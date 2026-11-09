@@ -237,7 +237,7 @@ function prepareOverlay(kind){
   if(kind!=='oak')oakLab?.close({immediate:true,notify:false});
   lastFocus=origin;clearInput();$('interact').hidden=true;$('touch-controls').hidden=true;$('ride-guide').hidden=true;sceneHost.style.cursor='';sceneHost.removeAttribute('title');
 }
-function setNearStop(kind){if(nearStop===kind)return;nearStop=kind;syncRideUI();const stop=STOPS[kind];if(stop){$('interact').querySelector('.stop-caption').textContent=stop.title;$('interact-label').innerHTML=`${stop.action} <kbd>Enter</kbd>`;$('route-hint').hidden=true;}}
+function setNearStop(kind){if(nearStop===kind)return;nearStop=kind;syncRideUI();const stop=STOPS[kind];if(stop){$('interact').querySelector('.stop-caption').textContent=stop.title;$('interact-label').innerHTML=`${kind==='cloud'?'Explore my photography':stop.action} <kbd>Enter</kbd>`;$('route-hint').hidden=true;}}
 function syncWelcomeVoice({enabled,supported,speaking,error,playback='idle',kind}={}){
   $('welcome-audio').hidden=!WELCOME_AUDIO.welcome?.src;
   for(const id of ['welcome-voice','woody-guide-voice']){

@@ -125,7 +125,7 @@ export function createPersonalRooms({renderer,onOpen=()=>{},onClose=()=>{},onPor
   let kind='about',selected=0,currentIndex=0,pan=0,currentPan=0,phase='closed',room=null,dead=false,dirty=true,transition=null,previousFocus=null,previousHost=null,previousSibling=null,previousStyle='',savedRenderer=null,lastSubFocus=null,texture=null,imageController=null,imageGeneration=0,renderedFrames=0,elapsed=0,hover=null,pressed=null,soundError='',photoLoading=false,postcard=null,captureGeneration=0,capturePending=false,mediaKind='photograph';
   let aboutEntranceProgress=1,queuedAboutSelection=null,interactionMoving=false,mediaIndex=0,mediaReturn=null;
   let listeningRoom=null,garbaRoom=null,hobbySiblings=[],hobbyReaderReturn=null;
-  let cloudGallery=null,cloudSiblings=[],photoEntryProgress=0;
+  let cloudGallery=null,cloudSiblings=[],photoEntryProgress=0,pendingPhotoEntry=false;
   function activeHobbyRoom(){return listeningRoom?.isOpen?listeningRoom:garbaRoom?.isOpen?garbaRoom:null;}
   const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2(),anchorProjection=new THREE.Vector3();
   const aboutPrompts=q('.about-object-prompts'),aboutAction=q('[data-about-interact]'),photoRetry=q('[data-personal-retry]'),recordingVideo=q('[data-personal-video]');
@@ -176,7 +176,7 @@ export function createPersonalRooms({renderer,onOpen=()=>{},onClose=()=>{},onPor
     cloudSiblings=[];
     dialog.removeAttribute('aria-label');dialog.setAttribute('aria-labelledby','personal-room-title');
   }
-  function releaseCloudGallery(){cloudGallery?.close({notify:false});restoreCloudHost();}
+  function releaseCloudGallery(){pendingPhotoEntry=false;cloudGallery?.close({notify:false});restoreCloudHost();}
   function applyPhotoEntry(progress){
     photoEntryProgress=clamp(progress,0,1);const view=cloudReelPose(selected,viewSize(),photoEntryProgress);
     room.camera.position.copy(view.position);room.camera.fov=view.fov;room.camera.aspect=view.aspect;room.camera.lookAt(view.target);room.camera.updateProjectionMatrix();room.camera.updateMatrixWorld(true);dirty=true;
@@ -201,6 +201,10 @@ export function createPersonalRooms({renderer,onOpen=()=>{},onClose=()=>{},onPor
   }
   function enterCloudGallery(){
     if(kind!=='cloud'||!['viewing','focusing','reading'].includes(phase))return false;
+    // Complete the current move before beginning the viewfinder approach.
+    // Settling here would snap to the newly selected camera angle.
+    if(phase==='focusing'){pendingPhotoEntry=true;return true;}
+    pendingPhotoEntry=false;
     sound.stop();clearRecording();hideSubViews();settle();caption.hidden=true;photoEntryProgress=0;
     setPhase('photo-enter');host.focus({preventScroll:true});
     if(isReduced()){applyPhotoEntry(1);return revealPhotoReel();}
@@ -291,9 +295,9 @@ export function createPersonalRooms({renderer,onOpen=()=>{},onClose=()=>{},onPor
     }
     mediaReturn=null;hideSubViews();settle();if(focus){const target=lastSubFocus?.isConnected&&!lastSubFocus.disabled&&!lastSubFocus.closest?.('[hidden],[inert]')?lastSubFocus:q('[data-personal-story]');target.focus({preventScroll:true});}return true;
   }
-  function showSubView(next,element,focus){lastSubFocus=document.activeElement;sound.stop();settle();hideSubViews();element.hidden=false;host.inert=true;header.inert=true;caption.inert=true;setPhase(next);focus.focus({preventScroll:true});}
+  function showSubView(next,element,focus){pendingPhotoEntry=false;lastSubFocus=document.activeElement;sound.stop();settle();hideSubViews();element.hidden=false;host.inert=true;header.inert=true;caption.inert=true;setPhase(next);focus.focus({preventScroll:true});}
   function selectChapter(value){
-    if(phase==='closed'||phase==='returning'||phase==='photo-enter'||phase==='photo-return'||cloudGallery?.isOpen)return false;if(isSpatial()&&phase==='entering'){queuedAboutSelection=clamp(Math.round(value),0,contentFor(kind).chapters.length-1);return true;}closeSubView(false);const next=clamp(Math.round(value),0,contentFor(kind).chapters.length-1);selected=next;pan=0;room.select(selected);if(isSpatial()&&!(kind==='cloud'&&selected===1)&&!room.interactionState(selected))room.interact(selected);setContent();
+    if(phase==='closed'||phase==='returning'||phase==='photo-enter'||phase==='photo-return'||cloudGallery?.isOpen)return false;pendingPhotoEntry=false;if(isSpatial()&&phase==='entering'){queuedAboutSelection=clamp(Math.round(value),0,contentFor(kind).chapters.length-1);return true;}closeSubView(false);const next=clamp(Math.round(value),0,contentFor(kind).chapters.length-1);selected=next;pan=0;room.select(selected);if(isSpatial()&&!(kind==='cloud'&&selected===1)&&!room.interactionState(selected))room.interact(selected);setContent();
     if(isReduced()){settle();return true;}transition={kind:'focus',from:currentIndex,to:selected,fromPan:currentPan,toPan:pan,elapsed:0,duration:kind==='cloud'?.85+Math.abs(next-currentIndex)*.35:.85};setPhase('focusing');return true;
   }
   function frameSky(direction){if(kind!=='cloud'||!['viewing','focusing'].includes(phase))return;pan=clamp(pan+direction*.45,-1,1);if(isReduced()){settle();return;}transition={kind:'focus',from:currentIndex,to:selected,fromPan:currentPan,toPan:pan,elapsed:0,duration:.65};setPhase('focusing');}
@@ -397,6 +401,7 @@ export function createPersonalRooms({renderer,onOpen=()=>{},onClose=()=>{},onPor
   function beginKind(next){releaseCloudGallery();mediaReturn=null;q('[data-personal-article]').replaceChildren();q('[data-personal-image]').removeAttribute('src');releaseHobbyRoom();sound.stop();clearRecording();clearPostcard();clearPhoto();room?.dispose();kind=next;room=createPersonalRoomScene(kind);aboutEntranceProgress=isSpatial()?0:1;queuedAboutSelection=null;photoRetry.hidden=true;selected=0;currentIndex=0;pan=0;currentPan=0;soundError='';room.select(0);photoEntryProgress=0;hideSubViews();setContent();curtain.style.setProperty('--room-cover',paper[kind]);revealCurtain(0);setPhase('entering');transition={kind:'entry',elapsed:0,duration:isReduced()?0:isSpatial()?1.25:.8};caption.hidden=isSpatial();loadPortrait();resize();if(isSpatial())applyAboutEntrance(0);else applyCamera(0,{approach:2.8});}
   function open(next='about'){
     if(dead||!KINDS.includes(next))return false;
+    pendingPhotoEntry=false;
     if(cloudGallery?.isOpen){releaseCloudGallery();setPhase('viewing');caption.hidden=false;resize();}
     if(activeHobbyRoom()){
       releaseHobbyRoom();setPhase('viewing');caption.hidden=false;dirty=true;
@@ -408,7 +413,7 @@ export function createPersonalRooms({renderer,onOpen=()=>{},onClose=()=>{},onPor
     catch(error){sound.stop();removeRoom();if(savedRenderer)restoreRenderer();if(dialog.open)dialog.close();setPhase('closed');onClose();throw error;}
   }
   function completeClose(notify=true){if(phase==='closed')return;sound.stop();transition=null;hideSubViews();removeRoom();restoreRenderer();setPhase('closed');if(dialog.open)dialog.close();hover=null;pressed=null;host.style.cursor='';if(notify){onClose();const containing=previousFocus?.closest?.('dialog');if(previousFocus?.isConnected&&!previousFocus.closest?.('[hidden],[inert]')&&(!containing||containing.open))previousFocus.focus({preventScroll:true});}previousFocus=null;}
-  function close({immediate=false,notify=true}={}){if(phase==='closed')return false;if(cloudGallery?.isOpen)releaseCloudGallery();if(activeHobbyRoom())releaseHobbyRoom();sound.stop();if(immediate||isReduced()){completeClose(notify);return true;}if(phase==='returning')return false;const wasEntering=phase==='entering';hideSubViews();caption.hidden=true;queuedAboutSelection=null;setPhase('returning');if(isSpatial()){const startProgress=wasEntering?aboutEntranceProgress:1;transition={kind:'exit',elapsed:0,duration:.9*Math.max(.08,startProgress),notify,startProgress,curtainFrom:curtainOpen,from:currentIndex,fromPan:currentPan,prelude:wasEntering||(currentIndex<.001&&Math.abs(currentPan)<.001)?0:kind==='cloud'?1.4:.55};}else transition={kind:'exit',elapsed:0,duration:.45,notify,curtainFrom:curtainOpen};return true;}
+  function close({immediate=false,notify=true}={}){pendingPhotoEntry=false;if(phase==='closed')return false;if(cloudGallery?.isOpen)releaseCloudGallery();if(activeHobbyRoom())releaseHobbyRoom();sound.stop();if(immediate||isReduced()){completeClose(notify);return true;}if(phase==='returning')return false;const wasEntering=phase==='entering';hideSubViews();caption.hidden=true;queuedAboutSelection=null;setPhase('returning');if(isSpatial()){const startProgress=wasEntering?aboutEntranceProgress:1;transition={kind:'exit',elapsed:0,duration:.9*Math.max(.08,startProgress),notify,startProgress,curtainFrom:curtainOpen,from:currentIndex,fromPan:currentPan,prelude:wasEntering||(currentIndex<.001&&Math.abs(currentPan)<.001)?0:kind==='cloud'?1.4:.55};}else transition={kind:'exit',elapsed:0,duration:.45,notify,curtainFrom:curtainOpen};return true;}
   function resize(){if(cloudGallery?.isOpen)return;if(activeHobbyRoom()){activeHobbyRoom().resize();return;}if(!room||phase==='closed')return;const view=viewSize();renderer.setSize?.(view.width,view.height,false);renderer.setViewport?.(0,0,view.width,view.height);renderer.setScissorTest?.(false);if(kind==='cloud'&&['photo-enter','photo-return'].includes(phase))applyPhotoEntry(photoEntryProgress);else if(isSpatial()&&(phase==='entering'||phase==='returning'&&aboutEntranceProgress<1))applyAboutEntrance(aboutEntranceProgress);else applyCamera(currentIndex);dirty=true;}
   function pick(event){if(!room)return null;const rect=host.getBoundingClientRect();if(!rect.width||!rect.height)return null;pointer.set((event.clientX-rect.left)/rect.width*2-1,1-(event.clientY-rect.top)/rect.height*2);raycaster.setFromCamera(pointer,room.camera);if(kind==='about'&&room.portrait){room.scene.updateMatrixWorld(true);const photo=raycaster.intersectObject(room.portrait)[0],prop=raycaster.intersectObjects(room.pickRoots,true)[0];if(photo&&(!prop||photo.distance<prop.distance))return room.portrait;}return pickPersonalRoomTarget(room,raycaster);}
   const placeList=q('[data-personal-place-list]');
@@ -502,7 +507,7 @@ export function createPersonalRooms({renderer,onOpen=()=>{},onClose=()=>{},onPor
       if(t.kind==='photo-enter'){applyPhotoEntry(blend);if(p===1){revealPhotoReel();return;}}
       else if(t.kind==='photo-return'){applyPhotoEntry(t.from*(1-blend));if(p===1)finishPhotoReturn();}
       else if(t.kind==='entry'){if(isSpatial())applyAboutEntrance(p);else applyCamera(selected,{approach:(1-blend)*2.8});revealCurtain(ease(Math.min(1,p*3)));if(p===1)settle();}
-      else if(t.kind==='focus'){currentIndex=THREE.MathUtils.lerp(t.from,t.to,kind==='cloud'?p:blend);currentPan=THREE.MathUtils.lerp(t.fromPan,t.toPan,blend);applyCamera(currentIndex,{approach:Math.sin(p*Math.PI)*.45,panValue:currentPan,travel:p});if(p===1)settle();}
+      else if(t.kind==='focus'){currentIndex=THREE.MathUtils.lerp(t.from,t.to,kind==='cloud'?p:blend);currentPan=THREE.MathUtils.lerp(t.fromPan,t.toPan,blend);applyCamera(currentIndex,{approach:Math.sin(p*Math.PI)*.45,panValue:currentPan,travel:p});if(p===1){settle();if(kind==='cloud'&&pendingPhotoEntry){pendingPhotoEntry=false;enterCloudGallery();return;}}}
       else if(isSpatial()){if(t.elapsed<t.prelude&&!isReduced()){currentIndex=THREE.MathUtils.lerp(t.from,0,kind==='cloud'?t.elapsed/t.prelude:ease(t.elapsed/t.prelude));currentPan=THREE.MathUtils.lerp(t.fromPan||0,0,ease(t.elapsed/t.prelude));applyCamera(currentIndex);revealCurtain(1);}else{currentIndex=0;currentPan=0;const exitP=isReduced()?1:clamp((t.elapsed-t.prelude)/t.duration,0,1);applyAboutEntrance(t.startProgress*(1-exitP));revealCurtain(t.curtainFrom*(1-ease(clamp((exitP-.7)/.3,0,1))));if(exitP===1){completeClose(t.notify);return;}}}
       else{applyCamera(currentIndex,{approach:blend*1.7});revealCurtain(t.curtainFrom*(1-blend));if(p===1){completeClose(t.notify);return;}}
     }
@@ -511,7 +516,7 @@ export function createPersonalRooms({renderer,onOpen=()=>{},onClose=()=>{},onPor
     interactionMoving=Boolean(isSpatial()&&room.updateInteraction(dt,isReduced()));if(interactionMoving){if(kind==='cloud'&&['viewing','focusing'].includes(phase)){applyCamera(currentIndex);syncCloudControls();}dirty=true;}
     if(dirty){projectAboutPrompts();renderer.render(room.scene,room.camera);renderedFrames++;dirty=false;}
   }
-  return {open,close,update,resize,dispose(){if(dead)return;close({immediate:true,notify:false});dead=true;cloudGallery?.dispose();cloudGallery=null;listeningRoom?.dispose();listeningRoom=null;garbaRoom?.dispose();garbaRoom=null;clearRecording();clearPhoto();sound.dispose();listeners.forEach(off=>off());dialog.remove();},get isOpen(){return phase!=='closed';},get phase(){return phase;},diagnostics(){return {phase,cloudGalleryOpen:Boolean(cloudGallery?.isOpen),cloudPhotoIndex:cloudGallery?.selectedIndex??0,photoEntryProgress,photoRoll:cloudGallery?.selectedRoll??selected,listening:listeningRoom?.diagnostics()||null,garba:garbaRoom?.diagnostics()||null,currentKind:kind,currentChapter:selected,aboutEntranceProgress,interactionState:isSpatial()&&room?contentFor(kind).chapters.map((chapter,index)=>room.interactionState(index)):null,renderedFrames,portraitTextures:texture?1:0,photoLoading,postcardURLs:postcard?1:0,capturePending,soundPlaying:sound.playing,resources:room?.resourceCounts||null};}};
+  return {open,close,update,resize,dispose(){if(dead)return;close({immediate:true,notify:false});dead=true;cloudGallery?.dispose();cloudGallery=null;listeningRoom?.dispose();listeningRoom=null;garbaRoom?.dispose();garbaRoom=null;clearRecording();clearPhoto();sound.dispose();listeners.forEach(off=>off());dialog.remove();},get isOpen(){return phase!=='closed';},get phase(){return phase;},diagnostics(){return {phase,cloudGalleryOpen:Boolean(cloudGallery?.isOpen),cloudPhotoIndex:cloudGallery?.selectedIndex??0,photoEntryProgress,pendingPhotoEntry,photoRoll:cloudGallery?.selectedRoll??selected,listening:listeningRoom?.diagnostics()||null,garba:garbaRoom?.diagnostics()||null,currentKind:kind,currentChapter:selected,aboutEntranceProgress,interactionState:isSpatial()&&room?contentFor(kind).chapters.map((chapter,index)=>room.interactionState(index)):null,renderedFrames,portraitTextures:texture?1:0,photoLoading,postcardURLs:postcard?1:0,capturePending,soundPlaying:sound.playing,resources:room?.resourceCounts||null};}};
 }
 
 

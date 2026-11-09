@@ -8,7 +8,7 @@ const DESCRIPTIONS={
   projects:'The projects, decisions and process behind my work.',
   work:'Singing, Garba and moments with people.',
   music:'Pokémon GO catches, childhood memories and the story behind this world.',
-  cloud:'The skies I stop for, through my own photographs.'
+  cloud:'Clouds and everyday moments, through my phone camera.'
 };
 
 export function createMapUI({onOpen,onClose,onRide,onRead,onPortfolio,onHelp,getView=()=> 'overview',onReset=()=>{}}){

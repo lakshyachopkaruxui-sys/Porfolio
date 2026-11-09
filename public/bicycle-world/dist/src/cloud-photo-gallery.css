@@ -106,3 +106,5 @@
 .cloud-gallery-load [data-cloud-status]{color:#f1e9d9}
 @media(max-height:760px){.cloud-gallery-rolls{margin:10px 0 4px}.cloud-gallery-header h2{font-size:24px}.cloud-gallery-footer{padding-top:6px}.cloud-gallery-actions{margin-top:8px}.cloud-gallery-caption h3{font-size:17px}}
 @media(max-height:580px){#personal-experience .cloud-photo-gallery{padding:12px 22px}.cloud-gallery-rolls{position:absolute;right:22px;bottom:68px;z-index:8;justify-content:flex-end;margin:0}.cloud-gallery-rolls button{font-size:12px!important;padding:8px 12px!important}.cloud-gallery-header h2{font-size:20px}.cloud-gallery-caption h3{font-size:16px}.cloud-gallery-caption p{font-size:11px}}
+/* Keep navigation in flow in short windows; full inspection needs the photo controls. */
+@media(max-height:580px){.cloud-gallery-rolls{position:static;inset:auto;justify-content:center;margin:6px 0 0}#personal-experience .cloud-photo-gallery[data-mode="full"] .cloud-gallery-rolls{display:none}}
