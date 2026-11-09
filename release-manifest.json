@@ -2294,8 +2294,8 @@
     },
     {
       "path": "normal-portfolio/assets/Lakshya-Chopkar-UX-Designer-Resume.pdf",
-      "size": 150155,
-      "sha256": "1eff7fd6c0333d119baa534b121f30835d3375acc3cf001abeffcd8000580145"
+      "size": 150158,
+      "sha256": "c759729259bd575ff61e2e15d886cf47d55b5af074b3f5f670de6ec09c638ab8"
     },
     {
       "path": "normal-portfolio/assets/cases/connectaid/design-system/button-states-source.webp",
@@ -4359,8 +4359,8 @@
     },
     {
       "path": "normal-portfolio/resume-content.json",
-      "size": 7548,
-      "sha256": "b06e9b11ce78832bb257ccb848e04a3b755c4d625ca9e24a808741f42dbd5298"
+      "size": 7825,
+      "sha256": "56ba1f04486811cc52482e15c61dfa918dbf15bfad37ee024a2c0648e46a4b91"
     },
     {
       "path": "normal-portfolio/resume-ui.css",
