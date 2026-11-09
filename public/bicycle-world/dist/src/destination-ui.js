@@ -2,11 +2,11 @@ import {createSkyCamera} from './sky-camera.js';
 import {personalRoomContent} from './personal-room-content.js';
 const hobbies=personalRoomContent('memory');
 const cloud=personalRoomContent('cloud');
-const cloudFallback={title:cloud.title,eyebrow:'05 / THE CLOUD LOOKOUT',body:`<p class="place-intro">${cloud.intro}</p>${cloud.chapters.map(chapter=>`<section class="place-story"><h2>${chapter.title}</h2><p>${chapter.body}</p><p>${chapter.detail}</p></section>`).join('')}<p class="place-caption">${cloud.mediaNote}</p>`};
+const cloudFallback={title:cloud.title,eyebrow:'05 / THE VIEWFINDER',body:`<p class="place-intro">${cloud.intro}</p>${cloud.chapters.map(chapter=>`<section class="place-story"><h2>${chapter.title}</h2><p>${chapter.body}</p><p>${chapter.detail}</p></section>`).join('')}<p class="place-caption">${cloud.mediaNote}</p>`};
 
 const stories={
   collection:{title:hobbies.title,eyebrow:'03 / HOBBIES',body:`<p class="place-intro">${hobbies.intro}</p>${hobbies.chapters.map(chapter=>`<section class="place-story"><h2>${chapter.title}</h2><p>${chapter.body}</p><p>${chapter.detail}</p></section>`).join('')}<p class="place-caption">${hobbies.mediaNote}</p>`},
-  cloud:{title:'I collect quiet moments.',eyebrow:'05 / THE CLOUD LOOKOUT',body:`
+  cloud:{title:'I collect quiet moments.',eyebrow:'05 / THE VIEWFINDER',body:`
     <p class="place-intro">I love photographing clouds. Looking up gives me a quiet moment, even on a busy day.</p>
     <div class="sky-viewfinder"><div id="sky-scene"></div><div class="viewfinder-corner top-left"></div><div class="viewfinder-corner bottom-right"></div><span class="viewfinder-label">VIRTUAL VIEWFINDER</span></div>
     <div class="postcard-caption-field"><label for="postcard-caption">Give your moment a caption <span>(optional)</span></label><input id="postcard-caption" type="text" maxlength="100" placeholder="A small moment, looking up." aria-describedby="postcard-caption-help"><small id="postcard-caption-help">Up to 100 characters. Your words appear on the downloaded postcard.</small></div>
@@ -71,8 +71,8 @@ export function createDestinationUI({onOpen,onClose,onContinue,onPortfolio,onVis
     if(!stories[kind])return false;
     if(current)scrolls[current]=progress();
     cleanup();onOpen();current=kind;const story=kind==='cloud'&&!enableRichCloud?cloudFallback:stories[kind];
-    const next={about:{id:'projects',label:'Ride to the Works Room'},collection:{id:'music',label:'Ride to Oak’s lab'},music:{id:'cloud',label:'Ride to the Cloud Lookout'}}[kind]||null;
-    article.innerHTML=`<header class="case-header"><p class="eyebrow">${story.eyebrow}</p><h1 id="place-title">${story.title}</h1></header>${story.body}<footer class="case-footer"><p>${kind==='about'?'Now, take a look at the work.':kind==='collection'?'Oak is looking after a different part of the story around the next bend.':kind==='music'?'A quieter moment is waiting at the Cloud Lookout.':'Stay a little, or return to the garden when you’re ready.'}</p><div class="place-footer-actions">${next&&onVisit?`<button class="primary" id="place-next">${next.label}</button>`:''}<button class="quiet-button" id="place-continue">Return to the bicycle</button></div></footer>`;
+    const next={about:{id:'projects',label:'Ride to the Works Room'},collection:{id:'music',label:'Ride to Oak’s lab'},music:{id:'cloud',label:'Ride to the Viewfinder'}}[kind]||null;
+    article.innerHTML=`<header class="case-header"><p class="eyebrow">${story.eyebrow}</p><h1 id="place-title">${story.title}</h1></header>${story.body}<footer class="case-footer"><p>${kind==='about'?'Now, take a look at the work.':kind==='collection'?'Oak is looking after a different part of the story around the next bend.':kind==='music'?'A quieter moment is waiting at the Viewfinder.':'Stay a little, or return to the garden when you’re ready.'}</p><div class="place-footer-actions">${next&&onVisit?`<button class="primary" id="place-next">${next.label}</button>`:''}<button class="quiet-button" id="place-continue">Return to the bicycle</button></div></footer>`;
     article.querySelectorAll('.case-header,.place-intro,.sky-viewfinder,.music-playground,.place-story,.case-footer').forEach((el,i)=>el.dataset.readingAnchor=String(i));
     if(!dialog.open)dialog.showModal();closeButton.focus({preventScroll:true});history.replaceState(null,'',storyHashes[kind]);
     article.querySelector('#place-continue').addEventListener('click',()=>{close();onContinue();});

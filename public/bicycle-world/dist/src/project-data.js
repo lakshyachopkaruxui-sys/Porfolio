@@ -398,7 +398,7 @@ export const GARDEN_PROJECTS=[...PROJECTS.map(project=>({...project,...GARDEN_OV
       "title": "Refine what the visitor actually feels",
       "body": [
         "Movement was developed in layers: the map, bicycle proportions, bridge clearance, riding feedback, pedalling, foot-down stops and head glances. Mouse-click riding needed its own turn-speed correction after keyboard improvements did not solve the reported problem.",
-        "Wayfinding follows actual destinations. The first stop introduces Lakshya. Works follows, then Hobbies, Professor Oak’s lab and Cloud Lookout. Destinations change places within the original pockets; the road geometry stays intact. Visitors can also open any destination directly."
+        "Wayfinding follows actual destinations. The first stop introduces Lakshya. Works follows, then Hobbies, Professor Oak’s lab and The Viewfinder. Destinations change places within the original pockets; the road geometry stays intact. Visitors can also open any destination directly."
       ],
       "limitation": "These iterations respond to Lakshya’s reviews and local checks. They are not presented as a completed recruiter usability study."
     },

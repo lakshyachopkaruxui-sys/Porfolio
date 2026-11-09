@@ -4,6 +4,7 @@
 #oak-lab[open]{display:block;}
 #oak-lab *{box-sizing:border-box;}
 #oak-lab [hidden]{display:none!important;}
+#oak-lab .oak-response-announcement{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
 #oak-lab .oak-shell{position:relative;height:100%;width:100%;isolation:isolate;}
 #oak-lab .oak-canvas{position:absolute;inset:0;touch-action:manipulation;}
 #oak-lab .oak-canvas canvas{display:block;width:100%;height:100%;}
@@ -83,3 +84,56 @@
 #oak-lab [data-oak-destinations]>button[aria-current=page]{box-shadow:inset 3px 0 var(--oak-green);font-weight:700;}
 #oak-lab .oak-places>header>.play-music-dock{position:static;flex:none;margin:0;}
 @media(max-width:760px){#oak-lab .oak-places{padding:20px 24px;}#oak-lab .oak-places>header{top:-20px;}#oak-lab .oak-places h2{font-size:22px;}#oak-lab .oak-header{gap:12px;flex-wrap:wrap;}#oak-lab .oak-header nav{flex-wrap:wrap;}}
+/* Conversation replies own progression. The transcript stays complete while
+   the current spoken sentence receives a quiet visual cue. */
+#oak-lab .oak-current-sentence{color:inherit;background:#e5ecd0;border-radius:3px;box-shadow:0 0 0 2px #e5ecd0;}
+#oak-lab .oak-dialogue-nav{flex-wrap:wrap;gap:10px;}
+#oak-lab [data-oak-making]{flex-basis:100%;background:transparent;border-color:#a5b39b;}
+#oak-lab .oak-build-actions{flex-wrap:wrap;gap:8px;}
+#oak-lab [data-oak-work]{flex-basis:100%;background:transparent;}
+#oak-lab .oak-build-copy details{font-size:14px;line-height:1.6;color:#52644f;margin-top:16px;}
+#oak-lab .oak-build-copy summary{cursor:pointer;min-height:44px;padding:10px 0;color:var(--oak-ink);font-weight:600;}
+#oak-lab .oak-build-copy details p{font-size:14px;line-height:1.7;margin:8px 0 0;}
+#oak-lab :is(select,summary):focus-visible{outline:3px solid #a45132;outline-offset:4px;}
+#oak-lab .oak-tools{bottom:12px;gap:8px;align-items:flex-end;padding:8px 10px;border:1px solid #a5b39b;border-radius:11px;background:#fff8e5f5;}
+#oak-lab .oak-tools>div.oak-narration-controls{flex:1;min-width:0;display:flex;flex-wrap:wrap;gap:5px 6px;justify-content:center;}
+#oak-lab [data-oak-narration-status]{flex-basis:100%;margin:0;font-size:12px;line-height:1.4;text-align:center;}
+#oak-lab .oak-tools :is(button,select){font:600 12px/1.4 'DM Sans',sans-serif;min-height:44px;padding:8px 10px;}
+#oak-lab .oak-tools [data-oak-read][aria-pressed=true]{background:var(--oak-green);color:var(--oak-paper);}
+#oak-lab .oak-voice-choice{display:flex;align-items:center;gap:5px;font-size:12px;min-width:0;}
+#oak-lab [data-oak-voice]{width:170px;max-width:24vw;border:1px solid #a5b39b;border-radius:8px;color:var(--oak-ink);background:var(--oak-paper);}
+#oak-lab .oak-comic{bottom:122px;max-height:calc(100% - 295px);}
+#oak-lab .oak-making{bottom:122px;}
+#oak-lab .oak-map-action{bottom:132px;}
+@media(max-width:1100px){#oak-lab .oak-tools{left:20px;right:20px;}#oak-lab .oak-tools :is(button,select){padding-inline:8px;}#oak-lab [data-oak-voice]{width:150px;}#oak-lab .oak-tools a{padding-inline:3px;max-width:55px;}}
+@media(max-height:640px) and (min-width:761px){
+  #oak-lab .oak-header{padding-block:12px;}#oak-lab .oak-header p{display:none;}
+  #oak-lab .oak-zones{top:80px;}#oak-lab .oak-place-picks{top:137px;}
+  #oak-lab .oak-comic{max-height:calc(100% - 260px);bottom:118px;padding:14px 16px;display:flex;flex-direction:column;overflow:hidden;}
+  #oak-lab .oak-comic h2{font-size:19px;line-height:1.45;margin:0 0 10px;flex:none;}
+  #oak-lab .oak-speaker,#oak-lab .oak-key-hint,#oak-lab .oak-previews{display:none;}
+  #oak-lab .oak-speech{font-size:16px;line-height:1.55;overflow:auto;min-height:0;}
+  #oak-lab .oak-dialogue-nav{margin-top:12px;flex:none;gap:6px;}
+  #oak-lab .oak-dialogue-nav button{font-size:13px;padding:8px 10px;}
+  #oak-lab .oak-collection{flex:none;margin-top:10px;}
+  #oak-lab .oak-making{top:137px;bottom:118px;width:min(510px,49vw);padding:14px;gap:8px;}
+  #oak-lab .oak-build-eyebrow{display:none;}
+  #oak-lab .oak-build-steps{grid-template-columns:repeat(6,minmax(0,1fr));gap:5px;flex:none;}
+  #oak-lab .oak-build-steps button{justify-content:center;padding:7px;}
+  #oak-lab .oak-build-steps button>span:last-child{display:none;}
+  #oak-lab .oak-build-steps button>span:first-child{font-size:13px;opacity:1;}
+  #oak-lab .oak-build-copy h2{font-size:18px;line-height:1.45;margin-bottom:8px;}
+  #oak-lab .oak-build-copy p{font-size:16px;line-height:1.55;margin-bottom:12px;}
+  #oak-lab .oak-build-actions{flex:none;}
+  #oak-lab .oak-build-actions button{font-size:12px;padding:8px;}
+}
+@media(max-width:760px){
+  #oak-lab .oak-tools{flex-wrap:wrap;justify-content:space-between;padding:8px;}
+  #oak-lab .oak-tools>div.oak-narration-controls{flex-basis:100%;order:-1;}
+  #oak-lab [data-oak-voice]{max-width:36vw;width:170px;}
+  #oak-lab .oak-tools a{max-width:none;}
+  #oak-lab .oak-comic{bottom:166px;max-height:calc(100% - 350px);}
+  #oak-lab .oak-making{bottom:166px;overflow:auto;}
+  #oak-lab .oak-making> :not(.oak-build-copy){flex:none;}
+  #oak-lab .oak-build-copy{flex:none;overflow:visible;}
+}

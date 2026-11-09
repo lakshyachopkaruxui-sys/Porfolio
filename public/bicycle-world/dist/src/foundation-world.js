@@ -1,3 +1,4 @@
+import {destinationName} from './destination-names.js';
 import * as THREE from 'three';
 import {WORLD_BOUNDS,PATHS,BRIDGES,RIVER,STOPS,START,ARRIVAL_SIGN,STOP_SIGNS,STRUCTURE_COLLIDERS,terrainHeight} from './layout.js';
 import {createLandmarks} from './landmarks.js';
@@ -50,7 +51,7 @@ export function createWorld(scene,{landmarkFactory=createLandmarks}={}){
   for(const [id,stop]of Object.entries(STOPS)){
     disc(stop.focus.x,stop.focus.z,stop.size,colors.court);
     const ring=new THREE.Mesh(new THREE.RingGeometry(stop.size-.1,stop.size,64),new THREE.MeshBasicMaterial({color:'#acb5a3',side:THREE.DoubleSide}));ring.rotation.x=-Math.PI/2;ring.position.set(stop.focus.x,.047,stop.focus.z);scene.add(ring);
-    const sign=STOP_SIGNS[id];const board=label(sign.text??`${stop.number}  ${stop.title}`,sign.x,sign.y,sign.z,sign.width,sign.height??.75,sign.fontSize??58,sign.fontScale??.55);board.rotation.y=sign.yaw??0;
+    const sign=STOP_SIGNS[id];const board=label(id==='cloud'?destinationName(id):sign.text??`${stop.number}  ${stop.title}`,sign.x,sign.y,sign.z,sign.width,sign.height??.75,sign.fontSize??58,sign.fontScale??.55);board.rotation.y=sign.yaw??0;
     if(id==='projects'&&!sign.attached)box(sign.x,.45,sign.z,.18,.9,.18,colors.structure);
   }
   const landmarks=landmarkFactory(scene,colors);

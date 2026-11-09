@@ -1,3 +1,4 @@
+import {destinationName} from './destination-names.js';
 import {decorateModeSelectors} from './mode-selector.js';
 import {isKeyboardShortcutBlocked,consumeNavigationKey} from './keyboard-navigation.js';
 import * as THREE from 'three';
@@ -237,7 +238,7 @@ function prepareOverlay(kind){
   if(kind!=='oak')oakLab?.close({immediate:true,notify:false});
   lastFocus=origin;clearInput();$('interact').hidden=true;$('touch-controls').hidden=true;$('ride-guide').hidden=true;sceneHost.style.cursor='';sceneHost.removeAttribute('title');
 }
-function setNearStop(kind){if(nearStop===kind)return;nearStop=kind;syncRideUI();const stop=STOPS[kind];if(stop){$('interact').querySelector('.stop-caption').textContent=stop.title;$('interact-label').innerHTML=`${kind==='cloud'?'Explore my photography':stop.action} <kbd>Enter</kbd>`;$('route-hint').hidden=true;}}
+function setNearStop(kind){if(nearStop===kind)return;nearStop=kind;syncRideUI();const stop=STOPS[kind];if(stop){$('interact').querySelector('.stop-caption').textContent=destinationName(kind,stop.title);$('interact-label').innerHTML=`${kind==='cloud'?'Explore my photography':stop.action} <kbd>Enter</kbd>`;$('route-hint').hidden=true;}}
 function syncWelcomeVoice({enabled,supported,speaking,error,playback='idle',kind}={}){
   $('welcome-audio').hidden=!WELCOME_AUDIO.welcome?.src;
   for(const id of ['welcome-voice','woody-guide-voice']){
@@ -374,7 +375,7 @@ function beginRoute(destination,preferPaths=false,onArrival=null){
   world.ring.position.set(destination.x,elevation(destination.z,destination.x)+.05,destination.z);world.ring.visible=true;
   world.setRoute([{x:state.x,z:state.z},...guidedRide.points]);$('ride-status-label').textContent='Following your route';syncRideUI();return true;
 }
-function visitPlace(kind,onArrival=null){const stop=STOPS[kind];if(!stop)return;if(!ready){notify('The world is still preparing. You can read every story directly.');return;}if(help.open)help.close();if(!running)start({skipWelcome:true});if(beginRoute(stop.arrival,true,onArrival||(()=>notify(`Arrived at ${stop.title.toLowerCase()}. Choose the stop to explore.`)))){$('ride-status-label').textContent=`Riding to ${stop.title.toLowerCase()}`;notify('Steer or brake to take over at any time.');}sceneHost.focus({preventScroll:true});}
+function visitPlace(kind,onArrival=null){const stop=STOPS[kind];if(!stop)return;if(!ready){notify('The world is still preparing. You can read every story directly.');return;}if(help.open)help.close();if(!running)start({skipWelcome:true});if(beginRoute(stop.arrival,true,onArrival||(()=>notify(`Arrived at ${destinationName(kind,stop.title).toLowerCase()}. Choose the stop to explore.`)))){$('ride-status-label').textContent=`Riding to ${destinationName(kind,stop.title).toLowerCase()}`;notify('Steer or brake to take over at any time.');}sceneHost.focus({preventScroll:true});}
 function showMap(){if(inPortfolio||reader.open||placeUI?.isOpen||projectUI?.isOpen||personalRooms?.isOpen||worksExperience?.isOpen||oakLab?.isOpen)return;mapUI.open(state);}
 function activateLandmark(kind){const stop=STOPS[kind];if(!stop)return;if(Math.hypot(state.x-stop.x,state.z-stop.z)<=stop.radius+4)openLandmark(kind);else visitPlace(kind);}
 placeUI=createDestinationUI({
@@ -813,7 +814,7 @@ function frame(now){
         let object=pick?.object;
         while(object&&!object.userData.stop&&!object.userData.pokemon&&!object.userData.gardenGuide&&!object.userData.bicycleBell&&!object.userData.bicycleLight)object=object.parent;
         sceneHost.style.cursor=object?'pointer':'';
-        if(object)sceneHost.title=object.userData.bicycleLight?(bicycleLight.enabled?'Turn bicycle light off (L)':'Turn bicycle light on (L)'):object.userData.bicycleBell?'Ring bicycle bell (R)':object.userData.gardenGuide?'Open the garden riding guide':object.userData.pokemon?'Say hello to '+object.name:`Open ${STOPS[object.userData.stop].title.toLowerCase()}`;
+        if(object)sceneHost.title=object.userData.bicycleLight?(bicycleLight.enabled?'Turn bicycle light off (L)':'Turn bicycle light on (L)'):object.userData.bicycleBell?'Ring bicycle bell (R)':object.userData.gardenGuide?'Open the garden riding guide':object.userData.pokemon?'Say hello to '+object.name:`Open ${destinationName(object.userData.stop,STOPS[object.userData.stop].title).toLowerCase()}`;
         else sceneHost.removeAttribute('title');
       }
     }

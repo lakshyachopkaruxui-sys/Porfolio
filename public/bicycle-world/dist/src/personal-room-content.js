@@ -26,10 +26,10 @@ export const PERSONAL_ROOMS=Object.freeze({
     mediaNote:'Enter the listening room in Hobbies for my spontaneous recording, Tiny Desk performance and photographs from Junoon and a family function.'
   }),
   cloud:freezeRoom({
-    id:'cloud',title:'The Cloud Lookout',eyebrow:'THROUGH MY PHONE',
+    id:'cloud',title:'The Viewfinder',eyebrow:'LAKSHYA’S MOBILE PHOTOGRAPHY',
     intro:'Clouds are a favourite, but my camera roll holds more than the sky. I take photographs when something catches my eye.',
     chapters:[
-      {id:'clouds',label:'Clouds',title:'The skies I stop for.',body:'Looking up gives me a calm moment. Step into the camera to see a few skies I’ve photographed.',detail:'I’m often moving around or meeting people. Photographing clouds gives me a reason to pause and notice what is overhead.'},
+      {id:'clouds',label:'Clouds',title:'The skies I stop for.',body:'Looking up gives me a calm moment. Step into the camera to explore the skies I’ve photographed.',detail:'I’m often moving around or meeting people. Photographing clouds gives me a reason to pause and notice what is overhead.'},
       {id:'mobile-photography',label:'Mobile photography',title:'Small things. Worth a second look.',body:'A flower, a reflection, a little light. I take my phone out when something catches my eye.',detail:'Photography is something I do for the feeling of it. These are moments I wanted to keep, alongside the clouds I love photographing.'}
     ],
     media:PHOTOGRAPHY_ROLLS.flatMap(roll=>roll.photos),

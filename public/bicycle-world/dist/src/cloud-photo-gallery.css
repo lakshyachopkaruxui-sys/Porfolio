@@ -108,3 +108,20 @@
 @media(max-height:580px){#personal-experience .cloud-photo-gallery{padding:12px 22px}.cloud-gallery-rolls{position:absolute;right:22px;bottom:68px;z-index:8;justify-content:flex-end;margin:0}.cloud-gallery-rolls button{font-size:12px!important;padding:8px 12px!important}.cloud-gallery-header h2{font-size:20px}.cloud-gallery-caption h3{font-size:16px}.cloud-gallery-caption p{font-size:11px}}
 /* Keep navigation in flow in short windows; full inspection needs the photo controls. */
 @media(max-height:580px){.cloud-gallery-rolls{position:static;inset:auto;justify-content:center;margin:6px 0 0}#personal-experience .cloud-photo-gallery[data-mode="full"] .cloud-gallery-rolls{display:none}}
+
+/* A large real collection stays legible through subjects and bounded contact sheets. */
+.cloud-gallery-eyebrow [data-cloud-total]{display:inline-block;margin-left:16px;color:#b9c5c0;letter-spacing:.02em;font-weight:500}
+.cloud-gallery-subjects{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;flex:none;margin:0 0 8px}
+#personal-experience .cloud-gallery-subjects button{min-height:40px;padding:7px 14px;background:transparent;border-color:transparent;color:#c5d0c9;font-weight:500}
+#personal-experience .cloud-gallery-subjects button[aria-pressed="true"]{background:#36504a;border-color:#8fa391;color:#fff6df}
+.cloud-gallery-sheet-toolbar{display:flex;align-items:center;justify-content:space-between;gap:18px;flex:none;margin-top:12px}
+.cloud-gallery-sheet-toolbar p{font-size:14px;color:#d6c6a8;margin:0;font-variant-numeric:tabular-nums}
+.cloud-gallery-sheet-toolbar nav{display:flex;gap:8px}
+#personal-experience .cloud-gallery-sheet-toolbar button{padding:8px 13px;font-size:13px}
+.cloud-gallery-index{grid-template-columns:repeat(auto-fill,minmax(190px,1fr));grid-auto-rows:max-content;gap:16px;margin-top:12px;scrollbar-color:#7d9688 #142624}
+#personal-experience .cloud-photo-gallery button.cloud-gallery-index-card{height:max-content;min-height:0;align-self:start}
+.cloud-gallery-index-card :is(img,span){flex:none}
+.cloud-gallery-index-card img{height:clamp(130px,22vh,215px)}
+#personal-experience .cloud-photo-gallery[data-mode="full"] :is(.cloud-gallery-rolls,.cloud-gallery-subjects,.cloud-gallery-caption h3){display:none}
+@media(max-height:760px){.cloud-gallery-subjects{margin-bottom:4px;gap:5px}#personal-experience .cloud-gallery-subjects button{min-height:36px;padding-block:5px}.cloud-gallery-rolls{margin-top:7px}}
+@media(max-height:580px){.cloud-gallery-subjects{margin-bottom:0}#personal-experience .cloud-photo-gallery[data-mode="full"] .cloud-gallery-subjects{display:none}.cloud-gallery-sheet-toolbar{margin-top:4px}.cloud-gallery-index{margin-top:5px}.cloud-gallery-eyebrow [data-cloud-total]{margin-left:8px}}

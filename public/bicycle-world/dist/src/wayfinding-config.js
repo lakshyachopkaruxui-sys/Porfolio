@@ -88,7 +88,7 @@ export const DIRECTION_BOARDS=[
     "x": 0.4442976698039782,
     "z": -71.31469612302546,
     "label": "Oak’s lab",
-    "nextLabel": "Cloud lookout",
+    "nextLabel": "The Viewfinder",
     "pointerTarget": {
       "x": 11,
       "y": 1.3,
@@ -106,7 +106,7 @@ export const DIRECTION_BOARDS=[
     "next": null,
     "x": 24.99986790282358,
     "z": -8.516773489277092,
-    "label": "Cloud lookout",
+    "label": "The Viewfinder",
     "nextLabel": null,
     "pointerTarget": {
       "x": 43,

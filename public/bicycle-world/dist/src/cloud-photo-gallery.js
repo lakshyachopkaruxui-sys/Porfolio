@@ -1,14 +1,16 @@
+import {CONTACT_SHEET_SIZE,PHOTO_SUBJECTS,photographySubjects,photographySelection,contactSheetPage} from './photography-browse.js';
+
 /** A bounded, DOM-only photo gallery. The parent owns scene pause and return focus. */
 export function createCloudPhotoGallery({host,photos=[],collections=[],onClose=()=>{},isReduced=()=>false}={}){
   if(!host?.ownerDocument&&!host?.document)throw new TypeError('A gallery host is required.');
   const doc=host.ownerDocument||host.document;
   const valid=photos=>photos.filter(photo=>photo&&typeof photo.src==='string'&&photo.src&&photo.width>0&&photo.height>0);
   const rolls=(collections.length?collections:[{id:'clouds',label:'Clouds',title:'The skies I stop for.',intro:'Cloud photographs I’ve taken when the sky made me pause.',photos}]).map(roll=>({...roll,photos:valid(roll.photos||[])})).filter(roll=>roll.photos.length);
-  let rollIndex=0,items=rolls[0]?.photos||[];
-  const remembered=new Map();
+  let rollIndex=0,subject='all',sheetPage=0,items=rolls[0]?.photos||[];
+  const remembered=new Map(),rememberedSubjects=new Map();
   const root=doc.createElement('section');root.className='cloud-photo-gallery';root.hidden=true;root.tabIndex=-1;
   root.setAttribute('role','region');root.setAttribute('aria-label','Lakshya’s photography reels');
-  root.innerHTML=`<header class="cloud-gallery-header"><div><p class="cloud-gallery-eyebrow">THROUGH MY PHONE</p><h2 data-cloud-title>The skies I stop for.</h2><p class="cloud-gallery-intro">A few cloud photographs I’ve taken when the sky made me pause.</p></div><div class="cloud-gallery-header-actions"><button type="button" data-cloud-index>Contact sheet</button><button type="button" data-cloud-close>Back to the lookout</button></div></header><nav class="cloud-gallery-rolls" aria-label="Choose a photography reel"></nav><div class="cloud-gallery-stage" data-cloud-stage><button type="button" class="cloud-photo-card" data-cloud-slot="-1"><img alt="" decoding="async"><span class="cloud-photo-edge-caption"></span></button><button type="button" class="cloud-photo-card" data-cloud-slot="0"><img alt="" decoding="async"></button><button type="button" class="cloud-photo-card" data-cloud-slot="1"><img alt="" decoding="async"><span class="cloud-photo-edge-caption"></span></button><div class="cloud-gallery-load" role="status" aria-live="polite"><span data-cloud-status></span><button type="button" data-cloud-retry hidden>Retry photograph</button></div></div><section class="cloud-gallery-index" aria-label="Photograph contact sheet" hidden></section><footer class="cloud-gallery-footer"><div class="cloud-gallery-caption"><p data-cloud-count aria-live="polite"></p><h3 data-cloud-caption></h3></div><nav class="cloud-gallery-actions" aria-label="Browse the photo reel"><button type="button" data-cloud-prev>Previous photo</button><button type="button" class="cloud-gallery-primary" data-cloud-inspect>View full photograph</button><button type="button" data-cloud-zoom hidden>Zoom photograph</button><button type="button" data-cloud-next>Next photo</button></nav><div class="cloud-gallery-bottom"><p data-cloud-hint>Scroll or drag the reel · A / D to browse · Esc to go back</p><div class="cloud-gallery-tools"></div></div></footer>`;
+  root.innerHTML=`<header class="cloud-gallery-header"><div><p class="cloud-gallery-eyebrow">THE VIEWFINDER <span data-cloud-total></span></p><h2 data-cloud-title>The skies I stop for.</h2><p class="cloud-gallery-intro">A few cloud photographs I’ve taken when the sky made me pause.</p></div><div class="cloud-gallery-header-actions"><button type="button" data-cloud-index>Contact sheet</button><button type="button" data-cloud-close>Back to the Viewfinder</button></div></header><nav class="cloud-gallery-rolls" aria-label="Choose a photography reel"></nav><nav class="cloud-gallery-subjects" aria-label="Filter photographs by subject"></nav><div class="cloud-gallery-stage" data-cloud-stage><button type="button" class="cloud-photo-card" data-cloud-slot="-1"><img alt="" decoding="async"><span class="cloud-photo-edge-caption"></span></button><button type="button" class="cloud-photo-card" data-cloud-slot="0"><img alt="" decoding="async"></button><button type="button" class="cloud-photo-card" data-cloud-slot="1"><img alt="" decoding="async"><span class="cloud-photo-edge-caption"></span></button><div class="cloud-gallery-load" role="status" aria-live="polite"><span data-cloud-status></span><button type="button" data-cloud-retry hidden>Retry photograph</button></div></div><div class="cloud-gallery-sheet-toolbar" hidden><p data-cloud-sheet-count role="status"></p><nav aria-label="Contact sheet pages"><button type="button" data-cloud-sheet-prev>Previous sheet</button><button type="button" data-cloud-sheet-next>Next sheet</button></nav></div><section class="cloud-gallery-index" aria-label="Photograph contact sheet" hidden></section><footer class="cloud-gallery-footer"><div class="cloud-gallery-caption"><p data-cloud-count aria-live="polite"></p><h3 data-cloud-caption></h3></div><nav class="cloud-gallery-actions" aria-label="Browse the photo reel"><button type="button" data-cloud-prev>Previous photo</button><button type="button" class="cloud-gallery-primary" data-cloud-inspect>View full photograph</button><button type="button" data-cloud-zoom hidden>Zoom photograph</button><button type="button" data-cloud-next>Next photo</button></nav><div class="cloud-gallery-bottom"><p data-cloud-hint>Scroll or drag the reel · A / D to browse · Esc to go back</p><div class="cloud-gallery-tools"></div></div></footer>`;
   host.append(root);
   const q=selector=>root.querySelector(selector),stage=q('[data-cloud-stage]'),indexView=q('.cloud-gallery-index');
   const cards=[...root.querySelectorAll('[data-cloud-slot]')],listeners=[],pending=new Map(),animations=new Map();
@@ -17,7 +19,14 @@ export function createCloudPhotoGallery({host,photos=[],collections=[],onClose=(
   const listen=(element,type,fn,options)=>{element.addEventListener(type,fn,options);listeners.push(()=>element.removeEventListener(type,fn,options));};
   const focus=element=>element?.focus({preventScroll:true});
   const resolve=photo=>new URL('../'+photo.src.replace(/^\.\//,''),import.meta.url).href;
-  const rollNav=q('.cloud-gallery-rolls');
+  const rollNav=q('.cloud-gallery-rolls'),subjectNav=q('.cloud-gallery-subjects'),sheetToolbar=q('.cloud-gallery-sheet-toolbar');
+  const memoryKey=()=>`${rollIndex}:${subject}`;
+  let renderedSubjectRoll=-1;
+  function renderSubjects(){
+    if(renderedSubjectRoll===rollIndex){for(const button of subjectNav.querySelectorAll('button'))button.setAttribute('aria-pressed',String(button.dataset.cloudSubject===subject));return;}
+    renderedSubjectRoll=rollIndex;subjectNav.replaceChildren();const subjects=photographySubjects(rolls[rollIndex].photos);subjectNav.hidden=subjects.length<2;
+    for(const [id,label]of [['all','All scenes'],...subjects]){const button=doc.createElement('button');button.type='button';button.dataset.cloudSubject=id;button.textContent=label;button.setAttribute('aria-pressed',String(id===subject));subjectNav.append(button);}
+  }
   rolls.forEach((roll,index)=>{const button=doc.createElement('button');button.type='button';button.dataset.cloudRoll=String(index);button.textContent=roll.label;rollNav.append(button);});
   rollNav.hidden=rolls.length<2;
   function releaseImage(image){
@@ -44,18 +53,18 @@ export function createCloudPhotoGallery({host,photos=[],collections=[],onClose=(
     if(image.complete&&image.naturalWidth>0)loaded();
   }
   function releaseAll(){for(const image of root.querySelectorAll('img'))releaseImage(image);indexView.replaceChildren();}
-  function setZoom(value){zoomed=Boolean(value&&mode==='full');root.dataset.zoomed=String(zoomed);q('[data-cloud-zoom]').textContent=zoomed?'Fit photograph':'Zoom photograph';q('[data-cloud-zoom]').setAttribute('aria-pressed',String(zoomed));stage.scrollTop=0;stage.scrollLeft=0;q('[data-cloud-hint]').textContent=zoomed?'Scroll to explore · Esc to fit the photograph':mode==='index'?'Tab to choose a photograph · Enter to open · Esc to go back':'Scroll or drag the reel · A / D to browse · Esc to go back';}
+  function setZoom(value){zoomed=Boolean(value&&mode==='full');root.dataset.zoomed=String(zoomed);q('[data-cloud-zoom]').textContent=zoomed?'Fit photograph':'Zoom photograph';q('[data-cloud-zoom]').setAttribute('aria-pressed',String(zoomed));stage.scrollTop=0;stage.scrollLeft=0;q('[data-cloud-hint]').textContent=zoomed?'Scroll to explore · Esc to fit the photograph':mode==='index'?'Tab to a photograph · Enter to open · Page Up / Down for more · Esc to go back':'Scroll or drag the reel · A / D to browse · Esc to go back';}
   function render(){
     if(!opened||dead)return;generation++;setZoom(false);
-    const roll=rolls[rollIndex];root.dataset.roll=roll.id;
-    q('[data-cloud-title]').textContent=roll.title;q('.cloud-gallery-intro').textContent=roll.intro;
+    const roll=rolls[rollIndex];root.dataset.roll=roll.id;root.dataset.subject=subject;renderSubjects();q('[data-cloud-total]').textContent=`${subject==='all'?roll.photos.length:items.length+' of '+roll.photos.length} photographs`;sheetToolbar.hidden=mode!=='index';
+    q('[data-cloud-title]').textContent=mode==='full'?(items[selected]?.caption||roll.title):roll.title;q('.cloud-gallery-intro').textContent=roll.intro;
     for(const button of rollNav.querySelectorAll('button'))button.setAttribute('aria-pressed',String(Number(button.dataset.cloudRoll)===rollIndex));
     root.dataset.mode=mode;root.dataset.reduced=String(Boolean(isReduced()));
     stage.hidden=mode==='index';indexView.hidden=mode!=='index';q('.cloud-gallery-caption').hidden=mode==='index';q('.cloud-gallery-actions').hidden=mode==='index';
     q('[data-cloud-index]').textContent=mode==='index'?'Back to reel':'Contact sheet';q('[data-cloud-index]').setAttribute('aria-expanded',String(mode==='index'));
     q('[data-cloud-inspect]').textContent=mode==='full'?'Back to reel':'View full photograph';q('[data-cloud-zoom]').hidden=mode!=='full';
     q('[data-cloud-prev]').disabled=selected===0;q('[data-cloud-next]').disabled=selected===items.length-1;
-    q('[data-cloud-count]').textContent=`${String(selected+1).padStart(2,'0')} / ${String(items.length).padStart(2,'0')} · ${roll.label}`;
+    q('[data-cloud-count]').textContent=`${String(selected+1).padStart(2,'0')} / ${String(items.length).padStart(2,'0')} · ${subject==='all'?roll.label:PHOTO_SUBJECTS[subject]}`;
     q('[data-cloud-caption]').textContent=items[selected]?.caption||'Photograph';
     q('[data-cloud-status]').textContent='';q('[data-cloud-retry]').hidden=true;root.dataset.loading='false';
     for(const image of indexView.querySelectorAll('img'))releaseImage(image);indexView.replaceChildren();
@@ -69,35 +78,47 @@ export function createCloudPhotoGallery({host,photos=[],collections=[],onClose=(
       else{q('[data-cloud-status]').textContent='Loading photograph…';root.dataset.loading='true';}
       loadImage(image,photo,{primary:offset===0});
     }
-    if(mode==='index')items.forEach((photo,index)=>{
+    if(mode==='index'){
+      const page=contactSheetPage(items,sheetPage);sheetPage=page.page;
+      q('[data-cloud-sheet-count]').textContent=`${page.start+1}–${page.end} of ${items.length} photographs`;
+      q('[data-cloud-sheet-prev]').disabled=page.page===0;q('[data-cloud-sheet-next]').disabled=page.page===page.pages-1;
+      page.photos.forEach((photo,offset)=>{const index=page.start+offset;
       const button=doc.createElement('button');button.type='button';button.dataset.cloudPick=String(index);button.className='cloud-gallery-index-card';
       button.setAttribute('aria-label',`Photograph ${index+1}: ${photo.caption}`);button.setAttribute('aria-pressed',String(index===selected));
       const image=doc.createElement('img');image.decoding='async';image.loading='lazy';const caption=doc.createElement('span');caption.textContent=`${String(index+1).padStart(2,'0')}  ${photo.caption}`;button.append(image,caption);indexView.append(button);loadImage(image,photo.thumb?{...photo,src:photo.thumb}:photo);
-    });
+    });}
+
     root.scrollTop=0;root.scrollLeft=0;
   }
   function select(value,{moveFocus=false}={}){
     if(!opened||!items.length)return false;const next=Math.max(0,Math.min(items.length-1,Math.round(Number(value)||0)));if(next===selected)return false;
-    const origin=doc.activeElement,wasPrevious=origin===q('[data-cloud-prev]'),wasNext=origin===q('[data-cloud-next]');root.dataset.direction=next<selected?'back':'forward';selected=next;remembered.set(rollIndex,selected);render();
+    const origin=doc.activeElement,wasPrevious=origin===q('[data-cloud-prev]'),wasNext=origin===q('[data-cloud-next]');root.dataset.direction=next<selected?'back':'forward';selected=next;remembered.set(memoryKey(),selected);render();
     if(moveFocus||(wasPrevious&&selected===0)||(wasNext&&selected===items.length-1))focus(q('[data-cloud-inspect]'));return true;
   }
   function setRoll(index){
     if(!opened||!rolls[index]||index===rollIndex)return false;
-    remembered.set(rollIndex,selected);rollIndex=index;items=rolls[index].photos;selected=remembered.get(index)||0;mode='gallery';render();focus(q('[data-cloud-inspect]'));return true;
+    remembered.set(memoryKey(),selected);rememberedSubjects.set(rollIndex,subject);rollIndex=index;subject=rememberedSubjects.get(index)||'all';items=photographySelection(rolls[index].photos,subject);selected=remembered.get(memoryKey())||0;mode='gallery';render();focus(q('[data-cloud-inspect]'));return true;
   }
-  function setMode(value){if(!opened)return;mode=value;render();focus(value==='index'?indexView.querySelector(`[data-cloud-pick="${selected}"]`):q('[data-cloud-inspect]'));}
-  function close({notify=true}={}){if(!opened)return false;remembered.set(rollIndex,selected);opened=false;generation++;dragOrigin=null;wheelDistance=0;root.hidden=true;releaseAll();q('[data-cloud-status]').textContent='';root.dataset.loading='false';if(notify)onClose({roll:rollIndex,selectedIndex:selected});return true;}
+  function setSubject(value){
+    if(!opened||value===subject)return false;if(value!=='all'&&!photographySubjects(rolls[rollIndex].photos).some(([id])=>id===value))return false;
+    remembered.set(memoryKey(),selected);subject=value;rememberedSubjects.set(rollIndex,subject);items=photographySelection(rolls[rollIndex].photos,subject);selected=Math.min(items.length-1,remembered.get(memoryKey())||0);sheetPage=Math.floor(selected/CONTACT_SHEET_SIZE);render();focus(q(`[data-cloud-subject="${subject}"]`));return true;
+  }
+  function setSheetPage(value){if(!opened||mode!=='index')return false;sheetPage=contactSheetPage(items,value).page;render();indexView.scrollTop=0;focus(indexView.querySelector('button'));return true;}
+  function setMode(value){if(!opened)return;mode=value;if(value==='index')sheetPage=Math.floor(selected/CONTACT_SHEET_SIZE);render();const target=value==='index'?indexView.querySelector(`[data-cloud-pick="${selected}"]`):q('[data-cloud-inspect]');focus(target);if(value==='index')target?.scrollIntoView?.({block:'nearest'});}
+  function close({notify=true}={}){if(!opened)return false;remembered.set(memoryKey(),selected);opened=false;generation++;dragOrigin=null;wheelDistance=0;root.hidden=true;releaseAll();q('[data-cloud-status]').textContent='';root.dataset.loading='false';if(notify)onClose({roll:rollIndex,selectedIndex:selected});return true;}
   function goBack(){if(!opened)return false;if(zoomed){setZoom(false);focus(q('[data-cloud-zoom]'));return true;}if(mode==='index'||mode==='full'){setMode('gallery');return true;}return close();}
   function onKey(event){
     if(!opened||event.defaultPrevented||event.altKey||event.ctrlKey||event.metaKey||event.shiftKey||event.isComposing)return;
     const target=event.target;if(target?.isContentEditable||target?.closest?.('input,textarea,select,[contenteditable="true"]'))return;
     const key=event.key?.toLowerCase();if(key==='escape'){event.preventDefault();event.stopPropagation();if(!event.repeat)goBack();return;}
     if(event.repeat)return;
-    if(mode==='index'||zoomed)return;
+    if(mode==='index'){if(key==='pagedown'||key==='pageup'){event.preventDefault();event.stopPropagation();setSheetPage(sheetPage+(key==='pagedown'?1:-1));}return;}if(zoomed)return;
     let value;if(key==='a'||key==='arrowleft')value=selected-1;else if(key==='d'||key==='arrowright')value=selected+1;else if(key==='home')value=0;else if(key==='end')value=items.length-1;else return;
     event.preventDefault();event.stopPropagation();select(value);
   }
   listen(root,'keydown',onKey);
+  listen(subjectNav,'click',event=>{const button=event.target.closest?.('[data-cloud-subject]');if(button)setSubject(button.dataset.cloudSubject);});
+  listen(q('[data-cloud-sheet-prev]'),'click',()=>setSheetPage(sheetPage-1));listen(q('[data-cloud-sheet-next]'),'click',()=>setSheetPage(sheetPage+1));
   listen(rollNav,'click',event=>{const button=event.target.closest?.('[data-cloud-roll]');if(button)setRoll(Number(button.dataset.cloudRoll));});
   listen(stage,'wheel',event=>{
     if(!opened||mode==='index'||zoomed||event.ctrlKey||event.metaKey)return;
@@ -118,7 +139,7 @@ export function createCloudPhotoGallery({host,photos=[],collections=[],onClose=(
   cards.forEach(card=>listen(card,'click',()=>{if(suppressClick){suppressClick=false;return;}const offset=Number(card.dataset.cloudSlot);if(offset===0){if(mode==='full')setZoom(!zoomed);else setMode('full');}else select(selected+offset,{moveFocus:true});}));
   listen(indexView,'click',event=>{const button=event.target.closest?.('[data-cloud-pick]');if(!button||button.parentElement!==indexView)return;selected=Number(button.dataset.cloudPick);setMode('gallery');});
   return {
-    open(index,{roll}={}){if(dead||!rolls.length)return false;if(Number.isInteger(roll)&&rolls[roll]){remembered.set(rollIndex,selected);rollIndex=roll;items=rolls[rollIndex].photos;selected=remembered.get(rollIndex)||0;}if(index!==undefined)selected=Math.max(0,Math.min(items.length-1,Math.round(Number(index)||0)));opened=true;mode='gallery';root.hidden=false;render();focus(q('[data-cloud-inspect]'));return true;},
+    open(index,{roll}={}){if(dead||!rolls.length)return false;if(Number.isInteger(roll)&&rolls[roll]){remembered.set(memoryKey(),selected);rememberedSubjects.set(rollIndex,subject);rollIndex=roll;subject=rememberedSubjects.get(roll)||'all';items=photographySelection(rolls[rollIndex].photos,subject);selected=remembered.get(memoryKey())||0;}if(index!==undefined)selected=Math.max(0,Math.min(items.length-1,Math.round(Number(index)||0)));opened=true;mode='gallery';root.hidden=false;render();focus(q('[data-cloud-inspect]'));return true;},
     close,cancel:goBack,
     dispose(){if(dead)return;close({notify:false});dead=true;generation++;releaseAll();listeners.splice(0).forEach(remove=>remove());root.remove();},
     get isOpen(){return opened;},get selectedIndex(){return selected;},get selectedRoll(){return rollIndex;}

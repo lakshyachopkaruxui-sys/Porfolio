@@ -15,101 +15,97 @@ export const OAK_ZONE_ORDER=Object.freeze(['welcome','collection','making']);
 
 export const OAK_ZONES=freeze([
   {
-    id:'welcome',label:'The childhood wish',title:'Why this world exists',
+    id:'welcome',label:'Meet Oak',title:'Why this world exists',
     intro:'Pokémon, a favourite film and a childhood wish that stayed with Lakshya.',
-    primaryAction:{kind:'zone',target:'collection',label:'See his collection'}
+    primaryAction:{kind:'zone',target:'collection',label:'Show me his collection'}
   },
   {
     id:'collection',label:'His Pokémon GO collection',title:'Lakshya’s Pokémon GO collection',
     intro:`${OAK_COLLECTION_COUNT} screenshots from Lakshya’s own Pokémon GO collection.`,
-    primaryAction:{kind:'collection',label:'Walk with Pikachu'}
+    primaryAction:{kind:'collection',label:'Let me explore with Pikachu'}
   },
   {
-    id:'making',label:'Building this portfolio',title:'From the idea to this garden',
+    id:'making',label:'How he built this',title:'From the idea to this garden',
     intro:'The choices, tools and repeated rides that brought the world together.',
-    primaryAction:{kind:'garden',label:'Back on the bicycle'}
+    primaryAction:{kind:'garden',label:'I’ll get back on the bicycle'}
   }
 ]);
 
 export const OAK_DIALOGUE=freeze([
   {
-    id:'childhood-wish',zone:'welcome',title:'Come in. There’s a story behind this garden.',
-    text:'I’m Professor Oak. When Lakshya was a child, he watched Pokémon and imagined a world where he could meet and catch them himself. Let me show you where that wish led.',
-    nextLabel:'Then came Pokémon GO',sceneCue:'oak'
+    id:'childhood-wish',zone:'welcome',title:'Come in.',
+    text:'Come in. I’m Professor Oak. When Lakshya watched Pokémon as a child, he wished he could step into that world. I’ll show you what became of that wish.',
+    nextLabel:'What happened to that wish?',sceneCue:'oak'
   },
   {
-    id:'pokemon-go-today',zone:'welcome',title:'The adventure found a place in everyday life.',
-    text:'Pokémon GO brought a little of that idea into the real world. Lakshya still plays when he wants a break. The childhood fascination is still there, along with the pleasure of going out and discovering something.',
-    nextLabel:'Why Woody rides along',sceneCue:'oak'
+    id:'pokemon-go-today',zone:'welcome',title:'Still exploring.',
+    text:'That wish stayed with him. He still plays Pokémon GO. Before we look around, there’s one more childhood favourite I should introduce.',
+    nextLabel:'Why is Woody here?',sceneCue:'oak'
   },
   {
-    id:'woody-companion',zone:'welcome',title:'Another childhood favourite came along.',
-    text:'Toy Story was a favourite film, and Woody was the character Lakshya especially loved. That’s why Woody is your companion here. Together, these familiar faces make the portfolio feel more like his world.',
-    nextLabel:'See his collection',sceneCue:'collection'
+    id:'woody-companion',zone:'welcome',title:'A familiar companion.',
+    text:'You may notice Woody riding through this garden. Toy Story was a childhood favourite, and Woody was the character Lakshya loved. That’s why he rides along.',
+    nextLabel:'Show me his collection',sceneCue:'collection'
   },
   {
-    id:'real-collection',zone:'collection',title:'A little of his Pokémon GO world.',
-    text:`These ${OAK_COLLECTION_COUNT} screenshots come from Lakshya’s own Pokémon GO collection. I’ve given them a home here. Choose a Pokémon to look closer, or take a walk through the exhibition with Pikachu.`,
-    nextLabel:'How the collection fits',sceneCue:'collection'
+    id:'real-collection',zone:'collection',title:'His Pokémon GO collection.',
+    text:`Here’s a little of Lakshya’s Pokémon GO collection: ${OAK_COLLECTION_COUNT} of his own screenshots. Choose one to look closer, or let Pikachu take you through the exhibition.`,
+    nextLabel:'How did this become a portfolio?',sceneCue:'collection'
   },
   {
-    id:'collection-connection',zone:'collection',title:'The collection explains the company you meet.',
-    text:'The Pokémon in the garden are part of the same affection you see in this collection. This place brings that interest into the ride. When you’re ready, I’ll show you how Lakshya built the portfolio around it.',
-    nextLabel:'How he built this world',sceneCue:'map'
+    id:'collection-connection',zone:'collection',title:'From collection to garden.',
+    text:'I’ll leave you to explore these. When you’re ready, the garden on my table will help me show you how this became a portfolio.',
+    nextLabel:'How did this become a portfolio?',sceneCue:'map'
   },
   {
-    id:'direction-and-tools',zone:'making',title:'Lakshya directed it. ChatGPT helped build it.',
-    text:'Lakshya shaped the concept, chose the references and reviewed each version. He worked with ChatGPT for implementation and code checks. Bruno Simon’s portfolio inspired the feeling of exploring through movement; the bicycle, interests and memories made the direction personal.',
-    nextLabel:'Look at the garden plan',sceneCue:'map'
+    id:'direction-and-tools',zone:'making',title:'A garden to explore.',
+    text:'Let’s look at the garden. Bruno Simon’s portfolio inspired the freedom to explore through movement. Lakshya chose a bicycle and brought his own interests into the world.',
+    nextLabel:'How did he build it?',sceneCue:'map'
   },
   {
-    id:'build-in-layers',zone:'making',title:'One layer, then another ride.',
-    text:'The map and bicycle came first. Landmarks, rooms, camera transitions and sound followed. Lakshya kept riding and reviewing: a slow turn, an unclear sign or a difficult return became the next thing to refine.',
-    nextLabel:'Two ways to explore',sceneCue:'map'
+    id:'build-in-layers',zone:'making',title:'One layer at a time.',
+    text:'Lakshya directed the design and worked with ChatGPT to build it in layers. First came the route and riding; then the places, rooms and sound.',
+    nextLabel:'What did he keep changing?',sceneCue:'map'
   },
   {
-    id:'explore-or-read',zone:'making',title:'The work is always within reach.',
-    text:'The garden makes room for wandering; Portfolio mode takes visitors straight to the work. Shared scene resources and on-demand media help keep exploration lightweight. The goal is simple: enjoy the ride, and find what you came for.',
-    nextLabel:'Back on the bicycle',sceneCue:'map'
+    id:'explore-or-read',zone:'making',title:'Where next?',
+    text:'I’ve shown you some of Lakshya’s world. You can keep exploring, meet the person behind the work, or switch to Portfolio mode and read the projects.',
+    nextLabel:'I’ll get back on the bicycle',sceneCue:'map'
   }
 ]);
 
 export const OAK_MAKING_STEPS=freeze([
   {
-    id:'childhood',title:'Start with a childhood wish',
-    body:'Lakshya grew up watching Pokémon and imagining a world where he could meet and catch them. Pokémon GO brought part of that wish outside, and he still enjoys playing.',
-    detail:'Toy Story was another childhood favourite, especially Woody. Bringing him along as a companion connects the ride to a film and character Lakshya loves.',
-    mapFocus:'all',stopIds:[],nextLabel:'Find a way to explore'
+    id:'childhood',title:'It started with a wish.',
+    body:'This garden began with Pokémon, Toy Story and a childhood wish. I’ll show you how Lakshya turned those interests into a place you can explore.',
+    detail:'',mapFocus:'all',stopIds:[],nextLabel:'Why explore by bicycle?'
   },
   {
-    id:'exploration',title:'Make movement part of discovery',
-    body:'Bruno Simon’s portfolio showed how movement, interaction and discovery could make a website feel like a place. Lakshya wanted that freedom to explore, with his own interests shaping the experience.',
-    detail:'A bicycle became the way through a winding garden. The camera follows the rider, destinations appear gradually, and open space gives visitors room to notice what comes next.',
-    mapFocus:'route',stopIds:[],nextLabel:'Give each part a place'
+    id:'exploration',title:'Movement became the way in.',
+    body:'Bruno Simon’s portfolio gave Lakshya a reference for discovery through movement. Here, you ride a bicycle through a garden, finding different parts of his life along the way.',
+    detail:'',mapFocus:'route',stopIds:[],nextLabel:'Show me the garden'
   },
   {
-    id:'structure',title:'Give each part a place',
-    body:'About introduces Lakshya before visitors reach his work. Singing and Garba share Hobbies, this lab holds Pokémon and the portfolio story, and Cloud Lookout gives his photography a home.',
-    detail:'The destinations use the garden’s existing pockets. Each one offers a different side of Lakshya, with an entrance, something worth exploring and a clear way back to the bicycle.',
-    mapFocus:'about',stopIds:['about','projects','work','music','cloud'],nextLabel:'Build it one layer at a time'
+    id:'structure',title:'Every place has a reason.',
+    body:'This is the garden you’ve been riding through. Choose a place on the miniature, or use its name below. I’ll tell you why it belongs here.',
+    detail:'',mapFocus:'about',stopIds:['about','projects','work','music','cloud'],nextLabel:'How did he build it?'
   },
   {
-    id:'layers',title:'Build one layer, then review it',
-    body:'Lakshya directed the concept and reviewed the design, working with ChatGPT for implementation and code checks. The first layer established the route, bicycle proportions and riding behaviour.',
-    detail:'Landmarks followed, then interiors and camera transitions. Personal photographs, recordings and sound gave the places their content. Each layer was reviewed before the next part was developed.',
-    mapFocus:'work',stopIds:['projects'],nextLabel:'Refine how the ride feels'
+    id:'layers',title:'Built with ChatGPT, layer by layer.',
+    body:'Lakshya shaped the concept and reviewed each version. He worked with ChatGPT on implementation and code checks. I’ll show you the details that kept sending him back for another ride.',
+    detail:'The route and riding came first. Landmarks, rooms and camera transitions followed. His photographs, recordings and the room sound gave those places their personal content.',
+    detailLabel:'What came first?',mapFocus:'work',stopIds:['projects'],nextLabel:'What changed after those rides?'
   },
   {
-    id:'details',title:'Refine the moments you feel',
-    body:'A turn that felt too slow led to changes in automatic riding. Pedalling, stopping, bridge crossings, camera framing and signs were revisited as Lakshya tried the garden.',
-    detail:'The same attention went into entering rooms, returning to the bicycle and balancing sound. His own photographs, singing recordings and Pokémon GO screenshots make those destinations personal.',
-    mapFocus:'hobbies',stopIds:['work'],nextLabel:'Keep the work within reach'
+    id:'details',title:'Another ride, another adjustment.',
+    body:'Turns, pedalling, bridge crossings, signs and room entrances were revisited as Lakshya tried the garden. The aim was to make the journey feel clear, all the way back to your bicycle.',
+    detail:'',mapFocus:'hobbies',stopIds:['work'],nextLabel:'And the work itself?'
   },
   {
-    id:'access',title:'Keep the work within reach',
-    body:'The garden and its rooms share rendering resources. Media loads when needed, and repeated objects reuse assets. Detail is added carefully so exploration stays practical for a website.',
-    detail:'Portfolio mode offers a direct route to the work. Full case studies open there in a new tab, leaving the garden available. Visitors can explore or get straight to reading.',
-    mapFocus:'all',stopIds:[],nextLabel:'Back on the bicycle'
+    id:'access',title:'Explore, or go straight to the work.',
+    body:'You can wander here, or read the projects in Portfolio mode. Full case studies open in another tab, so the garden is still here when you return.',
+    detail:'The garden and its rooms share rendering resources. Media loads when needed, and repeated objects reuse assets.',
+    detailLabel:'How does it stay lightweight?',mapFocus:'all',stopIds:[],nextLabel:'I’ll get back on the bicycle'
   }
 ]);
 
