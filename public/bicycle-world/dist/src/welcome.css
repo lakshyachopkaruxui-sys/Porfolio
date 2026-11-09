@@ -1,3 +1,17 @@
+/* Before entry is known, and on returning visits, show only real loading. */
+body[data-garden-entry="preparing"] #welcome .welcome-copy > :not(#loading-state),
+body[data-garden-entry="resume"] #welcome .welcome-copy > :not(#loading-state),
+body[data-garden-entry="preparing"] #welcome-wave,
+body[data-garden-entry="resume"] #welcome-wave { display: none; }
+body[data-garden-entry="preparing"] #welcome .welcome-world::after,
+body[data-garden-entry="resume"] #welcome .welcome-world::after { background: none; }
+body[data-garden-entry="preparing"] #welcome .loading-clouds,
+body[data-garden-entry="resume"] #welcome .loading-clouds { margin-inline: auto; }
+body[data-garden-entry="preparing"] #welcome .welcome-stage,
+body[data-garden-entry="resume"] #welcome .welcome-stage { grid-template-columns: minmax(0,1fr); }
+body[data-garden-entry="preparing"] #welcome.woody-welcome .welcome-copy,
+body[data-garden-entry="resume"] #welcome.woody-welcome .welcome-copy { justify-self: center; text-align: center; }
+
 /* A quiet reading zone beside an actual, transparent 3D garden entrance. */
 body.hybrid-intro { background: #dcebf1; }
 body.hybrid-intro #welcome.woody-welcome:not(.diegetic-surface) {
