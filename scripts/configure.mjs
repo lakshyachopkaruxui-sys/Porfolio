@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
+import {versionPlayAssets} from './version-play-assets.mjs';
 
 const block = /<!-- portfolio-publishing:start -->[\s\S]*?<!-- portfolio-publishing:end -->\s*/g;
 const escapeHTML = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
@@ -52,6 +53,7 @@ export async function configureSite({siteRoot,env = process.env} = {}) {
     const target = path.join(publicRoot,file);
     // Match HTML parser newline normalization before calculating script hashes.
     let html = (await fs.readFile(target,'utf8')).replace(/\r\n?/g,'\n').replace(block,'');
+    html = await versionPlayAssets({html, publicRoot, htmlPath:file});
     // Some existing generated attribution pages use a valid implicit HTML head.
     if (!/<\/head>/i.test(html) && !/<title\b/i.test(html)) throw Error(`Missing metadata insertion point in ${file}`);
     const noindex = isNoindex(html);
