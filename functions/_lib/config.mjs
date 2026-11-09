@@ -1,1 +1,1 @@
-export const publicOrigin = "https://lakshyachopkar.pages.dev";
+export const publicOrigin = "https://lakshyachopkar.com";
