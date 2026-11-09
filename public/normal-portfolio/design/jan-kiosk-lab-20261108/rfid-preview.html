@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Jan Aushadhi · RFID record concept preview</title>
+  <link rel="icon" href="../../assets/identity/shared-curve/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./lab.css?v=20261108-highfi">
+<!-- portfolio-publishing:start -->
+<link rel="canonical" href="https://lakshyachopkar.pages.dev/normal-portfolio/design/jan-kiosk-lab-20261108/rfid-preview">
+<meta property="og:url" content="https://lakshyachopkar.pages.dev/normal-portfolio/design/jan-kiosk-lab-20261108/rfid-preview">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jan Aushadhi · RFID record concept preview">
+<meta property="og:image" content="https://lakshyachopkar.pages.dev/normal-portfolio/assets/identity/shared-curve/icon-512.png">
+<meta name="twitter:card" content="summary">
+<!-- portfolio-publishing:end -->
+</head>
+<body>
+  <header class="lab-header">
+    <a href="../../#project-jan-aushadhi">Back to Jan Aushadhi case study</a>
+    <p class="eyebrow">RFID-enabled medicine packaging · small concept preview</p>
+    <h1>Reading a record is not verifying it.</h1>
+    <p>Our team explored package identity linked to batch, expiry, billing and supporting records. This new November 2026 AI-assisted preview shows the difference between displaying a prepared record and establishing that it is trustworthy.</p>
+    <p class="small">No RFID hardware, camera, tag permission, manufacturer database, medicine, bill or quality test is connected. This is a concept discussion aid, not an authenticity checker.</p>
+  </header>
+  <main>
+    <section class="kiosk" aria-label="Prepared package-record preview">
+      <div class="kiosk-brand"><span class="product-name">Jan Aushadhi<small>Package record concept</small></span><span class="demo-badge">Demo only</span></div>
+      <button type="button" id="read-tag">Read prepared sample tag</button>
+      <section id="tag-record" hidden aria-labelledby="record-title" class="receipt">
+        <h2 id="record-title" tabindex="-1">Prepared record displayed</h2>
+        <dl>
+          <dt>Example tag identity</dt><dd>DEMO-TAG-001</dd>
+          <dt>Item</dt><dd>Item A · fictional</dd>
+          <dt>Batch record</dt><dd>DEMO-BATCH-A · fictional</dd>
+          <dt>Expiry record</dt><dd>January 2030 · synthetic example date</dd>
+          <dt>Billing record</dt><dd>Not connected</dd>
+          <dt>Record source</dt><dd>Prepared local example, not a manufacturer or pharmacy record</dd>
+          <dt>Verification status</dt><dd><strong>Not verified</strong></dd>
+        </dl>
+        <p>A displayed batch or expiry value does not establish authenticity, quality, storage conditions or whether an item is suitable for anyone.</p>
+        <button type="button" id="clear-tag" class="secondary">Clear the prepared record</button>
+      </section>
+      <p id="tag-status" class="small" role="status" aria-live="polite"></p>
+    </section>
+    <section class="moderator" aria-labelledby="rfid-questions">
+      <h2 id="rfid-questions">Questions for a staff walkthrough</h2>
+      <p>Who would create and update the record? What makes that source reliable? Who can correct an error? What can someone do when a tag or record is missing? How would the screen distinguish an available record from a verified claim?</p>
+      <p class="small">No participant feedback or real traceability result has been recorded. The original packaging concept is on report page 50; this interface preview is new and separate.</p>
+    </section>
+  </main>
+  <script type="module" src="./rfid-preview.mjs"></script>
+</body>
+</html>

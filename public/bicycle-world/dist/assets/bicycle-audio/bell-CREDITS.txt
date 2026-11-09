@@ -1,0 +1,21 @@
+Recorded traditional bicycle bell — ring-ring
+Adapted from "Traditional Bicycle Bell.wav" by trpete.
+Source: https://freesound.org/people/trpete/sounds/688055/
+Creator publication: 20 May 2023. Recorded traditional English handlebar bell
+on a Zoom H5 with the XY microphone module; single and multiple rings.
+
+Licence: CC0 1.0 Universal — https://creativecommons.org/publicdomain/zero/1.0/
+Official legal code is preserved in the existing CC0-1.0.txt in this folder.
+No endorsement by the creator is implied.
+
+Derived from the full public HQ MP3 preview. The original WAV requires login
+and was not downloaded. The exact unchanged public preview is preserved
+privately; bell-SOURCE.json records URL, hashes, size and preparation details.
+
+Changes: source excerpt 1.82–3.82 seconds; mono 48 kHz; high-pass 100 Hz;
+5 ms entry and 250 ms tail fades; gain attenuation; 64 kbit/s VBR Opus.
+Both ringing attacks are retained from the actual recording. No synthesized
+oscillators, extra strike copies, pitch shift or tempo change were added.
+
+Use as one non-looping bell action. Subjective listening unavailable during
+preparation; source identity, decoding, duration, size, peak and hashes verified.

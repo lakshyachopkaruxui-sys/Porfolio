@@ -1,0 +1,11 @@
+{
+  "name": "lakshya-portfolio-pages",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/configure.mjs"
+  }
+}

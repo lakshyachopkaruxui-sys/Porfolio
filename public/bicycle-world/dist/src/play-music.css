@@ -1,0 +1,15 @@
+.play-music-dock{position:fixed;right:24px;bottom:20px;z-index:200;pointer-events:auto}
+.play-music-dock[hidden]{display:none!important}
+/* Room actions already use the bottom edge; music belongs in header flow. */
+#personal-experience .personal-header nav{flex-wrap:wrap;justify-content:flex-end}
+#personal-experience .personal-header .play-music-dock{position:static;flex:0 0 auto}
+#personal-experience .personal-header .play-music-dock button{white-space:nowrap}
+.play-music-dock button{min-height:44px;padding:10px 18px;border:1px solid #bdc6b8;border-radius:24px;background:#f6f5eefa;color:#254f46;font-family:var(--font-body,'DM Sans',sans-serif);font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 3px 14px #142d1e12}
+.play-music-dock button:hover{background:#fff}
+.play-music-dock button:focus-visible{outline:3px solid #285e4d;outline-offset:4px}
+.play-music-credit{font-family:var(--font-body,'DM Sans',sans-serif);font-size:14px;line-height:1.6;color:#526356}
+.play-music-credit a{text-decoration:underline;text-underline-offset:3px}
+.music-choice{display:grid;gap:8px;margin:18px 0 8px;font:600 15px/1.5 var(--font-body,'DM Sans',sans-serif)}
+.music-choice select{width:100%;min-height:44px;border:1px solid #9caeaa;border-radius:6px;padding:10px 36px 10px 12px;background:#fff9ec;color:#203c36;font:400 16px/1.5 var(--font-body,'DM Sans',sans-serif)}
+.music-choice select:focus-visible{outline:3px solid #b94f38;outline-offset:3px}
+@media(max-height:720px){.play-music-dock{right:18px;bottom:12px}}

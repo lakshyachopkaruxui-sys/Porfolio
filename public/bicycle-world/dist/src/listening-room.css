@@ -1,0 +1,183 @@
+/* Scoped Listening Room styles; fonts remain application-owned. */
+#personal-experience #listening-experience{--cream:#f5f0e5;--ink:#203b32;--muted:#625e51;--line:#ccc4b0;--wood:#b78350;--green:#285441;--font-body:"DM Sans",sans-serif;--font-heading:"Mochiy Pop P One",sans-serif;color-scheme:light;font-family:var(--font-body);color:var(--ink);background:#d7dfcf}
+#personal-experience #listening-experience *{box-sizing:border-box}
+#personal-experience #listening-experience button,#personal-experience #listening-experience a{-webkit-tap-highlight-color:transparent}
+#personal-experience #listening-experience button{font:inherit;cursor:pointer}
+#personal-experience #listening-experience button:disabled{cursor:wait}
+#personal-experience #listening-experience a{color:inherit}
+#personal-experience #listening-experience button,#personal-experience #listening-experience a{touch-action:manipulation}
+#personal-experience #listening-experience button:focus-visible,#personal-experience #listening-experience a:focus-visible,#personal-experience #listening-experience video:focus-visible{outline:3px solid #c87532;outline-offset:5px}
+#personal-experience #listening-experience button[hidden],#personal-experience #listening-experience [hidden]{display:none!important}
+#personal-experience #listening-experience,#personal-experience #listening-experience #listening-scene{position:absolute;inset:0;overflow:hidden}
+#personal-experience #listening-experience #listening-scene canvas{display:block;width:100%;height:100%;cursor:default}
+#personal-experience #listening-experience .vignette{position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,rgba(27,42,29,.11),transparent 24%,transparent 85%,rgba(27,42,29,.05))}
+#personal-experience #listening-experience .masthead{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:28px 40px;gap:24px;z-index:4;pointer-events:none;font-size:14px}
+#personal-experience #listening-experience .masthead>*{pointer-events:auto}
+#personal-experience #listening-experience .garden-link{display:inline-flex;align-items:center;min-height:44px;text-decoration:none;border-radius:100px;background:rgba(248,244,233,.93);padding:0 21px;box-shadow:0 2px 8px #2537280a}
+#personal-experience #listening-experience .garden-link:hover{background:#fffaf0}
+#personal-experience #listening-experience .study-label{font-weight:700;letter-spacing:.02em}
+#personal-experience #listening-experience .study-number{font-size:12px;letter-spacing:.03em;color:#42513f;background:#f8f4e9dd;border-radius:100px;padding:9px 14px}
+#personal-experience #listening-experience .threshold-copy{position:absolute;left:7vw;top:50%;transform:translateY(-43%);width:min(470px,34vw);padding:34px 30px 30px 0;z-index:3}
+#personal-experience #listening-experience .eyebrow{font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;margin:0 0 18px}
+#personal-experience #listening-experience .threshold-copy h1{font-family:var(--font-heading);font-size:clamp(32px,3.55vw,63px);font-weight:400;letter-spacing:-.035em;line-height:1.28;margin:0 0 25px}
+#personal-experience #listening-experience .entry-description{max-width:360px;font-size:17px;line-height:1.65;margin:0 0 28px;color:#3e4d3e}
+#personal-experience #listening-experience .entry-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px 18px}
+#personal-experience #listening-experience .button{min-height:50px;padding:13px 23px;border:1px solid transparent;border-radius:10px;font-weight:700;font-size:15px}
+#personal-experience #listening-experience .primary{background:var(--green);color:#fff8e8;box-shadow:0 4px 0 #143a2a}
+#personal-experience #listening-experience .primary:hover{background:#1e4433}
+#personal-experience #listening-experience .primary:active{transform:translateY(2px);box-shadow:0 2px 0 #143a2a}
+#personal-experience #listening-experience .text-button{padding:10px 0;background:none;border:0;min-height:44px;font-weight:600;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+#personal-experience #listening-experience .concept-note{margin:28px 0 0;color:#5e6857;font-size:12px;line-height:1.6;max-width:340px}
+#personal-experience #listening-experience .room-controls{position:absolute;left:40px;top:108px;max-width:620px;z-index:3}
+#personal-experience #listening-experience .room-heading{display:flex;align-items:center;gap:30px}
+#personal-experience #listening-experience .room-heading .eyebrow{margin:0 0 10px;font-size:10px;color:#505b4e}
+#personal-experience #listening-experience .room-heading h1{font-family:var(--font-heading);font-size:clamp(19px,2vw,29px);font-weight:400;margin:0;line-height:1.5}
+#personal-experience #listening-experience .quiet-button{min-height:44px;border:1px solid #babaa8;background:#f7f1e6ed;border-radius:9px;padding:10px 16px;white-space:nowrap;font-weight:600;font-size:13px}
+#personal-experience #listening-experience .quiet-button:hover{background:#fffaf0}
+#personal-experience #listening-experience .room-instruction{font-size:13px;line-height:1.5;margin:12px 0 0;color:#566050;background:#f7f1e6dd;display:inline-block;padding:5px 10px;border-radius:5px}
+#personal-experience #listening-experience .room-controls{left:50%;transform:translateX(-50%);width:max-content}
+#personal-experience #listening-experience .room-instruction{display:block;text-align:center}
+#personal-experience #listening-experience .collection{position:absolute;left:40px;right:40px;bottom:66px;z-index:4;display:flex;align-items:center;gap:28px;background:#f7f3e8f0;border:1px solid #e1dac8;box-shadow:0 12px 36px #202c1c16;border-radius:15px;padding:17px 20px;backdrop-filter:blur(12px)}
+#personal-experience #listening-experience .collection-label{font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:700;margin:0 8px;white-space:nowrap}
+#personal-experience #listening-experience .collection-items{display:grid;grid-template-columns:repeat(3,1fr);flex:1;gap:10px}
+#personal-experience #listening-experience .collection button{display:flex;align-items:center;text-align:left;gap:14px;min-height:68px;padding:11px 15px;background:transparent;border:1px solid transparent;border-radius:10px;color:var(--ink)}
+#personal-experience #listening-experience .collection button:hover{background:#e7e8db}
+#personal-experience #listening-experience .collection button[aria-pressed=true]{background:#dde5d7;border-color:#8f9e82}
+#personal-experience #listening-experience .item-number{font-size:12px;color:#7d806e}
+#personal-experience #listening-experience .collection strong{display:block;font-size:14px;font-weight:700;line-height:1.35}
+#personal-experience #listening-experience .collection small{display:block;font-size:11px;line-height:1.5;color:#67685c;margin-top:3px}
+#personal-experience #listening-experience .item-context{position:absolute;left:40px;bottom:70px;z-index:5;max-width:350px;padding:23px 25px;border-radius:14px;background:#f7f3e8f5;box-shadow:0 9px 32px #222d241a}
+#personal-experience #listening-experience .back-button{margin:0 0 24px;padding:8px 12px;min-height:40px;font-size:12px;background:transparent}
+#personal-experience #listening-experience .item-context .eyebrow{margin:0 0 10px;font-size:10px;color:#65705b}
+#personal-experience #listening-experience .item-context h2{font-family:var(--font-heading);font-size:22px;line-height:1.5;letter-spacing:-.02em;font-weight:400;margin:0 0 14px}
+#personal-experience #listening-experience .item-context>p:not(.eyebrow){font-size:14px;line-height:1.65;margin:0 0 20px;color:#5e6153}
+#personal-experience #listening-experience .item-context .button{min-height:46px;font-size:13px;padding:11px 17px}
+#personal-experience #listening-experience .item-context .player-hint{font-size:12px;margin:14px 0 0!important}
+#personal-experience #listening-experience #player-surface{position:absolute;z-index:2;background:#171b16;box-shadow:0 0 0 1px #171b16;overflow:hidden}
+#personal-experience #listening-experience #recording-player{display:block;width:100%;height:100%;object-fit:contain;background:#151914}
+#personal-experience #listening-experience #player-surface video::-webkit-media-controls-panel{font-family:var(--font-body)}
+#personal-experience #listening-experience .object-hint{position:absolute;z-index:6;pointer-events:none;background:#234635;color:#fff8e8;font-size:12px;line-height:1.4;padding:10px 14px;border-radius:8px;box-shadow:0 4px 20px #172c232e;max-width:240px}
+#personal-experience #listening-experience .review-footer{position:absolute;bottom:21px;left:40px;right:40px;z-index:4;display:flex;justify-content:space-between;font-size:11px;letter-spacing:.025em;color:#42523c;pointer-events:none}
+#personal-experience #listening-experience .review-footer span{background:#f7f3e8d9;border-radius:5px;padding:5px 8px}
+#personal-experience #listening-experience .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+#personal-experience #listening-experience .fallback{position:absolute;inset:0;z-index:8;background:var(--cream);padding:15vh 10vw}
+#personal-experience #listening-experience .fallback h1{font-family:var(--font-heading);font-size:30px}
+#personal-experience #listening-experience .fallback p{max-width:550px;line-height:1.6}
+#personal-experience #listening-experience .fallback a{display:block;margin:20px 0;min-height:44px}
+#personal-experience #listening-experience.is-moving .collection,#personal-experience #listening-experience.is-moving .item-context{opacity:.48}
+/* Visible collection choices remain usable while the controller queues or retargets travel. */
+#personal-experience #listening-experience.is-moving .collection{pointer-events:auto}
+#personal-experience #listening-experience.is-moving .item-context{pointer-events:none}
+#personal-experience #listening-experience.is-moving .object-hint{display:none}
+#personal-experience #listening-experience.is-item .room-controls{display:none}
+#personal-experience #listening-experience.is-threshold .study-label{margin-left:8vw}
+@media(min-width:1800px){#personal-experience #listening-experience .threshold-copy{left:9vw}
+#personal-experience #listening-experience .item-context{left:5vw;bottom:90px;max-width:380px;padding:28px 30px}
+#personal-experience #listening-experience .collection{left:5vw;right:5vw;bottom:80px}
+#personal-experience #listening-experience .masthead{padding:34px 5vw}
+#personal-experience #listening-experience .room-controls{left:5vw;top:124px}
+#personal-experience #listening-experience .review-footer{left:5vw;right:5vw}}
+@media(max-height:760px){#personal-experience #listening-experience .masthead{padding-top:17px}
+#personal-experience #listening-experience .threshold-copy{padding-top:10px;transform:translateY(-40%)}
+#personal-experience #listening-experience .threshold-copy h1{font-size:clamp(30px,3.2vw,48px);margin-bottom:17px}
+#personal-experience #listening-experience .entry-description{font-size:15px;margin-bottom:18px}
+#personal-experience #listening-experience .concept-note{margin-top:20px}
+#personal-experience #listening-experience .room-controls{top:89px}
+#personal-experience #listening-experience .collection{bottom:52px;padding:10px 14px}
+#personal-experience #listening-experience .collection button{min-height:59px}
+#personal-experience #listening-experience .review-footer{bottom:12px}
+#personal-experience #listening-experience .item-context{bottom:53px;padding:17px 20px;max-width:310px}
+#personal-experience #listening-experience .back-button{margin-bottom:15px}
+#personal-experience #listening-experience .item-context h2{font-size:19px}
+#personal-experience #listening-experience .item-context>p:not(.eyebrow){font-size:13px;margin-bottom:15px}}
+@media(max-width:1050px){#personal-experience #listening-experience .masthead{padding-left:24px;padding-right:24px}
+#personal-experience #listening-experience .study-number{display:none}
+#personal-experience #listening-experience .threshold-copy{left:5vw;width:39vw}
+#personal-experience #listening-experience .threshold-copy h1{font-size:32px}
+#personal-experience #listening-experience .entry-description{font-size:15px}
+#personal-experience #listening-experience .entry-actions{gap:12px}
+#personal-experience #listening-experience .collection{left:24px;right:24px;gap:10px;padding:10px}
+#personal-experience #listening-experience .collection-label{display:none}
+#personal-experience #listening-experience .collection button{padding:8px;gap:8px}
+#personal-experience #listening-experience .collection strong{font-size:12px}
+#personal-experience #listening-experience .collection small{font-size:10px}
+#personal-experience #listening-experience .room-controls{left:24px}
+#personal-experience #listening-experience .room-heading{gap:20px}
+#personal-experience #listening-experience .item-context{left:24px;max-width:280px}
+#personal-experience #listening-experience .item-context h2{font-size:18px}
+#personal-experience #listening-experience .review-footer{left:24px;right:24px}}
+@media(max-width:700px){#personal-experience #listening-experience .masthead{padding:12px 18px}
+#personal-experience #listening-experience .study-label{font-size:12px}
+#personal-experience #listening-experience .garden-link{font-size:12px;min-height:40px;padding:0 13px}
+#personal-experience #listening-experience .threshold-copy{left:24px;right:24px;top:auto;bottom:70px;transform:none;width:auto;max-width:440px;background:#f7f1e6f2;padding:24px;border-radius:15px}
+#personal-experience #listening-experience .threshold-copy h1{font-size:29px;margin-bottom:15px}
+#personal-experience #listening-experience .entry-description{font-size:14px;margin-bottom:18px;max-width:360px}
+#personal-experience #listening-experience .concept-note{font-size:10px;margin-top:16px}
+#personal-experience #listening-experience .room-controls{top:76px;right:20px}
+#personal-experience #listening-experience .room-heading h1{font-size:17px}
+#personal-experience #listening-experience .room-heading .eyebrow{font-size:9px}
+#personal-experience #listening-experience .room-heading{justify-content:space-between;gap:12px}
+#personal-experience #listening-experience .room-instruction{font-size:11px;max-width:280px}
+#personal-experience #listening-experience .collection{bottom:48px;left:12px;right:12px;padding:8px}
+#personal-experience #listening-experience .collection-items{grid-template-columns:1fr;gap:1px}
+#personal-experience #listening-experience .collection button{min-height:47px;padding:5px 10px}
+#personal-experience #listening-experience .collection strong{font-size:12px}
+#personal-experience #listening-experience .collection small{font-size:10px}
+#personal-experience #listening-experience .collection button>span:nth-child(2){display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+#personal-experience #listening-experience .item-number{font-size:10px}
+#personal-experience #listening-experience .item-context{bottom:50px;left:16px;right:16px;max-width:none;padding:14px 18px}
+#personal-experience #listening-experience .item-context h2{font-size:16px;margin-bottom:7px}
+#personal-experience #listening-experience .item-context .back-button{margin-bottom:10px;min-height:38px}
+#personal-experience #listening-experience .item-context>p:not(.eyebrow){font-size:12px;line-height:1.5;margin-bottom:9px}
+#personal-experience #listening-experience .item-context .eyebrow{font-size:9px;margin-bottom:6px}
+#personal-experience #listening-experience .review-footer{left:14px;right:14px;bottom:10px;font-size:9px}
+#personal-experience #listening-experience .review-footer #load-label{max-width:190px;text-align:right}}
+@media(prefers-reduced-motion:reduce){#personal-experience #listening-experience *{scroll-behavior:auto!important;transition:none!important}}
+@media(min-width:701px){#personal-experience #listening-experience .room-controls{left:50%;right:auto;transform:translateX(-50%);width:max-content;max-width:calc(100vw - 80px)}}
+@media(max-width:700px){#personal-experience #listening-experience .room-controls{left:24px;right:20px;transform:none;width:auto}}
+#personal-experience #listening-experience .collection-items{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:1050px) and (min-width:701px){#personal-experience #listening-experience .collection-items{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:1050px) and (min-width:701px){#personal-experience #listening-experience .collection{padding:10px}
+#personal-experience #listening-experience .collection-items{gap:6px}
+#personal-experience #listening-experience .collection button{min-height:54px;padding:7px 10px}}
+@media(max-width:700px){#personal-experience #listening-experience .collection-items{grid-template-columns:1fr}}
+
+
+#personal-experience #listening-experience{position:absolute;inset:0;z-index:30;isolation:isolate;overflow:hidden;background:#d7dfcf}
+#personal-experience #listening-experience .garden-link{border:0;color:var(--ink);font:inherit;cursor:pointer}
+#personal-experience #listening-experience .masthead .quiet-button{background:#f8f4e9ed}
+
+#personal-experience #listening-experience .listening-veil{position:absolute;inset:0;z-index:20;pointer-events:none;background:#f5f0e5;opacity:1}
+#personal-experience #listening-experience #back-room{position:static;inset:auto;transform:none;z-index:auto;display:inline-flex;align-items:center;justify-content:center;width:auto;height:auto;min-height:44px}
+/* Readable media context and full photographs; no additional 3D assets. */
+#personal-experience #listening-experience .room-heading{background:#f5f0e5f2;padding:14px 22px;border-radius:10px;}
+#personal-experience #listening-experience .room-instruction{font-size:14px;}
+#personal-experience #listening-experience .collection{background:#f7f3e8fa;backdrop-filter:none;}
+#personal-experience #listening-experience .collection strong{font-size:15px;line-height:1.5;}
+#personal-experience #listening-experience .collection small{font-size:12px;line-height:1.6;}
+#personal-experience #listening-experience .item-context{background:#f7f3e8;max-width:360px;border:1px solid #d5d7c7;padding:24px;box-shadow:0 8px 30px #222d2414;}
+#personal-experience #listening-experience .item-context>p:not(.eyebrow){font-size:16px;line-height:1.75;color:#3f5144;}
+#personal-experience #listening-experience .item-context h2{font-size:24px;line-height:1.5;letter-spacing:0;}
+#personal-experience #listening-experience .item-context .eyebrow{font-size:11px;line-height:1.65;}
+#personal-experience #listening-experience #listening-photo-viewer{position:absolute;inset:0;z-index:12;background:#f4f0e5;padding:24px max(32px,calc((100vw - 1160px)/2));overflow:auto;overscroll-behavior:contain;}
+#personal-experience #listening-experience #listening-photo-viewer>header{position:sticky;top:-24px;z-index:1;background:#f4f0e5;display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 0 22px;}
+#personal-experience #listening-experience #listening-photo-title{font:400 24px/1.5 var(--font-heading);margin:0 auto 0 0;}
+#personal-experience #listening-experience .singing-photo-layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(280px,.85fr);gap:40px;align-items:center;margin:20px 0;}
+#personal-experience #listening-experience .singing-photo-layout figure{margin:0;min-width:0;}
+#personal-experience #listening-experience .singing-photo-layout img{display:block;width:auto;height:auto;max-width:100%;max-height:calc(100dvh - 210px);object-fit:contain;border-radius:12px;margin:auto;}
+#personal-experience #listening-experience .singing-photo-layout figcaption{font-size:14px;line-height:1.6;margin:16px 0 0;text-align:center;color:#536250;}
+#personal-experience #listening-experience .singing-photo-layout aside>p:not(.eyebrow){font-size:18px;line-height:1.8;margin:0 0 24px;}
+#personal-experience #listening-experience .singing-photo-layout .eyebrow{font-size:11px;line-height:1.7;}
+#personal-experience #listening-experience .singing-photo-layout nav{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:30px;}
+#personal-experience #listening-experience .singing-photo-layout nav span{font-size:14px;}
+#personal-experience #listening-experience #listening-photo-viewer .play-music-dock{position:static;inset:auto;transform:none;}
+#personal-experience #listening-experience #listening-photo-viewer button:disabled{cursor:default;opacity:.45;}
+@media(max-height:760px){#personal-experience #listening-experience .item-context{padding:18px 22px;max-width:330px;}#personal-experience #listening-experience .item-context h2{font-size:22px;}#personal-experience #listening-experience .item-context>p:not(.eyebrow){font-size:15px;}}
+@media(max-width:760px){#personal-experience #listening-experience .singing-photo-layout{grid-template-columns:1fr;gap:24px;}#personal-experience #listening-experience #listening-photo-viewer{padding-inline:24px;}}
+/* Keep previous/next aligned even in a compact desktop column. */
+#personal-experience #listening-experience .singing-photo-layout nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));}
+#personal-experience #listening-experience .singing-photo-layout nav button{white-space:normal;}
+#personal-experience #listening-experience #listening-photo-prev{grid-column:1;grid-row:1;}
+#personal-experience #listening-experience #listening-photo-next{grid-column:2;grid-row:1;}
+#personal-experience #listening-experience #listening-photo-count{grid-column:1 / -1;grid-row:2;text-align:center;}
+#personal-experience #listening-experience .review-footer{padding-right:190px;}

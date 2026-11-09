@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#dce6cc">
+  <title>Lakshya — Work, songs & a little wandering</title>
+  <meta name="description" content="A bicycle journey through Lakshya's world. An early playable portfolio prototype.">
+  <link rel="stylesheet" href="./src/style.css"><link rel="stylesheet" href="./src/destinations.css"><link rel="stylesheet" href="./src/foundation.css"><link rel="stylesheet" href="./src/exploration.css"><link rel="stylesheet" href="./src/hobby-interactions.css">
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}</script>
+  <link rel="stylesheet" href="./src/riding.css">
+  <link rel="stylesheet" href="./src/diegetic.css">
+  <link rel="stylesheet" href="./src/hybrid-ui.css">
+  <link rel="stylesheet" href="./src/welcome-fonts.css"><link rel="stylesheet" href="./src/welcome.css">
+  <link rel="stylesheet" href="./src/clouds.css">
+  <link rel="stylesheet" href="./src/mobile-entry.css"><link rel="stylesheet" href="./src/play-typography.css">
+  <link rel="stylesheet" href="./src/garden-polish.css"><link rel="stylesheet" href="./src/collection-experience.css"><link rel="stylesheet" href="./src/works-experience.css">
+<link rel="stylesheet" href="./src/personal-rooms.css">
+<link rel="stylesheet" href="./src/listening-room.css">
+<link rel="stylesheet" href="./src/garba-room.css">
+<link rel="stylesheet" href="./src/pokemon-room.css">
+<link rel="stylesheet" href="./src/oak-lab.css">
+<link rel="stylesheet" href="./src/play-music.css">
+  <link rel="icon" type="image/svg+xml" href="./assets/identity/shared-curve/favicon.svg?v=20261103"><link rel="icon" type="image/png" sizes="32x32" href="./assets/identity/shared-curve/icon-32.png?v=20261103"><link rel="apple-touch-icon" href="./assets/identity/shared-curve/apple-touch-icon.png?v=20261103">
+  <link rel="stylesheet" href="./src/identity.css?v=20261103">
+  <link rel="stylesheet" href="./src/play-controls.css?v=20261105"><link rel="stylesheet" href="./src/map-guide.css?v=20261105"><link rel="stylesheet" href="./src/riding-options.css?v=20261105">
+  <link rel="stylesheet" href="./src/mode-selector.css?v=20261105">
+<!-- portfolio-publishing:start -->
+<link rel="canonical" href="https://lakshyachopkar.pages.dev/bicycle-world/dist/">
+<meta property="og:url" content="https://lakshyachopkar.pages.dev/bicycle-world/dist/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lakshya — Work, songs & a little wandering">
+<meta property="og:description" content="A bicycle journey through Lakshya's world. An early playable portfolio prototype.">
+<meta property="og:image" content="https://lakshyachopkar.pages.dev/normal-portfolio/assets/identity/shared-curve/icon-512.png">
+<meta name="twitter:card" content="summary">
+<!-- portfolio-publishing:end -->
+</head>
+<body class="hybrid-world hybrid-intro">
+  <main id="game" aria-label="Bicycle portfolio world">
+    <button id="skip-read" class="skip-read">Skip riding. Browse the projects.</button><div id="scene" tabindex="0" role="region" aria-label="Bicycle world. W or up arrow to pedal. A and D to steer. S to reverse. Hold Shift to ride faster. Space to brake. R rings the bicycle bell. L switches the bicycle light. Click a landmark or press Enter at a stop to explore. M opens the map with direct reading. P opens the portfolio. Question mark for help."></div>
+    <nav id="world-controls" aria-label="Exploration controls" hidden>
+      <div id="ride-tools">
+        <button id="ride-guide" class="ride-guide" aria-label="Open map and destinations"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 5 6-2 6 2 6-2v16l-6 2-6-2-6 2V5Zm6-2v16m6-14v16"/></svg>Map <kbd>M</kbd></button>
+        <button id="ride-help" type="button" aria-label="Open riding controls and accessibility settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5zM8 3v18m3-13h5m-5 4h5"/></svg>Guide <kbd>?</kbd></button>
+        <button id="ride-bell" type="button" aria-label="Ring bicycle bell (R)" title="Ring bicycle bell (R)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15h12M7 15v-4a5 5 0 0 1 10 0v4M4 18h16M10 21h4M12 4V2"/></svg><span>Bell</span><kbd>R</kbd></button>
+        <button id="ride-light" type="button" aria-label="Bicycle light" aria-pressed="false" title="Turn bicycle light on (L)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5c-5 0-8 3-8 7s3 7 8 7V5ZM17 6l4-2M18 10h4M18 14h4M17 18l4 2"/></svg><span>Light</span><kbd>L</kbd></button>
+        <button id="ride-camera" type="button" aria-label="Switch to closer third-person camera">Follow Woody (C)</button>
+        <span class="mode-switch mode-selector" data-mode-switch id="back" data-mode="play" role="group" aria-label="Portfolio version">
+          <span class="mode-selector-plate" aria-hidden="true"></span>
+          <a data-mode-link="portfolio" href="/normal-portfolio/">Portfolio</a>
+          <a data-mode-link="play" href="./index.html" aria-current="page">Play</a>
+        </span>
+      </div>
+    </nav>
+    <section id="welcome" class="welcome woody-welcome" aria-labelledby="welcome-title">
+      <header class="welcome-masthead"><span class="mode-switch mode-selector" data-mode-switch id="welcome-portfolio" data-mode="play" role="group" aria-label="Portfolio version"><span class="mode-selector-plate" aria-hidden="true"></span><a data-mode-link="portfolio" href="/normal-portfolio/">Portfolio</a><a data-mode-link="play" href="./index.html" aria-current="page">Play</a></span></header>
+      <div class="welcome-stage">
+      <div class="welcome-copy">
+        <h1 id="welcome-title"><span>Hi, I’m</span><strong>Woody.</strong></h1>
+        <p class="welcome-deck-title">Welcome to Lakshya’s portfolio.</p>
+        <p id="welcome-about" class="welcome-deck">He built this garden from his projects, hobbies and childhood memories. I’ll show you around.</p>
+        <p id="welcome-dialogue" role="status" aria-live="polite">Ready to explore?</p>
+        <div id="loading-state" class="loading-state" aria-busy="true"><div class="loading-clouds" aria-hidden="true"><span></span><span></span><span></span></div><p id="loading-status" role="status" aria-live="polite">Preparing your ride…</p><ol class="loading-steps" aria-label="World preparation"><li data-load-stage="view" data-state="waiting">View</li><li data-load-stage="world" data-state="waiting">Woody &amp; bicycle</li><li data-load-stage="assets" data-state="waiting">Garden &amp; displays</li></ol></div>
+        <div class="welcome-actions"><button id="start" class="primary" disabled>Preparing the ride…</button><a id="read-direct" class="text-button" data-normal-portfolio href="/normal-portfolio/">View portfolio</a></div>
+        <div id="welcome-audio" class="welcome-audio" hidden><button id="welcome-voice" type="button" aria-pressed="false" disabled>Voice pending</button><button id="welcome-replay" type="button" hidden>Hear welcome</button><p id="welcome-caption"></p></div>
+        <a class="plain-reading" href="./projects.html">Read projects without 3D</a>
+      </div>
+      <div class="welcome-world">
+        <div id="welcome-portrait" aria-hidden="true"></div>
+        <button id="welcome-wave" type="button" disabled aria-label="Wave hello to Woody">Wave hello</button>
+      </div>
+      </div>
+    </section>
+    <div id="welcome-handoff" aria-hidden="true" hidden></div>
+    <aside id="woody-guide" class="woody-guide" aria-label="A quick introduction from Woody" hidden>
+      <p class="eyebrow">WOODY · YOUR RIDING COMPANION</p>
+      <p id="woody-guide-destination"></p>
+      <p id="woody-guide-controls"><kbd>W</kbd> pedal · <kbd>A</kbd><kbd>D</kbd> steer · <kbd>S</kbd> reverse.<br>Click clear ground and I’ll ride there. Hold <kbd>Shift</kbd> to ride faster. <kbd>Space</kbd> brakes.</p>
+      <div class="guide-actions"><button id="woody-guide-dismiss" type="button">Got it</button><button id="woody-guide-voice" type="button" aria-pressed="false" hidden>Voice off</button><button id="woody-guide-replay" type="button" hidden>Hear controls</button></div>
+      <p id="woody-guide-audio-status" role="status" hidden></p>
+    </aside>
+    <div id="world-bottom" hidden>
+      <p id="notice" role="status" aria-live="polite"></p>
+      <div id="ride-status" hidden><p id="ride-status-label" role="status" aria-live="polite"></p><button id="stop-route" type="button">Stop ride</button></div>
+      <button id="interact" class="interact" hidden><span class="stop-caption">MEET LAKSHYA</span><span id="interact-label">Start a conversation <kbd>Enter</kbd></span></button>
+      <div id="route-hint" class="route-hint" hidden><kbd>W A S D</kbd> ride <span>·</span> Click ground to travel <span>·</span> Hold <kbd>Shift</kbd> for speed <span>·</span> <kbd>Space</kbd> brake</div>
+    </div>
+    <div id="touch-controls" hidden aria-label="Touch riding controls"><div class="steering"><button data-key="a" aria-label="Steer left">←</button><button data-key="d" aria-label="Steer right">→</button></div><button id="touch-help" aria-label="Open field guide">?</button><div class="pedals"><button data-key="s" aria-label="Reverse bicycle">Back ↓</button><button data-key=" " aria-label="Brake">Stop</button><button data-key="w" aria-label="Pedal forward">Ride ↑</button></div></div>
+    <section id="failure" hidden><h1>The world couldn’t start.</h1><p id="failure-message" role="alert">The projects and personal stories are still here to read.</p><button id="failure-retry" class="primary">Retry the world</button><button class="primary" id="failure-read">Browse the projects</button><div class="direct-stories"><button class="text-button" data-open-landmark="work">Hobbies</button><button class="text-button" data-read-place="cloud">Cloud story</button><button class="text-button" data-read-place="music">Oak’s lab story</button><button class="text-button" data-open-landmark="about">Meet Lakshya</button></div><nav class="failure-links" aria-label="Continue without 3D"><a class="plain-reading" href="./projects.html">Read projects without the game</a><a class="plain-reading" data-normal-portfolio href="../../normal-portfolio/">View portfolio</a><a class="plain-reading" href="../../normal-portfolio/assets/Lakshya-Chopkar-UX-Designer-Resume.pdf">View résumé</a><a class="plain-reading" href="mailto:lakshyachopkaruxui@gmail.com">Contact Lakshya</a></nav></section>
+  </main>
+
+  <dialog id="reader" aria-labelledby="case-title">
+    <div class="reader-top"><span class="mode-switch mode-selector" data-mode-switch id="reader-back" data-mode="play" role="group" aria-label="Portfolio version"><span class="mode-selector-plate" aria-hidden="true"></span><a data-mode-link="portfolio" href="/normal-portfolio/">Portfolio</a><a data-mode-link="play" href="./index.html" aria-current="page">Play</a></span><button id="close-reader" class="close-button">Return to ride <span aria-hidden="true">×</span></button></div>
+    <article>
+      <header class="case-header"><p class="eyebrow">PORTFOLIO PROJECT · PROTOTYPE IN PROGRESS</p><h1 id="case-title">A little more room<br>to be human.</h1><p class="case-deck">Building a portfolio you can ride through—without making anyone work to read it.</p><div class="case-meta"><span>Project<strong>This portfolio</strong></span><span>Focus<strong>Exploration & clarity</strong></span><span>Stage<strong>Playable study</strong></span></div></header>
+      <figure class="route-diagram" aria-label="Early concept diagram: arrival, the work stop, a bridge and a cloud lookout."><svg viewBox="0 0 840 300" role="img" aria-label="Four places connected by a meandering path"><path class="river" d="M490 -10 Q520 100 480 180 T510 320"/><path class="track" d="M50 230 C170 230 150 75 295 85 S425 220 535 170 S685 65 790 80"/><path class="bridge" d="M467 190 L520 179"/><g class="map-dot"><circle cx="78" cy="225" r="8"/><circle cx="280" cy="86" r="8"/><circle cx="735" cy="84" r="8"/></g><g class="map-label"><text x="50" y="270">ARRIVE</text><text x="220" y="50">THE WORK STOP</text><text x="442" y="240">TAKE A BREATHER</text><text x="620" y="48">CLOUD LOOKOUT</text></g></svg><figcaption>Early concept sketch. The current winding map expands this idea into five stops.</figcaption></figure>
+      <nav class="case-sections" aria-label="Case study sections"><a href="#intent">The intent</a><a href="#decisions">The decisions</a><a href="#next">What comes next</a></nav>
+      <section id="intent"><p class="eyebrow">THE INTENT</p><h2>Personality shouldn’t cost clarity.</h2><p>I’m a UX designer who enjoys meeting people, singing, and photographing clouds. A conventional portfolio can show my work clearly. The playful mode gives those interests a place to live.</p><p>Early world concepts tried to fit too much into one view. The correction was spatial: spread destinations out, follow the rider, and let each place arrive when it matters.</p><aside class="case-note">This portfolio is a working design study. The five project readers use original project documents, with evidence and limitations shown together.</aside></section>
+      <section id="workbench"><p class="eyebrow">AT THE WORKBENCH</p><h2>Choose a layer. See the decision.</h2><div class="workbench-choices" role="group" aria-label="Explore a portfolio design decision"><button data-workbench="route" aria-pressed="true" aria-controls="workbench-result">The winding route</button><button data-workbench="landmarks" aria-pressed="false" aria-controls="workbench-result">Recognisable places</button><button data-workbench="reading" aria-pressed="false" aria-controls="workbench-result">Room to read</button></div><div id="workbench-result" class="workbench-result" aria-live="polite" aria-atomic="true"><h3 id="workbench-title">A route with something around the bend.</h3><p id="workbench-body">The first circular track felt repetitive. A winding circuit now alternates long sweeps, tighter bends and two bridge crossings. Short pull-offs lead to five personal stops.</p><p id="workbench-tradeoff">Trade-off: a longer route asks for more time. The map can take you to a stop, or open its story immediately.</p></div></section>
+      <section id="decisions"><p class="eyebrow">THE DECISIONS</p><h2>Small choices. A calmer ride.</h2><details open><summary><span>01</span> Discover one place at a time</summary><p>The camera follows a visible rider at a stable angle. Open ground separates the arrival, project stop and bridge. The full route is never forced into the default gameplay view.</p><p class="decision-tradeoff">Trade-off: more distance between stops. Click-to-ride and direct reading keep that distance optional.</p></details><details><summary><span>02</span> A bicycle with forgiving controls</summary><p>Pedaling and coasting bring a human pace to the world. The bicycle balances automatically, turns even at low speed, and brakes on Space. No cycling skill or racing objective is required.</p><p class="decision-tradeoff">Trade-off: gentler handling is less realistic. Approaching a case study comfortably matters more than simulating a race.</p></details><details><summary><span>03</span> Stop the world. Let the story speak.</summary><p>Case studies open as selectable, scrollable HTML. Riding pauses, held keys clear, and closing the story returns to the same place. Keyboard focus stays inside the reader until it closes.</p><p class="decision-tradeoff">Trade-off: the reader covers most of the scene. That separation protects reading from competing motion.</p></details><details><summary><span>04</span> An exit you never need to hunt for</summary><p>The Portfolio / Play switch stays in a consistent screen position while riding and remains available inside each reader. Press P while riding for a direct return to the portfolio. Switching modes keeps your place in the world. Normal mode uses the same project stories, with category filters and a direct route into the work.</p><p class="decision-tradeoff">The world has local signs and contextual actions. It doesn’t repeat a conventional website menu over the scene.</p></details></section>
+      <section id="next"><p class="eyebrow">THE NEXT TEST</p><h2>Feel it before filling it.</h2><p>Five personal places now connect reading and exploration. Direction boards guide the route, while Mochiy Pop P One headings and DM Sans text keep the experience consistent.</p><ul class="next-list"><li>Observe where first-time visitors hesitate.</li><li>Tune camera distance, stopping and signs from actual use.</li><li>Add original cloud photographs and vocal recordings.</li><li>Check whether each stop feels personal without distracting from the work.</li></ul><p>No participant-study results or business outcomes are claimed for this portfolio.</p></section>
+      <section aria-labelledby="garden-credit"><h2 id="garden-credit">Garden model credits</h2><p><a href="https://sketchfab.com/3d-models/japanese-bridge-garden-d122e17593eb4012913cde927486d15a" target="_blank" rel="noopener noreferrer">Japanese Bridge Garden</a> by <a href="https://sketchfab.com/kristenlee" target="_blank" rel="noopener noreferrer">kristenlee</a>. The bridge has been extracted and reshaped to fit the riding crossings.</p><p><a href="https://sketchfab.com/3d-models/low-poly-trees-nature-pack-70-props-9e80530909f84da9bc226273974f75f1" target="_blank" rel="noopener noreferrer">Low Poly Trees &amp; Nature Pack (70 Props)</a> by <a href="https://sketchfab.com/anastasita.3d" target="_blank" rel="noopener noreferrer">anastasita.3d</a>. Selected props have been resized and arranged around this world. Both models are provided under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>.</p></section>
+      <section aria-labelledby="character-credit"><h2 id="character-credit">Character credit</h2><p><a href="https://sketchfab.com/3d-models/ts3-woody-8703447e35db4de79cf4923e7c88631c" target="_blank" rel="noopener noreferrer">Ts3 Woody</a> by <a href="https://sketchfab.com/HarrisonHag1" target="_blank" rel="noopener noreferrer">HarrisonHag1</a>, provided under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>. The model is fitted and posed for this bicycle experience. Woody is a Toy Story character.</p></section>
+      <footer class="case-footer"><p>Ready for a little fresh air?</p><button id="reader-continue" class="primary">Back on the bicycle ↗</button></footer>
+    </article>
+  </dialog>
+
+  <dialog id="help" aria-labelledby="help-title"><div class="reader-top"><span class="mode-switch mode-selector" data-mode-switch id="help-back" data-mode="play" role="group" aria-label="Portfolio version"><span class="mode-selector-plate" aria-hidden="true"></span><a data-mode-link="portfolio" href="/normal-portfolio/">Portfolio</a><a data-mode-link="play" href="./index.html" aria-current="page">Play</a></span><button id="help-close" class="close-button" aria-label="Close controls">×</button></div><h2 id="help-title">Riding field guide</h2><div class="guide-arrival"><p>Start beside the physical garden guide at arrival. Click its board, or press <kbd>Enter</kbd> nearby, to open these controls.</p><button id="help-reset" type="button" aria-describedby="journey-reset-note">Restart journey</button><p id="journey-reset-note">Return Woody to the start. Keep reading progress, photos and preferences.</p></div><div class="field-guide-layout"><section aria-labelledby="guide-ride-title"><h3 id="guide-ride-title">On the bicycle</h3><dl><div><dt><kbd>W</kbd> / <kbd>↑</kbd></dt><dd>Pedal forward</dd></div><div><dt><kbd>Shift</kbd></dt><dd>Hold to ride faster, including click-to-ride routes</dd></div><div><dt><kbd>A</kbd><kbd>D</kbd> / <kbd>←</kbd><kbd>→</kbd></dt><dd>Steer left / right</dd></div><div><dt><kbd>S</kbd> / <kbd>↓</kbd></dt><dd>Slow down, then reverse</dd></div><div><dt><kbd>Space</kbd></dt><dd>Brake</dd></div><div><dt><kbd>Enter</kbd></dt><dd>Open a nearby stop</dd></div></dl><p>Click or tap nearby ground to ride there. The two bridges are the safe crossings. Click a landmark to explore it.</p><details class="places-guide"><summary>Explore the stops without riding</summary><div class="place-shortcuts"><button data-open-landmark="about">Meet Lakshya <span>Explore</span></button><button data-open-landmark="projects">Works <span>Explore</span></button><button data-open-landmark="work">Hobbies <span>Explore</span></button><button data-open-landmark="music">Oak’s lab <span>Explore</span></button><button data-open-landmark="cloud">Cloud lookout <span>Explore</span></button></div></details><section class="field-guide-keyboard" aria-labelledby="guide-keyboard-title"><h3 id="guide-keyboard-title">Inside the rooms</h3><dl><div><dt><kbd>A</kbd><kbd>D</kbd> / <kbd>←</kbd><kbd>→</kbd></dt><dd>Browse stories, projects, recordings and photographs</dd></div><div><dt><kbd>Enter</kbd></dt><dd>Open the selected object, or activate the focused button</dd></div><div><dt><kbd>Tab</kbd> / <kbd>Shift</kbd> + <kbd>Tab</kbd></dt><dd>Move between controls. Space also activates buttons.</dd></div><div><dt><kbd>Esc</kbd></dt><dd>Back one step. On the ride, stop and return keyboard control to Woody.</dd></div></dl><p>From the Listening Room: use Esc to step back to Hobbies, then D and Enter for Garba. Video controls keep their own keys.</p><p>Read with ↑/↓, Page Up/Down and Home/End. The map uses W/S for stops and A/D for Ride or Explore.</p></section></section><section class="field-guide-settings" aria-labelledby="guide-preferences-title"><h3 id="guide-preferences-title">Make yourself at home</h3><label class="music-choice">Riding view<select id="riding-view" aria-describedby="riding-view-note"><option value="overview">Garden overview</option><option value="follow">Follow Woody</option></select></label><p class="ride-sound-note" id="riding-view-note">Press C while riding to change views. Reduced motion keeps the overview steady.</p><label class="check"><input type="checkbox" id="bicycle-light" aria-describedby="bicycle-light-note"> Bicycle light</label><p class="ride-sound-note" id="bicycle-light-note">Press L while riding. A small headlight follows your handlebars, useful after dark.</p><label class="check"><input type="checkbox" id="night-garden"> Night garden</label><label class="check"><input type="checkbox" id="automatic-daylight"> Let day turn into night</label><p class="ride-sound-note">A gentle four-and-a-half-minute cycle, with a full minute of daylight before sunset. Pauses while you explore a room. Press N while riding for day or night.</p><label class="check"><input type="checkbox" id="calm-motion"> Reduced motion</label><label class="check"><input type="checkbox" id="lighter-graphics" aria-describedby="graphics-note"> Lighter graphics</label><p class="ride-sound-note" id="graphics-note">Less detail in shadows and no tree breeze. Keeps the full garden and every project.</p><label class="check"><input type="checkbox" id="ride-sounds" aria-describedby="ride-sound-note"> Ride sounds</label><p class="ride-sound-note" id="ride-sound-note">Recorded bicycle detail follows your pace, with short bridge and contact cues. Quiet when parked. Turn off whenever you prefer.</p><p class="play-music-credit">Bicycle recordings: <a href="./assets/bicycle-audio/CREDITS.txt" target="_blank" rel="noopener">riding</a> · <a href="./assets/bicycle-audio/bell-CREDITS.txt" target="_blank" rel="noopener">bell</a></p><label class="music-choice">Background music<select data-play-music-track aria-describedby="music-choice-note"><option value="clear-air">Clear Air</option><option value="porch-swing-days">Porch Swing Days</option></select></label><p class="ride-sound-note" id="music-choice-note">Choose a track, then turn Garden sound on. Music pauses during recordings and in the Listening Room.</p><p class="play-music-credit"><a href="./assets/ambient-music/CREDITS.txt" target="_blank" rel="noopener">Music by Kevin MacLeod · credits</a></p></section></div><div class="help-actions"><button id="help-map" class="text-button">Open the garden map (M)</button><button id="help-read" class="text-button">Read the making-of</button><button id="help-bell" class="text-button">Ring the bell <kbd>R</kbd></button></div><button id="help-resume" class="primary">Back to the ride</button></dialog>
+  <noscript><style>#game{display:none!important}body{overflow:auto!important}.no-script{max-width:42rem;margin:10vh auto;padding:24px;line-height:1.6}</style><section class="no-script"><h1>Explore Lakshya’s portfolio</h1><p>JavaScript is needed for the bicycle world. Read <a href="./projects.html">all six project stories</a> or <a href="./story.html">the making-of</a> without JavaScript.</p><p><a href="../../normal-portfolio/">View portfolio</a> · <a href="../../normal-portfolio/assets/Lakshya-Chopkar-UX-Designer-Resume.pdf">View résumé</a> · <a href="mailto:lakshyachopkaruxui@gmail.com">Contact Lakshya</a></p></section></noscript>
+  <script id="play-startup-guard">
+  // Recovery is independent of every external module, including boot.js itself.
+  (() => {
+    let settled = false;
+    const timer = setTimeout(() => fail('The world is taking too long to prepare. Retry, or read the projects directly.'), 90000);
+    const slowTimer = setTimeout(() => {
+      if (!settled) byId('loading-status').textContent += ' Still loading. You can read the projects while it prepares.';
+    }, 15000);
+    const byId = id => document.getElementById(id);
+    function finish(state) {
+      settled = true; clearTimeout(timer); clearTimeout(slowTimer); document.body.dataset.startupState = state;
+    }
+    function fail(message) {
+      if (settled && document.body.dataset.startupState !== 'failed') return;
+      finish('failed');
+      document.body.dataset.entryMode = 'failed';
+      document.body.classList.remove('hybrid-intro', 'cloud-handoff');
+      byId('game').hidden = false; byId('welcome').hidden = true;
+      byId('failure').hidden = false; byId('failure-message').textContent = message;
+      byId('failure-read').hidden = true;
+      byId('failure').querySelector('.direct-stories').hidden = true;
+      byId('loading-state').setAttribute('aria-busy', 'false');
+      byId('loading-status').textContent = 'The world needs another try.';
+      for (const id of ['mobile-play-notice', 'welcome-handoff', 'world-controls', 'world-bottom', 'woody-guide', 'skip-read']) {
+        const node = byId(id); if (node) node.hidden = true;
+      }
+      byId('scene').removeAttribute('tabindex');
+      window.dispatchEvent(new Event('play-startup-cancel'));
+      byId('failure-retry').focus({preventScroll: true});
+    }
+    byId('failure-retry').addEventListener('click', () => location.reload());
+    window.addEventListener('error', event => {
+      if (event.target === byId('play-boot')) fail('The interactive world could not load. Retry, or read the projects directly.');
+    }, true);
+    window.__playStartup = Object.freeze({finish, fail});
+    document.body.dataset.startupState = 'loading';
+  })();
+  </script>
+  <script id="play-boot" type="module" src="./src/boot.js"></script>
+</body>
+</html>
+
+
+
+
+

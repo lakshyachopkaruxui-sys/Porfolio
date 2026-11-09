@@ -1,0 +1,17 @@
+GARDEN MUSIC
+
+"Clear Air" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+https://creativecommons.org/licenses/by/4.0/
+Composer page: https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100626
+Original recording: https://incompetech.com/music/royalty-free/mp3-royaltyfree/Clear%20Air.mp3
+
+"Porch Swing Days - slower" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+https://creativecommons.org/licenses/by/4.0/
+Composer page: https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100715
+Original recording: https://incompetech.com/music/royalty-free/mp3-royaltyfree/Porch%20Swing%20Days%20-%20slower.mp3
+
+Changes: full recordings normalized near -18 LUFS; gentle 0.65-second entry and 1.5-second tail fades; metadata removed;64 kbit/s stereo Opus. No nature-recording layer/remix. Files preserve musical endings and are not seamless loops.
+
+Default: Clear Air. Optional alternative: Porch Swing Days - slower. Only selected track should load/play. Full originals, exact lengths/hashes and processing evidence archived privately. Official CC BY 4.0 legal-code copy provided here.

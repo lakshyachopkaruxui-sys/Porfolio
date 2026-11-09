@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, follow">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'none'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; base-uri 'none'; object-src 'none'">
+  <title>Pixel Mania — interaction comparison</title>
+  <link rel="stylesheet" href="./lab.css">
+  <script type="module" src="./lab.mjs"></script>
+<!-- portfolio-publishing:start -->
+<link rel="canonical" href="https://lakshyachopkar.pages.dev/normal-portfolio/design/pixel-interaction-lab-20261108/">
+<meta property="og:url" content="https://lakshyachopkar.pages.dev/normal-portfolio/design/pixel-interaction-lab-20261108/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pixel Mania — interaction comparison">
+<meta property="og:image" content="https://lakshyachopkar.pages.dev/normal-portfolio/assets/identity/shared-curve/icon-512.png">
+<meta name="twitter:card" content="summary">
+<!-- portfolio-publishing:end -->
+</head>
+<body>
+  <a class="skip-link" href="#comparison">Skip to comparison</a>
+  <header class="page-header">
+    <a href="../../#project-pixel-mania">Back to Pixel Mania</a>
+    <span>Interaction lab · November 2026</span>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="title">
+      <p class="eyebrow">New exploration · Not user-tested</p>
+      <h1 id="title">Pixel painting comparison</h1>
+      <p class="lead">Does a colour choice help more than cycling each square? Does dragging help beyond choosing a colour? Try the same board with three input conditions.</p>
+      <p class="scope">Prepared for general visitors and casual creative play, the owner-confirmed audience. This simplified November 2026 comparison isolates painting from the original game’s entry and animation. It is not a replica, a replacement for the live game, or evidence from the exhibition.</p>
+    </section>
+
+    <section id="comparison" aria-labelledby="comparison-title">
+      <h2 id="comparison-title">Choose an input condition</h2>
+      <fieldset class="conditions">
+        <legend class="sr-only">Painting input</legend>
+        <label><input type="radio" name="condition" value="cycle" checked><span><strong>A · Cycle each cell</strong><small>Activate a square to advance its colour. The original colour rule.</small></span></label>
+        <label><input type="radio" name="condition" value="select"><span><strong>B · Choose, then tap</strong><small>Select a colour and paint one square at a time.</small></span></label>
+        <label><input type="radio" name="condition" value="drag"><span><strong>C · Choose, then draw</strong><small>Select a colour and drag a stroke. Single-square input still works.</small></span></label>
+      </fieldset>
+      <p class="condition-note" id="condition-description"></p>
+
+      <div class="task-panel">
+        <div class="task-controls">
+          <label for="task">Practice or task</label>
+          <select id="task">
+            <option value="explore">Free exploration</option>
+            <option value="flag">Small symbol</option>
+            <option value="rectangle">Larger block</option>
+            <option value="recovery">Restore a drawing</option>
+          </select>
+          <button type="button" id="prepare">Prepare this board</button>
+        </div>
+        <div class="task-copy"><p id="task-goal"></p><figure id="reference" hidden><figcaption>Target reference</figcaption><div id="reference-grid" aria-hidden="true"></div></figure></div>
+        <p class="quiet">Preparing a task replaces the board. Changing the input condition keeps your drawing. Use the same prepared task for each condition.</p>
+      </div>
+
+      <section class="workspace" aria-labelledby="board-title">
+        <div class="workspace-heading"><h2 id="board-title">28 × 18 board</h2><p id="selected-colour"></p></div>
+        <div id="palette" class="palette" role="group" aria-label="Colour sequence"></div>
+        <div class="controls">
+          <button type="button" id="undo" disabled>Undo</button>
+          <button type="button" id="reset" disabled>Reset board</button>
+          <button type="button" id="pan" aria-pressed="false">Move board view</button>
+          <label class="check"><input type="checkbox" id="letters" checked>Show colour letters</label>
+        </div>
+        <p class="board-help" id="board-help">Arrow keys move between squares. Enter or Space activates a square. Home/End move along a row; Ctrl+Home/End reach the board’s corners. Ctrl+Z undoes an action. On a narrow screen, use Move board view to pan without painting.</p>
+        <div class="board-scroll" tabindex="0" role="region" aria-label="Scrollable painting area">
+          <div id="board" class="board" role="grid" aria-label="Pixel painting board" aria-rowcount="18" aria-colcount="28" aria-describedby="board-help"></div>
+        </div>
+        <p class="board-status" id="board-status" role="status" aria-live="polite"></p>
+        <p class="quiet">Undo restores the last action, including Reset. A drag stroke counts as one action. The last 100 actions are available in every condition. Cream is the clearing colour.</p>
+      </section>
+    </section>
+
+    <section class="local-log" aria-labelledby="log-title">
+      <h2 id="log-title">Optional local task log</h2>
+      <p>For moderated sessions: select a task, choose the assigned condition, then start. Starting restores the prepared board. A moderator records the outcome; the lab does not judge success or choose a winner. Elapsed windows include start/finish navigation. Use observer notes for consistent task timing.</p>
+      <div class="log-controls">
+        <button type="button" id="start-log" disabled>Start prepared task</button>
+        <label for="outcome">Observed outcome</label>
+        <select id="outcome" disabled><option value="">Choose observed outcome</option><option value="completed">Completed without help</option><option value="helped">Completed with help</option><option value="stopped">Stopped or incomplete</option></select>
+        <button type="button" id="stop-log" disabled>Finish task log</button>
+      </div>
+      <p id="log-status" role="status" aria-live="polite">No task is being recorded.</p>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Local task records"><table><caption class="sr-only">Local task records</caption><thead><tr><th scope="col">Condition</th><th scope="col">Task</th><th scope="col">Window (s)</th><th scope="col">Outcome</th><th scope="col">Activations</th></tr></thead><tbody id="log-rows"></tbody></table></div>
+      <div class="controls"><button type="button" id="export-log" disabled>Export local JSON</button><button type="button" id="clear-log" disabled>Clear local records</button></div>
+      <p class="quiet">Records stay in this tab’s memory and disappear when it closes. No names or typed notes are collected, and no task data is uploaded. Export only if useful. Counts describe actions, not usability scores; compare observations alongside them.</p>
+    </section>
+  </main>
+  <footer><p>Prepared for a small formative comparison. No participant sessions have been run.</p><a href="../../#project-pixel-mania">Return to the case study</a></footer>
+</body>
+</html>

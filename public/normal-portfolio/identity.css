@@ -1,0 +1,31 @@
+/* Round 03 / 07: the selected Shared curve LC, used as a standalone mark. */
+.wordmark.identity-lockup {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  min-height: 44px;
+  color: var(--ink, #242424);
+  text-decoration: none;
+}
+.wordmark.identity-lockup { width: 44px; }
+.identity-lockup .brand-logo {
+  display: block;
+  flex: 0 0 auto;
+  width: 44px;
+  height: auto;
+  aspect-ratio: 771 / 635;
+  overflow: visible;
+}
+.identity-lockup:focus-visible { outline: 2px solid currentColor; outline-offset: 7px; border-radius: 2px; }
+.site-footer .footer-identity { display: inline-flex; align-items: center; justify-content: center; width: 44px; min-height: 44px; flex: 0 0 auto; }
+.footer-identity .identity-mark { width: 40px; height: auto; flex: 0 0 auto; }
+.reader-identity { display: flex; align-items: center; gap: 14px; }
+.reader-identity .identity-mark { width: 40px; height: auto; flex: 0 0 auto; }
+.assistant-header .identity-mark { width: 40px; height: auto; margin-top: 2px; flex: 0 0 auto; }
+.assistant-header .assistant-title { margin-right: auto; }
+@media (max-width: 739px) {
+  .editorial-portfolio .wordmark.identity-lockup { min-height: 46px; }
+  .assistant-header { gap: 12px; }
+  .map-header { align-items: flex-start; flex-wrap: wrap; }
+}

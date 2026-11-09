@@ -1,0 +1,9 @@
+/* Normal mode uses one readable sans-serif family. The LC mark remains a drawing. */
+.editorial-portfolio main :is(h1, h2, .project-link h3, .toolkit-detail-title),
+#case-reader .story-hero h2,
+.map-page main :is(h1, h2) {
+  font-family: 'DM Sans', Arial, sans-serif;
+  font-weight: 500;
+  font-synthesis: none;
+  letter-spacing: -.025em;
+}

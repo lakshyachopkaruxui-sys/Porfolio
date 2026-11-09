@@ -1,0 +1,65 @@
+/* Immediate selection, then a short panel entrance for pointer and touch input. */
+.toolkit-explorer .toolkit-controls { position: relative; }
+.toolkit-explorer .toolkit-tool { transition: none; }
+.toolkit-explorer[data-toolkit-input="pointer"]:not([data-toolkit-motion="off"]) .toolkit-tool {
+  transition: color 160ms ease, border-color 160ms ease, background-color 180ms ease;
+}
+.toolkit-explorer .toolkit-tool[aria-pressed="true"] {
+  background-color: #f0e9ec;
+  color: var(--ink);
+}
+.capability-selection-marker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 3px;
+  height: 36px;
+  border-radius: 2px;
+  background: var(--accent, #1c1d1b);
+  pointer-events: none;
+  transform-origin: top left;
+}
+.capability-selection-marker[hidden] { display: none; }
+
+/* Used only when WAAPI is missing or rejects an effect. The baseline is visible. */
+.toolkit-explorer[data-toolkit-motion="css"][data-toolkit-input="pointer"] .toolkit-panel.is-entering {
+  animation: toolkit-panel-enter 380ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.toolkit-explorer[data-toolkit-motion="css"][data-toolkit-input="pointer"] .toolkit-panel.is-entering .capability-tools > li {
+  animation: toolkit-tool-enter 320ms cubic-bezier(0.23, 1, 0.32, 1) backwards;
+}
+.toolkit-explorer[data-toolkit-motion="css"] .toolkit-panel.is-entering .capability-tools > li:nth-child(2) { animation-delay: 30ms; }
+.toolkit-explorer[data-toolkit-motion="css"] .toolkit-panel.is-entering .capability-tools > li:nth-child(3) { animation-delay: 60ms; }
+@keyframes toolkit-panel-enter {
+  from { opacity: .25; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes toolkit-tool-enter {
+  from { opacity: .2; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Avoid the older unconditional hover color sticking after a touch selection. */
+.toolkit-explorer .toolkit-tool:not([aria-pressed="true"]):hover { color: var(--muted); background-color: transparent; }
+@media (hover: hover) and (pointer: fine) {
+  .toolkit-explorer .toolkit-tool:not([aria-pressed="true"]):hover { color: var(--ink); background-color: var(--surface); }
+}
+.toolkit-explorer[data-toolkit-motion="off"] .toolkit-panel,
+.toolkit-explorer[data-toolkit-motion="off"] .capability-tools > li,
+.toolkit-explorer[data-toolkit-input="keyboard"] .toolkit-panel,
+.toolkit-explorer[data-toolkit-input="keyboard"] .capability-tools > li {
+  animation: none !important;
+  transform: none !important;
+  opacity: 1 !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .capability-selection-marker { display: none; }
+  .toolkit-explorer .toolkit-tool { transition: none !important; }
+  .toolkit-explorer .toolkit-panel,
+  .toolkit-explorer .capability-tools > li {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

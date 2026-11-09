@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, follow">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Workplace Mode — audio and navigation comparison</title>
+  <link rel="icon" href="../../assets/identity/shared-curve/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="lab.css"><script type="module" src="lab.mjs"></script>
+<!-- portfolio-publishing:start -->
+<link rel="canonical" href="https://lakshyachopkar.pages.dev/normal-portfolio/design/workplace-audio-lab-20261108/">
+<meta property="og:url" content="https://lakshyachopkar.pages.dev/normal-portfolio/design/workplace-audio-lab-20261108/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Workplace Mode — audio and navigation comparison">
+<meta property="og:image" content="https://lakshyachopkar.pages.dev/normal-portfolio/assets/identity/shared-curve/icon-512.png">
+<meta name="twitter:card" content="summary">
+<!-- portfolio-publishing:end -->
+</head>
+<body>
+  <header class="page-header"><a href="../../#project-workplace-mode">Back to Workplace Mode</a><span>Interaction study · November 2026</span></header>
+  <main>
+    <section class="intro" aria-labelledby="title">
+      <p class="eyebrow">Audio, navigation and an uncertain response</p>
+      <h1 id="title">Change the track.<br>Keep the route.</h1>
+      <p class="lead">A driver described difficult music/navigation switching and, separately, repeated checking when a song change lagged. This combined task is newly synthesized. The prototype asks whether a clearer action receipt adds value beyond existing shortcuts and feedback.</p>
+      <p class="scope">Stationary desktop exploration. Baleno Zeta / 7-inch SmartPlay Pro is the provisional reference context. This is an original interaction model, not an inspected Maruti screen or Android Auto replica. No real route, vehicle, media service or sound is connected.</p>
+    </section>
+
+    <section class="experiment" aria-labelledby="compare-title">
+      <div class="section-heading"><h2 id="compare-title">Compare the response</h2><a href="#moderator">Try a delayed response</a></div>
+      <fieldset class="approaches"><legend>Both approaches keep the same controls, navigation and playback states.</legend>
+        <label><input name="approach" type="radio" value="existing" checked><span><strong>Existing-pattern comparison</strong><small>Media shortcuts and a clear status message.</small></span></label>
+        <label><input name="approach" type="radio" value="receipt"><span><strong>Explicit action receipt</strong><small>The same information, grouped by request and result.</small></span></label>
+      </fieldset>
+      <p class="task"><strong>Try this:</strong> Route guidance is already active in this stationary simulation. You no longer want the current track. Change it, then tell what happened to playback and what navigation information is still available. You can leave the task without finishing it.</p>
+      <p class="silent-note">Silent model: tests screen-state understanding; real playback provides sound cues. Local mute is represented only. No sound plays here.</p>
+      <p class="phone-note">Phone review layout: panels reflow for reading. Use the desktop layout for comparison sessions; this is not a phone-sized head-unit design.</p>
+
+      <div class="display-shell">
+        <div class="display-meta"><span>Original concept interface</span><span>Illustrative content · no live route</span></div>
+        <div id="car-display" class="car-display" data-view="dashboard" data-approach="existing" tabindex="0" aria-label="Simulated infotainment display. Keyboard shortcuts N for next, P for previous, M for local mute.">
+          <div class="system-bar"><span class="connection"><i aria-hidden="true"></i>Phone connected <span class="sim-label">simulated</span></span><span id="mute-state">Modeled output on</span><span>09:41</span></div>
+          <div class="guidance" aria-label="Illustrative route guidance, not actual directions">
+            <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M29 33V17a7 7 0 0 0-7-7H8m0 0 7-7M8 10l7 7"/></svg>
+            <div><strong>In 500 m, turn left</strong><span>Garden Road · schematic route</span></div>
+            <p><strong>18 min</strong><span>Illustrative remaining time</span></p>
+          </div>
+          <div class="panes">
+            <section class="map-pane" aria-labelledby="map-title">
+              <h3 id="map-title" class="visually-hidden">Schematic navigation context</h3>
+              <svg class="map-art" viewBox="0 0 680 460" role="img" aria-label="Original schematic map with a blue route line and a position marker. Not real navigation or geographic data.">
+                <defs><pattern id="grid" width="120" height="100" patternUnits="userSpaceOnUse"><path d="M120 0H0V100" fill="none" stroke="#22323b" stroke-width="1"/></pattern></defs>
+                <rect width="680" height="460" fill="#17262d"/><rect width="680" height="460" fill="url(#grid)"/>
+                <path d="M-20 362C160 286 215 395 346 285S540 246 715 121" class="river"/>
+                <path d="M80-20 175 500M270-20 305 245 420 500M490-20 455 170 700 350M-20 120 700 82M-20 218 270 205 690 262M-20 410 160 325 690 385" class="map-roads"/>
+                <path d="M313 405V208H175V121" class="route-back"/><path d="M313 405V208H175V121" class="route-line"/>
+                <circle cx="175" cy="121" r="12" fill="#cde2e5"/><circle cx="175" cy="121" r="5" fill="#42606c"/>
+                <text x="334" y="326">Garden Road</text><text x="215" y="170">Lake Street</text><text x="470" y="91">Civic Park</text>
+                <circle cx="313" cy="366" r="34" fill="#7cd1ff" opacity=".13"/><path d="m313 340 17 42-17-7-17 7Z" fill="#9bd9ff" stroke="#17262d" stroke-width="4"/>
+              </svg>
+              <div class="map-caption"><span>Guidance stays available</span><span>Static schematic</span></div>
+            </section>
+            <section class="media-pane" aria-labelledby="media-title">
+              <div class="media-heading"><h3 id="media-title">Media</h3><span id="playback-certainty">Confirmed playback</span></div>
+              <div class="track-identity"><img id="album-art" src="art-city.svg" width="240" height="240" alt="Original abstract album illustration for City morning"><div><p id="track-label">Confirmed track</p><h4 id="track-title">City morning</h4><p id="track-artist">Illustrative track 01</p></div></div>
+              <div class="playback-controls" aria-label="Playback controls">
+                <button type="button" data-command="previous"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5v14M19 5 8 12l11 7Z"/></svg><span>Previous</span></button>
+                <button type="button" data-command="playback" class="play-button"><svg viewBox="0 0 24 24" aria-hidden="true"><path id="play-icon" d="M8 5v14M16 5v14"/></svg><span id="play-label">Pause</span></button>
+                <button type="button" data-command="next"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 5 11 7-11 7ZM19 5v14"/></svg><span>Next</span></button>
+              </div>
+              <div id="feedback-area" class="feedback-area">
+                <div id="receipt" class="receipt" hidden aria-hidden="true"><span class="receipt-tag" id="receipt-tag">Playback</span><strong id="receipt-request">No request pending</strong><span id="receipt-result">Confirmed result</span></div>
+                <p id="playback-status" class="playback-status" role="status" aria-live="polite" aria-atomic="true">Playback is confirmed.</p>
+                <button id="read-state" class="read-state" type="button" hidden>Check playback state</button>
+                <p id="query-status" class="query-status" hidden>Playback state requested. Waiting for a simulated source response.</p>
+              </div>
+            </section>
+          </div>
+          <nav class="display-nav" aria-label="Display views">
+            <button type="button" data-view="dashboard" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h7v7H3ZM14 3h7v7h-7ZM3 14h7v7H3ZM14 14h7v7h-7Z"/></svg>Dashboard</button>
+            <button type="button" data-view="map" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 5 6-2 6 2 6-2v16l-6 2-6-2-6 2Zm6-2v16m6-14v16"/></svg>Map</button>
+            <button type="button" data-view="media" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 17V5l12-2v12M9 8l12-2M9 17c0 2-2 3-4 3s-3-1-3-2 2-3 4-3 3 1 3 2Zm12-2c0 2-2 3-4 3s-3-1-3-2 2-3 4-3 3 1 3 2Z"/></svg>Media</button>
+            <button type="button" id="display-mute" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4Zm13-2c4 3 4 7 0 10"/></svg><span id="mute-label">Mute output</span></button>
+          </nav>
+        </div>
+      </div>
+      <div class="steering-row"><div><p class="eyebrow">Steering-control representation</p><p>Same actions, another existing access route.</p></div><div class="wheel-actions"><button type="button" data-command="next" class="wheel-button">Steering Next</button><button id="steering-mute" type="button" class="wheel-button" aria-pressed="false">Steering Mute</button></div></div>
+      <p class="keyboard-note">When the display has keyboard focus: <kbd>N</kbd> next, <kbd>P</kbd> previous, <kbd>M</kbd> local mute. Buttons also work with Tab and Enter/Space. No sound plays.</p>
+      <p id="freeze-note" class="freeze-note" role="status" hidden>Display rendering is paused for demonstration. The frozen HMI cannot acknowledge new input. Researcher controls remain outside it; this design does not fix an unavailable renderer.</p>
+      <p class="storage-note">This tab retains last-confirmed playback and any unresolved request. Reload never repeats a command; an unresolved response becomes unknown. No participant answers, times or scores are recorded.</p>
+    </section>
+
+    <section id="moderator" class="moderator" aria-labelledby="moderator-title">
+      <div class="moderator-intro"><p class="eyebrow">Researcher controls · outside the HMI</p><h2 id="moderator-title">What happens after the press?</h2><p>Choose a simulated response before using Next, Previous or Pause. The system does not guess road demand or declare a safe moment.</p><button id="reset" type="button" class="quiet-button">Reset the comparison</button></div>
+      <div class="moderator-controls">
+        <label for="scenario">Response to the next playback command</label>
+        <select id="scenario"><option value="confirmed">Confirmed immediately</option><option value="delayed">Delayed · result still pending</option><option value="failed">Known failure · not applied</option><option value="unknown">Unknown · response unavailable</option></select>
+        <div class="moderator-buttons"><button type="button" id="confirm-result">Confirm requested change</button><button type="button" id="fail-result">Confirm no change</button><button type="button" id="lose-result">Lose the response</button></div>
+        <div class="snapshot-controls"><label for="snapshot-track">Authoritative playback snapshot</label><select id="snapshot-track"><option value="0">City morning</option><option value="1">Open coast</option><option value="2">After hours</option></select><label class="check-label"><input id="snapshot-playing" type="checkbox" checked>Source reports playback playing</label><button type="button" id="send-snapshot">Send playback snapshot</button><p>Available after “Check playback state.” This supplies a simulated source result; it never repeats the original command.</p></div>
+        <label class="check-label freeze-control"><input id="freeze-display" type="checkbox">Pause display rendering</label>
+        <p id="moderator-status" role="status" aria-live="polite">No command is waiting for a result.</p>
+      </div>
+    </section>
+
+    <section class="research-note" aria-labelledby="learn-title"><h2 id="learn-title">What would make this worthwhile?</h2><div class="learning-grid"><div><h3>Understanding</h3><p>Can someone distinguish an input received locally from playback confirmed by its source, including when the result is unknown?</p></div><div><h3>Less checking</h3><p>Does the receipt help beyond the existing status and shortcuts, or does it add another thing to read?</p></div><div><h3>Continuity</h3><p>Can someone leave Media and retain guidance without losing or accidentally repeating an unresolved action?</p></div></div><p>No winner or improvement is claimed. The task combines related research accounts; exact Maruti hardware, firmware and current screen paths remain to be verified. Real driver sessions are the next evidence step.</p></section>
+    <section class="source-note" aria-labelledby="source-title"><h2 id="source-title">Why these controls are here</h2><p>Google documents media widgets, navigation context and recent-app access. NEXA lists steering-mounted audio controls for the provisional Baleno Zeta context. Both approaches retain these capabilities. The comparison isolates presentation of response state.</p><ul><li><a href="https://developers.google.com/cars/design/android-auto/product-experience/system-ui/widgets" target="_blank" rel="noopener">Android Auto widgets</a></li><li><a href="https://support.google.com/androidauto/answer/6348063?hl=en-GB" target="_blank" rel="noopener">Android Auto screens and quick controls</a></li><li><a href="https://www.nexaexperience.com/content/dam/msil/nexa/in/en/assets/documents/brochure/NEXA-Baleno-Brochure-15-07.pdf" target="_blank" rel="noopener">NEXA Baleno specification · PDF page 8</a></li></ul></section>
+  </main>
+  <footer><p>New interaction exploration · no participant results yet</p><a href="../../#project-workplace-mode">Return to case study</a></footer>
+</body>
+</html>

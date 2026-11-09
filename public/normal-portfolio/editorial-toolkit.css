@@ -1,0 +1,59 @@
+/* Capability index with complete, directly visible methods and tools. */
+#toolkit { scroll-margin-top: 36px; }
+#toolkit .toolkit-explorer { display: block; margin-top: 32px; }
+#toolkit .capability-workbench { min-width: 0; padding: 0; background: transparent; border: 0; border-radius: 0; }
+#toolkit .capability-board-label, #toolkit .capability-panel-label, #toolkit .capability-selection-marker { display: none; }
+#toolkit .toolkit-controls { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px 24px; padding: 0; border: 0; }
+#toolkit .toolkit-tool { display: grid; grid-template-columns: 28px minmax(0,1fr); align-items: center; gap: 12px; min-width: 0; min-height: 52px; padding: 10px 12px; border: 0; border-radius: 8px; background: transparent; color: var(--muted); text-align: left; cursor: pointer; }
+#toolkit .toolkit-tool-index { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; font: 400 13px/1 var(--body); font-variant-numeric: tabular-nums; }
+#toolkit .toolkit-tool-name { padding: 0; color: inherit; font: 400 clamp(17px,1.65vw,20px)/1.35 var(--body); text-align: left; }
+#toolkit .toolkit-tool[aria-pressed="true"] { background: transparent; color: var(--ink); }
+#toolkit .toolkit-tool[aria-pressed="true"] .toolkit-tool-index { background: var(--ink); color: white; }
+#toolkit .toolkit-tool[aria-pressed="true"] .toolkit-tool-name { font-weight: 500; }
+@media (hover: hover) and (pointer: fine) { #toolkit .toolkit-tool:not([aria-pressed="true"]):hover { background: #f5f6f4; color: var(--ink); } }
+#toolkit .toolkit-tool:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+#toolkit .toolkit-detail { min-width: 0; margin-top: 28px; padding: clamp(32px,4vw,48px); border-radius: 22px; background: #f5f6f4; }
+#toolkit .toolkit-panel { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.05fr); grid-template-rows: auto 1fr; column-gap: clamp(36px,6vw,80px); row-gap: 44px; min-width: 0; min-height: 300px; padding: 0; }
+#toolkit .toolkit-panel[hidden] { display: none; }
+#toolkit .toolkit-overview { grid-column: 1; grid-row: 1; min-width: 0; }
+#toolkit .toolkit-method-block { grid-column: 2; grid-row: 1; min-width: 0; }
+#toolkit .toolkit-tools-block { grid-column: 1 / -1; grid-row: 2; min-width: 0; }
+#toolkit .toolkit-detail-title { margin: 0 0 14px; color: var(--ink); font: 500 clamp(24px,2.5vw,30px)/1.2 var(--body); letter-spacing: -.025em; }
+#toolkit .toolkit-description { margin: 0; max-width: 46ch; color: var(--muted); font: 400 17px/1.65 var(--body); }
+#toolkit .capability-more-note { margin: 14px 0 0; max-width: 48ch; color: var(--muted); font: 400 15px/1.65 var(--body); }
+#toolkit .capability-subheading { margin: 3px 0 16px; color: var(--ink); font: 500 15px/1.5 var(--body); letter-spacing: 0; }
+#toolkit .capability-methods { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px 28px; margin: 0; padding: 0; list-style: none; }
+#toolkit .capability-methods li { color: var(--muted); font: 400 16px/1.55 var(--body); }
+#toolkit .capability-methods li::after { content: none; }
+#toolkit .capability-tools { display: grid; grid-template-columns: repeat(auto-fill,minmax(88px,1fr)); justify-content: start; align-items: start; gap: 28px 24px; margin: 0; }
+#toolkit .capability-tools li { min-width: 0; gap: 10px; }
+#toolkit .capability-logo { width: 64px; height: 64px; border: 0; border-radius: 14px; background: white; }
+#toolkit .capability-logo img { width: 40px; height: 40px; object-fit: contain; }
+#toolkit .capability-tool-label { max-width: 100%; color: var(--muted); font: 400 14px/1.5 var(--body); overflow-wrap: anywhere; }
+#toolkit .capability-tool-names { display: flex; flex-wrap: wrap; gap: 7px 18px; margin: 16px 0 0; padding: 0; list-style: none; }
+#toolkit .capability-tool-names li { color: var(--ink); font: 400 15px/1.6 var(--body); }
+@media (max-width: 899px) {
+  #toolkit .toolkit-controls { column-gap: 8px; }
+  #toolkit .toolkit-tool { gap: 8px; padding-inline: 6px; }
+  #toolkit .toolkit-tool-name { font-size: 17px; }
+  #toolkit .toolkit-panel { column-gap: 28px; }
+  #toolkit .capability-methods { grid-template-columns: 1fr; }
+}
+@media (max-width: 659px) {
+  #toolkit .toolkit-controls { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  #toolkit .toolkit-tool { grid-template-columns: 23px minmax(0,1fr); min-height: 56px; }
+  #toolkit .toolkit-tool-index { width: 23px; height: 23px; font-size: 12px; }
+  #toolkit .toolkit-tool-name { font-size: 16px; }
+  #toolkit .toolkit-detail { padding: 28px 22px; border-radius: 18px; }
+  #toolkit .toolkit-panel { display: flex; flex-direction: column; gap: 36px; min-height: 0; }
+  #toolkit .toolkit-description { font-size: 16px; }
+  #toolkit .toolkit-tools-block { order: 2; }
+  #toolkit .toolkit-method-block { order: 1; }
+  #toolkit .capability-methods { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px 18px; }
+  #toolkit .capability-tools { grid-template-columns: repeat(auto-fill,minmax(76px,1fr)); gap: 24px 16px; }
+}
+@media (max-width: 359px) {
+  #toolkit .toolkit-tool { padding-inline: 0; gap: 6px; }
+  #toolkit .toolkit-detail { padding-inline: 20px; }
+  #toolkit .capability-methods { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, follow">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>Workplace Mode — researcher session sheet</title>
+  <link rel="icon" href="../../assets/identity/shared-curve/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="session-sheet.css">
+  <script type="module" src="session-sheet.mjs"></script>
+<!-- portfolio-publishing:start -->
+<link rel="canonical" href="https://lakshyachopkar.pages.dev/normal-portfolio/design/workplace-audio-lab-20261108/session-sheet">
+<meta property="og:url" content="https://lakshyachopkar.pages.dev/normal-portfolio/design/workplace-audio-lab-20261108/session-sheet">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Workplace Mode — researcher session sheet">
+<meta property="og:image" content="https://lakshyachopkar.pages.dev/normal-portfolio/assets/identity/shared-curve/icon-512.png">
+<meta name="twitter:card" content="summary">
+<!-- portfolio-publishing:end -->
+</head>
+<body data-session-sheet>
+  <header class="page-header">
+    <a href="./">Open the comparison prototype</a>
+    <span>Researcher worksheet · not participant results</span>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="title">
+      <h1 id="title">Record one driver session</h1>
+      <p class="lead">Keep this sheet off the participant’s screen. Use it beside the stationary audio/navigation comparison to record what happened, what the person understood and where help was needed.</p>
+      <p class="scope">One anonymous participant per sheet. Notes stay in this tab’s memory; nothing is sent or saved automatically. Export before closing or reloading. Omit names, contact details, number plates and identifying quotations.</p>
+      <div class="actions"><button type="button" id="export-notes">Export JSON notes</button><button type="button" class="secondary" id="clear-notes">Clear this tab</button></div>
+      <p id="sheet-status" class="status" role="status">No observations recorded. Empty fields mean not recorded, not zero.</p>
+      <p id="sheet-error" class="error" role="alert" hidden></p>
+      <details id="protocol"><summary>Session instructions and full protocol location</summary><p>Use the existing <strong>Audio/navigation comparison: formative protocol</strong> before running sessions. The owner kit links its local workspace file, <code>docs/hmi-audio-evaluation-20261108.md</code>. This sheet captures notes; it does not replace that protocol or schedule a session.</p><p>First recover the actual setup from the collected research and owner records. Baleno Zeta / 7-inch SmartPlay Pro is a provisional planning reference, not a verified participant unit. Keep unknown firmware, phone, projection and app versions unknown until matched or inspected.</p><p>Read the same neutral task, use matched response conditions, alternate the planned A/B order, and record any help or deviation. Ask the same state questions at predetermined moments: “What is confirmed?”, “What is only requested?” and “Does anything still need a decision?” These are probes, not instructions to teach the expected answer.</p></details>
+    </section>
+
+    <form id="session-form" aria-labelledby="session-title">
+      <fieldset id="session-fields">
+        <legend id="session-title">1. Session setup</legend>
+        <p>Use the same task, track, response condition and available controls in both approaches. Alternate A/B and B/A across participants. This sheet does not control the prototype.</p>
+        <div class="form-grid">
+          <label>Anonymous participant code <span class="required">required</span><input name="participantCode" required pattern="[A-Za-z]{1,3}[0-9]{1,4}" maxlength="7" placeholder="P01" autocomplete="off" aria-describedby="code-help"></label>
+          <label>Session date <input name="sessionDate" type="date"></label>
+          <label>Round <span class="required">required</span><select name="round" required><option value="">Choose the round</option><option value="pilot">Protocol pilot</option><option value="matched">First matched A/B round</option><option value="retest">Targeted retest after a revision</option></select></label>
+          <label>Planned approach order <span class="required">required</span><select name="order" required><option value="">Choose the order</option><option value="AB">A then B</option><option value="BA">B then A</option></select></label>
+          <label>Language used <input name="language" autocomplete="off" placeholder="Leave blank if not recorded"></label>
+          <label>Relevant driving and system familiarity <textarea name="familiarity" rows="2" placeholder="Context, experience with these controls; no names or employer details"></textarea></label>
+          <label class="wide">Baseline/setup reference <textarea name="baselineContext" rows="2" placeholder="Car/year/trim, head unit and firmware, phone/OS, wired or wireless projection and app versions where known. Mark unknowns explicitly."></textarea></label>
+        </div>
+        <p id="code-help" class="hint">Use a research code such as P01. No personal-identity fields are needed.</p>
+        <label class="check"><input name="stationary" type="checkbox" required> The person is using a stationary desktop setup, not driving, stopped in traffic or in a queue.</label>
+        <label class="check"><input name="participationAgreed" type="checkbox" required> The person has agreed to this session and can stop. Recording or public use needs separate permission.</label>
+        <label class="check"><input name="simulationExplained" type="checkbox" required> The silent model and researcher-controlled responses have been explained.</label>
+      </fieldset>
+    </form>
+
+    <form id="trial-form" aria-labelledby="trial-title">
+      <fieldset>
+        <legend id="trial-title">2. Trial setup</legend>
+        <div class="form-grid">
+          <label>Task <span class="required">required</span><select name="taskId" id="task-select" required><option value="">Choose a task</option></select></label>
+          <label>Approach actually used <span class="required">required</span><select name="approach" id="approach-select" required><option value="">Choose the actual approach</option></select></label>
+          <label>Response setting actually used <span class="required">required</span><select name="scenario" id="scenario-select" required><option value="">Choose the actual setting</option></select></label>
+          <label>Trial kind <span class="required">required</span><select name="trialKind" required><option value="">Choose the kind</option><option value="independent">Independent comparison trial</option><option value="practice">Practice</option><option value="exploration">Exploration with carried state</option></select></label>
+        </div>
+        <div class="task-card" id="task-card" hidden><h2 id="task-name"></h2><p id="task-prompt"></p><p id="task-setup" class="hint"></p></div>
+        <label class="check"><input name="resetConfirmed" type="checkbox"> I reset the prototype before this independent trial, then selected the intended approach and response setting.</label>
+        <p class="hint">An independent trial requires a reset. Switching approaches with a pending state is exploration, not a clean matched trial. Record the actual setup even if it differs from the plan.</p>
+        <label>Setup/injection notes <textarea name="setupNotes" rows="2" placeholder="What the researcher supplied, when the response was resolved, snapshot values, practice or order deviations. A simulated delay is not participant time."></textarea></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>3. Observed actions and understanding</legend>
+        <label>What you actually observed <span class="required">required</span><textarea name="observedActions" required rows="3" placeholder="Record actions, input path and errors. Do not paste the expected answer or a planned result."></textarea></label>
+        <label>Participant’s explanation <textarea name="participantExplanation" rows="2" placeholder="Their explanation of what happened. Leave blank if not asked or not recorded; keep notes anonymous."></textarea></label>
+        <div class="form-grid">
+          <label>State understanding <select name="comprehension"><option value="">Not recorded / not assessed</option><option value="accurate">Accurate for the supplied state</option><option value="incorrect">Incorrect</option><option value="unclear">Unclear from the observation</option></select></label>
+          <label>Task outcome <select name="taskOutcome"><option value="">Not recorded</option><option value="completed">Goal completed</option><option value="left-by-choice">Left deliberately; not automatically a failure</option><option value="blocked">Blocked</option><option value="stopped">Stopped or interrupted</option></select></label>
+          <label>Help events observed <input name="helpCount" type="number" min="0" step="1" inputmode="numeric" placeholder="Blank = not recorded"></label>
+          <label>Repeated command attempts observed <input name="repeatCount" type="number" min="0" step="1" inputmode="numeric" placeholder="Blank = not recorded"></label>
+        </div>
+        <label>Critical misunderstanding <select name="criticalCode" id="critical-select"><option value="">Not coded / not assessed</option></select></label>
+        <p class="hint">Code only what the explanation or action supports. A missing answer is not success. Help and repeated attempts need an actual count; enter 0 only if you observed none. Pointer actions are not gaze measurements.</p>
+        <label>Researcher interpretation / possible revision <textarea name="interpretation" rows="2" placeholder="Keep your interpretation separate from the observed action and the participant’s words."></textarea></label>
+        <label>Independent timing note, if measured <textarea name="timingNote" rows="2" placeholder="Optional: record the real timing method, start/end boundary and any think-aloud or assistance. This sheet has no participant timer; the model’s clock/delay is not a measurement."></textarea></label>
+        <div class="actions"><button type="submit" id="save-trial">Add observed trial</button><button type="button" class="secondary" id="cancel-edit" hidden>Cancel edit</button></div>
+      </fieldset>
+    </form>
+
+    <section aria-labelledby="records-title" class="records-section">
+      <h2 id="records-title">Recorded trials</h2>
+      <p class="hint">These are researcher-entered records, not verified results or a computed winner. Edit a record to correct notes. Export and clear before starting a different participant.</p>
+      <div id="records"><p>No observations recorded.</p></div>
+    </section>
+  </main>
+  <footer><a href="../../#project-workplace-mode">Back to the case study</a><p>Local research tool · No results prefilled · No safety or gaze score</p></footer>
+  <dialog id="clear-dialog" aria-labelledby="clear-title">
+    <h2 id="clear-title">Clear notes from this tab?</h2>
+    <p id="clear-description">Export first if you need these notes. This clears the session and trial records in memory. Files you already downloaded stay on your computer.</p>
+    <div class="actions"><button type="button" id="confirm-clear">Clear this tab</button><button type="button" class="secondary" id="cancel-clear">Keep notes</button></div>
+  </dialog>
+</body>
+</html>

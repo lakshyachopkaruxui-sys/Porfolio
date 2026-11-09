@@ -1,0 +1,179 @@
+/* Each page supplies the finish. Both versions keep the same two destinations. */
+.mode-selector.mode-switch {
+  --mode-face: var(--play-control-paper, #26384b);
+  --mode-edge: var(--play-control-edge, #627e91);
+  --mode-depth: 0 2px 0 var(--play-control-depth, #172a3c);
+  --mode-label: var(--play-control-ink, #fff9ec);
+  --mode-current: var(--play-control-ink, #fff9ec);
+  --mode-track: var(--play-control-forest, #b94f38);
+  --mode-track-edge: var(--play-control-forest-depth, #7c3529);
+  --mode-knob: var(--play-control-on-forest, #fff9ec);
+  --mode-focus: var(--play-control-focus, #b94f38);
+  --mode-type: 13px;
+  --mode-rail-column: 32px;
+
+  /* The welcome and reader have older ID-scoped button positioning. */
+  position: relative !important;
+  inset: auto !important;
+  transform: none !important;
+  display: inline-grid !important;
+  grid-template-columns: minmax(0, 1.3fr) var(--mode-rail-column) minmax(44px, 1fr) !important;
+  grid-template-rows: 44px;
+  align-items: center !important;
+  gap: 0 !important;
+  isolation: isolate;
+  flex: 0 0 auto;
+  box-sizing: border-box !important;
+  width: 154px !important;
+  min-width: 154px !important;
+  max-width: none !important;
+  height: 46px !important;
+  min-height: 46px !important;
+  padding: 0 !important;
+  border: 1px solid var(--mode-edge) !important;
+  border-radius: 10px !important;
+  background: var(--mode-face) !important;
+  box-shadow: var(--mode-depth) !important;
+}
+
+/* Normal's page is white and its projects supply the colour. Only the small
+   track needs a surface here. Take both label colours from the editorial site. */
+.mode-selector[data-mode='portfolio'] {
+  --normal-mode-label: var(--muted, #646b68);
+  --normal-mode-ink: var(--ink, #222725);
+  --normal-mode-surface: var(--surface, #f2f5f3);
+  --mode-type: 14px;
+}
+.mode-selector[data-mode='portfolio']:not([data-visual-mode]),
+.mode-selector[data-visual-mode='portfolio'] {
+  --mode-face: transparent;
+  --mode-edge: transparent;
+  --mode-depth: none;
+  --mode-label: var(--normal-mode-label, #646b68);
+  --mode-current: var(--normal-mode-ink, #222725);
+  --mode-track: var(--normal-mode-surface, #f2f5f3);
+  --mode-track-edge: #828a86;
+  --mode-knob: var(--normal-mode-ink, #222725);
+  --mode-focus: var(--normal-mode-ink, #222725);
+}
+
+.mode-selector.mode-switch[hidden] { display: none !important; }
+
+.mode-selector.mode-switch > a {
+  grid-row: 1;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 44px !important;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--mode-label) !important;
+  font: 500 var(--mode-type) / 1.2 'DM Sans', Arial, sans-serif !important;
+  letter-spacing: normal;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+.mode-selector [data-mode-link='portfolio'] { grid-column: 1; }
+.mode-selector [data-mode-link='play'] { grid-column: 3; }
+
+.mode-selector.mode-switch > a[aria-current='page'] {
+  color: var(--mode-current) !important;
+  font-weight: 650 !important;
+  cursor: default;
+}
+
+/* The whole rail is part of the alternate native link. Clicking the thumb or
+   track switches versions, with the same keyboard and new-tab behaviour as its label. */
+.mode-selector.mode-switch > [data-mode-link='play']:not([aria-current]) {
+  grid-column: 2 / 4;
+  padding-inline-start: var(--mode-rail-column);
+}
+.mode-selector.mode-switch > [data-mode-link='portfolio']:not([aria-current]) {
+  grid-column: 1 / 3;
+  padding-inline-end: var(--mode-rail-column);
+}
+.mode-selector.mode-switch > a:not([aria-current]):hover {
+  color: var(--mode-current) !important;
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+}
+.mode-selector.mode-switch > a:focus-visible {
+  outline: 2px solid var(--mode-focus) !important;
+  outline-offset: 2px;
+}
+
+.mode-selector-plate {
+  grid-area: 1 / 2;
+  place-self: center;
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+  box-sizing: border-box;
+  width: 28px;
+  height: 16px;
+  border: 1px solid var(--mode-track-edge);
+  border-radius: 12px;
+  background: var(--mode-track);
+}
+.mode-selector-plate::after {
+  content: '';
+  position: absolute;
+  inset: 2px auto auto 2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--mode-knob);
+}
+.mode-selector[data-mode='play']:not([data-visual-mode]) .mode-selector-plate::after,
+.mode-selector[data-visual-mode='play'] .mode-selector-plate::after {
+  transform: translateX(12px);
+}
+
+/* Feedback completes before crossing to the other document. Only this tiny
+   control repaints; the label targets and the rest of the page stay in place. */
+.mode-selector[data-mode-moving] {
+  transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+.mode-selector[data-mode-moving] > a {
+  transition: color 180ms ease;
+}
+.mode-selector[data-mode-moving] .mode-selector-plate {
+  transition: background-color 180ms ease, border-color 180ms ease;
+}
+.mode-selector[data-mode-moving] .mode-selector-plate::after {
+  transition: transform 180ms cubic-bezier(0.77, 0, 0.175, 1), background-color 180ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mode-selector[data-mode-moving],
+  .mode-selector[data-mode-moving] > a,
+  .mode-selector[data-mode-moving] .mode-selector-plate,
+  .mode-selector[data-mode-moving] .mode-selector-plate::after {
+    transition: none;
+  }
+}
+.reduce-motion .mode-selector[data-mode-moving],
+.reduce-motion .mode-selector[data-mode-moving] > a,
+.reduce-motion .mode-selector[data-mode-moving] .mode-selector-plate,
+.reduce-motion .mode-selector[data-mode-moving] .mode-selector-plate::after {
+  transition: none;
+}
+
+@media (forced-colors: active) {
+  .mode-selector.mode-switch {
+    --mode-face: Canvas;
+    --mode-edge: ButtonBorder;
+    --mode-depth: none;
+    --mode-label: LinkText;
+    --mode-current: CanvasText;
+    --mode-track: Canvas;
+    --mode-track-edge: CanvasText;
+    --mode-knob: CanvasText;
+    --mode-focus: Highlight;
+  }
+  .mode-selector-plate { forced-color-adjust: none; }
+}

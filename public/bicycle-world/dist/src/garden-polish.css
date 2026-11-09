@@ -1,0 +1,24 @@
+/* Shared reading rhythm for the garden's overview and personal-story layer. */
+html:has(dialog[open]),body:has(dialog[open]) { overflow:hidden!important; }
+.project-case-action { margin:28px 0 32px; padding:24px 0; border-block:1px solid #cbd3c3; }
+.project-case-action :is(.project-behance-link,.project-local-case-link) { display:inline-flex; align-items:center; justify-content:center; min-height:46px; padding:12px 22px; border:1px solid #31584a; border-radius:12px; background:#31584a; color:#fffdf5; font:600 15px/1.4 var(--font-body,'DM Sans',sans-serif); text-decoration:none; }
+.project-case-action button.project-behance-link:disabled { opacity:1; background:#e2e7dc; color:#526455; border-color:#bdc9b6; cursor:default; }
+.project-link-status { margin:10px 0 0; max-width:62ch; font-size:14px; line-height:1.6; color:#526455; }
+.project-overview-sections { display:grid; grid-template-columns:1fr 1fr; gap:32px; margin:32px 0; }
+.project-overview-sections > section { margin:0; min-width:0; }
+.project-overview-sections h2 { font-size:clamp(19px,2vw,25px); margin:0 0 14px; }
+.project-overview-sections p,.project-contribution { max-width:64ch; line-height:1.75; }
+.project-process-link { margin:32px 0; padding-block:22px; border-top:1px solid #cbd3c3; }
+.project-process-link button { margin-top:8px; }
+.project-chooser .project-process-link { grid-column:1/-1; justify-self:start; margin:0; padding:7px 0; border:0; background:transparent; min-height:44px; font-size:14px; text-decoration:underline; text-underline-offset:4px; }
+.project-overview-sections .case-note { padding:0; border:0; background:transparent; margin:14px 0 0; font-size:14px; line-height:1.65; color:#526455; }
+.project-credit-links { display:flex; flex-wrap:wrap; gap:12px 24px; padding:20px 0; font-size:14px; }
+.project-timeline { margin:10px 0; font-size:14px; color:#526455; }
+.project-artifact { margin:28px 0; }
+.project-artifact img { display:block; width:100%; height:auto; max-height:480px; object-fit:contain; background:#e8ecdf; border-radius:14px; }
+.project-artifact figcaption { max-width:70ch; margin-top:12px; font-size:13px; line-height:1.6; color:#526455; }
+.place-footer-actions { display:flex; align-items:center; flex-wrap:wrap; gap:12px; }
+.place-reader .case-footer p { max-width:55ch; }
+.place-reader .place-intro + p { max-width:62ch; line-height:1.75; margin-top:16px; }
+.project-case-action :is(a,button):focus-visible,.project-process-link button:focus-visible { outline:3px solid #b46a39; outline-offset:5px; }
+@media(max-width:760px){ .project-overview-sections { grid-template-columns:1fr; gap:24px; } }

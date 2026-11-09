@@ -1,0 +1,26 @@
+/* Layer 3 controls inherit the existing palette and typography. */
+.postcard-caption-field {margin:24px 0 0;max-width:40rem;}
+.postcard-caption-field label {display:block;margin-bottom:10px;line-height:1.5;}
+.postcard-caption-field label span {color:var(--muted);}
+.postcard-caption-field input {
+  width:100%;min-height:48px;padding:12px 14px;border:1px solid var(--line);
+  border-radius:8px;background:var(--paper);color:var(--ink);font:inherit;
+}
+.postcard-caption-field small {display:block;margin-top:8px;color:var(--muted);line-height:1.6;}
+#postcard-result-caption {overflow-wrap:anywhere;max-width:100%;}
+.hobby-choices {display:flex;flex-wrap:wrap;gap:10px;margin:24px 0;}
+.hobby-choices button {
+  min-height:48px;padding:12px 22px;border:1px solid var(--line);border-radius:8px;
+  background:var(--paper);color:var(--ink);font:inherit;
+}
+.hobby-choices button[aria-pressed="true"] {border-color:var(--ink);box-shadow:inset 0 -2px var(--ink);}
+.hobby-story-panel {min-height:170px;max-width:65ch;}
+.hobby-story-panel h3 {margin:0 0 16px;line-height:1.4;}
+.hobby-story-panel p {margin:0;line-height:1.7;color:var(--muted);}
+.about-conversations details p {padding-left:0;}
+.about-conversations summary {min-height:44px;}
+@media(max-width:700px) {
+  .hobby-choices {gap:8px;}
+  .hobby-choices button {flex:1;padding:12px;}
+  .hobby-story-panel {min-height:215px;}
+}

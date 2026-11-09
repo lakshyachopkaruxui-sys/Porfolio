@@ -1,0 +1,89 @@
+/* Namespaced destination styles. Existing application owns fonts and modal. */
+#personal-experience #garba-experience{--gr-paper:#f3ebd8;--gr-ink:#2d4536;--gr-wood:#b99268;position:absolute;inset:0;z-index:30;isolation:isolate;overflow:hidden;background:#454e50;color:var(--gr-ink);font-family:'DM Sans',sans-serif}
+#personal-experience #garba-experience *{box-sizing:border-box}
+#personal-experience #garba-experience [hidden]{display:none!important}
+#personal-experience #garba-experience #garba-scene{position:absolute;inset:0}
+#personal-experience #garba-experience #garba-scene canvas{position:absolute;inset:0;display:block;width:100%;height:100%}
+#personal-experience #garba-experience button{font-family:'DM Sans',sans-serif;cursor:pointer;min-height:44px;color:var(--gr-ink);line-height:1.4;touch-action:manipulation}
+#personal-experience #garba-experience button:focus-visible{outline:3px solid #e3ac63;outline-offset:5px}
+#personal-experience #garba-experience button:disabled{cursor:wait;opacity:.5}
+#personal-experience #garba-experience .gr-header{position:absolute;top:0;left:0;right:0;z-index:5;display:flex;justify-content:space-between;align-items:flex-start;padding:26px 40px;gap:24px;pointer-events:none}
+#personal-experience #garba-experience .gr-header>*{pointer-events:auto}
+#personal-experience #garba-experience .gr-heading{color:#f6edd7;text-align:center;text-shadow:0 2px 18px #182c2755;padding-top:2px}
+#personal-experience #garba-experience .gr-heading p{font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 11px;font-weight:700}
+#personal-experience #garba-experience .gr-heading h1{font-family:'Mochiy Pop P One',sans-serif;font-size:clamp(19px,1.9vw,28px);line-height:1.5;font-weight:400;letter-spacing:-.025em;margin:0}
+#personal-experience #garba-experience .gr-quiet{position:static;inset:auto;transform:none;border:1px solid #e5dac0;background:#f5eddaed;padding:11px 18px;border-radius:9px;white-space:nowrap;font-size:13px;font-weight:600;box-shadow:none}
+#personal-experience #garba-experience .gr-quiet:hover{background:#fff5df;border-color:#d4c096}
+#personal-experience #garba-experience .gr-vignette{position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,#1c30252e,transparent 28%,transparent 72%,#202b2f24)}
+#personal-experience #garba-experience .gr-rail{position:absolute;left:40px;right:40px;bottom:61px;z-index:4;display:grid;grid-template-columns:minmax(210px,.9fr) minmax(280px,1fr) auto;align-items:center;gap:28px;padding:21px 24px;max-width:1460px;margin:auto;border:1px solid #e2d5b8;border-radius:14px;background:#f5eddbf2;box-shadow:0 8px 40px #1027211c;backdrop-filter:blur(10px)}
+#personal-experience #garba-experience .gr-eyebrow{font-size:10px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;margin:0 0 10px;color:#69715b;line-height:1.5}
+#personal-experience #garba-experience .gr-intro>p:last-child{font-size:14px;line-height:1.6;margin:0;max-width:360px}
+#personal-experience #garba-experience .gr-photo-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+#personal-experience #garba-experience .gr-photo-choice{display:flex;gap:12px;text-align:left;align-items:center;padding:11px 13px;border:1px solid transparent;background:transparent;border-radius:9px;min-height:64px}
+#personal-experience #garba-experience .gr-photo-choice:hover{background:#e6e4cf;border-color:#d1d1b9}
+#personal-experience #garba-experience .gr-photo-choice[aria-pressed=true]{background:#dce2cb;border-color:#99ab89}
+#personal-experience #garba-experience .gr-number{font-size:11px;color:#7c806b}
+#personal-experience #garba-experience .gr-photo-choice strong{display:block;font-size:13px;line-height:1.4;font-weight:700}
+#personal-experience #garba-experience .gr-photo-choice small{display:block;font-size:11px;line-height:1.4;color:#74745f;margin-top:4px}
+#personal-experience #garba-experience .gr-circle-actions{display:flex;align-items:center;flex-direction:column;gap:7px}
+#personal-experience #garba-experience .gr-primary{display:inline-flex;align-items:center;justify-content:center;padding:12px 19px;border:1px solid #31533d;border-radius:9px;background:#31533d;color:#fff3dc;min-height:48px;font-size:13px;font-weight:700;white-space:nowrap;box-shadow:0 3px 0 #1a3525}
+#personal-experience #garba-experience .gr-primary:hover{background:#254630;border-color:#254630}
+#personal-experience #garba-experience .gr-primary:active{transform:translateY(2px);box-shadow:0 1px 0 #1a3525}
+#personal-experience #garba-experience .gr-text{padding:7px 2px;font-size:11px;background:transparent;border:0;border-radius:0;text-decoration:underline;text-underline-offset:4px;box-shadow:none;min-height:44px}
+#personal-experience #garba-experience .gr-text:hover{background:transparent;color:#395f3c}
+#personal-experience #garba-experience .gr-context{position:absolute;left:40px;bottom:64px;z-index:5;max-width:310px;padding:23px 24px;border:1px solid #e7d9bb;border-radius:13px;background:#f5eddbf5;box-shadow:0 8px 30px #182d2420}
+#personal-experience #garba-experience .gr-context .gr-quiet{margin-bottom:24px;font-size:12px;padding:9px 12px;min-height:44px}
+#personal-experience #garba-experience .gr-context h2{font-family:'Mochiy Pop P One',sans-serif;font-size:22px;line-height:1.5;margin:0 0 13px;font-weight:400;letter-spacing:-.02em}
+#personal-experience #garba-experience .gr-context>p:not(.gr-eyebrow){font-size:13px;line-height:1.65;margin:0 0 20px;color:#5c6551}
+#personal-experience #garba-experience .gr-context .gr-primary{font-size:12px}
+#personal-experience #garba-experience .gr-footer{position:absolute;bottom:20px;left:40px;right:40px;z-index:4;display:flex;justify-content:space-between;gap:15px;font-size:10px;color:#f2e9d4;pointer-events:none;letter-spacing:.02em}
+#personal-experience #garba-experience .gr-footer span{padding:5px 8px;background:#35433bed;border-radius:5px}
+#personal-experience #garba-experience .gr-object-hint{position:absolute;z-index:7;pointer-events:none;padding:10px 14px;border-radius:8px;font-size:12px;background:#f2e9d4;color:#2d4536;box-shadow:0 4px 16px #172e2340;max-width:230px}
+#personal-experience #garba-experience .gr-viewer{position:absolute;inset:0;z-index:10;background:#f3ebd9;padding:26px 40px 24px}
+#personal-experience #garba-experience .gr-viewer>header{display:flex;align-items:center;justify-content:space-between;gap:24px;max-width:1460px;margin:auto}
+#personal-experience #garba-experience .gr-viewer h2{font-family:'Mochiy Pop P One',sans-serif;font-size:22px;line-height:1.5;margin:0;font-weight:400}
+#personal-experience #garba-experience .gr-viewer figure{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;height:calc(100% - 86px);margin:14px 0 0}
+#personal-experience #garba-experience .gr-viewer img{display:block;width:auto;height:auto;max-width:100%;max-height:calc(100% - 50px);object-fit:contain;border-radius:2px;box-shadow:0 6px 26px #2036281c}
+#personal-experience #garba-experience .gr-viewer figcaption{font-size:13px;line-height:1.5;text-align:center;margin:0;color:#60705b;max-width:600px}
+#personal-experience #garba-experience .gr-veil{position:absolute;inset:0;z-index:20;pointer-events:none;background:#f3ebd9;opacity:1}
+#personal-experience #garba-experience .gr-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;margin:-1px;padding:0;border:0}
+#personal-experience #garba-experience.gr-moving .gr-rail,#personal-experience #garba-experience.gr-moving .gr-context{opacity:.55;pointer-events:none}
+#personal-experience #garba-experience.gr-focused .gr-heading{visibility:hidden}
+@media(min-width:1800px){#personal-experience #garba-experience .gr-header{padding:34px 5vw}#personal-experience #garba-experience .gr-rail{left:5vw;right:5vw;bottom:76px;padding:25px 30px;gap:38px}#personal-experience #garba-experience .gr-intro>p:last-child{font-size:15px}#personal-experience #garba-experience .gr-photo-choice strong{font-size:14px}#personal-experience #garba-experience .gr-context{left:5vw;bottom:76px;max-width:340px;padding:27px 28px}#personal-experience #garba-experience .gr-footer{left:5vw;right:5vw;bottom:26px}}
+@media(max-width:1100px){#personal-experience #garba-experience .gr-header{padding:22px 24px}#personal-experience #garba-experience .gr-heading h1{font-size:20px}#personal-experience #garba-experience .gr-rail{left:24px;right:24px;grid-template-columns:minmax(180px,.8fr) minmax(300px,1.2fr) auto;gap:15px;padding:17px 18px}#personal-experience #garba-experience .gr-intro>p:last-child{font-size:12px}#personal-experience #garba-experience .gr-eyebrow{font-size:9px}#personal-experience #garba-experience .gr-photo-choice{padding:9px 8px;gap:8px;min-height:58px}#personal-experience #garba-experience .gr-photo-choice strong{font-size:12px}#personal-experience #garba-experience .gr-photo-choice small{font-size:10px}#personal-experience #garba-experience .gr-circle-actions .gr-primary{font-size:12px;padding:10px 13px}#personal-experience #garba-experience .gr-context{left:24px;max-width:260px;padding:20px}#personal-experience #garba-experience .gr-context h2{font-size:19px}#personal-experience #garba-experience .gr-footer{left:24px;right:24px}}
+@media(max-height:760px){#personal-experience #garba-experience .gr-header{padding-top:17px}#personal-experience #garba-experience .gr-heading p{margin-bottom:7px}#personal-experience #garba-experience .gr-rail{bottom:49px;padding-top:15px;padding-bottom:15px}#personal-experience #garba-experience .gr-context{bottom:49px;padding:18px 20px}#personal-experience #garba-experience .gr-context .gr-quiet{margin-bottom:18px}#personal-experience #garba-experience .gr-context h2{font-size:19px}#personal-experience #garba-experience .gr-footer{bottom:10px}#personal-experience #garba-experience .gr-viewer{padding-top:17px;padding-bottom:14px}}
+@media(max-width:760px){#personal-experience #garba-experience .gr-header{padding:16px;gap:10px}#personal-experience #garba-experience .gr-heading h1{font-size:14px}#personal-experience #garba-experience .gr-heading p{font-size:9px}#personal-experience #garba-experience .gr-quiet{font-size:11px;padding:9px 12px}#personal-experience #garba-experience .gr-rail{left:16px;right:16px;grid-template-columns:1fr;gap:10px;padding:14px;bottom:50px}#personal-experience #garba-experience .gr-intro{display:none}#personal-experience #garba-experience .gr-circle-actions{flex-direction:row;justify-content:center}#personal-experience #garba-experience .gr-photo-choice{min-height:48px}#personal-experience #garba-experience .gr-context{left:16px;right:16px;max-width:none;bottom:50px;padding:15px 18px}#personal-experience #garba-experience .gr-context>p:not(.gr-eyebrow){display:none}#personal-experience #garba-experience .gr-context h2{font-size:17px}#personal-experience #garba-experience .gr-context .gr-quiet{margin-bottom:14px}#personal-experience #garba-experience .gr-viewer{padding:18px}#personal-experience #garba-experience .gr-viewer h2{font-size:18px}#personal-experience #garba-experience .gr-viewer figcaption{font-size:11px}#personal-experience #garba-experience .gr-footer{left:16px;right:16px;font-size:9px}#personal-experience #garba-experience #garba-load-label{max-width:170px;text-align:right}}
+@media(min-width:761px){#personal-experience #garba-experience .gr-intro>p:last-child{font-size:14px}#personal-experience #garba-experience .gr-photo-choice strong{font-size:13px}#personal-experience #garba-experience .gr-photo-choice small{font-size:11px}#personal-experience #garba-experience .gr-circle-actions .gr-primary{font-size:13px}#personal-experience #garba-experience .gr-context>p:not(.gr-eyebrow){font-size:14px}#personal-experience #garba-experience .gr-context .gr-primary{font-size:13px}#personal-experience #garba-experience .gr-viewer figcaption{font-size:14px}}
+#personal-experience #garba-experience .gr-circle-actions{flex-direction:row;gap:12px;min-height:64px}
+#personal-experience #garba-experience #garba-reset{font-size:13px;white-space:nowrap}
+#personal-experience #garba-experience #garba-reset:disabled{cursor:default}
+/* A full photograph and its personal context share a calm, readable view. */
+#personal-experience #garba-experience .gr-context{background:#f5eddb;max-width:350px;padding:24px;}
+#personal-experience #garba-experience .gr-context>p:not(.gr-eyebrow){font-size:16px;line-height:1.75;color:#3f5144;}
+#personal-experience #garba-experience .gr-context h2{font-size:24px;letter-spacing:0;}
+#personal-experience #garba-experience .gr-eyebrow{font-size:11px;line-height:1.65;}
+#personal-experience #garba-experience .gr-intro>p:last-child{font-size:15px;line-height:1.7;}
+#personal-experience #garba-experience .gr-rail{background:#f5eddbfa;backdrop-filter:none;}
+#personal-experience #garba-experience .gr-photo-choice strong{font-size:14px;}
+#personal-experience #garba-experience .gr-viewer{overflow:auto;overscroll-behavior:contain;padding:24px max(32px,calc((100vw - 1160px)/2));}
+#personal-experience #garba-experience .gr-viewer>header{position:sticky;top:-24px;z-index:1;background:#f3ebd9;flex-wrap:wrap;padding:12px 0 22px;gap:16px;}
+#personal-experience #garba-experience .gr-viewer>header>div{margin-right:auto;}
+#personal-experience #garba-experience .gr-viewer-layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(280px,.85fr);gap:40px;align-items:center;margin:20px 0;}
+#personal-experience #garba-experience .gr-viewer figure{display:block;height:auto;margin:0;min-width:0;}
+#personal-experience #garba-experience .gr-viewer img{max-height:calc(100dvh - 240px);border-radius:12px;margin:auto;box-shadow:none;}
+#personal-experience #garba-experience .gr-viewer figcaption{margin:16px 0 0;font-size:14px;line-height:1.6;}
+#personal-experience #garba-experience .gr-viewer-layout aside>p:not(.gr-eyebrow){font-size:18px;line-height:1.8;margin:0 0 24px;}
+#personal-experience #garba-experience .gr-viewer-layout nav{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:30px;}
+#personal-experience #garba-experience .gr-viewer-layout nav span{font-size:14px;}
+#personal-experience #garba-experience .gr-viewer button:disabled{cursor:default;opacity:.45;}
+#personal-experience #garba-experience .gr-viewer .play-music-dock{position:static;inset:auto;transform:none;}
+@media(max-height:760px){#personal-experience #garba-experience .gr-context{padding:18px 22px;max-width:320px;}#personal-experience #garba-experience .gr-context h2{font-size:22px;}}
+@media(max-width:760px){#personal-experience #garba-experience .gr-viewer-layout{grid-template-columns:1fr;gap:24px;}#personal-experience #garba-experience .gr-viewer{padding-inline:24px;}}
+#personal-experience #garba-experience .gr-viewer-layout nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));}
+#personal-experience #garba-experience .gr-viewer-layout nav button{white-space:normal;}
+#personal-experience #garba-experience #garba-photo-prev{grid-column:1;grid-row:1;}
+#personal-experience #garba-experience #garba-photo-next{grid-column:2;grid-row:1;}
+#personal-experience #garba-experience #garba-photo-count{grid-column:1 / -1;grid-row:2;text-align:center;}
+#personal-experience #garba-experience .gr-viewer>header>.play-music-dock{margin:0;flex:0 0 auto;}
+#personal-experience #garba-experience .gr-viewer img{max-height:calc(100dvh - 264px);}
+#personal-experience #garba-experience .gr-footer{padding-right:190px;}

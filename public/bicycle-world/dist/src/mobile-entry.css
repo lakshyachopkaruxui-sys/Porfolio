@@ -1,0 +1,29 @@
+/* Phone entry links to the responsive portfolio. It never boots the garden. */
+@media (max-width: 760px), (pointer: coarse) and (max-height: 500px) {
+  body:not([data-entry-mode]) #game { display: none; }
+}
+body[data-entry-mode='mobile'] { --paper:#edf4f3; --ink:#26384b; --muted:#43586b; background:var(--paper); overflow:auto; }
+body[data-entry-mode='mobile'] #game { display: none; }
+#mobile-play-notice {
+  box-sizing: border-box;
+  min-height: 100dvh;
+  padding: max(18px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(32px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
+  display: grid;
+  grid-template-rows: auto 1fr;
+  place-items: center;
+  row-gap: 24px;
+}
+.mobile-mode-bar { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.mobile-play-card { width: min(100%, 31rem); }
+.mobile-play-card .eyebrow { margin-bottom: 36px; }
+.mobile-play-device { display: block; width: 112px; height: 84px; stroke: currentColor; stroke-width: 2.5; margin-bottom: 28px; }
+.mobile-play-device path:last-child { fill: currentColor; stroke: none; }
+.mobile-play-card h1 { font-size: clamp(1.875rem, 8vw, 2.75rem); line-height: 1.15; letter-spacing: -.025em; margin: 0 0 24px; }
+.mobile-play-card > p:not(.eyebrow) { color: var(--muted); font-size: 1rem; line-height: 1.65; margin: 0 0 20px; }
+.mobile-play-card .primary { margin-top: 12px; min-height: 52px; width: 100%; font-size: 1rem; text-decoration: none; }
+body[data-entry-mode='mobile'] #mobile-play-info { margin: 0; min-height: 44px; font-size: .875rem; }
+body[data-entry-mode='mobile'] .portfolio-top { flex-wrap: wrap; gap: 8px 16px; }
+body[data-entry-mode='mobile'] .portfolio-top > span { font-size: .8125rem; }
+body[data-entry-mode='mobile'] #project-reader .reader-top { padding: 16px 24px; min-height: 70px; }
+body[data-entry-mode='mobile'] #projects-close { margin-left: auto; }
+body[data-entry-mode='mobile'] #project-reader .case-footer { flex-wrap: wrap; }

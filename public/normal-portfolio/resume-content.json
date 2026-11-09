@@ -1,0 +1,277 @@
+{
+  "schema_version": 1,
+  "identity": {
+    "full_name": "Lakshya Chopkar",
+    "professional_title": "UX Designer",
+    "location": "Pune, Maharashtra"
+  },
+  "biofacts": [
+    {
+      "text": "Pursuing an M.Des in User Experience after studying Electronics and Telecommunication."
+    },
+    {
+      "text": "Designed websites and mobile apps in contract and internship roles."
+    },
+    {
+      "text": "Co-designed a physical-digital learning game."
+    }
+  ],
+  "education": [
+    {
+      "institution": "MIT ADT University, Pune",
+      "qualification": "M.Des in User Experience",
+      "status": "Pursuing",
+      "date_text": "Jul 2025 - Jul 2027 (expected)",
+      "start": "2025-07",
+      "end": "2027-07",
+      "end_status": "expected",
+      "grade": {
+        "label": "CGPA",
+        "value": 8.6,
+        "scale": 10,
+        "status": "current"
+      }
+    },
+    {
+      "institution": "SSIPMT Raipur",
+      "qualification": "B.Tech in Electronics & Telecommunication",
+      "date_text": "2018 - 2022",
+      "start": "2018",
+      "end": "2022",
+      "grade": {
+        "label": "Percentage",
+        "value": 72.72
+      }
+    }
+  ],
+  "experience": [
+    {
+      "organization": "Baragaun",
+      "title": "Product Designer (Contract)",
+      "type": "Contract",
+      "date_text": "Nov 2023 - Dec 2023",
+      "start": "2023-11",
+      "end": "2023-12",
+      "claims": [
+        "Designed layouts for a responsive website after competitor and secondary research; completed the design handoff for development.",
+        "Developed wireframes, mockups and an interactive prototype for a mobile app. Presented user flows in stakeholder reviews."
+      ]
+    },
+    {
+      "organization": "Novae Avenue",
+      "title": "Product Design Intern",
+      "type": "Internship",
+      "date_text": "Jul 2023 - Aug 2023",
+      "start": "2023-07",
+      "end": "2023-08",
+      "claims": [
+        "Designed a data portal, landing page and brochure for customers of a 4G dashcam product.",
+        "Redesigned the dashcam app's customer-facing core and secondary screens."
+      ]
+    }
+  ],
+  "tools": {
+    "design_research": [
+      "Figma",
+      "ProtoPie",
+      "Illustrator",
+      "Photoshop",
+      "Miro",
+      "FigJam",
+      "Google Forms"
+    ],
+    "ai": [
+      "ChatGPT",
+      "Figma Make",
+      "Claude",
+      "GitHub Copilot",
+      "Gemini",
+      "Midjourney",
+      "Perplexity",
+      "NotebookLM (Google)",
+      "Antigravity",
+      "Google Search (AI Mode)",
+      "LLM Arena"
+    ],
+    "development": [
+      "CSS",
+      "HTML",
+      "Visual Studio Code",
+      "GitHub",
+      "Xcode"
+    ],
+    "project_specific": [
+      {
+        "project": "ConnectAid",
+        "items": [
+          "Figma",
+          "FigJam",
+          "Google Forms",
+          "Miro"
+        ]
+      },
+      {
+        "project": "20 cc Syringe",
+        "items": [
+          "Figma",
+          "Maya",
+          "3D printing"
+        ]
+      },
+      {
+        "project": "Giggles",
+        "items": [
+          "Figma",
+          "Arduino C++",
+          "ESP32",
+          "RFID (MFRC522)"
+        ]
+      }
+    ]
+  },
+  "methods": {
+    "ux_design": [
+      "Information Architecture",
+      "Interaction Design",
+      "User-Centered Design",
+      "User Interface Design",
+      "Design Systems",
+      "User Flows",
+      "Design Iteration",
+      "Data Portal Design"
+    ],
+    "research_evaluation": [
+      "User Interviews",
+      "Contextual Inquiry",
+      "User Research",
+      "Survey Design",
+      "Research Synthesis",
+      "Competitive Analysis",
+      "Persona Creation",
+      "Journey Mapping",
+      "Heuristic Evaluation",
+      "Usability Testing",
+      "Eye-Tracking",
+      "NASA-TLX"
+    ],
+    "design_outputs": [
+      "Wireframing",
+      "Prototyping",
+      "Interactive Prototypes",
+      "High-Fidelity Screens",
+      "Infographics",
+      "Illustrations",
+      "Animations",
+      "Design Handoff"
+    ],
+    "collaboration_working_style": [
+      "Analytical Thinking",
+      "Problem-Solving",
+      "Cross-Functional Collaboration",
+      "Communication",
+      "Planning & Organising",
+      "Leadership",
+      "High-Pressure Resilience",
+      "Stakeholder Communication"
+    ]
+  },
+  "achievements": [
+    {
+      "project": "20 cc Syringe",
+      "claim": "Following the first review round, the syringe redesign was shortlisted for research-paper presentation at Humanizing Work and Work Environment 2026 (HWWE 2026), UPES School of Design (9-11 Dec 2026). Publication remains subject to jury review.",
+      "stage": "Shortlisted after first review round",
+      "event": "Humanizing Work and Work Environment 2026",
+      "event_abbreviation": "HWWE 2026",
+      "host_as_stated": "UPES School of Design",
+      "event_start": "2026-12-09",
+      "event_end": "2026-12-11",
+      "publication_status": "Subject to jury review"
+    },
+    {
+      "project": "Giggles",
+      "event": "Meraki",
+      "event_context": "College pre-graduation show",
+      "claim": "Giggles received the Best Project award at Meraki.",
+      "award": "Best Project",
+      "jury_context": "Two days of industry jury review with different jurors each day.",
+      "feedback": "Positive feedback."
+    },
+    {
+      "project": "20 cc Syringe",
+      "claim": "The syringe project was presented and received positive jury feedback on the knowledge and the 3D-printed prototype.",
+      "award_status": "Not an award winner."
+    }
+  ],
+  "certifications": [
+    {
+      "provider": "Google",
+      "platform": "Coursera",
+      "title": "UX Design Process"
+    },
+    {
+      "provider": "Internshala",
+      "title": "UI/UX Training"
+    },
+    {
+      "provider": "GrowthSchool",
+      "title": "UX Workshop"
+    },
+    {
+      "provider": "University of Colorado Boulder",
+      "platform": "Coursera",
+      "title": "Graphic Design Elements for Non-Designers Specialization"
+    },
+    {
+      "provider": "University of Colorado Boulder",
+      "platform": "Coursera",
+      "title": "Basic Elements of Design: Design Principles and Software Overview"
+    },
+    {
+      "provider": "University of Colorado Boulder",
+      "platform": "Coursera",
+      "title": "Textual Elements of Design: Fonts, Typography, and Spacing"
+    },
+    {
+      "provider": "University of Colorado Boulder",
+      "platform": "Coursera",
+      "title": "Print and Digital Elements of Design: Branding and User Experience"
+    },
+    {
+      "provider": "University of Colorado Boulder",
+      "platform": "Coursera",
+      "title": "Graphic Elements of Design: Color Theory and Image Formats"
+    },
+    {
+      "provider": "California Institute of the Arts",
+      "platform": "Coursera",
+      "title": "Fundamentals of Graphic Design"
+    },
+    {
+      "provider": "California Institute of the Arts",
+      "platform": "Coursera",
+      "title": "Introduction to Imagemaking"
+    },
+    {
+      "provider": "California Institute of the Arts",
+      "platform": "Coursera",
+      "title": "Ideas from the History of Graphic Design"
+    }
+  ],
+  "contacts": {
+    "phone": {
+      "display": "+91 798 773 7180",
+      "normalized": "+917987737180"
+    },
+    "email": {
+      "value": "lakshyachopkaruxui@gmail.com"
+    },
+    "portfolio": {
+      "display": "behance.net/lakshyachopkaruiux",
+      "url": "https://www.behance.net/lakshyachopkaruiux"
+    },
+    "linkedin": {
+      "display": "linkedin.com/in/lakshyachopkar/",
+      "url": "https://www.linkedin.com/in/lakshyachopkar/"
+    }
+  }
+}

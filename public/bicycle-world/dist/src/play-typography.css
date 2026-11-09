@@ -1,0 +1,23 @@
+/* Shared type roles. Font sizes remain owned by each existing component. */
+:root { --font-body: 'DM Sans', sans-serif; --font-heading: 'Mochiy Pop P One', sans-serif; font-family:var(--font-body); }
+body, button, input, textarea, select, kbd { font-family:var(--font-body); }
+body :is(h1,h2,h3,h4,h5,h6) { font-family:var(--font-heading); font-weight:400; line-height:1.35; }
+body :is(p,li,dt,dd,summary,figcaption,label,button,a,input,select,textarea) { font-family:var(--font-body); }
+/* The authored hero has its own measured display spacing. */
+body.hybrid-intro #welcome #welcome-title { font-family:var(--font-heading); line-height:1.02; }
+body.hybrid-intro #welcome .welcome-deck-title { font-family:var(--font-body); }
+
+body.hybrid-world :is(h1,h2,h3,h4,h5,h6):not(#welcome-title):not(.welcome-deck-title) { letter-spacing:0; }
+
+/* Mochiy ships one regular face. Give multi-line reader headings real leading. */
+body.hybrid-world :is(#project-reader,#reader,#help,#world-map,#studio-preview) :is(h1,h2,h3) {
+  font-family:var(--font-heading); font-weight:400; line-height:1.35; letter-spacing:0;
+  overflow-wrap:break-word;
+}
+body.hybrid-world .place-reader :is(h1,h2,h3) { font-weight:400; line-height:1.35; letter-spacing:0; overflow-wrap:break-word; }
+body.hybrid-world #project-reader .case-header h1 { font-size:clamp(32px,4.2vw,52px); max-width:18ch; }
+body.hybrid-world #studio-preview h2 { font-size:22px; line-height:1.4; }
+body.hybrid-world .case-sections { gap:12px 24px; }
+body.hybrid-world .case-meta { flex-wrap:wrap; row-gap:18px; }
+/* Keep reading surfaces opaque when scenery crosses behind a physical panel. */
+body.hybrid-world #studio-preview.diegetic-surface { background:var(--paper)!important; }

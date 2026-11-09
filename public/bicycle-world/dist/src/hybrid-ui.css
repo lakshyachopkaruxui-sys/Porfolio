@@ -1,0 +1,434 @@
+/* Hybrid interaction layer. World objects identify places; persistent HTML
+   controls handle navigation and reading. Existing palette and type are retained. */
+
+/* A returned exhibit must not briefly expose its old viewport-side layout
+   before the next frame projects it onto the physical board. */
+body.hybrid-world #studio-preview:not(.diegetic-surface),
+body.hybrid-world #studio-preview:not(.inspection-ready) {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+body.hybrid-world #world-controls {
+  position: fixed;
+  top: max(24px, env(safe-area-inset-top));
+  left: max(24px, env(safe-area-inset-left));
+  right: max(24px, env(safe-area-inset-right));
+  z-index: 6;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  pointer-events: none;
+}
+
+body.hybrid-world #world-controls > *,
+body.hybrid-world #ride-tools > * {
+  pointer-events: auto;
+}
+
+body.hybrid-world #world-controls #back,
+body.hybrid-world #ride-tools :is(#ride-guide, #ride-help) {
+  position: static;
+  inset: auto;
+  margin: 0;
+  transform: none;
+  min-height: 44px;
+  flex: none;
+}
+
+body.hybrid-world #ride-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+body.hybrid-world #ride-tools :is(#ride-guide, #ride-help) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 54px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.25;
+}
+
+body.hybrid-world #ride-tools :is(#ride-guide, #ride-help):hover {
+  border-color: var(--ink);
+}
+
+body.hybrid-world :is(#world-controls, #world-bottom) :is(button, a):focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+body.hybrid-world #world-bottom {
+  position: fixed;
+  left: 50%;
+  bottom: max(24px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  width: min(420px, calc(100vw - 48px));
+  max-height: calc(100dvh - 120px);
+  pointer-events: none;
+}
+
+body.hybrid-world #world-bottom > * {
+  position: static;
+  inset: auto;
+  margin: 0;
+  transform: none;
+  width: auto;
+  min-width: 0;
+  max-width: 100%;
+  pointer-events: auto;
+}
+
+body.hybrid-world #world-bottom #notice {
+  display: none;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: left;
+  overflow-wrap: anywhere;
+  pointer-events: none;
+  opacity: 1;
+}
+
+body.hybrid-world #world-bottom #notice.visible {
+  display: block;
+}
+
+body.hybrid-world #world-bottom #ride-status {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 12px 10px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+  box-shadow: none;
+}
+
+body.hybrid-world #ride-status-label {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+body.hybrid-world #ride-status #stop-route {
+  flex: none;
+  min-width: 60px;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+body.hybrid-world #ride-status #stop-route:hover {
+  border-color: var(--ink);
+}
+
+body.hybrid-world #world-bottom #interact {
+  min-height: 64px;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+body.hybrid-world #interact .stop-caption {
+  font-size: 11px;
+  line-height: 1.35;
+  letter-spacing: .04em;
+  margin: 0 0 5px;
+}
+
+body.hybrid-world #interact-label {
+  gap: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+body.hybrid-world #world-bottom #route-hint {
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+  box-shadow: none;
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: normal;
+}
+
+body.hybrid-world #route-hint > span {
+  margin: 0;
+}
+
+
+
+body.hybrid-world #touch-controls,
+body.hybrid-reading :is(#world-controls, #world-bottom),
+body.world-inspecting :is(#world-controls, #world-bottom),
+body.hybrid-intro :is(#world-controls, #world-bottom) {
+  display: none !important;
+}
+
+/* Opening and reading are screen tasks. They stay stable while the bicycle is
+   paused, rather than moving or changing scale with the game camera. */
+body.hybrid-intro #welcome:not(.diegetic-surface) {
+  position: fixed;
+  left: max(32px, 6vw);
+  top: max(32px, env(safe-area-inset-top));
+  right: auto;
+  bottom: auto;
+  width: min(460px, calc(100vw - 64px));
+  max-width: 460px;
+  height: max-content;
+  max-height: calc(100dvh - max(32px, env(safe-area-inset-top)) - max(32px, env(safe-area-inset-bottom)));
+  transform: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--paper);
+  pointer-events: auto;
+  scroll-padding-block: 16px;
+}
+
+body.hybrid-intro #welcome > .mode-switch {
+  position: static;
+  margin: 0 0 24px;
+}
+
+body.hybrid-intro #welcome > p.mobile-play-note {
+  position: static;
+  inset: auto;
+  max-width: none;
+  margin: 0 0 20px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+body.hybrid-intro #welcome .welcome-controls {
+  line-height: 1.5;
+}
+
+body.hybrid-intro #welcome .welcome-controls span:last-child {
+  display: block;
+}
+
+body.hybrid-intro #welcome .welcome-links {
+  gap: 0 20px;
+}
+
+body.hybrid-intro #welcome :is(.text-button, .plain-reading) {
+  min-height: 44px;
+  font-size: 12px;
+}
+
+body.hybrid-reading :is(#reader, #project-reader, #place-reader, #world-map, #help) {
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scroll-padding-top: 110px;
+}
+
+body.hybrid-reading .reader-top {
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+body.hybrid-reading .reader-top .mode-switch {
+  position: static;
+  margin: 0;
+}
+
+body.hybrid-reading :is(article, .map-content) {
+  min-width: 0;
+}
+
+body.hybrid-reading :is(h1, h2, h3, p, label, summary, figcaption) {
+  overflow-wrap: anywhere;
+}
+
+body.hybrid-reading :is(.camera-controls, .music-controls, .case-meta, .case-footer) {
+  flex-wrap: wrap;
+}
+
+body.hybrid-reading #help {
+  width: min(520px, calc(100vw - 32px));
+  max-width: none;
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 0 24px 24px;
+}
+
+body.hybrid-reading #help > .reader-top {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  min-height: 68px;
+  margin: 0 -24px 24px;
+  padding: 12px 16px;
+  background: var(--paper);
+}
+
+body.hybrid-reading #help-back {
+  position: static;
+  margin: 0;
+}
+
+body.hybrid-reading #help-close {
+  position: static;
+  inset: auto;
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: center;
+  font-size: 26px;
+}
+
+body.hybrid-reading #help dl div {
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+body.hybrid-reading #help dt {
+  flex: 0 0 110px;
+}
+
+body.hybrid-reading #help dd {
+  flex: 1 0 100px;
+  min-width: 0;
+}
+
+
+
+@media (max-width: 700px) {
+  body.hybrid-world #world-controls {
+    top: max(16px, env(safe-area-inset-top));
+    left: max(16px, env(safe-area-inset-left));
+    right: max(16px, env(safe-area-inset-right));
+    gap: 8px;
+  }
+
+  body.hybrid-world #ride-tools {
+    gap: 6px;
+  }
+
+  body.hybrid-world #ride-tools :is(#ride-guide, #ride-help) {
+    min-width: 52px;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  body.hybrid-world #ride-tools kbd {
+    display: none;
+  }
+
+  body.hybrid-world #world-controls #back {
+    gap: 6px;
+    padding: 7px 8px;
+  }
+
+  body.hybrid-world #world-bottom {
+    bottom: max(16px, env(safe-area-inset-bottom));
+    width: min(420px, calc(100vw - 32px));
+  }
+
+  body.hybrid-intro #welcome:not(.diegetic-surface) {
+    top: max(16px, env(safe-area-inset-top));
+    bottom: auto;
+    left: max(16px, env(safe-area-inset-left));
+    width: min(480px, calc(100vw - 32px));
+    max-height: calc(100dvh - max(16px, env(safe-area-inset-top)) - max(16px, env(safe-area-inset-bottom)));
+    padding: 18px;
+    background: var(--paper);
+  }
+
+  body.hybrid-intro #welcome > p.mobile-play-note {
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  body.hybrid-intro #welcome .eyebrow {
+    margin-bottom: 16px;
+  }
+
+  body.hybrid-intro #welcome > p:not(.eyebrow) {
+    margin-bottom: 18px;
+  }
+
+  body.hybrid-reading .reader-top {
+    padding: 12px 16px;
+    min-height: 68px;
+    gap: 8px;
+  }
+
+  body.hybrid-reading :is(#reader, #project-reader, #place-reader) article,
+  body.hybrid-reading .map-content {
+    padding-inline: 20px;
+  }
+
+  
+
+  
+}
+
+@media (max-width: 359px) {
+  body.hybrid-world #world-bottom #ride-status {
+    gap: 8px;
+    padding-left: 12px;
+  }
+
+  body.hybrid-world #ride-status #stop-route {
+    min-width: 56px;
+    padding-inline: 10px;
+  }
+
+  body.hybrid-reading .reader-top .mode-switch {
+    gap: 6px;
+    padding-inline: 8px;
+  }
+
+  body.hybrid-reading .close-button {
+    gap: 6px;
+    font-size: 12px;
+  }
+}
+
+@media (max-height: 580px) and (min-width: 701px) {
+  body.hybrid-intro #welcome:not(.diegetic-surface) {
+    top: 20px;
+    bottom: auto;
+    max-height: calc(100dvh - 40px);
+  }
+}

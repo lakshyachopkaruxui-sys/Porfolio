@@ -1,0 +1,45 @@
+#collection-experience{position:fixed;inset:0;margin:0;width:100%;height:100dvh;max-width:none;max-height:none;padding:0;border:0;border-radius:0;background:transparent;color:#23483e;overflow:hidden;box-shadow:none;font-family:var(--font-body,'DM Sans',sans-serif)}
+#collection-experience::backdrop{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
+.collection-shell{height:100%;display:grid;grid-template-columns:minmax(0,1fr) min(440px,32vw);grid-template-rows:auto minmax(0,1fr) auto;gap:24px 36px;padding:28px 32px;box-sizing:border-box}
+.collection-top{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.collection-header-actions{display:flex;align-items:center;gap:12px;flex:none}
+.collection-top>div{background:#fbf7e9f2;padding:14px 20px;border:1px solid #d7dfcc;border-radius:18px}
+.collection-eyebrow{margin:0 0 10px;font:600 10px/1.5 var(--font-body,'DM Sans',sans-serif);letter-spacing:.1em;color:#597363}
+#collection-title{font-size:18px;line-height:1.4;margin:0;font-weight:400}
+#collection-experience button{min-height:44px;padding:11px 15px;border:1px solid #b6c4ae;border-radius:10px;color:#23483e;background:#faf7e9;font:600 13px/1.45 var(--font-body,'DM Sans',sans-serif);cursor:pointer;box-shadow:none}
+#collection-experience button:hover:not(:disabled){background:#e4ecd9;border-color:#68846c}
+#collection-experience button:focus-visible,.collection-view:focus-visible{outline:3px solid #345c47;outline-offset:4px}
+#collection-experience button:disabled{opacity:.45;cursor:default}
+#collection-experience .collection-back{background:#234f3d;color:#fff9e9;border-color:#234f3d;padding:13px 22px}
+.collection-view{position:relative;grid-column:1;grid-row:2;min-width:0;min-height:0;border-radius:20px;touch-action:none;cursor:grab;outline-offset:-5px}
+.collection-view:active{cursor:grabbing}
+.collection-view-note{position:absolute;bottom:8px;left:0;max-width:330px;padding:10px 14px;border-radius:12px;background:#fbf7e9ed;border:1px solid #d7dfcc;pointer-events:none}
+.collection-view-note span{display:block;font-size:12px;line-height:1.6;color:#5b7161}
+.collection-view-note .collection-view-label{font-size:14px;font-weight:600;color:#23483e;margin-bottom:2px}
+.collection-panel{grid-column:2;grid-row:2;align-self:center;max-height:100%;overflow:auto;overscroll-behavior:contain;box-sizing:border-box;padding:24px;border:1px solid #d0d9c5;border-radius:22px;background:#fbf7e9;scrollbar-width:thin;scrollbar-color:#b9c5ab transparent}
+.collection-chapters{display:flex;gap:7px;margin:0 0 26px;padding-bottom:18px;border-bottom:1px solid #dce1d0}
+#collection-experience .collection-chapters button{display:flex;flex:1;flex-direction:column;gap:5px;align-items:flex-start;padding:10px 8px;text-align:left;font-size:11px;border-color:transparent;background:transparent}
+.collection-chapters button span{font-size:10px;font-weight:600;color:#697d65}
+#collection-experience .collection-chapters button[aria-pressed=true]{background:#e6ecd9;border-color:#c6d3b8;color:#244c3b}
+#collection-experience #collection-chapter-title{margin:0 0 20px;font-size:clamp(21px,1.8vw,27px);line-height:1.45;font-weight:400;letter-spacing:0;overflow-wrap:break-word}
+.collection-story>p:not(.collection-eyebrow){font-size:15px;line-height:1.75;margin:0 0 15px;color:#4f6555}
+.collection-story .collection-intro{color:#254c3b}
+.collection-media-note{display:grid;grid-template-columns:26px minmax(0,1fr);align-items:center;gap:12px;padding:12px;margin:20px 0;border:1px dashed #bdc9b1;border-radius:12px;background:#f0f1e2}
+.collection-media-mark{display:block;width:26px;height:19px;border:1px solid #7c9477;border-radius:4px;background:linear-gradient(153deg,transparent 48%,#cdd9bd 49%,#cdd9bd 70%,transparent 71%)}
+.collection-media-note p{font-size:13px;line-height:1.55;margin:0 0 6px;color:#536c55}
+.collection-media-note small{font-size:11px;line-height:1.55;color:#63785f}
+.collection-panel-actions{display:flex;gap:10px;flex-wrap:wrap}
+#collection-experience .collection-panel-actions button{font-size:12px;padding:10px 12px}
+.collection-index{margin-top:22px;padding-top:22px;border-top:1px solid #d5ddca}
+.collection-index h3{font-size:16px;margin:0 0 12px}
+.collection-index p{font-size:14px;line-height:1.7;margin:0}
+.collection-item-list{list-style:none;margin:0;padding:0;display:grid;gap:20px}.collection-item-list li{margin:0}.collection-item-list h4{font-size:14px;margin:0 0 12px}.collection-item-list img{display:block;width:100%;height:auto;border-radius:8px;margin-bottom:12px}
+.collection-navigation{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.collection-progress{display:block;padding:10px 16px;border-radius:20px;background:#faf7e9e8;color:#3f604b;font-size:12px;text-align:center}
+#collection-experience.is-returning .collection-panel,#collection-experience.is-returning .collection-view-note,#collection-experience.is-returning .collection-navigation{opacity:0;pointer-events:none;transition:opacity .22s ease}
+#collection-experience.is-returning .collection-top>div{opacity:0;transition:opacity .22s ease}
+#collection-experience.is-returning .collection-back{opacity:.6;pointer-events:none}
+@media(max-width:1100px){.collection-shell{grid-template-columns:minmax(0,1fr) 360px;gap:18px 24px;padding:22px 24px}.collection-panel{padding:20px}.collection-chapters{margin-bottom:20px}.collection-top>div{padding:12px 16px}.collection-story>p:not(.collection-eyebrow){font-size:14px;line-height:1.7}.collection-view-note{max-width:270px}}
+@media(max-height:760px){.collection-shell{gap:16px 28px;padding-top:18px;padding-bottom:18px}.collection-panel{padding:20px}.collection-chapters{margin-bottom:18px;padding-bottom:12px}.collection-media-note{margin:18px 0;padding:12px}.collection-top>div{padding:11px 16px}.collection-eyebrow{margin-bottom:7px}.collection-story>p:not(.collection-eyebrow){font-size:14px;line-height:1.65}.collection-navigation button{min-height:44px}}
+@media(prefers-reduced-motion:reduce){#collection-experience *{transition:none!important}}
+html.reduce-motion #collection-experience *{transition:none!important}

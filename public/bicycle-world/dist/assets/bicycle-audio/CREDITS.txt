@@ -1,0 +1,17 @@
+Mechanical bicycle riding texture
+Adapted from "Bicycle Pedalling Rolling Braking_01" by Rudmer_Rotteveel.
+Source: https://freesound.org/people/Rudmer_Rotteveel/sounds/719482/
+Licence: CC0 1.0 Universal — https://creativecommons.org/publicdomain/zero/1.0/
+Official legal code saved as CC0-1.0.txt.
+
+Derived from the creator-licensed public HQ MP3 preview. The WAV master
+requires login and was not downloaded. The exact unmodified public preview
+is preserved privately; SOURCE.json records URL, bytes and SHA-256 hashes.
+
+Changes: excerpt 3.20–7.32 seconds; mono at 48 kHz; 70 Hz high-pass and
+6.5 kHz low-pass; 120 ms circular equal-power crossfade; gain attenuation;
+56 kbit/s VBR Opus encoding. No pitch, tempo or generated sound layers.
+
+Role: mechanical bicycle riding texture. Creator provides sequence order
+but no phase timecodes; this is not certified as isolated pedaling or
+freewheel. Subjective listening was unavailable in the preparation runtime.

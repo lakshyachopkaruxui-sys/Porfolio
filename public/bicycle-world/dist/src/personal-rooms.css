@@ -1,0 +1,173 @@
+#personal-experience{--personal-paper:#f4f0e5;--personal-ink:#294638;position:fixed;inset:0;margin:0;padding:0;width:100%;height:100dvh;max-width:none;max-height:none;border:0;border-radius:0;background:var(--personal-paper);color:var(--personal-ink);overflow:clip;box-shadow:none;font-family:var(--font-body,'DM Sans',sans-serif)}#personal-experience::backdrop{background:var(--personal-paper);backdrop-filter:none;-webkit-backdrop-filter:none}.personal-shell{position:relative;height:100%;overflow:clip;isolation:isolate}.personal-canvas{position:absolute;inset:0;outline-offset:-6px}.personal-canvas canvas{display:block;width:100%!important;height:100%!important}.personal-curtain{position:absolute;inset:0;z-index:4;pointer-events:none;background:var(--personal-paper);opacity:1}
+#personal-experience button,#personal-experience a{font:600 13px/1.5 var(--font-body,'DM Sans',sans-serif);color:inherit;touch-action:manipulation}#personal-experience button{min-height:44px;padding:10px 17px;border:1px solid #c8cebc;border-radius:9px;background:var(--personal-paper);cursor:pointer;box-shadow:none}#personal-experience button:hover:not(:disabled){background:#e2e6d7;border-color:#7d957c}#personal-experience button:disabled{opacity:.4;cursor:default}#personal-experience :is(button,a):focus-visible,.personal-canvas:focus-visible{outline:3px solid #a45132;outline-offset:4px}#personal-experience :is(h1,h2,h3){font-family:var(--font-heading,'Mochiy Pop P One',sans-serif);font-weight:400;line-height:1.45;letter-spacing:0}.personal-eyebrow{font:600 10px/1.6 var(--font-body,'DM Sans',sans-serif);letter-spacing:.14em;margin:0 0 8px;color:#687665}
+.personal-header{position:absolute;z-index:5;top:0;left:0;right:0;padding:23px 32px;display:flex;align-items:flex-start;justify-content:space-between;gap:24px;background:var(--personal-paper);pointer-events:none}.personal-header>*{pointer-events:auto}.personal-header::after{content:'';position:absolute;left:0;right:0;top:100%;height:28px;background:linear-gradient(180deg,var(--personal-paper),transparent);pointer-events:none}#personal-room-title{font-size:21px;margin:0}.personal-header nav{display:flex;gap:10px;align-items:center}.personal-header nav button{font-size:12px}.personal-caption{--caption-bottom:22px;position:absolute;z-index:3;left:max(24px,calc((100% - 900px)/2));right:max(24px,calc((100% - 900px)/2));bottom:var(--caption-bottom);text-align:center;isolation:isolate;pointer-events:none}.personal-caption>*{pointer-events:auto}.personal-caption::before{content:'';position:absolute;z-index:-1;left:50%;width:100vw;transform:translateX(-50%);top:-35px;bottom:calc(-1 * var(--caption-bottom));background:linear-gradient(180deg,transparent,var(--personal-paper) 24%);pointer-events:none}.personal-number{font-size:10px;line-height:1.5;letter-spacing:.13em;color:#6b7969;margin:0 0 6px}#personal-chapter-title{font-size:clamp(21px,2.4vw,28px);margin:0 0 10px}.personal-caption>p[data-personal-body]{font-size:15px;line-height:1.65;max-width:780px;margin:0 auto;color:#465f4c}.personal-chapters{display:flex;align-items:center;justify-content:center;gap:7px;margin:15px 0 0}.personal-chapters button{font-size:12px!important;padding:8px 16px!important;min-height:40px!important;background:transparent!important}.personal-chapters button[aria-pressed=true]{background:var(--personal-ink)!important;color:#fff7e8!important;border-color:var(--personal-ink)!important}.personal-actions{display:flex;justify-content:center;align-items:center;gap:16px;margin-top:8px;flex-wrap:wrap}#personal-experience .personal-actions>button{background:transparent;border:0;padding:8px 0;font-size:12px;text-decoration:underline;text-underline-offset:4px}.personal-sound-actions,.personal-sky-actions{display:flex;gap:8px;align-items:center}#personal-experience .personal-sound-actions button,#personal-experience .personal-sky-actions button{padding:8px 14px;font-size:12px;min-height:40px}.personal-scene-note{font-size:11px;line-height:1.6;color:#697565;margin:4px auto 0}.personal-scene-note:empty{display:none}.personal-status{position:absolute;z-index:5;top:105px;left:50%;transform:translateX(-50%);padding:7px 13px;background:var(--personal-paper);max-width:80%;margin:0;border-radius:7px;font-size:12px;line-height:1.6;color:#627360;text-align:center}.personal-status:empty{display:none}
+.personal-reading,.personal-media,.personal-places{position:absolute;inset:0;z-index:7;background:var(--personal-paper);overflow:auto;overscroll-behavior:contain;padding:26px max(26px,calc((100vw - 940px)/2));scrollbar-color:#a8b69e var(--personal-paper)}.personal-reading>header,.personal-media>header,.personal-places>header{position:sticky;top:-26px;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:24px;background:var(--personal-paper);border-bottom:1px solid #cdd2c2;padding:18px 0;margin-bottom:36px}.personal-reading article{max-width:760px;margin:auto;padding:0 0 50px}.personal-reading h1{font-size:clamp(30px,4vw,44px);margin:18px 0 24px}.personal-reading p{font-size:17px;line-height:1.8;color:#445e4b;margin:0 0 24px}.personal-reading .personal-deck{font-size:21px;line-height:1.7}.personal-reading .personal-media-note{font-size:13px;line-height:1.75;margin-top:40px;padding-top:24px;border-top:1px solid #cdd2c2;color:#6b7766}.personal-media{padding:20px 30px}.personal-media>header{top:-20px;margin-bottom:18px}.personal-media>header>div{display:flex;gap:12px}.personal-media h2{font-size:22px;margin:0}.personal-media figure{margin:0}.personal-media img{display:block;max-width:100%;height:auto;max-height:calc(100dvh - 210px);object-fit:contain;margin:0 auto;background:#e5e6d9}.personal-media.is-zoomed img{width:min(100%,var(--personal-image-width));height:auto;max-height:none;object-fit:contain}.personal-media figcaption{max-width:900px;font-size:13px;line-height:1.7;color:#64745f;margin:18px auto 32px}.personal-media nav{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:28px}.personal-places h2{font-size:27px;margin:0}.personal-places [data-personal-place-list]{display:grid;gap:0}#personal-experience .personal-places [data-personal-place-list] button{padding:24px 8px;text-align:left;border-width:0 0 1px;border-radius:0;background:transparent;font-size:20px;font-weight:500;min-height:85px}
+#personal-experience [hidden]{display:none!important}.personal-profile{position:absolute;z-index:6;left:18px;top:112px;padding:10px 13px;background:var(--personal-paper);border:1px solid #cbd1c0;border-radius:8px;max-width:285px;font:11px/1.65 var(--font-body,'DM Sans',sans-serif)}.personal-profile summary{display:block;min-height:26px;font:inherit;cursor:pointer}.personal-profile summary:after{content:none}.personal-profile pre{font:inherit;white-space:pre-wrap;margin:10px 0 0}
+@media(max-width:1100px){.personal-header{padding:21px 24px;gap:18px}.personal-header nav{gap:7px}.personal-header nav button{font-size:11px;padding:10px 12px}#personal-room-title{font-size:19px}.personal-caption{left:35px;right:35px}#personal-chapter-title{font-size:24px}.personal-caption>p[data-personal-body]{font-size:14px;max-width:720px}.personal-chapters{margin-top:12px}.personal-actions{gap:13px}.personal-scene-note{font-size:10px}}
+@media(max-height:760px){.personal-caption{--caption-bottom:16px}#personal-chapter-title{font-size:23px;margin-bottom:7px}.personal-caption>p[data-personal-body]{font-size:14px;line-height:1.6}.personal-chapters{margin-top:10px}.personal-actions{margin-top:4px}.personal-header{padding-top:18px}.personal-status{top:92px}}
+/* The nested Listening Room borrows the same canvas; courtyard controls pause. */
+.personal-shell.has-hobby-room > :not(#listening-experience):not(#garba-experience):not(#pokemon-experience){visibility:hidden;pointer-events:none}
+/* Reserve room for the real photo selector; keep the full frame visible. */
+.personal-media[data-media-collection="photos"]:not(.is-zoomed) img{max-height:calc(100dvh - 292px)}
+.personal-media[data-media-collection="photos"] figcaption{margin:14px auto 18px}
+.personal-media [data-personal-media-nav] button[aria-pressed="true"]{background:var(--personal-ink)!important;color:var(--personal-paper)!important;border-color:var(--personal-ink)!important}
+.personal-media video{display:block;max-width:100%;width:auto;height:min(960px,calc(100dvh - 235px));object-fit:contain;margin:0 auto;background:#16251e;border-radius:9px}
+.personal-media[data-media-collection="video"] figure{max-width:900px;margin:auto}
+.personal-media[data-media-collection="video"] figcaption{text-align:center;margin:16px auto 0;font-size:15px}
+.personal-media [data-personal-recording-status]{max-width:40rem;margin:16px auto;color:var(--personal-ink);font-size:15px;line-height:1.6}
+@media(max-width:1100px){.personal-media[data-media-collection="photos"]:not(.is-zoomed) img{max-height:calc(100dvh - 344px)}}
+@media(max-width:760px){.personal-header{padding:16px;gap:12px;flex-wrap:wrap}.personal-header nav{margin-left:auto}.personal-header .personal-eyebrow{display:none}#personal-room-title{font-size:16px}.personal-caption{left:20px;right:20px}#personal-chapter-title{font-size:21px}.personal-chapters{gap:5px}.personal-chapters button{font-size:11px!important;padding:8px 11px!important}.personal-actions{gap:10px}.personal-reading,.personal-places{padding:20px 24px}.personal-reading>header,.personal-places>header{top:-20px}.personal-reading .personal-deck{font-size:18px}.personal-media{padding:16px}.personal-media h2{font-size:18px}.personal-media>header{top:-16px}.personal-media>header>div{gap:6px}.personal-places h2{font-size:22px}}
+@media(prefers-reduced-motion:reduce){#personal-experience *{scroll-behavior:auto!important;transition:none!important}}
+#personal-experience [data-personal-download]{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 17px;border:1px solid #c8cebc;border-radius:9px;text-decoration:none;background:var(--personal-paper)}#personal-experience [data-personal-download]:hover{background:#e2e6d7;border-color:#7d957c}
+
+/* About: a furnished space with a compact, readable story rail. Other rooms
+   retain their established layout until their own destination phases. */
+#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-header{background:transparent;padding:22px 32px}
+#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-header::after{display:none}
+#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-header>div{background:#f4f0e5f5;padding:12px 18px;border-radius:4px}
+#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-header nav{padding-top:10px}
+#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-caption{left:40px;right:40px;bottom:24px;display:grid;grid-template-columns:minmax(0,1.18fr) minmax(0,1fr);column-gap:56px;text-align:left;align-items:end;max-width:1440px;margin:auto}
+#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-caption::before{top:-36px;bottom:-30px;background:linear-gradient(180deg,transparent,#f4f0e5 25%)}
+#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-number{grid-column:1;grid-row:1;margin:0 0 7px;font-size:11px;letter-spacing:.10em}
+#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) #personal-chapter-title{grid-column:1;grid-row:2;font-size:clamp(20px,1.85vw,28px);line-height:1.5;margin:0 0 10px}
+#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-caption>[data-personal-body]{grid-column:1;grid-row:3;font-size:15px;line-height:1.7;margin:0;max-width:590px;color:#354e42}
+#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-chapters{grid-column:2;grid-row:1 / 3;justify-content:flex-start;align-self:end;margin:0 0 16px;gap:8px;flex-wrap:wrap}
+#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-chapters button{font-size:13px!important;min-height:44px!important;padding:10px 17px!important;border-radius:7px}
+#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-actions{grid-column:2;grid-row:3 / 5;justify-content:flex-start;align-self:start;gap:6px 20px;margin:0}
+#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-actions>button{font-size:13px;min-height:44px}
+#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-actions>[data-about-interact]{background:#294638;color:#fff8eb;border-radius:7px;text-decoration:none;padding:11px 17px;min-width:170px}
+#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-actions>[data-about-interact]:hover{background:#3c5e49}
+#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-scene-note{grid-column:1;grid-row:4;margin:8px 0 0}
+.about-object-prompts{position:absolute;inset:0;z-index:2;pointer-events:none}
+#personal-experience .about-object-prompts button{position:absolute;pointer-events:auto;transform:translate(-50%,-50%);background:#fff9eaf5;box-shadow:0 3px 16px #1f35232b;border:1px solid #9baf97;border-radius:6px;padding:9px 14px;white-space:nowrap;min-height:44px;font-size:12px}
+#personal-experience .about-object-prompts button::before{content:'';position:absolute;left:50%;top:100%;width:1px;height:14px;background:#718b70;pointer-events:none}
+#personal-experience .personal-retry{position:absolute;top:140px;left:50%;transform:translateX(-50%);z-index:6}
+#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-status{top:112px;background:#fff9ec;border:1px solid #d7d3be;color:#294638}
+#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud])[data-phase=entering] .personal-header>div,
+#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud])[data-phase=returning] .personal-header>div,
+#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud])[data-phase=entering] [data-personal-places],
+#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud])[data-phase=returning] [data-personal-places]{visibility:hidden}
+@media(min-width:1600px){#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-caption{bottom:34px;column-gap:90px}#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-caption>[data-personal-body]{font-size:17px}}
+@media(max-width:1100px){#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-caption{left:28px;right:28px;column-gap:28px;grid-template-columns:1.15fr 1fr}#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-header{padding:18px 24px}#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-chapters button{padding:9px 13px!important}#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-caption>[data-personal-body]{font-size:14px}#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-actions{gap:2px 16px}#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-actions>button{font-size:12px}}
+@media(max-height:650px){#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-caption{bottom:12px}#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) #personal-chapter-title{font-size:19px;margin-bottom:6px}#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-chapters{margin-bottom:8px}#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-caption>[data-personal-body]{font-size:13px;line-height:1.5}}
+
+/* The lookout uses the same readable rail, with its own sky-toned paper. */
+#personal-experience[data-kind=cloud] .personal-caption::before{background:linear-gradient(180deg,transparent,var(--personal-paper) 25%)}
+#personal-experience[data-kind=cloud] .personal-header>div{background:#e8f1eff5}
+#personal-experience[data-kind=cloud] .personal-sky-actions{flex-basis:100%;gap:8px}
+#personal-experience[data-kind=cloud] .personal-sky-actions button{min-height:44px;padding:9px 12px;font-size:12px}
+#personal-experience .personal-places [aria-current="page"]{box-shadow:inset 3px 0 var(--personal-ink);padding-left:18px;font-weight:700}
+
+/* A split cover gives the entry and its reverse a visible threshold. Shared
+   renderer ownership and the authored doorway camera path remain independent. */
+.personal-curtain { background:transparent; opacity:1; overflow:hidden; }
+.personal-curtain::before,.personal-curtain::after {
+  content:''; position:absolute; top:0; bottom:0; width:51%;
+  background:var(--room-cover,var(--personal-paper));
+}
+.personal-curtain::before { left:0; transform:translateX(calc(-102% * var(--room-reveal,0))); box-shadow:inset -1px 0 #29463816; }
+.personal-curtain::after { right:0; transform:translateX(calc(102% * var(--room-reveal,0))); box-shadow:inset 1px 0 #29463816; }
+.personal-caption:not([hidden]) { animation:personal-content-arrive 300ms cubic-bezier(.23,1,.32,1) both; }
+.personal-reading:not([hidden]) > article,
+.personal-media:not([hidden]) > figure,
+.personal-places:not([hidden]) > [data-personal-place-list] { animation:personal-content-arrive 240ms cubic-bezier(.23,1,.32,1) both; }
+@keyframes personal-content-arrive { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+@media(prefers-reduced-motion:reduce) {
+  #personal-experience .personal-caption,#personal-experience :is(article,figure,[data-personal-place-list]) { animation:none; }
+}
+.reduce-motion #personal-experience .personal-caption,
+.reduce-motion #personal-experience :is(article,figure,[data-personal-place-list]) { animation:none; }
+
+/* About: photographs and a readable story share one composition. */
+#personal-experience[data-kind=about] .personal-reading{padding:20px max(32px,calc((100vw - 1160px)/2));}
+#personal-experience[data-kind=about] .personal-reading>header{top:-20px;margin-bottom:26px;padding:14px 0;border:0;gap:16px;flex-wrap:wrap;}
+#personal-experience[data-kind=about] .personal-reading>header>.personal-eyebrow{margin:0 auto 0 0;font-size:11px;}
+#personal-experience[data-kind=about] .personal-reading>header>button{margin-left:auto;}
+#personal-experience[data-kind=about] .about-story{max-width:none;margin:0;padding-bottom:40px;}
+#personal-experience[data-kind=about] .about-story-navigation{display:flex;gap:8px;margin:0 0 30px;flex-wrap:wrap;}
+#personal-experience[data-kind=about] .about-story-navigation button{padding:10px 18px;background:transparent;color:var(--personal-ink);box-shadow:none;border-color:#bec8b8;}
+#personal-experience[data-kind=about] .about-story-navigation button[aria-pressed=true]{background:var(--personal-ink);color:#fff9eb;border-color:var(--personal-ink);}
+#personal-experience[data-kind=about] .about-story-hero{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:clamp(32px,5vw,72px);align-items:center;}
+#personal-experience[data-kind=about] .about-story-intro{grid-column:2;grid-row:1;}
+#personal-experience[data-kind=about] .about-story-hero>.about-story-photo{grid-column:1;grid-row:1;}
+#personal-experience[data-kind=about] .about-story-hero>.about-story-photo[data-orientation=portrait]{width:100%;max-width:390px;justify-self:center;}
+#personal-experience[data-kind=about] .about-story-intro>.personal-eyebrow{font-size:11px;letter-spacing:.13em;margin:0 0 18px;}
+#personal-experience[data-kind=about] .about-story h1{font-size:clamp(28px,3.1vw,42px);line-height:1.45;margin:0 0 24px;max-width:19ch;}
+#personal-experience[data-kind=about] .about-story .personal-deck{font-size:clamp(18px,1.65vw,21px);line-height:1.75;margin:0;max-width:44ch;}
+#personal-experience[data-kind=about] .about-story-photo{margin:0;min-width:0;}
+#personal-experience[data-kind=about] .about-photo-open{display:block;width:100%;padding:0;border:0;background:transparent;box-shadow:none;border-radius:12px;overflow:hidden;line-height:0;}
+#personal-experience[data-kind=about] .about-photo-open img{display:block;width:100%;height:auto;max-height:520px;object-fit:contain;border-radius:12px;}
+#personal-experience[data-kind=about] .about-photo-open:hover{background:transparent;box-shadow:0 0 0 3px #7d957c;}
+#personal-experience[data-kind=about] .about-story-photo figcaption{font:400 14px/1.6 var(--font-body,'DM Sans',sans-serif);color:#536250;margin:12px 0 0;}
+#personal-experience[data-kind=about] .about-story-details{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px);margin:52px 0 0;}
+#personal-experience[data-kind=about] .about-story-details h2{font-size:20px;line-height:1.6;margin:0 0 16px;}
+#personal-experience[data-kind=about] .about-story-details p{font-size:18px;line-height:1.8;margin:0;max-width:52ch;}
+#personal-experience[data-kind=about] .about-story-moments{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin:36px 0 0;}
+#personal-experience[data-kind=about] .about-story-next{display:flex;align-items:center;gap:12px 18px;flex-wrap:wrap;margin-top:44px;padding:24px 0;}
+#personal-experience[data-kind=about] .about-story-next p{flex:1 1 260px;font-size:18px;margin:0;}
+#personal-experience[data-kind=about] .about-story-next button{background:var(--personal-ink);color:#fff9eb;border-color:var(--personal-ink);box-shadow:none;}
+#personal-experience[data-kind=about] .personal-media>header{flex-wrap:wrap;border:0;gap:16px;}
+#personal-experience[data-kind=about] .personal-media h2{font-size:20px;margin-right:auto;}
+#personal-experience[data-kind=about] .personal-media img{background:transparent;border-radius:10px;}
+#personal-experience[data-kind=about] .personal-media[data-media-collection=photos]:not(.is-zoomed) img{max-height:calc(100dvh - 256px);}
+#personal-experience[data-kind=about] .personal-media nav{align-items:center;margin:0 0 12px;}
+#personal-experience[data-kind=about] .personal-media nav span{min-width:64px;text-align:center;font-size:14px;}
+#personal-experience[data-kind=about] .personal-media figcaption{text-align:center;font-size:16px;}
+#personal-experience[data-kind=about] :is(.personal-reading,.personal-media,.personal-places)>header>.play-music-dock{position:static;inset:auto;display:flex;transform:none;margin:0;}
+#personal-experience[data-kind=about] .personal-actions>[data-personal-story]{order:-1;background:var(--personal-ink);color:#fff9eb;border:1px solid var(--personal-ink);border-radius:7px;box-shadow:none;text-decoration:none;padding:10px 18px;}
+#personal-experience[data-kind=about] .personal-actions>[data-about-interact]{background:transparent;color:var(--personal-ink);border:0;box-shadow:none;padding:8px 0;min-width:0;text-decoration:underline;text-underline-offset:4px;}
+#personal-experience[data-kind=about] .personal-actions>[data-about-interact]:hover{background:transparent;color:#516b40;}
+@media(max-width:1100px){
+  #personal-experience[data-kind=about] .about-story-hero{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:32px;}
+  #personal-experience[data-kind=about] .personal-reading{padding-inline:32px;}
+}
+@media(max-width:760px){
+  #personal-experience[data-kind=about] .personal-reading{padding-inline:24px;}
+  #personal-experience[data-kind=about] .about-story-hero{grid-template-columns:1fr;gap:26px;}
+  #personal-experience[data-kind=about] .about-story-intro{grid-column:1;grid-row:1;}
+  #personal-experience[data-kind=about] .about-story-hero>.about-story-photo{grid-column:1;grid-row:2;}
+  #personal-experience[data-kind=about] .about-story-hero>.about-story-photo[data-orientation=portrait]{max-width:360px;}
+  #personal-experience[data-kind=about] .about-story-details,#personal-experience[data-kind=about] .about-story-moments{grid-template-columns:1fr;gap:28px;}
+  #personal-experience[data-kind=about] .about-story-details{margin-top:36px;}
+  #personal-experience[data-kind=about] .personal-media[data-media-collection=photos]:not(.is-zoomed) img{max-height:calc(100dvh - 306px);}
+}
+/* Photo-led hobby stories share About's reading scale, keeping spatial rooms intact. */
+#personal-experience[data-kind=work] .personal-reading{padding:20px max(32px,calc((100vw - 1160px)/2));}
+#personal-experience[data-kind=work] .personal-reading>header{top:-20px;border:0;gap:16px;flex-wrap:wrap;padding:14px 0;margin-bottom:26px;}
+#personal-experience[data-kind=work] .personal-reading>header>.personal-eyebrow{margin:0 auto 0 0;font-size:11px;}
+#personal-experience[data-kind=work] .hobby-story{max-width:none;margin:0;padding-bottom:40px;}
+#personal-experience[data-kind=work] .hobby-story-navigation{display:flex;gap:8px;margin-bottom:30px;flex-wrap:wrap;}
+#personal-experience[data-kind=work] .hobby-story-navigation button{padding:10px 18px;background:transparent;color:var(--personal-ink);box-shadow:none;}
+#personal-experience[data-kind=work] .hobby-story-navigation button[aria-pressed=true]{background:var(--personal-ink);color:#fff9eb;border-color:var(--personal-ink);}
+#personal-experience[data-kind=work] .hobby-story-hero{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:clamp(32px,5vw,72px);align-items:center;}
+#personal-experience[data-kind=work] .hobby-story-intro{grid-column:2;grid-row:1;}
+#personal-experience[data-kind=work] .hobby-story-hero>.hobby-story-photo{grid-column:1;grid-row:1;}
+#personal-experience[data-kind=work] .hobby-story-intro>.personal-eyebrow{font-size:11px;margin:0 0 18px;}
+#personal-experience[data-kind=work] .hobby-story h1{font-size:clamp(28px,3.1vw,42px);line-height:1.45;margin:0 0 24px;}
+#personal-experience[data-kind=work] .hobby-story .personal-deck{font-size:clamp(18px,1.65vw,21px);line-height:1.75;margin:0;max-width:44ch;}
+#personal-experience[data-kind=work] :is(.hobby-story-enter,.hobby-story-next button){background:var(--personal-ink);color:#fff9eb;border-color:var(--personal-ink);box-shadow:none;padding:11px 18px;}
+#personal-experience[data-kind=work] .hobby-story-enter{margin-top:24px;}
+#personal-experience[data-kind=work] .hobby-story-photo{margin:0;min-width:0;}
+#personal-experience[data-kind=work] .hobby-photo-open{display:block;padding:0;width:100%;border:0;background:transparent;box-shadow:none;line-height:0;}
+#personal-experience[data-kind=work] .hobby-photo-open img{display:block;width:auto;height:auto;max-width:100%;max-height:520px;object-fit:contain;border-radius:12px;margin:auto;}
+#personal-experience[data-kind=work] .hobby-photo-open:hover{background:transparent;box-shadow:0 0 0 3px #7d957c;border-radius:12px;}
+#personal-experience[data-kind=work] .hobby-story-photo figcaption{font:400 14px/1.6 var(--font-body,'DM Sans',sans-serif);color:#536250;margin:12px 0 0;}
+#personal-experience[data-kind=work] .hobby-story-details{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px);margin:48px 0 0;}
+#personal-experience[data-kind=work] .hobby-story-details h2{font-size:20px;line-height:1.6;margin:0 0 16px;}
+#personal-experience[data-kind=work] .hobby-story-details p{font-size:18px;line-height:1.8;margin:0;max-width:52ch;}
+#personal-experience[data-kind=work] .hobby-story-moments{max-width:800px;margin:36px auto 0;}
+#personal-experience[data-kind=work] .hobby-story-next{display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin:36px 0 0;padding:24px 0;}
+#personal-experience[data-kind=work] .hobby-story-next p{flex:1 1 300px;margin:0;font-size:18px;}
+#personal-experience[data-kind=work] .personal-media>header{flex-wrap:wrap;border:0;gap:16px;}
+#personal-experience[data-kind=work] .personal-media h2{font-size:20px;margin-right:auto;}
+#personal-experience[data-kind=work] .personal-media img{background:transparent;border-radius:10px;}
+#personal-experience[data-kind=work] .personal-media nav{align-items:center;}
+#personal-experience[data-kind=work] .personal-media nav span{font-size:14px;min-width:64px;text-align:center;}
+#personal-experience[data-kind=work] .personal-media figcaption{text-align:center;font-size:16px;}
+#personal-experience[data-kind=work] :is(.personal-reading,.personal-media,.personal-places)>header>.play-music-dock{position:static;inset:auto;display:flex;transform:none;margin:0;}
+@media(max-width:760px){
+ #personal-experience[data-kind=work] .personal-reading{padding-inline:24px;}
+ #personal-experience[data-kind=work] .hobby-story-hero,#personal-experience[data-kind=work] .hobby-story-details{grid-template-columns:1fr;gap:28px;}
+ #personal-experience[data-kind=work] .hobby-story-intro{grid-column:1;grid-row:1;}
+ #personal-experience[data-kind=work] .hobby-story-hero>.hobby-story-photo{grid-column:1;grid-row:2;}
+}

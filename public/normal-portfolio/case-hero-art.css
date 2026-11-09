@@ -1,0 +1,199 @@
+/* Source-based hero mockups. Load after the case presentation stylesheet. */
+#case-reader .case-hero-visual {
+  --hero-art-field: #f2f3f1;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+
+#case-reader .case-hero-visual .case-hero-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: clamp(300px, 34vw, 440px);
+  min-height: 300px;
+  max-height: 440px;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 22px;
+  background: var(--hero-art-field);
+}
+
+#case-reader .case-hero-visual .case-hero-source {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+  border: 0;
+  border-radius: 0;
+  margin: 0;
+  box-shadow: none;
+  transform: none;
+}
+
+#case-reader .case-hero-visual[data-hero-project="connectaid"] { --hero-art-field: #e7f4f7; }
+#case-reader .case-hero-visual[data-hero-project="giggles"] { --hero-art-field: #dfe8f3; }
+#case-reader .case-hero-visual[data-presentation="generated"] { --hero-art-field: #f5eadb; }
+#case-reader .case-hero-visual[data-presentation="generated"] .case-hero-stage { height: auto; aspect-ratio: 5 / 4; min-height: 0; max-height: none; }
+#case-reader .case-hero-mockup-link { display: block; width: 100%; height: 100%; }
+#case-reader .case-hero-mockup-link:focus-visible { outline: 3px solid var(--ink); outline-offset: -5px; border-radius: 22px; }
+#case-reader .case-hero-visual[data-hero-project="pixel-mania"] { --hero-art-field: #fff0be; }
+#case-reader .case-hero-visual[data-hero-project="syringe"] { --hero-art-field: #f3e8f4; }
+#case-reader .case-hero-visual[data-hero-project="workplace-mode"] { --hero-art-field: #eef0ed; }
+#case-reader .case-hero-visual[data-hero-project="jan-aushadhi"] { --hero-art-field: #ece9e2; }
+#case-reader .case-hero-visual[data-hero-project="jan-aushadhi"] .case-hero-stage,
+#case-reader .case-hero-visual[data-hero-project="pixel-mania"] .case-hero-stage,
+#case-reader .case-hero-visual[data-hero-project="workplace-mode"] .case-hero-stage {
+  height: auto;
+  aspect-ratio: 5 / 4;
+  min-height: 0;
+  max-height: none;
+}
+
+#case-reader .case-hero-visual .case-hero-phone {
+  position: absolute;
+  aspect-ratio: 372 / 812;
+  height: 86%;
+  padding: 6px;
+  border: 1px solid #202c33;
+  border-radius: 25px;
+  background: #202c33;
+  box-shadow: 0 18px 28px rgb(22 49 60 / 17%);
+}
+
+#case-reader .case-hero-visual .case-hero-phone-primary {
+  z-index: 1;
+  left: 17%;
+  top: 8%;
+  transform: rotate(-7deg);
+}
+
+#case-reader .case-hero-visual .case-hero-phone-support {
+  z-index: 0;
+  right: 15%;
+  top: 4%;
+  height: 82%;
+  transform: rotate(7deg);
+}
+
+#case-reader .case-hero-visual .case-hero-phone-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 18px;
+  background: white;
+}
+
+/* Original files include a40px side margin and50px bottom shadow.
+   Reveal x40,y0,360×800 so all actual screen content remains in view. */
+#case-reader .case-hero-visual .case-hero-phone-source {
+  position: absolute;
+  display: block;
+  left: -11.111111%;
+  top: 0;
+  width: 122.222222%;
+  height: 106.25%;
+  max-width: none;
+  max-height: none;
+  border: 0;
+  border-radius: 0;
+  margin: 0;
+  object-fit: fill;
+  transform: none;
+  box-shadow: none;
+}
+#case-reader .case-hero-visual .case-hero-phone-source.is-reviewed-screen {
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#case-reader .case-hero-visual .case-hero-giggles-board {
+  position: absolute;
+  left: 7%;
+  top: 4%;
+  width: auto;
+  height: 88%;
+  max-width: 80%;
+  max-height: none;
+  border: 0;
+  border-radius: 3px;
+  margin: 0;
+  object-fit: contain;
+  transform: rotate(-5deg);
+  box-shadow: 0 12px 24px rgb(33 54 81 / 14%);
+}
+
+#case-reader .case-hero-visual .case-hero-game-device {
+  position: absolute;
+  z-index: 1;
+  width: 61%;
+  right: 4%;
+  bottom: 5%;
+  padding: 6px;
+  border: 1px solid #24333c;
+  border-radius: 16px;
+  background: #24333c;
+  box-shadow: 0 10px 20px rgb(24 39 55 / 20%);
+  transform: rotate(3deg);
+}
+
+#case-reader .case-hero-visual .case-hero-game-screen {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #fcf6ed;
+}
+
+/* Unchanged Start the Game rectangle: x856,y80,720×360 in1650×1821. */
+#case-reader .case-hero-visual .case-hero-game-source {
+  position: absolute;
+  display: block;
+  left: -118.888889%;
+  top: -22.222222%;
+  width: 229.166667%;
+  height: 505.833333%;
+  max-width: none;
+  max-height: none;
+  border: 0;
+  border-radius: 0;
+  margin: 0;
+  object-fit: fill;
+  transform: none;
+  box-shadow: none;
+}
+
+#case-reader .case-hero-visual .case-hero-unavailable {
+  align-self: center;
+  margin: auto;
+  padding: 20px;
+  color: var(--ink, #252825);
+  font: 400 16px/1.5 var(--body, sans-serif);
+  text-align: center;
+}
+
+#case-reader .case-hero-visual figcaption {
+  margin: 16px 0 0;
+}
+
+@media (max-width: 739px) {
+  #case-reader .case-hero-visual .case-hero-stage {
+    height: clamp(300px, 80vw, 400px);
+    border-radius: 18px;
+  }
+  #case-reader .case-hero-visual .case-hero-phone-primary { left: 14%; }
+  #case-reader .case-hero-visual .case-hero-phone-support { right: 12%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #case-reader .case-hero-visual,
+  #case-reader .case-hero-visual * { animation: none; transition: none; }
+}

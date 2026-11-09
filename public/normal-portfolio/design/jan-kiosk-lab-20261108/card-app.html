@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Jan Aushadhi · Selected card/app walkthrough</title>
+  <link rel="icon" href="../../assets/identity/shared-curve/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./lab.css?v=20261108-highfi">
+<!-- portfolio-publishing:start -->
+<link rel="canonical" href="https://lakshyachopkar.pages.dev/normal-portfolio/design/jan-kiosk-lab-20261108/card-app">
+<meta property="og:url" content="https://lakshyachopkar.pages.dev/normal-portfolio/design/jan-kiosk-lab-20261108/card-app">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jan Aushadhi · Selected card/app walkthrough">
+<meta property="og:image" content="https://lakshyachopkar.pages.dev/normal-portfolio/assets/identity/shared-curve/icon-512.png">
+<meta name="twitter:card" content="summary">
+<!-- portfolio-publishing:end -->
+</head>
+<body>
+  <a class="skip" href="#card-app">Skip to the walkthrough</a>
+  <header class="lab-header">
+    <a href="../../#project-jan-aushadhi">Back to Jan Aushadhi case study</a>
+    <p class="eyebrow">Report-selected card/app concept · new November 2026 walkthrough</p>
+    <h1>Check before a pharmacy visit.</h1>
+    <p>Our team selected a health card and app. This new AI-assisted interface explores one of its intended tasks: use a prepared prescription, check a Kendra's availability before travel, then request collection.</p>
+    <p class="small">This is an interactive concept walkthrough, not the original working app or a live service. Accounts, items, stores and responses are fictional. No real card, prescription, payment or medical data is used.</p>
+  </header>
+  <main>
+    <section id="card-app" class="kiosk" aria-label="Selected card/app walkthrough" tabindex="-1">
+      <div class="kiosk-brand"><span class="product-name">Jan Aushadhi<small>Health card &amp; collection</small></span><span class="demo-badge">Demo only</span></div>
+      <ol id="app-progress" class="progress" aria-label="Walkthrough steps"></ol>
+      <div id="app-screen"></div>
+      <p id="app-notice" class="notice" role="status" aria-live="polite"></p>
+    </section>
+    <aside class="moderator" aria-label="Separate moderator controls">
+      <details>
+        <summary>For the moderator · scenario and blank worksheet</summary>
+        <div class="moderator-content">
+          <h2>Start a separate scenario</h2>
+          <p>These controls are outside the app flow. Responses are scripted. Starting a scenario clears the current local walkthrough.</p>
+          <label for="app-scenario">Prepared scenario</label>
+          <select id="app-scenario"></select>
+          <button id="app-start-scenario" type="button">Start separate scenario</button>
+          <h2>Record observations separately</h2>
+          <p>The worksheet starts blank, with every task marked not observed. Use anonymous codes and keep observations separate from interpretations. No participant has been tested by this artifact.</p>
+          <button id="app-download-worksheet" type="button" class="secondary">Download blank selected-app worksheet</button>
+          <p id="app-export-notice" class="small" role="status"></p>
+          <p class="small">This core-task walkthrough does not cover onboarding, medicine comparison, delivery, reminders, payments, or the report's wider feature set.</p>
+        </div>
+      </details>
+    </aside>
+    <noscript><p>This walkthrough requires JavaScript. The case-study link above remains available.</p></noscript>
+  </main>
+  <footer><p>English-only prepared example. No location, account, medical record, inventory or pharmacy service is connected. Stock accuracy, reservation, store confirmation and staff responsibility require operational review and actual participant testing.</p></footer>
+  <script type="module" src="./card-app.mjs"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+/* Image-first cards, adapted to this portfolio's identity rail. */
+.editorial-portfolio .project-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 64px 32px;
+}
+.editorial-portfolio .project-grid .project-card { grid-column: auto; padding: 0; }
+.editorial-portfolio .project-grid .project-link { display: flex; flex-direction: column; }
+.editorial-portfolio .project-grid .project-heading { order: 1; margin: 21px 0 8px; }
+.editorial-portfolio .project-grid .project-heading h3 {
+  margin: 0;
+  font-size: clamp(22px, 1.9vw, 25px);
+  line-height: 1.25;
+}
+.editorial-portfolio .project-grid .project-copy { order: 2; padding: 0; }
+.editorial-portfolio .project-grid .project-meta { display: block; order: 2; margin-top: 10px; }
+.editorial-portfolio .project-grid .project-art.is-project-cover {
+  order: 0;
+  display: block;
+  height: auto;
+  aspect-ratio: 5 / 4;
+  padding: 0;
+  margin: 0;
+  background: var(--surface);
+}
+.editorial-portfolio .project-grid .project-art.is-project-cover > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  object-fit: cover;
+  object-position: center;
+  transform: none;
+}
+/* Complete studio renders retain their original composition. */
+.editorial-portfolio .project-grid .art-connectaid.is-project-cover { background: #f3fafb; }
+.editorial-portfolio .project-grid .art-connectaid.is-project-cover > img { object-position: 50% 35%; }
+/* The complete Pixel studio composition includes its own outer margins. */
+.editorial-portfolio .project-grid .project-art.art-pixel-mania.is-project-cover > img {
+  object-fit: contain;
+  transform: none;
+  transform-origin: center;
+}
+.editorial-portfolio .project-grid .project-art.art-syringe.is-project-cover { background: #e7eee2; }
+.editorial-portfolio .project-grid .project-art.art-syringe.is-project-cover > img { object-position: 0% 50%; }
+.editorial-portfolio .project-grid .project-art.art-workplace-mode.is-project-cover > img { object-position: 0% 50%; }
+.editorial-portfolio .project-grid .project-art.art-jan-aushadhi.is-project-cover > img { object-position: 0% 50%; }
+@media (max-width: 1050px) and (min-width: 700px) {
+  .editorial-portfolio .portfolio-opening { grid-template-columns: 170px minmax(0, 1fr); gap: 32px; }
+  .editorial-portfolio .project-grid { gap: 56px 24px; }
+}
+@media (max-width: 899px) {
+  .editorial-portfolio .project-grid,
+  .editorial-portfolio .project-grid:not([data-filter="all"]):not([data-filter="featured"]) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+  }
+}
+@media (max-width: 699px) {
+  .editorial-portfolio .project-grid .project-heading { margin-top: 19px; }
+  .editorial-portfolio .project-grid .project-heading h3 { font-size: 24px; }
+}

@@ -1,0 +1,384 @@
+/* Normal-mode reading surfaces. Project artwork keeps its original colours. */
+#case-reader,
+#case-reader[data-project] {
+  --case-tint: var(--surface);
+  --case-accent-soft: var(--surface);
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 17px/1.65 var(--body);
+  scroll-padding-top: 92px;
+}
+
+#case-reader .reader-toolbar {
+  background: var(--paper);
+  border-bottom: 0;
+  box-shadow: none;
+}
+
+#case-reader .reader-toolbar p {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: none;
+}
+
+#case-reader .reader-toolbar button {
+  border-radius: 6px;
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+#case-reader .reader-toolbar button:hover { color: var(--accent); }
+#case-progress::-webkit-progress-value { background: var(--accent); }
+#case-progress::-moz-progress-bar { background: var(--accent); }
+
+#case-content .story-hero { padding-top: 56px; padding-bottom: 40px; }
+
+#case-content .story-hero h2 {
+  font-family: var(--body);
+  font-size: clamp(30px, 3.5vw, 42px);
+  font-weight: 500;
+  letter-spacing: -.03em;
+  line-height: 1.2;
+  max-width: 24ch;
+}
+
+#case-reader .story-status,
+#case-reader .story-reading-time {
+  font-size: 14px;
+  letter-spacing: 0;
+}
+
+#case-reader .story-intro {
+  margin-top: 20px;
+  font-size: 18px;
+  line-height: 1.65;
+  max-width: 44ch;
+}
+
+#case-reader .story-award {
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--case-accent-soft);
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+#case-reader .story-hero-art {
+  background: var(--case-tint);
+  border: 0;
+  border-radius: 24px;
+  box-shadow: none;
+}
+
+#case-reader .story-hero-art img,
+#case-reader .story-figure img {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  object-fit: contain;
+}
+
+#case-reader .story-hero-art figcaption,
+#case-reader .story-figure figcaption {
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+#case-reader .story-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 24px; border: 0; padding: 0; margin: 24px 0 0; }
+#case-reader .story-facts .story-role { grid-column: 1 / -1; }
+#case-reader .story-facts dt { margin-bottom: 5px; }
+#case-reader .story-hero-art img { max-height: 340px; }
+#case-reader .story-reading-time { margin-top: 22px; }
+#case-reader .story-hero-art figcaption { margin-top: 18px; }
+#case-reader .story-facts dt {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+#case-reader .story-facts dd { font-size: 16px; line-height: 1.65; }
+#case-reader .story-facts > div { min-width: 0; }
+
+#case-reader .story-index { padding: 4px 12px 12px 4px; }
+#case-reader .story-index > p { font-size: 14px; }
+
+#case-reader .story-index button {
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 11px 12px;
+  border: 0;
+  border-radius: 6px;
+  color: var(--muted);
+}
+
+#case-reader .story-index button:hover { color: var(--ink); }
+#case-reader .story-index button.is-current { background: var(--surface); color: var(--accent); font-weight: 500; }
+
+#case-reader .story-section { padding-bottom: 0; margin-bottom: 88px; border: 0; }
+
+#case-reader .story-section > h3 {
+  font-family: var(--body);
+  font-size: clamp(24px, 2.4vw, 28px);
+  line-height: 1.25;
+  letter-spacing: -.025em;
+  font-weight: 500;
+}
+
+#case-reader .story-body {
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 64ch;
+  color: var(--ink);
+}
+
+#case-reader .story-kicker {
+  color: var(--muted);
+  font-size: 14px;
+  letter-spacing: 0;
+}
+
+#case-reader .story-process li { padding-top: 0; border: 0; }
+#case-reader .story-process h4 { font-size: 16px; font-weight: 500; }
+#case-reader .story-process p { font-size: 15px; line-height: 1.65; }
+#case-reader .story-step-number,
+#case-reader .story-point-number { color: var(--muted); font-size: 14px; }
+
+#case-reader .story-tools,
+#case-reader .story-states {
+  border-radius: 6px;
+  background: var(--case-tint);
+  box-shadow: none;
+}
+
+#case-reader .story-tool-selectors button {
+  padding: 10px 12px;
+  border: 0;
+  color: var(--muted);
+  font-size: 15px;
+  border-radius: 6px;
+}
+
+#case-reader .story-tool-selectors button:hover { color: var(--ink); }
+#case-reader .story-tool-selectors button[aria-pressed="true"] {
+  background: var(--paper);
+  color: var(--accent);
+  font-weight: 500;
+}
+
+#case-reader .story-tool-detail h4 { font-size: 20px; }
+#case-reader .story-tool-detail p { font-size: 15px; line-height: 1.7; }
+#case-reader .story-methods { font-size: 15px; line-height: 1.8; }
+#case-reader .story-points > div { border: 0; padding-block: 16px; }
+#case-reader .story-points h4 { font-size: 20px; letter-spacing: -.015em; }
+#case-reader .story-points p { font-size: 16px; line-height: 1.75; }
+
+#case-reader .story-flow li { border-left: 0; }
+#case-reader .story-flow li::before {
+  border-radius: 4px;
+  background: var(--case-tint);
+  color: var(--accent);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+#case-reader .story-flow h4 { font-size: 17px; }
+#case-reader .story-flow p { font-size: 16px; line-height: 1.7; }
+
+#case-reader .story-state-controls button {
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ink);
+  font-size: 14px;
+  padding: 9px 15px;
+}
+
+#case-reader .story-state-controls button:hover { border-color: var(--accent); }
+#case-reader .story-state-controls button[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+#case-reader .story-state-view p { line-height: 1.75; }
+#case-reader .story-state-response { border: 0; padding-top: 8px; }
+
+#case-reader .story-comparison > div,
+#case-reader .story-comparison > div:last-child {
+  border-radius: 6px;
+  background: var(--case-tint);
+}
+
+#case-reader .story-comparison > div:last-child { border: 0; }
+#case-reader .story-comparison h4 { font-size: 17px; }
+#case-reader .story-comparison p,
+#case-reader .story-comparison-note { font-size: 16px; line-height: 1.75; }
+
+#case-reader .story-figure a {
+  background: var(--case-tint);
+  border: 0;
+  border-radius: 4px;
+  box-shadow: none;
+}
+
+#case-reader .story-note {
+  border: 0;
+  border-radius: 6px;
+  padding: 18px 20px;
+  background: var(--surface);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+#case-reader .story-related button { padding-block: 20px; border: 0; border-radius: 0; }
+#case-reader .story-related button:hover strong { color: var(--accent); }
+#case-reader .story-related strong { font-size: 24px; font-family: var(--body); letter-spacing: -.02em; }
+#case-reader .story-related span { font-size: 14px; line-height: 1.65; }
+
+#case-reader :is(a, button) { text-decoration: none; }
+#case-reader :is(.story-body, .story-note, .story-points p, .story-flow p, figcaption) a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: .2em;
+  text-decoration-thickness: 1px;
+}
+
+#case-reader :is(a, button):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* The assistant is a quiet utility alongside the portfolio. */
+#portfolio-assistant > .portfolio-assistant-launcher {
+  min-height: 46px;
+  max-width: calc(100vw - 32px);
+  padding: 11px 17px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 2px 12px #26272712;
+  font: 500 14px/1.5 var(--body);
+}
+
+#portfolio-assistant > .portfolio-assistant-launcher:hover { background: var(--surface); border-color: var(--muted); }
+
+.portfolio-assistant-dialog {
+  width: min(680px, calc(100% - 32px));
+  border-radius: 6px;
+  border-color: var(--line);
+  background: var(--paper);
+  box-shadow: 0 12px 40px #24242412;
+}
+
+.portfolio-assistant-dialog::backdrop { background: #24242470; }
+.portfolio-assistant-dialog .assistant-shell { padding: 28px 28px 20px; }
+.portfolio-assistant-dialog .assistant-header { gap: 14px; }
+.portfolio-assistant-dialog .assistant-title {
+  font: 500 clamp(23px, 3vw, 28px)/1.25 var(--body);
+  letter-spacing: -.025em;
+}
+
+.portfolio-assistant-dialog .assistant-intro { font-size: 15px; line-height: 1.65; }
+.portfolio-assistant-dialog .assistant-privacy { font-size: 14px; line-height: 1.65; }
+.portfolio-assistant-dialog .assistant-suggestion {
+  border-color: var(--line);
+  border-radius: 6px;
+  background: transparent;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.portfolio-assistant-dialog .assistant-suggestion:hover { background: var(--surface); border-color: var(--accent); }
+.portfolio-assistant-dialog .assistant-message-user { background: var(--surface); border-radius: 6px; }
+.portfolio-assistant-dialog .assistant-message-text { font-size: 16px; line-height: 1.7; }
+.portfolio-assistant-dialog .assistant-error {
+  border: 1px solid #b97770;
+  border-radius: 6px;
+  background: #fcf0ee;
+  color: #822e29;
+}
+
+.portfolio-assistant-dialog .assistant-error .assistant-retry { color: #822e29; }
+.portfolio-assistant-dialog .assistant-input {
+  border-color: #9d9d9d;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 16px;
+}
+
+.portfolio-assistant-dialog .assistant-send {
+  border-radius: 6px;
+  border-color: var(--accent);
+  background: var(--accent);
+  font-size: 14px;
+}
+
+.portfolio-assistant-dialog .assistant-send:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+.portfolio-assistant-dialog :is(.assistant-close, .assistant-reset, .assistant-source-link) { color: var(--accent); }
+.portfolio-assistant-dialog :is(.assistant-close, .assistant-reset, .assistant-retry) { border-radius: 4px; }
+.portfolio-assistant-dialog .assistant-keyboard-hint { font-size: 14px; }
+
+#portfolio-assistant > .portfolio-assistant-launcher:focus-visible,
+.portfolio-assistant-dialog :is(a, button, textarea, .assistant-transcript):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 739px) {
+  #case-content .story-hero { padding-top: 36px; padding-bottom: 32px; }
+  #case-reader .story-index { padding: 4px 0 24px; border: 0; }
+  #case-reader .story-index nav { gap: 6px; }
+  #case-reader .story-index button { padding: 10px; }
+  #case-content .story-hero h2 { font-size: clamp(30px, 6.5vw, 36px); letter-spacing: -.03em; }
+  #case-reader .story-body { font-size: 16px; line-height: 1.7; }
+  #case-reader .story-intro { font-size: 17px; }
+  #case-reader .story-section { margin-bottom: 64px; }
+  #case-reader .story-facts { margin: 24px 0 0; }
+  #case-reader .story-hero-art { padding: 20px; }
+  #case-reader .story-tools,
+  #case-reader .story-states { padding: 20px; }
+  #case-reader .story-related strong { font-size: 23px; }
+}
+
+@media (max-width: 499px) {
+  #case-reader .reader-toolbar { padding-inline: 16px; }
+  #case-reader .reader-toolbar button { font-size: 14px; }
+  #case-reader .reader-toolbar-actions { gap: 12px; }
+  #case-reader .story-facts { gap: 24px 18px; }
+  #case-reader .story-tools,
+  #case-reader .story-states,
+  #case-reader .story-comparison > div { padding: 18px; }
+  #case-reader .story-state-controls button { font-size: 14px; padding-inline: 12px; }
+  #case-reader .story-figure figcaption,
+  #case-reader .story-hero-art figcaption { font-size: 14px; }
+}
+
+@media (max-width: 639px) {
+  .portfolio-assistant-dialog {
+    width: calc(100% - 16px);
+    border-radius: 6px;
+  }
+  .portfolio-assistant-dialog .assistant-shell { padding: 22px 17px 16px; }
+  .portfolio-assistant-dialog .assistant-title { font-size: 23px; }
+  .portfolio-assistant-dialog .assistant-intro { font-size: 14px; }
+  .portfolio-assistant-dialog .assistant-suggestion { padding: 10px 12px; }
+  .portfolio-assistant-dialog .assistant-form-footer { flex-wrap: wrap; align-items: center; }
+  .portfolio-assistant-dialog .assistant-send { margin-left: auto; }
+  .portfolio-assistant-dialog .assistant-keyboard-hint { max-width: 21ch; }
+}
+
+@media (max-height: 600px) {
+  .portfolio-assistant-dialog .assistant-shell { padding-block: 15px 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #case-reader,
+  .portfolio-assistant-dialog,
+  .portfolio-assistant-dialog .assistant-transcript { scroll-behavior: auto; }
+}

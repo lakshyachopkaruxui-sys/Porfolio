@@ -1,0 +1,56 @@
+/* Hritika's single changing photo frame, adapted to the existing About composition. */
+#about .personal-portrait.photo-carousel { max-width: 320px; }
+.photo-carousel-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 16px 80px 16px 16px;
+  background: var(--surface);
+  isolation: isolate;
+}
+.photo-carousel-slide { position: absolute; inset: 0; margin: 0; }
+.photo-carousel-slide[hidden] { display: none; }
+#about .photo-carousel-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: cover;
+  object-position: var(--photo-position, 50% 50%);
+  transform: scale(var(--photo-scale, 1));
+  transform-origin: var(--photo-origin, 50% 50%);
+  border-radius: 0;
+}
+/* Individual framing keeps the subjects clear inside the fixed curved mask. */
+.photo-carousel-slide[data-photo-slide="P11"] { --photo-scale: 1.10; --photo-origin: 45% 65%; }
+.photo-carousel-slide[data-photo-slide="P12"] { --photo-position: 55% 50%; }
+.photo-carousel-slide[data-photo-slide="P35"] { --photo-scale: 1.08; --photo-origin: 45% 65%; }
+.photo-carousel-slide[data-photo-slide="P37"] { --photo-position: 50% 20%; }
+.photo-carousel-slide[data-photo-slide="P54"] { --photo-position: 50% 45%; }
+.photo-carousel-slide[data-photo-slide="N001"] { --photo-position: 50% 50%; }
+.photo-carousel-slide[data-photo-slide="N098"] { --photo-position: 50% 32%; }
+.photo-carousel-slide[data-photo-slide="N100"] { --photo-position: 48% 50%; }
+.photo-carousel-slide[data-photo-slide="N103"] { --photo-position: 53% 50%; }
+.photo-carousel-toggle {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.photo-carousel-toggle:focus-visible { outline: 3px solid var(--ink); outline-offset: -6px; }
+@media (max-width: 739px) {
+  .photo-carousel-stage { border-top-right-radius: 64px; }
+  #about .personal-portrait.photo-carousel { width: 100%; max-width: 360px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .photo-carousel-slide { animation: none !important; opacity: 1 !important; transform: none !important; }
+}

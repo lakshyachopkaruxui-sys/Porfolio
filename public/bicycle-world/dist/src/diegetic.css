@@ -1,0 +1,369 @@
+/* World-mounted reading surfaces. Palette and typeface come from existing tokens.
+   The projection module owns each face's inline dimensions and transform. */
+.diegetic-surface {
+  position: fixed !important;
+  inset: auto !important;
+  top: 0 !important;
+  left: 0 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: var(--paper);
+  color: var(--ink);
+  transform-origin: 0 0 !important;
+  animation: none !important;
+  transition: none !important;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-padding-top: 88px;
+  pointer-events: auto;
+  touch-action: pan-y;
+  container-name: diegetic-face;
+  container-type: inline-size;
+  isolation: isolate;
+}
+
+dialog.diegetic-surface::backdrop {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* WebGL geometry cannot occlude unrelated DOM. Only the inspected HTML face
+   may paint over the scene; the welcome returns when its board is selected. */
+body.world-inspecting :is(#welcome, #studio-preview):not(.diegetic-surface) {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.diegetic-surface :is(button, a, input, select, summary):focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: -3px;
+}
+
+.diegetic-surface :is(article, .map-content) {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  margin: 0;
+  padding: 24px 40px 48px;
+}
+
+.diegetic-surface:is(#reader, #project-reader, #place-reader, #world-map) > .reader-top {
+  position: sticky;
+  top: 0;
+  min-height: 72px;
+  margin: 0;
+  padding: 12px 24px;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: var(--paper);
+  z-index: 3;
+}
+
+.diegetic-surface .reader-top .mode-switch {
+  position: static;
+  margin: 0;
+}
+
+.diegetic-surface .case-header {
+  padding-top: 16px;
+}
+
+.diegetic-surface .case-meta,
+.diegetic-surface .case-sections,
+.diegetic-surface .case-footer {
+  flex-wrap: wrap;
+}
+
+.diegetic-surface :is(h1, h2, h3, p, summary, figcaption, label) {
+  overflow-wrap: anywhere;
+}
+
+.diegetic-surface :is(img, svg, video) {
+  max-width: 100%;
+}
+
+.diegetic-surface .map-layout {
+  grid-template-columns: minmax(0, 1fr) minmax(260px, .95fr);
+  gap: 28px;
+}
+
+.diegetic-surface .map-destinations,
+.diegetic-surface .map-stop,
+.diegetic-surface .map-destinations button {
+  min-width: 0;
+}
+
+#welcome.diegetic-surface {
+  padding: 28px 32px;
+  scroll-padding-top: 20px;
+}
+
+#welcome.diegetic-surface > .mode-switch {
+  position: static;
+  margin: 0 0 20px;
+}
+
+#welcome.diegetic-surface h1 {
+  font-size: clamp(32px, 6.8cqw, 56px);
+}
+
+#welcome.diegetic-surface > p.mobile-play-note {
+  position: static;
+  inset: auto;
+  max-width: none;
+  margin: 0 0 20px;
+}
+
+#welcome.diegetic-surface .welcome-links {
+  gap: 0 20px;
+}
+
+#welcome.diegetic-surface .loading-state {
+  max-width: 100%;
+}
+
+#help.diegetic-surface {
+  padding: 24px 28px;
+  scroll-padding-top: 64px;
+}
+
+#help.diegetic-surface #help-back {
+  position: static;
+  margin: 0 0 24px;
+}
+
+#help.diegetic-surface > #help-close {
+  position: sticky;
+  top: 0;
+  right: auto;
+  float: right;
+  min-width: 44px;
+  min-height: 44px;
+  margin: 0 0 12px 12px;
+  justify-content: center;
+  background: var(--paper);
+  z-index: 4;
+}
+
+
+
+
+
+#interact.diegetic-surface {
+  padding: 14px 18px;
+  text-align: left;
+  overflow: hidden;
+}
+
+/* A studio remains one full board face: controls at either edge, body scrolling
+   between them. The old viewport-side panel and mobile two-column layout do not
+   determine the physical display's composition. */
+#studio-preview.diegetic-surface {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden !important;
+}
+
+#studio-preview.diegetic-surface .studio-preview-heading {
+  position: sticky;
+  top: 0;
+  flex: none;
+  padding: 8px 16px 4px 24px;
+  background: var(--paper);
+  z-index: 2;
+}
+
+#studio-preview.diegetic-surface .studio-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  flex: none;
+  overflow: visible;
+  padding: 0 24px 12px;
+}
+
+#studio-preview.diegetic-surface .studio-tabs button {
+  min-width: 0;
+}
+
+#studio-preview.diegetic-surface .studio-preview-scroll {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 24px 24px;
+}
+
+#studio-preview.diegetic-surface .studio-preview-content {
+  display: block;
+}
+
+#studio-preview.diegetic-surface .studio-artifact {
+  margin: 0 0 18px;
+}
+
+#studio-preview.diegetic-surface .studio-artifact img {
+  max-height: 280px;
+}
+
+#studio-preview.diegetic-surface .studio-preview-actions {
+  position: sticky;
+  bottom: 0;
+  flex: none;
+  padding: 12px 24px;
+  background: var(--paper);
+  z-index: 2;
+}
+
+/* These semantic buttons are hit targets for labels already rendered on a
+   physical face. A keyboard outline remains visible on the exact same face. */
+body.diegetic-active .guide-hit {
+  position: fixed !important;
+  inset: auto !important;
+  top: 0 !important;
+  left: 0 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: transparent !important;
+  text-shadow: none !important;
+  transform-origin: 0 0 !important;
+  animation: none !important;
+  transition: none !important;
+  pointer-events: auto;
+  touch-action: manipulation;
+}
+
+body.diegetic-active .guide-hit > *,
+body.diegetic-active .guide-hit::before,
+body.diegetic-active .guide-hit::after {
+  opacity: 0 !important;
+}
+
+body.diegetic-active .guide-hit:focus-visible {
+  outline: 3px solid var(--accent) !important;
+  outline-offset: 3px;
+}
+
+/* Keep status announcements and existing keyboard targets in the document.
+   Focus restores a control's existing readable layout when a keyboard user
+   reaches it; an unseen, focusable button must never become a keyboard trap. */
+body.diegetic-active :is(#route-hint, #touch-controls, #notice, #ride-status):not(:focus-within) {
+  position: absolute !important;
+  inset: auto !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 1px !important;
+  height: 1px !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  transform: none !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+}
+
+@container diegetic-face (max-width: 620px) {
+  .diegetic-surface :is(article, .map-content) {
+    padding: 16px 16px 32px;
+  }
+
+  .diegetic-surface:is(#reader, #project-reader, #place-reader, #world-map) > .reader-top {
+    padding: 10px 16px;
+    min-height: 64px;
+    gap: 8px;
+  }
+
+  .diegetic-surface :is(.case-header h1, .map-content h1),
+  #welcome.diegetic-surface h1 {
+    font-size: 32px;
+    line-height: 1.13;
+  }
+
+  .diegetic-surface .map-layout,
+  .diegetic-surface .project-chooser {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .diegetic-surface .case-meta {
+    gap: 16px;
+  }
+
+  .diegetic-surface .case-sections {
+    gap: 12px 18px;
+    margin-bottom: 32px;
+  }
+
+  .diegetic-surface .project-sections .case-note {
+    margin-left: 0;
+  }
+
+  .diegetic-surface .camera-controls,
+  .diegetic-surface .music-controls {
+    flex-wrap: wrap;
+  }
+
+  #studio-preview.diegetic-surface .studio-preview-heading,
+  #studio-preview.diegetic-surface .studio-preview-actions {
+    padding-inline: 16px;
+  }
+
+  #studio-preview.diegetic-surface .studio-tabs {
+    padding-inline: 16px;
+  }
+
+  #studio-preview.diegetic-surface .studio-preview-scroll {
+    padding: 0 16px 16px;
+  }
+}
+
+/* Container queries cannot style the container itself. These width-independent
+   values keep small direct-content surfaces comfortable at every face size. */
+@media (max-width: 700px) {
+  #welcome.diegetic-surface,
+  #help.diegetic-surface {
+    padding: 16px;
+  }
+
+  #welcome.diegetic-surface > p.mobile-play-note {
+    display: block;
+  }
+
+  #help.diegetic-surface dl div {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  #help.diegetic-surface dt {
+    flex-basis: 130px;
+  }
+
+  
+
+  
+}

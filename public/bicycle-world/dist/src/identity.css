@@ -1,0 +1,39 @@
+/* Selected Shared curve LC identity. Garden layout and interaction stay independent. */
+.lc-brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  width: fit-content;
+  color: var(--ink, #203d35);
+  text-decoration: none;
+}
+.lc-brand-mark {
+  display: inline-block;
+  flex: none;
+  width: 54px;
+  aspect-ratio: 771 / 635;
+  background: currentColor;
+  -webkit-mask: url('../assets/identity/shared-curve/lc.svg') center / contain no-repeat;
+  mask: url('../assets/identity/shared-curve/lc.svg') center / contain no-repeat;
+}
+.lc-brand:focus-visible { outline: 3px solid currentColor; outline-offset: 6px; border-radius: 2px; }
+#welcome .welcome-brand { position: absolute; left: 0; top: 50%; transform: translateY(-50%); color: var(--welcome-ink); }
+.world-brand-controls { display: flex; align-items: center; gap: 16px; }
+#world-controls .world-brand { justify-content: center; width: 52px; min-height: 48px; border-radius: 10px; background: var(--paper); }
+#world-controls .world-brand .lc-brand-mark { width: 38px; }
+#welcome .loading-brand { display: block; width: 32px; margin-bottom: 10px; color: var(--welcome-ink); }
+.portfolio-intro > .lc-brand { margin-bottom: 22px; }
+.mobile-mode-bar .lc-brand-mark { width: 44px; }
+.static-projects .lc-brand,
+.story-page .lc-brand { display: inline-flex; padding-block: 0; margin-bottom: 24px; }
+.credits-brand { margin-bottom: 22px; }
+@media (max-width: 1050px) {
+  #welcome .welcome-brand .lc-brand-mark { width: 48px; }
+}
+@media (max-width: 380px) {
+  .world-brand-controls { gap: 8px; }
+  #world-controls .world-brand { width: 44px; }
+}
+@media (forced-colors: active) {
+  .lc-brand-mark { background: CanvasText; }
+}

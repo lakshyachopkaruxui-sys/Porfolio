@@ -1,0 +1,20 @@
+/* The existing WebGL canvas draws lit clouds above the welcome HTML only
+   during entry. No second canvas/context, blur, texture or permanent effect. */
+#welcome-handoff{position:fixed;inset:0;z-index:7;overflow:hidden;pointer-events:none;contain:strict}
+.cloud-veil{position:absolute;inset:0;background:#f3f7fa;opacity:0}
+body.cloud-handoff #scene{z-index:8;pointer-events:none}
+body.cloud-handoff #world-controls,body.cloud-handoff #world-bottom,body.cloud-handoff #woody-guide{visibility:hidden}
+.loading-clouds{position:relative;width:120px;height:48px;margin-bottom:6px;pointer-events:none}
+/* Immediate HTML fallback while the one WebGL context is being prepared. */
+.loading-clouds span{position:absolute;top:28px;left:16px;width:85px;height:23px;border-radius:50%;background:radial-gradient(ellipse at 30% 15%,#fff,#d2dfe9)}
+.loading-clouds span::before,.loading-clouds span::after{content:"";position:absolute;border-radius:50%;background:radial-gradient(circle at 32% 24%,#fff 12%,#edf2f7 50%,#c2d0df)}
+.loading-clouds span::before{width:44px;height:42px;left:13px;top:-25px}
+.loading-clouds span::after{width:35px;height:33px;right:4px;top:-15px}
+.loading-clouds span:nth-child(2){left:59px;top:29px;scale:.58;opacity:.8}
+.loading-clouds span:nth-child(3){display:none}
+.loading-clouds[data-volume-ready="true"] span{visibility:hidden}
+@media(forced-colors:active){.loading-clouds{display:none}}
+/* Recovery links stay usable at small desktop sizes and enlarged text. */
+#failure{position:fixed;inset:24px;margin:auto;width:min(550px,calc(100% - 48px));height:max-content;max-height:calc(100dvh - 48px);overflow:auto}
+#failure .failure-links{display:flex;flex-wrap:wrap;gap:4px 20px;margin-top:16px}
+#failure .failure-links a{padding-block:12px;margin:0}

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" type="image/svg+xml" href="./assets/identity/shared-curve/favicon.svg?v=07">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/identity/shared-curve/icon-32.png?v=07">
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/identity/shared-curve/apple-touch-icon.png?v=07">
+  <title>Portfolio map — Lakshya Chopkar</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./editorial.css?v=20261103-canvas">
+  <link rel="stylesheet" href="./identity.css?v=20261103-logo-only">
+  <link rel="stylesheet" href="./typography.css?v=20261103-minimal">
+  <style>
+    .map-page { background: var(--paper); color: var(--ink); font-family: 'DM Sans', Arial, sans-serif; font-size: 17px; line-height: 1.6; overflow-wrap: anywhere; }
+    .map-page .wrap { width: min(1040px, calc(100% - 80px)); margin-inline: auto; }
+    .map-page main :is(h1, h2, h3) { font-family: 'DM Sans', Arial, sans-serif; font-weight: 500; line-height: 1.25; letter-spacing: -.025em; }
+    .map-page h1 { margin: 0; font-size: 34px; }
+    .map-page h2 { margin: 0 0 16px; font-size: 28px; }
+    .map-page h3 { margin: 0; font-size: 20px; }
+    .map-page p { margin: 12px 0 0; }
+    .map-page a { text-decoration: none; }
+    .map-page a:not(.identity-lockup) { color: var(--accent); }
+    .map-page a:not(.identity-lockup):hover { color: var(--accent-dark); text-decoration: underline; text-underline-offset: 4px; }
+    .map-page a.skip-link, .map-page a.skip-link:hover { color: #fff; }
+    .map-page a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; border-radius: 3px; }
+    .map-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 28px; }
+    .map-header > a:last-child, .map-nav a, .map-footer a { display: inline-flex; align-items: center; min-height: 44px; font-size: 15px; }
+    .map-intro { padding-top: 44px; max-width: 660px; }
+    .map-intro p, .map-section-intro { color: var(--muted); }
+    .map-nav { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 22px; }
+    .map-section { padding-top: 88px; }
+    .map-section-intro { max-width: 66ch; }
+    .map-flow { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 48px; margin: 32px 0 0; padding: 0; list-style: none; counter-reset: flow; }
+    .map-flow > li { position: relative; padding-left: 36px; counter-increment: flow; }
+    .map-flow > li::before { content: counter(flow, decimal-leading-zero); position: absolute; top: 3px; left: 0; color: var(--muted); font-size: 14px; }
+    .map-flow p { color: var(--muted); font-size: 16px; }
+    .map-flow h3 a { display: inline-flex; align-items: center; min-height: 44px; margin-top: -9px; }
+    .map-projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin: 28px 0 0; padding: 0; list-style: none; }
+    .map-projects a { display: flex; align-items: start; justify-content: space-between; gap: 16px; height: 100%; padding: 22px 24px; background: var(--surface); border-radius: 12px; }
+    .map-projects a:hover { background: var(--soft-yellow); text-decoration: none !important; }
+    .map-projects strong { display: block; color: var(--ink); font-size: 18px; font-weight: 500; }
+    .map-projects small { display: block; margin-top: 6px; color: var(--muted); font-size: 14px; line-height: 1.55; }
+    .map-projects .map-arrow { padding-top: 2px; font-size: 18px; }
+    .map-case-note { max-width: 70ch; color: var(--muted); font-size: 15px; }
+    .map-photos { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 36px; align-items: start; margin-top: 28px; }
+    .map-photos figure { margin: 0; }
+    .map-photos img { display: block; width: 180px; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 12px; }
+    .map-photos figcaption { margin-top: 12px; color: var(--muted); font-size: 14px; }
+    .map-photos ul { margin: 16px 0 0; padding-left: 20px; }
+    .map-photos li { margin-block: 12px; color: var(--muted); font-size: 16px; }
+    .map-photos li strong { color: var(--ink); font-weight: 500; }
+    .map-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; padding-block: 80px 32px; }
+    .map-footer span { color: var(--muted); font-size: 14px; }
+    @media (max-width: 699px) {
+      .map-page { font-size: 16px; }
+      .map-page .wrap { width: calc(100% - 40px); }
+      .map-header { padding-block: 20px; }
+      .map-intro { padding-top: 28px; }
+      .map-page h1 { font-size: 30px; }
+      .map-page h2 { font-size: 26px; }
+      .map-section { padding-top: 64px; }
+      .map-flow, .map-projects { grid-template-columns: 1fr; }
+      .map-flow { gap: 28px; }
+      .map-photos { grid-template-columns: 1fr; gap: 28px; }
+      .map-photos img { width: min(240px, 100%); }
+      .map-projects a { padding: 20px; }
+      .map-footer { padding-top: 64px; }
+    }
+  </style>
+<!-- portfolio-publishing:start -->
+<link rel="canonical" href="https://lakshyachopkar.pages.dev/normal-portfolio/map">
+<meta property="og:url" content="https://lakshyachopkar.pages.dev/normal-portfolio/map">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Portfolio map — Lakshya Chopkar">
+<meta property="og:image" content="https://lakshyachopkar.pages.dev/normal-portfolio/assets/identity/shared-curve/icon-512.png">
+<meta name="twitter:card" content="summary">
+<!-- portfolio-publishing:end -->
+</head>
+<body class="map-page">
+  <a class="skip-link" href="#homepage-plan">Skip to the homepage map</a>
+  <header class="map-header wrap">
+    <a class="wordmark identity-lockup" href="./" aria-label="Lakshya Chopkar, home"><svg class="brand-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 771 635" width="44" height="36.24" aria-hidden="true" focusable="false"><path fill="currentColor" fill-rule="evenodd" d="M 419.817 3.063 C 312.344 8.628, 207.358 44.081, 132.500 100.087 C 89.120 132.542, 54.164 171.817, 32.255 212.716 C 16.226 242.639, 7.179 269.745, 3.463 298.982 C 1.193 316.836, 1.851 344.151, 4.977 361.872 C 14.991 418.628, 42.920 469.037, 90.950 517.044 C 134.035 560.109, 186.886 591.783, 249.239 611.909 C 297.863 627.603, 354.546 634.821, 407.500 632.060 C 474.144 628.585, 532.648 615.442, 598.778 589.089 C 625.627 578.390, 667.643 557.787, 699.293 539.800 L 714.086 531.393 720.639 519.946 C 733.856 496.860, 769 431.732, 769 430.326 C 769 430.090, 765.104 434.083, 760.341 439.199 C 691.916 512.702, 632.111 550.111, 556 567.015 C 521.689 574.635, 475.386 576.764, 438.012 572.440 C 405.987 568.734, 378.265 560.045, 359.340 547.781 C 330.300 528.962, 314.820 502.298, 308.535 460.275 C 307.694 454.651, 306.568 439.126, 306.032 425.775 C 304.636 390.933, 302.841 270.656, 302.663 200 C 302.528 146.462, 302.713 138.283, 304.270 128.926 C 306.708 114.276, 309.439 104.894, 314.059 95.302 C 320.470 81.990, 332.581 71.379, 348.266 65.334 L 354.500 62.931 343.500 63.506 C 337.450 63.822, 310.907 65.880, 284.516 68.079 C 258.125 70.278, 235.696 71.948, 234.674 71.789 C 232.615 71.469, 252.788 60.546, 269.874 52.730 C 284.705 45.945, 312.731 35.922, 330.355 31.099 C 338.525 28.863, 353.150 25.482, 362.855 23.586 C 423.310 11.771, 475.626 13.001, 525.701 27.414 C 568.855 39.835, 607.337 61.917, 634.135 89.637 C 647.626 103.592, 660.499 122.900, 667.212 139.250 C 668.962 143.512, 670.642 147, 670.947 146.999 C 671.251 146.999, 673.958 142.836, 676.963 137.749 C 695.673 106.073, 713.222 82.734, 722.767 76.835 L 726.172 74.730 716.836 69.226 C 711.701 66.198, 699.625 59.792, 690 54.990 C 611.185 15.669, 518.898 -2.068, 419.817 3.063 M 218.147 81.357 C 162.812 118.752, 124.316 170.281, 103.697 234.552 C 98.433 250.960, 94.674 267.110, 91.724 285.987 C 88.854 304.351, 88.630 343.731, 91.298 361 C 98.797 409.550, 118.190 453.788, 150.041 495 C 165.205 514.621, 202.113 548.484, 210.677 550.634 C 220.904 553.201, 234.961 529.828, 243.449 496.143 C 246.472 484.146, 251.417 458.074, 253.433 443.500 C 257.448 414.480, 261.228 365.919, 262.970 321 C 264.219 288.757, 264.235 189.127, 262.998 146 C 262.062 113.391, 261.235 106.444, 256.893 94.754 C 253.044 84.389, 243.329 76.036, 233.249 74.424 C 229.598 73.840, 228.573 74.311, 218.147 81.357"/></svg></a>
+    <a href="./">Open portfolio </a>
+  </header>
+  <main class="wrap">
+    <header class="map-intro">
+      <h1>Portfolio map</h1>
+      <p>The homepage flow, six projects, and personal photographs.</p>
+    </header>
+    <nav class="map-nav" aria-label="Portfolio map">
+      <a href="#homepage-plan">Homepage</a><a href="#case-plan">Projects</a><a href="#photo-plan">Photos &amp; evidence</a>
+    </nav>
+    <section id="homepage-plan" class="map-section" aria-labelledby="homepage-plan-title">
+      <h2 id="homepage-plan-title">Homepage</h2>
+      <p class="map-section-intro">A compact personal introduction sits beside the project gallery. About, toolkit, experience and education, then a wide Play invitation follow.</p>
+      <ol class="map-flow">
+        <li><h3><a href="./#top">Introduction </a></h3><p>A small portrait and personal rail alongside work on desktop, becoming a compact identity block on phones.</p></li>
+        <li><h3><a href="./?filter=all#work">Work </a></h3><p>Six projects with individual covers, contribution details and case links. Jan Aushadhi is a research and concept exploration.</p></li>
+        <li><h3><a href="./#about">About </a></h3><p>A twelve-photo carousel beside the introduction, followed by photographs from the studio, Meraki and Junoon.</p></li>
+        <li><h3><a href="./#toolkit">Toolkit </a></h3><p>A six-part index with complete methods and images for every listed tool; no nested reveal. Works with hover, keyboard focus or tap.</p></li>
+        <li><h3><a href="./#background">Experience &amp; education</a></h3><p>Roles, dates, qualifications and courses presented directly on the page.</p></li>
+        <li><h3><a href="./#explore-play">Play invitation </a></h3><p>The bicycle garden offers another way to explore. Best on a desktop or laptop. A small drawing toy stays optional here.</p></li>
+        <li><h3><a href="./#contact">Contact </a></h3><p>Email, résumé and professional profiles, with copy controls. The footer provides a route back to the top and this map.</p></li>
+      </ol>
+    </section>
+    <section id="case-plan" class="map-section" aria-labelledby="case-plan-title">
+      <h2 id="case-plan-title">Project stories</h2>
+      <p class="map-section-intro">Open a project to see the artifact, Lakshya’s contribution, key decisions and the evidence behind them.</p>
+      <ul class="map-projects" aria-label="Case studies">
+        <li><a href="./#project-connectaid"><span><strong>ConnectAid</strong><small>Collaborative prototype · Research and interaction design</small></span></a></li>
+        <li><a href="./#project-giggles"><span><strong>Giggles</strong><small>Physical–digital prototype · Best Project at Meraki</small></span></a></li>
+        <li><a href="./#project-pixel-mania"><span><strong>Pixel Mania</strong><small>Design system · Playable exploration</small></span></a></li>
+        <li><a href="./#project-syringe"><span><strong>Redesign 20 cc Syringe</strong><small>Ergonomics research · Physical prototype</small></span></a></li>
+        <li><a href="./#project-workplace-mode"><span><strong>Workplace Mode</strong><small>UX research · Concept awaiting validation</small></span></a></li>
+        <li><a href="./#project-jan-aushadhi"><span><strong>Jan Aushadhi</strong><small>Service design · Research &amp; concept</small></span></a></li>
+      </ul>
+      <p class="map-case-note">Each story follows its own project. Research, alternatives, prototype behavior and feedback appear where relevant, followed by outcomes and remaining questions. Section shortcuts, related work and a return to the collection keep navigation straightforward.</p>
+    </section>
+    <section id="photo-plan" class="map-section" aria-labelledby="photo-plan-title">
+      <h2 id="photo-plan-title">Photos &amp; evidence</h2>
+      <div class="map-photos">
+        <figure><img src="./assets/personal/carousel/p11.webp" width="180" height="240" loading="lazy" decoding="async" alt="Lakshya Chopkar’s supplied portrait"><figcaption>Clearer portrait · Introduction</figcaption></figure>
+        <div>
+          <p>A red-shirt portrait introduces the homepage. Twelve selected personal photos rotate in About, alongside three college moments.</p>
+          <ul>
+            <li><strong>About:</strong> comparing logo patterns, the syringe display at Meraki, and performing at Junoon. A brief photo-spread animation settles into a readable gallery.</li>
+            <li><strong>Giggles:</strong> Meraki presentation or award photographs, a working-board demo, and later testing material with children and educators.</li>
+            <li><strong>Project evidence:</strong> syringe prototype footage, Figma research and testing artifacts, and the Pixel Mania feedback photograph.</li>
+          </ul>
+          <p class="map-case-note">The portfolio uses the supplied résumé and confirmed project details. Informal feedback, tested prototypes and unvalidated concepts remain distinct; missing results are not filled in.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="map-footer wrap"><a href="./">Back to portfolio</a><a href="#homepage-plan">Back to homepage map</a><span>Updated 4 November 2026</span></footer>
+</body>
+</html>

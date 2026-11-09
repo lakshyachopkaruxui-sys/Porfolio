@@ -1,0 +1,4311 @@
+{
+  "generatedAt": "2026-11-09T10:41:56.790Z",
+  "publicOrigin": "https://lakshyachopkar.pages.dev",
+  "files": [
+    {
+      "path": "404.html",
+      "size": 909,
+      "sha256": "03d07999e63e3716539497983f8ea2822e09cd2d03b90b8ec41ffefc7b615e56"
+    },
+    {
+      "path": "_headers",
+      "size": 686,
+      "sha256": "eb9e9522ee8c9a5f58fe2c577a14ed4a5967db8f1d20fad877d10ffc948ff22e"
+    },
+    {
+      "path": "_redirects",
+      "size": 111,
+      "sha256": "4bae7645568a8f7fba115cf66f2580046d3e6d7a79014aa4b402a24ab43b7724"
+    },
+    {
+      "path": "_routes.json",
+      "size": 69,
+      "sha256": "9ac04b0b988b70aa7a8aeef820ca5653cab83721b0df8013e54a4450f1d22040"
+    },
+    {
+      "path": "bicycle-world/assets/fonts/DM-Sans-OFL.txt",
+      "size": 4482,
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+    },
+    {
+      "path": "bicycle-world/assets/fonts/mochiy-pop-p-one-latin.woff2",
+      "size": 18204,
+      "sha256": "90d53f9b1bdaba1dd40efcbe18ab9f6ab72b2afb660e7db6a80a64073a8ed7e3"
+    },
+    {
+      "path": "bicycle-world/assets/fonts/welcome-0.woff2",
+      "size": 48280,
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    {
+      "path": "bicycle-world/assets/fonts/welcome-1.woff2",
+      "size": 48308,
+      "sha256": "376427b5322148d8de1e03f263bcca4935a2d60ba71d9f94f4947ab664c711ae"
+    },
+    {
+      "path": "bicycle-world/assets/fonts/welcome-2.woff2",
+      "size": 48280,
+      "sha256": "b79a2ea7a38f33fd96a282fadb9ce97626bb0724a44d21075859f0e50239993a"
+    },
+    {
+      "path": "bicycle-world/assets/fonts/welcome-3.woff2",
+      "size": 48200,
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    {
+      "path": "bicycle-world/assets/personal/stories/giggles-best-project-meraki.webp",
+      "size": 182470,
+      "sha256": "e39adeeb62f8d9018f2bf33b940a6ccd47469c2684f685b27cf4d2c18d281fed"
+    },
+    {
+      "path": "bicycle-world/assets/personal/stories/syringe-redesign-at-meraki.webp",
+      "size": 175288,
+      "sha256": "48fdf9191113fa69ed42e461ee7f558e7a6429d5683eac8f8bdf9bdb1ba866bb"
+    },
+    {
+      "path": "bicycle-world/assets/projects/connectaid.png",
+      "size": 445175,
+      "sha256": "67aa8758446dbb6e68b72676eb7b714bc2a3783760f70bdd0fd17755178d4ccc"
+    },
+    {
+      "path": "bicycle-world/assets/projects/syringe.webp",
+      "size": 33486,
+      "sha256": "d6edf42da551c2b3e24a28baf7e147200090741a767643a5f4dff640889609c9"
+    },
+    {
+      "path": "bicycle-world/dist/assets/ambient-music/CC-BY-4.0.txt",
+      "size": 13049,
+      "sha256": "97f7de53f0fe80df2ce4e256ef78c75c00e3b032f32a14a983ab615ed42f8301"
+    },
+    {
+      "path": "bicycle-world/dist/assets/ambient-music/CREDITS.txt",
+      "size": 1207,
+      "sha256": "3b31c2a7a2d7f592fe22be5706a2d586bc0f3f180db668578718444a5a6a7df0"
+    },
+    {
+      "path": "bicycle-world/dist/assets/ambient-music/clear-air.ogg",
+      "size": 1795259,
+      "sha256": "4a04fc7957fb26fa53ad8c5d7c3734646d8c5defcc921d511e65871a5f362cc2"
+    },
+    {
+      "path": "bicycle-world/dist/assets/ambient-music/porch-swing-days.ogg",
+      "size": 2206308,
+      "sha256": "737ed094aa01f5dc3e4391ede5b448e8f4de503b6596407c0c0d6c7f23fa0012"
+    },
+    {
+      "path": "bicycle-world/dist/assets/bicycle-audio/CC0-1.0.txt",
+      "size": 7048,
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
+    },
+    {
+      "path": "bicycle-world/dist/assets/bicycle-audio/CREDITS.txt",
+      "size": 982,
+      "sha256": "34a9c1eb2cd1fe1b4ff8fb4a9ead94861381b75d9b04d742351b64186e886b67"
+    },
+    {
+      "path": "bicycle-world/dist/assets/bicycle-audio/bell-CREDITS.txt",
+      "size": 1221,
+      "sha256": "c9e9461b702773327fc350217b99798b34f1c0d8db1f4edb23d53179df626e89"
+    },
+    {
+      "path": "bicycle-world/dist/assets/bicycle-audio/bicycle-bell.ogg",
+      "size": 18283,
+      "sha256": "49d662c082d96bd754f6e73b1861792558d8aa05b4dc8163cfd971ac07db7468"
+    },
+    {
+      "path": "bicycle-world/dist/assets/bicycle-audio/bicycle-riding-loop.ogg",
+      "size": 46939,
+      "sha256": "25d29ca98e7dae3467b21eb7586e8ffec319f1fe2134718b7a5ddeac19035931"
+    },
+    {
+      "path": "bicycle-world/dist/assets/characters/SOURCE.md",
+      "size": 611,
+      "sha256": "f21ba4bbf57908fd2af8ab1726d65d9bcd719a7ddb73820926646570648fcdf4"
+    },
+    {
+      "path": "bicycle-world/dist/assets/characters/woody.glb",
+      "size": 9306824,
+      "sha256": "9062f51a8f9768a9cc726752a0c7f868f038d6d5af4468f2ad24a5aa42b23f81"
+    },
+    {
+      "path": "bicycle-world/dist/assets/fonts/DM-Sans-OFL.txt",
+      "size": 4482,
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+    },
+    {
+      "path": "bicycle-world/dist/assets/fonts/Mochiy-Pop-P-One-OFL.txt",
+      "size": 4387,
+      "sha256": "76be26178f13ef82866cf6a5c54272191bb583c203ad7035021c7681c9043558"
+    },
+    {
+      "path": "bicycle-world/dist/assets/fonts/mochiy-pop-p-one-latin.woff2",
+      "size": 18204,
+      "sha256": "90d53f9b1bdaba1dd40efcbe18ab9f6ab72b2afb660e7db6a80a64073a8ed7e3"
+    },
+    {
+      "path": "bicycle-world/dist/assets/fonts/welcome-0.woff2",
+      "size": 48280,
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    {
+      "path": "bicycle-world/dist/assets/fonts/welcome-1.woff2",
+      "size": 48308,
+      "sha256": "376427b5322148d8de1e03f263bcca4935a2d60ba71d9f94f4947ab664c711ae"
+    },
+    {
+      "path": "bicycle-world/dist/assets/fonts/welcome-2.woff2",
+      "size": 48280,
+      "sha256": "b79a2ea7a38f33fd96a282fadb9ce97626bb0724a44d21075859f0e50239993a"
+    },
+    {
+      "path": "bicycle-world/dist/assets/fonts/welcome-3.woff2",
+      "size": 48200,
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    {
+      "path": "bicycle-world/dist/assets/garden/SOURCE.md",
+      "size": 1029,
+      "sha256": "d83a20eacefca8380cf68f50682958e02b037332a2cd7fbe1ca24a9aeccd73b4"
+    },
+    {
+      "path": "bicycle-world/dist/assets/garden/japanese-bridge-runtime.glb",
+      "size": 118728,
+      "sha256": "b069c05c1ba8dd073e0d83dc1a1ddbb6f93e2f31918d770884796a1d3b77f107"
+    },
+    {
+      "path": "bicycle-world/dist/assets/garden/nature-pack-runtime.glb",
+      "size": 187084,
+      "sha256": "9ab637f2e31cae3324a8900734413c5e6bf1cf4e1207cbac4367b2848a5973a7"
+    },
+    {
+      "path": "bicycle-world/dist/assets/identity/shared-curve/apple-touch-icon.png",
+      "size": 6157,
+      "sha256": "ac5ce53effcd2dfe28de031d89603b1115b58681ecc34ee537090530d657f87c"
+    },
+    {
+      "path": "bicycle-world/dist/assets/identity/shared-curve/favicon.svg",
+      "size": 2621,
+      "sha256": "4990d8a73cc2437e2271fbbd803f7b2b0a8e7c1d606575638c86349b7512e585"
+    },
+    {
+      "path": "bicycle-world/dist/assets/identity/shared-curve/icon-32.png",
+      "size": 1016,
+      "sha256": "4cdbcc15d583bcc32eeea251ec31b2cf045c1048492a8cc3786b5202a139b0b4"
+    },
+    {
+      "path": "bicycle-world/dist/assets/identity/shared-curve/lc.svg",
+      "size": 2552,
+      "sha256": "f231fb84a8bd2a32c22c4c7433bd8378390bdaa97e91e9d4cf18987d3e68ed7a"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-lab/CREDITS.md",
+      "size": 1599,
+      "sha256": "9cd43562293fdb8c7e053f3b5b7f12494fe9ac0d93bda258eb08ca530dba1e21"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-lab/pokeballs-variety-CREDITS.md",
+      "size": 1085,
+      "sha256": "158f34166b761c5d84c3968fd6b33086f1ebc4827ab2beb70cf979ee02ccaae6"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-lab/pokeballs-variety.glb",
+      "size": 1908588,
+      "sha256": "2b5720e7a8af35b67c794828339ca18368590d618b2466334997f58759aae91b"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-lab/professor-oak-relaxed.glb",
+      "size": 1865196,
+      "sha256": "3b5e5bcc378bbe573af544d2bc7486b740018db188a6ac9eaf450065e35e4a37"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/clouds/a-break-in-the-clouds.webp",
+      "size": 99546,
+      "sha256": "7d013f9523a852ca0cb4d2d18a85f7c2df81c80239fc12450bbfd0b9cbc63593"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/clouds/a-quieter-sky.webp",
+      "size": 163446,
+      "sha256": "188e0ebede9babc836ef69f31beb004dd7633f0afd7c683ce05fe86954a0b502"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/clouds/above-the-palms.webp",
+      "size": 192214,
+      "sha256": "7af94efc02b7e08cb46de8ada444e0674ff5fffd319cfb0c244cfddd5da190c3"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/clouds/layers-of-cloud.webp",
+      "size": 89068,
+      "sha256": "ad5a5a7de136ac8f1007d5587b6455c93eb3096dfc8aeefc6507173f81d21ae5"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/clouds/sky-along-the-path.webp",
+      "size": 253056,
+      "sha256": "dfe9697ec4bd6dd2c5bb0becb9a352625f49e7456618f189f8bc4baa4ea9ea8b"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/clouds/sunlight-overhead.webp",
+      "size": 47778,
+      "sha256": "2958a16d04cd23fbd9a825544f15dd35093bb944eb3cc89d968d3ad96e920c83"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/garba/friends-under-the-lights-r001.webp",
+      "size": 288532,
+      "sha256": "335a1d819bca6dae44d7041c08345856f3860bb96baf82cff9a12623c765d556"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/garba/under-the-lights.webp",
+      "size": 123990,
+      "sha256": "81e522834546a214e9f793e6cd41277fc426acb730112bc595ec51de11415a4a"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/lakshya-portrait.webp",
+      "size": 89146,
+      "sha256": "15cf61e1c999f77bc4d8e960e4b29c36bdd7ba2297f947a802acca785e200220"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/recordings/spontaneous-song.mp4",
+      "size": 7469570,
+      "sha256": "8a69bb9d75de9cda1536c1fb125366e2a21d71dde3db99b4ec6231d20760bc3b"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/recordings/spontaneous-song.webp",
+      "size": 12010,
+      "sha256": "24a0fa44c158f9cabd9ff632c2673dbf6a2c7519c155e1694a043b6df4173c0e"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/recordings/tiny-desk.mp4",
+      "size": 13011300,
+      "sha256": "ff8a7eccbfeb44bd860e2b22465bb3a53b0b66dbd43b7bc98da92ad2037e92fc"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/recordings/tiny-desk.webp",
+      "size": 29886,
+      "sha256": "9eb02271d3b723f5ae141db4b90d4a395ae101a20f2d7eda09e8320f4ca44a5c"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/stories/comparing-logo-patterns.webp",
+      "size": 158000,
+      "sha256": "9619bf00270e6c4c956d849e23b6b20b3c55428965ea9fecd9cead51f103de73"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/stories/giggles-best-project-meraki.webp",
+      "size": 182470,
+      "sha256": "e39adeeb62f8d9018f2bf33b940a6ccd47469c2684f685b27cf4d2c18d281fed"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/stories/lakshya-outdoors.webp",
+      "size": 207094,
+      "sha256": "cebf7ab2107dab6508e71d78253056ef645c0b79152e3a80d575b50b05c49f8c"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/stories/singing-at-a-family-function.webp",
+      "size": 34474,
+      "sha256": "87ce5ee408c438f48a63810401a47b2a6f927f00ed6e1285c1f90aeb48454256"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/stories/singing-at-junoon.webp",
+      "size": 45276,
+      "sha256": "c4baf7b6cc881e1b4c36f03fddcce2a4a0a9b81217893afbc4e8be5a7edcf71a"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/stories/syringe-redesign-at-meraki.webp",
+      "size": 175288,
+      "sha256": "48fdf9191113fa69ed42e461ee7f558e7a6429d5683eac8f8bdf9bdb1ba866bb"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-audio/SOURCE.md",
+      "size": 1231,
+      "sha256": "090f909ac69843bb9289093aa0d908b4e864082dd3d26ea241c7931d6b7c8774"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-audio/articuno.ogg",
+      "size": 17059,
+      "sha256": "374612dfbb0a5c7e7721b9698553fc15909c0ab2b49be9eeb3385e7558d9730b"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-audio/vaporeon.ogg",
+      "size": 20852,
+      "sha256": "8954f4acc8658d84620b7eb93d99a21221518d6d5388e667de989ff35dec4c28"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg001-thumb.webp",
+      "size": 5556,
+      "sha256": "0f6715316ab3ce4e34c3cb37e9b3f1f5cc619a217faf52a0c6a768bf68ca1e75"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg001.webp",
+      "size": 18916,
+      "sha256": "617e0135e73135ac6f3dfd03b8feb24bfc671a401b1e6ad89980c0e439b49b98"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg002-thumb.webp",
+      "size": 9006,
+      "sha256": "7b88f5e34474e9829bd33e12d60ba7236bb7c147f829ad0e8ca66654c865680c"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg002.webp",
+      "size": 29706,
+      "sha256": "24c2df320a68ba8dd5d9c0222f07412d045d03e980f6474526ddb695cda9f8e1"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg003-thumb.webp",
+      "size": 6344,
+      "sha256": "241a71b8870c015ea2902be2ec104822150b8e07317c668b5920d5e6d400a7b7"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg003.webp",
+      "size": 23156,
+      "sha256": "05519dea1e59983bd2990a09958ff2da5ee52e45e5274d1c9fb9ce2bf6e188dc"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg004-thumb.webp",
+      "size": 6496,
+      "sha256": "0d7215f42a51dbb57cbc0c10327a8f0f628d5f06929cabb8266e3a166cb48f4f"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg004.webp",
+      "size": 22954,
+      "sha256": "4e79e9e0e9aad83fd5b41d552f614cf77b0c66ce56cb0d7760ea5b6a39f8f27b"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg005-thumb.webp",
+      "size": 7000,
+      "sha256": "d4044de7aa120af5b64685d4da7bb164620f8355876259f5f72dd0ff3b3f62e2"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg005.webp",
+      "size": 24796,
+      "sha256": "2a31e80032b8e0e394dcf645d28075d6e86b6062218487a3451a7896ba598c49"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg006-thumb.webp",
+      "size": 6624,
+      "sha256": "c8a87175d32394e59ad8da0276943e26e5d2b51bfe2e50d71e91f10421f4a731"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg006.webp",
+      "size": 23226,
+      "sha256": "d1824bc3d5d2d5cb25047909d0c3273af1ec91cf83db4b5ac3649c8f6c4b8e0d"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg007-thumb.webp",
+      "size": 5992,
+      "sha256": "7463a4c7b57c1b7ee3b46e82aecda911efb4c7f4822168182bd3d3fcd13e63c1"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg007.webp",
+      "size": 22416,
+      "sha256": "58010a66040f9b953a22cb50ba42f0b34f1deb0d9c1081dbce029db6703a79f3"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg008-thumb.webp",
+      "size": 7784,
+      "sha256": "757bdd67e3c2c598af0647ba6be9a0a1e9ae8ee3c999b010761417d00330d0cd"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg008.webp",
+      "size": 27340,
+      "sha256": "443972654a2b04ae71f728a081686da2ca407fb0f1f0466d7b8e56d5c8fcc509"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg009-thumb.webp",
+      "size": 4128,
+      "sha256": "0c7240168dd02cc40fbb33cb07006059f77bd37eb2bd6a5a85bd2dcd31944816"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg009.webp",
+      "size": 15932,
+      "sha256": "145b35d368a5b6ada04106eb30d615a8e21119cd74e7cdabf8c85946256892a7"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg010-thumb.webp",
+      "size": 8310,
+      "sha256": "ecc08ecffd113aeeb53f62cea04388f9f06b63db21f65077b970fa3559231f5f"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg010.webp",
+      "size": 29588,
+      "sha256": "816c7cdf9101fe43af94767873f66ee3e5abcc843c49157d928205739c751083"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg011-thumb.webp",
+      "size": 6050,
+      "sha256": "08e751c374805b1765757f2749dcad4756f2019b1919f5835351c23d4dcda18d"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg011.webp",
+      "size": 20928,
+      "sha256": "4e0c223ad0c010886d1fc75291c0aa42b394f1e42ec86781e59a7ab6e6600638"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg012-thumb.webp",
+      "size": 7138,
+      "sha256": "0feaa8e8e314d7100c58b46fb66709efe3281ef8bdf50b0b5fb82aae7f7adf52"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg012.webp",
+      "size": 25792,
+      "sha256": "31677941ccadd07beead62b7fdf3142bce94a41ce144d7811858be6354a1654b"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg013-thumb.webp",
+      "size": 6388,
+      "sha256": "1a85df8e267832ab0d914d3a551af34212968e734e27e8f634264b3e0d627834"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg013.webp",
+      "size": 23328,
+      "sha256": "c0ea29e38d97bc9ad5a5e50efdc5cc1747fb16c092fe55088d8d46db9449ffe6"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg014-thumb.webp",
+      "size": 7248,
+      "sha256": "dee616cf9a515f42e5a3ca1c79ecdf11fa557f35d679adaeb4bb7f905ef92571"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg014.webp",
+      "size": 25056,
+      "sha256": "44d43339f5a65e78de1520b4f7cd427396aa21284c516e7b749e2e13aecd882a"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg016-thumb.webp",
+      "size": 7938,
+      "sha256": "4b64cabe9e98764c9102f62157c2cbcdf99deca8501a2e45983e0da341d51f51"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg016.webp",
+      "size": 27228,
+      "sha256": "34593ae47c437129e9ec21bf90579c768c764775ee1087e1945e55d6fa9a9de8"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg017-thumb.webp",
+      "size": 4950,
+      "sha256": "3289ebf895922958699a5cd26ec2f3bb92dc94872fc1f2783fd33466db2f287b"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg017.webp",
+      "size": 19758,
+      "sha256": "08257392a2a730eaa6515241da08d958dc0fdecfceaa31c7eed2787a38202e44"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg018-thumb.webp",
+      "size": 11768,
+      "sha256": "aba80e57765388750a2e198a04ae1804778701e0f90fa4ee7ef5f2d698877a67"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg018.webp",
+      "size": 40722,
+      "sha256": "416bd2c8887c2f1479b4ff6ac79ee97e616e534da4a47c25f89e068f08c00331"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg019-thumb.webp",
+      "size": 6846,
+      "sha256": "4ea5c8fda432c8c240c057ee220ee3d34862eb3d345741104801028e4591425e"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg019.webp",
+      "size": 26350,
+      "sha256": "6e665b99fb2f9a50bf2d24c3141be59916d63596c3c4f97a2e161f986971a9f1"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg020-thumb.webp",
+      "size": 5590,
+      "sha256": "3974878ca36a6cfe8162c486f1a21db6d450f72ff8f641f332d16aae99fc6077"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg020.webp",
+      "size": 21384,
+      "sha256": "df859104ece53e9b15912964468f6b68e855c3c5085a4f3138f54a947b5e5652"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg021-thumb.webp",
+      "size": 6254,
+      "sha256": "416e3877e0d83803bf44a9eaca8bcd92f5add4d2661ce9b527cc7e7028f5afa0"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg021.webp",
+      "size": 22940,
+      "sha256": "b546b3180979f259411741ac3f30947aaddd6f25551ac445ee7e8ac80cc40fdd"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg022-thumb.webp",
+      "size": 7588,
+      "sha256": "adf0663b674156b7b9ae5c09e14ae39fc1fd989756056c23de4347d80fe96a3d"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg022.webp",
+      "size": 27468,
+      "sha256": "f34ea1bf3ac70fb9d4f12df3bc09e5dfdfec96b6f1bc660f0a56b2f66caac585"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg023-thumb.webp",
+      "size": 5732,
+      "sha256": "b3296f043cf1ceda8187e754494befb92ae7cd559789a9b24b26137c895d6917"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg023.webp",
+      "size": 21274,
+      "sha256": "b1d455790746887eddf5faaf3b5dde7776345fb30c4f63bbc28502b6cbd84d72"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg024-thumb.webp",
+      "size": 6336,
+      "sha256": "e4010fd639c2c082cca7f9eaab2dcfd1593047ba68adc6dc21f3f2233ce012aa"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg024.webp",
+      "size": 21544,
+      "sha256": "57f2fa7ae1c6602141765c3e2d69ffb20f2d7e800f127d7de9fbc3e3c02e730c"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg025-thumb.webp",
+      "size": 6712,
+      "sha256": "b030c6d3fab58d6eea375e2058d012bf520f2f27ea98755703369dedfc6c1076"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg025.webp",
+      "size": 24616,
+      "sha256": "0f9de20ee7839c5956f6e5ff155197f2c4b6e435f64f1c71d984ceb942eaaa8a"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg026-thumb.webp",
+      "size": 5984,
+      "sha256": "fa789e2371f50beecf7599dd71948f925218dfc9a1c11212717d6b3ac19a4d92"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg026.webp",
+      "size": 21716,
+      "sha256": "a0c5c2549c79bd5a498da8790295e367ab5f51328c97cd81f2ffcf4aa28f039a"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg027-thumb.webp",
+      "size": 6694,
+      "sha256": "740d5851bfbcdab99a960a517243e6b8367b220d8d6eabdcb002808c2eb38260"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg027.webp",
+      "size": 22334,
+      "sha256": "6d82c6fe7f32c2b6f4313c7da762a2023b750492a8f7e6c53173bfe2b714f20f"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg028-thumb.webp",
+      "size": 7406,
+      "sha256": "628fec6d1e229248be1fc6b4197698562f43a8bb40cbe420e715f83e69a0add0"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg028.webp",
+      "size": 24338,
+      "sha256": "74a4e3d51f04e2d83b249e3f0b9ef0d881fd63dd62b4f5cef86288e7af7d0b09"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg029-thumb.webp",
+      "size": 7678,
+      "sha256": "3bb2950ed733dff95ba937bb644a32d3a089054640642072654c9945f5119372"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg029.webp",
+      "size": 25556,
+      "sha256": "125531747438de7b4ae049875bc25177c49a66cc0f7fa56ebd8b9c04bf32063d"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg030-thumb.webp",
+      "size": 8572,
+      "sha256": "6a035701f55172ead769eda8c415e6ff6a445b472637fcedc556ce98e652d39c"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg030.webp",
+      "size": 29150,
+      "sha256": "de8711c213a856333930b4f9294aef09a3523896e18a1d4ab77f16d2e231db87"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg031-thumb.webp",
+      "size": 7030,
+      "sha256": "feaca0f76e5195c3b7c417cbaa031d70e4af6cb54b385fbde908c2deb004ea8f"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg031.webp",
+      "size": 23362,
+      "sha256": "3a2f1f59fc5163c1d6c16842dc16cc8625c4a5fc25102ff875d12502a5bd3bff"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg032-thumb.webp",
+      "size": 7614,
+      "sha256": "386d852dc487e70223756e7171f25b158d0a597445f6dba7b3bcc5691fb7f308"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg032.webp",
+      "size": 24722,
+      "sha256": "ccfc9502bdfca3b46e238879837c9654fb435fe1703397398ee4a0fdaa903572"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg033-thumb.webp",
+      "size": 7918,
+      "sha256": "17b8f7ace0b891c7f353a95aa313b18dd02c6d5851aba56a62ea2164a8f8e4bb"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg033.webp",
+      "size": 26210,
+      "sha256": "66fd82858fe87b73b7fc6f199a4293406aff190c473aa73b145db7bc09fc8a3a"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg034-thumb.webp",
+      "size": 7922,
+      "sha256": "e9dba6df8287b9070006ba18d729ff9f85145e0b328b8c4a35672e3b4c9d6782"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg034.webp",
+      "size": 26544,
+      "sha256": "f8f84bd034a6ca57f668cee7f08c2ebce661a4b11c6d72a77ee0b5011bd706e3"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg035-thumb.webp",
+      "size": 8210,
+      "sha256": "631f429c69d62fe983ef601f5b480ff7c0f9cc29e0a6d3f4879b4d4b9babddd1"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg035.webp",
+      "size": 29374,
+      "sha256": "041f7ffbc5e7e0c545085299e052f24c02095fac91c980952fa53b63192ef865"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg036-thumb.webp",
+      "size": 8074,
+      "sha256": "57068f8038606ccf790ce4ee9b60274c35e4a132d9e887bfe39df60e344664bf"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg036.webp",
+      "size": 28688,
+      "sha256": "18e8229df2e63d237062944fee8cdb9ec716e4a885548087ff6818518cf61c85"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg037-thumb.webp",
+      "size": 8848,
+      "sha256": "e1770d9ccb4adc1bd88a57cc7b553df8bd4a39cba3de464eb97885fbd61a5f53"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg037.webp",
+      "size": 30802,
+      "sha256": "93ea7a5418d10695af278dc42e26137a4ef0458a6056352a239a320265f29f6f"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg038-thumb.webp",
+      "size": 5308,
+      "sha256": "317c7bd85ecf735bcc7b5c70d646bbf6e910cd720a84a3288af8ac4a7f924db9"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg038.webp",
+      "size": 19698,
+      "sha256": "f73605fe704459024c2beac4297b3d7aba5ee1bdc93a4c4adcfd5f15512cb90a"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg039-thumb.webp",
+      "size": 9048,
+      "sha256": "8491afaeca848d0b54938ea0c2e1b8465581391886bd9618ce103a7c0129baa5"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg039.webp",
+      "size": 30452,
+      "sha256": "9788b49346347695a51a7b476baafeba19eb0cd10fd66cc4dc91b4926ad0af86"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg040-thumb.webp",
+      "size": 11942,
+      "sha256": "8cc704e14f0c33b7b46a144f9636841b46672f3a6acf032ddc42ed673999888a"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg040.webp",
+      "size": 40666,
+      "sha256": "304bd121bac0ab7fe2a2eff29e2f3a566fa727d125559c0be9c528ab1a8d59fa"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg041-thumb.webp",
+      "size": 10978,
+      "sha256": "0409ab9e488052c3eec2cc5e3d31e743c2fecd0915e01c24628c02147a0e69db"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg041.webp",
+      "size": 38324,
+      "sha256": "8aba4efeaba13d30b7e4eb67701bbdcf46ef47e57753cf66477c79110182bdb8"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg042-thumb.webp",
+      "size": 7868,
+      "sha256": "63ee05d8ff4778904e39b72c5d11278d493122d06c4ed9a30c408baee524e40f"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg042.webp",
+      "size": 27342,
+      "sha256": "b2b1591faa1208f540379a72af2df73136bb0558c604a08c1730bc17f66015ab"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg043-thumb.webp",
+      "size": 5054,
+      "sha256": "97991c86744c36a7a3286b5a833524cb68f5ffeb87187c1a979a1c92fc1cf9dc"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg043.webp",
+      "size": 19360,
+      "sha256": "5f2f9fa54bfc283c5f8c2e6512048a24380b881a92072bcd818dc27371415547"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg044-thumb.webp",
+      "size": 12704,
+      "sha256": "6f5429ed92737940a2e0f71e211386c7c23a5dc0bf7b7ae6f6ee41a3219e503d"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg044.webp",
+      "size": 43104,
+      "sha256": "76d77e7fd673adf4c5776415c39fc616e377998b445dbd21841669ca1258c48b"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg045-thumb.webp",
+      "size": 6552,
+      "sha256": "8f25c24902fefbe45b5657eec14b72a63a8e8f3f084b760bc679a8edb8f0c6e7"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg045.webp",
+      "size": 23620,
+      "sha256": "eabfe2a856b9cb2d8ca3c9909b4bb51244dbf3e095a9ef7d65c9ff9ca093c6bf"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg046-thumb.webp",
+      "size": 7136,
+      "sha256": "0fac492cfa47e88f37bc80a91978f91d065e9172fc888ea30dc530a8cae7ba7a"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg046.webp",
+      "size": 25336,
+      "sha256": "a4ea7fb9d5ac4a1e1f98a8997dfa6524bc11130d58cb4d95d65920b6c8526929"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg047-thumb.webp",
+      "size": 6396,
+      "sha256": "01c63290176c0707cc73a765d9faa515c589e6fa0858893984fe63efe240676c"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg047.webp",
+      "size": 22060,
+      "sha256": "1b783a65a63eb9e3cc5f83688e1fead99ec77b59c903ca3144c4d306341082b3"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg048-thumb.webp",
+      "size": 8356,
+      "sha256": "9ed7fa82d0f72ba9a2f86a249de650911531ffa67637b3b1bf64977e975bef1b"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg048.webp",
+      "size": 28116,
+      "sha256": "c2f20672f32dd39b6a8b6ef594fb8f3928b8c45dadca259d5d9a7151bd9f352f"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg049-thumb.webp",
+      "size": 8204,
+      "sha256": "cdfea0e44880fc630d6332e52d92d70ab6ba01944bbfddf4da1c1a08740a03fb"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg049.webp",
+      "size": 28148,
+      "sha256": "49af73a88f32239f7fac2ce6edace0ee524ccc57274000db998ab5f61946ad7e"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg050-thumb.webp",
+      "size": 7544,
+      "sha256": "0c8b922ba45071fa42faa6659460d0c7a97a2540fe4b48467a7704a37cfeb343"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg050.webp",
+      "size": 26678,
+      "sha256": "d3815e0bea68c2d3801a4875dbacf519c5a36f5e6ae0e3ce9608d490e880693f"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg051-thumb.webp",
+      "size": 6242,
+      "sha256": "fc0f128a3730f17603c6c480dea8f655172fbdf6438c3e14d9322ba501ba4f89"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg051.webp",
+      "size": 22326,
+      "sha256": "c209ad8b526e5aa31dd050ec983376ca8633ff64453289a2ef4b6cd2d02d559c"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg052-thumb.webp",
+      "size": 5952,
+      "sha256": "1701a69185315dd27ce3f7b97a7645d3b603045065798aec7ea1ae9f0d06cacf"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg052.webp",
+      "size": 22122,
+      "sha256": "1fbdc2c85a722f38122faf7045d7bb70bef37a7db8567b22a864030c6597f8e1"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg053-thumb.webp",
+      "size": 6794,
+      "sha256": "823b53a10b08d517df11e9f67f8aab2b665ac7eee6f2fdbe3ce211ee79afcb8b"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg053.webp",
+      "size": 23004,
+      "sha256": "2aff463aa1b21ca1b0f470bdae8fa20ed4c9d4d448a58a4f71c595aeb9fc5441"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg054-thumb.webp",
+      "size": 6092,
+      "sha256": "b3d33b5d8b6974cb735482eb9f5f3d17c8fb44c949b5579cf50b23005a03291b"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg054.webp",
+      "size": 22392,
+      "sha256": "bbfabdb1c97e6a2702239f5a19eed6f8fc92503d6998e74dab2259238204dbcc"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg055-thumb.webp",
+      "size": 6054,
+      "sha256": "2ac64d14048f2c5045badcb88c0f279f278f4c0698067d746d232aac290f636e"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg055.webp",
+      "size": 20936,
+      "sha256": "d19e694942ffda8039ef1e397f4695e28148b3a69dc897b17b691e2d2f642fe8"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg056-thumb.webp",
+      "size": 6188,
+      "sha256": "f8567f3a30ee7fbb924a82aed0ccc292e2fef3311dce8c75542a1edcf2dd6a38"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg056.webp",
+      "size": 22924,
+      "sha256": "44607097e21f601b91c63bfe58e7f98a45c971e16a8a060521299dcf9cf18b16"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg057-thumb.webp",
+      "size": 8198,
+      "sha256": "1fdbab92cc0afd6b11711833454db1132962b01eea39c9c6f40793fcaa274666"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg057.webp",
+      "size": 28248,
+      "sha256": "3a873527d7840cda72b3d8e8ce1d1d66ffbf8f6dccd40e03233e4eeb4f8b942a"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg058-thumb.webp",
+      "size": 7198,
+      "sha256": "1a2256a21b4de1209067717505cc4c90faaae95d93ead2647c19d0d636b44b45"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg058.webp",
+      "size": 25030,
+      "sha256": "7d9db2de432fc61314138747487a54943f883636e8925afcf28f1eb960eeec58"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg059-thumb.webp",
+      "size": 6740,
+      "sha256": "8465a7100d014d97702350762d69bdb6c5e926929201b9ef174afbfc9b815a4e"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg059.webp",
+      "size": 24244,
+      "sha256": "494d1c46b1f1d7aa499769ecaeb74705b42a6123d88880f053f8d024908cdf59"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg060-thumb.webp",
+      "size": 6912,
+      "sha256": "bff41ee119e68d632afe016df4cbdd64f47336a7ea8cd2f814aa43b5fa8aca90"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg060.webp",
+      "size": 26116,
+      "sha256": "6638a19db2f3554001575248e91bca10ee78e52be72d298bb79a1ba10c6a717c"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg061-thumb.webp",
+      "size": 7586,
+      "sha256": "01af77b345559919fb7dcca3cd36e4ca7ec30b71d2c3afbd4800c6a638a6f504"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg061.webp",
+      "size": 26786,
+      "sha256": "fc685a0c8e6826afe5eb0ca26ebd0d5618d580eea91d3fbc834d6be99a1e1ad9"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg063-thumb.webp",
+      "size": 5986,
+      "sha256": "b45adf47cff84bf4b51a02e2980dcafa14a5c63889004cb2b41671216e102aae"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg063.webp",
+      "size": 20870,
+      "sha256": "d74542bfaf170c7da4cd60cb69ef739cd213f492fc4d739ca2c1a18fe9dfc66c"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg064-thumb.webp",
+      "size": 6432,
+      "sha256": "d8d4eeeaca245497fee4e37735e86f32cccfe9b91ddcb37da04b6a2c8c3e59e7"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg064.webp",
+      "size": 22660,
+      "sha256": "c8216d101ab2da801034691f65d9f76cd9992c4408f016d204a232e029664495"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg065-thumb.webp",
+      "size": 6226,
+      "sha256": "0eba099bed29159e0651c9cbd9f81f80ca012c100c3904ed8037467b053b8006"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg065.webp",
+      "size": 21836,
+      "sha256": "b7f04c6357ead5366b6f8f3bdc42c6a76459ede571962226f8e4a365e8f68c6f"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg066-thumb.webp",
+      "size": 9352,
+      "sha256": "530ac6dad73033f2b0da4548fdb8b3f1af4e6db46ff8830370b5c6dd482a6fbd"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg066.webp",
+      "size": 31410,
+      "sha256": "c9a18c21d557c7bcb653903d8b7736775f81d2231db94c2c2774698873e094f7"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg067-thumb.webp",
+      "size": 6646,
+      "sha256": "843878a46b853b79f390983a3d4c3cee06552a534d0d1a70e0a7fa813beee707"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg067.webp",
+      "size": 23482,
+      "sha256": "d2261c15985387a75146a4f2e4fbf05d4ee02338e76a8b65378e039912194592"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg068-thumb.webp",
+      "size": 6140,
+      "sha256": "9bba7337a17cd3a7077c155129b4aa53a792f2efbbc811340dd1efb4df95a4c2"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg068.webp",
+      "size": 22772,
+      "sha256": "7fe10a6f2e0ca1a3717a47b51b7dbf2204027351aef9d3498bd591e0eed294ec"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg069-thumb.webp",
+      "size": 5850,
+      "sha256": "d1987f4c9d831dcaf3c63e4f12e350b592fe99764d2c330be566ce2a34d4b011"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg069.webp",
+      "size": 20746,
+      "sha256": "ed8cdea4c9bd9938dd7bf4f804e0018e2b80cc71fe70030fc4770e7419a9c446"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg070-thumb.webp",
+      "size": 7908,
+      "sha256": "8a7489b585f976882d352ef3d563105ef414791ea478179e05c84690d8bbd418"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg070.webp",
+      "size": 27356,
+      "sha256": "b16bb8d0282973d0e9a9cd65905e22ba6b8ed8e5949b225f59630e85742619e5"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg071-thumb.webp",
+      "size": 7458,
+      "sha256": "6972ab2afdd637c95c4459c6f2eace8e4dcfed5b6e3172665a87d1df141afe3e"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg071.webp",
+      "size": 26620,
+      "sha256": "7d72b4265a44bf0f2f2eed0a424b64522854a3aef7f75f27683f9395ed5ab70f"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg072-thumb.webp",
+      "size": 6832,
+      "sha256": "74333e44d1b97fdb75f0d9fbf6ff0ccef1a422992449adece3e13f7da85bebc1"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg072.webp",
+      "size": 25114,
+      "sha256": "2b29d3a2c0cbb274ea72d992b85af316c0f8bffe6468101b78c58ab7a9b75b26"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg073-thumb.webp",
+      "size": 8706,
+      "sha256": "9b8d453407041b0f8b167f1e0ffa2c9b6f2b377c6ccc9a6f5627c6dc43519466"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg073.webp",
+      "size": 31564,
+      "sha256": "3e127d92709afccb4f7b4e19c776adaee4e93e2105218824bff6bce2a6ccd960"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg074-thumb.webp",
+      "size": 9628,
+      "sha256": "c7cb2aa5855d367612a554b4ca26d4684c5c1cd370ccc772c4de7971a7610cba"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg074.webp",
+      "size": 32548,
+      "sha256": "d2ad37646d4f6286592a4eb2fb47577d1964ab250707f50dac04699b320aa1f0"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg075-thumb.webp",
+      "size": 7974,
+      "sha256": "514eb11deb464be4699909907ec838dea2fe208f8dd9c3ecdbf6f152b2531aa1"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg075.webp",
+      "size": 28930,
+      "sha256": "1bff3cd12ad3d56d3791f21f846191e7bc1ddb447b9d1801261c90677de86d46"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg076-thumb.webp",
+      "size": 6704,
+      "sha256": "6c1b598afea6b07a92fa6646934664ed57252095391df478f0a0d5c020eb0322"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg076.webp",
+      "size": 22876,
+      "sha256": "6054ca96f1ae39da0a398999cda7810960510fff4da1ab3a5047617b4f65c7f4"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg077-thumb.webp",
+      "size": 6012,
+      "sha256": "aa227b93c45451b9494693064b0bca613224e4555743cbed6e92aee416ff3cd8"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg077.webp",
+      "size": 20354,
+      "sha256": "5534d02cd23458e82a5830c8b77aec5ebb51988c0522f943770fe0dcfcccdb0f"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg078-thumb.webp",
+      "size": 14238,
+      "sha256": "b4204005d9826cdfc75d892a72f54ae5ea4096ad6044f4fd8d7fecb74e5fde21"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg078.webp",
+      "size": 46566,
+      "sha256": "f201fc9708912c1838ad7beef43063b34b1d9d44408a8adcc00236f0215b5f29"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg079-thumb.webp",
+      "size": 8782,
+      "sha256": "c7aa9b22f7aef94afefd2d222ff0b9fe5a52c81de54c39fae796adb2f7dbd303"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg079.webp",
+      "size": 31102,
+      "sha256": "162ec095859982eba60a7920dca30605d0494bc5a1dc8352118184bb816dc7ad"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg080-thumb.webp",
+      "size": 6246,
+      "sha256": "5623e0ec0d413c4419e58a0aebb7e624548ba127323257ababf1011b3107e66b"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg080.webp",
+      "size": 21376,
+      "sha256": "db43aa80c4389c6af48de346b2ea756df971751391276eb6898f4b387fe18a6a"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg081-thumb.webp",
+      "size": 9436,
+      "sha256": "52d139390444654151dfbfd1a83dca0f2c0dd740866ea0c0b6fdb0325341ec4e"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg081.webp",
+      "size": 31564,
+      "sha256": "031ba53ef436f6893514c71b0b1232353df74dbd91b74abfcfacabc371f14c5d"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg082-thumb.webp",
+      "size": 6620,
+      "sha256": "11abe64551e0d8740cfc0ebc027a879647bdd08f5d50fec193b8796f35791366"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg082.webp",
+      "size": 23826,
+      "sha256": "6262ecb0600fbbd54c759f771c843113da0d545fbb017cb038ac70b6823e224c"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg083-thumb.webp",
+      "size": 11132,
+      "sha256": "b426e58f49c6cb9ab3c70cd7fe1daea3bb162d1caeb937771f2559e68ef1a99a"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg083.webp",
+      "size": 38618,
+      "sha256": "6c3a619b2da3b489a129f4fb49430ac3caead0ac0dcccf6bae47af9e69721ea0"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg084-thumb.webp",
+      "size": 7386,
+      "sha256": "a9fc4072e05f8e2dcef30fe1f44e481a1fd33bd945cd9d9269bcfa289184ce0a"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg084.webp",
+      "size": 26296,
+      "sha256": "3c20fe759fe5f775db5b71499b491b8b2b056d2226628ccbca6eb66da2cb3ca3"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg085-thumb.webp",
+      "size": 7586,
+      "sha256": "938cc963a46067c8a23a403871fc7e167dcf7c7e5206d73fdbfe18ce2e0d4ed0"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg085.webp",
+      "size": 28626,
+      "sha256": "d148b914310e5b44096bb10844f8998a58cbf6022e7128624d34381ff798287d"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg086-thumb.webp",
+      "size": 7484,
+      "sha256": "75f10a3bfa377367703c19df08ea6729f2d27a3000e6d886d954fbc018a839d6"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg086.webp",
+      "size": 25996,
+      "sha256": "d179bcd4dcf53b86244a0955fb3cda0c7d1c2d9c19a09792d57dfcb333b22fac"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg087-thumb.webp",
+      "size": 5804,
+      "sha256": "9783b8ee08fd9b28647a30be142377f2d11d3b7c7881b7a93fd6733a6af33dcd"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg087.webp",
+      "size": 19968,
+      "sha256": "3b97bfa16d30c4ebd9195278d61fb50a5cb77d7adab0136d260131a6631c033f"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg088-thumb.webp",
+      "size": 6656,
+      "sha256": "0150112367441fe03d246d89d1df8fa2a057f1e22da1f91b70ebc3ad92f3ed62"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg088.webp",
+      "size": 22042,
+      "sha256": "7a90fa247740128b2d4e210a6dcac3918e241c26b8ab154c6d9be82ca29bab85"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg089-thumb.webp",
+      "size": 6148,
+      "sha256": "34f38d3ecd576492af36c29ebd63cc5fe46004ee7f0ce44c24cf7b1f9a3f484d"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg089.webp",
+      "size": 22230,
+      "sha256": "9e8f9791b3a63b9bc6332e3e5a500da22399668c81ff4ee0fbb9b5a1d2c40d69"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg090-thumb.webp",
+      "size": 5582,
+      "sha256": "70ed57c0746b6a90d1035db010c7a76c0bc8cddb6b90ec36a304075a1d157c2d"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg090.webp",
+      "size": 20650,
+      "sha256": "5f27c4870bc93a7469b9ba495de8222e694be7c712902d4b3ef9eba30754480b"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg091-thumb.webp",
+      "size": 5476,
+      "sha256": "af9439fdbfc3d8953bd49664317f16cb34337819acd0ef16cd0baf41d85300ef"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg091.webp",
+      "size": 18800,
+      "sha256": "57061abbdd4945839e173092aa960e8496f00cc75039d729d84336554ceba602"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg092-thumb.webp",
+      "size": 7482,
+      "sha256": "16fe58d118d265f61ec14623a09e69460e874c59b3f6798f81d0845cc59edf59"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg092.webp",
+      "size": 26008,
+      "sha256": "3508d43c0213c895acb8e7ae30b733c3602dd618869d50c46c0032f38377dfbd"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg093-thumb.webp",
+      "size": 5492,
+      "sha256": "8e489354c178d860bcfce34009e95888eb8b5ea6cc999a0cbf99e7022b525427"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg093.webp",
+      "size": 19394,
+      "sha256": "7ef110b9f16d26040db7c40aff580abf500173d162b45ef7098b53962952707b"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg094-thumb.webp",
+      "size": 10198,
+      "sha256": "06a0c153309a6c7329ad34eb20f77aa0396f391daeea543f45ceca9ba65d89d4"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-collection/pg094.webp",
+      "size": 35260,
+      "sha256": "5e7bb1c46ff9fa7f5ab0e18cd3a1a54a19b7aa0800b923e2499356d77e720a1a"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-voices/SOURCE.md",
+      "size": 1496,
+      "sha256": "d3e40cbb8df5cf2873b0de8bf71f2f3a2e472364d93924b342147976b39e291b"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-voices/bulbasaur-anime-candidate.mp3",
+      "size": 12717,
+      "sha256": "36e0215374428edd89833008f711f386a90e098d311711d5f8831f7506c79563"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-voices/charizard-anime-candidate.mp3",
+      "size": 12717,
+      "sha256": "62a8197863a39c530d504344a9497a0e1fd1be911ef8fbfa549e827caa425ca6"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-voices/charmander-anime-candidate.mp3",
+      "size": 10989,
+      "sha256": "4616a66136c6abad0a3f723167271eeffd8e8324aeff506930fb61eb789e9656"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon-voices/pikachu-anime-candidate.mp3",
+      "size": 12429,
+      "sha256": "a910dd28d7df871027b61459bac048f92efb921c284c3120da245d0070bd4621"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon/articuno.glb",
+      "size": 518000,
+      "sha256": "e5b7696772055d65b575ef62259dc2db027c345ef17286ab543e9d2b3c893a11"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon/bulbasaur.glb",
+      "size": 384808,
+      "sha256": "3676a2658286f48de703342b588b1ef7131b46804827d602e171d400273802fa"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon/charizard.glb",
+      "size": 484712,
+      "sha256": "d4ccd1ed8ee160019e4f28da6c487bce1e99402272653ea91511d8ab8055fedc"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon/charmander.glb",
+      "size": 406668,
+      "sha256": "6d05515763d819fce0c3b785e2dee59517ff2bf01017730dc92c6dfdad44bdcd"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon/pikachu.glb",
+      "size": 146152,
+      "sha256": "f6adfe0dd7f3dcc6100370c5b32c003360eab4f235b920cac71d8e3a253cd5de"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon/snorlax.glb",
+      "size": 279848,
+      "sha256": "3c480914f2686cbad955df9c288fb9c72642094b2ec8288a3cca6d490cba5879"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon/vaporeon.glb",
+      "size": 415416,
+      "sha256": "5075b12f67bcba1ca2e5fd54d0a0e013ffd6d51901f82c41167bb62ae1b94c21"
+    },
+    {
+      "path": "bicycle-world/dist/assets/work-covers/connectaid.webp",
+      "size": 140338,
+      "sha256": "42c20592f9d74d92bbed81d29e1c73f54a2f9f8fe8fa9d3afff8e71b24caef7a"
+    },
+    {
+      "path": "bicycle-world/dist/assets/work-covers/giggles.webp",
+      "size": 263156,
+      "sha256": "27af5457f1f0ae57d66c8c7d5efbc25adca69157264f883a3bf6bfe7818918dd"
+    },
+    {
+      "path": "bicycle-world/dist/assets/work-covers/jan-aushadhi.webp",
+      "size": 192364,
+      "sha256": "0046aaa65232f2d2b551f5e6ab951fc7bb3ccbc163d255162efb92004d064f54"
+    },
+    {
+      "path": "bicycle-world/dist/assets/work-covers/pixel-mania.webp",
+      "size": 154672,
+      "sha256": "2d092a1140245b35c7db0cc8e697720302d95341a4378e8320e1a387cb6a51c4"
+    },
+    {
+      "path": "bicycle-world/dist/assets/work-covers/syringe.webp",
+      "size": 100106,
+      "sha256": "44a7fbc02a8d4cd43d5a5547f142b13ac972161b9c245042bca99f79ac2e08c4"
+    },
+    {
+      "path": "bicycle-world/dist/assets/work-covers/workplace-mode.webp",
+      "size": 105256,
+      "sha256": "cf801cd30a0f5723f2038e55cd2e13fe40af6bf3906fef2f6eb38fb348d21edf"
+    },
+    {
+      "path": "bicycle-world/dist/index.html",
+      "size": 27371,
+      "sha256": "b56cb851af7927942265dfa2ea396284afc87d0d191bd82c490946e0ad914b37"
+    },
+    {
+      "path": "bicycle-world/dist/pokemon-credits.html",
+      "size": 8062,
+      "sha256": "57ceb44d0e34f71e078ba81c175cdd86c6a63bea3d716b43401cbb7c5f63fb40"
+    },
+    {
+      "path": "bicycle-world/dist/projects.html",
+      "size": 26944,
+      "sha256": "80b6afae70637a1a1fd88cdaafdbb46b5ffca00be9e33e5cf822794b95ea65df"
+    },
+    {
+      "path": "bicycle-world/dist/src/about-content.js",
+      "size": 5518,
+      "sha256": "5b681c60edc6b2bae9eedf08e6f9bf6383ea172ab1235764b87c94e117863543"
+    },
+    {
+      "path": "bicycle-world/dist/src/about-exterior.js",
+      "size": 6596,
+      "sha256": "8acafc58f85e2313ea5ebbad0795d9f035014195abad77c4b55592bbe0ab48ed"
+    },
+    {
+      "path": "bicycle-world/dist/src/about-room-architecture.js",
+      "size": 20453,
+      "sha256": "d659a7f85f839c44512c04c637a2f721cdb09611cb605b11c403e8c5ecca2cd7"
+    },
+    {
+      "path": "bicycle-world/dist/src/about-room-camera.js",
+      "size": 4576,
+      "sha256": "1d97e51aebead1111d8f988fa35a48489667d1170882ac3fb1b1cde08c8d6470"
+    },
+    {
+      "path": "bicycle-world/dist/src/about-story-reader.js",
+      "size": 3861,
+      "sha256": "e8ac060f2c4231cfec66d1c1d16123cac74becf6a6fd2b2ae976b25958e3a192"
+    },
+    {
+      "path": "bicycle-world/dist/src/ambient-music.js",
+      "size": 9429,
+      "sha256": "957e1c58e661d3fc8a8e9a00053bceb3577362635d3142247c82986d3c140e25"
+    },
+    {
+      "path": "bicycle-world/dist/src/articuno-pose.js",
+      "size": 6178,
+      "sha256": "63b3266aa5c1e640a971b4c6a92713d25a7911efdd1cbcf0a0e076056f9d2f6d"
+    },
+    {
+      "path": "bicycle-world/dist/src/audio-mix.js",
+      "size": 286,
+      "sha256": "cd1fa7e458a710b769e07304030b64fe8062a95c379acdc5858adb3414999ea6"
+    },
+    {
+      "path": "bicycle-world/dist/src/bicycle-headlight.js",
+      "size": 3497,
+      "sha256": "e1ba2fdc43c10d27965a4f477c961c3edfd178ef771349e25aae5c4af8ecc2b0"
+    },
+    {
+      "path": "bicycle-world/dist/src/bicycle-sound-catalog.js",
+      "size": 342,
+      "sha256": "997b2eea61a02772fb9e89e70efc4bcd6987cd1a9fc9719f3ab468a02a912ee4"
+    },
+    {
+      "path": "bicycle-world/dist/src/boot.js",
+      "size": 1805,
+      "sha256": "7f650421fb57214af995a468564c62bb42372a535bb13ceee5687e9e73c00868"
+    },
+    {
+      "path": "bicycle-world/dist/src/bridge-decks.js",
+      "size": 3997,
+      "sha256": "d06a45f0ff73998269300ffe99c7a58de168be28aa57424c37ae1152ab983a57"
+    },
+    {
+      "path": "bicycle-world/dist/src/bridge-surface.js",
+      "size": 286,
+      "sha256": "ae73be1fd7085944a7db05ffe15884f66db303976151a979c480300d0afd4911"
+    },
+    {
+      "path": "bicycle-world/dist/src/camera-framing.js",
+      "size": 4269,
+      "sha256": "9a4a773c0656f588befda2ee8adce5693eb3f93d42684410882d8d3277a63b4b"
+    },
+    {
+      "path": "bicycle-world/dist/src/character-loader.js",
+      "size": 2256,
+      "sha256": "8463d0bbfd46ee0ebeece1a57000812a2e4916889f90786d097ef01d6acb5d67"
+    },
+    {
+      "path": "bicycle-world/dist/src/charizard-colour.js",
+      "size": 3672,
+      "sha256": "05070e384c631d0f4da0a48bceab363a5b5941018fbfbc13241a7a71d54c17cc"
+    },
+    {
+      "path": "bicycle-world/dist/src/charmander-arm-morphs.js",
+      "size": 8547,
+      "sha256": "6f2e259c4a610bad59c74f8c9380abcaf9dd9707108fbba859b19b500d8877c7"
+    },
+    {
+      "path": "bicycle-world/dist/src/charmander-arm-refinement-plan.js",
+      "size": 7646,
+      "sha256": "c91d40324765a6b3d84c0dbf41380fe653cd917de56cb0e12fbdaf4e808757ab"
+    },
+    {
+      "path": "bicycle-world/dist/src/cloud-curtain.js",
+      "size": 696,
+      "sha256": "35d9e2591d769f4612cc64898db88e4b61af8bea457625918686e6ebb14a96f4"
+    },
+    {
+      "path": "bicycle-world/dist/src/cloud-exterior.js",
+      "size": 7544,
+      "sha256": "d858f4d9301a8bbb4890a2306898cd4563cf5140517b672b24cae97fa96f1f3d"
+    },
+    {
+      "path": "bicycle-world/dist/src/cloud-photo-data.js",
+      "size": 1925,
+      "sha256": "e9297515d585b4c32ac9b390fee68f796e87e82a6ac313950bf1f6cc220261da"
+    },
+    {
+      "path": "bicycle-world/dist/src/cloud-room-architecture.js",
+      "size": 14203,
+      "sha256": "13a9f470f9770ef17cb5c0b7a1fa009f71df773b371e7f490021a8ce54a341f3"
+    },
+    {
+      "path": "bicycle-world/dist/src/cloud-room-camera.js",
+      "size": 6495,
+      "sha256": "acefa124d14f49edfaeee6537eb84ad169fc63bc861fea79d651570a8e7ee7a6"
+    },
+    {
+      "path": "bicycle-world/dist/src/cloud-transition.js",
+      "size": 1857,
+      "sha256": "49602a670adfad4a16b75b593f5b45101fe6854172462b40e12ba346c6400e80"
+    },
+    {
+      "path": "bicycle-world/dist/src/cloud-volume.js",
+      "size": 7989,
+      "sha256": "7489a41f65f21aa0169eff75217460a18987189d5e4ee27ceac7c8a9456a3d79"
+    },
+    {
+      "path": "bicycle-world/dist/src/clouds.css",
+      "size": 1769,
+      "sha256": "12467af0b470bbb3cce655eb78e826bad9917988508dcc4063693d90c3263bf4"
+    },
+    {
+      "path": "bicycle-world/dist/src/collection-experience.css",
+      "size": 6217,
+      "sha256": "d88bfef64df6194824db8e44f6c9d83352c31cdb5fdf8de7d2c6b1f2affd7471"
+    },
+    {
+      "path": "bicycle-world/dist/src/contact-marker.js",
+      "size": 1135,
+      "sha256": "ba91881685e05328a3deae1ccc56d40936b9197a929c4cbdf2c553f9246fe186"
+    },
+    {
+      "path": "bicycle-world/dist/src/destination-ui.js",
+      "size": 14104,
+      "sha256": "184ecd916eb22eed98b424721ccfa4cbf2bc3dc11be4505ac57f1dcad17b2aa0"
+    },
+    {
+      "path": "bicycle-world/dist/src/destinations.css",
+      "size": 6306,
+      "sha256": "e44415214d9d550fc208b84d640bd6649dce1b2b22edc84236300907ee0e9ee6"
+    },
+    {
+      "path": "bicycle-world/dist/src/diegetic.css",
+      "size": 8908,
+      "sha256": "6cfe360389e75262bc9806f2b3892439139767ed9d557355d15cf8fa669b6d7e"
+    },
+    {
+      "path": "bicycle-world/dist/src/exploration.css",
+      "size": 3084,
+      "sha256": "90e4db048e1eae37317bcc0db67f5dba508b9de2659cb96db9364e7b9040c676"
+    },
+    {
+      "path": "bicycle-world/dist/src/follow-camera.js",
+      "size": 5999,
+      "sha256": "e8c7721080c87c5a6549f28a5d4c6b359d9319aab1dddcbd5cdf66e1f45b9b58"
+    },
+    {
+      "path": "bicycle-world/dist/src/follow-sky.js",
+      "size": 4874,
+      "sha256": "eae4ec346a9c9868d4f0918f7b007f3353ffc1c663d2d01a51908b2924e6b2f0"
+    },
+    {
+      "path": "bicycle-world/dist/src/foundation-world.js",
+      "size": 7323,
+      "sha256": "fa6123944d94b274e46d4cbebddd2fcefbdc31feeb276b9da7d767021d73105c"
+    },
+    {
+      "path": "bicycle-world/dist/src/foundation.css",
+      "size": 2549,
+      "sha256": "03e0a42cf1dbc6abd80323cecd82865643d9dcd6f5ec00ebf9d62792e17ad3cd"
+    },
+    {
+      "path": "bicycle-world/dist/src/garba-room-data.js",
+      "size": 1293,
+      "sha256": "357e17b217129cd9791fabfc8fe15f00931b1342d4919063447fb1e97d245b82"
+    },
+    {
+      "path": "bicycle-world/dist/src/garba-room.css",
+      "size": 15480,
+      "sha256": "966d42f1fee0dbdd350c7bb53bfec67c83c293c188a2e66f0bf946ed056c3885"
+    },
+    {
+      "path": "bicycle-world/dist/src/garba-room.js",
+      "size": 38014,
+      "sha256": "555207f69ebf87e9fe9c8b4ee05534ac262c7cb36765ee42a1806ee13e36b45c"
+    },
+    {
+      "path": "bicycle-world/dist/src/garden-bell.js",
+      "size": 5611,
+      "sha256": "e317734f419904723ba864760ad7986df7f616034ec42ce716639adae833e469"
+    },
+    {
+      "path": "bicycle-world/dist/src/garden-bridge.js",
+      "size": 8563,
+      "sha256": "1221ff0bba8ea3e100f82afed0af4f436ade5a7d4bab0730bd4f675f7e3c22ed"
+    },
+    {
+      "path": "bicycle-world/dist/src/garden-culling.js",
+      "size": 3276,
+      "sha256": "f4def97a96a813d2924aaad2873dfc098df3fa045189b7494498be80e2c67e9a"
+    },
+    {
+      "path": "bicycle-world/dist/src/garden-lighting.js",
+      "size": 8898,
+      "sha256": "e2a2dbfdcdabbece54a411429aaefa717fbfe3b92a6abee462a90c9d70baf019"
+    },
+    {
+      "path": "bicycle-world/dist/src/garden-nature.js",
+      "size": 8882,
+      "sha256": "9a43f86400d95ca84bb9f22a2133ec1816a34f67aa68cd8a48c87c1a03e8252c"
+    },
+    {
+      "path": "bicycle-world/dist/src/garden-palette.js",
+      "size": 235,
+      "sha256": "732300e74983065126b02afc6fa860f863099b52ce84a6c988652463d6bbe78d"
+    },
+    {
+      "path": "bicycle-world/dist/src/garden-pokeballs.js",
+      "size": 8481,
+      "sha256": "d80d87b3193556f8dc8886d4165b95c0c7104093b6a193df07e16dc06ec8c806"
+    },
+    {
+      "path": "bicycle-world/dist/src/garden-polish.css",
+      "size": 2622,
+      "sha256": "3e1e59a9701d9db9e180bb778c6854cc7e2ae2b8321f6104afa651a6abe3f295"
+    },
+    {
+      "path": "bicycle-world/dist/src/garden-river.js",
+      "size": 6662,
+      "sha256": "c02e128f2d8c5ac4b3088b043a894a90889a57f153c8ae7f14e45e0982b6d0d2"
+    },
+    {
+      "path": "bicycle-world/dist/src/garden-stones.js",
+      "size": 1058,
+      "sha256": "0f0e65d256b2b540829be07582465bda5f8933a71d68c543611fa4afe2b536a7"
+    },
+    {
+      "path": "bicycle-world/dist/src/garden-water-material.js",
+      "size": 9625,
+      "sha256": "bb082df7b1dd9cd4473b544b4d14f7865a55e61063de1813c6877e3c9aa1dce6"
+    },
+    {
+      "path": "bicycle-world/dist/src/garden.js",
+      "size": 3518,
+      "sha256": "47f6257c8f9d8d55c4316de5a08678cb105de9a15f81d895b6648dc6af30c043"
+    },
+    {
+      "path": "bicycle-world/dist/src/ground-pokemon-gait.js",
+      "size": 12536,
+      "sha256": "349a1fdea9c5bb6b18eb053f5534f6f452bcb7876e8f6d03be1049c2c68a866f"
+    },
+    {
+      "path": "bicycle-world/dist/src/guided-ride.js",
+      "size": 12921,
+      "sha256": "a9830d672207a3d5681d53eb7289ef90932d1d7d0a857fd6517e2ea9616e36d1"
+    },
+    {
+      "path": "bicycle-world/dist/src/hobbies-content.js",
+      "size": 3130,
+      "sha256": "65087d41c006261ee68bf0b2e9e9729ba00e3504217144dcc349c6749aec50d2"
+    },
+    {
+      "path": "bicycle-world/dist/src/hobbies-exterior.js",
+      "size": 7439,
+      "sha256": "1a9819e8bea30a069bcb75d979d889a27f0f366f2c325264b1cc02a6ee959d5b"
+    },
+    {
+      "path": "bicycle-world/dist/src/hobbies-room-architecture.js",
+      "size": 18284,
+      "sha256": "3d27e17633bbaa5457d849be665b7776942c94e8d0b1da3c56fc9ecfb6067eb6"
+    },
+    {
+      "path": "bicycle-world/dist/src/hobbies-room-camera.js",
+      "size": 3655,
+      "sha256": "e5be836bf71046fdb7730eadba4ad1aaf1a388b33910283ad39cc8df906a4dcf"
+    },
+    {
+      "path": "bicycle-world/dist/src/hobbies-story-reader.js",
+      "size": 3046,
+      "sha256": "a7a0120b303f020a2dbf4798caffec877a8f09245661bb3c43d5fb03a9e8d488"
+    },
+    {
+      "path": "bicycle-world/dist/src/hobby-interactions.css",
+      "size": 1376,
+      "sha256": "ffd508740adba462e793eb5e8c6b1101da62ac62328c4ec025137d5e7bf9cd8b"
+    },
+    {
+      "path": "bicycle-world/dist/src/hybrid-ui-state.js",
+      "size": 637,
+      "sha256": "abcea469be74042d9b84941fca3aefab3f20056ca578ea379bf006bde2a6ea3d"
+    },
+    {
+      "path": "bicycle-world/dist/src/hybrid-ui.css",
+      "size": 9783,
+      "sha256": "0d89e66a3c6d8c648e1d95a1f59bc48728da664f917fec4187ed3764fd54ca32"
+    },
+    {
+      "path": "bicycle-world/dist/src/identity.css",
+      "size": 1690,
+      "sha256": "fe3847317e65db92c8cc8273094fb34cb8b828e963612fc6d9d8c62e714719e9"
+    },
+    {
+      "path": "bicycle-world/dist/src/keyboard-navigation.js",
+      "size": 1281,
+      "sha256": "a354b8d4cd3f1ae6100c51578bbdfbdb72941274aa6087551e329a007bfedc41"
+    },
+    {
+      "path": "bicycle-world/dist/src/landmark-proportions.js",
+      "size": 418,
+      "sha256": "32e9f650980302748d1648017bc0448054a8e69b6ba96df0b873d41964dfecaf"
+    },
+    {
+      "path": "bicycle-world/dist/src/landmarks.js",
+      "size": 8992,
+      "sha256": "14e8f98c48a92c9b192e5122447878a4b8b625314238ea6e116522a299d5fdc8"
+    },
+    {
+      "path": "bicycle-world/dist/src/layout.js",
+      "size": 8714,
+      "sha256": "daa7a9c75dc378dec3dbdb88be0dd3589028022e01043a159b9a9d6307ce4c11"
+    },
+    {
+      "path": "bicycle-world/dist/src/listening-room-data.js",
+      "size": 3430,
+      "sha256": "ba00363bfd5b4baa84ba04186c2c924670cfd87b4f3d6a22f85fd153650a9e4d"
+    },
+    {
+      "path": "bicycle-world/dist/src/listening-room.css",
+      "size": 21607,
+      "sha256": "6398de66b1021935928bf521057255ea62870b64bc805a7416404b577d189b2a"
+    },
+    {
+      "path": "bicycle-world/dist/src/listening-room.js",
+      "size": 53865,
+      "sha256": "e629f0f6236519c26532c008cc9b5f54cc5e4d8042d07157d17607d8b6681f0b"
+    },
+    {
+      "path": "bicycle-world/dist/src/loading.js",
+      "size": 1986,
+      "sha256": "189709cf1b794dfb366d0468bf1e74b703f4fc6a7903ca7413ba5e94d581da47"
+    },
+    {
+      "path": "bicycle-world/dist/src/main.js",
+      "size": 68588,
+      "sha256": "47487195806aa6f1635645ca833c1620960d81a6f16ed91b03c2921463a690c9"
+    },
+    {
+      "path": "bicycle-world/dist/src/map-guide.css",
+      "size": 13347,
+      "sha256": "1f8ab48024ef1e5961337ed9b3aad0e687376fc137dd55cad5398031c2256d02"
+    },
+    {
+      "path": "bicycle-world/dist/src/map-ui.js",
+      "size": 8196,
+      "sha256": "1b8d0dd964c3af54f4c510d27d277c6e62b50adf9398b24def43235523dedb31"
+    },
+    {
+      "path": "bicycle-world/dist/src/mobile-entry-policy.js",
+      "size": 730,
+      "sha256": "2435d4d2f264a0efaf191714f6634c58a518c6d5eb5782a134274c4f2a8352ba"
+    },
+    {
+      "path": "bicycle-world/dist/src/mobile-entry.css",
+      "size": 2005,
+      "sha256": "ef9dbfb394f2fd16addfc7681f732f2eb78ae9e9f7ff781f750670f5f050d061"
+    },
+    {
+      "path": "bicycle-world/dist/src/mobile-entry.js",
+      "size": 2220,
+      "sha256": "8dbba9794e3fc23d2f59171327822c023cd85a7e298e9e24db723d1558d3097e"
+    },
+    {
+      "path": "bicycle-world/dist/src/mode-selector.css",
+      "size": 6235,
+      "sha256": "ddcd7f25e97d1b5262d8319b0533491c08b575930130aa516e55d5f7bd56dce7"
+    },
+    {
+      "path": "bicycle-world/dist/src/mode-selector.js",
+      "size": 5892,
+      "sha256": "a4264ac44fecb4e05cf09d313fba8adc41eb90d779057b35a377de55389b1ce8"
+    },
+    {
+      "path": "bicycle-world/dist/src/motion.js",
+      "size": 7337,
+      "sha256": "e6b8d1c6b0e98485c716b90a568366671ff2ce324d3c9bd92c7dde2b88f001e7"
+    },
+    {
+      "path": "bicycle-world/dist/src/music-catalog.js",
+      "size": 619,
+      "sha256": "a73274ac6e23aae10f29bf73e389520d5d09cb0f7749499c9faada7afa6dc8c5"
+    },
+    {
+      "path": "bicycle-world/dist/src/navigation.js",
+      "size": 9003,
+      "sha256": "84d48f3aa88347efe26ec48222db5b91955d188d05e4ff16ad842047351b13c7"
+    },
+    {
+      "path": "bicycle-world/dist/src/normal-work-source.js",
+      "size": 8750,
+      "sha256": "4261b272e528e780e75bf1a11873e6d211b933619e304fe565b9e0bbc8c279af"
+    },
+    {
+      "path": "bicycle-world/dist/src/oak-lab-content.js",
+      "size": 7815,
+      "sha256": "467db8f2c41a765eee2d892d26c8f8e0f5c5eef50357be67cae33af50ccf9922"
+    },
+    {
+      "path": "bicycle-world/dist/src/oak-lab-exterior.js",
+      "size": 4913,
+      "sha256": "57fb3da10dd07cca0ae8e6e1ed22c0d3b1fb208fda2eca4c9afb3f37194bf184"
+    },
+    {
+      "path": "bicycle-world/dist/src/oak-lab-scene.js",
+      "size": 24105,
+      "sha256": "9b62178715e4c5606ac7f19f2204dd854ce948b8d30b95096c9c254082a9da7c"
+    },
+    {
+      "path": "bicycle-world/dist/src/oak-lab.css",
+      "size": 9003,
+      "sha256": "af92fca61677263960cf44b0321919fc40e1e75b7f39b9bf1a3f6a69a260ec56"
+    },
+    {
+      "path": "bicycle-world/dist/src/oak-lab.js",
+      "size": 25616,
+      "sha256": "722965c3be6b62a7ce68630fe51a8e378f1dff4d73788bdd25fc5a1c18d77c84"
+    },
+    {
+      "path": "bicycle-world/dist/src/oak-narration.js",
+      "size": 1589,
+      "sha256": "13d212138c426d644945f1426dcdeeafc2ed839b3bbc0475b43d953f7cca4a4c"
+    },
+    {
+      "path": "bicycle-world/dist/src/personal-photo-data.js",
+      "size": 2280,
+      "sha256": "3489778a1cc738e873434e53b22255af1eba96046d2df44a470cba7c2716ed92"
+    },
+    {
+      "path": "bicycle-world/dist/src/personal-recording-data.js",
+      "size": 473,
+      "sha256": "d97362930e2207b50412d3d58d209b956a754709876d86848d9ddcf76b85c15d"
+    },
+    {
+      "path": "bicycle-world/dist/src/personal-room-content.js",
+      "size": 3494,
+      "sha256": "9d66e01de386454c5e2612ab8bbe9df1a8fa3e535ebce03cd7a1d683421c2bf4"
+    },
+    {
+      "path": "bicycle-world/dist/src/personal-rooms.css",
+      "size": 28886,
+      "sha256": "4f2fbdaa221ea0968a307d3650e758a945f40b2337adf393e05f82dd2a1e4370"
+    },
+    {
+      "path": "bicycle-world/dist/src/personal-rooms.js",
+      "size": 58583,
+      "sha256": "ac07cab740b18654a27a82d048202f43a861d51e91619759f290820af4b60f36"
+    },
+    {
+      "path": "bicycle-world/dist/src/pikachu-gait.js",
+      "size": 18219,
+      "sha256": "2287dae8680b82a1ece0ab8f9011e64cdfc7902b41cc888d56f76ef70240addd"
+    },
+    {
+      "path": "bicycle-world/dist/src/play-controls.css",
+      "size": 18588,
+      "sha256": "e8057be102c68206f2f1789054bca602094e65d355236afe6a0a1355dcb3adec"
+    },
+    {
+      "path": "bicycle-world/dist/src/play-music-ui.js",
+      "size": 10527,
+      "sha256": "a3db77ca62729756caf2e037bf2b305df14690f688f190f667d72e5af28eeef5"
+    },
+    {
+      "path": "bicycle-world/dist/src/play-music.css",
+      "size": 1519,
+      "sha256": "67603fcd8c70c57854c55a8902c9400076e6c4e5e20b3a020c8301c916876f2c"
+    },
+    {
+      "path": "bicycle-world/dist/src/play-typography.css",
+      "size": 1752,
+      "sha256": "bc3ae8a16c1a7afb3ad4a68cf7dda0558bd9f588b29b2e4af406f89e6a4f9419"
+    },
+    {
+      "path": "bicycle-world/dist/src/play-work-catalog.js",
+      "size": 1193,
+      "sha256": "c36f062c183fde806240d91037d811f736265bab516a3f6791f3143ae3f5fb57"
+    },
+    {
+      "path": "bicycle-world/dist/src/pokemon-attention.js",
+      "size": 1517,
+      "sha256": "c0e071777557ad6fa0a3d3665ea3f73f918f1f7d3fd6a0361c71691b1a56c3f7"
+    },
+    {
+      "path": "bicycle-world/dist/src/pokemon-audio.js",
+      "size": 5085,
+      "sha256": "65d338cdad8c1fe5f67d578162d91d1794e6fe975d423ecdb2500716785cfaad"
+    },
+    {
+      "path": "bicycle-world/dist/src/pokemon-collection-data.js",
+      "size": 22629,
+      "sha256": "b8c82cc1e755cb8d0c1c015416a1b249dc920fc2ae9672ebed09baebd331fa45"
+    },
+    {
+      "path": "bicycle-world/dist/src/pokemon-flight.js",
+      "size": 8001,
+      "sha256": "8cbd6ef17e9341b908390b29fde51c392e04d0f5e556bfe5ebb46257c928cd3c"
+    },
+    {
+      "path": "bicycle-world/dist/src/pokemon-habitats.js",
+      "size": 5641,
+      "sha256": "6fff2843646977c91c8967d0afa9d2a269f0b064913b29f172dacc5b62d872c2"
+    },
+    {
+      "path": "bicycle-world/dist/src/pokemon-locomotion.js",
+      "size": 3349,
+      "sha256": "fca38b6badb18be60b4627c830086c322d8670ba790f02b9ef96a80864df8522"
+    },
+    {
+      "path": "bicycle-world/dist/src/pokemon-paw-contacts.js",
+      "size": 4755,
+      "sha256": "762e453536c79e58bd7406d76c5569e9fc7a88ee62e8c73c0c13349ae305dee9"
+    },
+    {
+      "path": "bicycle-world/dist/src/pokemon-pose.js",
+      "size": 12396,
+      "sha256": "ef2119dd5e7b825473eddad571d609693a4c99a02f60dbf1385d2d29b864723d"
+    },
+    {
+      "path": "bicycle-world/dist/src/pokemon-proximity.js",
+      "size": 3253,
+      "sha256": "3559867e085184096f858a88b9eafa3dcd279a747dd7dff9fb8ca8fdf33859e1"
+    },
+    {
+      "path": "bicycle-world/dist/src/pokemon-room-data.js",
+      "size": 1041,
+      "sha256": "d907302728b3276da27f36ea8a4239607b8603e005230798a5f2339eebb751ac"
+    },
+    {
+      "path": "bicycle-world/dist/src/pokemon-room.css",
+      "size": 19123,
+      "sha256": "9aea208cd4bfd829e20096f1987ed387426f13ba8ad4f7ab0056d92e21b03068"
+    },
+    {
+      "path": "bicycle-world/dist/src/pokemon-room.js",
+      "size": 62477,
+      "sha256": "8f8cf1cb1afddd97674f744b339a5a7bcf3b24fa627df9998d9f004e21228045"
+    },
+    {
+      "path": "bicycle-world/dist/src/pokemon-sleep-cues.js",
+      "size": 1406,
+      "sha256": "19a8aec707fa94567a3e7cd84c6fc1b2a5844b0736ec48346e15a5ba2b6c2406"
+    },
+    {
+      "path": "bicycle-world/dist/src/pokemon-ui.js",
+      "size": 2048,
+      "sha256": "e260246471b2b0244db3385b81f66f5a265a6a5b69a2cc81f003bae55b9a8aff"
+    },
+    {
+      "path": "bicycle-world/dist/src/pokemon-world.js",
+      "size": 18934,
+      "sha256": "272349267fcdfe6741a7e707b98b1d12f0bcc6446b54eba55c3ed8e9a7e994ef"
+    },
+    {
+      "path": "bicycle-world/dist/src/portfolio-route.js",
+      "size": 2773,
+      "sha256": "f766624a0fb773b97d6d10cdbf6b27090ad032db0ea4ff565bf4bd331a995414"
+    },
+    {
+      "path": "bicycle-world/dist/src/project-catalog.js",
+      "size": 2222,
+      "sha256": "67a508b9dad6a52fb914a07be73624ebab23c90d8244232143c00c9b9d1be8d1"
+    },
+    {
+      "path": "bicycle-world/dist/src/project-data.js",
+      "size": 25796,
+      "sha256": "b0c704b4f474ca930dec4e0ef6e49a124e70a24d9a6ea59197fae2fab0110477"
+    },
+    {
+      "path": "bicycle-world/dist/src/project-ui.js",
+      "size": 10123,
+      "sha256": "5fca76e696b7db034552a140498a862e29683ef28f57d3be380da9fd2fd98664"
+    },
+    {
+      "path": "bicycle-world/dist/src/render-quality.js",
+      "size": 2850,
+      "sha256": "a96bc9d535699295b2cc6d32cda2d5b6ffdde562282d291c26a0a6e19ed664e5"
+    },
+    {
+      "path": "bicycle-world/dist/src/replacement-character-poses.js",
+      "size": 28771,
+      "sha256": "8e987fd1c1a569f6863a72145cb0035bafbf228077524a65f24714d310f2ca5a"
+    },
+    {
+      "path": "bicycle-world/dist/src/ride-feedback.js",
+      "size": 3472,
+      "sha256": "015f5bfa7dc6141b752e4568198360494f162518d72954b0a7139cba10f30866"
+    },
+    {
+      "path": "bicycle-world/dist/src/rider-accessory-picking.js",
+      "size": 2433,
+      "sha256": "ba5f513275d736b6fec1e018e235b081b91f5b988306135b2026db8aae765165"
+    },
+    {
+      "path": "bicycle-world/dist/src/rider.js",
+      "size": 26085,
+      "sha256": "6373f26b59361d1dfbdec44b1513858485ffad75475e22c7eb45407dfa8e6c60"
+    },
+    {
+      "path": "bicycle-world/dist/src/riding-audio-ui.js",
+      "size": 708,
+      "sha256": "d6aa50f2866274bf3594c14cb6545e87981a02283dc63548205c02a6bb936ef5"
+    },
+    {
+      "path": "bicycle-world/dist/src/riding-audio.js",
+      "size": 10767,
+      "sha256": "43a5e114f34934b635a3e2eabfedae1379ed568226277b57ad063b5fbc6bd9b4"
+    },
+    {
+      "path": "bicycle-world/dist/src/riding-options.css",
+      "size": 7740,
+      "sha256": "01e29eb1d47b802defd301c4798b859e5a5276cb9457bb64b784aea8065ae605"
+    },
+    {
+      "path": "bicycle-world/dist/src/riding.css",
+      "size": 1622,
+      "sha256": "5c4521740cf0e56268a3e806df1a3a9570f60ce5254a98e19ee66eeb97dfaf8f"
+    },
+    {
+      "path": "bicycle-world/dist/src/sky-camera.js",
+      "size": 4478,
+      "sha256": "c5db91af7827da9b1744ed4c97b53986f77272ab03af4e6360b580f274cbd1c3"
+    },
+    {
+      "path": "bicycle-world/dist/src/startup-lifecycle.js",
+      "size": 641,
+      "sha256": "60b5234717705436511e031acdb8c4ca0f1f0e23d2799aba1db9a251fe7014ac"
+    },
+    {
+      "path": "bicycle-world/dist/src/studio-displays.js",
+      "size": 312,
+      "sha256": "5a2e1c45769767390236527d1d78d5dcfa9153a44f8b004fce7ac95249e6a8e9"
+    },
+    {
+      "path": "bicycle-world/dist/src/style.css",
+      "size": 15818,
+      "sha256": "24c9295e6b14faf0a859aa81f8b6562866ebca71904f99aff992dc862dab33a8"
+    },
+    {
+      "path": "bicycle-world/dist/src/trailhead-guide.js",
+      "size": 4908,
+      "sha256": "84b83952e78277de0c5433b06607b4c8f9e94ca712f309492a46add63c7d0507"
+    },
+    {
+      "path": "bicycle-world/dist/src/wayfinding-config.js",
+      "size": 2328,
+      "sha256": "e08ec53b1eda7717f5c053cb5727b2997cdf58f8bfd0d17265931fda4f795a32"
+    },
+    {
+      "path": "bicycle-world/dist/src/wayfinding.js",
+      "size": 5155,
+      "sha256": "6983f06154d42771af7240cdf2ed61b7ffa233311715cd76e14525f3f2ce6e98"
+    },
+    {
+      "path": "bicycle-world/dist/src/welcome-audio.js",
+      "size": 756,
+      "sha256": "33f2f422cdb47f9223ce46ab9b43fe6b4470014abc7768106ee7a79de0a226ac"
+    },
+    {
+      "path": "bicycle-world/dist/src/welcome-flow.js",
+      "size": 1482,
+      "sha256": "4fcfac9b9391fc6810c539360686ecb3b9bc8f51748d429b2e4a78dd2df7d21f"
+    },
+    {
+      "path": "bicycle-world/dist/src/welcome-fonts.css",
+      "size": 899,
+      "sha256": "a05d05a37eafab67eea57349fa0b27fa57cec03f89114be1aaabd0ac64fa9a57"
+    },
+    {
+      "path": "bicycle-world/dist/src/welcome-garden.js",
+      "size": 7884,
+      "sha256": "6aca584a4f3620e2ba24f0c9fd9a26e355c8907c1eb976c4c6f9c609cf685375"
+    },
+    {
+      "path": "bicycle-world/dist/src/welcome-recordings.js",
+      "size": 3714,
+      "sha256": "ff1fd2a5261e5f3a8225baebef455bc8a227f15a73dbad437204a0db89514106"
+    },
+    {
+      "path": "bicycle-world/dist/src/welcome.css",
+      "size": 8308,
+      "sha256": "41abdd660d1f40eaccb41ebb61eeda24d04257958453e116d66da0610d42637e"
+    },
+    {
+      "path": "bicycle-world/dist/src/woody-rig.js",
+      "size": 14527,
+      "sha256": "2a4822217628fe6458cdaf6e89b60f66500b6e7232b8637dcf606fce399b152e"
+    },
+    {
+      "path": "bicycle-world/dist/src/woody-welcome.js",
+      "size": 14124,
+      "sha256": "f57e83de6db1d0e25cc3a757dcbcf6ce76ec52133ccea5217690bbd76ae1cba6"
+    },
+    {
+      "path": "bicycle-world/dist/src/work-cover-frame.js",
+      "size": 3223,
+      "sha256": "66c6829cc7966297ca52b087a42301b8aa5da2509f18962fed50ca128409de54"
+    },
+    {
+      "path": "bicycle-world/dist/src/work-overview-content.js",
+      "size": 9406,
+      "sha256": "b69bbc2ef00739ee5b20f741f449f999760db42bdc0846dc38d51624d135ef04"
+    },
+    {
+      "path": "bicycle-world/dist/src/works-experience.css",
+      "size": 15295,
+      "sha256": "c8d762a99b5596ff99ef3c62fce2bafc6d7378adf807675b78cc91b6d10b7a56"
+    },
+    {
+      "path": "bicycle-world/dist/src/works-experience.js",
+      "size": 32074,
+      "sha256": "3a2553ac2c367a715a9d04dd6fff92151facc6be9de3863c62594bbd9ffad0c5"
+    },
+    {
+      "path": "bicycle-world/dist/src/works-exterior.js",
+      "size": 5674,
+      "sha256": "d86007813b3608ed2c8c4127b80bd65740657c779b9abc74642161d1a3fa2608"
+    },
+    {
+      "path": "bicycle-world/dist/src/works-room-architecture.js",
+      "size": 10114,
+      "sha256": "a368d8d3b942d750827701be390cef016ebfa674f7b0a5ecf1d74047a7cb638f"
+    },
+    {
+      "path": "bicycle-world/dist/src/world-camera.js",
+      "size": 759,
+      "sha256": "a234d21bfc4a1697c7bbfaf1b42d8887daf68371462b32298bcc131b44dcd1ee"
+    },
+    {
+      "path": "bicycle-world/dist/story.html",
+      "size": 4946,
+      "sha256": "2d7e902b09f57f9304e04070710dd87b87e3f0ee2842f7d9dfa1e3aa2d9479a6"
+    },
+    {
+      "path": "bicycle-world/dist/vendor/THREE-LICENSE.txt",
+      "size": 1081,
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+    },
+    {
+      "path": "bicycle-world/dist/vendor/addons/geometries/RoundedBoxGeometry.js",
+      "size": 6476,
+      "sha256": "c1b7c9bd2cddff2e3f3a0723f618a3d364a47450e3d25771d21faed88410bec8"
+    },
+    {
+      "path": "bicycle-world/dist/vendor/addons/loaders/GLTFLoader.js",
+      "size": 114959,
+      "sha256": "97642d720f16cc9a0c9844934198e4d0c023bea8e89576d0f7545d03b2d103d2"
+    },
+    {
+      "path": "bicycle-world/dist/vendor/addons/utils/BufferGeometryUtils.js",
+      "size": 37621,
+      "sha256": "5c552223a9309883743b80538d6e9cdb45e3227f30d3ec56fb2c39b46e78d595"
+    },
+    {
+      "path": "bicycle-world/dist/vendor/addons/utils/SkeletonUtils.js",
+      "size": 11535,
+      "sha256": "b1632a703206c3d830de9fcbe515696770d04b71a15ee6b50afa6d2c3298c86f"
+    },
+    {
+      "path": "bicycle-world/dist/vendor/three.core.js",
+      "size": 1443056,
+      "sha256": "3718df126d69c125362a03340913204470d8c50238605150e57f808840fb7759"
+    },
+    {
+      "path": "bicycle-world/dist/vendor/three.module.js",
+      "size": 650153,
+      "sha256": "bbf5ed13fe4373f5bd38b14ea8e62e9f157327da5638edc6d3863e08b167c9c7"
+    },
+    {
+      "path": "bicycle-world/src/project-artifacts.js",
+      "size": 2393,
+      "sha256": "74a1dcd02be4f1233378a3af5d09add4150cb017d4eccf2eeced1db5eaba1e8f"
+    },
+    {
+      "path": "bicycle-world/src/project-catalog.js",
+      "size": 2222,
+      "sha256": "67a508b9dad6a52fb914a07be73624ebab23c90d8244232143c00c9b9d1be8d1"
+    },
+    {
+      "path": "bicycle-world/src/project-data.js",
+      "size": 25796,
+      "sha256": "b0c704b4f474ca930dec4e0ef6e49a124e70a24d9a6ea59197fae2fab0110477"
+    },
+    {
+      "path": "bicycle-world/src/welcome-fonts.css",
+      "size": 899,
+      "sha256": "a05d05a37eafab67eea57349fa0b27fa57cec03f89114be1aaabd0ac64fa9a57"
+    },
+    {
+      "path": "normal-portfolio/assets/Lakshya-Chopkar-UX-Designer-Resume.pdf",
+      "size": 150155,
+      "sha256": "1eff7fd6c0333d119baa534b121f30835d3375acc3cf001abeffcd8000580145"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/design-system/button-states-source.webp",
+      "size": 9504,
+      "sha256": "04e798168a1fc36b2ec2b8d0db43baba20a8b161fc6126a4ae9e61e26fbb2ae3"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/design-system/palette-source.webp",
+      "size": 31130,
+      "sha256": "533a98450f4c539d0382c468a0302798d0b88a105d8e378826d7fc35f65f5406"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/design-system/search-filters-source.webp",
+      "size": 8724,
+      "sha256": "df7e8fec3569d95daea1d49072583d15da65e21f3a6cae2247262a2df7224819"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/design-system/test-card-source.webp",
+      "size": 14388,
+      "sha256": "3720844cfc556d5e98d3f30ea44fbacfe78cc2c3b6a648db96575d1b059fdf7d"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/design-system/type-source.webp",
+      "size": 46792,
+      "sha256": "6c51194a152ed56be7d88c102ca57f6085e1750ecbbd0daf933f95ec1f60eca1"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/affinity-map-original.preview.webp",
+      "size": 1006474,
+      "sha256": "6fa50514e87c5365a392863b21df78372f715eb0689d3ab587f5c40a88544e46"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/affinity-map-original.webp",
+      "size": 1168906,
+      "sha256": "4fca6a06d429d085d07996abfb7e7e7b0e39fa641ea497d0dd1fa9ae84ea1bac"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/competitive-analysis-original.preview.webp",
+      "size": 247848,
+      "sha256": "359a1a145b39498559ab672b9919d99a45880c4db577b059fc210784782861fd"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/competitive-analysis-original.webp",
+      "size": 2909378,
+      "sha256": "89f9d4344e544212cbaff1803cd152f6eb3c9dd871cf95c49129d016cbb2d730"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/consult.webp",
+      "size": 119386,
+      "sha256": "0e1a5fa5edb3cef9a58a62eb0087c0e29db46cc93ea0d17d316cd00720f9fc1f"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/journey-map-original.webp",
+      "size": 126660,
+      "sha256": "33890a1d1d9d1e418555c8da35c13f9b1b83f673b5d047c8fa35c75c1d334e27"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/later-patient-proposal.preview.webp",
+      "size": 20114,
+      "sha256": "db757586d53da95998944df4d49097087773c7e2db5f88aaa72c2036bf16c4a4"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/later-patient-proposal.svg",
+      "size": 1250583,
+      "sha256": "92c388226c3d67790b58cb626b7d40ac10f27a6843dc486eac4a07d5f8ff213b"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/later-payment-proposal.preview.webp",
+      "size": 34946,
+      "sha256": "7f07f0449062963c0cce00b5ca419b479d985ddfbca76f57a120364cdad68938"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/later-payment-proposal.svg",
+      "size": 1250585,
+      "sha256": "7851f6d5e40b3b8e44a6dd8ccd188dd095abc5e988e5424cab11dabe03957211"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/review-clinic-summary.webp",
+      "size": 120720,
+      "sha256": "0f47742584c6cfbff15d3d6fe2c469f9b0aab93746b71c2ee987ffc482764d5d"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/review-home.webp",
+      "size": 176650,
+      "sha256": "754af6fdf294f562adc0dc3ec0f149267866c6617a73f6f19e2afc59a7629fc8"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/review-lab-services.webp",
+      "size": 332504,
+      "sha256": "0e8b18e3377a5b18aa694064740059ce96b7ba6215fcde254ef73446c10b06e4"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/review-lab-test-list.webp",
+      "size": 69800,
+      "sha256": "242ddbe7ab0e4b845c4d10043e98cdf5fd46e85cb3e7ed08de2833e28aa4c2c7"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/review-prescriptions.webp",
+      "size": 138746,
+      "sha256": "319b986ef07985126bec45bb9ee668f6a20aa1a47f20791a97fb04cdfceaa179"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/review-records.svg",
+      "size": 452792,
+      "sha256": "ffe3b3dd6eb02aa777c2909f8aa337352618e67bc0b5e36fa24ea676fd6997e6"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/review-video-summary.webp",
+      "size": 114656,
+      "sha256": "3570e3b9ca42f86a7beb7c0d0f61ca9a1f6917b18bdec514dbf75086d6bd7e5e"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/sketch-crazy8s-cropped.webp",
+      "size": 278266,
+      "sha256": "092b697361049643020dd562ae86a2b79206c7528f44a7872f0f2fb4063b8092"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/sketch-critique-original.webp",
+      "size": 338676,
+      "sha256": "f6bb7164dc27c92b3f7485b2df0a593f9d150bf922e6234746fca8238cb47ec8"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/sketch-solutions-original.webp",
+      "size": 1082994,
+      "sha256": "0cc50b6c8ff8b69fa3967abaa9e9e67413f39c5d681384e66c7f7c81ab33ba37"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/sketch-storyboards-original.preview.webp",
+      "size": 1031388,
+      "sha256": "66d8793ec0b4d82540fee982a2c95de92b153082220c1f98d29a7ba16720cc08"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/sketch-storyboards-original.webp",
+      "size": 960522,
+      "sha256": "1ad8e9237992466c6de01dce51eb601e7eb3fca97c747590a658726eb2dc0ef4"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/sprint-hmw-original.webp",
+      "size": 218178,
+      "sha256": "ba15d3ebb3686b3910b6cb6f5049f71228256688f2728fc69c5e0b918e274193"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/sprint-impact-original.webp",
+      "size": 206334,
+      "sha256": "2d7bc755b6204c05a9b37f0b700e38c3f2d50729e2b851145b972f62febca6b3"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/survey-aggregate.preview.webp",
+      "size": 567500,
+      "sha256": "5f8a1de23aec1847c1792d086df5024a7ed91018b893922ec9f9ef3bee7a9f46"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/survey-aggregate.webp",
+      "size": 2157352,
+      "sha256": "e92462c3fc2b6c014f1b233a5b3162a23b719151da0f28316816346add052161"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/system-buttons-original.preview.webp",
+      "size": 248032,
+      "sha256": "9231d0eb946b3108989defb6aec1791db91044cc1a5aa3e0a98de6ba9ef4ff5e"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/system-buttons-original.webp",
+      "size": 144408,
+      "sha256": "0cb101a80043b503ca1670f5a40ea085808dc26d4806cce448897c76438e18f5"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/testing-enhancements-original.preview.webp",
+      "size": 229290,
+      "sha256": "a778c1d861dd424125bc1ca0a8087df7ee4aabcb85238288504f223cbd3d3185"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/testing-enhancements-original.webp",
+      "size": 309854,
+      "sha256": "77c8c5463801e3be991b4f043f4484598250954b6db8a989c08cdc40157c342a"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/testing-findings-original.webp",
+      "size": 82218,
+      "sha256": "5e793af2ada961e2a863981c241f9b1103e168756012838d308f5af75a3fdefe"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/testing-input-search-original.preview.webp",
+      "size": 197480,
+      "sha256": "5ec150176710f11a7c3976cfe1d37aad10c65fec6dceaf51f5c3a46890da7909"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/evidence/testing-input-search-original.webp",
+      "size": 247388,
+      "sha256": "69ab9c8897422d42e3941620fb0d0ce0d29556ed49383c8ea79fa98e8a38ee9b"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/home-en.png",
+      "size": 102831,
+      "sha256": "e77bcd3abbd562d6060240870ee8b12cbcf89aaa4dfd36e5b6506efde0e78d7b"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/connectaid/records.png",
+      "size": 77077,
+      "sha256": "dcfc882f9f5de907f3f4fb94d5a40f3cf7046c8093ba4d2ba5879bc4ce4de311"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/build-photos/IMG-20260815-WA0009.jpg",
+      "size": 102331,
+      "sha256": "9b53b118c280691c362c1a1b600f7cc1b0bef2eb93c2a5f55ef4ac31e1e53e8d"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/build-photos/IMG-20260815-WA0010.jpg",
+      "size": 121864,
+      "sha256": "c9f98290c970f087ff5c7397cf44067cc074c41bbc5b8b87e3ace19599c07e38"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/build-photos/IMG-20260816-WA0018.jpg",
+      "size": 329351,
+      "sha256": "c6523491c719b8c1bdc806ad7b327c7ae2eca4cac5807d7708a51cf6d6e9310c"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/build-photos/IMG-20261007-WA0005.jpg",
+      "size": 90619,
+      "sha256": "16a5f0126f2cae6c219d7e118a4b33dec2e8dcbb405cd1f0bae4ed548e3e0180"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/build-photos/IMG-20261007-WA0006.jpg",
+      "size": 93544,
+      "sha256": "b98fa4125e9c2d09a8da05191c6db8effde907c7ed62bae443bab3b27e87747d"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/build-photos/IMG-20261007-WA0007.jpg",
+      "size": 54094,
+      "sha256": "a92b741c7fd96cda5a8fce13196b1613a66a51b0501613372793b5ce01571a07"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/build-photos/IMG-20261007-WA0008.jpg",
+      "size": 162754,
+      "sha256": "097f0e093cc26a6000acd3829481e84027853cb02e701cb9d3e0a82b2b8c410e"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/build-photos/IMG-20261007-WA0010.jpg",
+      "size": 97563,
+      "sha256": "6cba6de3d93d0966cbd1c0425ece6c6e1cec394d2b6fca9f6733f30a2f2b153a"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/build-photos/IMG-20261007-WA0012.jpg",
+      "size": 516026,
+      "sha256": "d1698b55ddc091fc53fed433949fe066a200b851868a8e1ba7acb879302b30ed"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/child-interface.png",
+      "size": 778150,
+      "sha256": "6d45141765e805e319f389cfc39ee9ea9edd20d5460bed6895c401ea2ab211ea"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/components/button-reference.webp",
+      "size": 46444,
+      "sha256": "e70b5e647f36f0f7b810c2637e7a1bc76e964c0860cd764d93c392dacec29271"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/components/component-data.js",
+      "size": 4376,
+      "sha256": "070a62a5b02d64e5d7a31b90806b6c544b7f9981d17a6119a2edc36bdbeadd02"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/components/esp32-reference.webp",
+      "size": 136286,
+      "sha256": "93febd58a1eed571d358e4d7893e2347ff6322afa26777302169464a8cfc3f50"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/components/led-green-reference.webp",
+      "size": 252372,
+      "sha256": "f94b17487c77dfdfea26fe3f256640907855c4231ac3c7e714b15861bda60493"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/components/led-red-reference.webp",
+      "size": 295656,
+      "sha256": "5bde2f6b24db0296cb00f595b57158e3db292fb5f697a8b39937b4a02f73c8be"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/components/rc522-reference.webp",
+      "size": 37898,
+      "sha256": "427581751fae572529acd47b7188cfc7f4bd728f0a700ad23b9aa553912e92d1"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/components/touch-reference.webp",
+      "size": 39498,
+      "sha256": "d9bf7caf2784788ebdac5bffc693a6d420c2882c59a5bd67199bbbf3203de698"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/evidence/child-completed.webp",
+      "size": 53138,
+      "sha256": "a7995261fe14eb837e68eb72a237a3d9f1aea4f65c70478066fd54c29505ea8c"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/evidence/child-correct.webp",
+      "size": 89372,
+      "sha256": "26a9a7bf94fbaff2e0e8d586a2c89e70030ee97bd5235911c23352825d90ac59"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/evidence/child-finish.webp",
+      "size": 29270,
+      "sha256": "3591d8f32109954e79cc7d1b89fd4349017109de1271d42cbceca6c2c5845080"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/evidence/child-hint.webp",
+      "size": 69124,
+      "sha256": "d9d85504ee8acc7fd005d0bf91c1124ec1612d440d92c0fbe5280d90d49e13cb"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/evidence/child-logo.webp",
+      "size": 28760,
+      "sha256": "27364a57e15fdb5d9f7419630c0e5428e40f70a542d67c7dcae9bb6021dc9f05"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/evidence/child-retry.webp",
+      "size": 78310,
+      "sha256": "51203297af1d1956d9a803f1adf5dded1b0d18f9d25b5f8d39f1b258265c4141"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/evidence/child-start.webp",
+      "size": 105198,
+      "sha256": "1dfd9c73f0a9a6362abb95b7fb3cfc43ed305915ffca64399b52ce8531665051"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/evidence/child-turn.webp",
+      "size": 35394,
+      "sha256": "0bda3c9a04e9adef560124017eca504f5c976831817a422af89e1e925a15b7ea"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/evidence/teacher-add.webp",
+      "size": 44166,
+      "sha256": "10f98e6ccde0cd7a2384dbcdcc0e7c6e38bc05a51724c360ceaed346bd53657d"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/evidence/teacher-ai.webp",
+      "size": 94486,
+      "sha256": "21ef6ccfb1a31c679d8edd4cbdaac840efe52ede48fa9c8db5ef794ef1702f76"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/evidence/teacher-children.webp",
+      "size": 67036,
+      "sha256": "4295782363672addbbfb4e4450bd48e083af986571573f02a0d5fe1b70a2013d"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/evidence/teacher-history.webp",
+      "size": 37008,
+      "sha256": "4216212c226c9010fec8f30cae7a35621a39ebec44f93f5c1a6cb22ea7cfeb10"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/evidence/teacher-profile.webp",
+      "size": 73200,
+      "sha256": "adb9a43d73b0a37a590d0376e1ebec5770241534209d6386538b773212e45f9b"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/evidence/teacher-progress.webp",
+      "size": 21462,
+      "sha256": "ebc06b354ccf6740bbe39acfd85c92cdf914362ac41f4eabfec56a245cbc0f5f"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/evidence/teacher-session.webp",
+      "size": 58950,
+      "sha256": "72df67e01418bfc48aab7006d6b2ed66d5d0eb3a170b3ebcbf8e6094c6c59164"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/evidence/teacher-settings.webp",
+      "size": 11862,
+      "sha256": "0dc3d59b453f8444b3a9da48d1b42d2cb5c4b20a2661577f8f1eb56cc40e2f7f"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/evidence/teacher-setup.webp",
+      "size": 37892,
+      "sha256": "12d5fd92be577e3b93b44fad6c553792926897a55030b9cede85aeda7e2be643"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/evidence/teacher-welcome.webp",
+      "size": 104982,
+      "sha256": "24b5361959d250809996a5052a33ecacea193a04c6c063864049dca31040cae6"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/field-visit/foundation-team.jpg",
+      "size": 151649,
+      "sha256": "cdf19044a669341d8ca341ee311909449dbf4d8236504f1e00aa87c032f7f768"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/final-documentation/asset-data.js",
+      "size": 4974,
+      "sha256": "fdd79998670e700069998736f846229a98c0eea85ea1dbe2dd6c0e3a1fbfbf22"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/final-documentation/board-layout.webp",
+      "size": 96722,
+      "sha256": "fa22942dd7f7498f350b3c0e00edcf1fdfe7eda7a49bf7c44615444ad432d7a3"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/final-documentation/category-cards.webp",
+      "size": 63484,
+      "sha256": "aa281738735cc60c078987ab605954ccba16e82fe47cc674af5bf31b4582edaf"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/final-documentation/child-flow.webp",
+      "size": 94862,
+      "sha256": "c0ece0c9b5fab24ef8a08f2c450c28302568a64206d533e393d8ce75b37870b9"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/final-documentation/communication-cards.webp",
+      "size": 83546,
+      "sha256": "6bf104abba016463475c4e40fbcf3dc0325d95e8c105427bf8916e796772c4a7"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/final-documentation/emotion-cards.webp",
+      "size": 68696,
+      "sha256": "c184f53893343716fc73423c0cf991df592dba6c536849335601e1d011062b49"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/final-documentation/ideation-emotion-reference-01.webp",
+      "size": 25154,
+      "sha256": "d43b594981bc1e345890b9441c72fc68c84934f3428b35e4f104c89cbb1e442d"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/final-documentation/ideation-emotion-reference-02.webp",
+      "size": 29130,
+      "sha256": "4bbb240df1bf17c725571cb9110fc0f79932777c9606fc92f2199ae443314606"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/final-documentation/ideation-read-the-room.webp",
+      "size": 268376,
+      "sha256": "44cc5c31227ac18325a753cb4dd735a69af353e5f2601bddf09f0097f43aa09a"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/final-documentation/ideation-sequencing.webp",
+      "size": 223114,
+      "sha256": "3dcc74ea042d1e10098f604bdf058ad1477e0a72ba3cf77f951d58ddaf0d8e8c"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/final-documentation/shape-controls.webp",
+      "size": 45798,
+      "sha256": "11654eb9f05bf8097aa3e5a19273dd21de63389e0703abdc315a17e814d172ff"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/presentation/giggles-studio-v2.png",
+      "size": 2198591,
+      "sha256": "6cf728e5248b33e156304e5448ca9d4e12470485ab58e1330e2a2e23def4aea2"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/presentation/giggles-studio-v2.webp",
+      "size": 374646,
+      "sha256": "ce65390a25e2161a97c7e3a9b52608861faa25898521fbe8d11fe2ecb88c0b25"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/concepts-20261108/doctor-flow-source.png",
+      "size": 73761,
+      "sha256": "e7f46e11bbfc519a79a2f0b1524675b60c137111ae0601de3bff370d038da397"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/concepts-20261108/doctor-storyboard-source.png",
+      "size": 1584116,
+      "sha256": "227601b67be6727d72b9cfb6591d2ff44bb29335ae98c0f51833ebae1e5bab1b"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/concepts-20261108/existing-user-storyboard-source.png",
+      "size": 886579,
+      "sha256": "70ec76e92e02479f8a39797dd56cce84b9369141aa08bc89299e786417991b51"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/concepts-20261108/kendra-storyboard-source.png",
+      "size": 2233480,
+      "sha256": "a1b603aa294b283f05123522f65651f90265eeb849b0bbe996cdb738251d633b"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/concepts-20261108/new-user-storyboard-source.png",
+      "size": 1223486,
+      "sha256": "3314bebf3687e35e9e45bf93ac7433e918ea1dbe92fe861f8840fe6f42340ea9"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/concepts-20261108/pharmacy-flow-source.png",
+      "size": 128716,
+      "sha256": "5fdd52db9f2ec79a9a9601ea6079c90469cafb92c90676f5c4f3e6f69f6e7e24"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/concepts-20261108/pharmacy-storyboard-source.png",
+      "size": 2185748,
+      "sha256": "5ca458b57e847c005212a43c162d428a05cc37605fcfa3e70c66de872993484b"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/concepts-20261108/rfid-packaging-source.png",
+      "size": 812367,
+      "sha256": "af1adef60afb81c7dd1e110f33b3cf67d55c58f719edb56630e022b9cd5a628c"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/evidence/affinity-spending.webp",
+      "size": 28392,
+      "sha256": "443091a77c768fc1e9513cb354c2a7cba0d14512dac68f51d0cfb7f0e765e570"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/evidence/affinity-supply.webp",
+      "size": 27160,
+      "sha256": "aa269495d41ef9f6525b63de728d8ed7a92b5e7a02d58be513136a97084f4f0b"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/evidence/kiosk-alternative-flow-preview.webp",
+      "size": 64060,
+      "sha256": "ea7483916962a1aefb545b6c1ea474b619091d1a9d89f4e26cf01e0435045bbc"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/evidence/kiosk-alternative-flow.webp",
+      "size": 92826,
+      "sha256": "66f37a00ce667fc907c615f91d64c1b2b9f31e682f4a7b67a55d32107c08178a"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/evidence/purchase-sequence-preview.webp",
+      "size": 40450,
+      "sha256": "d5165597bed180d60d0408a65fcd79d405b7b171455075072ca8dc63d719d1c8"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/evidence/purchase-sequence.webp",
+      "size": 54984,
+      "sha256": "e1e725ec1cf27c1a53ef0943ba37025dc1bd565b77777f289637b4b1f7d2b382"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/evidence/stakeholder-map-preview.webp",
+      "size": 39994,
+      "sha256": "ca557936c8fa8106cb357aaa521eb517653f0230672bfcf5380fb0f4268ce999"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/evidence/stakeholder-map.webp",
+      "size": 37506,
+      "sha256": "ba8813ad1e081af0d4fe4a258a64f2ec1ed5028c0394829cfa5960cb92c139b9"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/extended-evidence/brainstorming-map-preview.webp",
+      "size": 42002,
+      "sha256": "5879e0f5887e161c6f233296ad151e8baa8aa86b7b76cd1d52ba9fc93b56a8f4"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/extended-evidence/brainstorming-map.webp",
+      "size": 50728,
+      "sha256": "e84bc0d056c6871cda7867adb5436c6840adadfeefd1ef45efb0858773b76cf6"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/extended-evidence/brainstorming-team-preview.webp",
+      "size": 38550,
+      "sha256": "98e942dec42c003913aaf7a8fc7f1b2855808cf66c52cb62df89965135151122"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/extended-evidence/brainstorming-team.webp",
+      "size": 241538,
+      "sha256": "dd9b65c05f2af110a34363c67bb5d69af192a487ef792fa09ff38abbf19776e5"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/extended-evidence/flow-model-preview.webp",
+      "size": 50528,
+      "sha256": "562e13835584afd42642e44a36a49e0003b7dc1f2e84d1bde1396682ae94a7de"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/extended-evidence/flow-model.webp",
+      "size": 227216,
+      "sha256": "3b3b4044c54f9b69a1de25d8a85365d79096bb2b04f8f4feba93fb87dc19a93b"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/extended-evidence/kiosk-concept-pair-preview.webp",
+      "size": 73842,
+      "sha256": "ab7c1bec4192f0a2939945f11ffdcec2c580152f6b8187bcbd5f451d8ea9a96c"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/extended-evidence/kiosk-concept-pair.webp",
+      "size": 698570,
+      "sha256": "558056012ec16e704b8671b5131542959221233990e89e3ec53e18a096e0fe43"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/extended-evidence/problem-statement-preview.webp",
+      "size": 25494,
+      "sha256": "082f7e6aee1f59ff1b4bc488178511dae45ec7e0793d4b420fac584a54b5d5fa"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/extended-evidence/problem-statement.webp",
+      "size": 25494,
+      "sha256": "082f7e6aee1f59ff1b4bc488178511dae45ec7e0793d4b420fac584a54b5d5fa"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/extended-evidence/selected-service-flow-preview.webp",
+      "size": 36028,
+      "sha256": "7252d4a969ccc9e4ed2a1240a4e2494683ca6c50a7804218bfe1631f3210b520"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/extended-evidence/selected-service-flow.webp",
+      "size": 71714,
+      "sha256": "170b4b9f23ee6d7fe522d1feba4c5ac5e1d877586921908e5037e531ca3c12d3"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/extended-evidence/stakeholder-priorities-preview.webp",
+      "size": 48418,
+      "sha256": "b00546b3e4b1ff803c539cfcf30e05b0c0359b126ca0d0cb5bb34be6c0aded4d"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/extended-evidence/stakeholder-priorities.webp",
+      "size": 57906,
+      "sha256": "f7b8b9fb65b069d93acc66ade04ea4c18975a6bdf7991f515ad551fe0750df39"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/fieldwork/interview-visit-preview.webp",
+      "size": 101550,
+      "sha256": "85bf4ce1ff501eb06dcc81160c209e27e2c50ec05ca6cd753160b623affe0225"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/fieldwork/interview-visit.webp",
+      "size": 361260,
+      "sha256": "2b0bbc32bee2a795dd9ad5e7d87b8f22bbc21606acb0b34fee57d9eebdc6b08e"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/fieldwork/team-interview-preview.webp",
+      "size": 72556,
+      "sha256": "4729f28be86a5a01913fa424ee0ef84bfd351dd6e231efe0c5fd166ae0720fe7"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/fieldwork/team-interview.webp",
+      "size": 287536,
+      "sha256": "d5e3fe3054e65950e8dbc19d272302dcfc453f35bc3b61cf3f65c45adff613e3"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/jan-aushadhi/presentation-20261108/card-app-original-v2.webp",
+      "size": 183184,
+      "sha256": "e5c87ca33a09436469f76560ebe9388ade0c49be123482b9849862452f4670da"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/bird-1.svg",
+      "size": 6432,
+      "sha256": "7edea6de99fa5a31e4a78e1add330444e43aa2e61fe3fdb61e4deb7db64a7533"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/bird-2.svg",
+      "size": 6869,
+      "sha256": "e598608ff4900855f6a34882e41d7cfbad49d777e5e8834a79f37d64f9402c29"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/board-frame.svg",
+      "size": 234,
+      "sha256": "d82e6461a8505870825b9f473f06deabf5e3a79b68cbae7aaacbcc104a9711f6"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/dino-left.svg",
+      "size": 8664,
+      "sha256": "e71aa53c2092ba2505512f4e538c8dbd26bf351c1b699739ade5dac8cf30d211"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/dino-right.svg",
+      "size": 8605,
+      "sha256": "5efe863ccb990d865b2dd2769dcd389fc152749cbf74897b929f8989eeac02e1"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/fonts/JetBrainsMono-OFL.txt",
+      "size": 4388,
+      "sha256": "8beaaeefd30382a3f9f960c4bcebdacfdcffddeff94b9b96b6f65b59f602b51a"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/fonts/JetBrainsMono-VF.woff2",
+      "size": 31432,
+      "sha256": "83c005d49d8a6a50474c73a5a36ac0468076e9c4a29da7bdb14995d80560a5be"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/fonts/PressStart2P-400.woff2",
+      "size": 12512,
+      "sha256": "afec86997fdaf54af1f59358fa2c1e2a0f1d04146edad18e5cd141d0384a7548"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/fonts/PressStart2P-OFL.txt",
+      "size": 4403,
+      "sha256": "dcdfcb8cac92a8aa3c2198d2f25a8916364b81595dee5ed7e8f7a56fd960b083"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/ground.svg",
+      "size": 141629,
+      "sha256": "37287238ef287abaedd98e663985fffbc6220f8b7ee746d40a0ac5aeabfab3d4"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/loading-1.svg",
+      "size": 11917,
+      "sha256": "bfd5d94a49a4e3ab9f76b8e056803ee2c2e5fe27c4d1f5f367e868ee42b4287c"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/loading-2.svg",
+      "size": 12671,
+      "sha256": "928b41e3e5add5c2611b15a1bdae4f313773e5f171df99fa027517c649d3b011"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/loading-3.svg",
+      "size": 13422,
+      "sha256": "e1b9ae303501a0c711a2047a282332745396ab8d483d3db872c0858ef6d6ed64"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/logo.png",
+      "size": 43647,
+      "sha256": "b7bb4587856ce18f6257b30b13f8e39a1f3ba609c5cca54d4880310d58c56c2b"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/shape-bolt-yellow.svg",
+      "size": 4930,
+      "sha256": "04d515fe7b880d93e88bb69288e744ed248985c53e23cd81af1d6ab5920460c7"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/shape-circles-red.svg",
+      "size": 4749,
+      "sha256": "77b72e9a1c1117a63db0154d84eea70acbf9f09776bbfa7bb7fdf0c44804c32e"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/shape-disc-blue.svg",
+      "size": 2488,
+      "sha256": "9da0c5a9b0ca4d77bd916868a556e73258e0ad124fbe2faff270e13c7d9ca25e"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/shape-ellipse-blue.svg",
+      "size": 1110,
+      "sha256": "6d71f71abb9af53b27ee0876676fe84159126658a3a8cdc045f90e3f89c544ae"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/shape-ellipse-pink.svg",
+      "size": 1112,
+      "sha256": "6c20d6e828c480f43b3ee5022cd503066b1bf153d9117250462e26c41223b4d6"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/shape-pipe-gold.svg",
+      "size": 2895,
+      "sha256": "096b3bb5e8885487ac88fecb266252d604903c8b17f4d354899eaee1cecd65f1"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/shape-ring-blue-shadow.svg",
+      "size": 2269,
+      "sha256": "c1cd5c2d0179d833de62e8789d0c6b4810bd5230f01b9a97c35b1621aa0d205f"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/shape-squarering-blue-2.svg",
+      "size": 1323,
+      "sha256": "2422a85de3f7a1a660d9f8daa0c9f3ee3db5610ab3da4f74ee7778b393ec087d"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/shape-squarering-blue.svg",
+      "size": 1324,
+      "sha256": "4a6c72ca2057c6d059902c24387cceafa00765ef5cd0838a38251a442381dac1"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/shape-star-purple.svg",
+      "size": 1967,
+      "sha256": "a1d5154930b704bf8c3f3d7e902cffefdc92178df2f89aa618fda74d088d5fba"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/shape-triangle-orange.svg",
+      "size": 880,
+      "sha256": "92d303b3fbfdc940e552c555c034bc8fb040109e789b23612df0ba98b1bc97b2"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/shape-triangle-yellow.svg",
+      "size": 435,
+      "sha256": "b8f020264b19403b59baaa27c8e3f2a36940deb4d1559b5af2dc25128831041f"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/shape-zigzag-purple.svg",
+      "size": 5566,
+      "sha256": "c86fc12ae6fd47f86d1d1719489d5f0979c8e682e81645fc21731294cede4ff5"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/shape-zigzag-yellow.svg",
+      "size": 5564,
+      "sha256": "af1e2568f41bdbe39259ad6e53311f15df18050cdbdb94bf1d22e1bae7cb630f"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/tagline-1.png",
+      "size": 5265,
+      "sha256": "0e4002a2cdabde275b55bfccf8a573486b9c08d813c1a346384360c79610660a"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/tagline-2.png",
+      "size": 4510,
+      "sha256": "8082d85f61490c50e60502c4428fc7596ef1a3f904c5eddf542c4004bfdbddcb"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/tagline-3.png",
+      "size": 5130,
+      "sha256": "f29000ada6738baf3979d212a71b64b0b733493c9c99ac54e6936377f8f2ba96"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/thankyou-sub.png",
+      "size": 4776,
+      "sha256": "dbfa2270463c607fed3c8f1d87962dbca121bf32f3c7b73bcd5eb63c7de5d4d3"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/elements/thankyou-title.svg",
+      "size": 16211,
+      "sha256": "04d94b65e97f9dfe62c974fba8ac7f1e376ed061322c989d00beec4fc216314e"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/evidence/board-demo-poster.webp",
+      "size": 120194,
+      "sha256": "9b7736896be64cb815a72c34003bf788c394f55a31b2336e14e485b598feb121"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/evidence/board-demo.mp4",
+      "size": 1012721,
+      "sha256": "d52953d7943acbb6f745e1137475b0dc0a6f86a07fa556506d02c53ac6c5760f"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/evidence/exhibition-display.webp",
+      "size": 120260,
+      "sha256": "f1c205ce64a3dde5d1bbaadce2bac83e49115255cdb875f0696795870f13030b"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/evidence/exhibition-drawing.webp",
+      "size": 139712,
+      "sha256": "118f89b8b94d021853a125e5c40a3f3230100e1a073867ab05be7d7993a92a6e"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/evidence/exhibition-playing.webp",
+      "size": 87174,
+      "sha256": "2cd3582a8d74d3c43be529c70f6d851e79c554c980f8694a08c13ab4aa6d3f4d"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/evidence/exit-demo-poster.webp",
+      "size": 66700,
+      "sha256": "56979a37b7f30d1e6a4a0cf268fe71316764ecf6e4646f6a52b3fb96aeb1100c"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/evidence/exit-demo.mp4",
+      "size": 1085523,
+      "sha256": "de1a0b3d0ff4a26872867c1690a69cba7a739aedfd6306a3dfc227db97ebcb90"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/evidence/form-demo-poster.webp",
+      "size": 28772,
+      "sha256": "4454ef1ca87db37a873d00e46773ddaf37c7880a588d4940ff9eb85e0ad3954e"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/evidence/form-demo.mp4",
+      "size": 150994,
+      "sha256": "6dce06b6cda9ce7daa32ae799c8de0adf977c5579def5bdde08fbf6617150726"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/evidence/intro-demo-poster.webp",
+      "size": 68374,
+      "sha256": "e8be287604a8f860342565f1c23c3fe4617e3ddd0d75331379aab81047701b5a"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/evidence/intro-demo.mp4",
+      "size": 799211,
+      "sha256": "fa8ef061d093e23305ff4ce79516e23db2411efe86870ce8ccc41bbe78b142f0"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/evidence/loading-demo-poster.webp",
+      "size": 35656,
+      "sha256": "5605fbc896a2416525909f372390f36413a37a4b94b0a0364bbe7b106ef1aad0"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/evidence/loading-demo.mp4",
+      "size": 466548,
+      "sha256": "2aa663aa3b9365c523f598d8c1964bc448dd68c61a52b74a0117bb58289c2a61"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/evidence/visitor-artwork.webp",
+      "size": 114946,
+      "sha256": "7c54cc855845c3f054963073939866d9b714d35628bb5087677743a70afb3a33"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/asset-data.js",
+      "size": 22660,
+      "sha256": "3918fac2fd1b4b7b7fc4aa0842e30288c3ba0d12d9d38fd81c09f61f54b6bf85"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/button-large-dark-default.svg",
+      "size": 4568,
+      "sha256": "a1a4ee385d891aeccf45b7eba335062b3264835ace3c4d62de4c1dc4e28bd8b1"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/button-large-dark-disabled.svg",
+      "size": 1123,
+      "sha256": "876aebc2fb1b29e7ab27989e4b2caaa7929f8a0d7c479e7892c40cf72bd10206"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/button-large-dark-hover.svg",
+      "size": 5018,
+      "sha256": "cc4f109d4059cadae43e8b93038fa9a6c084461757c31b774c85ddd030ab66e9"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/button-large-dark-pressed.svg",
+      "size": 1122,
+      "sha256": "cf2f8f22f4d5c6441ccd9def8ca109f2fad59d758a27654cfaec290b91ce18c0"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/button-large-light-default.svg",
+      "size": 5263,
+      "sha256": "0f435f657fdb05ad1f32a003d71be16a09d1b8d3c066191160bf108791b08d77"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/button-large-light-disabled.svg",
+      "size": 1124,
+      "sha256": "1d3aff6f0d344822dc38bff1f7bfdd899eb7ae5019135698f5ea73966714fb9d"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/button-large-light-hover.svg",
+      "size": 5723,
+      "sha256": "196862141fdb281841632710117bee7dbd5049179b437c370df6740849075659"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/button-large-light-pressed.svg",
+      "size": 1123,
+      "sha256": "e211a201600de11b6deabf5e98861710982b1908806e37ff67b2fb2f3f7d09e4"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/button-small-dark-default.svg",
+      "size": 4594,
+      "sha256": "0dd00b78c1a6ca1e9fc99e2ef5d9b4d33cc2d5a7df0829ad14196e7df7594ee4"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/button-small-dark-disabled.svg",
+      "size": 1158,
+      "sha256": "7d495260f3ef85849521374d3980449cd8c77cc5927368191650eaab5b345798"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/button-small-dark-hover.svg",
+      "size": 5038,
+      "sha256": "6552af4346d276f35de0d4d03e015107ece74e0cd0cf40673f2bb1dfefd32c5c"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/button-small-dark-pressed.svg",
+      "size": 1157,
+      "sha256": "9fa1fa482a7ec7bd27bba200593f2686ec4bb2f6ffc0b8e46e0afc6bf5ab429b"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/button-small-light-default.svg",
+      "size": 5238,
+      "sha256": "6312947c3c3219aac123134483c16390607b08ec62dcdb953ef4d15435cbd7ea"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/button-small-light-disabled.svg",
+      "size": 1113,
+      "sha256": "e6f8eaa7502064f49ba65e1e24237db31343b2ccd5d99c433554d39cf1773e06"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/button-small-light-hover.svg",
+      "size": 5726,
+      "sha256": "5155509a5f8a1b9c3af687bb2d3768a40a15690a0d92c8fc9e0655e7cb8e6ae3"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/button-small-light-pressed.svg",
+      "size": 1107,
+      "sha256": "d101df2c240153b56f56de37be73c02ab4a20b7e32fc95a320072b7898a8f4a8"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/cell-black-default.svg",
+      "size": 324,
+      "sha256": "d55824e633e53337a2b5530fe73f42e1358c60a9bd79dbb6002e120f93f275ef"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/cell-blue-default.svg",
+      "size": 323,
+      "sha256": "e2cb0b148740fff4425270d2bf2df1bd5a8a302b8583e0fbb9501851f8b4d529"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/cell-default-default.svg",
+      "size": 326,
+      "sha256": "1d62d5d6aee1a7edcc2c086e563d0d7abe5d25b78fe452ec0473f5a56d777432"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/cell-green-default.svg",
+      "size": 324,
+      "sha256": "59f5c89d7df04e44384e13398ae510c646c1b7906d5033992d6963546415e25e"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/cell-hover-default.svg",
+      "size": 324,
+      "sha256": "625d70203cebe78fda14b4f59d9854a4fd31fc24d5e8ca7f2a2e2a35d1a209f5"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/cell-red-default.svg",
+      "size": 322,
+      "sha256": "d1dde17a456225442fc5de431fef32001c20215b94131179440f2d154b2aef97"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/game-board.webp",
+      "size": 129664,
+      "sha256": "1ab9f5c8c3fe188a8e50fa5c24d006c246d2b30d4d92f8ead82615ca59830bca"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/game-intro.webp",
+      "size": 78592,
+      "sha256": "2720f238fb4a3f9af2ab62b211d0915f1b9bbd96d2ca0e3d31eed791608f3e4c"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/game-loading.webp",
+      "size": 43072,
+      "sha256": "751d3ffc4c05977b9b62aeff69a88234c7208d05d7ae9dd4be188bbb9b13f063"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/game-thanks.webp",
+      "size": 76530,
+      "sha256": "a84ceb3a69baa8b352b71e2d0bb58a976979e654c8784f01a0407f8cbc4fece5"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/game-tutorial.webp",
+      "size": 56544,
+      "sha256": "f9197ea9bad51c892b5ccaebbd91825340dde3c564222513d76ee4dfb87d9aa6"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/input-filled.svg",
+      "size": 3143,
+      "sha256": "65793a0a34b4989c186578ce23703c9fc924062bf8bfa2ca833ea9687116f173"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/input-typing.svg",
+      "size": 1357,
+      "sha256": "fb851f5b294c58181b886fe679ec375f9318a5210ee074eff649828802d083e7"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/input-unfilled.svg",
+      "size": 2470,
+      "sha256": "2ed57018669e15f4f19536733f3e1a4669a54dc850630b0afdfa00f9c6c6bdba"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/loading-1-dots.svg",
+      "size": 12030,
+      "sha256": "7cb374e582526a47e342669c8e066adb08f53e72bc64ce1ec5d34b573cde66ca"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/loading-2-dots.svg",
+      "size": 12784,
+      "sha256": "260a95222f93fc86667228dfda10bb29a75a6b31549395f2ac6c2ce89cc0c811"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/loading-3-dots.svg",
+      "size": 13538,
+      "sha256": "9b897f36a0081bfd45dac1cc324b035247fb92ef7ab9e8e1c7d05608f0caa79a"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/loading-4-dots.svg",
+      "size": 14273,
+      "sha256": "46903536c0d8d97c0588e9adfaad2d39a814fbc3c77055a1aff897deb3af9509"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/loading-5-dots.svg",
+      "size": 15027,
+      "sha256": "4e89d2482010351bbfb6921cc4bedbe993f53bc0e955209f4d346b5bf9cbed84"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/loading-6-dots.svg",
+      "size": 15781,
+      "sha256": "c93616f9f7ac6185cc89f7e264dbdf508cbdb40dd448ca2417bbbca062ab9624"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/logo-state-1-node-239-1024.svg",
+      "size": 31052,
+      "sha256": "543371df8dfb33bc678be528c506eca10e550bde6bf023b6098afd96c00286f3"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/logo-state-2-node-239-1016.svg",
+      "size": 51123,
+      "sha256": "6d4b7528a3b58707d7e73d64df474c45bca0308121258379e2e0bffa3ae0d118"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/logo-state-2-node-239-1019.svg",
+      "size": 51125,
+      "sha256": "689538557ac18c7b3d6bb7d61ca54b6531232065ffa3db1f251effafe9a99831"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/logo-state-2-node-239-1022.svg",
+      "size": 31197,
+      "sha256": "fb581997b399a74be10a2ebefc583bdd4e852baeec80ff61c49a82b523ea0d59"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/logo-state-2-node-239-1023.svg",
+      "size": 51121,
+      "sha256": "6b8d10802c8f1ee331e311650e028f8681caf2c30484ce80f12f814202032c41"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/logo-state-3-node-239-1021.svg",
+      "size": 31199,
+      "sha256": "e8d7a827f15c419e0cff9710bc9db4397811e8bf64202cd927b39053d3b34d0a"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/logo-state-4-node-239-1020.svg",
+      "size": 31334,
+      "sha256": "d8407819d178ffaf892732b637e52c845728003271250c612e6293d98a291624"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/logo-state-5-node-239-1018.svg",
+      "size": 31338,
+      "sha256": "2ced1764eedacb204b2c3f951adb179d64515669b20681b0f346a2964f8b2e20"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/logo-state-6-node-239-1017.svg",
+      "size": 31345,
+      "sha256": "6e99017ec8e8ab944a628e19e5ce9501af23fdc60244ef803ec96ea4dce0afb0"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/logo-state-7-node-239-1015.svg",
+      "size": 51257,
+      "sha256": "74b7dc7e22d7014505c3ff5c42fc69b925ff22026e1d3af94d2fe0f01ff85c0c"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/logo-state-8-node-239-1064.svg",
+      "size": 51393,
+      "sha256": "83b86307b315e48ccc340d31d51fb0f995beb3cb8794a38d750cbc65959a7115"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/mario-pixels-app.svg",
+      "size": 25656,
+      "sha256": "fd46654b1f23c245c07562743369a79170c67fa652137d5270b814018b2bfeec"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/pedia-categories.svg",
+      "size": 418265,
+      "sha256": "82d30ca3f0931e8cbb867c3b24bbd130999407a8bfd6b3f6a0384b1e145be504"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/pedia-detail.svg",
+      "size": 330530,
+      "sha256": "fe9c912ed48fdb6de0a809d00f1653a8b3c3d5d5d04fabf50eb9d32ad6962349"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/pedia-home.svg",
+      "size": 740219,
+      "sha256": "c50b3e575e976024651539de53a452a3ae2ffda199312041ffc9204f0db0966d"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/pedia-introduction.svg",
+      "size": 63424,
+      "sha256": "54cb50e7c49ddecdb4960ecd2a7f6ab95fde2d60e3b570bc0ab7f9e066f5707b"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/pedia-login.svg",
+      "size": 49018,
+      "sha256": "d24b8704fc2d7cdeae5b1bb39de5d34933157648045c98a1fcae0f87f281fe19"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/pedia-profile.svg",
+      "size": 166377,
+      "sha256": "f05a98fda70df1f04162626930b5a54de9e0151fa79367e0f0513ca472deb275"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/pedia-search.svg",
+      "size": 450948,
+      "sha256": "988c8804b8d524e261f7e7382efa154c2cc8966923c893d0550470203de0b834"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/sketch-board.webp",
+      "size": 192790,
+      "sha256": "812926d737b0f3aeedebbc73faca3fb9f3e8b75b7b6c959f9e4f99d4c5541281"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/sketch-entry.webp",
+      "size": 89336,
+      "sha256": "09f04f3324eab64f73e6a930b8b494d632c1b0a4c6dfa2db4b4e8b9946211639"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/sketch-layout.webp",
+      "size": 128056,
+      "sha256": "de35f5353c4e5e20d001746c48af9c255be20517352ebf9d8834ade3a1c8a6d3"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/tagline-state-1.svg",
+      "size": 98922,
+      "sha256": "060a2008ab75106cf3a10de815ad6997d1e4fc53dbe40832cc9f82906274fb18"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/tagline-state-2.svg",
+      "size": 98922,
+      "sha256": "01993b5666f0aded3811012bf085a4c929d372554213f0c862ca0807577935b6"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/tagline-state-3.svg",
+      "size": 98924,
+      "sha256": "4d5c84656e288512e8fed0f289fd1995930f2adec4a06064e08bf082ba9906fc"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/tutorial-1.svg",
+      "size": 313,
+      "sha256": "48d534b9966d010bda71b926c3187b9aec8f85403e33632d6f11aa333b7de6f7"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/tutorial-2.svg",
+      "size": 313,
+      "sha256": "999791f5ac0b82a05ac103d4ef0898de9bf40ff3f1b07b5f16345a3dc90cb41e"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/tutorial-3.svg",
+      "size": 313,
+      "sha256": "ff6957af29507c064b446e7d3c561c6f077f892db740b74dea46a03eb1c579f5"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/tutorial-4.svg",
+      "size": 313,
+      "sha256": "f915bc4ef8be5cf144c7ba35ee80aebc92f7db716973e86f2f28bb60d2b85cc3"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/tutorial-5.svg",
+      "size": 313,
+      "sha256": "0932ecb897adcd4798593bcb4b65922dabff7080226bc6065b4ddcdbab73d225"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/tutorial-output-1.svg",
+      "size": 320,
+      "sha256": "58bac23f048585efc81c0e58ef1e170a918fba12cacb561a9a1a0aa6f0e236ae"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/tutorial-output-2.svg",
+      "size": 320,
+      "sha256": "cb4c9a45ee932ff10cae86d19f4d600bc409a903a0ad3ce1d753eca5922bc1a1"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/tutorial-output-3.svg",
+      "size": 320,
+      "sha256": "5dba31d980156de7fa703152a1ac902102a8e9b7b5c089123f0541e00ffea846"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/tutorial-output-4.svg",
+      "size": 320,
+      "sha256": "19c56c2fbb6fc74d7a7d888d69dc86151a5d6ac0e0ca359ae79b66fb78d19350"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/pixel-mania/figma-exports/tutorial-output-5.svg",
+      "size": 318,
+      "sha256": "13b38a1502a245064b727d1211ac8d6ca3fa8fb79adb5f71951f7b72e3429419"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/syringe/evidence/affinity-map-1600.webp",
+      "size": 76676,
+      "sha256": "6cc47dd0ab03e07a1c02482323216d9e8843c00bd8e3023011ddec270ac1a0bb"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/syringe/evidence/affinity-map-original.png",
+      "size": 2704098,
+      "sha256": "8e2a805f64da72d64a5dca8eb3f0a63936f1eb94841797bd5f0e1bc1571475d2"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/syringe/evidence/final-concept-original.png",
+      "size": 227396,
+      "sha256": "66bfec75e3c8b521ff169105a6e1792eb991059ceca7c6071a470d8a5b590d58"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/syringe/evidence/final-concept.webp",
+      "size": 40972,
+      "sha256": "9d3b1f4ac02e81c8ca22b4316d2b0d926f60714689b22c35567ad7d26bdea397"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/syringe/evidence/lakshya-sketches-1600.webp",
+      "size": 64830,
+      "sha256": "5ee0e98de59ac7e343fe7149c68ccad117003cefaafb5cf62f92b6e3b243d88d"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/syringe/evidence/lakshya-sketches-original.png",
+      "size": 5846654,
+      "sha256": "6f7b12573432338967988439b80e4dd5771b7b75a9a22c0f9ebc398f9b0eea00"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/syringe/evidence/maya-contact-detail-1200.webp",
+      "size": 60242,
+      "sha256": "4f17c9a7e0464d849e596f5ac8d20cc0e035a8bba9148ce7e15faee364fbd65c"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/syringe/evidence/maya-contact-detail-2400.webp",
+      "size": 146012,
+      "sha256": "3fbc9278ef9f3909baca8918f7facfb55b773a995eced58dcbf65e33eb782998"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/syringe/evidence/maya-full-model-1600.webp",
+      "size": 63296,
+      "sha256": "d37f45d1426658f479b653e25149316c928c02ba22df50590233f2b93765986c"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/syringe/evidence/maya-full-model-800.webp",
+      "size": 26084,
+      "sha256": "634ca3b23875f5b648dba6a10e1151c478dd78bce40be116371ba8e10b9a4f26"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/syringe/evidence/pilot-rating-comparison.svg",
+      "size": 3904,
+      "sha256": "de51eed9090e1dcd1762a8053d5d9f03fc04b21e2393cc78ad951f42b420478e"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/syringe/evidence/printed-prototype-alternate.webp",
+      "size": 44952,
+      "sha256": "eafc9fca2baddf870afd4b190e9371a2846b2c28d6ad38fa0bbe95878e73dc9b"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/syringe/evidence/printed-prototype-angle.webp",
+      "size": 38734,
+      "sha256": "1f703ab767b390e79e0cbfe3c6a1ba95c3765546670ef38cab5ae03e6f446c77"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/syringe/evidence/printed-prototype-front.webp",
+      "size": 37428,
+      "sha256": "63cb4d702dc504132ddbe415da6d961725d87b0d8faae86afcae27edfafc7702"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/syringe/evidence/printed-prototype-grip.webp",
+      "size": 45756,
+      "sha256": "faf8cf4a1d4863116d3751a3d2441de5aebd0b6f6b85469b10dfd0066b729e1c"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/syringe/evidence/printed-prototype-overall.webp",
+      "size": 41702,
+      "sha256": "70216bebb90c0652df948ec63af1e94bdaf3b639b3e32c2e1e686370bfbae9c7"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/syringe/evidence/printed-prototype-upright.webp",
+      "size": 38924,
+      "sha256": "6d18528c2af0f31b99b8477284fafc7e69cb8e321af3b7aa25b56315b42f7e91"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/syringe/evidence/prototype-contact.webp",
+      "size": 42336,
+      "sha256": "9c4afe12b65c28eca53441647a556ebb718d48081879c0b83535cf23827b28cd"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/syringe/evidence/prototype-in-hand.webp",
+      "size": 42376,
+      "sha256": "7f568983fabbdd0e6dbabfdc215f78c58d4c8d56ac663b0a001bc7efafa1a5a8"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/syringe/evidence/syringe-showcase.mp4",
+      "size": 1976428,
+      "sha256": "dfd638ae348c90947eb841a07f382a583e04dab6916d1fa292162a011469540a"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/syringe/evidence/syringe-video-poster.jpg",
+      "size": 71125,
+      "sha256": "4813e08aba5e441f0955cc498217cb3e088a649882baa9fc9b93eb022c44c650"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/syringe/evidence/varun-sketches-1600.webp",
+      "size": 57494,
+      "sha256": "a5a524af8c86379c0a9ecde2f3abc55ee548691d408a80a2bf931d5556301c61"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/syringe/evidence/varun-sketches-original.png",
+      "size": 3687282,
+      "sha256": "44892f23a742649f3e6659aba8e8d966060663dec5b9503e6cce297ecca9230f"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/workplace-mode/audio-refinement/audio-comparison.svg",
+      "size": 3070,
+      "sha256": "ac91bc7a0da28efc0ec8836105fab631b1c92b459543648da1f15bd2f8829ea7"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/workplace-mode/audio-refinement/audio-state-contract.svg",
+      "size": 3361,
+      "sha256": "23a08a62b8501f5cd833de7b25e0ff7d8800dbbe31211a899787f27cef3d017f"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/workplace-mode/audio-refinement/task-evidence.svg",
+      "size": 2799,
+      "sha256": "c8c4ede7faa78e2bb7762154c208d4c513872eab97fbcefb219b2e366da7a3b5"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/workplace-mode/evidence/affinity-map-original.jpg",
+      "size": 371232,
+      "sha256": "9be6ea44c92dc72b2d5e8c965ca93253f8bc1a074d09afc0450d881cc85bba2a"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/workplace-mode/evidence/affinity-map-preview.webp",
+      "size": 200780,
+      "sha256": "cfc542ad7cb849196634d99de4e9b3b86804ef88b2d680f223189223489a4dfd"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/workplace-mode/refinement/causal-branches.svg",
+      "size": 3136,
+      "sha256": "718ad2d1a3c2f07d1175f9c78f7af04490c5ee1c5f92ef229e9ea08358d18de6"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/workplace-mode/refinement/evidence-to-requirements.svg",
+      "size": 3140,
+      "sha256": "4248ff60ec8ef484804754cc6cbb92bacd32e95eefdfe0940e0f705187a8d61b"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/workplace-mode/refinement/opportunity-map.svg",
+      "size": 2884,
+      "sha256": "36d386d478fa43828664bcaac9e5a1762cf64ea6b8c33736990a46e6471e212d"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/workplace-mode/refinement/study-scope.svg",
+      "size": 2455,
+      "sha256": "343dbe4ffb9093cf10ba4de8a23e3a31e0ab2ab606c3ec85e8ac57bc9cda9afb"
+    },
+    {
+      "path": "normal-portfolio/assets/identity/shared-curve/apple-touch-icon.png",
+      "size": 6157,
+      "sha256": "ac5ce53effcd2dfe28de031d89603b1115b58681ecc34ee537090530d657f87c"
+    },
+    {
+      "path": "normal-portfolio/assets/identity/shared-curve/favicon.svg",
+      "size": 2621,
+      "sha256": "4990d8a73cc2437e2271fbbd803f7b2b0a8e7c1d606575638c86349b7512e585"
+    },
+    {
+      "path": "normal-portfolio/assets/identity/shared-curve/icon-32.png",
+      "size": 1016,
+      "sha256": "4cdbcc15d583bcc32eeea251ec31b2cf045c1048492a8cc3786b5202a139b0b4"
+    },
+    {
+      "path": "normal-portfolio/assets/identity/shared-curve/icon-512.png",
+      "size": 13608,
+      "sha256": "7f85ae86c2946f784938561302fe2ce6bc8ebfc56a53c2cad844b49d1145b1c4"
+    },
+    {
+      "path": "normal-portfolio/assets/identity/shared-curve/lc-ink.svg",
+      "size": 2547,
+      "sha256": "308f7c5ed377c2476481bc205341747648efcd48480ce78a6f6ba673e7348b77"
+    },
+    {
+      "path": "normal-portfolio/assets/personal/carousel/n001-waterfront.webp",
+      "size": 38352,
+      "sha256": "c4d0e5ecf8e21993ba341c9f5678fc05be958933cb34340ca3075c32add64a02"
+    },
+    {
+      "path": "normal-portfolio/assets/personal/carousel/n098-colour.webp",
+      "size": 62500,
+      "sha256": "d4bfdc14bd25b872cd253a7f9b1c18d35b56001f7e759bf9cd9af9604a1d806a"
+    },
+    {
+      "path": "normal-portfolio/assets/personal/carousel/n100-courtyard.webp",
+      "size": 209422,
+      "sha256": "eef4cefe152498520e7846541308346e940999299761d376b3af5187c236eecf"
+    },
+    {
+      "path": "normal-portfolio/assets/personal/carousel/n103-waterside.webp",
+      "size": 77222,
+      "sha256": "34d4fea73af1e670ad6a29112cbb0e38a4b1f07fad5ad3ce2423ab1845d843a0"
+    },
+    {
+      "path": "normal-portfolio/assets/personal/carousel/p11.webp",
+      "size": 38164,
+      "sha256": "dd3c90081775aeebc481cd6e6792040e84d13329450a46ad2a86f95359b6534f"
+    },
+    {
+      "path": "normal-portfolio/assets/personal/carousel/p12.webp",
+      "size": 81180,
+      "sha256": "17766c24034999ac84ec85407ad33c3c6a91ecab05d9bd5ad1636176b9a1564c"
+    },
+    {
+      "path": "normal-portfolio/assets/personal/carousel/p17.webp",
+      "size": 85468,
+      "sha256": "b43bc3fc1865cf99fa6aa522fd5852c22901cb7891da7e0735d11aaae43cc227"
+    },
+    {
+      "path": "normal-portfolio/assets/personal/carousel/p23.webp",
+      "size": 92774,
+      "sha256": "77418e7e0d29a8b8022ff0cff616e1ef34d590f00edc0dbbfdbb11a5ed65e495"
+    },
+    {
+      "path": "normal-portfolio/assets/personal/carousel/p35.webp",
+      "size": 207094,
+      "sha256": "cebf7ab2107dab6508e71d78253056ef645c0b79152e3a80d575b50b05c49f8c"
+    },
+    {
+      "path": "normal-portfolio/assets/personal/carousel/p37-exposure.webp",
+      "size": 93152,
+      "sha256": "abc5e95d6a016097fdabf5219b1a4196e9b8dd94719e84e650dc7d6beb32ba5b"
+    },
+    {
+      "path": "normal-portfolio/assets/personal/carousel/p41.webp",
+      "size": 47458,
+      "sha256": "e7f1642ba235cd780d3f2c0cd15cafd4d80efc12698b6600c947789f100e7f10"
+    },
+    {
+      "path": "normal-portfolio/assets/personal/carousel/p54.webp",
+      "size": 102034,
+      "sha256": "1e444031083f7266d87556c6db45896f81d05d769dcce6a0a9ef8e5a660fb6fd"
+    },
+    {
+      "path": "normal-portfolio/assets/personal/junoon.webp",
+      "size": 26074,
+      "sha256": "1c9b1eee4a0b27a0be0115bb23f3dcc5960e6bc721339206946024856de27700"
+    },
+    {
+      "path": "normal-portfolio/assets/personal/logo-patterns.webp",
+      "size": 91504,
+      "sha256": "4550a1272fd0c1682a21ed8e465afb1671669f236afdf2357c17611f1e4cec77"
+    },
+    {
+      "path": "normal-portfolio/assets/personal/meraki-syringe.webp",
+      "size": 92272,
+      "sha256": "814f7e4d1dd6c7ca99bffcfad26187f1724fb03681e24d6f41a4b154bb55b379"
+    },
+    {
+      "path": "normal-portfolio/assets/play-preview.png",
+      "size": 62163,
+      "sha256": "1e771ab01e8ffe19fa741acb8bffa9831812a1f5b1a198ad93b7c466b01a1fd1"
+    },
+    {
+      "path": "normal-portfolio/assets/process/connectaid-findings.png",
+      "size": 138483,
+      "sha256": "047c706d0b3a61a8bc9b08c33f9549c384126ddedd49eb5271febaaec931d736"
+    },
+    {
+      "path": "normal-portfolio/assets/process/connectaid-home.png",
+      "size": 102831,
+      "sha256": "e77bcd3abbd562d6060240870ee8b12cbcf89aaa4dfd36e5b6506efde0e78d7b"
+    },
+    {
+      "path": "normal-portfolio/assets/process/connectaid-storyboards.png",
+      "size": 131474,
+      "sha256": "541bbe4d31818ee3e6e430a04d61100e4b523d79c9fe4b197f711edfa2a294b5"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/connectaid-studio-v2.png",
+      "size": 1727831,
+      "sha256": "19245effdd507f42afca81566c4dc0b90f413942d8f8930ab45b28d6401a571d"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/connectaid-studio-v2.webp",
+      "size": 189972,
+      "sha256": "e939d5de85546919ab380c8688538c69c4a09638c8ceba8058d6622cb2b4d34b"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/jan-original-card-v2.webp",
+      "size": 271686,
+      "sha256": "ece9889404c01f4f9158a1cbf70103059673891cf9b44585dd47672448d6e498"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/pixel-highfi-v2.webp",
+      "size": 210200,
+      "sha256": "ba0454778df0bfcdf5cb5916b6cb75f55279019cf1c1e29976f65394ba6a9747"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/syringe-v2.webp",
+      "size": 99086,
+      "sha256": "35a19cc2bdafcc98abb81ebabf78be053efe700b8603a7e40e957c194cae0f30"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/workplace-highfi-v2.webp",
+      "size": 145910,
+      "sha256": "312d4b283bd7df32ff2a064a863fcc7d1b908c02f500193589eb3e99e0beb21c"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/3d-printing.svg",
+      "size": 731,
+      "sha256": "cb9c48acc659870f27d9c9c306f4671d5bde935e512a4b1ba3a25cd170d4e16c"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/LOBE-ICONS-LICENSE.txt",
+      "size": 1064,
+      "sha256": "add9d7531d1b21646317a8958e38fc727506fa39d24bdecb44154d943c82753a"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/OCTICONS-LICENSE.txt",
+      "size": 1068,
+      "sha256": "da259c8bd0de62713ccdcf88910aebca810644f98c2c912bad814fc79ea778df"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/TABLER-LICENSE.txt",
+      "size": 1073,
+      "sha256": "b740a1d46122672da62833e97f7e7c8a13fa85cbc7445b584b297cc00dde93db"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/antigravity.svg",
+      "size": 5037,
+      "sha256": "de7911c3d206a3d2fe3d5b4e76e84b185c581d7a259406f64db247b5b824f02e"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/arduino.jpg",
+      "size": 2660,
+      "sha256": "d017c877994c4ca828386aa2f0813743729833e2b5a159fa872fa3a609f0e54c"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/arena.png",
+      "size": 1990,
+      "sha256": "c8215769ba7549223e971f6b7dd27e8ba85233d663ba145671257df512269c56"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/chatgpt.avif",
+      "size": 5166,
+      "sha256": "f58a7cada80e61274a83b5e1cf2f21b1608078c1ba8647c8ee416787461336c5"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/claude.avif",
+      "size": 8099,
+      "sha256": "9e8df8b78f5d07fd78c97840da1b3da546508f1dba76b05e33ccdde00d921a98"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/esp32.svg",
+      "size": 688,
+      "sha256": "d9ecd8e0f4a140f8a0c272d3cb6d7e380c6a57f2d5e823980dc40024fa7387ac"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/figjam.avif",
+      "size": 6753,
+      "sha256": "43ff81be8a5f2e948319146f33cf2338c12e9275e8f51aa72322620dc3b47846"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/figma-make.png",
+      "size": 1990,
+      "sha256": "a7012c890bc4ae056dd944dff7152415995cd2a3e00c7a751924e97dd6dbebbd"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/figma.svg",
+      "size": 782,
+      "sha256": "646ef4f3d56f911e282664fe6e12dd1d0bc7aaf4ff6851d055ee2e1b7964e4cb"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/framer.webp",
+      "size": 1198,
+      "sha256": "36ab14d10427797532b371f826b4a3c3c68eeebdfa09cbae0f0b8b9e054bdd0f"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/gemini.avif",
+      "size": 5544,
+      "sha256": "318f9efb11980fe504944331d1c1ae20a4c34e714e359978dec02033aeff31eb"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/github-copilot.svg",
+      "size": 1689,
+      "sha256": "eeafb3c2f333e04ccf7d031ae215f7adafaed4c6352556b0bf79496e048bcdd7"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/github.avif",
+      "size": 2566,
+      "sha256": "de866e8d42788e6ed6d24114317f2d40a02730704df3eba4651692fa12afbd13"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/google-forms.svg",
+      "size": 1986,
+      "sha256": "eb133dc96a1d21f7472d84ac24d2cc814c7605e6577f4d589984881836f0c2f3"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/google-search.png",
+      "size": 2392,
+      "sha256": "3730780f82acd51907c761bf0da9429d18266a9c6b33a03a515c4dd06819a0d9"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/illustrator.svg",
+      "size": 1003,
+      "sha256": "16ab739533f7b81f013de8c09836fc5183d1cd21bc3e4da538ec990e7224e170"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/maya.svg",
+      "size": 1492,
+      "sha256": "4449f319b44da8d7d9c5cd0936790cbd8e366a1cc839e2769a3f2b890524f8f9"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/midjourney.svg",
+      "size": 4012,
+      "sha256": "e09640ccbf6f643b4624e540f198cd704a6bf3d75dc43b0938628caf4e98c30b"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/miro.avif",
+      "size": 10524,
+      "sha256": "a008601475383786209772a72f26c8863f3038e4bf0afa1664fa56dd665803dc"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/notebooklm.svg",
+      "size": 2470,
+      "sha256": "0e369abeda7894c1d9762e9ae709c07d9007574ecc439fff95c675f9a7adf563"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/notion.avif",
+      "size": 3356,
+      "sha256": "eb2fb7155324af655bf8b35dae60f2435e87fcee3b213b0f17f169bf10a306e0"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/perplexity.svg",
+      "size": 2438,
+      "sha256": "00180a688c194d684a69b247769cdf24a7720712256dbe0f334f97e8a15821e4"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/photoshop.svg",
+      "size": 1484,
+      "sha256": "1ce6b4f4219b3797b250630ae7d3d9f4efc5cc24597dc36aa2d30e70ce8c40eb"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/protopie.png",
+      "size": 515,
+      "sha256": "017c9ca9e1d3c67b8cb98721009aa8c0cb3361e44dedc74fdb7f5a4ccfb08f7c"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/rfid.svg",
+      "size": 540,
+      "sha256": "fbdd866f8e0bfbee190910364ff746cf5f6cf17ac003f183efecb934ad85c7b9"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/vscode.avif",
+      "size": 18580,
+      "sha256": "7620ae16e23c69314130cc5d31a1bae68dbe4cbecda2dae82d943d4a65b75e8d"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/xcode.avif",
+      "size": 34509,
+      "sha256": "f11cb0ac65c642fc21bf9bfb62b44e9c315a0d3dacca70e1f625f094157b9234"
+    },
+    {
+      "path": "normal-portfolio/assistant-discovery.js",
+      "size": 6349,
+      "sha256": "a34a44f99705558787b6378e13289771604ee1bd43b8e5f034db1afdbe928845"
+    },
+    {
+      "path": "normal-portfolio/assistant-ui.css",
+      "size": 7249,
+      "sha256": "1746c395c62542eb9f14a5170d7add0eb87df7534ed7d3d55258989d4a6d11c8"
+    },
+    {
+      "path": "normal-portfolio/case-context.js",
+      "size": 7359,
+      "sha256": "4f26044c964aaaccf4991f853177d197313d28a6bf36f93f5caf9ac74003f114"
+    },
+    {
+      "path": "normal-portfolio/case-hero-art.css",
+      "size": 5369,
+      "sha256": "0488c92def850b81411a7fb4d90432f2bdfc253bc7d1ffb0d5d0178911088260"
+    },
+    {
+      "path": "normal-portfolio/case-hero-art.js",
+      "size": 2697,
+      "sha256": "cbd5bb111e5b67c8a9193e75520e4039a601c729faa711b533c189fca000f9d6"
+    },
+    {
+      "path": "normal-portfolio/case-image-viewer.css",
+      "size": 2804,
+      "sha256": "642bef56486f36e156ab98fecc8f558af3ec7c75df15ff7cf59d437ffc0842ec"
+    },
+    {
+      "path": "normal-portfolio/case-image-viewer.js",
+      "size": 6423,
+      "sha256": "31bfb1a93eed22bcd8cbe25f63632e8de243bce51ec5fe55b497327d298a1f45"
+    },
+    {
+      "path": "normal-portfolio/case-motion.css",
+      "size": 566,
+      "sha256": "696304f567ba503f7e3b29255500da681bd4f61416082eba35d99a9395fffd1c"
+    },
+    {
+      "path": "normal-portfolio/case-motion.js",
+      "size": 5358,
+      "sha256": "f3a14231d23bfc531b71c9aca7361bc90d3bd661362d86bea58a5fb8bc508b19"
+    },
+    {
+      "path": "normal-portfolio/case-presentation.css",
+      "size": 18373,
+      "sha256": "98274816bdfa4a7d1058002fb4667faacc4037a443472211c4334bcfabcb0875"
+    },
+    {
+      "path": "normal-portfolio/case-reader.css",
+      "size": 10327,
+      "sha256": "bb8d50940202e822ee6fb37ea72c65216c16ece838a378b8eea9daf6c6aed2af"
+    },
+    {
+      "path": "normal-portfolio/case-reader.js",
+      "size": 23377,
+      "sha256": "bfc5609895a3583eb4e612da0a809b09c1f088957c40a63dab0a2b1c94e2bcfa"
+    },
+    {
+      "path": "normal-portfolio/case-section-nav.js",
+      "size": 4549,
+      "sha256": "1d3fc43b49ef390a82ad5499c01f591f09cf20ee9fe771a7d631adef0893aab1"
+    },
+    {
+      "path": "normal-portfolio/case-stories.js",
+      "size": 21057,
+      "sha256": "2fcfb643693c7b08bcb31940881fe5b458c4f1a1e77a8d144424558c3006df8c"
+    },
+    {
+      "path": "normal-portfolio/case-video.js",
+      "size": 4111,
+      "sha256": "077cefe001bbc601499c58465d6173fb3149b9d058dd8f0c5e297f45edad585e"
+    },
+    {
+      "path": "normal-portfolio/connectaid-evidence.js",
+      "size": 39677,
+      "sha256": "2d63054603ce97fa4543ea4fc50a0303082492df8edcfad31c6b35d62dff3528"
+    },
+    {
+      "path": "normal-portfolio/cover-artwork.css",
+      "size": 2221,
+      "sha256": "5330e2b0d1b0a215cc31de4fd2740a8707e6a8ae1a57d02ded1801cb0a1f9e45"
+    },
+    {
+      "path": "normal-portfolio/cover-artwork.js",
+      "size": 1390,
+      "sha256": "9eb5da6d605ac0a06e99c539f701c9e0e76f15b7d1df9cfa9a97ee7138ddae7e"
+    },
+    {
+      "path": "normal-portfolio/design/jan-kiosk-lab-20261108/card-app-engine.mjs",
+      "size": 5961,
+      "sha256": "c9fd962c27616aebe13f6d23c627492cc555dab5bd58cebd68b0b7786ec17b58"
+    },
+    {
+      "path": "normal-portfolio/design/jan-kiosk-lab-20261108/card-app.html",
+      "size": 3997,
+      "sha256": "4de75abeaa750811967ad769bb38b79996e228eeb3d382ee47d6e10034a5bb10"
+    },
+    {
+      "path": "normal-portfolio/design/jan-kiosk-lab-20261108/card-app.mjs",
+      "size": 9952,
+      "sha256": "03d3f530636482401d6a2a5709cf0449cab6a3c12b160769b779f32fa6ef14ee"
+    },
+    {
+      "path": "normal-portfolio/design/jan-kiosk-lab-20261108/engine.mjs",
+      "size": 11291,
+      "sha256": "f835e1b1a84615b8e30c32c32c8e4861908377b2acb4e11980ce992df4b56714"
+    },
+    {
+      "path": "normal-portfolio/design/jan-kiosk-lab-20261108/index.html",
+      "size": 4801,
+      "sha256": "822f93a0ddc78b91ef2d38fb8b85ebf8c1ee72a2a6e61685993409e5cf412850"
+    },
+    {
+      "path": "normal-portfolio/design/jan-kiosk-lab-20261108/lab.css",
+      "size": 9073,
+      "sha256": "c1678cc89262a2940be82d86dfcf3c5dfeaed064d735451cc7f07a5fb3be3404"
+    },
+    {
+      "path": "normal-portfolio/design/jan-kiosk-lab-20261108/lab.mjs",
+      "size": 15356,
+      "sha256": "6d9113a253e4630effea8e0f03af82993b2c67d53e04319f805e9df5917f1244"
+    },
+    {
+      "path": "normal-portfolio/design/jan-kiosk-lab-20261108/rfid-preview.html",
+      "size": 3760,
+      "sha256": "b2a83da2d79041fdd8b509f1a4475117fcf7ebdb65e35a7923ba67761a419735"
+    },
+    {
+      "path": "normal-portfolio/design/jan-kiosk-lab-20261108/rfid-preview.mjs",
+      "size": 646,
+      "sha256": "0b9215f5acf66deba3e2f95e96549dfa5d9a611d5561aae2d7b127f4162b2407"
+    },
+    {
+      "path": "normal-portfolio/design/pixel-interaction-lab-20261108/index.html",
+      "size": 7418,
+      "sha256": "d3db7e9936804c9240e426178b7c5834bb4e87fd71a0ac7b482ad9774a50ea16"
+    },
+    {
+      "path": "normal-portfolio/design/pixel-interaction-lab-20261108/lab.css",
+      "size": 6982,
+      "sha256": "da96a5ad12c269b79358cb6c17a5a2508bbe37e38f2bfeb6c4e40f12e40397cc"
+    },
+    {
+      "path": "normal-portfolio/design/pixel-interaction-lab-20261108/lab.mjs",
+      "size": 13985,
+      "sha256": "c6fc1ce6473b48ac0a673000cc3de36daa68beae0d85ba32e931e3d5dd4962c9"
+    },
+    {
+      "path": "normal-portfolio/design/pixel-interaction-lab-20261108/model.mjs",
+      "size": 6531,
+      "sha256": "d7b466a413bd887fa0bb9559d3659e7c0cb4e060ec583f372317d310c54b62a0"
+    },
+    {
+      "path": "normal-portfolio/design/workplace-audio-lab-20261108/art-city.svg",
+      "size": 628,
+      "sha256": "f2f03a146830f43af499b2408d4e32eb7fc83b794150281eb002edce7767941c"
+    },
+    {
+      "path": "normal-portfolio/design/workplace-audio-lab-20261108/art-coast.svg",
+      "size": 607,
+      "sha256": "c8aa6dc29e55d9e9a18090ad66cac26f7f99d5ae9f2993be1bba5032a2c824aa"
+    },
+    {
+      "path": "normal-portfolio/design/workplace-audio-lab-20261108/art-night.svg",
+      "size": 639,
+      "sha256": "b8a30702f20bf21f70aca441c77629aa7439729e3a9a6b6554ea114752ced6d7"
+    },
+    {
+      "path": "normal-portfolio/design/workplace-audio-lab-20261108/focus.mjs",
+      "size": 482,
+      "sha256": "92fb8ea5f559bc6138c324c8c7c368dbf126abb649e76304ad8f73335bb72c0c"
+    },
+    {
+      "path": "normal-portfolio/design/workplace-audio-lab-20261108/index.html",
+      "size": 13929,
+      "sha256": "992c7496f5f158ee43ed032ae8061bf1fe99444f36fc31f4b1dfb95d91e10f34"
+    },
+    {
+      "path": "normal-portfolio/design/workplace-audio-lab-20261108/lab.css",
+      "size": 15607,
+      "sha256": "7147efc7a4a157ea019185b64520b3fd932815ccc1074c8f43ce875a5bcc2172"
+    },
+    {
+      "path": "normal-portfolio/design/workplace-audio-lab-20261108/lab.mjs",
+      "size": 6810,
+      "sha256": "8bc1a0b6b0fef432243bbcd77f09e1a09e1c92fe00f8da3c25c8edf31fb7b092"
+    },
+    {
+      "path": "normal-portfolio/design/workplace-audio-lab-20261108/model.mjs",
+      "size": 7702,
+      "sha256": "75db953b30ef4d8b6f9637ce4373e8426296167e12231ebec655353b115511f8"
+    },
+    {
+      "path": "normal-portfolio/design/workplace-audio-lab-20261108/session-sheet.css",
+      "size": 4795,
+      "sha256": "8f92f58cfeb2a687aaabeedbcd12cfb1f2dc9f71dbb241172e25482e06ffc183"
+    },
+    {
+      "path": "normal-portfolio/design/workplace-audio-lab-20261108/session-sheet.html",
+      "size": 11592,
+      "sha256": "a6b767c32e439f86935404c042b4d60fc1b76c7a333c30c4735381bd72c3aaba"
+    },
+    {
+      "path": "normal-portfolio/design/workplace-audio-lab-20261108/session-sheet.mjs",
+      "size": 17350,
+      "sha256": "b7f2b285a11b42cc3588a695268e44b6b3211a8119e8b8c89893d9ce2b8ba263"
+    },
+    {
+      "path": "normal-portfolio/editorial-case.css",
+      "size": 11996,
+      "sha256": "c67bed0a5b5241dcd2629b64beff734ca85ba3ebd02e518ce696d9851dc4c911"
+    },
+    {
+      "path": "normal-portfolio/editorial-toolkit.css",
+      "size": 5258,
+      "sha256": "3c65a68e995c700c91971454a88fbfbb56a8edef00d8dfabb75964063367250b"
+    },
+    {
+      "path": "normal-portfolio/editorial.css",
+      "size": 14463,
+      "sha256": "a4beb677f28e40e0d838710eb26f48ff9638be7c4fa57c01b4f14133138ccabf"
+    },
+    {
+      "path": "normal-portfolio/footer-ui.css",
+      "size": 3610,
+      "sha256": "278aa717d50fa640c2aa765a1a5bebc36daef5ae7ae252f3faebaa8d6d2016d1"
+    },
+    {
+      "path": "normal-portfolio/giggles-evidence.js",
+      "size": 37022,
+      "sha256": "2dfe1db8debc98b3bf92abd941e48307db7ea99bf6fa2add5c6e7da1c324a2c4"
+    },
+    {
+      "path": "normal-portfolio/giggles-final-data.js",
+      "size": 5456,
+      "sha256": "59a6f252b13832e6d0a72f20be8fb9c6b8f17bd2d56d5b7c1a15f5d34d0d3075"
+    },
+    {
+      "path": "normal-portfolio/giggles-photo-data.js",
+      "size": 2648,
+      "sha256": "020d1e204479627c6c412e12531df9fac8a5eed397d40fe7d989278118d03737"
+    },
+    {
+      "path": "normal-portfolio/giggles-presentation.js",
+      "size": 702,
+      "sha256": "6c4de065ac17e2153b74d2fdd7982194ac8eda5d3d75ab43882a11a662382ebe"
+    },
+    {
+      "path": "normal-portfolio/identity.css",
+      "size": 1302,
+      "sha256": "61df77a05ece47d9e4ed9e5852f8a82c7215b621ecd8d084534c20383ca1e151"
+    },
+    {
+      "path": "normal-portfolio/index.html",
+      "size": 19948,
+      "sha256": "229b603dc3efaf0dabc80f2fd5f49c9b1e54175d127bb39bb6915c288a6228c5"
+    },
+    {
+      "path": "normal-portfolio/jan-concept-data.js",
+      "size": 14271,
+      "sha256": "0eb7db3cb1f9e70105050e6787474bb2410af12c36bdc78f9447983077144dfc"
+    },
+    {
+      "path": "normal-portfolio/jan-evidence.js",
+      "size": 3476,
+      "sha256": "1a4cf6f2880d42fb4fae7a2ded5c007379af0d60c7def1f72a3fbeb2e92ee9ae"
+    },
+    {
+      "path": "normal-portfolio/map.html",
+      "size": 13747,
+      "sha256": "606029cad8b33a079e9490ede14ddef04a339baecbf74690f01c7cc3c9b6e47b"
+    },
+    {
+      "path": "normal-portfolio/mode-entry.js",
+      "size": 1237,
+      "sha256": "20ce696c9f488cdbd488ab2a986ce4978f8fdf1b8ad89de41f731706be80163e"
+    },
+    {
+      "path": "normal-portfolio/mode-selector.css",
+      "size": 6235,
+      "sha256": "ddcd7f25e97d1b5262d8319b0533491c08b575930130aa516e55d5f7bd56dce7"
+    },
+    {
+      "path": "normal-portfolio/mode-selector.js",
+      "size": 5892,
+      "sha256": "a4264ac44fecb4e05cf09d313fba8adc41eb90d779057b35a377de55389b1ce8"
+    },
+    {
+      "path": "normal-portfolio/normal-projects.js",
+      "size": 12972,
+      "sha256": "53902d5761df7533727b0ebeb692e37d679eb4e39886b55f21ecdf781610f86f"
+    },
+    {
+      "path": "normal-portfolio/personal-sections.css",
+      "size": 5372,
+      "sha256": "265a48ae35a82ba35cc4d2aad11cb3f1530d4d341ba7fa1e3d8566cc07cd50e0"
+    },
+    {
+      "path": "normal-portfolio/photo-carousel.css",
+      "size": 2262,
+      "sha256": "da9ba729a847a97046ad213562fb5eebc6f174bc53480ed53fd9d167928fafad"
+    },
+    {
+      "path": "normal-portfolio/photo-carousel.js",
+      "size": 10029,
+      "sha256": "93c1c06e8f6389d52f9d016fb54df70872873a146f839a3a468e604d1efad623"
+    },
+    {
+      "path": "normal-portfolio/pixel-mania-evidence.js",
+      "size": 28406,
+      "sha256": "ba216945ca63e1427d67e5081609bc6d9ba18b6d2e2a88299a3bf87baff99d33"
+    },
+    {
+      "path": "normal-portfolio/pixel-mania-original-data.js",
+      "size": 8261,
+      "sha256": "baaa00252d5c60195b9557f5de71eb3af5cc5194b6d2b4d7ae238f8253889ed9"
+    },
+    {
+      "path": "normal-portfolio/pixel-mania-presentation.css",
+      "size": 10324,
+      "sha256": "4e12db6837b6ecd1fd5f29b4dfc5ec0b056e00c98932634c5762931ee79a04e2"
+    },
+    {
+      "path": "normal-portfolio/pixel-mania-presentation.js",
+      "size": 8750,
+      "sha256": "066f094cb4c70eda17d48de442128a1d8415d02734150ef7eff0d179b1ce3277"
+    },
+    {
+      "path": "normal-portfolio/pixel-mania-source-data.js",
+      "size": 3533,
+      "sha256": "a835962edfa0d57bf74ab41a419d88e269759374697860ffa69495b8f4379706"
+    },
+    {
+      "path": "normal-portfolio/portfolio-extras.css",
+      "size": 8007,
+      "sha256": "4f20274a98f19746ef2153fdd4a60f2a095138bca0450eb5a87c15f8fdf11475"
+    },
+    {
+      "path": "normal-portfolio/portfolio-extras.js",
+      "size": 21355,
+      "sha256": "16ab741e73d60d0b7622653e0f1292bb92686e7c7e3e74536d7e06bdd055a0d6"
+    },
+    {
+      "path": "normal-portfolio/portfolio-motion.css",
+      "size": 3674,
+      "sha256": "5c881ce70ae7a841f6b610c464164b9718922da691e25494f33773f594d12b33"
+    },
+    {
+      "path": "normal-portfolio/portfolio-motion.js",
+      "size": 14247,
+      "sha256": "7f6a91dd8ec30e5edf35f02b8066f342afa18e4dc95b2ad61cc9a98ac89a7b80"
+    },
+    {
+      "path": "normal-portfolio/portfolio.js",
+      "size": 20286,
+      "sha256": "285c1da00526bcbd826861ca04555d1b25c40ec2c184422e21416ff634558ed7"
+    },
+    {
+      "path": "normal-portfolio/process-data.js",
+      "size": 7682,
+      "sha256": "bc322ac1a8ae9b580433331e4ed790c5cd23d1a9600372923c7e8f76f6f8bce9"
+    },
+    {
+      "path": "normal-portfolio/project-cover-ui.css",
+      "size": 2785,
+      "sha256": "f7000939361683b4515cbdb224be95854208ce74c4331d4a22970fc9605b3f90"
+    },
+    {
+      "path": "normal-portfolio/project-research-evidence.js",
+      "size": 13984,
+      "sha256": "23f4a834da438c64340d8d3b68ef8deea9c9fd5237ebd2d271cade420139089a"
+    },
+    {
+      "path": "normal-portfolio/refinements.css",
+      "size": 2013,
+      "sha256": "fc855fb03cae70fd146d77817ffc0851b3f2092bb0081eff1ea4af37bdf1e8b9"
+    },
+    {
+      "path": "normal-portfolio/resume-content.json",
+      "size": 7548,
+      "sha256": "b06e9b11ce78832bb257ccb848e04a3b755c4d625ca9e24a808741f42dbd5298"
+    },
+    {
+      "path": "normal-portfolio/resume-ui.css",
+      "size": 8741,
+      "sha256": "a48f9aaee06d7571d4ee7800ab28de274afc31083567b53b68d981d79b43fd26"
+    },
+    {
+      "path": "normal-portfolio/resume-ui.js",
+      "size": 10613,
+      "sha256": "50d9a43d5f505451397543cf590a58d743113cc40cf93f1cdbf64485d2e8b6ef"
+    },
+    {
+      "path": "normal-portfolio/sections.css",
+      "size": 7249,
+      "sha256": "0e8c598397529d0a04f8434f8d7ff0bf3425799d7ad0ff49ff35a5ba8b773102"
+    },
+    {
+      "path": "normal-portfolio/styles.css",
+      "size": 13895,
+      "sha256": "f977b82e3648cc03b4b494cf7bb6553f78134a0596f18f6cfd87638cf9b5164d"
+    },
+    {
+      "path": "normal-portfolio/syringe-evidence.js",
+      "size": 28779,
+      "sha256": "28e3d8aa945a6144f4f89936bdbc8afe2b355b3b67f499562740620104a7edf3"
+    },
+    {
+      "path": "normal-portfolio/toolkit-motion.css",
+      "size": 2862,
+      "sha256": "e48a2cbcb5c6d17b2ee5280ce2e7a8a52a35bdc52c2d19fbe49e2ea39c162cb0"
+    },
+    {
+      "path": "normal-portfolio/toolkit-resume.js",
+      "size": 2183,
+      "sha256": "7d7fcaf9fe260e04e2bbc9796cee4219feae1b0f0b4661a6fa35a41058722cd1"
+    },
+    {
+      "path": "normal-portfolio/toolkit.css",
+      "size": 5678,
+      "sha256": "5d6bd0fe2544a611051f1b44c89c3068d439f36d58b080d05ce4daee89421bbe"
+    },
+    {
+      "path": "normal-portfolio/toolkit.js",
+      "size": 17175,
+      "sha256": "fb75e0ff38f0d8d27856fe0e3f61a0cfeb286ba633ae8b46bdc1ee6de122e0c7"
+    },
+    {
+      "path": "normal-portfolio/typography.css",
+      "size": 343,
+      "sha256": "d2d82ff3fd01c9dec3bafceb620ac54789324ee06984c86150ee8ea325664769"
+    },
+    {
+      "path": "normal-portfolio/welcome-entry.js",
+      "size": 173,
+      "sha256": "ea859d108844b88d9510ef8470da46fa1ab0976354cd79f24232d0b4e6616f58"
+    },
+    {
+      "path": "normal-portfolio/welcome-intro.css",
+      "size": 3238,
+      "sha256": "7f81b8c518616e183a596fadd1e3ac95a4306cfb38b19aa219cae914acce9f47"
+    },
+    {
+      "path": "normal-portfolio/welcome-intro.js",
+      "size": 12165,
+      "sha256": "f07ce10bee6893ab8e69d929430ee3f8334494b515733125471632559eca9fc4"
+    },
+    {
+      "path": "normal-portfolio/workplace-mode-evidence.js",
+      "size": 36682,
+      "sha256": "33c69c3aea172f3ccd441c673800f49eb7fdbaeac3e876a945696dcd308b705f"
+    },
+    {
+      "path": "robots.txt",
+      "size": 93,
+      "sha256": "69a7561997a5ca494902fccfca8219d1d6c102320b32e5fdadb0a88cd0563d0e"
+    },
+    {
+      "path": "sitemap.xml",
+      "size": 507,
+      "sha256": "8b145adefb53ae115b138cc590b1d79d4947e91a5ebaa314e44181d880645617"
+    }
+  ]
+}

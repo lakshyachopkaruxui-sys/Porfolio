@@ -1,0 +1,266 @@
+/* Unique family names keep original game fonts within explicitly named samples. */
+@font-face {
+  font-family: 'Pixel Mania Press Start';
+  src: url('./assets/cases/pixel-mania/elements/fonts/PressStart2P-400.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pixel Mania JetBrains';
+  src: url('./assets/cases/pixel-mania/elements/fonts/JetBrainsMono-VF.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+}
+
+/* Individual project specimens share the Normal page's quiet editorial frame. */
+#case-reader[data-project="pixel-mania"] .pixel-specimen {
+  margin: 36px 0 52px;
+  min-width: 0;
+  color: var(--ink);
+  font-family: var(--body, 'DM Sans', Arial, sans-serif);
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen :is(ul, ol) {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen-title {
+  margin: 0 0 24px;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -.02em;
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen :is(.pixel-specimen-description, .pixel-specimen-caption) {
+  max-width: 72ch;
+  margin: 0 0 24px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen .pixel-specimen-caption { margin: 24px 0 0; }
+#case-reader[data-project="pixel-mania"] .pixel-specimen-grid,
+#case-reader[data-project="pixel-mania"] .pixel-specimen-group-items {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 30px 24px;
+  min-width: 0;
+  align-items: start;
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen :is(.pixel-specimen-cell, .pixel-specimen-group, .pixel-specimen-item) {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen-group { grid-column: 1 / -1; }
+#case-reader[data-project="pixel-mania"] .pixel-specimen-group-title {
+  margin: 0 0 18px;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen-group-note {
+  max-width: 70ch;
+  margin: 0 0 20px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen-index {
+  display: block;
+  margin-bottom: 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen-media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen-media[data-surface] {
+  padding: 24px;
+  border-radius: 12px;
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen-media[data-surface="blue"] { background: #3300ff; }
+#case-reader[data-project="pixel-mania"] .pixel-specimen-media[data-surface="ink"] { background: #292929; }
+#case-reader[data-project="pixel-mania"] .pixel-specimen-media[data-surface="teal"] { background: #25988e; }
+#case-reader[data-project="pixel-mania"] .pixel-specimen-image {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 280px;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  object-fit: contain;
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen .pixel-specimen-image-link {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen .pixel-specimen-item-caption {
+  display: grid;
+  gap: 6px;
+  max-width: 64ch;
+  margin: 18px 0 0;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen-label {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen-value {
+  font-size: 14px;
+  color: var(--ink);
+  font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen :is(.pixel-specimen-role, .pixel-specimen-detail) { display: block; }
+#case-reader[data-project="pixel-mania"] .pixel-specimen-swatch {
+  display: block;
+  width: 100%;
+  max-width: 140px;
+  aspect-ratio: 1.5;
+  border: 1px solid #29292922;
+  border-radius: 8px;
+}
+#case-reader[data-project="pixel-mania"] :is(.pixel-specimen-palette, .pixel-specimen-rules) :is(.pixel-specimen-grid, .pixel-specimen-group-items) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen-rules .pixel-specimen-swatch {
+  max-width: 72px;
+  aspect-ratio: 1;
+  border: 1px solid #292929;
+  border-radius: 0;
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen-unit {
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin: 20px 0;
+  background: #fffaee;
+  border: 2px solid #292929;
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen-board {
+  display: grid;
+  width: min(100%, 250px);
+  gap: 1px;
+  padding: 1px;
+  background: #292929;
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen-board-cell { background: #fffaee; }
+#case-reader[data-project="pixel-mania"] .pixel-specimen-space-track {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  height: 12px;
+  margin-block: 12px;
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen-space-bar {
+  display: block;
+  height: 12px;
+  background: var(--ink);
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen-origin .pixel-specimen-item {
+  display: grid;
+  grid-template-rows: 220px auto;
+  align-items: center;
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen-origin .pixel-specimen-item-caption { align-self: start; }
+#case-reader[data-project="pixel-mania"] .pixel-specimen-origin .pixel-specimen-media { height: 220px; }
+#case-reader[data-project="pixel-mania"] .pixel-specimen-origin .pixel-specimen-image { max-height: 220px; }
+#case-reader[data-project="pixel-mania"] .pixel-specimen-origin .pixel-specimen-cell:nth-child(1) .pixel-specimen-image { width: 160px; }
+#case-reader[data-project="pixel-mania"] .pixel-specimen-origin .pixel-specimen-cell:nth-child(2) .pixel-specimen-image { width: 80px; }
+#case-reader[data-project="pixel-mania"] .pixel-specimen-origin .pixel-specimen-cell:nth-child(3) .pixel-specimen-image { width: 100%; }
+#case-reader[data-project="pixel-mania"] .pixel-specimen-origin[data-pixel-variant="state-trace"] .pixel-specimen-cell:nth-child(-n+2) .pixel-specimen-image { width: 96px; }
+#case-reader[data-project="pixel-mania"] .pixel-specimen-origin .pixel-specimen-unit { width: 80px; height: 80px; justify-self: center; }
+#case-reader[data-project="pixel-mania"] .pixel-specimen-type-sample {
+  margin: 0;
+  font-size: clamp(24px, 4vw, 40px);
+  line-height: 1.5;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen-components .pixel-specimen-media {
+  justify-content: flex-start;
+  min-height: 100px;
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen-components .pixel-specimen-image { max-height: 170px; }
+#case-reader[data-project="pixel-mania"] .pixel-specimen-components [data-asset-family="cell"] .pixel-specimen-image { width: 72px; }
+#case-reader[data-project="pixel-mania"] .pixel-specimen-components [data-asset-family="tutorial"] .pixel-specimen-image { width: 84px; }
+#case-reader[data-project="pixel-mania"] .pixel-specimen-motion .pixel-specimen-media { min-height: 130px; }
+#case-reader[data-project="pixel-mania"] .pixel-specimen-motion .pixel-specimen-image { max-height: 190px; max-width: min(100%, 240px); }
+#case-reader[data-project="pixel-mania"] :is(.pixel-specimen-flow, .pixel-specimen-pedia) .pixel-specimen-image {
+  width: 100%;
+  max-height: none;
+}
+#case-reader[data-project="pixel-mania"] .pixel-specimen-pedia .pixel-specimen-media { max-width: 310px; margin-inline: auto; }
+#case-reader[data-project="pixel-mania"] .pixel-specimen-unavailable {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+#case-reader[data-project="pixel-mania"] .story-figure-photo > a,
+#case-reader[data-project="pixel-mania"] #case-ideation .story-component-grid .story-figure > a {
+  padding: 0;
+  min-height: 0;
+  height: auto;
+  background: transparent;
+  border: 0;
+}
+#case-reader[data-project="pixel-mania"] #case-ideation .story-component-grid .story-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  max-height: none;
+}
+@media (min-width: 520px) {
+  #case-reader[data-project="pixel-mania"] :is(.pixel-specimen-palette, .pixel-specimen-rules) :is(.pixel-specimen-grid, .pixel-specimen-group-items) {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+  #case-reader[data-project="pixel-mania"] :is(.pixel-specimen-type, .pixel-specimen-components, .pixel-specimen-motion, .pixel-specimen-flow, .pixel-specimen-pedia) :is(.pixel-specimen-grid, .pixel-specimen-group-items) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 850px) {
+  #case-reader[data-project="pixel-mania"] .pixel-specimen-origin .pixel-specimen-grid,
+  #case-reader[data-project="pixel-mania"] .pixel-specimen-components .pixel-specimen-grid,
+  #case-reader[data-project="pixel-mania"] .pixel-specimen-pedia .pixel-specimen-grid,
+  #case-reader[data-project="pixel-mania"] :is(.pixel-specimen-components, .pixel-specimen-motion, .pixel-specimen-pedia) .pixel-specimen-group-items {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  #case-reader[data-project="pixel-mania"] .pixel-specimen-flow .pixel-specimen-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  #case-reader[data-project="pixel-mania"] .pixel-specimen-motion .pixel-specimen-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  #case-reader[data-project="pixel-mania"] .pixel-specimen-components .pixel-specimen-group-items[data-item-count="4"] {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  #case-reader[data-project="pixel-mania"] .pixel-specimen-components .pixel-specimen-group-items[data-item-count="5"] {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}

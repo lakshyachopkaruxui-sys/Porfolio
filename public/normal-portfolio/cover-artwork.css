@@ -1,0 +1,82 @@
+/* Load after project-cover-ui.css. Only the Giggles presentation is affected. */
+.editorial-portfolio .project-grid .art-giggles.is-project-cover.has-giggles-composition {
+  position: relative;
+  display: block;
+  height: auto;
+  aspect-ratio: 5 / 4;
+  overflow: hidden;
+  isolation: isolate;
+  background: #dfe8f3;
+}
+
+.editorial-portfolio .project-grid .art-giggles.is-project-cover img.giggles-board-art {
+  position: absolute;
+  z-index: 0;
+  left: 5%;
+  top: 4%;
+  width: 80%;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  border: 0;
+  border-radius: 3px;
+  object-fit: contain;
+  object-position: center;
+  transform: rotate(-5deg);
+  transform-origin: 50% 50%;
+  transition: none;
+  box-shadow: 0 10px 22px rgb(33 54 81 / 14%);
+}
+
+.editorial-portfolio .project-grid .art-giggles.is-project-cover .giggles-device {
+  position: absolute;
+  z-index: 1;
+  right: 3%;
+  bottom: 4%;
+  width: 64%;
+  padding: 5px;
+  border: 1px solid #24333c;
+  border-radius: 13px;
+  background: #24333c;
+  box-shadow: 0 8px 16px rgb(24 39 55 / 20%);
+  transform: rotate(3deg);
+  pointer-events: none;
+}
+
+.editorial-portfolio .project-grid .art-giggles.is-project-cover .giggles-device-screen {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+  border-radius: 7px;
+  background: #fcf6ed;
+}
+
+/* Exact source rectangle: x856, y80, width720, height360, within1650×1821.
+   The complete sheet stays unchanged; CSS reveals only Start the Game. */
+.editorial-portfolio .project-grid .art-giggles.is-project-cover .giggles-device-screen img.giggles-start-preview {
+  position: absolute;
+  left: -118.888889%;
+  top: -22.222222%;
+  width: 229.166667%;
+  height: 505.833333%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  object-fit: fill;
+  object-position: initial;
+  transform: none;
+  transition: none;
+  box-shadow: none;
+}
+
+/* This composition is static in every motion mode. Parent card animations
+   already honor reduced motion; no independent animation is introduced. */
+@media (prefers-reduced-motion: reduce) {
+  .editorial-portfolio .project-grid .art-giggles.is-project-cover.has-giggles-composition img {
+    transition: none;
+  }
+}

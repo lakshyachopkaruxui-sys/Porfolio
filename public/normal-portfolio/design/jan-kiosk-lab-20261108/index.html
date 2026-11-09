@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Jan Aushadhi · Kiosk UX lab</title>
+  <link rel="icon" href="../../assets/identity/shared-curve/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./lab.css?v=20261108-highfi">
+<!-- portfolio-publishing:start -->
+<link rel="canonical" href="https://lakshyachopkar.pages.dev/normal-portfolio/design/jan-kiosk-lab-20261108/">
+<meta property="og:url" content="https://lakshyachopkar.pages.dev/normal-portfolio/design/jan-kiosk-lab-20261108/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jan Aushadhi · Kiosk UX lab">
+<meta property="og:image" content="https://lakshyachopkar.pages.dev/normal-portfolio/assets/identity/shared-curve/icon-512.png">
+<meta name="twitter:card" content="summary">
+<!-- portfolio-publishing:end -->
+</head>
+<body>
+  <a class="skip" href="#kiosk">Skip to the demo</a>
+  <header class="lab-header">
+    <a href="../../#project-jan-aushadhi">Back to Jan Aushadhi case study</a>
+    <p class="eyebrow">November 2026 · New AI-assisted UX continuation</p>
+    <h1>A pharmacy-side kiosk flow</h1>
+    <p>Try a small purchase-and-help flow with fictional items. This is a working interface simulation, not a pharmacy service or the original 2025 team work. No real card, PIN, prescription or payment is needed.</p>
+    <p class="small">One later learning exercise: our team report selected a health card and app. This kiosk exploration broadens our interface-design experience; it does not replace that direction or establish a better service.</p>
+  </header>
+  <main>
+    <section id="kiosk" class="kiosk" aria-label="Kiosk demo" tabindex="-1">
+      <div class="kiosk-brand"><span class="product-name">Jan Aushadhi<small>Medicine kiosk</small></span><span class="demo-badge">Demo only</span></div>
+      <ol id="progress" class="progress" aria-label="Purchase steps"></ol>
+      <div id="screen"></div>
+      <p id="notice" class="notice" role="status" aria-live="polite"></p>
+    </section>
+    <aside class="moderator" aria-label="Separate moderator tools">
+      <details>
+        <summary>For the moderator · scenarios and observation worksheet</summary>
+        <div class="moderator-content">
+          <h2>Scenario controls</h2>
+          <p>These controls are outside the patient flow. Starting a separate scenario clears this local demo. Status responses are scripted; no service is contacted.</p>
+          <label for="scenario">Next scenario</label>
+          <select id="scenario"></select>
+          <button id="start-scenario" type="button">Start separate scenario</button>
+          <p id="scenario-note" class="small"></p>
+          <h2>Manual observation worksheet</h2>
+          <p>Blank until you record observations. Use anonymous codes. Do not enter names, contact details, PINs, medicine names or health information. Nothing is sent or saved automatically; a page reload clears entries.</p>
+          <div class="worksheet-meta">
+            <label>Session code <input id="session-code" maxlength="30" placeholder="For example, P01"></label>
+            <label>Participant role <select id="participant-role"><option value="">Not recorded</option><option>Patient</option><option>Caregiver</option><option>Pharmacy staff</option><option>Other</option></select></label>
+            <label>Language used <input id="session-language" maxlength="60"></label>
+            <label>Setting / device <input id="session-context" maxlength="120"></label>
+          </div>
+          <div id="task-fields"></div>
+          <label for="overall-note">Overall observation / study limitations</label>
+          <textarea id="overall-note" rows="3" maxlength="3000"></textarea>
+          <div class="actions"><button id="download-notes" type="button">Download local worksheet</button><button id="download-blank" type="button" class="secondary">Download blank template</button></div>
+          <p id="export-notice" class="small" role="status"></p>
+          <p class="small">A worksheet is a research aid, not a result. No participants have been tested by this prototype. Consent and any recruitment arrangements must be handled separately.</p>
+        </div>
+      </details>
+    </aside>
+    <noscript><p>This demo needs JavaScript. The project case study remains available using the link above.</p></noscript>
+  </main>
+  <footer><p>English-only exploratory interface. Staff handoff, physical access, language support, card verification, stock, payment and collection services need real-world evaluation. No analytics, cookies, local storage or external SDKs.</p></footer>
+  <script type="module" src="./lab.mjs"></script>
+</body>
+</html>
