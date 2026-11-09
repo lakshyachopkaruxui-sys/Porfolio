@@ -29,12 +29,12 @@ export const PERSONAL_ROOMS=Object.freeze({
     id:'cloud',title:'The Cloud Lookout',eyebrow:'A REASON TO LOOK UP',
     intro:'I take photographs when something catches my eye. Clouds are a favourite. This is a little space for that quieter side of me.',
     chapters:[
-      {id:'looking-up',label:'Looking up',title:'Clouds make me pause.',body:'I love photography, especially clouds. Looking up and taking a photograph gives me a calm moment in an otherwise energetic day.',detail:'I’m usually moving around, meeting people or finding something to do. Cloud photography is one of the quieter things I return to.'},
-      {id:'noticing',label:'Framing',title:'A small piece of a big sky.',body:'Choose a view and keep a little piece of this illustrated sky. A small way to share something I love doing.',detail:'Move the frame until something catches your eye, then keep the illustrated view as a postcard. Choose View photographs to see the real skies I have photographed.'},
-      {id:'quiet',label:'A little quiet',title:'No rush from here.',body:'Singing and photographing clouds help me slow down. This corner holds a little of that quieter side of me.',detail:'Stay for a moment, change the frame, or return to the garden whenever you’re ready.'}
+      {id:'looking-up',label:'My cloud photos',title:'The skies I stop for.',body:'I take photographs when something catches my eye. Clouds are a favourite, and looking up gives me a calm moment.',detail:'I’m usually moving around, meeting people or finding something to do. Cloud photography is one of the quieter things I return to.'},
+      {id:'noticing',label:'Frame the sky',title:'A small piece of a big sky.',body:'Choose a view and keep a little piece of this illustrated sky. A small way to share something I love doing.',detail:'Move the frame until something catches your eye, then keep the illustrated view as a postcard. Explore my cloud photos to see the real skies I have photographed.'},
+      {id:'quiet',label:'A quiet moment',title:'No rush from here.',body:'Singing and photographing clouds help me slow down. This corner holds a little of that quieter side of me.',detail:'Stay for a moment, change the frame, or return to the garden whenever you’re ready.'}
     ],
     media:CLOUD_PHOTOS,
-    mediaNote:'View photographs opens my own cloud photography. The sky you explore and frame here is illustrated.'
+    mediaNote:'Explore my own cloud photography. The sky-framing activity is an illustrated space to play with a view.'
   })
 });
 

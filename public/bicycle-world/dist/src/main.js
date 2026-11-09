@@ -651,7 +651,7 @@ async function initialize(){
           onOpen(){prepareOverlay('works');history.replaceState(null,'',location.pathname+location.search+'#works-room');},
           onClose(){updateProjection();readingBackdropDrawn=false;history.replaceState(null,'',location.pathname+location.search);restoreRideUI();}
         });
-        oakLab=createOakLab({renderer,isReduced:()=>reduced,onPortfolio:showPortfolio,
+        oakLab=createOakLab({renderer,isReduced:()=>reduced,onPortfolio:showPortfolio,onPlace:openLandmark,
           onOpen(){prepareOverlay('oak');history.replaceState(null,'',location.pathname+location.search+'#oak-lab');},
           onClose(){updateProjection();readingBackdropDrawn=false;history.replaceState(null,'',location.pathname+location.search);restoreRideUI();}
         });

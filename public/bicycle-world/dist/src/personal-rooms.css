@@ -171,3 +171,31 @@
  #personal-experience[data-kind=work] .hobby-story-intro{grid-column:1;grid-row:1;}
  #personal-experience[data-kind=work] .hobby-story-hero>.hobby-story-photo{grid-column:1;grid-row:2;}
 }
+
+/* Cloud photography has a dedicated, opaque room. Its WebGL parent rests. */
+.personal-shell.has-cloud-gallery > :not(.cloud-photo-gallery){visibility:hidden;pointer-events:none}
+#personal-experience[data-kind=cloud] .personal-caption{left:clamp(24px,4vw,72px);right:clamp(24px,4vw,72px);--caption-bottom:22px;}
+#personal-experience[data-kind=cloud] .personal-caption>[data-personal-body]{font-size:17px;line-height:1.65;max-width:65ch;}
+#personal-experience[data-kind=cloud] .personal-actions{gap:12px;flex-wrap:wrap;}
+#personal-experience[data-kind=cloud] .personal-actions>[data-personal-media]{order:-2;background:#254e55;color:#fff;border:1px solid #254e55;text-decoration:none;padding:12px 20px;min-height:46px;font-size:15px;border-radius:9px;box-shadow:none;}
+#personal-experience[data-kind=cloud] .personal-actions>[data-personal-media]:hover{background:#193c42;}
+#personal-experience[data-kind=cloud] .personal-actions>[data-about-interact]{background:transparent;color:#254e55;box-shadow:none;border-color:#93aaa7;font-size:14px;min-height:44px;}
+#personal-experience[data-kind=cloud] .personal-actions>[data-personal-story]{font-size:14px;min-height:44px;}
+#personal-experience[data-kind=cloud] .personal-chapters{gap:10px;}
+#personal-experience[data-kind=cloud] .personal-chapters button{font-size:14px;min-height:44px;padding:10px 16px;}
+#personal-experience[data-kind=cloud] .personal-scene-note{font-size:12px;}
+#personal-experience[data-kind=cloud] .personal-reading>header{border:0;flex-wrap:wrap;}
+#personal-experience[data-kind=cloud] .personal-reading .personal-media-note{border:0;margin-top:24px;padding:0;font-size:15px;}
+@media(max-height:760px){
+ #personal-experience[data-kind=cloud] .personal-caption{--caption-bottom:12px;}
+ #personal-experience[data-kind=cloud] .personal-caption>[data-personal-body]{font-size:16px;line-height:1.5;}
+ #personal-experience[data-kind=cloud] .personal-chapters{margin-top:8px;}
+}
+
+/* Keep the optional shutter action quieter than the photo entrance. */
+body.hybrid-world #personal-experience[data-kind=cloud] .personal-actions>[data-about-interact]:not([data-mode-switch]){--play-action-hover:#dbe8e5;background:transparent;color:#254e55;border:1px solid #8aa5a4;box-shadow:none;min-width:0;}
+body.hybrid-world #personal-experience[data-kind=cloud] .personal-actions>[data-about-interact]:hover:not(:disabled){background:#dbe8e5;color:#254e55;border-color:#6f9394;}
+
+/* The global game controls contain two-ID selectors; scope this room's quiet controls explicitly. */
+body.hybrid-world #personal-experience[data-kind=cloud] :is(.personal-header nav>button,.about-object-prompts button,.personal-actions>[data-about-interact],.personal-sky-actions button){background:#edf4f1!important;color:#254e55!important;box-shadow:none!important;border:1px solid #8aa5a4!important;}
+body.hybrid-world #personal-experience[data-kind=cloud] :is(.personal-header nav>button,.about-object-prompts button,.personal-actions>[data-about-interact],.personal-sky-actions button):hover:not(:disabled){background:#dbe8e5!important;}

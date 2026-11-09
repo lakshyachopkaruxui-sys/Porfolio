@@ -91,7 +91,7 @@ export function createOakLabScene({onChange=()=>{},onAssetState=()=>{}}={}){
   }
   box(3.6,2.15,.10,-4.3,3.18,-5.29,p.wood);box(3.34,1.91,.025,-4.3,3.18,-5.22,p.paper);
   for(let i=0;i<4;i++)box(2.0-i*.24,.035,.012,-4.35,3.75-i*.28,-5.195,p.deepMint);
-  for(const x of [-1.45,-.3]){box(.82,1.05,.10,x,3.3,-5.28,p.timber);box(.65,.85,.02,x,3.3,-5.20,p.paper);cylinder(.12,.02,x,3.35,-5.17,p.gold);}
+  for(const x of [-7.8,-6.7]){box(.82,1.05,.10,x,3.3,-5.28,p.timber);box(.65,.85,.02,x,3.3,-5.20,p.paper);cylinder(.12,.02,x,3.35,-5.17,p.gold);}
   // Central three-partner counter, with small round selection pedestals.
   box(5.65,1.20,1.55,-2.5,.6,-.95,p.mint);box(5.95,.16,1.85,-2.5,1.28,-.95,p.paper);
   box(5.3,.06,.03,-2.5,.86,.0,p.deepMint);
@@ -100,11 +100,12 @@ export function createOakLabScene({onChange=()=>{},onAssetState=()=>{}}={}){
     createDisplayBall(['classic','ultra','master'][index],x,index);
   }
   // Collection wall: a bookcase, six storage drawers and three real previews.
-  box(4.9,3.3,.65,5.35,1.65,-4.95,p.wood);
-  for(const y of [.15,1.14,2.14,3.23])box(4.7,.10,.8,5.35,y,-4.86,p.timber);
-  for(const x of [3.02,5.35,7.68])box(.10,3.25,.8,x,1.62,-4.86,p.timber);
-  for(let i=0;i<19;i++)box(.13+(i%3)*.045,.55+(i%4)*.10,.3,3.2+i*.23,2.57,-4.65,[p.red,p.mint,p.blue,p.gold][i%4]);
-  for(const x of [3.7,5.35,7.0]){box(1.35,.7,.45,x,.64,-4.63,p.mint);box(.36,.05,.06,x,.66,-4.36,p.ink);}
+  const collectionOffset=.40; // Clear the complete third preview, including its right edge.
+  box(4.9,3.3,.65,5.35+collectionOffset,1.65,-4.95,p.wood);
+  for(const y of [.15,1.14,2.14,3.23])box(4.7,.10,.8,5.35+collectionOffset,y,-4.86,p.timber);
+  for(const x of [3.02,5.35,7.68])box(.10,3.25,.8,x+collectionOffset,1.62,-4.86,p.timber);
+  for(let i=0;i<19;i++)box(.13+(i%3)*.045,.55+(i%4)*.10,.3,3.2+collectionOffset+i*.23,2.57,-4.65,[p.red,p.mint,p.blue,p.gold][i%4]);
+  for(const x of [3.7,5.35,7.0]){box(1.35,.7,.45,x+collectionOffset,.64,-4.63,p.mint);box(.36,.05,.06,x+collectionOffset,.66,-4.36,p.ink);}
   for(const [i,x]of [-.2,1.2,2.6].entries()){
     box(1.1,1.56,.12,x,3.05,-5.28,p.wood);
     const material=new THREE.MeshBasicMaterial({color:'#dfdfbc',toneMapped:false});materials.set(`preview${i}`,material);

@@ -77,14 +77,14 @@ export function mountPlayMusic({notify = () => {}} = {}) {
     ensureLevelControl();
     const dialogs = [...document.querySelectorAll('dialog[open]')];
     const dialog = dialogs.at(-1);
-    const activeLayer = dialog?.querySelector('#listening-photo-viewer:not([hidden]),#pokemon-viewer:not([hidden]),#pokemon-index:not([hidden]),#garba-viewer:not([hidden]),.personal-media:not([hidden]),.personal-reading:not([hidden]),.personal-places:not([hidden]),.works-reading:not([hidden]),.works-index:not([hidden]),.works-inspect:not([hidden]),.works-places:not([hidden])');
+    const activeLayer = dialog?.querySelector('.cloud-photo-gallery:not([hidden]),#listening-photo-viewer:not([hidden]),#pokemon-viewer:not([hidden]),#pokemon-index:not([hidden]),#garba-viewer:not([hidden]),.personal-media:not([hidden]),.personal-reading:not([hidden]),.personal-places:not([hidden]),.works-reading:not([hidden]),.works-index:not([hidden]),.works-inspect:not([hidden]),.works-places:not([hidden]),.oak-places:not([hidden])');
     const childRoom = dialog?.querySelector('#listening-experience,#garba-experience');
     const boundary = activeLayer || childRoom || dialog || document.body;
     // Personal-room actions occupy the bottom edge. Keep optional music in
     // the existing header's flow instead of covering those actions with a dock.
-    const headerNavigation = boundary.id === 'personal-experience'
+    const headerNavigation = boundary.matches('.cloud-photo-gallery') ? boundary.querySelector('.cloud-gallery-tools') : boundary.id === 'personal-experience'
       ? boundary.querySelector('.personal-header nav')
-      : boundary.matches('.works-reading,.works-index,.works-inspect,.works-places') || ['about','work'].includes(dialog?.dataset.kind) && boundary.matches('.personal-reading,.personal-media,.personal-places') || boundary.id === 'listening-photo-viewer' || boundary.id === 'garba-viewer' ? boundary.querySelector('header')
+      : boundary.matches('.works-reading,.works-index,.works-inspect,.works-places,.oak-places') || ['about','work'].includes(dialog?.dataset.kind) && boundary.matches('.personal-reading,.personal-media,.personal-places') || boundary.id === 'listening-photo-viewer' || boundary.id === 'garba-viewer' ? boundary.querySelector('header')
       : boundary.id === 'oak-lab' ? boundary.querySelector('.oak-tools')
       : boundary.id === 'help' || boundary.id === 'world-map' ? boundary.querySelector('.reader-top') : null;
     const parent = headerNavigation || boundary;
@@ -130,7 +130,7 @@ export function mountPlayMusic({notify = () => {}} = {}) {
   // Riding updates HUD text and visibility on every frame. Those mutations do
   // not change audio ownership or the active modal, so do not rescan the whole
   // document for them. Media events and visibilitychange remain synchronous.
-  const relevantNodes = 'dialog,#pokemon-viewer,#pokemon-index,#listening-experience,#listening-photo-viewer,#garba-experience,#garba-viewer,.personal-media,.personal-reading,.personal-places,.works-reading,.works-index,.works-inspect,.works-places,[data-play-music],[data-play-music-track],[data-play-music-level],video,audio:not([data-garden-music])';
+  const relevantNodes = 'dialog,.cloud-photo-gallery,#pokemon-viewer,#pokemon-index,#listening-experience,#listening-photo-viewer,#garba-experience,#garba-viewer,.personal-media,.personal-reading,.personal-places,.works-reading,.works-index,.works-inspect,.works-places,.oak-places,[data-play-music],[data-play-music-track],[data-play-music-level],video,audio:not([data-garden-music])';
   function hasRelevantNode(node) {
     if (!node?.matches || node.closest('.play-music-dock')) return false;
     if (node.matches(relevantNodes)) return true;

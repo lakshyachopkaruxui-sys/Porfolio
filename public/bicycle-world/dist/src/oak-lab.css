@@ -73,3 +73,13 @@
 #oak-lab .oak-build-steps{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;}
 #oak-lab .oak-build-steps button{display:flex;align-items:center;gap:7px;padding:9px 10px;font-size:12px;white-space:nowrap;}
 #oak-lab .oak-build-steps button>span:first-child{font-size:10px;opacity:.75;}
+/* The same destination layer used by the other rooms; the scene pauses beneath it. */
+#oak-lab .oak-places{position:absolute;inset:0;z-index:8;overflow:auto;overscroll-behavior:contain;background:var(--oak-paper);padding:28px max(28px,calc((100vw - 960px)/2));}
+#oak-lab .oak-places>header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:-28px;z-index:2;padding:20px 0;background:var(--oak-paper);margin-bottom:24px;}
+#oak-lab .oak-places h2{font-family:'Mochiy Pop P One',sans-serif;font-size:27px;line-height:1.5;margin:0 auto 0 0;}
+#oak-lab [data-oak-destinations]{display:grid;padding-bottom:24px;}
+#oak-lab [data-oak-destinations]>button{padding:24px 16px;text-align:left;border-width:0 0 1px;border-radius:0;background:transparent;font-size:20px;font-weight:500;min-height:85px;}
+#oak-lab [data-oak-destinations]>button:hover{background:var(--oak-mint);}
+#oak-lab [data-oak-destinations]>button[aria-current=page]{box-shadow:inset 3px 0 var(--oak-green);font-weight:700;}
+#oak-lab .oak-places>header>.play-music-dock{position:static;flex:none;margin:0;}
+@media(max-width:760px){#oak-lab .oak-places{padding:20px 24px;}#oak-lab .oak-places>header{top:-20px;}#oak-lab .oak-places h2{font-size:22px;}#oak-lab .oak-header{gap:12px;flex-wrap:wrap;}#oak-lab .oak-header nav{flex-wrap:wrap;}}

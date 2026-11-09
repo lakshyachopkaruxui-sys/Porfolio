@@ -2,7 +2,7 @@
 
 This is the clean generated publishing repository for both Normal and Play. Keep the local workspace and its source files separately. Do not edit generated pages here.
 
-Cloudflare Pages settings: framework None; production branch main; build command npm run build; build output public; Node 22. The functions directory is server-side and must remain outside public. The Pages project name lakshyachopkar and https://lakshyachopkar.pages.dev/ are proposed until Cloudflare confirms availability.
+Cloudflare Pages settings: framework None; production branch main; build command npm run build; build output public; Node 22. The functions directory is server-side and must remain outside public. The Pages project name lakshyachopkar and https://lakshyachopkar.com/ are proposed until Cloudflare confirms availability.
 
 Set PUBLIC_ORIGIN to the final HTTPS origin in both production build/runtime settings. GOOGLE_SITE_VERIFICATION is an optional public Search Console token. GEMINI_API_KEY is an optional production-only secret; without it the portfolio works and the live assistant reports unavailable. Do not put secrets in this repository.
 
