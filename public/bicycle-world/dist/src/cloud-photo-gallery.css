@@ -68,3 +68,41 @@
 #personal-experience .cloud-photo-gallery{overflow:clip}
 
 #personal-experience .cloud-gallery-tools>.play-music-dock{position:static;inset:auto;display:flex;transform:none;margin:0;}
+
+/* Inside the camera: one illuminated photograph, carried by a dark film reel. */
+#personal-experience .cloud-photo-gallery{--cloud-ink:#f1e9d9;--cloud-soft:#b9c5c0;--cloud-paper:#263c3b;background:radial-gradient(ellipse at 50% 45%,#3c5550 0%,#1b302f 60%,#142624 100%);padding:clamp(20px,3vw,40px)}
+#personal-experience .cloud-photo-gallery::before{display:none}
+#personal-experience .cloud-photo-gallery button{border-color:#73847a;background:#263c3b;color:#f1e9d9;border-radius:7px}
+#personal-experience .cloud-photo-gallery button:hover:not(:disabled){background:#354e48}
+#personal-experience .cloud-photo-gallery button:focus-visible{outline-color:#e9b46f}
+.cloud-gallery-header h2{font-size:clamp(23px,2.25vw,33px)}
+.cloud-gallery-eyebrow{color:#d6b47c;letter-spacing:.16em}
+.cloud-gallery-intro{color:#b9c5c0;margin-top:8px}
+.cloud-gallery-rolls{display:flex;justify-content:center;gap:8px;flex:none;margin:18px 0 8px}
+#personal-experience .cloud-gallery-rolls button{padding:10px 20px;min-height:44px;background:transparent;border-color:#637970}
+#personal-experience .cloud-gallery-rolls button[aria-pressed="true"]{color:#202f2b;background:#efd6a6;border-color:#efd6a6;box-shadow:inset 0 -2px #b08d56}
+#personal-experience .cloud-photo-gallery .cloud-gallery-rolls button[aria-pressed="true"]:hover{background:#f4e1c2;color:#202f2b}
+.cloud-gallery-stage{margin:0 calc(-1 * clamp(20px,3vw,40px));perspective:1500px;touch-action:pan-y}
+.cloud-gallery-stage::before,.cloud-gallery-stage::after{content:"";position:absolute;left:0;right:0;height:12px;z-index:4;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0 14px,#d7d5bd88 14px 28px,transparent 28px 42px);opacity:.55}
+.cloud-gallery-stage::before{top:8px}.cloud-gallery-stage::after{bottom:8px}
+#personal-experience .cloud-photo-gallery button.cloud-photo-card{padding:0;border:14px solid #0e1f1c;border-block-width:22px;border-radius:2px;background:#0e1f1c;box-shadow:0 20px 35px #0005;overflow:hidden;width:min(33vw,calc((100cqh - 70px) * var(--cloud-photo-ratio)))}
+#personal-experience .cloud-photo-gallery button.cloud-photo-card[data-cloud-slot="0"]{width:min(72vw,calc((100cqh - 60px) * var(--cloud-photo-ratio)));box-shadow:0 20px 45px #0006}
+#personal-experience .cloud-photo-gallery button.cloud-photo-card[data-cloud-slot="-1"]{left:7%;transform:translate(-50%,-50%) rotateY(22deg) scale(.81);opacity:.5}
+#personal-experience .cloud-photo-gallery button.cloud-photo-card[data-cloud-slot="1"]{left:93%;transform:translate(-50%,-50%) rotateY(-22deg) scale(.81);opacity:.5}
+.cloud-photo-edge-caption{color:#d5ddcf;background:#0e1f1cdd;font-size:11px;padding:7px}
+.cloud-photo-card img{object-fit:contain;background:#0e1f1c;user-select:none;-webkit-user-drag:none}
+.cloud-gallery-caption p{color:#d6b47c;font-variant-numeric:tabular-nums}
+.cloud-gallery-caption h3{font-family:"DM Sans",sans-serif!important;font-weight:500!important;font-size:19px;letter-spacing:0}
+.cloud-gallery-footer{padding-top:12px}.cloud-gallery-actions{margin-top:12px}
+#personal-experience .cloud-photo-gallery button.cloud-gallery-primary{background:#ead5b2;color:#20342e;border-color:#ead5b2}
+#personal-experience .cloud-photo-gallery button.cloud-gallery-primary:hover{background:#f4e1c2}
+.cloud-gallery-bottom{margin-top:10px}.cloud-gallery-bottom>p{color:#b9c5c0}
+.cloud-gallery-index-card img{background:#132722}
+#personal-experience .cloud-photo-gallery button.cloud-gallery-index-card[aria-pressed="true"]{border-color:#e9bd7d}
+#personal-experience .cloud-photo-gallery[data-mode="full"]{background:#122321}
+#personal-experience .cloud-photo-gallery[data-mode="full"] button.cloud-photo-card[data-cloud-slot="0"]{background:transparent}
+#personal-experience .cloud-photo-gallery[data-mode="full"] .cloud-gallery-stage::before,
+#personal-experience .cloud-photo-gallery[data-mode="full"] .cloud-gallery-stage::after{display:none}
+.cloud-gallery-load [data-cloud-status]{color:#f1e9d9}
+@media(max-height:760px){.cloud-gallery-rolls{margin:10px 0 4px}.cloud-gallery-header h2{font-size:24px}.cloud-gallery-footer{padding-top:6px}.cloud-gallery-actions{margin-top:8px}.cloud-gallery-caption h3{font-size:17px}}
+@media(max-height:580px){#personal-experience .cloud-photo-gallery{padding:12px 22px}.cloud-gallery-rolls{position:absolute;right:22px;bottom:68px;z-index:8;justify-content:flex-end;margin:0}.cloud-gallery-rolls button{font-size:12px!important;padding:8px 12px!important}.cloud-gallery-header h2{font-size:20px}.cloud-gallery-caption h3{font-size:16px}.cloud-gallery-caption p{font-size:11px}}

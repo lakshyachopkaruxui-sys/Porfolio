@@ -1,6 +1,6 @@
 import {HOBBIES_CONTENT} from './hobbies-content.js';
 import {ABOUT_CONTENT} from './about-content.js';
-import {CLOUD_PHOTOS} from './cloud-photo-data.js';
+import {PHOTOGRAPHY_ROLLS} from './photography-rolls.js';
 import {HOBBY_PHOTOS} from './personal-photo-data.js';
 import {SINGING_RECORDING} from './personal-recording-data.js';
 
@@ -26,15 +26,14 @@ export const PERSONAL_ROOMS=Object.freeze({
     mediaNote:'Enter the listening room in Hobbies for my spontaneous recording, Tiny Desk performance and photographs from Junoon and a family function.'
   }),
   cloud:freezeRoom({
-    id:'cloud',title:'The Cloud Lookout',eyebrow:'A REASON TO LOOK UP',
-    intro:'I take photographs when something catches my eye. Clouds are a favourite. This is a little space for that quieter side of me.',
+    id:'cloud',title:'The Cloud Lookout',eyebrow:'THROUGH MY PHONE',
+    intro:'Clouds are a favourite, but my camera roll holds more than the sky. I take photographs when something catches my eye.',
     chapters:[
-      {id:'looking-up',label:'My cloud photos',title:'The skies I stop for.',body:'I take photographs when something catches my eye. Clouds are a favourite, and looking up gives me a calm moment.',detail:'I’m usually moving around, meeting people or finding something to do. Cloud photography is one of the quieter things I return to.'},
-      {id:'noticing',label:'Frame the sky',title:'A small piece of a big sky.',body:'Choose a view and keep a little piece of this illustrated sky. A small way to share something I love doing.',detail:'Move the frame until something catches your eye, then keep the illustrated view as a postcard. Explore my cloud photos to see the real skies I have photographed.'},
-      {id:'quiet',label:'A quiet moment',title:'No rush from here.',body:'Singing and photographing clouds help me slow down. This corner holds a little of that quieter side of me.',detail:'Stay for a moment, change the frame, or return to the garden whenever you’re ready.'}
+      {id:'clouds',label:'Clouds',title:'The skies I stop for.',body:'Looking up gives me a calm moment. Step into the camera to see a few skies I’ve photographed.',detail:'I’m often moving around or meeting people. Photographing clouds gives me a reason to pause and notice what is overhead.'},
+      {id:'mobile-photography',label:'Mobile photography',title:'Small things. Worth a second look.',body:'A flower, a reflection, a little light. I take my phone out when something catches my eye.',detail:'Photography is something I do for the feeling of it. These are moments I wanted to keep, alongside the clouds I love photographing.'}
     ],
-    media:CLOUD_PHOTOS,
-    mediaNote:'Explore my own cloud photography. The sky-framing activity is an illustrated space to play with a view.'
+    media:PHOTOGRAPHY_ROLLS.flatMap(roll=>roll.photos),
+    mediaNote:'My own photographs, taken on my phone. Choose Clouds or Mobile photography inside the viewfinder.'
   })
 });
 

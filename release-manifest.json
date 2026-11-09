@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-09T13:54:47.276Z",
+  "generatedAt": "2026-11-09T14:20:18.330Z",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 686,
-      "sha256": "213a8c224f4d803223ee64b695d92e359491f2abb17c231ad87fa995d3bd34a8"
+      "sha256": "5ebedf39fc5f20f71d0ffde64c5c26914c6fbf3bfc0d6af0a7a9470bc846bb90"
     },
     {
       "path": "_redirects",
@@ -261,6 +261,116 @@
       "path": "bicycle-world/dist/assets/personal/lakshya-portrait.webp",
       "size": 89146,
       "sha256": "15cf61e1c999f77bc4d8e960e4b29c36bdd7ba2297f947a802acca785e200220"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography/a-closer-look.webp",
+      "size": 123104,
+      "sha256": "56a1a301094314e9eeff50604505a3a2ddfae124f9da1f7afaa3201b8a3cf664"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography/a-tree-in-bloom.webp",
+      "size": 269888,
+      "sha256": "535f2183e1d2f05bc952ff187c1e9ca1ecdbc0ca2e2f63e94b0f593c44a42d41"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography/between-the-palms.webp",
+      "size": 299612,
+      "sha256": "22414ceb9b89a8120dc97f17fcc98f6496ee44ebde1c286433e76bd9c93717d5"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography/in-the-shade.webp",
+      "size": 341830,
+      "sha256": "b9b5324ea369d178035abb9807e55e9bed2e93959794cc828ed533db7489ae38"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography/leaves-against-stone.webp",
+      "size": 236772,
+      "sha256": "9b7038df4a140ef684eda7973eb9d914c935eb91f95709406b964049b0c0fdee"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography/lit-after-dark.webp",
+      "size": 213300,
+      "sha256": "1c6079db3ac1a3823d5c53e8b36cd934d4bec48391551b562f14789fbf668073"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography/purple-flowers.webp",
+      "size": 116352,
+      "sha256": "96ff2e752958365080ac97383dc97bc29c6d2755f6b7c829a18c4ba55d129334"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography/reflections-after-dark.webp",
+      "size": 76628,
+      "sha256": "cadf9e1c0ef49707543b976b2745c497963ed3a77eecffa4a799d5f1e30b68cc"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography/thumbs/a-break-in-the-clouds.webp",
+      "size": 4250,
+      "sha256": "26d7815e36b099d1b388c3a351c7c7aca091fd8983295b3c75f0d104072e1d21"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography/thumbs/a-closer-look.webp",
+      "size": 7794,
+      "sha256": "20d146fc382589f2c1a771140f13d3ff6b0899e32c607d02955c74f6c60578d3"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography/thumbs/a-quieter-sky.webp",
+      "size": 6324,
+      "sha256": "01a4ffd4f9d4b5cdfd9c650279603ddcaa6978f39574902e37838e0c0eedc174"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography/thumbs/a-tree-in-bloom.webp",
+      "size": 10014,
+      "sha256": "be9666eab41e3ab899cac89d67bbc95aec86c30ff1e892712ff53d3d31e6a6f0"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography/thumbs/above-the-palms.webp",
+      "size": 8720,
+      "sha256": "0ea5afab76e59e57a8bc9945d5a35313fb774b627f630141a3c73c7d3f2eaab5"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography/thumbs/between-the-palms.webp",
+      "size": 12830,
+      "sha256": "71bfbf9c2eb4545551b8b12e3a4e5c78494c2b275ea3320bc816ed9a7fce276b"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography/thumbs/in-the-shade.webp",
+      "size": 11856,
+      "sha256": "4696281bccc6d4c332ceb2cc923a8bbe4999517d0df7a414d41b0086d6f3eca9"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography/thumbs/layers-of-cloud.webp",
+      "size": 5450,
+      "sha256": "df5d65d8ead1c7bad867b6082674de639de2a5ae931db614068ebff1f7838f02"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography/thumbs/leaves-against-stone.webp",
+      "size": 13232,
+      "sha256": "b60eddf3c3187830221184c6c02afe8f51d5a8700c876ab54936447448786e22"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography/thumbs/lit-after-dark.webp",
+      "size": 9168,
+      "sha256": "eccfb6bd4d3cb0a17d5c15c7d0a947fe0c8e25437c153966e10131396fd08029"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography/thumbs/purple-flowers.webp",
+      "size": 7714,
+      "sha256": "fff62bdfb4375483bf96bb3e665f890fc8d6ded92fe56a2aaf4036c953e6613b"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography/thumbs/reflections-after-dark.webp",
+      "size": 3258,
+      "sha256": "4e7d35a081712b158b58c613dde3849eda5210f786f583f727e12d0ed421eaf9"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography/thumbs/sky-along-the-path.webp",
+      "size": 4498,
+      "sha256": "70fbe7ed272d12d8c532f60e3598dd43f681b24d99484dd6a1e39f4ac7b1d7df"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography/thumbs/sunlight-overhead.webp",
+      "size": 3674,
+      "sha256": "914cc18ac2dbd2d4049c94a2507130eda57e23b8f030676c17633e872b7467c3"
     },
     {
       "path": "bicycle-world/dist/assets/personal/recordings/spontaneous-song.mp4",
@@ -1339,8 +1449,8 @@
     },
     {
       "path": "bicycle-world/dist/index.html",
-      "size": 42054,
-      "sha256": "0bfb4819042488bee70dd87fefec2c3051132c9db7ee17dee4cc9ed1cae5c855"
+      "size": 42284,
+      "sha256": "0b95d311e89c415fa528e281f3923596ea107626ef28b9b3b8b54f7c5a1dfc0a"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
@@ -1459,23 +1569,23 @@
     },
     {
       "path": "bicycle-world/dist/src/cloud-photo-gallery.css",
-      "size": 11217,
-      "sha256": "eb0d2b462d80f2bf61e1ddb5f2ebe539324be66428156f77edd9d685e578f6a4"
+      "size": 15835,
+      "sha256": "19b37a38236b1d6d317216324e954df9de63083775f4c07395a179e4669bd16b"
     },
     {
       "path": "bicycle-world/dist/src/cloud-photo-gallery.js",
-      "size": 11485,
-      "sha256": "168fd6717e368a66d8579bf9c0c95ae57f2b2fd78c4f26f613d53455bf94cbe5"
+      "size": 14534,
+      "sha256": "9c54fb3d508873d2889114f91fb2a8679627e112d1a17e2e68c01275e0672f33"
     },
     {
       "path": "bicycle-world/dist/src/cloud-room-architecture.js",
-      "size": 14203,
-      "sha256": "13a9f470f9770ef17cb5c0b7a1fa009f71df773b371e7f490021a8ce54a341f3"
+      "size": 11189,
+      "sha256": "e98ecc46d3f64766ddd4eed8ba7255f80a0da9e35cf89ba49f06261e8978038e"
     },
     {
       "path": "bicycle-world/dist/src/cloud-room-camera.js",
-      "size": 6495,
-      "sha256": "acefa124d14f49edfaeee6537eb84ad169fc63bc861fea79d651570a8e7ee7a6"
+      "size": 4627,
+      "sha256": "8bf5b7f16b32f93a763ccd2fdf1af2b6bd73080b2bdd1bac0b78aafd2bb65f3a"
     },
     {
       "path": "bicycle-world/dist/src/cloud-transition.js",
@@ -1743,6 +1853,11 @@
       "sha256": "8dbba9794e3fc23d2f59171327822c023cd85a7e298e9e24db723d1558d3097e"
     },
     {
+      "path": "bicycle-world/dist/src/mobile-photography-data.js",
+      "size": 2971,
+      "sha256": "d985d853b9a8967ad4b7ed8a82202222d98d0d26d8b6f5c3edc06960f8d8e07e"
+    },
+    {
       "path": "bicycle-world/dist/src/mode-selector.css",
       "size": 6235,
       "sha256": "ddcd7f25e97d1b5262d8319b0533491c08b575930130aa516e55d5f7bd56dce7"
@@ -1814,8 +1929,8 @@
     },
     {
       "path": "bicycle-world/dist/src/personal-room-content.js",
-      "size": 3498,
-      "sha256": "45d5f798266bbaa21c05ffd69af6d58c1a4d3585b9750287848dee7f492ead35"
+      "size": 3174,
+      "sha256": "4bcbb4f9eafb7ad0dd9d43ed013a036ca264d75ab300a5b7221ec6287b2cbc44"
     },
     {
       "path": "bicycle-world/dist/src/personal-rooms.css",
@@ -1824,8 +1939,13 @@
     },
     {
       "path": "bicycle-world/dist/src/personal-rooms.js",
-      "size": 60671,
-      "sha256": "27d5d8b8b3bd51c2478901fdd8b8aa34dc26c4f2ed91b68a6919676ea89cb281"
+      "size": 63001,
+      "sha256": "2864afdb88ab824c960683482f6425d470b5ae7cd3b926400c1e914674bc7f82"
+    },
+    {
+      "path": "bicycle-world/dist/src/photography-rolls.js",
+      "size": 1150,
+      "sha256": "c0734a66f0fc5b7f0fb7ac8eab0022ac7c28d3f9dc04b436655381bb0237878d"
     },
     {
       "path": "bicycle-world/dist/src/pikachu-gait.js",

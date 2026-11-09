@@ -1,12 +1,12 @@
 import * as THREE from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
-import {CLOUD_FOCUS_BOUNDS} from './cloud-room-camera.js';
+import {CLOUD_FOCUS_BOUNDS,CLOUD_REEL_APERTURE} from './cloud-room-camera.js';
 
 /** An original sky deck: no downloaded assets, invented photographs or idle loop. */
 export function createCloudRoomScene(){
   const scene=new THREE.Scene();scene.background=new THREE.Color('#b9d4df');scene.fog=new THREE.Fog('#c8dadd',70,170);
   const camera=new THREE.PerspectiveCamera(43,1,.1,220),geometries=new Set(),materials=new Set(),pickRoots=[],pickEnvelopes=[];
-  let disposed=false,selected=0;
+  let disposed=false;
   const p={wood:'#946846',edge:'#c8ab7d',cream:'#f1eddd',stone:'#cfcab7',green:'#355b4b',dark:'#29493f',clay:'#bd8d68',leaf:'#aebea2',sky:'#bdd5df',cloud:'#fff9e9',shade:'#e8eddf',blue:'#789eaa'};
   const matte=new THREE.MeshStandardMaterial({color:'#ffffff',vertexColors:true,roughness:.89});materials.add(matte);
   const colors=new Map(),color=tint=>{if(!colors.has(tint))colors.set(tint,new THREE.Color(tint));return colors.get(tint);};
@@ -31,53 +31,48 @@ export function createCloudRoomScene(){
   for(let x=-16;x<=16;x+=1.5)box(architecture,[.025,.012,14.8],[x,.047,-.6],p.stone);
   box(architecture,[33,.65,.42],[0,.35,-8.1],p.green);box(architecture,[33,.10,.60],[0,.72,-8.1],p.edge);
   for(const side of [-1,1]){box(architecture,[.45,.65,14],[side*16.3,.35,-1.3],p.green);box(architecture,[.62,.10,14],[side*16.3,.72,-1.3],p.edge);}
-  // One structural rounded window, with matching curved shutters. The other
-  // viewpoints stay open; repeated ornamental hoops would compete with the sky.
-  const window=target('Cloud viewing shutters',0);window.position.set(-8,0,-5);
-  for(const side of [-1,1])box(window,[.46,3.48,.60],[side*4.4,1.85,0],p.wood);
-  const archPoints=[];for(let i=0;i<=40;i++){const a=Math.PI-i/40*Math.PI;archPoints.push(new THREE.Vector3(Math.cos(a)*4.4,3.45+Math.sin(a)*4.7,0));}
-  part(window,new THREE.TubeGeometry(new THREE.CatmullRomCurve3(archPoints),40,.24,8,false),p.wood);
-  box(window,[9.2,.30,1.05],[0,.32,.1],p.edge);batch(window);
-  const shutters=[];
+  // One generous camera silhouette leads into the actual photographs. Its top
+  // finder is four solid rails around an empty tunnel, not an opaque screen.
+  const photography=new THREE.Group();photography.name='Camera and open viewfinder';scene.add(photography);
+  for(const angle of [0,Math.PI*2/3,Math.PI*4/3])beam(photography,[0,2.9,-4.3],[Math.sin(angle)*2.1,.1,-4.3+Math.cos(angle)*1.6],.14,p.wood);
+  cylinder(photography,.38,.28,[0,2.75,-4.3],p.dark,16);
+  box(photography,[7.6,3.6,2.2],[0,4.6,-4.4],p.green);
+  box(photography,[7.72,.25,2.34],[0,6.27,-4.4],p.edge);
+  box(photography,[7.72,.25,2.34],[0,2.92,-4.4],p.edge);
+  box(photography,[1.15,3.25,.45],[3.06,4.6,-3.12],p.dark);
+  for(const y of [3.45,3.9,4.35,4.8,5.25,5.7])box(photography,[.9,.045,.05],[3.06,y,-2.88],p.green);
+  box(photography,[1.9,1.0,.12],[-2.3,4.8,-3.24],p.cream);
+  const lens=cylinder(photography,1.46,2.35,[0,4.6,-2.2],p.dark,28);lens.rotation.x=Math.PI/2;
+  const glass=cylinder(photography,1.18,.07,[0,4.6,-.99],p.blue,28);glass.rotation.x=Math.PI/2;
+  part(photography,new THREE.TorusGeometry(1.40,.12,6,28),p.edge,[0,4.6,-1.02]);
+  part(photography,new THREE.TorusGeometry(1.05,.065,5,28),p.dark,[0,4.6,-.94]);
+  for(const x of [-2.7,2.7])cylinder(photography,.38,.24,[x,6.53,-4.3],p.dark,16);
+  cylinder(photography,.18,.15,[2.7,6.72,-4.3],p.edge,16);
+  const [finderX,finderY,finderZ]=CLOUD_REEL_APERTURE.center;
+  const finderDepth=CLOUD_REEL_APERTURE.rearZ-CLOUD_REEL_APERTURE.frontZ;
   for(const side of [-1,1]){
-    const hinge=new THREE.Group();hinge.name=side<0?'Left sky shutter':'Right sky shutter';hinge.position.set(side*4.2,.48,.0);window.add(hinge);
-    const center=-side*2.10,shape=new THREE.Shape();shape.moveTo(-side*4.18,0);shape.lineTo(0,0);shape.lineTo(0,3);
-    for(let i=0;i<=24;i++){const a=side>0?i/24*Math.PI/2:Math.PI-i/24*Math.PI/2;shape.lineTo(Math.cos(a)*4.18-side*4.18,3+Math.sin(a)*4.65);}shape.closePath();
-    part(hinge,new THREE.ExtrudeGeometry(shape,{depth:.13,bevelEnabled:false,curveSegments:1}),p.green);
-    for(let i=0;i<8;i++){const y=.5+i*.94,w=y<=3?4.15:4.15*Math.sqrt(1-((y-3)/4.65)**2);box(hinge,[w,.045,.04],[side*w/2-side*4.18,y,.15],p.dark);}
-    box(hinge,[4.14,.16,.18],[center,.15,.08],p.wood);
-    box(hinge,[.12,.55,.14],[-side*3.80,3.75,.14],p.edge);batch(hinge);shutters.push({hinge,side});
+    box(photography,[.38,1.85,finderDepth],[finderX+side*1.14,finderY,finderZ],p.dark);
+    box(photography,[1.9,.365,finderDepth],[finderX,finderY+side*.7425,finderZ],p.dark);
+    box(photography,[.12,1.85,.15],[finderX+side*1.35,finderY,CLOUD_REEL_APERTURE.rearZ+.02],p.edge);
+    box(photography,[2.58,.12,.15],[finderX,finderY+side*.96,CLOUD_REEL_APERTURE.rearZ+.02],p.edge);
   }
-  envelope(window,[-12.6,.3,-6.1],[-3.4,8.5,-4.5]);
+  batch(photography);
 
-  const photography=target('Photography viewfinder',1);
-  // The open physical frame shows the same live sky used by the postcard capture.
-  const corners=[];
-  for(const side of [-1,1])for(const upper of [-1,1]){
-    const corner=new THREE.Group();corner.name='Viewfinder corner';corner.visible=false;photography.add(corner);
-    box(corner,[1.1,.095,.13],[side*.5,0,0],p.green);box(corner,[.095,.72,.13],[0,upper*.32,0],p.green);batch(corner);corners.push({corner,side,upper});
+  // Two open-spoked reels are chapter selectors, rather than extra scene toys.
+  for(const [index,x]of [-5.65,5.65].entries()){
+    const reel=target(index===0?'Cloud photograph film reel':'Mobile photograph film reel',index);
+    reel.position.set(x,1.47,-4.05);
+    for(const z of [-.25,.25]){
+      part(reel,new THREE.TorusGeometry(1.24,.095,5,24),p.edge,[0,0,z]);
+      for(let spoke=0;spoke<5;spoke++){
+        const angle=spoke*Math.PI*2/5,arm=box(reel,[.15,1.12,.12],[Math.sin(angle)*.59,Math.cos(angle)*.59,z],p.edge);arm.rotation.z=-angle;
+      }
+      const hub=cylinder(reel,.30,.15,[0,0,z],p.dark,16);hub.rotation.x=Math.PI/2;
+    }
+    const film=cylinder(reel,.72,.4,[0,0,0],p.green,24);film.rotation.x=Math.PI/2;
+    box(reel,[1.3,.12,.8],[0,-1.36,0],p.wood);batch(reel);
+    envelope(reel,[x-1.4,.05,-4.5],[x+1.4,2.85,-3.6]);
   }
-  // A simple camera and tripod, with a recognizable lens and rear viewfinder.
-  const tripod=new THREE.Group();tripod.name='Camera on a tripod';photography.add(tripod);tripod.position.set(0,0,.15);
-  for(const a of [0,Math.PI*2/3,Math.PI*4/3])beam(tripod,[0,2.5,0],[Math.sin(a)*.95,.1,Math.cos(a)*.95],.075,p.wood);
-  cylinder(tripod,.15,.22,[0,2.48,0],p.dark,12);box(tripod,[1.35,.83,.62],[0,3.0,0],p.green);box(tripod,[.92,.48,.045],[-.07,3,.34],p.dark);
-  box(tripod,[.65,.32,.05],[-.10,3,.37],p.blue);box(tripod,[.45,.20,.38],[0,3.48,0],p.dark);
-  cylinder(tripod,.10,.08,[.43,3.48,.05],p.edge,12);
-  const lens=cylinder(tripod,.42,.80,[0,3,-.59],p.dark,24);lens.rotation.x=Math.PI/2;
-  const glass=cylinder(tripod,.34,.025,[0,3,-1.0],p.blue,24);glass.rotation.x=Math.PI/2;
-  const lensRing=part(tripod,new THREE.TorusGeometry(.42,.045,5,24),p.edge,[0,3,-.96]);batch(tripod);tripod.scale.setScalar(1.4);
-  envelope(photography,[-3.9,.1,-6.1],[3.9,8.2,1.3]);
-
-  const quiet=target('Quiet sky bench',2);quiet.position.set(8.2,0,-3.5);
-  // A curved bench, visibly facing the sky, provides an unhurried final view.
-  for(let i=0;i<9;i++){
-    const x=-2.8+i*.70,z=.08*x*x;
-    const seat=box(quiet,[.65,.16,.72],[x,.85,z],p.edge);seat.rotation.y=-x*.14;
-    const back=box(quiet,[.65,.58,.12],[x,1.22,z+.44],p.wood);back.rotation.y=-x*.14;
-  }
-  for(const x of [-2.2,0,2.2]){box(quiet,[.18,.8,.65],[x,.4,.08*x*x],p.wood);}
-  // Resting camera strap is a restrained human trace, not fabricated personal media.
-  box(quiet,[.70,.12,.42],[1.65,.97,.21],p.green);batch(quiet);envelope(quiet,[4.8,.05,-4.1],[11.7,1.7,-1.6]);
 
   // Distant atmospheric layers. Each cloud is assembled from round, unscaled puffs.
   const cloudLayers=[],cloudPuffs=[];
@@ -106,36 +101,22 @@ export function createCloudRoomScene(){
   const atmosphere=new THREE.ShaderMaterial({side:THREE.BackSide,depthWrite:false,toneMapped:false,uniforms:{horizon:{value:new THREE.Color('#dce7e1')},zenith:{value:new THREE.Color('#82b7d1')}},vertexShader:'varying vec3 skyDirection; void main(){skyDirection=position; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}',fragmentShader:'uniform vec3 horizon; uniform vec3 zenith; varying vec3 skyDirection; void main(){float h=normalize(skyDirection).y; gl_FragColor=vec4(mix(horizon,zenith,smoothstep(-0.08,0.35,h)),1.0);\n#include <tonemapping_fragment>\n#include <colorspace_fragment>\n}'});materials.add(atmosphere);
   const sky=new THREE.Mesh(skyGeometry,atmosphere);sky.name='Illustrated sky atmosphere';sky.renderOrder=-1;scene.add(sky);batch(architecture);
 
-  const anchors=[{position:new THREE.Vector3(-5.2,2.2,-4.4),label:'Open the sky'},{position:new THREE.Vector3(2.0,3.8,-2.9),label:'Frame the sky'},{position:new THREE.Vector3(10.6,2.7,-4.2),label:'Let the clouds drift'}];
-  const entrance=new THREE.Group();entrance.name='Cloud Lookout threshold';entrance.visible=false;scene.add(entrance);
-  for(const x of [-5.1,5.1])box(entrance,[.45,9.2,.8],[x,4.6,0],p.wood);
-  box(entrance,[10.7,.35,.8],[0,9,0],p.wood);box(entrance,[10.9,.12,1.0],[0,9.27,0],p.edge);box(entrance,[10.6,.10,1.8],[0,-.05,0],p.stone);batch(entrance);
-  const leaves=[];
-  for(const side of [-1,1]){
-    const hinge=new THREE.Group();hinge.position.set(side*4.8,0,0);entrance.add(hinge);const center=-side*2.4;
-    box(hinge,[4.75,8.75,.16],[center,4.38,0],p.green);for(const y of [.25,8.5])box(hinge,[4.8,.18,.22],[center,y,.05],p.wood);box(hinge,[.10,.65,.16],[-side*4.3,4.2,.17],p.edge);batch(hinge);leaves.push({hinge,side});
-  }
+  const anchors=[{position:new THREE.Vector3(-5.65,3.25,-3.7),label:'Open cloud reel'},{position:new THREE.Vector3(5.65,3.25,-3.7),label:'Open photography reel'}];
+  // Retain the shared room interface without adding a decorative door.
+  const entrance=new THREE.Group();entrance.name='Open Cloud Lookout arrival';entrance.visible=false;scene.add(entrance);
   scene.add(new THREE.HemisphereLight('#fff8e6','#a7bcad',2.5));
   const sun=new THREE.DirectionalLight('#fff3d7',2.7);sun.position.set(-14,20,15);sun.target.position.set(0,3,-7);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);Object.assign(sun.shadow.camera,{left:-22,right:22,top:17,bottom:-12,near:1,far:70});sun.shadow.bias=-.00025;sun.shadow.normalBias=.025;scene.add(sun,sun.target);
-  const goals=[false,false,false],states=[0,0,0],smooth=t=>t*t*(3-2*t);
-  function apply(){
-    // Open onto the deck rather than into the photographing space. The leaves
-    // therefore remain behind the final lens view, without visibility tricks.
-    for(const {hinge,side}of shutters)hinge.rotation.y=side*smooth(states[0])*1.46;
-    const framing=smooth(states[1]);for(const {corner,side,upper}of corners){corner.visible=states[1]>0&&states[1]<.7&&selected===1;corner.position.set(side*(2.7-framing*.55),4.8+upper*(1.30-framing*.25),-5.2);}
-    for(let i=0;i<cloudLayers.length;i++){cloudLayers[i].position.x=smooth(states[2])*[1.4,-.9,.6][i];cloudLayers[i].position.y=smooth(states[2])*[.15,-.05,.07][i];}
-    scene.updateMatrixWorld(true);
-  }
-  apply();
+  scene.updateMatrixWorld(true);
   return {scene,camera,pickRoots,pickEnvelopes,anchors,entrance,portrait:null,cloudPuffs,cloudLayers,
+    photoCamera:photography,reelAperture:CLOUD_REEL_APERTURE,
     focusBounds:CLOUD_FOCUS_BOUNDS.map(bounds=>new THREE.Box3(new THREE.Vector3(...bounds.min),new THREE.Vector3(...bounds.max))),
-    select(index){selected=THREE.MathUtils.clamp(Math.round(index),0,2);apply();},
-    interact(index=selected){index=THREE.MathUtils.clamp(Math.round(index),0,2);goals[index]=!goals[index];return goals[index];},
-    interactionState(index=selected){return Boolean(goals[index]);},
-    getViewFraming(){return smooth(states[1]);},
-    updateInteraction(dt,reduced=false){if(disposed)return false;let changed=false;dt=Math.min(.1,Math.max(0,Number(dt)||0));for(let i=0;i<3;i++){const goal=Number(goals[i]);if(states[i]===goal)continue;const duration=goal?[1.3,1.5,4.2][i]:i===1?1.5:.8;const step=dt/duration;states[i]=reduced?goal:goal?Math.min(goal,states[i]+step):Math.max(goal,states[i]-step);changed=true;}if(changed)apply();return changed;},
+    select(){},
+    interact(){return false;},
+    interactionState(){return false;},
+    getViewFraming(){return 0;},
+    updateInteraction(){return false;},
     animateSound(){return false;},
-    setEntrance(progress,pose){entrance.visible=progress<1&&Boolean(pose?.entrance);if(!entrance.visible)return;entrance.position.copy(pose.entrance.position);entrance.rotation.y=pose.entrance.rotationY;for(const {hinge,side}of leaves)hinge.rotation.y=side*pose.openness*1.54;entrance.updateMatrixWorld(true);},
+    setEntrance(){entrance.visible=false;},
     dispose(){if(disposed)return;disposed=true;geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());sun.shadow.dispose();scene.clear();},
     get resourceCounts(){let meshes=0,triangles=0;scene.traverse(object=>{if(object.isMesh){meshes++;triangles+=(object.geometry.index?.count||object.geometry.attributes.position.count)/3;}});return {meshes,triangles,ownedGeometries:geometries.size,materials:materials.size,ownedTextures:0};}
   };
