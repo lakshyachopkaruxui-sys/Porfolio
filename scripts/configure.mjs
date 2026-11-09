@@ -6,6 +6,16 @@ import {versionPlayAssets} from './version-play-assets.mjs';
 
 const block = /<!-- portfolio-publishing:start -->[\s\S]*?<!-- portfolio-publishing:end -->\s*/g;
 const escapeHTML = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+const decodeHTML = value => value.replace(/&(#x[\da-f]+|#\d+|amp|quot|apos|lt|gt);/gi, (entity, name) => {
+  if (name[0] !== '#') return ({amp:'&',quot:'"',apos:"'",lt:'<',gt:'>'})[name.toLowerCase()];
+  const code = name[1].toLowerCase() === 'x' ? parseInt(name.slice(2),16) : Number(name.slice(1));
+  return code > 0 && code <= 0x10ffff && !(code >= 0xd800 && code <= 0xdfff) ? String.fromCodePoint(code) : entity;
+});
+const attribute = (tag, name) => new RegExp(`\\b${name}\\s*=\\s*(["'])([\\s\\S]*?)\\1`,'i').exec(tag)?.[2];
+const homepageTitle = 'Lakshya Chopkar | Product Designer & UX Designer';
+const homepageDescription = 'Lakshya Chopkar, Product Designer focused on digital UX/UI. Explore user research, Figma design systems and prototypes. View case studies, résumé and contact.';
+const previewImage = '/normal-portfolio/assets/social/portfolio-preview-v1.png';
+const previewAlt = 'Lakshya Chopkar, Product Designer focused on digital UX/UI, beside original ConnectAid healthcare-app interface designs.';
 const indexCandidates = new Set(['normal-portfolio/index.html','normal-portfolio/map.html','bicycle-world/dist/index.html','bicycle-world/dist/projects.html','bicycle-world/dist/story.html']);
 
 export function resolveConfiguration(config, env = {}) {
@@ -58,20 +68,50 @@ export async function configureSite({siteRoot,env = process.env} = {}) {
     if (!/<\/head>/i.test(html) && !/<title\b/i.test(html)) throw Error(`Missing metadata insertion point in ${file}`);
     const noindex = isNoindex(html);
     const canonical = config.publicOrigin + canonicalPath(file);
+    const homepage = file === 'normal-portfolio/index.html';
+    const normal = file.startsWith('normal-portfolio/');
     html = html.replace(/<link\b[^>]*>/gi,tag => /\brel\s*=\s*["']canonical["']/i.test(tag) ? '' : tag)
-      .replace(/<meta\b[^>]*>/gi,tag => /\bproperty\s*=\s*["']og:(?:url|image|title|description|type)["']/i.test(tag) || /\bname\s*=\s*["'](?:google-site-verification|twitter:card)["']/i.test(tag) ? '' : tag);
-    const title = /<title[^>]*>([^<]*)<\/title>/i.exec(html)?.[1] || 'Lakshya Chopkar — Portfolio';
+      .replace(/<meta\b[^>]*>/gi,tag => /\bproperty\s*=\s*["']og:(?:url|image(?::(?:width|height|type|alt))?|title|description|type)["']/i.test(tag) || /\bname\s*=\s*["'](?:google-site-verification|twitter:(?:card|title|description|image(?::alt)?))["']/i.test(tag) ? '' : tag);
+    if (homepage) {
+      html = html.replace(/<title[^>]*>[\s\S]*?<\/title>/i,`<title>${escapeHTML(homepageTitle)}</title>`);
+      let replacedDescription = false;
+      html = html.replace(/<meta\b[^>]*>/gi, tag => {
+        if (!/^description$/i.test(attribute(tag,'name') || '')) return tag;
+        if (replacedDescription) return '';
+        replacedDescription = true;
+        return `<meta name="description" content="${escapeHTML(homepageDescription)}">`;
+      });
+      if (!replacedDescription) html = html.replace(/<title\b/i,`<meta name="description" content="${escapeHTML(homepageDescription)}">\n<title`);
+    }
+    const title = decodeHTML(/<title[^>]*>([^<]*)<\/title>/i.exec(html)?.[1] || 'Lakshya Chopkar — Portfolio');
     const descriptionTag = [...html.matchAll(/<meta\b[^>]*>/gi)].map(match=>match[0]).find(tag=>/\bname\s*=\s*["']description["']/i.test(tag));
-    const description = /\bcontent\s*=\s*"([^"]*)"/i.exec(descriptionTag || '')?.[1];
+    const rawDescription = attribute(descriptionTag || '', 'content');
+    const description = rawDescription === undefined ? undefined : decodeHTML(rawDescription);
+    const image = config.publicOrigin + (normal ? previewImage : '/normal-portfolio/assets/identity/shared-curve/icon-512.png');
+    const imageAlt = normal ? previewAlt : 'Lakshya Chopkar portfolio logo';
+    const profile = homepage ? {
+      '@context':'https://schema.org', '@type':'ProfilePage', url:canonical,
+      mainEntity:{'@type':'Person', name:'Lakshya Chopkar', jobTitle:'Product Designer', url:canonical,
+        sameAs:['https://www.linkedin.com/in/lakshyachopkar/','https://www.behance.net/lakshyachopkaruiux']},
+    } : null;
     const metadata = [
       '<!-- portfolio-publishing:start -->',
       `<link rel="canonical" href="${escapeHTML(canonical)}">`,
       `<meta property="og:url" content="${escapeHTML(canonical)}">`,
       '<meta property="og:type" content="website">',
-      `<meta property="og:title" content="${title.replace(/"/g,'&quot;')}">`,
-      ...(description ? [`<meta property="og:description" content="${description}">`] : []),
-      `<meta property="og:image" content="${config.publicOrigin}/normal-portfolio/assets/identity/shared-curve/icon-512.png">`,
-      '<meta name="twitter:card" content="summary">',
+      `<meta property="og:title" content="${escapeHTML(title)}">`,
+      ...(description ? [`<meta property="og:description" content="${escapeHTML(description)}">`] : []),
+      `<meta property="og:image" content="${escapeHTML(image)}">`,
+      `<meta property="og:image:width" content="${normal ? 1200 : 512}">`,
+      `<meta property="og:image:height" content="${normal ? 630 : 512}">`,
+      '<meta property="og:image:type" content="image/png">',
+      `<meta property="og:image:alt" content="${escapeHTML(imageAlt)}">`,
+      `<meta name="twitter:card" content="${normal ? 'summary_large_image' : 'summary'}">`,
+      `<meta name="twitter:title" content="${escapeHTML(title)}">`,
+      ...(description ? [`<meta name="twitter:description" content="${escapeHTML(description)}">`] : []),
+      `<meta name="twitter:image" content="${escapeHTML(image)}">`,
+      `<meta name="twitter:image:alt" content="${escapeHTML(imageAlt)}">`,
+      ...(profile ? [`<script type="application/ld+json">${JSON.stringify(profile).replace(/</g,'\\u003c')}</script>`] : []),
       ...(config.googleSiteVerification && file === 'normal-portfolio/index.html' ? [`<meta name="google-site-verification" content="${config.googleSiteVerification}">`] : []),
       ...(config.preview ? ['<meta name="robots" content="noindex, nofollow">'] : []),
       '<!-- portfolio-publishing:end -->',
