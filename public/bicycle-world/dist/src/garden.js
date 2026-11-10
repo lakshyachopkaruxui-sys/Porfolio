@@ -5,6 +5,7 @@ import {createGardenNature} from './garden-nature.js';
 import {createGardenBridges} from './garden-bridge.js';
 import {loadGardenPokeballs} from './garden-pokeballs.js';
 import {createGardenRiver} from './garden-river.js';
+import {createGardenAccents} from './garden-accents.js';
 
 async function loadAsset(url,signal){
   if(signal?.aborted)throw new DOMException('Garden loading cancelled','AbortError');
@@ -27,10 +28,10 @@ export async function loadGarden(scene,world,{signal}={}){
     results.forEach(r=>{if(r.status==='fulfilled')disposeCharacterAsset(r.value);});
     throw results.find(r=>r.status==='rejected')?.reason||new DOMException('Garden loading cancelled','AbortError');
   }
-  const sources=results.map(r=>r.value);let nature,bridges,river,pokeballs;
+  const sources=results.map(r=>r.value);let nature,bridges,river,pokeballs,accents;
   function release(){
     const colliders=[...(nature?.colliders||[]),...(bridges?.colliders||[]),...(pokeballs?.colliders||[])];
-    pokeballs?.dispose();nature?.dispose();bridges?.dispose();river?.dispose();sources.forEach(disposeCharacterAsset);
+    accents?.dispose();pokeballs?.dispose();nature?.dispose();bridges?.dispose();river?.dispose();sources.forEach(disposeCharacterAsset);
     world.riverSurface.visible=true;world.bridgeDecks.root.visible=true;world.bridgeSurfaces.forEach(mesh=>mesh.visible=true);
     for(const collider of colliders){const index=world.colliders.indexOf(collider);if(index>=0)world.colliders.splice(index,1);}
   }
@@ -51,8 +52,19 @@ export async function loadGarden(scene,world,{signal}={}){
     if(signal?.aborted){release();throw error;}
     console.warn('Garden ball displays could not load; the riding paths remain available.',error);
   }
+  // Optional low garden planting must not block the essential riding world.
+  try{
+    const source=await loadAsset(new URL('../assets/garden/berry-bush.glb',import.meta.url).href,signal);
+    sources.push(source);let floral;
+    try{floral=await loadAsset(new URL('../assets/garden/floral-accents.glb',import.meta.url).href,signal);sources.push(floral);}
+    catch(error){if(signal?.aborted)throw error;console.warn('Flower planting could not load; berries remain available.',error);}
+    accents=createGardenAccents(source,nature.placements,floral);scene.add(accents.root);
+  }catch(error){
+    if(signal?.aborted){release();throw error;}
+    console.warn('Berry planting could not load; the garden remains available.',error);
+  }
   let disposed=false;
-  return {nature,bridges,river,pokeballs,update(options){nature.update(options);river.update(options);},dispose(){
+  return {nature,bridges,river,pokeballs,accents,update(options){nature.update(options);accents?.update(options);river.update(options);},dispose(){
     if(disposed)return;disposed=true;release();
   }};
 }

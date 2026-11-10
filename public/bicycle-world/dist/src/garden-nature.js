@@ -72,11 +72,12 @@ export function createGardenNature(source){
     if(kind==='tree'&&placements.some(q=>q.kind==='tree'&&Math.hypot(x-q.x,z-q.z)<(radius+q.radius)*.82))return false;
     if(kind==='stone'&&placements.some(q=>q.kind==='stone'&&Math.hypot(x-q.x,z-q.z)<radius+q.radius+.1))return false;
     if(kind==='stone'&&placements.some(q=>q.kind==='tree'&&Math.hypot(x-q.x,z-q.z)<radius+Math.max(.32,q.height*.065)+.2))return false;
+    if(kind==='mushroom'&&placements.some(q=>Math.hypot(x-q.x,z-q.z)<radius+(q.kind==='tree'?Math.max(.32,q.height*.065):q.radius)+.2))return false;
     const item={name,x,z,height,angle,scale,radius,kind,grove};
     p.placements.push(item);placements.push(item);
     // A low trunk obstacle leaves the canopy open; route planning and manual
     // motion share these exact colliders, including off-path wandering.
-    colliders.push({x,z,radius:kind==='tree'?Math.max(.32,height*.065):kind==='stone'?radius-.18:Math.min(radius,.65),kind:'garden'});
+    if(kind!=='mushroom')colliders.push({x,z,radius:kind==='tree'?Math.max(.32,height*.065):kind==='stone'?radius-.18:Math.min(radius,.65),kind:'garden'});
     return true;
   }
   // Three unequal trees read as a grove. Search locally for clear planting
@@ -100,6 +101,27 @@ export function createGardenNature(source){
       for(let attempt=0;attempt<16;attempt++){
         const angle=i*1.61+slot*.8+attempt*.64,distance=3.8+(attempt%5)*1.05;
         if(place(GARDEN_STONE_NAME,x+Math.cos(angle)*distance,z+Math.sin(angle)*distance,height,angle,'stone',i))break;
+      }
+    }
+  }
+  // Tiny, non-colliding dressing is added after all existing planting, so no
+  // established tree, shrub, stone or navigation collider is displaced.
+  for(const [group,grove]of [0,8,16].entries()){
+    const [x,z]=GROVES[grove];
+    let planted=false;
+    for(let attempt=0;attempt<32&&!planted;attempt++){
+      const angle=group*2.1+attempt*.73,distance=5.4+(attempt%5)*1.1;
+      const cx=x+Math.cos(angle)*distance,cz=z+Math.sin(angle)*distance;
+      const before=placements.length;
+      for(const [slot,dx,dz]of [[0,0,0],[1,1.25,.15],[2,.4,1.25]]){
+        place('Mushroom_01_Material_0',cx+dx,cz+dz,.35+slot*.15,angle+slot,'mushroom',group);
+      }
+      if(placements.length-before>=2)planted=true;
+      else{
+        // Retry the entire cluster rather than leaving isolated single props.
+        const removed=placements.splice(before);
+        const mushrooms=batches.get('Mushroom_01_Material_0');
+        mushrooms.placements.splice(mushrooms.placements.length-removed.length,removed.length);
       }
     }
   }

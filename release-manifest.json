@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T04:44:09.258Z",
+  "generatedAt": "2026-11-10T11:04:12.098Z",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 740,
-      "sha256": "318ace75d1e5d6445ce19fde21885c17b8c289c3fcc6450ef3c7c1020825a344"
+      "sha256": "14b20310b15d5c4d07f03f6a47fd131ada330d4319ad643356eb289e0a55a315"
     },
     {
       "path": "_redirects",
@@ -158,9 +158,39 @@
       "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
     },
     {
+      "path": "bicycle-world/dist/assets/garden/Crops-License.txt",
+      "size": 364,
+      "sha256": "83d8959f9fc56353ed571fbe2dc52e4bcd64508e2399501cd45ac2ce3df0bf8c"
+    },
+    {
+      "path": "bicycle-world/dist/assets/garden/Floral-License-Standard.txt",
+      "size": 852,
+      "sha256": "120710e542c3ebaf83856c4eb55b4a1e680593b39302eba7fdc5d942dfe78c58"
+    },
+    {
       "path": "bicycle-world/dist/assets/garden/SOURCE.md",
       "size": 1029,
       "sha256": "d83a20eacefca8380cf68f50682958e02b037332a2cd7fbe1ca24a9aeccd73b4"
+    },
+    {
+      "path": "bicycle-world/dist/assets/garden/berry-bush-SOURCE.md",
+      "size": 2483,
+      "sha256": "9cfef0e006f5b04437da990cc8ab13f75c93c194c5e6c518449c3de07062aa89"
+    },
+    {
+      "path": "bicycle-world/dist/assets/garden/berry-bush.glb",
+      "size": 97868,
+      "sha256": "024347ca3995ef6e7e20fd4025196e266942e8514a2f13a6b56d1f8c01c0675e"
+    },
+    {
+      "path": "bicycle-world/dist/assets/garden/floral-accents-SOURCE.md",
+      "size": 3333,
+      "sha256": "dc2101a68b04386b67beb9bd7f599adceac3e46ae4ee81eb6b55714352cf1c14"
+    },
+    {
+      "path": "bicycle-world/dist/assets/garden/floral-accents.glb",
+      "size": 632352,
+      "sha256": "011cf290068b3ef67ff31a710ed119db300d93299596257fa59572690ece81af"
     },
     {
       "path": "bicycle-world/dist/assets/garden/japanese-bridge-runtime.glb",
@@ -169,8 +199,8 @@
     },
     {
       "path": "bicycle-world/dist/assets/garden/nature-pack-runtime.glb",
-      "size": 187084,
-      "sha256": "9ab637f2e31cae3324a8900734413c5e6bf1cf4e1207cbac4367b2848a5973a7"
+      "size": 195044,
+      "sha256": "727cc068e971267f544f12da59845cfa326b6b767e180a5ab485c30b57068447"
     },
     {
       "path": "bicycle-world/dist/assets/identity/shared-curve/apple-touch-icon.png",
@@ -3829,8 +3859,8 @@
     },
     {
       "path": "bicycle-world/dist/index.html",
-      "size": 44120,
-      "sha256": "38876cde610b44066a203fa0e867014851413e43054309cfe5d21a723085a961"
+      "size": 44223,
+      "sha256": "81a8f3bc8641fedbcdfae81b49f65eca830e8ffb2a410eb7db869102b44b878e"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
@@ -4098,6 +4128,11 @@
       "sha256": "555207f69ebf87e9fe9c8b4ee05534ac262c7cb36765ee42a1806ee13e36b45c"
     },
     {
+      "path": "bicycle-world/dist/src/garden-accents.js",
+      "size": 6752,
+      "sha256": "a5fd4493ebbc25e48ed455bc52b8f72e878b22cf19099e921bbfee00d470bfc0"
+    },
+    {
       "path": "bicycle-world/dist/src/garden-bell.js",
       "size": 5611,
       "sha256": "e317734f419904723ba864760ad7986df7f616034ec42ce716639adae833e469"
@@ -4119,8 +4154,8 @@
     },
     {
       "path": "bicycle-world/dist/src/garden-nature.js",
-      "size": 8882,
-      "sha256": "9a43f86400d95ca84bb9f22a2133ec1816a34f67aa68cd8a48c87c1a03e8252c"
+      "size": 10102,
+      "sha256": "5a4600870ea094228e86e08f6471e67c4fc7b2f145b3f15946e2e4be7a41bf51"
     },
     {
       "path": "bicycle-world/dist/src/garden-palette.js",
@@ -4154,8 +4189,8 @@
     },
     {
       "path": "bicycle-world/dist/src/garden.js",
-      "size": 3518,
-      "sha256": "47f6257c8f9d8d55c4316de5a08678cb105de9a15f81d895b6648dc6af30c043"
+      "size": 4381,
+      "sha256": "34f35b5708fe56f9b6d7facdbdea5dfd5df3ea69edffb1a8073da78757db1898"
     },
     {
       "path": "bicycle-world/dist/src/ground-pokemon-gait.js",
