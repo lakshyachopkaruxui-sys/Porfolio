@@ -1,3 +1,4 @@
+import {createAboutExperience} from './about-experience.js';
 import {destinationName} from './destination-names.js';
 import {decorateModeSelectors} from './mode-selector.js';
 import {isKeyboardShortcutBlocked,consumeNavigationKey} from './keyboard-navigation.js';
@@ -134,7 +135,7 @@ const playMusic=mountPlayMusic({notify});
 let target=null,guidedRide=null,nearStop=null,lastTime=0,time=0,noticeTimer,saveTime=0,blockedTime=0;
 let readerScroll=0,lastFocus=null,usedReader=false;
 let pointerDown=null;
-let placeUI,mapUI,projectUI,personalRooms,worksExperience,oakLab,pendingArrival=null,hoverPointer=null;
+let placeUI,mapUI,projectUI,personalRooms,worksExperience,oakLab,aboutExperience,pendingArrival=null,hoverPointer=null;
 // World coordinates for the rider's planted shoe; reuse the same terrain as wheels.
 const riderGroundHeight=(x,z)=>elevation(z,x);
 let rideHintVisible=false;
@@ -205,7 +206,7 @@ function setBicycleLight(value){
   syncBicycleLight();readingBackdropDrawn=false;save();
   notify(value?'Bicycle light on.':'Bicycle light off.');
 }
-function hasOverlay(){return Boolean(reader.open||help.open||placeUI?.isOpen||projectUI?.isOpen||mapUI?.isOpen||personalRooms?.isOpen||worksExperience?.isOpen||oakLab?.isOpen);}
+function hasOverlay(){return Boolean(reader.open||help.open||placeUI?.isOpen||projectUI?.isOpen||mapUI?.isOpen||personalRooms?.isOpen||worksExperience?.isOpen||oakLab?.isOpen||aboutExperience?.isOpen);}
 function syncRideUI(){
   playMusic.setActive(ready&&running&&!inPortfolio);
   const ui=hybridUIState({ready,inPortfolio,running,modalOpen:hasOverlay(),previewOpen:false,hasRoute:Boolean(target),speed:state.speed,nearStop,hintVisible:rideHintVisible,stopFocused:document.activeElement===$('stop-route')});
@@ -236,6 +237,7 @@ function prepareOverlay(kind){
   if(kind!=='personal')personalRooms?.close({immediate:true,notify:false});
   if(kind!=='works')worksExperience?.close({immediate:true,notify:false});
   if(kind!=='oak')oakLab?.close({immediate:true,notify:false});
+  if(kind!=='about')aboutExperience?.close({immediate:true,notify:false});
   lastFocus=origin;clearInput();$('interact').hidden=true;$('touch-controls').hidden=true;$('ride-guide').hidden=true;sceneHost.style.cursor='';sceneHost.removeAttribute('title');
 }
 function setNearStop(kind){if(nearStop===kind)return;nearStop=kind;syncRideUI();const stop=STOPS[kind];if(stop){$('interact').querySelector('.stop-caption').textContent=destinationName(kind,stop.title);$('interact-label').innerHTML=`${kind==='cloud'?'Explore my photography':stop.action} <kbd>Enter</kbd>`;$('route-hint').hidden=true;}}
@@ -322,7 +324,7 @@ function showPortfolio(hash=''){
   // Capture the return URL before reader cleanup changes its hash or query.
   const returnPath=location.pathname+location.search;
   const destination=normalPortfolioURL(location.href,typeof hash==='string'?hash:'');
-  oakLab?.close({immediate:true,notify:false});worksExperience?.close({immediate:true,notify:false});personalRooms?.close({immediate:true,notify:false});
+  aboutExperience?.close({immediate:true,notify:false});oakLab?.close({immediate:true,notify:false});worksExperience?.close({immediate:true,notify:false});personalRooms?.close({immediate:true,notify:false});
   cancelWelcomeDeparture();dismissWelcomeGuide();welcomeVoice.stop();
   if(reader.open){readerScroll=reader.scrollTop;reader.close();}if(help.open)help.close();
   mapUI?.close();placeUI?.close();projectUI?.close();clearInput();syncRideUI();
@@ -349,6 +351,14 @@ function openWorks(projectId){
   }else projectUI.open(projectId);
 }
 function openLandmark(kind){
+  if(kind==='about'){
+    if(aboutExperience&&ready&&!inPortfolio){
+      if(aboutExperience.isOpen)return;
+      if(!running)start({skipWelcome:true});
+      try{if(aboutExperience.open())return;}catch(error){aboutExperience.close({immediate:true,notify:false});console.warn('The studio could not open; the readable biography remains available.',error);}
+    }
+    placeUI.open('about');return;
+  }
   if(kind==='projects'){openWorks();return;}
   if(kind==='music'){
     if(oakLab&&ready&&!inPortfolio){
@@ -376,11 +386,11 @@ function beginRoute(destination,preferPaths=false,onArrival=null){
   world.setRoute([{x:state.x,z:state.z},...guidedRide.points]);$('ride-status-label').textContent='Following your route';syncRideUI();return true;
 }
 function visitPlace(kind,onArrival=null){const stop=STOPS[kind];if(!stop)return;if(!ready){notify('The world is still preparing. You can read every story directly.');return;}if(help.open)help.close();if(!running)start({skipWelcome:true});if(beginRoute(stop.arrival,true,onArrival||(()=>notify(`Arrived at ${destinationName(kind,stop.title).toLowerCase()}. Choose the stop to explore.`)))){$('ride-status-label').textContent=`Riding to ${destinationName(kind,stop.title).toLowerCase()}`;notify('Steer or brake to take over at any time.');}sceneHost.focus({preventScroll:true});}
-function showMap(){if(inPortfolio||reader.open||placeUI?.isOpen||projectUI?.isOpen||personalRooms?.isOpen||worksExperience?.isOpen||oakLab?.isOpen)return;mapUI.open(state);}
+function showMap(){if(inPortfolio||reader.open||placeUI?.isOpen||projectUI?.isOpen||personalRooms?.isOpen||worksExperience?.isOpen||oakLab?.isOpen||aboutExperience?.isOpen)return;mapUI.open(state);}
 function activateLandmark(kind){const stop=STOPS[kind];if(!stop)return;if(Math.hypot(state.x-stop.x,state.z-stop.z)<=stop.radius+4)openLandmark(kind);else visitPlace(kind);}
 placeUI=createDestinationUI({
   onOpen(){prepareOverlay('place');},onClose:restoreRideUI,
-  onContinue(){if(!running&&ready)start({skipWelcome:true});},onPortfolio:showPortfolio,onVisit:visitPlace,isReduced:()=>reduced,enableRichCloud:false
+  onContinue(){if(!running&&ready)start({skipWelcome:true});},onPortfolio:showPortfolio,onVisit:visitPlace,onRead:openLandmark,onProject:openWorks,isReduced:()=>reduced,enableRichCloud:false
 });
 projectUI=createProjectUI({onOpen(){prepareOverlay('projects');},onClose:restoreRideUI,onPortfolio:showPortfolio,onContinue(){if(!running&&ready)start({skipWelcome:true});}});
 mapUI=createMapUI({onOpen(){prepareOverlay('map');},onClose:restoreRideUI,onRide:visitPlace,onRead:openLandmark,onPortfolio:showPortfolio,onHelp:showHelp,getView:()=>ridingView,onReset:restartJourney});
@@ -488,7 +498,7 @@ window.addEventListener('pagehide',event=>{
   const deferredGuide=running&&pendingWelcomeGuide;
   welcomeVoice.stop();clearWelcomeHandoff();
   if(event.persisted){pendingWelcomeGuide=deferredGuide;return;}
-  abandoned=true;mainLoop.stop();bicycleLight?.dispose();rider?.bell?.dispose();oakLab?.dispose();worksExperience?.dispose();personalRooms?.dispose();trailheadGuide?.dispose();gardenLighting?.dispose();followSky?.dispose();world?.wayfinding.dispose();cancelAnimationFrame(loadingCloudFrame);cloudVolume?.dispose();cloudCurtain.dispose();rideProfile?.dispose();startupController.abort();pokemonControls.dispose();pokemonAudio.dispose();rideSoundControl.dispose();gardenBell.dispose();rideAudio.dispose();companions?.dispose();welcomeVoice.dispose();garden?.dispose();world?.studioDisplays.dispose();world?.landmarks.dispose();woodyWelcome?.dispose();disposeCharacterAsset(characterAsset);characterAsset=null;
+  abandoned=true;mainLoop.stop();bicycleLight?.dispose();rider?.bell?.dispose();aboutExperience?.dispose();oakLab?.dispose();worksExperience?.dispose();personalRooms?.dispose();trailheadGuide?.dispose();gardenLighting?.dispose();followSky?.dispose();world?.wayfinding.dispose();cancelAnimationFrame(loadingCloudFrame);cloudVolume?.dispose();cloudCurtain.dispose();rideProfile?.dispose();startupController.abort();pokemonControls.dispose();pokemonAudio.dispose();rideSoundControl.dispose();gardenBell.dispose();rideAudio.dispose();companions?.dispose();welcomeVoice.dispose();garden?.dispose();world?.studioDisplays.dispose();world?.landmarks.dispose();woodyWelcome?.dispose();disposeCharacterAsset(characterAsset);characterAsset=null;
   renderer?.dispose();renderer?.domElement.remove();
 });
 document.querySelectorAll('[data-key]').forEach(button=>{
@@ -571,7 +581,7 @@ function renderWelcome(dt=0){
   renderCloudEntry();
 }
 function renderWorld(){if(renderer.domElement.parentElement!==sceneHost)sceneHost.append(renderer.domElement);gardenLighting?.update(0,{paused:true,reduced,focus});followSky?.update({camera,focus,time,active:ridingView==='follow',reduced,lighter:!renderSettings.ambientMotion,night:gardenLighting?.progress??0});garden?.update({time,reduced,lighter:!renderSettings.ambientMotion,camera,sun,night:gardenLighting?.progress??0});companions?.update({time,reduced,lighter:!renderSettings.ambientMotion,camera,player:state,active:running&&!hasOverlay()&&!inPortfolio});renderer.render(scene,camera);renderCloudEntry();}
-function renderBackdrop(){if(oakLab?.isOpen){oakLab.update(0);return;}if(personalRooms?.isOpen){personalRooms.update(0);return;}if(worksExperience?.isOpen){worksExperience.update(0);return;}if(!running&&!inPortfolio&&!enteredGarden&&!$('welcome').hidden&&woodyWelcome)renderWelcome();else renderWorld();}
+function renderBackdrop(){if(aboutExperience?.isOpen){aboutExperience.update(0);return;}if(oakLab?.isOpen){oakLab.update(0);return;}if(personalRooms?.isOpen){personalRooms.update(0);return;}if(worksExperience?.isOpen){worksExperience.update(0);return;}if(!running&&!inPortfolio&&!enteredGarden&&!$('welcome').hidden&&woodyWelcome)renderWelcome();else renderWorld();}
 function applyRenderQuality(){
   renderSettings=renderQuality.settings(innerWidth,innerHeight,devicePixelRatio);
   document.documentElement.dataset.graphics=renderSettings.level;
@@ -583,10 +593,10 @@ function applyRenderQuality(){
     sun.shadow.mapSize.setScalar(renderSettings.shadowSize);sun.shadow.needsUpdate=true;
   }
 }
-function resize(){if(!renderer)return;readingBackdropDrawn=false;const w=innerWidth,h=innerHeight;renderer.setSize(w,h);applyRenderQuality();if(oakLab?.isOpen){oakLab.resize();return;}if(worksExperience?.isOpen){worksExperience.resize();return;}if(personalRooms?.isOpen){personalRooms.resize();return;}cameraHeight=Math.max(24,16*h/w);updateProjection();if(ready)renderBackdrop();}
+function resize(){if(!renderer)return;readingBackdropDrawn=false;const w=innerWidth,h=innerHeight;renderer.setSize(w,h);applyRenderQuality();if(aboutExperience?.isOpen){aboutExperience.resize();return;}if(oakLab?.isOpen){oakLab.resize();return;}if(worksExperience?.isOpen){worksExperience.resize();return;}if(personalRooms?.isOpen){personalRooms.resize();return;}cameraHeight=Math.max(24,16*h/w);updateProjection();if(ready)renderBackdrop();}
 function showWorldFailure(message){
   mainLoop.stop();window.__playStartup?.finish('failed');
-  for(const owner of [oakLab,worksExperience,personalRooms]){
+  for(const owner of [aboutExperience,oakLab,worksExperience,personalRooms]){
     try{owner?.close({immediate:true,notify:false});}
     catch(error){console.warn('A destination could not finish closing after the 3D view stopped.',error);}
   }
@@ -650,7 +660,7 @@ async function initialize(){
         sun=new THREE.DirectionalLight('#fff1d5',2.5);sun.position.set(-12,25,14);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-24,right:24,top:24,bottom:-24,near:.5,far:80});sun.shadow.normalBias=.035;sun.shadow.bias=-.0002;sun.shadow.radius=4;scene.add(sun,sun.target);
       }},
       {id:'world',label:'Preparing Woody and the bicycle…',timeoutMs:35000,async run(){
-        personalRooms?.dispose();personalRooms=null;worksExperience?.dispose();worksExperience=null;oakLab?.dispose();oakLab=null;
+        aboutExperience?.dispose();aboutExperience=null;personalRooms?.dispose();personalRooms=null;worksExperience?.dispose();worksExperience=null;oakLab?.dispose();oakLab=null;
         bicycleLight?.dispose();rider?.bell?.dispose();
         world=createWorld(scene);trailheadGuide=createTrailheadGuide(scene);world.colliders.push(...trailheadGuide.colliders);rider=createRider(THREE);
         gardenLighting=createGardenLighting({scene,sun,hemisphere,world});gardenLighting.setNight(saved?.gardenNight===true,{immediate:true});gardenLighting.setAutomatic(saved?.automaticDaylight===true);
@@ -672,6 +682,10 @@ async function initialize(){
         });
         oakLab=createOakLab({renderer,isReduced:()=>reduced,onPortfolio:showPortfolio,onPlace:openLandmark,
           onOpen(){prepareOverlay('oak');history.replaceState(null,'',location.pathname+location.search+'#oak-lab');},
+          onClose(){updateProjection();readingBackdropDrawn=false;history.replaceState(null,'',location.pathname+location.search);restoreRideUI();}
+        });
+        aboutExperience=createAboutExperience({renderer,isReduced:()=>reduced,onPortfolio:showPortfolio,onPlace:openLandmark,onProject:openWorks,
+          onOpen(){prepareOverlay('about');history.replaceState(null,'',location.pathname+location.search+PERSONAL_ROUTES.about);},
           onClose(){updateProjection();readingBackdropDrawn=false;history.replaceState(null,'',location.pathname+location.search);restoreRideUI();}
         });
         decorateModeSwitches();
@@ -742,6 +756,7 @@ function frame(now){
     }
   }
   syncRideUI();
+  if(aboutExperience?.isOpen){aboutExperience.update(dt);return;}
   if(oakLab?.isOpen){oakLab.update(dt);return;}
   if(worksExperience?.isOpen){worksExperience.update(dt);return;}
   if(personalRooms?.isOpen){personalRooms.update(dt);return;}

@@ -1,3 +1,4 @@
+import {aboutJournalFallback} from './about-journal-fallback.js';
 import {createSkyCamera} from './sky-camera.js';
 import {personalRoomContent} from './personal-room-content.js';
 const hobbies=personalRoomContent('memory');
@@ -19,13 +20,7 @@ const stories={
     <p class="place-intro">Pokémon and Toy Story were childhood favourites. This lab brings that part of Lakshya’s story together with his real Pokémon GO collection and the making of this garden.</p>
     <section class="place-story"><h2>A childhood wish, out in the world.</h2><p>As a child, Lakshya imagined meeting Pokémon for real. He played Pokémon GO when it arrived and still returns to it to unwind and explore.</p><p>Woody was his favourite Toy Story character. Those memories helped shape this personal world: a bicycle, a garden and places to discover his work and interests.</p></section>
     <section class="place-story"><h2>How this garden came to be.</h2><p>The garden offers another way to meet Lakshya. Each destination reveals a part of him, while the normal portfolio keeps projects directly accessible.</p><p>Roads, signs, riding movements and room transitions were refined through repeated building and visual checks. These are development iterations, not a claim of formal user research.</p></section><p class="place-caption">In the 3D lab, Professor Oak introduces the story through text bubbles and opens Lakshya’s own catch collection. No caught locations are added.</p>`},
-  about:{title:'I usually start with a conversation.',eyebrow:'01 / MEET LAKSHYA',body:`
-    <p class="place-intro">I’m Lakshya, a UX designer and vocalist. I’m usually the person starting a conversation, making a new friend, or finding a reason to head outside.</p><p>I notice how people react, where they hesitate, and what frustrates them. Understanding those moments is what draws me to UX. You’ll find that side of me in my projects—and a few childhood favourites around this garden.</p>
-    <section class="place-story about-conversations"><p class="eyebrow">PICK A CONVERSATION</p><h2>A little about the person riding around.</h2>
-      <details data-about-question="ux" open><summary>What draws me to UX?</summary><p>I’m curious about human behaviour. I notice small moments of hesitation and changes in how people respond. They make me want to ask better questions and understand what someone is experiencing.</p><p>UX gives me a way to turn that curiosity into creative work: understand a problem, explore possible solutions, and keep improving them.</p></details>
-      <details data-about-question="away"><summary>What do I do away from the desk?</summary><p>I’m a vocalist and performed at Junoon during my M.Des studies. I enjoy Garba, socialising, and getting out for an adventure.</p><p>I also photograph clouds and sometimes play Pokémon Go. Cloud photography and singing help me slow down; meeting people brings out my more energetic side.</p></details>
-      <details data-about-question="process"><summary>How do I approach design?</summary><p>I adapt my methods to the people, problem, and situation in front of me. I don’t treat design as a fixed sequence that only moves forward.</p><p>If an idea needs another look, I go back, question it, and iterate. Understanding people’s pain and frustration is what gives that work a direction.</p></details>
-    </section>`}
+  about:aboutJournalFallback()
 };
 
 const storyHashes={cloud:'#cloud-lookout',music:'#oak-lab',about:'#meet-lakshya',collection:'#hobbies'};
@@ -54,7 +49,7 @@ function soundEngine(onStatus){
   return {play,stop,dispose(){stop();context?.close().catch(()=>{});context=null;}};
 }
 
-export function createDestinationUI({onOpen,onClose,onContinue,onPortfolio,onVisit,isReduced,enableRichCloud=true}){
+export function createDestinationUI({onOpen,onClose,onContinue,onPortfolio,onVisit,onRead=onVisit,onProject,isReduced,enableRichCloud=true}){
   const dialog=document.createElement('dialog');dialog.id='place-reader';dialog.className='place-reader';dialog.setAttribute('aria-labelledby','place-title');
   dialog.innerHTML='<div class="reader-top"><span class="mode-switch" data-mode-switch id="place-back">Portfolio / Play</span><button id="place-close" class="close-button">Return to ride <span aria-hidden="true">×</span></button></div><article id="place-article"></article>';
   document.body.append(dialog);
@@ -86,6 +81,8 @@ export function createDestinationUI({onOpen,onClose,onContinue,onPortfolio,onVis
       if(postcard)showPostcard();
       capture.addEventListener('click',()=>{try{postcard=sky.capture(postcardCaption);showPostcard();status.textContent='Your virtual postcard is ready below. It includes your caption.';}catch{status.textContent='The postcard couldn’t be captured. Please try another view.';}});
     }else if(kind==='about'){
+      article.querySelectorAll('[data-about-destination]').forEach(button=>button.addEventListener('click',()=>{close();onRead?.(button.dataset.aboutDestination);}));
+      article.querySelectorAll('[data-about-project]').forEach(button=>{button.disabled=!onProject;button.addEventListener('click',()=>{close();onProject?.(button.dataset.aboutProject);});});
       article.querySelectorAll('[data-about-question]').forEach(detail=>{detail.open=aboutOpen.has(detail.dataset.aboutQuestion);detail.addEventListener('toggle',()=>{if(detail.open)aboutOpen.add(detail.dataset.aboutQuestion);else aboutOpen.delete(detail.dataset.aboutQuestion);});});
     }
     restoreProgress(scrolls[kind]);return true;

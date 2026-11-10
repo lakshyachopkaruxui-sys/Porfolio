@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-09T17:40:01.293Z",
+  "generatedAt": "2026-11-10T02:39:49.461Z",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 740,
-      "sha256": "ad360c38653efa66437aabf8457a700e557114ec185271e3a39e376612699645"
+      "sha256": "9442cc4420c57617f25a02a03c65a1cce4c457b4dbeafd64e483f55842368d9b"
     },
     {
       "path": "_redirects",
@@ -78,19 +78,29 @@
       "sha256": "97f7de53f0fe80df2ce4e256ef78c75c00e3b032f32a14a983ab615ed42f8301"
     },
     {
-      "path": "bicycle-world/dist/assets/ambient-music/clear-air.ogg",
-      "size": 1795259,
-      "sha256": "4a04fc7957fb26fa53ad8c5d7c3734646d8c5defcc921d511e65871a5f362cc2"
-    },
-    {
       "path": "bicycle-world/dist/assets/ambient-music/CREDITS.txt",
       "size": 1207,
       "sha256": "3b31c2a7a2d7f592fe22be5706a2d586bc0f3f180db668578718444a5a6a7df0"
     },
     {
+      "path": "bicycle-world/dist/assets/ambient-music/clear-air.ogg",
+      "size": 1795259,
+      "sha256": "4a04fc7957fb26fa53ad8c5d7c3734646d8c5defcc921d511e65871a5f362cc2"
+    },
+    {
       "path": "bicycle-world/dist/assets/ambient-music/porch-swing-days.ogg",
       "size": 2206308,
       "sha256": "737ed094aa01f5dc3e4391ede5b448e8f4de503b6596407c0c0d6c7f23fa0012"
+    },
+    {
+      "path": "bicycle-world/dist/assets/bicycle-audio/CC0-1.0.txt",
+      "size": 7048,
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
+    },
+    {
+      "path": "bicycle-world/dist/assets/bicycle-audio/CREDITS.txt",
+      "size": 982,
+      "sha256": "34a9c1eb2cd1fe1b4ff8fb4a9ead94861381b75d9b04d742351b64186e886b67"
     },
     {
       "path": "bicycle-world/dist/assets/bicycle-audio/bell-CREDITS.txt",
@@ -108,16 +118,6 @@
       "sha256": "25d29ca98e7dae3467b21eb7586e8ffec319f1fe2134718b7a5ddeac19035931"
     },
     {
-      "path": "bicycle-world/dist/assets/bicycle-audio/CC0-1.0.txt",
-      "size": 7048,
-      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
-    },
-    {
-      "path": "bicycle-world/dist/assets/bicycle-audio/CREDITS.txt",
-      "size": 982,
-      "sha256": "34a9c1eb2cd1fe1b4ff8fb4a9ead94861381b75d9b04d742351b64186e886b67"
-    },
-    {
       "path": "bicycle-world/dist/assets/characters/SOURCE.md",
       "size": 611,
       "sha256": "f21ba4bbf57908fd2af8ab1726d65d9bcd719a7ddb73820926646570648fcdf4"
@@ -133,14 +133,14 @@
       "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
     },
     {
-      "path": "bicycle-world/dist/assets/fonts/mochiy-pop-p-one-latin.woff2",
-      "size": 18204,
-      "sha256": "90d53f9b1bdaba1dd40efcbe18ab9f6ab72b2afb660e7db6a80a64073a8ed7e3"
-    },
-    {
       "path": "bicycle-world/dist/assets/fonts/Mochiy-Pop-P-One-OFL.txt",
       "size": 4387,
       "sha256": "76be26178f13ef82866cf6a5c54272191bb583c203ad7035021c7681c9043558"
+    },
+    {
+      "path": "bicycle-world/dist/assets/fonts/mochiy-pop-p-one-latin.woff2",
+      "size": 18204,
+      "sha256": "90d53f9b1bdaba1dd40efcbe18ab9f6ab72b2afb660e7db6a80a64073a8ed7e3"
     },
     {
       "path": "bicycle-world/dist/assets/fonts/welcome-0.woff2",
@@ -163,6 +163,11 @@
       "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
     },
     {
+      "path": "bicycle-world/dist/assets/garden/SOURCE.md",
+      "size": 1029,
+      "sha256": "d83a20eacefca8380cf68f50682958e02b037332a2cd7fbe1ca24a9aeccd73b4"
+    },
+    {
       "path": "bicycle-world/dist/assets/garden/japanese-bridge-runtime.glb",
       "size": 118728,
       "sha256": "b069c05c1ba8dd073e0d83dc1a1ddbb6f93e2f31918d770884796a1d3b77f107"
@@ -171,11 +176,6 @@
       "path": "bicycle-world/dist/assets/garden/nature-pack-runtime.glb",
       "size": 187084,
       "sha256": "9ab637f2e31cae3324a8900734413c5e6bf1cf4e1207cbac4367b2848a5973a7"
-    },
-    {
-      "path": "bicycle-world/dist/assets/garden/SOURCE.md",
-      "size": 1029,
-      "sha256": "d83a20eacefca8380cf68f50682958e02b037332a2cd7fbe1ca24a9aeccd73b4"
     },
     {
       "path": "bicycle-world/dist/assets/identity/shared-curve/apple-touch-icon.png",
@@ -216,6 +216,76 @@
       "path": "bicycle-world/dist/assets/oak-lab/professor-oak-relaxed.glb",
       "size": 1865196,
       "sha256": "3b5e5bcc378bbe573af544d2bc7486b740018db188a6ac9eaf450065e35e4a37"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/about-journal/giggles-recognition-at-meraki.webp",
+      "size": 91272,
+      "sha256": "82d9ecf98bb6330b23a2d765984320d0f0a0d11b7e389286fb5008217e1eee4f"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/about-journal/lakshya-a-little-colour.webp",
+      "size": 62592,
+      "sha256": "42f72824d2b4a17e3174ec5c23dbc6ff5b4d7130393ba215fbb8e17373435440"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/about-journal/lakshya-a-quieter-moment.webp",
+      "size": 32198,
+      "sha256": "84da0b9a147336f212c4102b47fcd13281c0fe9e41c7fc3c40ca66ba6202945b"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/about-journal/lakshya-by-the-water.webp",
+      "size": 56494,
+      "sha256": "38df10402179a6ac2ca05e70d52625ef6ee7ce24e83746d5dd658dd48827096c"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/about-journal/listening-at-the-table.webp",
+      "size": 116650,
+      "sha256": "a0696d74e14e378b5e938107daed688877218e00c1553a8cc6db2889352aa4a6"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/about-journal/observing-a-comparison.webp",
+      "size": 84088,
+      "sha256": "e8e93f8a5986318565ae275a44b22bbb98ee054bfa444aee8aa61576c6432ce3"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/about-journal/presenting-the-syringe-redesign.webp",
+      "size": 87972,
+      "sha256": "063f0a11c7744149c9bd1be446ff23637d5d21d9d39da6213acbb0279911cace"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/about-journal/thumbs/giggles-recognition-at-meraki.webp",
+      "size": 9502,
+      "sha256": "0c16dabef38ac6b82f2aad8ad757310e0edaabf00492dfeabba77fd0562b51b0"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/about-journal/thumbs/lakshya-a-little-colour.webp",
+      "size": 2928,
+      "sha256": "a0da661e0e0fd706d625dbb74d294c9327b960f998807d1a06525dc69699f172"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/about-journal/thumbs/lakshya-a-quieter-moment.webp",
+      "size": 2500,
+      "sha256": "01c184ff9e3704517d4a5b1613f86252980d4bcf1f7aa505d5f1e4a531b53f98"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/about-journal/thumbs/lakshya-by-the-water.webp",
+      "size": 2752,
+      "sha256": "7dc22db3326251d7808ce06d7ac03b2d4a2f980e64ba07968b3fabb97a1e4e44"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/about-journal/thumbs/listening-at-the-table.webp",
+      "size": 13026,
+      "sha256": "dc675d0f6a6a58698c4ef3a1b4302c5879404d5f41aa90cf9913ff450124e262"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/about-journal/thumbs/observing-a-comparison.webp",
+      "size": 9632,
+      "sha256": "50776d72f427601f41c545aa99051ec496c78c9ebe51fd1778795972e36ec285"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/about-journal/thumbs/presenting-the-syringe-redesign.webp",
+      "size": 8920,
+      "sha256": "ad8e08ac765b38857694a9dc0b9001322bb7d5d0d5a586eb8f63d3c702334fe3"
     },
     {
       "path": "bicycle-world/dist/assets/personal/clouds/layers-of-cloud.webp",
@@ -2738,49 +2808,14 @@
       "sha256": "48fdf9191113fa69ed42e461ee7f558e7a6429d5683eac8f8bdf9bdb1ba866bb"
     },
     {
-      "path": "bicycle-world/dist/assets/pokemon/articuno.glb",
-      "size": 518000,
-      "sha256": "e5b7696772055d65b575ef62259dc2db027c345ef17286ab543e9d2b3c893a11"
-    },
-    {
-      "path": "bicycle-world/dist/assets/pokemon/bulbasaur.glb",
-      "size": 384808,
-      "sha256": "3676a2658286f48de703342b588b1ef7131b46804827d602e171d400273802fa"
-    },
-    {
-      "path": "bicycle-world/dist/assets/pokemon/charizard.glb",
-      "size": 484712,
-      "sha256": "d4ccd1ed8ee160019e4f28da6c487bce1e99402272653ea91511d8ab8055fedc"
-    },
-    {
-      "path": "bicycle-world/dist/assets/pokemon/charmander.glb",
-      "size": 406668,
-      "sha256": "6d05515763d819fce0c3b785e2dee59517ff2bf01017730dc92c6dfdad44bdcd"
-    },
-    {
-      "path": "bicycle-world/dist/assets/pokemon/pikachu.glb",
-      "size": 146152,
-      "sha256": "f6adfe0dd7f3dcc6100370c5b32c003360eab4f235b920cac71d8e3a253cd5de"
-    },
-    {
-      "path": "bicycle-world/dist/assets/pokemon/snorlax.glb",
-      "size": 279848,
-      "sha256": "3c480914f2686cbad955df9c288fb9c72642094b2ec8288a3cca6d490cba5879"
-    },
-    {
-      "path": "bicycle-world/dist/assets/pokemon/vaporeon.glb",
-      "size": 415416,
-      "sha256": "5075b12f67bcba1ca2e5fd54d0a0e013ffd6d51901f82c41167bb62ae1b94c21"
+      "path": "bicycle-world/dist/assets/pokemon-audio/SOURCE.md",
+      "size": 1231,
+      "sha256": "090f909ac69843bb9289093aa0d908b4e864082dd3d26ea241c7931d6b7c8774"
     },
     {
       "path": "bicycle-world/dist/assets/pokemon-audio/articuno.ogg",
       "size": 17059,
       "sha256": "374612dfbb0a5c7e7721b9698553fc15909c0ab2b49be9eeb3385e7558d9730b"
-    },
-    {
-      "path": "bicycle-world/dist/assets/pokemon-audio/SOURCE.md",
-      "size": 1231,
-      "sha256": "090f909ac69843bb9289093aa0d908b4e864082dd3d26ea241c7931d6b7c8774"
     },
     {
       "path": "bicycle-world/dist/assets/pokemon-audio/vaporeon.ogg",
@@ -3708,6 +3743,11 @@
       "sha256": "5e7bb1c46ff9fa7f5ab0e18cd3a1a54a19b7aa0800b923e2499356d77e720a1a"
     },
     {
+      "path": "bicycle-world/dist/assets/pokemon-voices/SOURCE.md",
+      "size": 1496,
+      "sha256": "d3e40cbb8df5cf2873b0de8bf71f2f3a2e472364d93924b342147976b39e291b"
+    },
+    {
       "path": "bicycle-world/dist/assets/pokemon-voices/bulbasaur-anime-candidate.mp3",
       "size": 12717,
       "sha256": "36e0215374428edd89833008f711f386a90e098d311711d5f8831f7506c79563"
@@ -3728,9 +3768,39 @@
       "sha256": "a910dd28d7df871027b61459bac048f92efb921c284c3120da245d0070bd4621"
     },
     {
-      "path": "bicycle-world/dist/assets/pokemon-voices/SOURCE.md",
-      "size": 1496,
-      "sha256": "d3e40cbb8df5cf2873b0de8bf71f2f3a2e472364d93924b342147976b39e291b"
+      "path": "bicycle-world/dist/assets/pokemon/articuno.glb",
+      "size": 518000,
+      "sha256": "e5b7696772055d65b575ef62259dc2db027c345ef17286ab543e9d2b3c893a11"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon/bulbasaur.glb",
+      "size": 384808,
+      "sha256": "3676a2658286f48de703342b588b1ef7131b46804827d602e171d400273802fa"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon/charizard.glb",
+      "size": 484712,
+      "sha256": "d4ccd1ed8ee160019e4f28da6c487bce1e99402272653ea91511d8ab8055fedc"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon/charmander.glb",
+      "size": 406668,
+      "sha256": "6d05515763d819fce0c3b785e2dee59517ff2bf01017730dc92c6dfdad44bdcd"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon/pikachu.glb",
+      "size": 146152,
+      "sha256": "f6adfe0dd7f3dcc6100370c5b32c003360eab4f235b920cac71d8e3a253cd5de"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon/snorlax.glb",
+      "size": 279848,
+      "sha256": "3c480914f2686cbad955df9c288fb9c72642094b2ec8288a3cca6d490cba5879"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon/vaporeon.glb",
+      "size": 415416,
+      "sha256": "5075b12f67bcba1ca2e5fd54d0a0e013ffd6d51901f82c41167bb62ae1b94c21"
     },
     {
       "path": "bicycle-world/dist/assets/work-covers/connectaid.webp",
@@ -3764,8 +3834,8 @@
     },
     {
       "path": "bicycle-world/dist/index.html",
-      "size": 43042,
-      "sha256": "f69968e2099fa96fcbbd67facf462f860fda4e2e967c2d7da89063e204687f11"
+      "size": 44001,
+      "sha256": "fe0139ffb1cdbe06b82cceb59f6ec42e03f36975855e96092af959ab7acd8a86"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
@@ -3783,9 +3853,54 @@
       "sha256": "5b681c60edc6b2bae9eedf08e6f9bf6383ea172ab1235764b87c94e117863543"
     },
     {
+      "path": "bicycle-world/dist/src/about-experience.css",
+      "size": 6302,
+      "sha256": "bfc26b9d1aacc7c2d76ec76b32f311465f0fbf080f99c43cc20fa324f44646c4"
+    },
+    {
+      "path": "bicycle-world/dist/src/about-experience.js",
+      "size": 17437,
+      "sha256": "d49628820dbd80fd5d8f14fccc66b744d1d3c9afe8cfa035e7b93dc692a8dd4b"
+    },
+    {
       "path": "bicycle-world/dist/src/about-exterior.js",
       "size": 6596,
       "sha256": "8acafc58f85e2313ea5ebbad0795d9f035014195abad77c4b55592bbe0ab48ed"
+    },
+    {
+      "path": "bicycle-world/dist/src/about-journal-camera.js",
+      "size": 3742,
+      "sha256": "46180e271e365b0db1d02370e9e9add7dd873ca2e85ec53d9d610504f5ac096e"
+    },
+    {
+      "path": "bicycle-world/dist/src/about-journal-content.js",
+      "size": 9794,
+      "sha256": "2f47d7d26f011c80de411130c4f0971ba83fdbf5e390a325676ef715e057aebc"
+    },
+    {
+      "path": "bicycle-world/dist/src/about-journal-fallback.js",
+      "size": 2587,
+      "sha256": "7d3dd874a8a572aace93c7d5b9451de860249afed6f4013599f089763bde8407"
+    },
+    {
+      "path": "bicycle-world/dist/src/about-journal-photo-data.js",
+      "size": 3435,
+      "sha256": "219b3ccf1a5311b5d0d445e4af752bc3d61ab3d5b1377ba14fec478c33ea9c7d"
+    },
+    {
+      "path": "bicycle-world/dist/src/about-journal-reader.css",
+      "size": 10771,
+      "sha256": "39dd5b57db65b984a03e8325f4fbe5e5cba719e59768ea4c97f656ebfed0be78"
+    },
+    {
+      "path": "bicycle-world/dist/src/about-journal-reader.js",
+      "size": 19686,
+      "sha256": "4420eb6f207693c288ead153c0abb26e139c3213b57d0af5f3236ee6a831d09f"
+    },
+    {
+      "path": "bicycle-world/dist/src/about-journal-scene.js",
+      "size": 15756,
+      "sha256": "f2c0b7414eafdf11d3f3cff1a161e6daf0eca94c557bc9b2a88471df277d24c8"
     },
     {
       "path": "bicycle-world/dist/src/about-room-architecture.js",
@@ -3929,13 +4044,13 @@
     },
     {
       "path": "bicycle-world/dist/src/destination-ui.js",
-      "size": 14092,
-      "sha256": "1c7d08d2f3121941341c644fdf0e56abe17b032fb3f8e4670e27bffc123dc7d2"
+      "size": 12664,
+      "sha256": "59f5f0e707cb91912d31b380d611e65fa0dfc0ff9ab1e4d20616752111e8877c"
     },
     {
       "path": "bicycle-world/dist/src/destinations.css",
-      "size": 6306,
-      "sha256": "e44415214d9d550fc208b84d640bd6649dce1b2b22edc84236300907ee0e9ee6"
+      "size": 6894,
+      "sha256": "b9dd5c6a8bbebb45766ba55859b4e47cab421454963a73a1d19447d0c8e629d6"
     },
     {
       "path": "bicycle-world/dist/src/diegetic.css",
@@ -4139,8 +4254,8 @@
     },
     {
       "path": "bicycle-world/dist/src/main.js",
-      "size": 70534,
-      "sha256": "5bb9aa3ac332f4a73c5037f259ba29c593aa41820e717068c4466a8c347c8f2c"
+      "size": 71963,
+      "sha256": "8525916aeb935910df8ab9273367a2da503000ec1b9b9312507eeee1f2a769f1"
     },
     {
       "path": "bicycle-world/dist/src/map-guide.css",
@@ -4279,8 +4394,8 @@
     },
     {
       "path": "bicycle-world/dist/src/play-music-ui.js",
-      "size": 10725,
-      "sha256": "e2bae381f857de7d02af05f89851c245adfbcf3ff3503a0bb868af03427278b8"
+      "size": 10983,
+      "sha256": "81e9575d684b28ec5b90335c3599a90309f5490c5ade2e63e10c59b9460b222e"
     },
     {
       "path": "bicycle-world/dist/src/play-music.css",
@@ -4558,6 +4673,11 @@
       "sha256": "b600e5f6bb8df7134589b6a5314655c869933009bc109958ae7d9ccc278a6b1b"
     },
     {
+      "path": "bicycle-world/dist/vendor/THREE-LICENSE.txt",
+      "size": 1081,
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+    },
+    {
       "path": "bicycle-world/dist/vendor/addons/geometries/RoundedBoxGeometry.js",
       "size": 6476,
       "sha256": "c1b7c9bd2cddff2e3f3a0723f618a3d364a47450e3d25771d21faed88410bec8"
@@ -4576,11 +4696,6 @@
       "path": "bicycle-world/dist/vendor/addons/utils/SkeletonUtils.js",
       "size": 11535,
       "sha256": "b1632a703206c3d830de9fcbe515696770d04b71a15ee6b50afa6d2c3298c86f"
-    },
-    {
-      "path": "bicycle-world/dist/vendor/THREE-LICENSE.txt",
-      "size": 1081,
-      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
     },
     {
       "path": "bicycle-world/dist/vendor/three.core.js",
@@ -4611,6 +4726,11 @@
       "path": "bicycle-world/src/welcome-fonts.css",
       "size": 899,
       "sha256": "a05d05a37eafab67eea57349fa0b27fa57cec03f89114be1aaabd0ac64fa9a57"
+    },
+    {
+      "path": "normal-portfolio/assets/Lakshya-Chopkar-UX-Designer-Resume.pdf",
+      "size": 150158,
+      "sha256": "c759729259bd575ff61e2e15d886cf47d55b5af074b3f5f670de6ec09c638ab8"
     },
     {
       "path": "normal-portfolio/assets/cases/connectaid/design-system/button-states-source.webp",
@@ -6013,11 +6133,6 @@
       "sha256": "308f7c5ed377c2476481bc205341747648efcd48480ce78a6f6ba673e7348b77"
     },
     {
-      "path": "normal-portfolio/assets/Lakshya-Chopkar-UX-Designer-Resume.pdf",
-      "size": 150158,
-      "sha256": "c759729259bd575ff61e2e15d886cf47d55b5af074b3f5f670de6ec09c638ab8"
-    },
-    {
       "path": "normal-portfolio/assets/personal/carousel/n001-waterfront.webp",
       "size": 38352,
       "sha256": "c4d0e5ecf8e21993ba341c9f5678fc05be958933cb34340ca3075c32add64a02"
@@ -6153,6 +6268,21 @@
       "sha256": "cb9c48acc659870f27d9c9c306f4671d5bde935e512a4b1ba3a25cd170d4e16c"
     },
     {
+      "path": "normal-portfolio/assets/toolkit/LOBE-ICONS-LICENSE.txt",
+      "size": 1064,
+      "sha256": "add9d7531d1b21646317a8958e38fc727506fa39d24bdecb44154d943c82753a"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/OCTICONS-LICENSE.txt",
+      "size": 1068,
+      "sha256": "da259c8bd0de62713ccdcf88910aebca810644f98c2c912bad814fc79ea778df"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/TABLER-LICENSE.txt",
+      "size": 1073,
+      "sha256": "b740a1d46122672da62833e97f7e7c8a13fa85cbc7445b584b297cc00dde93db"
+    },
+    {
       "path": "normal-portfolio/assets/toolkit/antigravity.svg",
       "size": 5037,
       "sha256": "de7911c3d206a3d2fe3d5b4e76e84b185c581d7a259406f64db247b5b824f02e"
@@ -6233,11 +6363,6 @@
       "sha256": "16ab739533f7b81f013de8c09836fc5183d1cd21bc3e4da538ec990e7224e170"
     },
     {
-      "path": "normal-portfolio/assets/toolkit/LOBE-ICONS-LICENSE.txt",
-      "size": 1064,
-      "sha256": "add9d7531d1b21646317a8958e38fc727506fa39d24bdecb44154d943c82753a"
-    },
-    {
       "path": "normal-portfolio/assets/toolkit/maya.svg",
       "size": 1492,
       "sha256": "4449f319b44da8d7d9c5cd0936790cbd8e366a1cc839e2769a3f2b890524f8f9"
@@ -6263,11 +6388,6 @@
       "sha256": "eb2fb7155324af655bf8b35dae60f2435e87fcee3b213b0f17f169bf10a306e0"
     },
     {
-      "path": "normal-portfolio/assets/toolkit/OCTICONS-LICENSE.txt",
-      "size": 1068,
-      "sha256": "da259c8bd0de62713ccdcf88910aebca810644f98c2c912bad814fc79ea778df"
-    },
-    {
       "path": "normal-portfolio/assets/toolkit/perplexity.svg",
       "size": 2438,
       "sha256": "00180a688c194d684a69b247769cdf24a7720712256dbe0f334f97e8a15821e4"
@@ -6286,11 +6406,6 @@
       "path": "normal-portfolio/assets/toolkit/rfid.svg",
       "size": 540,
       "sha256": "fbdd866f8e0bfbee190910364ff746cf5f6cf17ac003f183efecb934ad85c7b9"
-    },
-    {
-      "path": "normal-portfolio/assets/toolkit/TABLER-LICENSE.txt",
-      "size": 1073,
-      "sha256": "b740a1d46122672da62833e97f7e7c8a13fa85cbc7445b584b297cc00dde93db"
     },
     {
       "path": "normal-portfolio/assets/toolkit/vscode.avif",
