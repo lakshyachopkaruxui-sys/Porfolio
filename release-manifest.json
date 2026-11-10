@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T02:39:49.461Z",
+  "generatedAt": "2026-11-10T03:31:16.890Z",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 740,
-      "sha256": "9442cc4420c57617f25a02a03c65a1cce4c457b4dbeafd64e483f55842368d9b"
+      "sha256": "9a33b4ec4d1f2e609aed8cc6494738f23adc232a8a3fb26329b60655b941fe09"
     },
     {
       "path": "_redirects",
@@ -3834,8 +3834,8 @@
     },
     {
       "path": "bicycle-world/dist/index.html",
-      "size": 44001,
-      "sha256": "fe0139ffb1cdbe06b82cceb59f6ec42e03f36975855e96092af959ab7acd8a86"
+      "size": 44124,
+      "sha256": "3d8b5fe2878892cb229ef80adba2e52fec77b2436c9f8b1fb81f74b2aa42f838"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
@@ -3859,8 +3859,8 @@
     },
     {
       "path": "bicycle-world/dist/src/about-experience.js",
-      "size": 17437,
-      "sha256": "d49628820dbd80fd5d8f14fccc66b744d1d3c9afe8cfa035e7b93dc692a8dd4b"
+      "size": 17467,
+      "sha256": "63782e1f6e9e6ed8ab09af08d9daf639de0d66f76f45cf5a779dcfe98d05a3ac"
     },
     {
       "path": "bicycle-world/dist/src/about-exterior.js",
@@ -3869,8 +3869,8 @@
     },
     {
       "path": "bicycle-world/dist/src/about-journal-camera.js",
-      "size": 3742,
-      "sha256": "46180e271e365b0db1d02370e9e9add7dd873ca2e85ec53d9d610504f5ac096e"
+      "size": 3744,
+      "sha256": "30b04af5381d6dc01c739419442f01acd7004481632bc57d2a5ce3e8959fe79b"
     },
     {
       "path": "bicycle-world/dist/src/about-journal-content.js",
@@ -3883,24 +3883,29 @@
       "sha256": "7d3dd874a8a572aace93c7d5b9451de860249afed6f4013599f089763bde8407"
     },
     {
+      "path": "bicycle-world/dist/src/about-journal-pagination.js",
+      "size": 3315,
+      "sha256": "5f620d03d0ff85edbce9ca14de7678b1de1a2acac038d7eae77eee62a01298c8"
+    },
+    {
       "path": "bicycle-world/dist/src/about-journal-photo-data.js",
       "size": 3435,
       "sha256": "219b3ccf1a5311b5d0d445e4af752bc3d61ab3d5b1377ba14fec478c33ea9c7d"
     },
     {
       "path": "bicycle-world/dist/src/about-journal-reader.css",
-      "size": 10771,
-      "sha256": "39dd5b57db65b984a03e8325f4fbe5e5cba719e59768ea4c97f656ebfed0be78"
+      "size": 11641,
+      "sha256": "9593892a24351ef6306551dfc6577594c3733101b1678e69141b6769aa7fbca1"
     },
     {
       "path": "bicycle-world/dist/src/about-journal-reader.js",
-      "size": 19686,
-      "sha256": "4420eb6f207693c288ead153c0abb26e139c3213b57d0af5f3236ee6a831d09f"
+      "size": 25092,
+      "sha256": "19177eba3d8f2c370105e528cd42aacde865f591cf7b2a3ff4e87c8bd850c7bb"
     },
     {
       "path": "bicycle-world/dist/src/about-journal-scene.js",
-      "size": 15756,
-      "sha256": "f2c0b7414eafdf11d3f3cff1a161e6daf0eca94c557bc9b2a88471df277d24c8"
+      "size": 15776,
+      "sha256": "10696337934f6d68503a8f7aea73b33fd1838df15ce489a659d4c85eb4c2e8f7"
     },
     {
       "path": "bicycle-world/dist/src/about-room-architecture.js",
@@ -4254,8 +4259,8 @@
     },
     {
       "path": "bicycle-world/dist/src/main.js",
-      "size": 71963,
-      "sha256": "8525916aeb935910df8ab9273367a2da503000ec1b9b9312507eeee1f2a769f1"
+      "size": 72762,
+      "sha256": "d44a203b9c1ae6c11bd42297be280a487399dcd73df7b47a927f7f1ef11f2bb6"
     },
     {
       "path": "bicycle-world/dist/src/map-guide.css",
@@ -4334,8 +4339,8 @@
     },
     {
       "path": "bicycle-world/dist/src/oak-lab.js",
-      "size": 35483,
-      "sha256": "37e27d9580750d811a73406535c6424098c1a8f1069834a6b12acc547fde656f"
+      "size": 35510,
+      "sha256": "ef975b963297af007507ac6bc2f5368a22e725a7944b8570bdb453c9bf7ab097"
     },
     {
       "path": "bicycle-world/dist/src/oak-narration.js",
@@ -4364,8 +4369,8 @@
     },
     {
       "path": "bicycle-world/dist/src/personal-rooms.js",
-      "size": 63501,
-      "sha256": "a7bc9c0e151c20110e830edef51f95404f5c5ab7dc7b97d0ed25b04511c4f4e2"
+      "size": 64334,
+      "sha256": "81717235b72fcc4c3454535e0237c6b940892d5e60ffeafc5a85e7c3c15e886d"
     },
     {
       "path": "bicycle-world/dist/src/photography-browse.js",
@@ -4649,8 +4654,8 @@
     },
     {
       "path": "bicycle-world/dist/src/works-experience.js",
-      "size": 32074,
-      "sha256": "3a2553ac2c367a715a9d04dd6fff92151facc6be9de3863c62594bbd9ffad0c5"
+      "size": 32107,
+      "sha256": "6af4a126236f3e5e41114eaa14b93058a97f3d586607a1c647046db32382ee59"
     },
     {
       "path": "bicycle-world/dist/src/works-exterior.js",

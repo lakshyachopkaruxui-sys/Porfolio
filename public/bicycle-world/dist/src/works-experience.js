@@ -193,7 +193,7 @@ export function createWorksExperience({renderer,onOpen=()=>{},onClose=()=>{},onP
   const placeList=q('[data-works-place-list]');
   for(const id of ['about','projects','work','music','cloud']){
     const title=id==='projects'?'The Works Room':id==='music'?'Professor Oak’s lab':personalRoomContent(id==='work'?'memory':id).title;
-    const button=node('button',title,placeList);button.type='button';button.dataset.worksPlace=id;
+    const button=node('button',id==='projects'?title:'Ride to '+title,placeList);button.type='button';button.dataset.worksPlace=id;
     if(id==='projects'){button.setAttribute('aria-current','page');listen(button,'click',()=>closeSubView());}
     else listen(button,'click',()=>{if(phase!=='places')return;close({immediate:true,notify:false});onPlace(id);});
   }

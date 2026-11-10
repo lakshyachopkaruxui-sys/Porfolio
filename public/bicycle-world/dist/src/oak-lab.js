@@ -13,7 +13,7 @@ const MAP_PLACES=[
   {id:'about',label:'About',text:'Here, you can meet Lakshya before looking through his work: his personality, how he connects with people, and the way he approaches design.'},
   {id:'work',label:'Work',text:'This is the Works Room. You can browse his projects here, then open a full case study in Portfolio mode when you want the details.'},
   {id:'hobbies',label:'Hobbies',text:'Here, you’ll find Lakshya singing and dancing Garba. His own photographs and recordings give you a different side of the person behind the projects.'},
-  {id:'oak',label:'Oak’s lab',text:'We’re here. I’ll show you his Pokémon GO collection and the choices behind this garden, from the childhood wish to the way it was built.'},
+  {id:'oak',label:'Oak’s lab',text:'We’re here. I’ll show you his Pokemon GO collection and the choices behind this garden, from the childhood wish to the way it was built.'},
   {id:'cloud',label:'The Viewfinder',text:'The Viewfinder holds Lakshya’s own cloud and mobile photographs. Choose a roll, find an image that catches your eye, and take a closer look.'}
 ];
 const NARRATION_PREFERENCE='lakshya-oak-narration-v1';
@@ -28,7 +28,7 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
   const dialog=document.createElement('dialog');dialog.id='oak-lab';dialog.setAttribute('aria-labelledby','oak-lab-title');
   dialog.innerHTML=`<div class="oak-shell"><div class="oak-canvas" aria-hidden="true"></div><div class="oak-shade" aria-hidden="true"></div>
     <header class="oak-header"><div><p>CHILDHOOD MEMORIES. A WORLD OF HIS OWN.</p><h1 id="oak-lab-title">Professor Oak’s lab</h1></div><nav aria-label="Lab navigation"><button type="button" data-oak-places aria-expanded="false" aria-controls="oak-places">Other places</button><span class="mode-switch" data-oak-portfolio data-mode-switch>Portfolio / Play</span><button type="button" data-oak-close>Back to garden</button></nav></header>
-    <nav class="oak-zones" aria-label="Explore the lab"><button type="button" data-oak-zone="welcome"><span>01</span> Meet Oak</button><button type="button" data-oak-zone="collection"><span>02</span> His Pokémon collection</button><button type="button" data-oak-zone="making"><span>03</span> How he built this</button></nav>
+    <nav class="oak-zones" aria-label="Explore the lab"><button type="button" data-oak-zone="welcome"><span>01</span> Meet Oak</button><button type="button" data-oak-zone="collection"><span>02</span> His Pokemon collection</button><button type="button" data-oak-zone="making"><span>03</span> How he built this</button></nav>
     <button class="oak-talk" type="button" data-oak-talk title="Hear Oak’s current line again.">Hear Oak again</button>
     <section class="oak-comic" aria-labelledby="oak-speech-title"><p class="oak-speaker">PROFESSOR OAK <span data-oak-count></span></p><h2 id="oak-speech-title"></h2><p class="oak-speech" data-oak-speech aria-live="off"></p>
       <div class="oak-collection" hidden><div class="oak-previews" aria-label="A few captures from the collection"></div><button type="button" data-oak-collection>Explore the collection</button></div>
@@ -68,7 +68,7 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
     $('[data-oak-places-close]').focus({preventScroll:true});return true;
   }
   destinationItems.forEach(([id,title])=>{
-    const button=document.createElement('button');button.type='button';button.dataset.oakDestination=id;button.textContent=title;
+    const button=document.createElement('button');button.type='button';button.dataset.oakDestination=id;button.textContent=id==='music'?title:'Ride to '+title;
     if(id==='music')button.setAttribute('aria-current','page');
     $('[data-oak-destinations]').append(button);
     listen(button,'click',()=>{if(!placesOpen)return;if(id==='music'){hidePlaces();return;}close({immediate:true,notify:false});onPlace(id);});
@@ -192,7 +192,7 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
   function restoreChild(){childSiblings.forEach(([element,inert])=>{element.inert=inert;});childSiblings=[];shell.classList.remove('oak-has-collection');dialog.setAttribute('aria-labelledby','oak-lab-title');dialog.removeAttribute('aria-label');if(phase!=='closed'&&phase!=='returning'){setPhase('viewing');if(collectionVisited)index=OAK_DIALOGUE.findIndex(entry=>entry.id==='collection-connection');content({animate:false});resize();dirty=true;}}
   function openCollection(){
     if(!['viewing','entering'].includes(phase)||child?.isOpen)return false;stopNarration();transition=null;veil.style.opacity='0';lastCollectionFocus=document.activeElement;
-    try{child??=createPokemonRoom({renderer,container:shell,isReduced,returnLabel:'Back to Oak’s lab',onClose:restoreChild,onPortfolio(){close({immediate:true,notify:false});onPortfolio();}});child.open({returnFocus:lastCollectionFocus,initialCollection:true});childSiblings=[...shell.children].filter(element=>element.id!=='pokemon-experience').map(element=>[element,element.inert]);childSiblings.forEach(([element])=>{element.inert=true;});shell.classList.add('oak-has-collection');dialog.removeAttribute('aria-labelledby');dialog.setAttribute('aria-label','Lakshya’s Pokémon GO collection');collectionVisited=true;dialog.dataset.collectionVisited='true';setPhase('collection');return true;}
+    try{child??=createPokemonRoom({renderer,container:shell,isReduced,returnLabel:'Back to Oak’s lab',onClose:restoreChild,onPortfolio(){close({immediate:true,notify:false});onPortfolio();}});child.open({returnFocus:lastCollectionFocus,initialCollection:true});childSiblings=[...shell.children].filter(element=>element.id!=='pokemon-experience').map(element=>[element,element.inert]);childSiblings.forEach(([element])=>{element.inert=true;});shell.classList.add('oak-has-collection');dialog.removeAttribute('aria-labelledby');dialog.setAttribute('aria-label','Lakshya’s Pokemon GO collection');collectionVisited=true;dialog.dataset.collectionVisited='true';setPhase('collection');return true;}
     catch{restoreChild();$('.oak-status').textContent='The collection could not open. Please try again.';return false;}
   }
   function placeTalk(){if(!room||selectedZone!=='welcome')return;const point=room.headProjection(),rect=host.getBoundingClientRect(),base=shell.getBoundingClientRect(),x=(point.x+1)*rect.width/2+rect.left-base.left,y=(1-point.y)*rect.height/2+rect.top-base.top;$('[data-oak-talk]').style.left=`${x}px`;$('[data-oak-talk]').style.top=`${Math.max(164,y-13)}px`;const comic=$('.oak-comic').getBoundingClientRect();$('.oak-comic').style.setProperty('--oak-tail-x',`${Math.max(20,Math.min(comic.width-45,x-comic.left+base.left))}px`);}

@@ -62,14 +62,14 @@ export function createAboutJournalScene({onChange=()=>{}}={}){
   batch(architecture);
 
   const furniture=new THREE.Group();furniture.name='Writing desk and grounded furniture';scene.add(furniture);
-  roundedSlab(furniture,11.3,6.2,.25,.22,[0,2.75,.55],p.edge);
-  roundedSlab(furniture,11.1,6.0,.055,.20,[0,2.905,.55],p.wood);
-  for(const x of [-4.65,4.65])for(const z of [-1.75,2.85])beam(furniture,[x*1.03,.08,z*1.06],[x,2.65,z],.11,p.darkWood,8);
-  for(const x of [-4.65,4.65])box(furniture,[.18,.18,4.5],[x,1.05,.55],p.darkWood);
-  box(furniture,[9.3,.15,.16],[0,1.05,-1.75],p.darkWood);
-  box(furniture,[3.7,.63,1.45],[-2.9,2.28,-1.63],p.darkWood);
-  box(furniture,[3.46,.49,.055],[-2.9,2.29,-.88],p.wood);
-  box(furniture,[.52,.055,.12],[-2.9,2.29,-.81],p.brass);
+  roundedSlab(furniture,11.3,7.6,.25,.22,[0,2.75,.55],p.edge);
+  roundedSlab(furniture,11.1,7.4,.055,.20,[0,2.905,.55],p.wood);
+  for(const x of [-4.65,4.65])for(const z of [-2.3,3.4])beam(furniture,[x*1.03,.08,z*1.06],[x,2.65,z],.11,p.darkWood,8);
+  for(const x of [-4.65,4.65])box(furniture,[.18,.18,5.6],[x,1.05,.55],p.darkWood);
+  box(furniture,[9.3,.15,.16],[0,1.05,-2.3],p.darkWood);
+  box(furniture,[3.7,.63,1.45],[-2.9,2.28,-2.18],p.darkWood);
+  box(furniture,[3.46,.49,.055],[-2.9,2.29,-1.43],p.wood);
+  box(furniture,[.52,.055,.12],[-2.9,2.29,-1.36],p.brass);
   // A static chair establishes human scale; it is neither a target nor a toy.
   const seat=new THREE.Group();seat.position.set(-7.1,0,2.15);seat.rotation.y=.34;furniture.add(seat);
   for(const x of [-.68,.68])for(const z of [-.6,.6])beam(seat,[x*1.13,.04,z*1.15],[x,1.43,z],.055,p.darkWood);
@@ -78,42 +78,42 @@ export function createAboutJournalScene({onChange=()=>{}}={}){
   for(const x of [-.7,.7])beam(seat,[x,1.48,-.64],[x,2.86,-.79],.06,p.darkWood);
   const back=box(seat,[1.6,.94,.14],[0,2.40,-.74],p.cloth);back.rotation.x=-.12;
   // An articulated task lamp lights the work surface without a new dynamic light.
-  cylinder(furniture,.50,.09,[4.55,3.0,-1.5],p.green,24);
-  cylinder(furniture,.15,.06,[4.55,3.075,-1.5],p.brass,16);
-  beam(furniture,[4.55,3.1,-1.5],[4.72,4.35,-1.75],.065,p.green,10);
-  beam(furniture,[4.72,4.35,-1.75],[3.82,5.25,-1.85],.065,p.green,10);
-  for(const point of [[4.72,4.35,-1.75],[3.82,5.25,-1.85]]){const joint=cylinder(furniture,.14,.13,point,p.brass,12);joint.rotation.x=Math.PI/2;}
-  const shade=part(furniture,new THREE.CylinderGeometry(.26,.64,.62,20,1,true),p.green,[3.61,5.18,-1.63]);shade.rotation.x=-.34;shade.rotation.z=-.28;
-  const underside=cylinder(furniture,.57,.04,[3.52,4.89,-1.53],p.paper,20);underside.rotation.x=-.34;underside.rotation.z=-.28;
+  cylinder(furniture,.50,.09,[4.55,3.0,-2.45],p.green,24);
+  cylinder(furniture,.15,.06,[4.55,3.075,-2.45],p.brass,16);
+  beam(furniture,[4.55,3.1,-2.45],[4.72,4.35,-2.7],.065,p.green,10);
+  beam(furniture,[4.72,4.35,-2.7],[3.82,5.25,-2.8],.065,p.green,10);
+  for(const point of [[4.72,4.35,-2.7],[3.82,5.25,-2.8]]){const joint=cylinder(furniture,.14,.13,point,p.brass,12);joint.rotation.x=Math.PI/2;}
+  const shade=part(furniture,new THREE.CylinderGeometry(.26,.64,.62,20,1,true),p.green,[3.61,5.18,-2.58]);shade.rotation.x=-.34;shade.rotation.z=-.28;
+  const underside=cylinder(furniture,.57,.04,[3.52,4.89,-2.48],p.paper,20);underside.rotation.x=-.34;underside.rotation.z=-.28;
   // Only useful, restrained desk details: a pen cup, a slim tray and page marker.
   cylinder(furniture,.22,.45,[-4.78,3.16,-1.38],p.clay,14);
   for(const [i,x]of [-4.88,-4.75,-4.64].entries())beam(furniture,[x,3.13,-1.4],[x+(i-1)*.055,3.82,-1.44],.019,[p.ink,p.brass,p.paper][i],6);
-  roundedSlab(furniture,1.08,1.46,.055,.06,[-4.68,2.99,1.43],p.paperEdge);
-  roundedSlab(furniture,.98,1.36,.035,.04,[-4.68,3.035,1.43],p.paper);
-  for(const x of [-4.7,4.7])for(const z of [-1.85,2.95]){const foot=cylinder(furniture,.22,.008,[x,.012,z],p.shadow,16);foot.castShadow=false;}
+  roundedSlab(furniture,1.08,1.46,.055,.06,[-4.95,2.99,1.55],p.paperEdge);
+  roundedSlab(furniture,.98,1.36,.035,.04,[-4.95,3.035,1.55],p.paper);
+  for(const x of [-4.7,4.7])for(const z of [-2.43,3.60]){const foot=cylinder(furniture,.22,.008,[x,.012,z],p.shadow,16);foot.castShadow=false;}
   batch(furniture);
 
   const bookAnchor=new THREE.Group();bookAnchor.position.set(0,3.005,.4);bookAnchor.name='Notebook gutter';scene.add(bookAnchor);
   const bookTarget=new THREE.Group();bookTarget.name='Open Lakshya’s notebook';bookTarget.userData.aboutJournal='book';bookAnchor.add(bookTarget);
   const pages=new THREE.Group();bookTarget.add(pages);
-  roundedSlab(pages,4.3,3.58,.10,.09,[2.12,.03,0],p.green);
-  roundedSlab(pages,4.15,3.40,.18,.06,[2.12,.17,0],p.paper);
+  roundedSlab(pages,4.3,4.5,.10,.09,[2.12,.03,0],p.green);
+  roundedSlab(pages,4.15,4.32,.18,.06,[2.12,.17,0],p.paper);
   for(const y of [.095,.132,.169,.206]){
-    box(pages,[4.07,.009,.015],[2.12,y,1.706],p.paperEdge);
-    box(pages,[.014,.009,3.31],[4.202,y,0],p.paperEdge);
+    box(pages,[4.07,.009,.015],[2.12,y,2.166],p.paperEdge);
+    box(pages,[.014,.009,4.23],[4.202,y,0],p.paperEdge);
   }
   // Soft inner-page rules are visual texture only; readable content is HTML.
-  for(const z of [-1.15,-.74,-.33,.08,.49,.90,1.31])box(pages,[3.25,.003,.007],[2.13,.263,z],p.paperEdge);
-  box(pages,[.014,.004,2.93],[.62,.264,.05],p.clay);
-  roundedSlab(pages,.19,3.48,.29,.07,[.015,.16,0],p.green);
-  box(pages,[.12,.005,.52],[3.5,.266,1.44],p.clay);
+  for(const z of [-1.64,-1.23,-.82,-.41,0,.41,.82,1.23,1.64])box(pages,[3.25,.003,.007],[2.13,.263,z],p.paperEdge);
+  box(pages,[.014,.004,3.85],[.62,.264,.05],p.clay);
+  roundedSlab(pages,.19,4.40,.29,.07,[.015,.16,0],p.green);
+  box(pages,[.12,.005,.52],[3.5,.266,1.90],p.clay);
   batch(pages);
 
   const cover=new THREE.Group();cover.name='Hinged cloth cover';cover.position.set(0,.30,0);bookTarget.add(cover);
-  roundedSlab(cover,4.3,3.58,.10,.09,[2.12,0,0],p.green);
-  roundedSlab(cover,4.12,3.40,.025,.06,[2.12,-.065,0],p.paper);
-  for(const z of [-1.30,-.90,-.5,-.1,.3,.7,1.1])box(cover,[3.25,.004,.007],[2.13,-.083,z],p.paperEdge);
-  box(cover,[.014,.004,2.98],[.62,-.083,.02],p.clay);
+  roundedSlab(cover,4.3,4.5,.10,.09,[2.12,0,0],p.green);
+  roundedSlab(cover,4.12,4.32,.025,.06,[2.12,-.065,0],p.paper);
+  for(const z of [-1.65,-1.24,-.83,-.42,-.01,.40,.81,1.22,1.63])box(cover,[3.25,.004,.007],[2.13,-.083,z],p.paperEdge);
+  box(cover,[.014,.004,3.90],[.62,-.083,.02],p.clay);
   batch(cover);
 
   let coverLabel=null;

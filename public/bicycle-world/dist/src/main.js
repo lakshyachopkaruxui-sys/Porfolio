@@ -73,7 +73,7 @@ const pokemonAudio=createPokemonAudio({onState(status){
   }
 }});
 const pokemonProximity=createPokemonProximity({play:(id,options)=>pokemonAudio.enabled?pokemonAudio.play(id,options):false});
-const pokemonControls=mountPokemonControls(help,pokemonAudio,()=>notify('This browser could not enable Pokémon audio. The companions remain available.'),value=>{pokemonSoundPreference=value;pokemonProximity.reset();save();});
+const pokemonControls=mountPokemonControls(help,pokemonAudio,()=>notify('This browser could not enable Pokemon audio. The companions remain available.'),value=>{pokemonSoundPreference=value;pokemonProximity.reset();save();});
 const pokemonListener={x:0,y:0,z:0,heading:0,speed:0};
 const renderQuality=createRenderQuality();
 let renderSettings=renderQuality.settings(innerWidth,innerHeight,devicePixelRatio);
@@ -386,6 +386,18 @@ function beginRoute(destination,preferPaths=false,onArrival=null){
   world.setRoute([{x:state.x,z:state.z},...guidedRide.points]);$('ride-status-label').textContent='Following your route';syncRideUI();return true;
 }
 function visitPlace(kind,onArrival=null){const stop=STOPS[kind];if(!stop)return;if(!ready){notify('The world is still preparing. You can read every story directly.');return;}if(help.open)help.close();if(!running)start({skipWelcome:true});if(beginRoute(stop.arrival,true,onArrival||(()=>notify(`Arrived at ${destinationName(kind,stop.title).toLowerCase()}. Choose the stop to explore.`)))){$('ride-status-label').textContent=`Riding to ${destinationName(kind,stop.title).toLowerCase()}`;notify('Steer or brake to take over at any time.');}sceneHost.focus({preventScroll:true});}
+function rideFromRoom(kind,projectId){
+  const destination=kind==='collection'||kind==='memory'?'work':kind;
+  if(!STOPS[destination])return false;
+  // Direct reading remains available when the 3D world cannot support a ride.
+  if(!ready||inPortfolio){if(projectId)openWorks(projectId);else openLandmark(destination);return false;}
+  prepareOverlay('ride');
+  history.replaceState(null,'',location.pathname+location.search);
+  readingBackdropDrawn=false;updateProjection();restoreRideUI();
+  // A named project is an explicit reading request: keep that selection after
+  // the visible ride. General destination choices stop outside for Enter.
+  visitPlace(destination,projectId?()=>openWorks(projectId):null);return true;
+}
 function showMap(){if(inPortfolio||reader.open||placeUI?.isOpen||projectUI?.isOpen||personalRooms?.isOpen||worksExperience?.isOpen||oakLab?.isOpen||aboutExperience?.isOpen)return;mapUI.open(state);}
 function activateLandmark(kind){const stop=STOPS[kind];if(!stop)return;if(Math.hypot(state.x-stop.x,state.z-stop.z)<=stop.radius+4)openLandmark(kind);else visitPlace(kind);}
 placeUI=createDestinationUI({
@@ -672,19 +684,19 @@ async function initialize(){
         woodyWelcome=createWoodyWelcome(THREE,characterAsset);rider.attachCharacter(characterAsset);
         scene.add(rider.group);contactMarker=createContactMarker(scene,'#29433e');
         landmarkFramer=createLandmarkFramer(world.landmarks.roots,cameraOffset,{localMinHeights:{projects:18}});
-        personalRooms=createPersonalRooms({renderer,isReduced:()=>reduced,onPortfolio:showPortfolio,onWorks:openWorks,onOakLab:()=>openLandmark('music'),onSoundState:playing=>playMusic.suspend('sound-sketch',playing),
+        personalRooms=createPersonalRooms({renderer,isReduced:()=>reduced,onPortfolio:showPortfolio,onWorks:()=>rideFromRoom('projects'),onPlace:rideFromRoom,onOakLab:()=>rideFromRoom('music'),onSoundState:playing=>playMusic.suspend('sound-sketch',playing),
           onOpen(kind){prepareOverlay('personal');history.replaceState(null,'',location.pathname+location.search+(PERSONAL_ROUTES[kind]||PERSONAL_ROUTES.work));},
           onClose(){updateProjection();readingBackdropDrawn=false;history.replaceState(null,'',location.pathname+location.search);restoreRideUI();}
         });
-        worksExperience=createWorksExperience({renderer,isReduced:()=>reduced,onPortfolio:showPortfolio,onPlace:openLandmark,
+        worksExperience=createWorksExperience({renderer,isReduced:()=>reduced,onPortfolio:showPortfolio,onPlace:rideFromRoom,
           onOpen(){prepareOverlay('works');history.replaceState(null,'',location.pathname+location.search+'#works-room');},
           onClose(){updateProjection();readingBackdropDrawn=false;history.replaceState(null,'',location.pathname+location.search);restoreRideUI();}
         });
-        oakLab=createOakLab({renderer,isReduced:()=>reduced,onPortfolio:showPortfolio,onPlace:openLandmark,
+        oakLab=createOakLab({renderer,isReduced:()=>reduced,onPortfolio:showPortfolio,onPlace:rideFromRoom,
           onOpen(){prepareOverlay('oak');history.replaceState(null,'',location.pathname+location.search+'#oak-lab');},
           onClose(){updateProjection();readingBackdropDrawn=false;history.replaceState(null,'',location.pathname+location.search);restoreRideUI();}
         });
-        aboutExperience=createAboutExperience({renderer,isReduced:()=>reduced,onPortfolio:showPortfolio,onPlace:openLandmark,onProject:openWorks,
+        aboutExperience=createAboutExperience({renderer,isReduced:()=>reduced,onPortfolio:showPortfolio,onPlace:rideFromRoom,onProject:id=>rideFromRoom('projects',id),
           onOpen(){prepareOverlay('about');history.replaceState(null,'',location.pathname+location.search+PERSONAL_ROUTES.about);},
           onClose(){updateProjection();readingBackdropDrawn=false;history.replaceState(null,'',location.pathname+location.search);restoreRideUI();}
         });

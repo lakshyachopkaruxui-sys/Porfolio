@@ -1,3 +1,4 @@
+import {journalAtoms,paginateJournal} from './about-journal-pagination.js';
 let readerSerial=0;
 
 /** A semantic notebook inside the About owner's dialog. It owns no 3D resources. */
@@ -12,7 +13,7 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
       <article class="journal-page journal-page-left" data-journal-left tabindex="0"></article>
       <article class="journal-page journal-page-right" data-journal-right tabindex="0"></article>
     </div><div class="journal-binding" aria-hidden="true"></div></div>
-    <footer class="journal-footer"><nav class="journal-page-navigation" aria-label="Turn notebook pages"><button type="button" data-journal-prev>Previous spread</button><div><p data-journal-count aria-live="polite"></p><p class="journal-key-hint">A / D or ← / → to turn · Esc to close</p></div><button type="button" data-journal-next>Next spread</button><button type="button" data-journal-close>Close notebook</button></nav></footer>
+    <footer class="journal-footer"><nav class="journal-page-navigation" aria-label="Turn notebook pages"><button type="button" data-journal-prev>Previous pages</button><div><p data-journal-count aria-live="polite"></p><p class="journal-key-hint">Turn pages: A / D or ← / → · Esc to close</p></div><button type="button" data-journal-next>Turn the page</button><button type="button" data-journal-close>Close notebook</button></nav></footer>
     <section id="about-journal-photo" class="journal-photo-viewer" data-journal-viewer role="region" aria-labelledby="${id}-photo-title" tabindex="-1" hidden>
       <header><div><p>FROM MY NOTEBOOK</p><h2 id="${id}-photo-title" data-journal-photo-title></h2></div><button type="button" data-journal-photo-close>Back to the notebook</button></header>
       <figure><img decoding="async" data-journal-full-photo alt=""><figcaption data-journal-photo-caption></figcaption></figure>
@@ -24,6 +25,9 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
   const pages=[q('[data-journal-left]'),q('[data-journal-right]')],viewer=q('[data-journal-viewer]'),fullImage=q('[data-journal-full-photo]');
   const listeners=[],imageListeners=new Map(),motions=[];
   let opened=false,dead=false,selected=0,turnGeneration=0,turnLeaf=null,heldPage=null;
+  let selectedSpread=0,layoutPages=[],measuring=false,layoutKey='',resizeFrame=null;
+  const layoutCache=new Map(),measurePage=doc.createElement('article');
+  measurePage.className='journal-page journal-page-left journal-measure-page';measurePage.inert=true;measurePage.setAttribute('aria-hidden','true');root.append(measurePage);
   let photoOpened=false,photoIndex=0,photoGeneration=0,photoFocus=null,inertSiblings=[];
   const listen=(element,type,handler,options)=>{element.addEventListener(type,handler,options);listeners.push(()=>element.removeEventListener(type,handler,options));};
   const focus=element=>element?.focus({preventScroll:true});
@@ -54,7 +58,8 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     const figure=node('figure',undefined,parent,'journal-photo');figure.dataset.loading='true';
     const button=node('button',undefined,figure,'journal-photo-button');button.type='button';button.dataset.journalPhoto=photo.id;
     button.setAttribute('aria-label',`View full photograph: ${block.caption||photo.caption}`);
-    const image=node('img',undefined,button);image.decoding='async';image.loading='lazy';loadPagePhoto(image,photo,figure);
+    const image=node('img',undefined,button);image.decoding='async';image.loading='lazy';image.width=photo.width;image.height=photo.height;
+    if(!measuring)loadPagePhoto(image,photo,figure);
     node('figcaption',block.caption||photo.caption,figure);node('span','Open photograph',button,'journal-photo-affordance');
     node('p','This photograph could not load. Open it to try again.',figure,'journal-photo-error');
   }
@@ -66,7 +71,7 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     }
     if(block.type==='timeline'){
       const list=node('ol',undefined,parent,'journal-timeline');
-      for(const entry of block.entries||[]){const item=node('li',undefined,list);if(entry.date)node('p',entry.date,item,'journal-date');node('h4',entry.title,item);if(entry.body)node('p',entry.body,item);}return;
+      for(const entry of block.entries||[]){const item=node('li',undefined,list);if(entry.date)node('p',entry.date,item,'journal-date');if(entry.title)node('h4',entry.title,item);if(entry.body)node('p',entry.body,item);}return;
     }
     if(block.type==='toolkit'){
       const list=node('div',undefined,parent,'journal-toolkit');
@@ -86,20 +91,55 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
       for(const item of block.items||[])if(['projects','work','cloud','music'].includes(item.destination)){const button=node('button',item.label,nav);button.type='button';button.dataset.journalNavigate=item.destination;}
     }
   }
-  function render(){
-    releasePages();const chapter=chapters[selected];
+  function renderAtom(atom,parent){
+    if(atom.type==='chapter'){
+      node('p',`${String(atom.index+1).padStart(2,'0')} / ${String(atom.total).padStart(2,'0')} · ${atom.label}`,parent,'journal-kicker');
+      if(atom.title){const title=node('h2',atom.title,parent,'journal-chapter-title');if(!measuring)title.id=`${id}-chapter-title`;}
+      if(atom.body)node('p',atom.body,parent,'journal-lead');return;
+    }
+    if(atom.type==='heading'){node('h3',atom.title,parent,'journal-page-title');return;}
+    if(atom.type==='entry'){renderBlock({type:'timeline',entries:[atom]},parent);return;}
+    if(atom.type==='tools'){const list=node('ul',undefined,parent,'journal-tools journal-tool-list');for(const tool of atom.tools)node('li',tool,list);return;}
+    if(atom.type==='project-link'){const button=node('button','Explore this project in Work',parent,'journal-inline-link');button.type='button';button.dataset.journalNavigate='projects';button.dataset.journalProject=atom.projectId;return;}
+    renderBlock(atom,parent);
+  }
+  function chapterLayout(){
+    const chapter=chapters[selected],atoms=journalAtoms(chapter,selected,chapters.length);
+    const width=Math.min(pages[0].clientWidth||0,pages[1].clientWidth||0),height=Math.min(pages[0].clientHeight||0,pages[1].clientHeight||0);
+    // A non-layout host (for example a semantic DOM fixture) retains authored
+    // page boundaries. The browser always measures the actual visible paper.
+    if(!width||!height){layoutKey='semantic';return chapter.pages.map((_,index)=>atoms.filter(atom=>atom.logicalPage===index));}
+    const key=`${selected}:${width}:${height}`;layoutKey=key;
+    if(layoutCache.has(key))return layoutCache.get(key);
+    measurePage.style.width=width+'px';measurePage.style.height=height+'px';measuring=true;
+    try{
+      const result=paginateJournal(atoms,candidate=>{
+        measurePage.replaceChildren();for(const atom of candidate)renderAtom(atom,measurePage);
+        node('p','00',measurePage,'journal-folio');return measurePage.scrollHeight<=height+1;
+      });layoutCache.set(key,result);return result;
+    }finally{measuring=false;measurePage.replaceChildren();}
+  }
+  function render({reflow=false}={}){
+    const anchor=reflow?layoutPages[selectedSpread*2]?.[0]?.key:null;
+    releasePages();const chapter=chapters[selected];layoutPages=chapterLayout();
+    if(anchor){const at=layoutPages.findIndex(page=>page.some(atom=>atom.key===anchor));if(at>=0)selectedSpread=Math.floor(at/2);}
+    selectedSpread=Math.max(0,Math.min(Math.ceil(layoutPages.length/2)-1,selectedSpread));
     for(const [index,page]of pages.entries()){
-      page.replaceChildren();page.scrollTop=0;page.setAttribute('aria-label',`${index===0?'Left':'Right'} page: ${chapter.pages?.[index]?.title||chapter.title}`);
-      if(index===0){node('p',`${String(selected+1).padStart(2,'0')} / ${String(chapters.length).padStart(2,'0')} · ${chapter.label}`,page,'journal-kicker');const heading=node('h2',chapter.title,page,'journal-chapter-title');heading.id=`${id}-chapter-title`;if(chapter.lead)node('p',chapter.lead,page,'journal-lead');}
-      const data=chapter.pages?.[index];if(data?.title)node('h3',data.title,page,'journal-page-title');
-      for(const block of data?.blocks||[])renderBlock(block,page);
-      node('p',String(selected*2+index+1).padStart(2,'0'),page,'journal-folio');
+      const number=selectedSpread*2+index,data=layoutPages[number];page.replaceChildren();page.scrollTop=0;
+      page.setAttribute('aria-label',data?`${index===0?'Left':'Right'} page: ${chapter.label}, page ${number+1}`:`${index===0?'Left':'Right'} page: ${chapters[selected+1]?'Next chapter':'Return to the garden'}`);
+      if(data){for(const atom of data)renderAtom(atom,page);node('p',`${number+1} / ${layoutPages.length}`,page,'journal-folio');}
+      else{
+        const next=chapters[selected+1];node('p',next?'NEXT CHAPTER':'BACK OUTSIDE',page,'journal-kicker');node('h3',next?.label||'The garden is waiting.',page);
+        const button=node('button',next?'Continue to '+next.label:'Return to the garden',page,'journal-inline-link');button.type='button';
+        if(next)button.dataset.journalChapter=String(selected+1);else button.dataset.journalNavigate='garden';
+      }
     }
     const buttons=[...tabs.querySelectorAll('button')];buttons.forEach((button,index)=>{button.setAttribute('aria-selected',String(index===selected));button.tabIndex=index===selected?0:-1;});
     book.setAttribute('aria-labelledby',`${id}-tab-${selected}`);
-    q('[data-journal-count]').textContent=`Spread ${selected+1} of ${chapters.length} · Pages ${selected*2+1}–${selected*2+2}`;
-    q('[data-journal-prev]').disabled=selected===0;q('[data-journal-next]').disabled=selected===chapters.length-1;
-    root.dataset.chapter=chapter.id;root.dataset.reduced=String(reduced());
+    const firstPage=selectedSpread*2+1,lastPage=Math.min(layoutPages.length,firstPage+1);
+    q('[data-journal-count]').textContent=`${chapter.label} · ${firstPage===lastPage?'Page '+firstPage:'Pages '+firstPage+'–'+lastPage} of ${layoutPages.length}`;
+    q('[data-journal-prev]').disabled=selected===0&&selectedSpread===0;q('[data-journal-next]').disabled=selected===chapters.length-1&&selectedSpread===Math.ceil(layoutPages.length/2)-1;
+    root.dataset.chapter=chapter.id;root.dataset.spread=String(selectedSpread);root.dataset.spreads=String(Math.ceil(layoutPages.length/2));root.dataset.reduced=String(reduced());
   }
   function clearTurn(){
     turnGeneration++;for(const motion of motions.splice(0)){motion.onfinish=null;motion.oncancel=null;motion.cancel();}
@@ -137,17 +177,39 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     motions.push(turning,holding);root.dataset.turning='true';
     turning.onfinish=()=>{if(token!==turnGeneration||!opened||dead)return;clearTurn();};
   }
-  function setChapter(value){
+  function setChapter(value,{atEnd=false}={}){
     if(!opened||dead||!chapters.length)return false;
-    const next=Math.max(0,Math.min(chapters.length-1,Math.round(Number(value)||0)));if(next===selected){if(reduced())clearTurn();return false;}
+    const next=Math.max(0,Math.min(chapters.length-1,Math.round(Number(value)||0)));if(next===selected&&selectedSpread===0&&!atEnd){if(reduced())clearTurn();return false;}
     closePhoto({restoreFocus:false});clearTurn();
     const origin=doc.activeElement,fromTab=Boolean(origin?.closest?.('[data-journal-chapter]')),fromPage=pages.some(page=>page===origin||page.contains?.(origin));
     const before=!reduced()&&typeof stage.animate==='function'?pages.map(decorativeCopy):null;
-    const direction=next>selected?1:-1;selected=next;render();beginTurn(before,direction);
+    const direction=next>selected?1:-1;selected=next;selectedSpread=atEnd?Number.MAX_SAFE_INTEGER:0;render();beginTurn(before,direction);
     if(fromTab){const target=tabs.querySelector(`[data-journal-chapter="${selected}"]`);focus(target);target?.scrollIntoView?.({block:'nearest',inline:'nearest'});}
     else if(fromPage||origin?.disabled||!origin?.isConnected)focus(pages[0]);
     return true;
   }
+  function turnPage(direction){
+    if(!opened||dead)return false;
+    const next=selectedSpread+direction,last=Math.ceil(layoutPages.length/2)-1;
+    if(next<0)return selected>0?setChapter(selected-1,{atEnd:true}):false;
+    if(next>last)return selected<chapters.length-1?setChapter(selected+1):false;
+    closePhoto({restoreFocus:false});clearTurn();
+    const before=!reduced()&&typeof stage.animate==='function'?pages.map(decorativeCopy):null;
+    const origin=doc.activeElement,fromPage=pages.some(page=>page===origin||page.contains?.(origin));selectedSpread=next;render();beginTurn(before,direction);
+    if(fromPage||origin?.disabled||!origin?.isConnected)focus(pages[0]);return true;
+  }
+  function resize(){
+    if(!opened||dead)return;const origin=doc.activeElement,focusedPage=pages.findIndex(page=>page===origin||page.contains?.(origin));
+    clearTurn();layoutCache.clear();render({reflow:true});if(focusedPage>=0)focus(pages[focusedPage]);
+  }
+  function scheduleResize(){
+    if(!opened||dead||resizeFrame!==null)return;
+    const win=doc.defaultView||globalThis.window;
+    if(win?.requestAnimationFrame)resizeFrame=win.requestAnimationFrame(()=>{resizeFrame=null;resize();});else resize();
+  }
+  const Resize=doc.defaultView?.ResizeObserver||globalThis.ResizeObserver;
+  const resizeObserver=typeof Resize==='function'?new Resize(()=>scheduleResize()):null;resizeObserver?.observe(book);
+  doc.fonts?.ready?.then(()=>scheduleResize()).catch(()=>{});
   function renderPhoto(){
     const photo=photos[photoIndex];if(!photo?.src)return;
     photoGeneration++;const token=photoGeneration;releaseImage(fullImage);
@@ -188,7 +250,7 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     const chapter=event.target.closest?.('[data-journal-chapter]');if(chapter){setChapter(Number(chapter.dataset.journalChapter));return;}
     const destination=event.target.closest?.('[data-journal-navigate]');if(destination&&!photoOpened)onNavigate(destination.dataset.journalProject?'project:'+destination.dataset.journalProject:destination.dataset.journalNavigate);
   });
-  listen(q('[data-journal-prev]'),'click',()=>setChapter(selected-1));listen(q('[data-journal-next]'),'click',()=>setChapter(selected+1));listen(q('[data-journal-close]'),'click',()=>close());
+  listen(q('[data-journal-prev]'),'click',()=>turnPage(-1));listen(q('[data-journal-next]'),'click',()=>turnPage(1));listen(q('[data-journal-close]'),'click',()=>close());
   listen(q('[data-journal-photo-close]'),'click',()=>closePhoto());listen(q('[data-journal-photo-prev]'),'click',()=>selectPhoto(photoIndex-1));listen(q('[data-journal-photo-next]'),'click',()=>selectPhoto(photoIndex+1));listen(q('[data-journal-photo-retry]'),'click',renderPhoto);
   listen(root,'keydown',event=>{
     if(!opened||event.defaultPrevented||event.isComposing||event.altKey||event.ctrlKey||event.metaKey||event.shiftKey)return;
@@ -198,13 +260,14 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     event.preventDefault();event.stopPropagation();if(event.repeat)return;
     if(key==='escape'){cancel();return;}
     if(photoOpened)selectPhoto(key==='home'?0:key==='end'?photos.length-1:photoIndex+direction);
-    else setChapter(key==='home'?0:key==='end'?chapters.length-1:selected+direction);
+    else if(key==='home')setChapter(0);else if(key==='end')setChapter(chapters.length-1,{atEnd:true});else turnPage(direction);
   });
   return {
-    open({chapter=0}={}){if(dead||opened||!chapters.length)return false;selected=Math.max(0,Math.min(chapters.length-1,Math.round(Number(chapter)||0)));opened=true;root.hidden=false;render();focus(pages[0]);return true;},
+    open({chapter=0}={}){if(dead||opened||!chapters.length)return false;const next=Math.max(0,Math.min(chapters.length-1,Math.round(Number(chapter)||0)));if(next!==selected)selectedSpread=0;selected=next;opened=true;root.hidden=false;render();focus(pages[0]);return true;},
     close,cancel,setChapter,
-    dispose(){if(dead)return;close({notify:false});clearTurn();releaseImage(fullImage);listeners.splice(0).forEach(remove=>remove());root.remove();dead=true;},
+    resize,turnPage,
+    dispose(){if(dead)return;close({notify:false});clearTurn();resizeObserver?.disconnect();const win=doc.defaultView||globalThis.window;if(resizeFrame!==null)win?.cancelAnimationFrame?.(resizeFrame);resizeFrame=null;layoutCache.clear();releaseImage(fullImage);listeners.splice(0).forEach(remove=>remove());root.remove();dead=true;},
     get isOpen(){return opened;},get selectedChapter(){return selected;},get photoOpen(){return photoOpened;},
-    diagnostics(){return {isOpen:opened,selectedChapter:selected,photoOpen:photoOpened,photoIndex,turning:Boolean(turnLeaf),turnLeaves:turnLeaf?1:0,pageImageSources:pages.reduce((sum,page)=>sum+[...page.querySelectorAll('img')].filter(image=>image.getAttribute('src')).length,0),viewerImageSources:fullImage.getAttribute('src')?1:0,activeAnimations:motions.length,totalPhotos:photos.length};}
+    diagnostics(){return {isOpen:opened,selectedChapter:selected,selectedSpread,pageCount:layoutPages.length,measured:layoutKey!=='semantic',photoOpen:photoOpened,photoIndex,turning:Boolean(turnLeaf),turnLeaves:turnLeaf?1:0,pageImageSources:pages.reduce((sum,page)=>sum+[...page.querySelectorAll('img')].filter(image=>image.getAttribute('src')).length,0),viewerImageSources:fullImage.getAttribute('src')?1:0,activeAnimations:motions.length,totalPhotos:photos.length};}
   };
 }
