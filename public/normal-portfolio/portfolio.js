@@ -65,6 +65,7 @@ const CARD_DETAILS = {
   'workplace-mode': ['My part: research, synthesis and the interaction concept.', '34 surveys · 13 interviews'],
 };
 const RELATED_PROJECTS = {
+  tear: ['pixel-mania', 'giggles'],
   connectaid: ['giggles', 'pixel-mania'], giggles: ['syringe', 'connectaid'],
   'pixel-mania': ['connectaid', 'giggles'], syringe: ['giggles', 'workplace-mode'],
   'workplace-mode': ['connectaid', 'syringe'],
