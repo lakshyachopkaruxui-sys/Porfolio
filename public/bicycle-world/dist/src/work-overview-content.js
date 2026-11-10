@@ -3,6 +3,29 @@
 // docs/work-overview-copy-20261108.md.
 // Cover alt text comes from the current canonical thumbnail metadata.
 export const WORK_OVERVIEW_CONTENT = {
+  tear: {
+  "summary": "A doorway opened by hand, and a dream that becomes harder to leave.",
+  "overviewLead": "TEAR turns the transition itself into an interaction. Pinch a seam, pull it apart and choose whether to cross from a familiar room into Ocean, Shadow and Forest. The return leaves a question: did you wake up?",
+  "role": "I designed the concept, gesture, emotional journey and art direction, directing AI-assisted prototyping and narrative iteration.",
+  "status": "Immersive interaction · Working prototype",
+  "sections": [
+    {
+      "id": "interaction",
+      "title": "Make crossing a choice",
+      "body": [
+        "The next world becomes visible before the visitor commits. Holding, opening and releasing give curiosity a physical form."
+      ]
+    },
+    {
+      "id": "iteration",
+      "title": "Follow the breaks in immersion",
+      "body": [
+        "Informal feedback reshaped the near-ground Forest detail, volcanic Shadow atmosphere and first-person dream voice. The case shows those changes and distinguishes prototype checks from pending validation on the latest Quest 3S build."
+      ]
+    }
+  ],
+  "coverCaption": ""
+},
   connectaid: {
     summary: 'Booking care is one step. Keeping appointments, medicines, tests and records connected is the bigger design problem.',
     overviewLead: 'Booking an appointment is only part of getting care. ConnectAid brings consultations, medicines, lab tests and health records into one app prototype, so people can arrange care for themselves or family members and return to the information afterwards.',

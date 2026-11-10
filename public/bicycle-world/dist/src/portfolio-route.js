@@ -1,7 +1,7 @@
 // The responsive portfolio is maintained in normal-portfolio, not in Play.
 // Local previews use separate supervised ports; a combined deployment uses
 // the sibling normal-portfolio directory on the same origin.
-export const NORMAL_CASE_IDS=Object.freeze(['connectaid','giggles','pixel-mania','syringe','workplace-mode','jan-aushadhi']);
+export const NORMAL_CASE_IDS=Object.freeze(['connectaid','giggles','pixel-mania','syringe','workplace-mode','jan-aushadhi','tear']);
 const CASE_IDS = new Set(NORMAL_CASE_IDS);
 export const CASE_STUDY_LINK_NOTE='Opens in a new tab. Your garden stays here.';
 

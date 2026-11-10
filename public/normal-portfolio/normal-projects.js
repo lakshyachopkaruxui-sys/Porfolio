@@ -1,3 +1,4 @@
+import {TEAR_PROJECT, TEAR_CONTEXT, TEAR_PROCESS, TEAR_COVER, TEAR_STORY} from './tear-case.js?v=20261110-tear';
 // Normal-only additions. Evidence and image provenance live in
 // docs/project-covers-task-20261104.md and assets/project-covers/SOURCE.json.
 // Keep the shared garden catalogue independent.
@@ -128,3 +129,11 @@ export const NORMAL_PROJECT_ARTIFACTS = {
   'workplace-mode': PROJECT_COVERS['workplace-mode'],
   'jan-aushadhi': PROJECT_COVERS['jan-aushadhi'],
 };
+
+NORMAL_PROJECTS.push(TEAR_PROJECT);
+NORMAL_PROJECT_CATEGORIES.tear = ['interaction'];
+NORMAL_PROJECT_CONTEXT.tear = TEAR_CONTEXT;
+NORMAL_PROJECT_PROCESS.tear = TEAR_PROCESS;
+NORMAL_PROJECT_STORIES.tear = TEAR_STORY;
+PROJECT_COVERS.tear = TEAR_COVER;
+NORMAL_PROJECT_ARTIFACTS.tear = TEAR_COVER;

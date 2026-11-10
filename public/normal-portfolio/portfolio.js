@@ -40,9 +40,10 @@ welcome.onFinish(({shown, reason}) => {
   if (shown && reason !== 'completed') motion.cancel();
 });
 const caseMotion = optionalFeature(() => mountCaseMotion(reader), {cancel() {}, capture() {}, enter() {}});
-const PROJECT_ORDER = ['connectaid', 'giggles', 'pixel-mania', 'syringe', 'workplace-mode', 'jan-aushadhi'];
+const PROJECT_ORDER = ['connectaid', 'giggles', 'pixel-mania', 'syringe', 'workplace-mode', 'jan-aushadhi', 'tear'];
 const FEATURED_PROJECTS = new Set(['connectaid', 'giggles', 'pixel-mania']);
 const CARD_SUMMARIES = {
+  tear: 'Pinch a seam. Pull reality apart. A dream journey through wonder, fear and uncertain relief.',
   connectaid: 'One place to book care, order medicines and keep health records.',
   giggles: 'A learning game for autistic children that connects physical play with questions and feedback on a phone.',
   'pixel-mania': 'An open-ended drawing board built from one five-colour interaction.',
@@ -50,11 +51,13 @@ const CARD_SUMMARIES = {
   'workplace-mode': 'An in-car interface concept shaped by how private and commercial drivers use screens.',
 };
 const CARD_CATEGORIES = {
+  tear: 'Immersive interaction · Storytelling',
   connectaid: 'Healthcare · App design', giggles: 'Learning · Physical–digital play',
   'pixel-mania': 'Interaction · Visual system', syringe: 'Ergonomics · Physical product',
   'workplace-mode': 'UX research · Interface concept',
 };
 const CARD_DETAILS = {
+  tear: ['My part: concept, gesture, emotional journey and art direction.', 'Working prototype · Informal feedback-led iteration'],
   connectaid: ['My part: core design system and remote testing coordination.', '6 participants · 6 team refinements'],
   giggles: ['My part: electronics, game logic and the working prototype.', 'Best Project · Meraki'],
   'pixel-mania': ['My part: visual system, interface and interaction prototyping.', 'Tried by visitors at the college exhibition'],

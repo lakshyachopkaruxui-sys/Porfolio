@@ -6,7 +6,8 @@ export const NORMAL_WORK_ORDER=[
   "pixel-mania",
   "syringe",
   "workplace-mode",
-  "jan-aushadhi"
+  "jan-aushadhi",
+  "tear"
 ];
 export const NORMAL_WORK_COVERS={
   "connectaid": {
@@ -50,6 +51,13 @@ export const NORMAL_WORK_COVERS={
     "height": 908,
     "alt": "AI-generated Jan Aushadhi cover: a demo unified health card and prescriptions app beside Connecting care, on blue and teal-lit plinths.",
     "caption": "Owner-approved AI-generated cover for the selected health card and app concept, with demo data. The project also explored a kiosk and RFID packaging. These are concepts, not a deployed platform or built dispensing hardware."
+  },
+  "tear": {
+    "src": "./assets/work-covers/tear.webp",
+    "width": 1734,
+    "height": 907,
+    "alt": "AI-generated TEAR presentation cover: hands pull a glowing seam between a room, ocean and sunlit forest beside Pull reality apart.",
+    "caption": "Owner-selected AI-generated presentation artwork; actual prototype captures and iteration evidence appear below."
   }
 };
 export const NORMAL_WORK_METADATA=[
@@ -156,6 +164,31 @@ export const NORMAL_WORK_METADATA=[
           "We developed a unified health card and app, a dispensing kiosk alternative, and RFID-enabled packaging. The report took the card/app further. New November 2026 interface walkthroughs explore collection and a separate kiosk-learning exercise."
         ],
         "limitation": "Service concept only; new walkthroughs use simulated data and have not been evaluated with participants. No live prescription, stock, payment or dispensing service is connected."
+      }
+    ]
+  },
+  {
+    "id": "tear",
+    "title": "TEAR",
+    "subtitle": "Immersive interaction and storytelling",
+    "status": "Immersive experience · Working prototype",
+    "summary": "Pinch a seam. Pull reality apart. A dream journey through wonder, fear and uncertain relief.",
+    "role": "I designed the concept, spatial interaction, emotional journey and art direction, and directed AI-assisted prototyping and narrative iteration.",
+    "sections": [
+      {
+        "id": "concept",
+        "title": "Pull reality apart",
+        "body": [
+          "A dream journey opened by hand: curiosity becomes wonder, fear and uncertain relief."
+        ]
+      },
+      {
+        "id": "iteration",
+        "title": "Designing for presence",
+        "body": [
+          "Feedback reshaped the forest floor, volcanic atmosphere and first-person dream narration."
+        ],
+        "limitation": "Informal feedback and prototype checks; latest Quest 3S validation remains pending."
       }
     ]
   }
