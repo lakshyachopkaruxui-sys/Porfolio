@@ -173,7 +173,8 @@ export const TEAR_STORY = {
       "title": "From completing the brief to designing for presence",
       "body": [
         "After submission, I spent more time studying the project, revisiting references and thinking through what I wanted people to feel. I wanted the environments to hold attention at the visitor’s scale, the transitions to build curiosity, and the return to mean more than arriving back at the first scene.",
-        "The continuing work became a series of focused questions. What makes this patch of ground feel like a forest? Why does a mountain look placed into a scene rather than part of it? Is the voice describing the dream, or experiencing it? I used those questions to guide one-to-one brainstorming with ChatGPT."
+        "The continuing work became a series of focused questions. What makes this patch of ground feel like a forest? Why does a mountain look placed into a scene rather than part of it? Is the voice describing the dream, or experiencing it? I used those questions to guide one-to-one brainstorming with ChatGPT.",
+        "I revisited the homepage as part of the same experience. Earlier layouts did not create the curiosity I wanted. I asked for motion and world previews, then removed a pull-to-reveal control that made the invitation feel unnecessarily complicated. The entry became more focused: glimpse the worlds, choose desktop preview or headset, then begin."
       ],
       "points": [
         {
@@ -417,6 +418,13 @@ export const TEAR_STORY = {
         "These are live desktop captures of the current prototype. Earlier material is labeled separately."
       ],
       "figures": [
+        {
+          "src": "assets/cases/tear/final-homepage-20261110.png",
+          "width": 1280,
+          "height": 720,
+          "alt": "Current live Tear homepage with animated Ocean preview, world choices, headset and desktop entry.",
+          "caption": "Current prototype · live desktop homepage, 10 November 2026. Motion and world previews introduce the journey while the entry choices remain explicit."
+        },
         {
           "src": "assets/cases/tear/final-ocean-20261110.png",
           "width": 1280,
