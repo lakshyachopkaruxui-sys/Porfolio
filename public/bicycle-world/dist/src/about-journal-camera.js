@@ -47,7 +47,8 @@ function fit(points,{width,height,fov,normal,target,safe,minimumDistance}){
 function fitted(width,height){
   if(cached?.width===width&&cached?.height===height)return cached;
   const side=Math.max(28,(width-1320)/2);
-  const end=fit(bookPoints,{width,height,fov:35,normal:new THREE.Vector3(0,1,.045).normalize(),target:new THREE.Vector3(0,3.225,.4),safe:{left:side,right:width-side,top:140,bottom:height-74},minimumDistance:6.8});
+  const compact=height<=620;
+  const end=fit(bookPoints,{width,height,fov:35,normal:new THREE.Vector3(0,1,.045).normalize(),target:new THREE.Vector3(0,3.225,.4),safe:{left:side,right:width-side,top:compact?120:140,bottom:height-(compact?58:74)},minimumDistance:6.8});
   const start=fit(studioPoints,{width,height,fov:42,normal:new THREE.Vector3(.47,.32,1).normalize(),target:new THREE.Vector3(-1,3.7,-.15),safe:{left:28,right:width-28,top:112,bottom:height-70},minimumDistance:16});
   cached={width,height,start,end};return cached;
 }

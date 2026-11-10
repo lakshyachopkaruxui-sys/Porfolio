@@ -1,4 +1,4 @@
-import {journalAtoms,paginateJournal} from './about-journal-pagination.js';
+import {journalAtoms,balanceJournalPages} from './about-journal-pagination.js';
 let readerSerial=0;
 
 /** A semantic notebook inside the About owner's dialog. It owns no 3D resources. */
@@ -81,7 +81,7 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
       }return;
     }
     if(block.type==='decision'){
-      const section=node('section',undefined,parent,'journal-decision');node('h4',block.title,section);
+      const section=node('section',undefined,parent,'journal-decision');if(block.title)node('h4',block.title,section);
       const list=node('dl',undefined,section);
       for(const [field,label]of [['friction','What happened'],['decision','The decision'],['next','What comes next']])if(block[field]){node('dt',label,list);node('dd',block[field],list);}
       if(block.projectId){const button=node('button','Explore this project in Work',section,'journal-inline-link');button.type='button';button.dataset.journalNavigate='projects';button.dataset.journalProject=block.projectId;}return;
@@ -99,9 +99,15 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     }
     if(atom.type==='heading'){node('h3',atom.title,parent,'journal-page-title');return;}
     if(atom.type==='entry'){renderBlock({type:'timeline',entries:[atom]},parent);return;}
-    if(atom.type==='tools'){const list=node('ul',undefined,parent,'journal-tools journal-tool-list');for(const tool of atom.tools)node('li',tool,list);return;}
+    if(atom.type==='tools'){if(!parent.children.length&&atom.groupLabel)node('h4',atom.groupLabel,parent,'journal-tool-context');const list=node('ul',undefined,parent,'journal-tools journal-tool-list');for(const tool of atom.tools)node('li',tool,list);return;}
     if(atom.type==='project-link'){const button=node('button','Explore this project in Work',parent,'journal-inline-link');button.type='button';button.dataset.journalNavigate='projects';button.dataset.journalProject=atom.projectId;return;}
     renderBlock(atom,parent);
+  }
+  function contentHeight(page){
+    const children=[...page.children].filter(child=>!child.classList.contains('journal-folio'));
+    const last=children.at(-1);if(!last)return 0;
+    const style=(doc.defaultView||window).getComputedStyle(page);
+    return last.getBoundingClientRect().bottom-page.getBoundingClientRect().top+(parseFloat(style.paddingBottom)||0)+Math.max(0,parseFloat((doc.defaultView||window).getComputedStyle(last).marginBottom)||0);
   }
   function chapterLayout(){
     const chapter=chapters[selected],atoms=journalAtoms(chapter,selected,chapters.length);
@@ -111,12 +117,14 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     if(!width||!height){layoutKey='semantic';return chapter.pages.map((_,index)=>atoms.filter(atom=>atom.logicalPage===index));}
     const key=`${selected}:${width}:${height}`;layoutKey=key;
     if(layoutCache.has(key))return layoutCache.get(key);
-    measurePage.style.width=width+'px';measurePage.style.height=height+'px';measuring=true;
+    measurePage.style.width=width+'px';measurePage.style.height=height+'px';measurePage.style.setProperty('--journal-photo-height',Math.max(100,Math.min(126,height*.24))+'px');measuring=true;
     try{
-      const result=paginateJournal(atoms,candidate=>{
+      const measure=candidate=>{
         measurePage.replaceChildren();for(const atom of candidate)renderAtom(atom,measurePage);
-        node('p','00',measurePage,'journal-folio');return measurePage.scrollHeight<=height+1;
-      });layoutCache.set(key,result);return result;
+        return contentHeight(measurePage);
+      };
+      const result=chapter.pairLogicalPages?chapter.pages.flatMap((_,index)=>balanceJournalPages(atoms.filter(atom=>atom.logicalPage===index),measure,height)):balanceJournalPages(atoms,measure,height);
+      layoutCache.set(key,result);return result;
     }finally{measuring=false;measurePage.replaceChildren();}
   }
   function render({reflow=false}={}){
@@ -125,9 +133,14 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     if(anchor){const at=layoutPages.findIndex(page=>page.some(atom=>atom.key===anchor));if(at>=0)selectedSpread=Math.floor(at/2);}
     selectedSpread=Math.max(0,Math.min(Math.ceil(layoutPages.length/2)-1,selectedSpread));
     for(const [index,page]of pages.entries()){
-      const number=selectedSpread*2+index,data=layoutPages[number];page.replaceChildren();page.scrollTop=0;
+      const number=selectedSpread*2+index,data=layoutPages[number];page.replaceChildren();page.scrollTop=0;page.style.setProperty('--journal-photo-height',Math.max(100,Math.min(126,(page.clientHeight||500)*.24))+'px');
       page.setAttribute('aria-label',data?`${index===0?'Left':'Right'} page: ${chapter.label}, page ${number+1}`:`${index===0?'Left':'Right'} page: ${chapters[selected+1]?'Next chapter':'Return to the garden'}`);
-      if(data){for(const atom of data)renderAtom(atom,page);node('p',`${number+1} / ${layoutPages.length}`,page,'journal-folio');}
+      if(data){
+        for(const atom of data)renderAtom(atom,page);
+        const photos=page.querySelectorAll('.journal-photo-button img');
+        if(photos.length&&page.clientHeight){const base=Math.max(100,Math.min(126,page.clientHeight*.24)),spare=Math.max(0,page.clientHeight-contentHeight(page)-8);page.style.setProperty('--journal-photo-height',Math.min(page.clientHeight*.66,320,base+spare/photos.length)+'px');}
+        node('p',`${number+1} / ${layoutPages.length}`,page,'journal-folio');
+      }
       else{
         const next=chapters[selected+1];node('p',next?'NEXT CHAPTER':'BACK OUTSIDE',page,'journal-kicker');node('h3',next?.label||'The garden is waiting.',page);
         const button=node('button',next?'Continue to '+next.label:'Return to the garden',page,'journal-inline-link');button.type='button';

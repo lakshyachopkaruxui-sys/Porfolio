@@ -102,3 +102,10 @@
 .journal-timeline,.journal-timeline li{margin-bottom:16px}
 .journal-folio{position:absolute;bottom:12px;left:20px;right:20px;margin:0!important}
 
+
+/* Each facing spread is composed as a pair; photographs use spare paper. */
+.journal-photo-button img{height:var(--journal-photo-height,120px)}
+.journal-photo{position:relative}
+.journal-photo-error{position:absolute;left:12px;right:12px;top:12px;margin:0!important;padding:8px;background:#fff8e6;pointer-events:none}
+.journal-tool-context{margin-bottom:10px!important}
+

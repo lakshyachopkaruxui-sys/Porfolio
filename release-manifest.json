@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T03:31:16.890Z",
+  "generatedAt": "2026-11-10T04:14:01.057Z",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 740,
-      "sha256": "9a33b4ec4d1f2e609aed8cc6494738f23adc232a8a3fb26329b60655b941fe09"
+      "sha256": "bc1f3ac24e066da8b995580b3a7e479d807bbc3c7ad00ff8c377781992dcb8ba"
     },
     {
       "path": "_redirects",
@@ -3835,7 +3835,7 @@
     {
       "path": "bicycle-world/dist/index.html",
       "size": 44124,
-      "sha256": "3d8b5fe2878892cb229ef80adba2e52fec77b2436c9f8b1fb81f74b2aa42f838"
+      "sha256": "6e11de27c3f63e955808eacdcd89d26d6d8aa1a65a09cd91bba6f134344b38f2"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
@@ -3869,13 +3869,13 @@
     },
     {
       "path": "bicycle-world/dist/src/about-journal-camera.js",
-      "size": 3744,
-      "sha256": "30b04af5381d6dc01c739419442f01acd7004481632bc57d2a5ce3e8959fe79b"
+      "size": 3732,
+      "sha256": "bd2f09adff5805ce9af2432d12317a738968ccf82c41c303b4e60dfc1e079c67"
     },
     {
       "path": "bicycle-world/dist/src/about-journal-content.js",
-      "size": 9794,
-      "sha256": "2f47d7d26f011c80de411130c4f0971ba83fdbf5e390a325676ef715e057aebc"
+      "size": 7925,
+      "sha256": "b58ef4e25409253e956f92862c19cf18b4a205a0c0f089a827b153269386ec67"
     },
     {
       "path": "bicycle-world/dist/src/about-journal-fallback.js",
@@ -3884,8 +3884,8 @@
     },
     {
       "path": "bicycle-world/dist/src/about-journal-pagination.js",
-      "size": 3315,
-      "sha256": "5f620d03d0ff85edbce9ca14de7678b1de1a2acac038d7eae77eee62a01298c8"
+      "size": 6466,
+      "sha256": "675f76cc752f89bdbffadd6cdf8c31aba3271226d72dad0ee75c43e9ddde18a7"
     },
     {
       "path": "bicycle-world/dist/src/about-journal-photo-data.js",
@@ -3894,13 +3894,13 @@
     },
     {
       "path": "bicycle-world/dist/src/about-journal-reader.css",
-      "size": 11641,
-      "sha256": "9593892a24351ef6306551dfc6577594c3733101b1678e69141b6769aa7fbca1"
+      "size": 12012,
+      "sha256": "8981a3fc0a80efde621eff8629bc76d7d78f3df0aa9fac23795b84cecade7c55"
     },
     {
       "path": "bicycle-world/dist/src/about-journal-reader.js",
-      "size": 25092,
-      "sha256": "19177eba3d8f2c370105e528cd42aacde865f591cf7b2a3ff4e87c8bd850c7bb"
+      "size": 26121,
+      "sha256": "d7e7b6512eee18b90fc1e3c61c5c2453807c754f70447d3f6fa0d660b1d94781"
     },
     {
       "path": "bicycle-world/dist/src/about-journal-scene.js",
