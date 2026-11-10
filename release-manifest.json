@@ -6454,8 +6454,8 @@
     },
     {
       "path": "normal-portfolio/assistant-ui.css",
-      "size": 7754,
-      "sha256": "78408e7eed32c8681da93d3b0e99a4e6011e478473a00c31abdcf876d3728c01"
+      "size": 7921,
+      "sha256": "6baca54b29e140df3387ac17239347b36b85b3719951a5d4040a46ea9165c781"
     },
     {
       "path": "normal-portfolio/case-context.js",
@@ -6474,8 +6474,8 @@
     },
     {
       "path": "normal-portfolio/case-image-viewer.css",
-      "size": 2804,
-      "sha256": "642bef56486f36e156ab98fecc8f558af3ec7c75df15ff7cf59d437ffc0842ec"
+      "size": 2865,
+      "sha256": "ce4e77e1d94e06904bdce3bd7928eb8dd077181987cc8493d46ac55a9bed63b8"
     },
     {
       "path": "normal-portfolio/case-image-viewer.js",
@@ -6494,8 +6494,8 @@
     },
     {
       "path": "normal-portfolio/case-presentation.css",
-      "size": 18660,
-      "sha256": "0b9a56165b3c4d9bd13f2171912956678538184fc762f90c814796bdcbca9099"
+      "size": 18912,
+      "sha256": "908c2a47cf8e51404f6bbe35e343f3b34b31afcee4235080d60a75296e72831d"
     },
     {
       "path": "normal-portfolio/case-reader.css",
@@ -6664,23 +6664,23 @@
     },
     {
       "path": "normal-portfolio/editorial-case.css",
-      "size": 11996,
-      "sha256": "c67bed0a5b5241dcd2629b64beff734ca85ba3ebd02e518ce696d9851dc4c911"
+      "size": 12390,
+      "sha256": "b75e7707639f11c3090def523fa5babeb9e86061c5fbf3dcea99e5ccc920dc32"
     },
     {
       "path": "normal-portfolio/editorial-toolkit.css",
-      "size": 5261,
-      "sha256": "bc2abd330cd92be890572d9efde03c9b7f5329f9c03094db415a6745ae06ff33"
+      "size": 5336,
+      "sha256": "fc07d4f5ab0ed545051d3607188c36979920ee5bbf0a513924f19fd620b3ec80"
     },
     {
       "path": "normal-portfolio/editorial.css",
-      "size": 15042,
-      "sha256": "9f0df0c5d87b48805cd77689122e267350f0c3c236bc513a51b36a66016fd873"
+      "size": 15263,
+      "sha256": "fe1f5e781507db2f1e3ee88b365e5bfb8c3ad6c68ce2aaef00e717a2d9c4620e"
     },
     {
       "path": "normal-portfolio/footer-ui.css",
-      "size": 6167,
-      "sha256": "62b61a89a6dd2edeeb7911672928dc228e2846913f23098b651bff916d1dab63"
+      "size": 6290,
+      "sha256": "9198035c582481eab11cc4a41a5bbf1237ce06d9f0ec2b1e053466f0379e2b4c"
     },
     {
       "path": "normal-portfolio/giggles-evidence.js",
@@ -6709,8 +6709,8 @@
     },
     {
       "path": "normal-portfolio/index.html",
-      "size": 22596,
-      "sha256": "fe2dec3aadfc811533a3dc1c165d5b22a0983bce5f02945b633eea2df0a887a2"
+      "size": 22806,
+      "sha256": "48f41f61fd257b6e70cfd53edaa5811a31c7ae29e41d55edf51b91466e326392"
     },
     {
       "path": "normal-portfolio/jan-concept-data.js",
@@ -6724,8 +6724,8 @@
     },
     {
       "path": "normal-portfolio/map.html",
-      "size": 14400,
-      "sha256": "c232f204602e6866b563e0d3c5c34b91bb857ee5ca6490defe23eee178f6f260"
+      "size": 14547,
+      "sha256": "c70f47556e86a6afa525d9a40ab42cf7db79aa603c3f8807ee90a5ea061136df"
     },
     {
       "path": "normal-portfolio/mode-entry.js",
@@ -6759,8 +6759,8 @@
     },
     {
       "path": "normal-portfolio/photo-carousel.css",
-      "size": 2737,
-      "sha256": "d34d3a2f983b8d9339620eac1b55cddbe671a9fcb05648597a487d2e80b2d461"
+      "size": 2798,
+      "sha256": "a12483a1fbb10d43fa6eb27413b5720644e18275ef35cf9745f6eefc24f30ed7"
     },
     {
       "path": "normal-portfolio/photo-carousel.js",

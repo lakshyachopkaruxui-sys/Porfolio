@@ -1,8 +1,8 @@
 /* Personal work canvas. References and composition: docs/layout-reference-decision-20261103.md. */
 :root {
-  --paper:#fff; --ink:#222725; --muted:#646b68; --line:#dce1de;
+  --paper:#f2f4f7; --ink:#222725; --muted:#646b68; --line:#dce1de;
   --accent:#254b40; --accent-dark:#17382e; --blue:var(--accent);
-  --surface:#f2f5f3; --yellow:#eff2ed; --soft-yellow:#f7f8f5;
+  --surface:#f8fafc; --yellow:#eff2ed; --soft-yellow:#f7f8f5;
   --mint:#edf3ef; --lilac:#f0f2f4; --pink:#f4f2f1;
   --display:'DM Sans',Arial,sans-serif; --body:'DM Sans',Arial,sans-serif;
 }

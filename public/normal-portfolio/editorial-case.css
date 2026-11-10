@@ -308,7 +308,7 @@
 .portfolio-assistant-dialog .assistant-input {
   border-color: #9d9d9d;
   border-radius: 6px;
-  background: #fff;
+  background: var(--surface);
   font-size: 16px;
 }
 

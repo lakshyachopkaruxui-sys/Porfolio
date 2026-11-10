@@ -74,7 +74,7 @@
   align-self: center;
   padding: 32px;
   border-radius: 22px;
-  background: var(--paper);
+  background: var(--surface);
 }
 #contact .contact-ai-label { margin: 0 0 18px; color: var(--muted); font-size: 14px; }
 #contact .contact-ai h3 { margin: 0 0 16px; font-size: 26px; font-weight: 500; line-height: 1.3; letter-spacing: -.025em; }
