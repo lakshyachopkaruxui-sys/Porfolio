@@ -31,7 +31,7 @@ section[id] { scroll-margin-top:112px; }
 .site-header nav a:hover { color:var(--accent); }
 .site-header .play-link { margin-left:8px; padding:8px 0 8px 16px; gap:8px; border:0; border-radius:0; background:none; color:var(--muted); }
 .site-header .play-link:hover { background:none; color:var(--ink); }
-.portfolio-opening { display:grid; grid-template-columns:240px minmax(0,1fr); gap:76px; align-items:start; padding-block:54px 56px; }
+.portfolio-opening { display:grid; grid-template-columns:220px minmax(0,1fr); gap:88px; align-items:start; padding-block:64px 88px; }
 .hero { position:sticky; top:148px; display:block; padding:0; }
 .hero-portrait { width:132px; height:156px; margin:0 0 29px; }
 .hero-portrait img { display:block; width:100%; height:100%; object-fit:cover; object-position:center 36%; border-radius:22px 22px 52px 22px; }
@@ -45,7 +45,7 @@ section[id] { scroll-margin-top:112px; }
 h2,.personal-section-heading h2 { font:500 32px/1.3 var(--body); letter-spacing:-.035em; margin:0; text-wrap:balance; }
 .section-heading { margin-bottom:24px; }
 .work { min-width:0; padding:0; }
-.filter-row { border:0; gap:0; margin:-10px 0 28px; }
+.filter-row { border:0; gap:0; margin:-10px 0 40px; }
 .project-filters { gap:6px 20px; }
 .filter-label-short { display:none; }
 .project-filters button { border:0; border-radius:0; padding:10px 0; min-height:44px; font-size:14px; line-height:1.5; font-weight:400; background:none; color:var(--muted); }
@@ -91,14 +91,14 @@ h2,.personal-section-heading h2 { font:500 32px/1.3 var(--body); letter-spacing:
 .project-grid:not([data-filter="all"]):not([data-filter="featured"]) .project-card:only-child { grid-column:1/-1; max-width:620px; }
 .project-grid:not([data-filter="all"]):not([data-filter="featured"]) .art-connectaid { height:320px; padding-inline:15px; gap:14px; }
 .project-grid:not([data-filter="all"]):not([data-filter="featured"]) .art-connectaid img { height:340px; }
-.practice-section,.personal-about { padding-block:88px; border:0; }
+.practice-section,.personal-about { padding-block:104px; border:0; }
 .personal-about { margin-top:12px; }
 .toolkit-hint { font-size:16px; margin:0; color:var(--muted); }
-.play-invitation { display:block; padding-block:88px; border:0; }
+.play-invitation { display:block; padding-block:104px; border:0; }
 .play-invitation-heading { display:flex; align-items:center; justify-content:space-between; gap:36px; margin-bottom:30px; }
 .play-invitation-heading p { margin:13px 0 0; max-width:48ch; font-size:17px; color:var(--muted); }
 .play-preview { display:block; position:relative; min-width:0; text-decoration:none; overflow:hidden; border-radius:28px; background:var(--surface); }
-.play-preview img { display:block; width:100%; height:430px; object-fit:cover; object-position:center; }
+.play-preview img { display:block; width:100%; height:auto; object-fit:contain; object-position:center; }
 .play-invitation-copy { display:flex; align-items:baseline; justify-content:space-between; gap:24px; margin-top:15px; }
 .text-action { display:inline-flex; align-items:center; gap:20px; min-height:44px; color:var(--ink); font-size:16px; font-weight:500; text-decoration:none; white-space:nowrap; }
 .text-action:hover { color:var(--accent); }
@@ -145,7 +145,7 @@ h2,.personal-section-heading h2 { font:500 32px/1.3 var(--body); letter-spacing:
   .site-header .play-link { display:none; }
   .site-header .play-link svg { display:none; }
   .site-header .desktop-label { display:none; }
-  .portfolio-opening { display:block; padding-block:26px 26px; }
+  .portfolio-opening { display:block; padding-block:32px 48px; }
   .hero { position:static; display:grid; grid-template-columns:80px minmax(0,1fr); gap:22px; padding:0 0 36px; align-items:start; }
   .hero-portrait { width:80px; height:104px; margin:0; }
   .hero-portrait img { border-radius:14px 14px 30px 14px; }
@@ -159,7 +159,7 @@ h2,.personal-section-heading h2 { font:500 32px/1.3 var(--body); letter-spacing:
   .profile-contact { display:none; }
   section[id] { scroll-margin-top:24px; }
   h2,.personal-section-heading h2 { font-size:28px; }
-  .filter-row { margin:0 0 22px; }
+  .filter-row { margin:0 0 32px; }
   .project-filters { gap:0 18px; }
   .filter-label-full { display:none; }
   .filter-label-short { display:inline; }
@@ -174,13 +174,13 @@ h2,.personal-section-heading h2 { font:500 32px/1.3 var(--body); letter-spacing:
   .art-connectaid .project-companion { margin-top:30px; }
   .project-copy { padding-top:16px; }
   .project-summary { font-size:16px; }
-  .practice-section,.personal-about,.play-invitation { padding-block:60px; }
+  .practice-section,.personal-about,.play-invitation { padding-block:76px; }
   .personal-about { margin-top:10px; }
   .play-invitation-heading { display:block; margin-bottom:22px; }
   .play-invitation-heading p { font-size:16px; }
   .play-invitation-heading .text-action { margin-top:10px; }
   .play-preview { border-radius:20px; }
-  .play-preview img { height:300px; }
+  .play-preview img { height:auto; }
   .play-preview-label { left:18px; bottom:18px; }
   .play-invitation-copy { display:block; margin-top:18px; }
   .play-device-note { font-size:15px; }
@@ -210,3 +210,9 @@ h2,.personal-section-heading h2 { font:500 32px/1.3 var(--body); letter-spacing:
 @media(prefers-reduced-motion:reduce) {
   .project-art img,.read-label,.play-preview-label { transition:none; }
 }
+
+/* The primary contact action is a button-shaped link to the contact section. */
+.profile-contact { display: inline-flex; justify-content: center; gap: 12px; min-height: 46px; padding: 10px 18px; border: 1px solid var(--accent); border-radius: 999px; background: var(--accent); color: white; font-weight: 500; line-height: 1.4; text-decoration: none; transition: background-color 150ms, border-color 150ms; }
+.profile-contact:hover { background: var(--accent-dark); border-color: var(--accent-dark); color: white; text-decoration: none; }
+.profile-contact svg { flex: none; }
+

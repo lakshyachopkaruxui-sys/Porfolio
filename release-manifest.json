@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T04:32:54.476Z",
+  "generatedAt": "2026-11-10T04:44:09.258Z",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 740,
-      "sha256": "3fa7fc89531d97a9ed6247a703b796ba0cca3bd8cd8a77785f33121e5385584d"
+      "sha256": "318ace75d1e5d6445ce19fde21885c17b8c289c3fcc6450ef3c7c1020825a344"
     },
     {
       "path": "_redirects",
@@ -66,11 +66,6 @@
       "path": "bicycle-world/assets/projects/connectaid.png",
       "size": 445175,
       "sha256": "67aa8758446dbb6e68b72676eb7b714bc2a3783760f70bdd0fd17755178d4ccc"
-    },
-    {
-      "path": "bicycle-world/assets/projects/syringe.webp",
-      "size": 33486,
-      "sha256": "d6edf42da551c2b3e24a28baf7e147200090741a767643a5f4dff640889609c9"
     },
     {
       "path": "bicycle-world/dist/assets/ambient-music/CC-BY-4.0.txt",
@@ -3804,38 +3799,38 @@
     },
     {
       "path": "bicycle-world/dist/assets/work-covers/connectaid.webp",
-      "size": 140338,
-      "sha256": "42c20592f9d74d92bbed81d29e1c73f54a2f9f8fe8fa9d3afff8e71b24caef7a"
+      "size": 178054,
+      "sha256": "820bbc7ffb272b07bf6d450c51823402d473234fbef957c86ff31cf644340615"
     },
     {
       "path": "bicycle-world/dist/assets/work-covers/giggles.webp",
-      "size": 263156,
-      "sha256": "27af5457f1f0ae57d66c8c7d5efbc25adca69157264f883a3bf6bfe7818918dd"
+      "size": 200414,
+      "sha256": "b4b0bc869c7a4c734ffa4f30a823f38a6ea2de5e22fe436b4eb2f700a7257f8a"
     },
     {
       "path": "bicycle-world/dist/assets/work-covers/jan-aushadhi.webp",
-      "size": 192364,
-      "sha256": "0046aaa65232f2d2b551f5e6ab951fc7bb3ccbc163d255162efb92004d064f54"
+      "size": 170604,
+      "sha256": "f256e3f6ce10fa633891196355e0fc5623a73f87317ccec1c78fb749b13059f9"
     },
     {
       "path": "bicycle-world/dist/assets/work-covers/pixel-mania.webp",
-      "size": 154672,
-      "sha256": "2d092a1140245b35c7db0cc8e697720302d95341a4378e8320e1a387cb6a51c4"
+      "size": 213764,
+      "sha256": "3a1dd2ab4e5ccab67537292530389409ba0b9f5064af49fca4a304d2c577e90c"
     },
     {
       "path": "bicycle-world/dist/assets/work-covers/syringe.webp",
-      "size": 100106,
-      "sha256": "44a7fbc02a8d4cd43d5a5547f142b13ac972161b9c245042bca99f79ac2e08c4"
+      "size": 154262,
+      "sha256": "2a2091e3b067104bfd2e93e1726bc779ea097a3c1928d0415362710ad88be2ea"
     },
     {
       "path": "bicycle-world/dist/assets/work-covers/workplace-mode.webp",
-      "size": 105256,
-      "sha256": "cf801cd30a0f5723f2038e55cd2e13fe40af6bf3906fef2f6eb38fb348d21edf"
+      "size": 128686,
+      "sha256": "9197d85179689271354cb0c3f3ec71733e14517620944fc3efff5dec205d438b"
     },
     {
       "path": "bicycle-world/dist/index.html",
-      "size": 44124,
-      "sha256": "2bc3edfd4aeb207e2abf43b09f302889e90789a126afd512c99f198ce9faea4c"
+      "size": 44120,
+      "sha256": "38876cde610b44066a203fa0e867014851413e43054309cfe5d21a723085a961"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
@@ -3844,13 +3839,13 @@
     },
     {
       "path": "bicycle-world/dist/projects.html",
-      "size": 27654,
-      "sha256": "2527524f09e79c2c357737518e1c9092824d374dc2c540b6277c3dd08d2c1848"
+      "size": 27651,
+      "sha256": "335956a7553d417d35bbfe7b453781458672bcfd18c94c7c0dc91e3251ddc140"
     },
     {
       "path": "bicycle-world/dist/src/about-content.js",
-      "size": 5518,
-      "sha256": "5b681c60edc6b2bae9eedf08e6f9bf6383ea172ab1235764b87c94e117863543"
+      "size": 5516,
+      "sha256": "fcdcaaf110d39a85b79c2507984f0386bc4f4ba2f9eb214ea067736e8ce08923"
     },
     {
       "path": "bicycle-world/dist/src/about-experience.css",
@@ -4049,8 +4044,8 @@
     },
     {
       "path": "bicycle-world/dist/src/destination-ui.js",
-      "size": 12664,
-      "sha256": "59f5f0e707cb91912d31b380d611e65fa0dfc0ff9ab1e4d20616752111e8877c"
+      "size": 12659,
+      "sha256": "1afe331890256259198f16b247f4280fc2e172d29a767be2054ddc761c4483ab"
     },
     {
       "path": "bicycle-world/dist/src/destinations.css",
@@ -4234,8 +4229,8 @@
     },
     {
       "path": "bicycle-world/dist/src/layout.js",
-      "size": 8714,
-      "sha256": "daa7a9c75dc378dec3dbdb88be0dd3589028022e01043a159b9a9d6307ce4c11"
+      "size": 8713,
+      "sha256": "c5bc0bd4554f907f0e0b0908731c38b95118e09d16b43d9330181f1c0a402e22"
     },
     {
       "path": "bicycle-world/dist/src/listening-room-data.js",
@@ -4269,8 +4264,8 @@
     },
     {
       "path": "bicycle-world/dist/src/map-ui.js",
-      "size": 8202,
-      "sha256": "9dc96732e236706f444586d44f55d82f8a46006a1de57c4a19e0955f3bf06c10"
+      "size": 8201,
+      "sha256": "93acc633049932833b6788c18cb65d662ced3e9807bb7fd50a9bc2b5fefb0c1f"
     },
     {
       "path": "bicycle-world/dist/src/mobile-entry-policy.js",
@@ -4314,13 +4309,13 @@
     },
     {
       "path": "bicycle-world/dist/src/normal-work-source.js",
-      "size": 8750,
-      "sha256": "4261b272e528e780e75bf1a11873e6d211b933619e304fe565b9e0bbc8c279af"
+      "size": 8715,
+      "sha256": "ac5597a44dcd22ce969554abcf5e0ad50a5f1e28ab1cdf2b2917bf7e3f8daca7"
     },
     {
       "path": "bicycle-world/dist/src/oak-lab-content.js",
-      "size": 6373,
-      "sha256": "f0be88f73dbac1bc10dba13476f78ee0e5e51f7c3de10cea75e87d214d6e0ce9"
+      "size": 6364,
+      "sha256": "b4960401f524f5bf9ec3ec0978f889845a3696313bddd46e9a26cf304a9bd46c"
     },
     {
       "path": "bicycle-world/dist/src/oak-lab-exterior.js",
@@ -4339,13 +4334,13 @@
     },
     {
       "path": "bicycle-world/dist/src/oak-lab.js",
-      "size": 35510,
-      "sha256": "ef975b963297af007507ac6bc2f5368a22e725a7944b8570bdb453c9bf7ab097"
+      "size": 35404,
+      "sha256": "3b4a4617ab5be995ad281ea4c7bc41ea12f493dbbbde0a6fa6234bf10982a91c"
     },
     {
       "path": "bicycle-world/dist/src/oak-narration.js",
-      "size": 11075,
-      "sha256": "4f9c126d511595e3d9425527c63c922e0f3b86d5717e22b92d9f026fe7199a2c"
+      "size": 11241,
+      "sha256": "94b6e2b70b18cc6f6d20fafea25506f3e51ec2b62449931838da682aeee21a47"
     },
     {
       "path": "bicycle-world/dist/src/personal-photo-data.js",
@@ -4399,8 +4394,8 @@
     },
     {
       "path": "bicycle-world/dist/src/play-music-ui.js",
-      "size": 10983,
-      "sha256": "81e9575d684b28ec5b90335c3599a90309f5490c5ade2e63e10c59b9460b222e"
+      "size": 10982,
+      "sha256": "014754c3c4a2222a53ddd686033cbca371674bb002247cc8ea9e2466b7f07030"
     },
     {
       "path": "bicycle-world/dist/src/play-music.css",
@@ -4424,8 +4419,8 @@
     },
     {
       "path": "bicycle-world/dist/src/pokemon-audio.js",
-      "size": 5085,
-      "sha256": "65d338cdad8c1fe5f67d578162d91d1794e6fe975d423ecdb2500716785cfaad"
+      "size": 5084,
+      "sha256": "33e6223539362da89cf4ded0f4759720a24a5391eb404475aa17b10fddb69090"
     },
     {
       "path": "bicycle-world/dist/src/pokemon-collection-data.js",
@@ -4464,8 +4459,8 @@
     },
     {
       "path": "bicycle-world/dist/src/pokemon-room-data.js",
-      "size": 1041,
-      "sha256": "d907302728b3276da27f36ea8a4239607b8603e005230798a5f2339eebb751ac"
+      "size": 1036,
+      "sha256": "bfa0ab97e13c34675bf31b51795080bfd6df7bf4a37204214b5ed7e70f281411"
     },
     {
       "path": "bicycle-world/dist/src/pokemon-room.css",
@@ -4474,8 +4469,8 @@
     },
     {
       "path": "bicycle-world/dist/src/pokemon-room.js",
-      "size": 62477,
-      "sha256": "8f8cf1cb1afddd97674f744b339a5a7bcf3b24fa627df9998d9f004e21228045"
+      "size": 62465,
+      "sha256": "d6def849dddba395fe561dfa716d1f1fc1ee57088cb72486051f4b8f897b84df"
     },
     {
       "path": "bicycle-world/dist/src/pokemon-sleep-cues.js",
@@ -4484,8 +4479,8 @@
     },
     {
       "path": "bicycle-world/dist/src/pokemon-ui.js",
-      "size": 2048,
-      "sha256": "e260246471b2b0244db3385b81f66f5a265a6a5b69a2cc81f003bae55b9a8aff"
+      "size": 2042,
+      "sha256": "1db5087113d4a48369eb128d69c597e67f1fc782354e3ff7be5eb5b1f6e9ead5"
     },
     {
       "path": "bicycle-world/dist/src/pokemon-world.js",
@@ -4504,8 +4499,8 @@
     },
     {
       "path": "bicycle-world/dist/src/project-data.js",
-      "size": 25870,
-      "sha256": "58c6724bf031c5adef1c3045586c223c72ddabcbf5b2009e8e3c42a27b46dad8"
+      "size": 25867,
+      "sha256": "06b7f1cad185335c96b7eac60f0b858273a2f5f5516cc41f477d57196bf7852a"
     },
     {
       "path": "bicycle-world/dist/src/project-ui.js",
@@ -4644,8 +4639,8 @@
     },
     {
       "path": "bicycle-world/dist/src/work-overview-content.js",
-      "size": 9406,
-      "sha256": "b69bbc2ef00739ee5b20f741f449f999760db42bdc0846dc38d51624d135ef04"
+      "size": 8837,
+      "sha256": "52a709c95b51b9e219fd61de39ebb6da21408d3b27bb98b84d4956e0e8c93394"
     },
     {
       "path": "bicycle-world/dist/src/works-experience.css",
@@ -4724,8 +4719,8 @@
     },
     {
       "path": "bicycle-world/src/project-data.js",
-      "size": 25870,
-      "sha256": "58c6724bf031c5adef1c3045586c223c72ddabcbf5b2009e8e3c42a27b46dad8"
+      "size": 25867,
+      "sha256": "06b7f1cad185335c96b7eac60f0b858273a2f5f5516cc41f477d57196bf7852a"
     },
     {
       "path": "bicycle-world/src/welcome-fonts.css",
@@ -4734,8 +4729,8 @@
     },
     {
       "path": "normal-portfolio/assets/Lakshya-Chopkar-UX-Designer-Resume.pdf",
-      "size": 150158,
-      "sha256": "c759729259bd575ff61e2e15d886cf47d55b5af074b3f5f670de6ec09c638ab8"
+      "size": 148956,
+      "sha256": "4898ca23379535266c194c83af3e53f6ea9068b996f2ae1932b2252686caece2"
     },
     {
       "path": "normal-portfolio/assets/cases/connectaid/design-system/button-states-source.webp",
@@ -6213,9 +6208,9 @@
       "sha256": "814f7e4d1dd6c7ca99bffcfad26187f1724fb03681e24d6f41a4b154bb55b379"
     },
     {
-      "path": "normal-portfolio/assets/play-preview.png",
-      "size": 62163,
-      "sha256": "1e771ab01e8ffe19fa741acb8bffa9831812a1f5b1a198ad93b7c466b01a1fd1"
+      "path": "normal-portfolio/assets/play-promo/approved-20261110/play-mode.webp",
+      "size": 246312,
+      "sha256": "02bc08948f55d3aaa516f7596582e8d70c5d65d467ab39474e7a1d76bd887b32"
     },
     {
       "path": "normal-portfolio/assets/process/connectaid-findings.png",
@@ -6233,34 +6228,64 @@
       "sha256": "541bbe4d31818ee3e6e430a04d61100e4b523d79c9fe4b197f711edfa2a294b5"
     },
     {
-      "path": "normal-portfolio/assets/project-covers/connectaid-studio-v2.png",
-      "size": 1727831,
-      "sha256": "19245effdd507f42afca81566c4dc0b90f413942d8f8930ab45b28d6401a571d"
+      "path": "normal-portfolio/assets/project-covers/approved-20261110/connectaid.png",
+      "size": 2002773,
+      "sha256": "54332bae6f52d85a34a6442554e8a80d471c3d74b7a6a7e004e4d6cda1b2b70b"
     },
     {
-      "path": "normal-portfolio/assets/project-covers/connectaid-studio-v2.webp",
-      "size": 189972,
-      "sha256": "e939d5de85546919ab380c8688538c69c4a09638c8ceba8058d6622cb2b4d34b"
+      "path": "normal-portfolio/assets/project-covers/approved-20261110/connectaid.webp",
+      "size": 178054,
+      "sha256": "820bbc7ffb272b07bf6d450c51823402d473234fbef957c86ff31cf644340615"
     },
     {
-      "path": "normal-portfolio/assets/project-covers/jan-original-card-v2.webp",
-      "size": 271686,
-      "sha256": "ece9889404c01f4f9158a1cbf70103059673891cf9b44585dd47672448d6e498"
+      "path": "normal-portfolio/assets/project-covers/approved-20261110/giggles.png",
+      "size": 2153610,
+      "sha256": "1b0fff2d84232cabff58d801b152aba50f8182e12dc526762069790c21f6222b"
     },
     {
-      "path": "normal-portfolio/assets/project-covers/pixel-highfi-v2.webp",
-      "size": 210200,
-      "sha256": "ba0454778df0bfcdf5cb5916b6cb75f55279019cf1c1e29976f65394ba6a9747"
+      "path": "normal-portfolio/assets/project-covers/approved-20261110/giggles.webp",
+      "size": 200414,
+      "sha256": "b4b0bc869c7a4c734ffa4f30a823f38a6ea2de5e22fe436b4eb2f700a7257f8a"
     },
     {
-      "path": "normal-portfolio/assets/project-covers/syringe-v2.webp",
-      "size": 99086,
-      "sha256": "35a19cc2bdafcc98abb81ebabf78be053efe700b8603a7e40e957c194cae0f30"
+      "path": "normal-portfolio/assets/project-covers/approved-20261110/jan-aushadhi.png",
+      "size": 1957177,
+      "sha256": "cc8d50b7e02e7e3cf5ca151629d8671e4fd4d5b1269a2dd4de1e1f77a47a2a9e"
     },
     {
-      "path": "normal-portfolio/assets/project-covers/workplace-highfi-v2.webp",
-      "size": 145910,
-      "sha256": "312d4b283bd7df32ff2a064a863fcc7d1b908c02f500193589eb3e99e0beb21c"
+      "path": "normal-portfolio/assets/project-covers/approved-20261110/jan-aushadhi.webp",
+      "size": 170604,
+      "sha256": "f256e3f6ce10fa633891196355e0fc5623a73f87317ccec1c78fb749b13059f9"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/approved-20261110/pixel-mania.png",
+      "size": 1979908,
+      "sha256": "7c9168a5402783e046fefeb637de82734ef2a55f8c0925bf3825e5f6209d69b7"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/approved-20261110/pixel-mania.webp",
+      "size": 213764,
+      "sha256": "3a1dd2ab4e5ccab67537292530389409ba0b9f5064af49fca4a304d2c577e90c"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/approved-20261110/syringe.png",
+      "size": 1947945,
+      "sha256": "8edb5a4ef47434d175dc9a996870d3c02fb78a7bc3c9e74ad9c3888bb8209b80"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/approved-20261110/syringe.webp",
+      "size": 154262,
+      "sha256": "2a2091e3b067104bfd2e93e1726bc779ea097a3c1928d0415362710ad88be2ea"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/approved-20261110/workplace-mode.png",
+      "size": 1875562,
+      "sha256": "8c41365fe257cb986a344efe12ae173be63f8c267f4e22f12e90a38a88c9d2b0"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/approved-20261110/workplace-mode.webp",
+      "size": 128686,
+      "sha256": "9197d85179689271354cb0c3f3ec71733e14517620944fc3efff5dec205d438b"
     },
     {
       "path": "normal-portfolio/assets/social/portfolio-preview-v1.png",
@@ -6429,8 +6454,8 @@
     },
     {
       "path": "normal-portfolio/assistant-ui.css",
-      "size": 7249,
-      "sha256": "1746c395c62542eb9f14a5170d7add0eb87df7534ed7d3d55258989d4a6d11c8"
+      "size": 7754,
+      "sha256": "78408e7eed32c8681da93d3b0e99a4e6011e478473a00c31abdcf876d3728c01"
     },
     {
       "path": "normal-portfolio/case-context.js",
@@ -6439,13 +6464,13 @@
     },
     {
       "path": "normal-portfolio/case-hero-art.css",
-      "size": 5369,
-      "sha256": "0488c92def850b81411a7fb4d90432f2bdfc253bc7d1ffb0d5d0178911088260"
+      "size": 5470,
+      "sha256": "b5e09ead540cb4a17c30597da8a20ad470b651e3cd9f7ea8b43f686221a073eb"
     },
     {
       "path": "normal-portfolio/case-hero-art.js",
-      "size": 2697,
-      "sha256": "cbd5bb111e5b67c8a9193e75520e4039a601c729faa711b533c189fca000f9d6"
+      "size": 3421,
+      "sha256": "f7140ff8ea298c36c67fd7e16bc60b9fdf11521228c7f02852d82595fd6ae68e"
     },
     {
       "path": "normal-portfolio/case-image-viewer.css",
@@ -6469,8 +6494,8 @@
     },
     {
       "path": "normal-portfolio/case-presentation.css",
-      "size": 18373,
-      "sha256": "98274816bdfa4a7d1058002fb4667faacc4037a443472211c4334bcfabcb0875"
+      "size": 18660,
+      "sha256": "0b9a56165b3c4d9bd13f2171912956678538184fc762f90c814796bdcbca9099"
     },
     {
       "path": "normal-portfolio/case-reader.css",
@@ -6479,8 +6504,8 @@
     },
     {
       "path": "normal-portfolio/case-reader.js",
-      "size": 23377,
-      "sha256": "bfc5609895a3583eb4e612da0a809b09c1f088957c40a63dab0a2b1c94e2bcfa"
+      "size": 23458,
+      "sha256": "f28f5c5c118638354219843beace51a6aececd9f2bd2ec860f45011c123c175c"
     },
     {
       "path": "normal-portfolio/case-section-nav.js",
@@ -6496,6 +6521,11 @@
       "path": "normal-portfolio/case-video.js",
       "size": 4111,
       "sha256": "077cefe001bbc601499c58465d6173fb3149b9d058dd8f0c5e297f45edad585e"
+    },
+    {
+      "path": "normal-portfolio/clipboard-copy.js",
+      "size": 2711,
+      "sha256": "3d571b832ef617fea435aaf3a376dbe4d16de237f81dca4bc8e17408b8dfad64"
     },
     {
       "path": "normal-portfolio/connectaid-evidence.js",
@@ -6639,18 +6669,18 @@
     },
     {
       "path": "normal-portfolio/editorial-toolkit.css",
-      "size": 5258,
-      "sha256": "3c65a68e995c700c91971454a88fbfbb56a8edef00d8dfabb75964063367250b"
+      "size": 5261,
+      "sha256": "bc2abd330cd92be890572d9efde03c9b7f5329f9c03094db415a6745ae06ff33"
     },
     {
       "path": "normal-portfolio/editorial.css",
-      "size": 14463,
-      "sha256": "a4beb677f28e40e0d838710eb26f48ff9638be7c4fa57c01b4f14133138ccabf"
+      "size": 15042,
+      "sha256": "9f0df0c5d87b48805cd77689122e267350f0c3c236bc513a51b36a66016fd873"
     },
     {
       "path": "normal-portfolio/footer-ui.css",
-      "size": 3610,
-      "sha256": "278aa717d50fa640c2aa765a1a5bebc36daef5ae7ae252f3faebaa8d6d2016d1"
+      "size": 6167,
+      "sha256": "62b61a89a6dd2edeeb7911672928dc228e2846913f23098b651bff916d1dab63"
     },
     {
       "path": "normal-portfolio/giggles-evidence.js",
@@ -6679,8 +6709,8 @@
     },
     {
       "path": "normal-portfolio/index.html",
-      "size": 21317,
-      "sha256": "d0f34b506ca797938b72a4bfa1eb666316a6e9a5fccc479533d35bd2dee175ae"
+      "size": 22596,
+      "sha256": "fe2dec3aadfc811533a3dc1c165d5b22a0983bce5f02945b633eea2df0a887a2"
     },
     {
       "path": "normal-portfolio/jan-concept-data.js",
@@ -6694,8 +6724,8 @@
     },
     {
       "path": "normal-portfolio/map.html",
-      "size": 14404,
-      "sha256": "d1a4fd56936e457e383850603ef2b774199fc81989769015d5b5aeacdafd681e"
+      "size": 14400,
+      "sha256": "c232f204602e6866b563e0d3c5c34b91bb857ee5ca6490defe23eee178f6f260"
     },
     {
       "path": "normal-portfolio/mode-entry.js",
@@ -6713,9 +6743,14 @@
       "sha256": "a4264ac44fecb4e05cf09d313fba8adc41eb90d779057b35a377de55389b1ce8"
     },
     {
+      "path": "normal-portfolio/normal-actions.css",
+      "size": 2686,
+      "sha256": "732e4731ff18c500c8f85c3c3cc189ef8ffdbe69d72d0440981cb480fa990a0f"
+    },
+    {
       "path": "normal-portfolio/normal-projects.js",
-      "size": 12972,
-      "sha256": "53902d5761df7533727b0ebeb692e37d679eb4e39886b55f21ecdf781610f86f"
+      "size": 13486,
+      "sha256": "72f62bfafd8758941cdc9ed6845ec7540a2be410c9f07a981208d2b5d3263fbe"
     },
     {
       "path": "normal-portfolio/personal-sections.css",
@@ -6724,13 +6759,13 @@
     },
     {
       "path": "normal-portfolio/photo-carousel.css",
-      "size": 2262,
-      "sha256": "da9ba729a847a97046ad213562fb5eebc6f174bc53480ed53fd9d167928fafad"
+      "size": 2737,
+      "sha256": "d34d3a2f983b8d9339620eac1b55cddbe671a9fcb05648597a487d2e80b2d461"
     },
     {
       "path": "normal-portfolio/photo-carousel.js",
-      "size": 10029,
-      "sha256": "93c1c06e8f6389d52f9d016fb54df70872873a146f839a3a468e604d1efad623"
+      "size": 9767,
+      "sha256": "5c3a17ecd282d967f214bbefa7ad2a8e0d5bb6097229b431424c30a696e64922"
     },
     {
       "path": "normal-portfolio/pixel-mania-evidence.js",
@@ -6744,8 +6779,8 @@
     },
     {
       "path": "normal-portfolio/pixel-mania-presentation.css",
-      "size": 10324,
-      "sha256": "4e12db6837b6ecd1fd5f29b4dfc5ec0b056e00c98932634c5762931ee79a04e2"
+      "size": 10488,
+      "sha256": "a937cbe6e1a2428ba694ce6a7135a0a73acbf94ebf10fa343278e67ff7fa7f6c"
     },
     {
       "path": "normal-portfolio/pixel-mania-presentation.js",
@@ -6764,8 +6799,8 @@
     },
     {
       "path": "normal-portfolio/portfolio-extras.js",
-      "size": 21355,
-      "sha256": "16ab741e73d60d0b7622653e0f1292bb92686e7c7e3e74536d7e06bdd055a0d6"
+      "size": 23323,
+      "sha256": "5298ba45088bd9e9e74ee02a188ba90549e837e3e8648e3c7e3de993c088a899"
     },
     {
       "path": "normal-portfolio/portfolio-motion.css",
@@ -6779,8 +6814,8 @@
     },
     {
       "path": "normal-portfolio/portfolio.js",
-      "size": 20286,
-      "sha256": "285c1da00526bcbd826861ca04555d1b25c40ec2c184422e21416ff634558ed7"
+      "size": 20421,
+      "sha256": "38827f84b0b644b7f28b7995e6daced643c20647e4ce21f2b11088c1d92bc82a"
     },
     {
       "path": "normal-portfolio/process-data.js",
@@ -6789,8 +6824,13 @@
     },
     {
       "path": "normal-portfolio/project-cover-ui.css",
-      "size": 2785,
-      "sha256": "f7000939361683b4515cbdb224be95854208ce74c4331d4a22970fc9605b3f90"
+      "size": 2667,
+      "sha256": "389aa2c541ee57f6b68539c497b716f93adc620d52395d468a6b216ddbc7ebbe"
+    },
+    {
+      "path": "normal-portfolio/project-preview.js",
+      "size": 5376,
+      "sha256": "06616c7c2b35cd9a36c01538392b2e568f16dc6a9cbec05f5229e3549ddc280b"
     },
     {
       "path": "normal-portfolio/project-research-evidence.js",
@@ -6814,8 +6854,8 @@
     },
     {
       "path": "normal-portfolio/resume-ui.js",
-      "size": 10613,
-      "sha256": "50d9a43d5f505451397543cf590a58d743113cc40cf93f1cdbf64485d2e8b6ef"
+      "size": 12380,
+      "sha256": "0610ceb1b4fdaa96230568a2ccbed2e48a58f4459d4e9514b2e61a810f5837b2"
     },
     {
       "path": "normal-portfolio/sections.css",

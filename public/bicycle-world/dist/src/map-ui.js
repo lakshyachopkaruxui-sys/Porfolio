@@ -7,7 +7,7 @@ const DESCRIPTIONS={
   about:'A little about me, my energy and the way I see people.',
   projects:'The projects, decisions and process behind my work.',
   work:'Singing, Garba and moments with people.',
-  music:'Pokémon GO catches, childhood memories and the story behind this world.',
+  music:'Pokemon GO catches, childhood memories and the story behind this world.',
   cloud:'Clouds and everyday moments, through my phone camera.'
 };
 

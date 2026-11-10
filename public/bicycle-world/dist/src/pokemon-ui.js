@@ -2,11 +2,11 @@ import {POKEMON} from './pokemon-habitats.js';
 
 /** Optional controls stay in Help; the riding view keeps its existing space. */
 export function mountPokemonControls(help,audio,onUnavailable,onPreference){
-  const section=document.createElement('section');section.setAttribute('aria-label','Pokémon companions');
-  section.innerHTML=`<label class="motion-option"><input type="checkbox" id="pokemon-sounds" aria-describedby="pokemon-sound-note"> Nearby Pokémon voices</label>
+  const section=document.createElement('section');section.setAttribute('aria-label','Pokemon companions');
+  section.innerHTML=`<label class="motion-option"><input type="checkbox" id="pokemon-sounds" aria-describedby="pokemon-sound-note"> Nearby Pokemon voices</label>
     <p class="ride-sound-note" id="pokemon-sound-note">Short calls as you ride past. Four anime calls; their dub is unverified. Articuno and Vaporeon use game cries. Snorlax stays quiet.</p>
-    <details class="help-destinations"><summary>About the Pokémon companions <span aria-hidden="true">+</span></summary>
-    <p>Pokémon was part of Lakshya’s childhood. Pokémon GO brought that wish to explore a world with Pokémon a little closer.</p>
+    <details class="help-destinations"><summary>About the Pokemon companions <span aria-hidden="true">+</span></summary>
+    <p>Pokemon was part of Lakshya’s childhood. Pokemon GO brought that wish to explore a world with Pokemon a little closer.</p>
     <ul>${POKEMON.map(p=>`<li>${p.name} — ${p.habitat}.</li>`).join('')}</ul>
     <p>Click a companion to say hello, or ring the bicycle bell with <kbd>R</kbd> nearby. Every project is available independently of the companions.</p>
     <p><a href="${new URL('../pokemon-credits.html',import.meta.url).href}" target="_blank" rel="noopener">Model and audio credits</a></p></details>`;

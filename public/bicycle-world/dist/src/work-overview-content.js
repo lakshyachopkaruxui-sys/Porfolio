@@ -1,6 +1,7 @@
 // Play-only editorial layer. Canonical case studies and media provenance remain
 // in the Normal portfolio; factual mappings are recorded in
 // docs/work-overview-copy-20261108.md.
+// Cover alt text comes from the current canonical thumbnail metadata.
 export const WORK_OVERVIEW_CONTENT = {
   connectaid: {
     summary: 'Booking care is one step. Keeping appointments, medicines, tests and records connected is the bigger design problem.',
@@ -18,7 +19,6 @@ export const WORK_OVERVIEW_CONTENT = {
         body: ['Six remote sessions across 11 tasks revealed overlooked navigation, difficult date entry and hard-to-find services. Nine findings led to six prototype refinements. The case follows those observations into specific changes to search, navigation and the cart.'],
       },
     ],
-    coverAlt: 'ConnectAid Home and Health Records interfaces displayed on two phones against an aqua background.',
     coverCaption: '',
   },
   giggles: {
@@ -37,7 +37,6 @@ export const WORK_OVERVIEW_CONTENT = {
         body: ['Teacher-supported sessions with four participants revealed where instructions, shared-screen visibility and turn-taking needed attention. Giggles also received Best Project at Meraki. The case shows the build, the classroom observations and the changes they prompted us to propose.'],
       },
     ],
-    coverAlt: 'Giggles board, colourful shape buttons, phone display, answer cards, reader and die.',
     coverCaption: '',
   },
   'pixel-mania': {
@@ -56,7 +55,6 @@ export const WORK_OVERVIEW_CONTENT = {
         body: ['At an iPad exhibition, visitors made patterns, lettering and their own games. That freedom also exposed a tension: repeated clicking makes a large drawing slow. The case explores that trade-off and includes the playable board.'],
       },
     ],
-    coverAlt: 'Pixel Mania’s colourful drawing grid on a desktop display beside its introductory artwork.',
     coverCaption: '',
   },
   syringe: {
@@ -75,7 +73,6 @@ export const WORK_OVERVIEW_CONTENT = {
         body: ['Nurses tried the prototype and rated its feel. Grip impressions improved, but perceived effort stayed unchanged and dosage-accuracy ratings fell. Those mixed findings made the next design questions clearer. The case connects the sketches, dimensions and pilot feedback.'],
       },
     ],
-    coverAlt: 'A hand holding the redesigned syringe against a pale sage background.',
     coverCaption: '',
   },
   'workplace-mode': {
@@ -94,7 +91,6 @@ export const WORK_OVERVIEW_CONTENT = {
         body: ['Two desktop approaches explore how to show a pending song change: clear status feedback, or an explicit record of the requested action. The case traces the decision and lets you try the comparison, ready for the next round of driver evaluation.'],
       },
     ],
-    coverAlt: 'Workplace Mode concept display combining route information with a pending music-change request.',
     coverCaption: '',
   },
   'jan-aushadhi': {
@@ -113,7 +109,6 @@ export const WORK_OVERVIEW_CONTENT = {
         body: ['We developed a health card and app, a dispensing kiosk and RFID packaging, then took the card/app further. The case shows that choice and later interactive walkthroughs, including a separate kiosk exploration of stock checks, collection and getting help.'],
       },
     ],
-    coverAlt: 'Jan Aushadhi concepts showing a health card and app, medicine kiosk and RFID-enabled packaging.',
     coverCaption: '',
   },
 };

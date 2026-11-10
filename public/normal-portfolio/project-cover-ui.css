@@ -1,11 +1,11 @@
 /* Image-first cards, adapted to this portfolio's identity rail. */
 .editorial-portfolio .project-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 64px 32px;
+  gap: 96px 48px;
 }
 .editorial-portfolio .project-grid .project-card { grid-column: auto; padding: 0; }
 .editorial-portfolio .project-grid .project-link { display: flex; flex-direction: column; }
-.editorial-portfolio .project-grid .project-heading { order: 1; margin: 21px 0 8px; }
+.editorial-portfolio .project-grid .project-heading { order: 1; margin: 26px 0 12px; }
 .editorial-portfolio .project-grid .project-heading h3 {
   margin: 0;
   font-size: clamp(22px, 1.9vw, 25px);
@@ -17,7 +17,7 @@
   order: 0;
   display: block;
   height: auto;
-  aspect-ratio: 5 / 4;
+  aspect-ratio: 1.91;
   padding: 0;
   margin: 0;
   background: var(--surface);
@@ -31,35 +31,43 @@
   margin: 0;
   border: 0;
   border-radius: 0;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   transform: none;
 }
-/* Complete studio renders retain their original composition. */
-.editorial-portfolio .project-grid .art-connectaid.is-project-cover { background: #f3fafb; }
-.editorial-portfolio .project-grid .art-connectaid.is-project-cover > img { object-position: 50% 35%; }
-/* The complete Pixel studio composition includes its own outer margins. */
-.editorial-portfolio .project-grid .project-art.art-pixel-mania.is-project-cover > img {
-  object-fit: contain;
-  transform: none;
-  transform-origin: center;
-}
-.editorial-portfolio .project-grid .project-art.art-syringe.is-project-cover { background: #e7eee2; }
-.editorial-portfolio .project-grid .project-art.art-syringe.is-project-cover > img { object-position: 0% 50%; }
-.editorial-portfolio .project-grid .project-art.art-workplace-mode.is-project-cover > img { object-position: 0% 50%; }
-.editorial-portfolio .project-grid .project-art.art-jan-aushadhi.is-project-cover > img { object-position: 0% 50%; }
+/* Listing artwork stays complete, including its headline and edge details. */
+#case-reader .story-related .project-art.is-project-cover { display: block; height: auto; aspect-ratio: 1.91; padding: 0; }
+#case-reader .story-related .project-art.is-project-cover > img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; transform: none; }
 @media (max-width: 1050px) and (min-width: 700px) {
   .editorial-portfolio .portfolio-opening { grid-template-columns: 170px minmax(0, 1fr); gap: 32px; }
-  .editorial-portfolio .project-grid { gap: 56px 24px; }
+  .editorial-portfolio .project-grid { gap: 88px 36px; }
 }
 @media (max-width: 899px) {
   .editorial-portfolio .project-grid,
   .editorial-portfolio .project-grid:not([data-filter="all"]):not([data-filter="featured"]) {
     grid-template-columns: minmax(0, 1fr);
-    gap: 48px;
+    gap: 72px;
   }
 }
 @media (max-width: 699px) {
-  .editorial-portfolio .project-grid .project-heading { margin-top: 19px; }
+  .editorial-portfolio .project-grid .project-heading { margin-top: 22px; }
   .editorial-portfolio .project-grid .project-heading h3 { font-size: 24px; }
+}
+
+/* Existing project recordings appear only while an intentional preview plays. */
+.project-preview {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: var(--surface);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease;
+}
+.is-preview-playing > .project-preview { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .project-preview { transition: none; }
 }

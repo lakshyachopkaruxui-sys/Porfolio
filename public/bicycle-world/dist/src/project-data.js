@@ -380,8 +380,8 @@ export const GARDEN_PROJECTS=[...PROJECTS.map(project=>({...project,...GARDEN_OV
       "id": "personal",
       "title": "Begin with something personal",
       "body": [
-        "Lakshya wanted the play mode to reflect the person behind the work. Pokémon was a favourite childhood series; Toy Story was a favourite film, and Woody a character he especially liked. Cycling, singing, meeting people and photographing clouds give the garden its subjects.",
-        "Pokémon GO kept that childhood wish alive, and Lakshya still plays. His own collection screenshots, cloud photographs, singing recordings and Garba photographs now give those interests a place in the garden."
+        "Lakshya wanted the play mode to reflect the person behind the work. Pokemon was a favourite childhood series; Toy Story was a favourite film, and Woody a character he especially liked. Cycling, singing, meeting people and photographing clouds give the garden its subjects.",
+        "Pokemon GO kept that childhood wish alive, and Lakshya still plays. His own collection screenshots, cloud photographs, singing recordings and Garba photographs now give those interests a place in the garden."
       ]
     },
     {
@@ -421,7 +421,7 @@ export const GARDEN_PROJECTS=[...PROJECTS.map(project=>({...project,...GARDEN_OV
       ],
       "links": [
         {
-          "label": "Pokémon model credits",
+          "label": "Pokemon model credits",
           "href": "./pokemon-credits.html"
         },
         {

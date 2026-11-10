@@ -98,7 +98,7 @@
   width: auto;
   max-width: 100%;
   height: auto;
-  max-height: 280px;
+  max-height: min(280px, var(--case-media-height));
   margin: 0;
   border: 0;
   border-radius: 0;
@@ -187,7 +187,7 @@
 }
 #case-reader[data-project="pixel-mania"] .pixel-specimen-origin .pixel-specimen-item-caption { align-self: start; }
 #case-reader[data-project="pixel-mania"] .pixel-specimen-origin .pixel-specimen-media { height: 220px; }
-#case-reader[data-project="pixel-mania"] .pixel-specimen-origin .pixel-specimen-image { max-height: 220px; }
+#case-reader[data-project="pixel-mania"] .pixel-specimen-origin .pixel-specimen-image { max-height: min(220px, var(--case-media-height)); }
 #case-reader[data-project="pixel-mania"] .pixel-specimen-origin .pixel-specimen-cell:nth-child(1) .pixel-specimen-image { width: 160px; }
 #case-reader[data-project="pixel-mania"] .pixel-specimen-origin .pixel-specimen-cell:nth-child(2) .pixel-specimen-image { width: 80px; }
 #case-reader[data-project="pixel-mania"] .pixel-specimen-origin .pixel-specimen-cell:nth-child(3) .pixel-specimen-image { width: 100%; }
@@ -205,14 +205,14 @@
   justify-content: flex-start;
   min-height: 100px;
 }
-#case-reader[data-project="pixel-mania"] .pixel-specimen-components .pixel-specimen-image { max-height: 170px; }
+#case-reader[data-project="pixel-mania"] .pixel-specimen-components .pixel-specimen-image { max-height: min(170px, var(--case-media-height)); }
 #case-reader[data-project="pixel-mania"] .pixel-specimen-components [data-asset-family="cell"] .pixel-specimen-image { width: 72px; }
 #case-reader[data-project="pixel-mania"] .pixel-specimen-components [data-asset-family="tutorial"] .pixel-specimen-image { width: 84px; }
 #case-reader[data-project="pixel-mania"] .pixel-specimen-motion .pixel-specimen-media { min-height: 130px; }
-#case-reader[data-project="pixel-mania"] .pixel-specimen-motion .pixel-specimen-image { max-height: 190px; max-width: min(100%, 240px); }
+#case-reader[data-project="pixel-mania"] .pixel-specimen-motion .pixel-specimen-image { max-height: min(190px, var(--case-media-height)); max-width: min(100%, 240px); }
 #case-reader[data-project="pixel-mania"] :is(.pixel-specimen-flow, .pixel-specimen-pedia) .pixel-specimen-image {
-  width: 100%;
-  max-height: none;
+  width: auto;
+  max-height: var(--case-media-height);
 }
 #case-reader[data-project="pixel-mania"] .pixel-specimen-pedia .pixel-specimen-media { max-width: 310px; margin-inline: auto; }
 #case-reader[data-project="pixel-mania"] .pixel-specimen-unavailable {
@@ -231,10 +231,10 @@
 }
 #case-reader[data-project="pixel-mania"] #case-ideation .story-component-grid .story-figure img {
   display: block;
-  width: 100%;
+  width: auto;
   height: auto;
   max-width: 100%;
-  max-height: none;
+  max-height: var(--case-media-height);
 }
 @media (min-width: 520px) {
   #case-reader[data-project="pixel-mania"] :is(.pixel-specimen-palette, .pixel-specimen-rules) :is(.pixel-specimen-grid, .pixel-specimen-group-items) {

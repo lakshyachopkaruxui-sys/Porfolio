@@ -107,19 +107,24 @@ export const NORMAL_PROJECT_STORIES = {
 NORMAL_PROJECT_STORIES['jan-aushadhi'] = enrichJanResearchStory(NORMAL_PROJECT_STORIES['jan-aushadhi']);
 NORMAL_PROJECT_STORIES['jan-aushadhi'] = enrichJanConceptStory(NORMAL_PROJECT_STORIES['jan-aushadhi']);
 
+// Owner-approved landscape thumbnails supplied on 10 November 2026.
+// Originals and deterministic derivative hashes live beside the cover files.
 export const PROJECT_COVERS = {
-  connectaid: {src: './assets/project-covers/connectaid-studio-v2.webp', width: 1402, height: 1122, alt: 'AI-generated ConnectAid presentation with two complete graphite phones showing the source-led Home and Health Records interfaces on an aqua studio plinth.', caption: 'AI-generated presentation mockup using our Home and Health Records designs as references. Original screens and testing evidence are in the full case study.'},
-  giggles: {src: './assets/cases/giggles/presentation/giggles-studio-v2.webp', width: 1402, height: 1122, alt: 'AI-generated Giggles presentation: cream board, four blue shape buttons, colourful track, landscape phone, separate reader, phrase cards and die.', caption: 'AI-generated presentation mockup based on our board, cards and interface designs. Actual build photographs are in the full case study.'},
-  'pixel-mania': {src: './assets/project-covers/pixel-highfi-v2.webp', width: 1402, height: 1122, alt: 'Pixel Mania high-fidelity presentation: the colourful original game board on a desktop display beside its introduction artwork.', caption: 'AI-generated presentation mockup using the original Figma game artwork as reference. Device and studio are illustrative; the original screens, live game and exhibition evidence follow below.'},
-  syringe: {src: './assets/project-covers/syringe-v2.webp', width: 1536, height: 1024, alt: 'Rethinking the grip: a hand holding a syringe against one pale sage background.', caption: 'AI-assisted presentation edit of the existing cover, removing small captions and unifying the background. Original redesign evidence remains in the case study.'},
-  'workplace-mode': {src: './assets/project-covers/workplace-highfi-v2.webp', width: 1402, height: 1122, alt: 'Workplace Mode high-fidelity concept display: cyan schematic route beside last-confirmed City morning and an amber Open coast request awaiting playback confirmation.', caption: 'AI-generated high-fidelity concept presentation of the audio/navigation task. New illustrative styling; no Maruti firmware, Android Auto integration or live playback is shown. Original prototype states remain in the case.'},
-  'jan-aushadhi': {src: './assets/project-covers/jan-original-card-v2.webp', width: 1402, height: 1122, alt: 'Colourful high-fidelity Jan Aushadhi concept mockup: original-layout demo health card and app in the centre, medicine kiosk on the left, and RFID carton and blister packaging on the right.', caption: NORMAL_PROJECT_CONTEXT['jan-aushadhi'].artifactCaption},
+  connectaid: {src: './assets/project-covers/approved-20261110/connectaid.webp', width: 1733, height: 907, alt: 'AI-generated ConnectAid cover: two phone mockups for Home and Health Records beside the headline Care beyond the booking, on a deep blue and cyan background.', caption: 'Owner-approved AI-generated presentation cover. Original interface screens, research and testing evidence remain in the case study.'},
+  giggles: {src: './assets/project-covers/approved-20261110/giggles.webp', width: 1734, height: 907, alt: 'AI-generated Giggles cover: cream board, four blue shape buttons, landscape phone, communication cards and die beside Learning through play, on a coral background.', caption: 'Owner-approved AI-generated presentation cover based on the board, cards and interface designs. Actual build and testing photographs remain in the case study.'},
+  'pixel-mania': {src: './assets/project-covers/approved-20261110/pixel-mania.webp', width: 1733, height: 907, alt: 'AI-generated Pixel Mania cover: an open pixel board with five click-state labels, neon geometric shapes and the headline Click. Colour. Create.', caption: 'Owner-approved AI-generated presentation cover illustrating the open drawing board and colour cycle. Original screens, live game and exhibition evidence remain in the case study.'},
+  syringe: {src: './assets/project-covers/approved-20261110/syringe.webp', width: 1734, height: 907, alt: 'AI-generated syringe cover: transparent barrel, teal plunger and enlarged finger-flange detail beside A closer look at grip, on a dark teal background.', caption: 'Owner-approved AI-generated presentation cover of the 20 cc syringe redesign concept. It is not testing footage or evidence of clinical or ergonomic benefit.'},
+  'workplace-mode': {src: './assets/project-covers/approved-20261110/workplace-mode.webp', width: 1734, height: 907, alt: 'AI-generated Workplace Mode cover: dark navigation and music display with an amber Pending state beside When a tap needs an answer.', caption: 'Owner-approved AI-generated high-fidelity concept presentation. Illustrative interface only; no Maruti firmware, Android Auto integration or live playback is shown.'},
+  'jan-aushadhi': {src: './assets/project-covers/approved-20261110/jan-aushadhi.webp', width: 1732, height: 908, alt: 'AI-generated Jan Aushadhi cover: a demo unified health card and prescriptions app beside Connecting care, on blue and teal-lit plinths.', caption: 'Owner-approved AI-generated cover for the selected health card and app concept, with demo data. The project also explored a kiosk and RFID packaging. These are concepts, not a deployed platform or built dispensing hardware.'},
 };
 
+// Listing and case-opening covers share the approved composition; the original
+// research, interface, build and test artifacts remain in the case-study body.
 export const NORMAL_PROJECT_ARTIFACTS = {
   connectaid: PROJECT_COVERS.connectaid,
   giggles: PROJECT_COVERS.giggles,
   'pixel-mania': PROJECT_COVERS['pixel-mania'],
-  'jan-aushadhi': PROJECT_COVERS['jan-aushadhi'],
+  syringe: PROJECT_COVERS.syringe,
   'workplace-mode': PROJECT_COVERS['workplace-mode'],
+  'jan-aushadhi': PROJECT_COVERS['jan-aushadhi'],
 };

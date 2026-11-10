@@ -30,7 +30,7 @@ export const STOPS={
   about:{number:'01',x:-35,z:-5,radius:6,title:'MEET LAKSHYA',action:'Start a conversation',arrival:{x:-35,z:-2,heading:0},focus:{x:-35,z:-6},size:10,description:'A short introduction to Lakshya, his personality and the things he loves.',content:'about',next:'projects'},
   projects:{number:'02',x:-59,z:-88,radius:5.5,title:'WORKS',action:'Browse the projects',arrival:{x:-58.5,z:-85.5,heading:0},focus:{x:-60,z:-89},size:6.5,description:'Project overviews and the process behind this portfolio.',content:'projects',next:'work'},
   work:{number:'03',x:-10,z:-91,radius:5.5,title:'HOBBIES',action:'Explore my hobbies',arrival:{x:-13,z:-91,heading:-1.4},focus:{x:-10,z:-92},size:7,description:'Singing and Garba: music, movement and moments with people.',content:'collection',next:'music'},
-  music:{number:'04',x:13,z:-79,radius:6,title:'OAK’S LAB',action:'Meet Oak and explore the collection',arrival:{x:11,z:-76,heading:-.45},focus:{x:13,z:-80},size:8,description:'Pokémon GO catches, childhood memories and how this garden was made.',content:'music',next:'cloud'},
+  music:{number:'04',x:13,z:-79,radius:6,title:'OAK’S LAB',action:'Meet Oak and explore the collection',arrival:{x:11,z:-76,heading:-.45},focus:{x:13,z:-80},size:8,description:'Pokemon GO catches, childhood memories and how this garden was made.',content:'music',next:'cloud'},
   cloud:{number:'05',x:46,z:-22,radius:6,title:'CLOUD LOOKOUT',action:'Frame a quiet moment',arrival:{x:43,z:-21,heading:-Math.PI/2},focus:{x:47,z:-22},size:7.2,description:'Cloud photography, a quieter view and an illustrated postcard to take away.',content:'cloud',next:null}
 };
 export const STOP_SEQUENCE=Object.freeze(Object.keys(STOPS));

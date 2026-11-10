@@ -3,9 +3,9 @@ import {CASE_CONTEXT, normalProject} from './case-context.js?v=20261109-evidence
 import {PROJECT_PROCESS} from './process-data.js?v=20261109-evidence-pass';
 import {mountToolkit} from './toolkit.js?v=20261104-personal-space';
 import {CASE_STORIES} from './case-stories.js?v=20261109-evidence-pass';
-import {renderCaseStudy} from './case-reader.js?v=20261109-evidence-pass';
-import {mountPortfolioAssistant, mountPixelBreak} from './portfolio-extras.js?v=20261108-final-audit';
-import {mountResumeProfile} from './resume-ui.js?v=20261104-personal-space';
+import {renderCaseStudy} from './case-reader.js?v=20261110-approved-covers';
+import {mountPortfolioAssistant, mountPixelBreak} from './portfolio-extras.js?v=20261110-footer';
+import {mountResumeProfile} from './resume-ui.js?v=20261110-footer';
 import {mountPortfolioMotion} from './portfolio-motion.js?v=20261104-personal-space';
 import {mountCaseMotion} from './case-motion.js?v=20261103b';
 import {getWelcomeIntro} from './welcome-intro.js?v=20261103-shared-curve';
@@ -14,8 +14,9 @@ import {
   NORMAL_PROJECTS, NORMAL_PROJECT_CONTEXT, NORMAL_PROJECT_PROCESS,
   NORMAL_PROJECT_STORIES, NORMAL_PROJECT_ARTIFACTS, NORMAL_PROJECT_CATEGORIES,
   PROJECT_COVERS,
-} from './normal-projects.js?v=20261109-evidence-pass';
+} from './normal-projects.js?v=20261110-approved-covers';
 import {mountGigglesCover} from './cover-artwork.js?v=20261108-care-mockups';
+import {mountProjectPreview} from './project-preview.js?v=20261110-space';
 
 function optionalFeature(mount, fallback = null) {
   try { return mount(); }
@@ -95,6 +96,7 @@ async function start() {
   let currentProject = null;
   let disposeStory = null;
   const readingProgress = new Map();
+  let previews = [];
   const artPath = (artifact, id) => NORMAL_PROJECT_ARTIFACTS[id]
     ? new URL(artifact.src, import.meta.url).href
     : new URL(artifact.src.replace(/^\.\//, ''), new URL('../bicycle-world/', import.meta.url)).href;
@@ -116,6 +118,8 @@ async function start() {
 
   function render(filter, updateUrl = false, animate = false) {
     const before = motion.captureProjects(grid);
+    for (const preview of previews) preview.dispose();
+    previews = [];
     active = normalizeProjectFilter(filter);
     grid.dataset.filter = active;
     for (const button of filters.querySelectorAll('button')) {
@@ -135,6 +139,7 @@ async function start() {
       const artifact = cover || PROJECT_ARTIFACTS[project.id];
       if (artifact) {
         const figure = node('figure', undefined, link, `project-art art-${project.id}${cover ? ' is-project-cover' : ''}`);
+        if (cover) figure.style.aspectRatio = `${cover.width} / ${cover.height}`;
         const image = node('img', undefined, figure);
         image.src = cover ? new URL(cover.src, import.meta.url).href : artPath(artifact, project.id);
         image.alt = artifact.alt;
@@ -147,6 +152,10 @@ async function start() {
           node('p', 'Project image unavailable', figure);
         }, {once: true});
         if (project.id === 'giggles' && cover) mountGigglesCover(figure);
+        if (['pixel-mania', 'syringe'].includes(project.id)) {
+          const preview = optionalFeature(() => mountProjectPreview(link, figure, project.id));
+          if (preview) previews.push(preview);
+        }
         if (project.id === 'connectaid' && !cover) {
           image.src = new URL('./assets/cases/connectaid/home-en.png', import.meta.url).href;
           image.alt = 'ConnectAid home screen with consultations, medicines and lab tests.';
@@ -199,6 +208,7 @@ async function start() {
     const summaryURL = new URL(`../bicycle-world/dist/projects.html#project-${id}`, import.meta.url).href;
     if (typeof reader.showModal !== 'function') { location.assign(summaryURL); return true; }
     if (reader.open && currentProject === id) return true;
+    for (const preview of previews) preview.pause();
     caseMotion.cancel();
     const project = normalProject(sourceProject);
     if (reader.open && currentProject) readingProgress.set(currentProject, reader.scrollTop);
@@ -283,7 +293,7 @@ async function start() {
   const boundSectionLinks = new WeakSet();
   const initialHash = location.hash;
   let initialSectionAligned = false;
-  // Optional résumé enrichment must not delay the work grid or direct case links.
+  // Optional resume enrichment must not delay the work grid or direct case links.
   void fetch('./resume-content.json').then(response => {
     if (!response.ok) throw new Error('Resume content unavailable');
     return response.json();

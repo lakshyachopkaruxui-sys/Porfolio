@@ -12,9 +12,11 @@
   display: grid;
   place-items: center;
   width: 100%;
+  max-width: min(100%, calc(var(--case-media-height) * 1.25));
+  margin-inline: auto;
   height: clamp(300px, 34vw, 440px);
-  min-height: 300px;
-  max-height: 440px;
+  min-height: 0;
+  max-height: var(--case-media-height);
   overflow: hidden;
   isolation: isolate;
   border-radius: 22px;

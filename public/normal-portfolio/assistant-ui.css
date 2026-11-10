@@ -14,28 +14,31 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  min-width: 124px;
-  min-height: 56px;
+  gap: 12px;
+  min-width: 190px;
+  min-height: 64px;
   margin: 0;
-  padding: 14px 20px;
-  border: 1px solid var(--ink);
+  padding: 10px 18px 10px 10px;
+  border: 2px solid #fff;
   border-radius: 100px;
   color: #fff;
-  background: var(--ink);
-  box-shadow: 0 5px 24px #22272524;
-  font: 500 15px/1.4 var(--body);
+  background: #1958d3;
+  box-shadow: 0 6px 28px #1958d33d, 0 0 0 1px #1958d3;
+  font: 500 16px/1.4 var(--body);
   white-space: nowrap;
   cursor: pointer;
   transition: background var(--portfolio-motion-feedback, 180ms) ease;
 }
 .assistant-launcher-icon { display: inline-flex; align-items: center; }
+.assistant-launcher-icon img { display: block; width: 36px; height: 36px; border-radius: 50%; object-fit: cover; object-position: center 32%; }
+.assistant-launcher-copy { display: grid; gap: 2px; text-align: left; }
+.assistant-launcher-hint { color: #e7eeff; font-size: 14px; font-weight: 400; }
 #portfolio-assistant > .portfolio-assistant-launcher:hover {
-  background: var(--accent-dark);
-  border-color: var(--accent-dark);
+  background: #1244aa;
 }
 #portfolio-assistant:has(.portfolio-assistant-dialog[open]) > .portfolio-assistant-launcher { visibility: hidden; }
 #portfolio-assistant[data-assistant-obscured="true"] > .portfolio-assistant-launcher { visibility: hidden; }
+#portfolio-assistant[data-footer-assistant="true"] > .portfolio-assistant-launcher { visibility: hidden; }
 body:has(dialog[open]:not(.portfolio-assistant-dialog)) #portfolio-assistant { visibility: hidden; }
 
 .assistant-invitation {
@@ -132,7 +135,9 @@ body:has(dialog[open]:not(.portfolio-assistant-dialog)) #portfolio-assistant { v
 
 @media (max-width: 639px) {
   #portfolio-assistant { right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); }
-  #portfolio-assistant > .portfolio-assistant-launcher { min-height: 52px; min-width: 118px; padding: 12px 17px; }
+  #portfolio-assistant > .portfolio-assistant-launcher { min-height: 56px; min-width: 150px; padding: 10px 15px 10px 10px; gap: 10px; }
+  .assistant-launcher-icon img { width: 30px; height: 30px; }
+  .assistant-launcher-hint { display: none; }
   .assistant-invitation { width: min(282px, calc(100vw - 32px)); }
   #portfolio-assistant .portfolio-assistant-dialog {
     inset: auto 8px max(8px, env(safe-area-inset-bottom)) 8px;

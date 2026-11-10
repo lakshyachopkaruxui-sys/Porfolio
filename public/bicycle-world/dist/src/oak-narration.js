@@ -4,6 +4,8 @@ const voiceId = voice => `${voice.name}|${voice.lang}`;
 
 function voiceScore(voice) {
   if (!/^en(?:[-_]|$)/i.test(voice.lang)) return -1;
+  // Prefer the owner's chosen voice when the device provides it.
+  if (/^Microsoft Mark(?:\s|-|$)/i.test(voice.name) && /^en[-_]US$/i.test(voice.lang)) return 1000;
   return (/natural|neural|premium|enhanced/i.test(voice.name) ? 60 : 0)
     + (/google/i.test(voice.name) ? 12 : 0)
     + (/^en-IN$/i.test(voice.lang) ? 10 : /^en-US$/i.test(voice.lang) ? 8 : 0)

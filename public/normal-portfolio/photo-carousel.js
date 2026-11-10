@@ -1,6 +1,6 @@
 // A progressively enhanced photo frame. The biography and frame stay stationary.
-const PHOTO_DWELL = 1200;
-const PHOTO_TRANSITION = 240;
+const PHOTO_DWELL = 1000;
+const PHOTO_TRANSITION = 160;
 const EASE_OUT = 'cubic-bezier(0.23, 1, 0.32, 1)';
 
 export function mountPhotoCarousel(host) {
@@ -18,7 +18,6 @@ export function mountPhotoCarousel(host) {
   let index = 0;
   let requestedIndex = 0;
   let paused = Boolean(preference?.matches);
-  let hovered = false;
   let inView = false;
   let suspended = false;
   let destroyed = false;
@@ -38,7 +37,7 @@ export function mountPhotoCarousel(host) {
     timer = null;
   }
   function canRotate() {
-    return !destroyed && !paused && !hovered && inView && !suspended && !doc.hidden &&
+    return !destroyed && !paused && inView && !suspended && !doc.hidden &&
       !preference?.matches && !doc.querySelector('dialog[open]');
   }
   function updateState() {
@@ -170,12 +169,6 @@ export function mountPhotoCarousel(host) {
     interrupt();
     schedule();
   });
-  listen(host, 'pointerenter', event => {
-    if (event.pointerType === 'touch') return;
-    hovered = true;
-    interrupt();
-  });
-  listen(host, 'pointerleave', () => { hovered = false; rotationIntent = null; schedule(); });
   listen(host, 'focusin', () => { paused = true; interrupt(); });
   rotation.setAttribute('aria-keyshortcuts', 'ArrowLeft ArrowRight A D Home End');
   listen(host, 'keydown', event => {

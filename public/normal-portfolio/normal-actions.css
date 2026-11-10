@@ -1,0 +1,28 @@
+/* Action palette: the approved AI blue extends to Normal's navigation actions. */
+:root { --accent: #1958d3; --accent-dark: #1244aa; --blue: #1958d3; --action-tint: #edf3ff; --action-line: #bfd0f6; }
+[aria-label="Main navigation"] a[href="#contact"],
+.text-action, .case-prototype-link, .case-contact-email,
+#contact .resume-contact-value, #contact .resume-document-links a,
+.footer-sections a { color: var(--accent); }
+.text-action:hover, .case-prototype-link:hover,
+#contact .resume-contact-value:hover, #contact .resume-document-links a:hover { color: var(--accent-dark); }
+.play-invitation-heading .text-action { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 10px 18px; border: 1px solid var(--accent); border-radius: 999px; background: var(--accent); color: white; font-weight: 500; text-decoration: none; }
+.play-invitation-heading .text-action:hover { background: var(--accent-dark); border-color: var(--accent-dark); color: white; }
+.portfolio-assistant-dialog .assistant-suggestion { color: var(--accent); border-color: var(--action-line); }
+.portfolio-assistant-dialog .assistant-suggestion:hover { background: var(--action-tint); border-color: var(--accent); }
+#case-reader .reader-end-actions button { color: var(--accent); background: var(--action-tint); }
+#case-reader .reader-end-actions #copy-case-link { color: var(--accent); }
+#case-reader .case-prototype-link { color: var(--accent); }
+#case-reader .story-index button.is-current { color: var(--accent); background: var(--action-tint); }
+.photo-carousel-toggle::after { color: var(--accent); }
+
+/* Loaded after case presentation so action states use the same palette. */
+#case-reader .case-design-jump { background: var(--accent); color: white; border-color: var(--accent); }
+#case-reader .case-design-jump:hover { background: var(--accent-dark); color: white; border-color: var(--accent-dark); }
+#case-reader .story-hero-actions .case-prototype-link { color: var(--accent); }
+#case-reader .story-hero-actions .case-prototype-link:hover { color: var(--accent-dark); }
+#portfolio-assistant .assistant-send { background: var(--accent); border-color: var(--accent); color: white; }
+#portfolio-assistant .assistant-send:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+#toolkit .toolkit-tool[aria-pressed="true"] .toolkit-tool-index { background: var(--accent); color: white; }
+#case-reader .story-state-controls button[aria-pressed="true"] { color: var(--accent-dark); background: var(--action-tint); border-color: var(--action-line); }
+@media (max-width: 739px) { .profile-contact { grid-column: 2; justify-self: start; margin-top: 12px; } }

@@ -16,12 +16,12 @@ export const OAK_ZONE_ORDER=Object.freeze(['welcome','collection','making']);
 export const OAK_ZONES=freeze([
   {
     id:'welcome',label:'Meet Oak',title:'Why this world exists',
-    intro:'Pokémon, a favourite film and a childhood wish that stayed with Lakshya.',
+    intro:'Pokemon, a favourite film and a childhood wish that stayed with Lakshya.',
     primaryAction:{kind:'zone',target:'collection',label:'Show me his collection'}
   },
   {
-    id:'collection',label:'His Pokémon GO collection',title:'Lakshya’s Pokémon GO collection',
-    intro:`${OAK_COLLECTION_COUNT} screenshots from Lakshya’s own Pokémon GO collection.`,
+    id:'collection',label:'His Pokemon GO collection',title:'Lakshya’s Pokemon GO collection',
+    intro:`${OAK_COLLECTION_COUNT} screenshots from Lakshya’s own Pokemon GO collection.`,
     primaryAction:{kind:'collection',label:'Let me explore with Pikachu'}
   },
   {
@@ -34,12 +34,12 @@ export const OAK_ZONES=freeze([
 export const OAK_DIALOGUE=freeze([
   {
     id:'childhood-wish',zone:'welcome',title:'Come in.',
-    text:'Come in. I’m Professor Oak. When Lakshya watched Pokémon as a child, he wished he could step into that world. I’ll show you what became of that wish.',
+    text:'Come in. I’m Professor Oak. When Lakshya watched Pokemon as a child, he wished he could step into that world. I’ll show you what became of that wish.',
     nextLabel:'What happened to that wish?',sceneCue:'oak'
   },
   {
     id:'pokemon-go-today',zone:'welcome',title:'Still exploring.',
-    text:'That wish stayed with him. He still plays Pokémon GO. Before we look around, there’s one more childhood favourite I should introduce.',
+    text:'That wish stayed with him. He still plays Pokemon GO. Before we look around, there’s one more childhood favourite I should introduce.',
     nextLabel:'Why is Woody here?',sceneCue:'oak'
   },
   {
@@ -48,8 +48,8 @@ export const OAK_DIALOGUE=freeze([
     nextLabel:'Show me his collection',sceneCue:'collection'
   },
   {
-    id:'real-collection',zone:'collection',title:'His Pokémon GO collection.',
-    text:`Here’s a little of Lakshya’s Pokémon GO collection: ${OAK_COLLECTION_COUNT} of his own screenshots. Choose one to look closer, or let Pikachu take you through the exhibition.`,
+    id:'real-collection',zone:'collection',title:'His Pokemon GO collection.',
+    text:`Here’s a little of Lakshya’s Pokemon GO collection: ${OAK_COLLECTION_COUNT} of his own screenshots. Choose one to look closer, or let Pikachu take you through the exhibition.`,
     nextLabel:'How did this become a portfolio?',sceneCue:'collection'
   },
   {
@@ -77,7 +77,7 @@ export const OAK_DIALOGUE=freeze([
 export const OAK_MAKING_STEPS=freeze([
   {
     id:'childhood',title:'It started with a wish.',
-    body:'This garden began with Pokémon, Toy Story and a childhood wish. I’ll show you how Lakshya turned those interests into a place you can explore.',
+    body:'This garden began with Pokemon, Toy Story and a childhood wish. I’ll show you how Lakshya turned those interests into a place you can explore.',
     detail:'',mapFocus:'all',stopIds:[],nextLabel:'Why explore by bicycle?'
   },
   {

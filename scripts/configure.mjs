@@ -13,7 +13,7 @@ const decodeHTML = value => value.replace(/&(#x[\da-f]+|#\d+|amp|quot|apos|lt|gt
 });
 const attribute = (tag, name) => new RegExp(`\\b${name}\\s*=\\s*(["'])([\\s\\S]*?)\\1`,'i').exec(tag)?.[2];
 const homepageTitle = 'Lakshya Chopkar | Product Designer & UX Designer';
-const homepageDescription = 'Lakshya Chopkar, Product Designer focused on digital UX/UI. Explore user research, Figma design systems and prototypes. View case studies, résumé and contact.';
+const homepageDescription = 'Lakshya Chopkar, Product Designer focused on digital UX/UI. Explore user research, Figma design systems and prototypes. View case studies, resume and contact.';
 const previewImage = '/normal-portfolio/assets/social/portfolio-preview-v1.png';
 const previewAlt = 'Lakshya Chopkar, Product Designer focused on digital UX/UI, beside original ConnectAid healthcare-app interface designs.';
 const indexCandidates = new Set(['normal-portfolio/index.html','normal-portfolio/map.html','bicycle-world/dist/index.html','bicycle-world/dist/projects.html','bicycle-world/dist/story.html']);

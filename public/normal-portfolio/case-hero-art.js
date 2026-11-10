@@ -41,6 +41,20 @@ export function mountCaseHeroArt(figure, {project, artifact, artifactUrl}) {
   const stage = element('div', 'case-hero-stage');
   figure.replaceChildren(stage);
 
+  if (artifact.src?.includes('/approved-20261110/')) {
+    figure.dataset.presentation = 'generated';
+    const ratio = artifact.width / artifact.height;
+    stage.style.aspectRatio = `${artifact.width} / ${artifact.height}`;
+    stage.style.maxWidth = `min(100%, calc(var(--case-media-height) * ${ratio}))`;
+    const link = element('a', 'case-hero-mockup-link', stage);
+    link.dataset.caseImage = '';
+    link.href = artifactUrl.replace(/\.webp$/, '.png');
+    link.target = '_blank'; link.rel = 'noopener';
+    link.setAttribute('aria-label', `Open full-size ${project.title} cover illustration`);
+    sourceImage(link, {...artifact, src: artifactUrl}, 'case-hero-source');
+    return {caption: artifact.caption};
+  }
+
   if (project.id === 'connectaid') {
     figure.dataset.presentation = 'generated';
     const link = element('a', 'case-hero-mockup-link', stage);

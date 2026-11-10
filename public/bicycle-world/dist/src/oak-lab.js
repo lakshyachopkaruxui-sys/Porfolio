@@ -125,7 +125,8 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
   listeners.push(narration.subscribeVoices(voices=>{
     const select=$('[data-oak-voice]'),automatic=document.createElement('option');automatic.value='';automatic.textContent='Automatic English';select.replaceChildren(automatic);
     [...voices].sort((a,b)=>Number(/^en/i.test(b.lang))-Number(/^en/i.test(a.lang))).forEach(voice=>{const option=document.createElement('option');option.value=voice.id;option.textContent=voice.name+' · '+voice.lang;select.append(option);});
-    select.value=voices.some(voice=>voice.id===preferredVoice)?preferredVoice:'';
+    const defaultVoice=voices.find(voice=>/^Microsoft Mark(?:\s|-|$)/i.test(voice.name)&&/^en[-_]US$/i.test(voice.lang));
+    select.value=voices.some(voice=>voice.id===preferredVoice)?preferredVoice:(defaultVoice?.id||'');
     if(select.value)narration.setVoice(select.value);
   }));
   dialog.dataset.narrating='false';syncNarrationControls();

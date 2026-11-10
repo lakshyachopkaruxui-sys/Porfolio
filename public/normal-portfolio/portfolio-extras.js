@@ -34,12 +34,44 @@ export function mountPortfolioAssistant(host, {onOpenProject} = {}) {
   const launcher = button('portfolio-assistant-launcher', undefined, host);
   const launcherIcon = element('span', 'assistant-launcher-icon', undefined, launcher);
   launcherIcon.setAttribute('aria-hidden', 'true');
-  launcherIcon.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4.5h14a1.5 1.5 0 0 1 1.5 1.5v9a1.5 1.5 0 0 1-1.5 1.5h-8L5.5 20v-3.5H5A1.5 1.5 0 0 1 3.5 15V6A1.5 1.5 0 0 1 5 4.5Z"/><path d="M8 9h8M8 12h5"/></svg>';
-  element('span', 'assistant-launcher-label', 'Ask AI', launcher);
-  launcher.setAttribute('aria-label', 'Ask AI about Lakshya’s work');
+  const portrait = element('img', undefined, undefined, launcherIcon);
+  portrait.src = new URL('./assets/personal/carousel/p11.webp', import.meta.url).href;
+  portrait.alt = ''; portrait.width = 36; portrait.height = 36;
+  const launcherCopy = element('span', 'assistant-launcher-copy', undefined, launcher);
+  element('span', 'assistant-launcher-label', 'Ask my AI', launcherCopy);
+  element('span', 'assistant-launcher-hint', 'My work, explained', launcherCopy);
+  launcher.setAttribute('aria-label', 'Ask my AI about Lakshya’s work');
   launcher.setAttribute('aria-haspopup', 'dialog');
   launcher.setAttribute('aria-controls', prefix);
   launcher.setAttribute('aria-expanded', 'false');
+  const entryPoints = [...(document.querySelectorAll?.('[data-assistant-open]') || [])];
+  let returnTrigger = launcher;
+  for (const entry of entryPoints) {
+    entry.hidden = false;
+    entry.setAttribute('aria-haspopup', 'dialog');
+    entry.setAttribute('aria-controls', prefix);
+    entry.setAttribute('aria-expanded', 'false');
+  }
+  let footerVisible = false;
+  let restoringLauncherFocus = false;
+  const footerPanel = entryPoints.find(entry => entry.closest('.contact-ai'))?.closest('.contact-ai');
+  const updateFooterDock = () => {
+    // The footer has its own AI entry. Keep that copy readable, while retaining
+    // a keyboard visitor's currently focused launcher until focus moves away.
+    host.dataset.footerAssistant = String(footerVisible && !restoringLauncherFocus && document.activeElement !== launcher);
+  };
+  const footerObserver = footerPanel && typeof window.IntersectionObserver === 'function'
+    ? new window.IntersectionObserver(entries => {
+      footerVisible = entries.some(entry => entry.isIntersecting);
+      updateFooterDock();
+    }) : null;
+  footerObserver?.observe(footerPanel);
+  listen(document, 'focusin', updateFooterDock);
+  listen(document, 'focusout', updateFooterDock);
+
+  function expanded(value) {
+    for (const entry of [launcher, ...entryPoints]) entry.setAttribute('aria-expanded', String(value));
+  }
 
   const invitation = element('aside', 'assistant-invitation', undefined, host);
   invitation.hidden = true;
@@ -148,15 +180,20 @@ export function mountPortfolioAssistant(host, {onOpenProject} = {}) {
   function closeAssistant() {
     stopPending('That request was stopped. You can try it again when you’re ready.');
     if (dialog.open) dialog.close();
-    launcher.setAttribute('aria-expanded', 'false');
-    if (launcher.isConnected) launcher.focus({preventScroll: true});
+    expanded(false);
+    const trigger = returnTrigger?.isConnected ? returnTrigger : launcher;
+    restoringLauncherFocus = trigger === launcher;
+    if (restoringLauncherFocus) host.dataset.footerAssistant = 'false';
+    try { if (trigger.isConnected) trigger.focus({preventScroll: true}); }
+    finally { restoringLauncherFocus = false; updateFooterDock(); }
   }
 
-  function openAssistant() {
+  function openAssistant(trigger = launcher) {
     if (destroyed) return;
+    returnTrigger = trigger?.isConnected ? trigger : launcher;
     discovery?.consume();
     if (!dialog.open) dialog.showModal();
-    launcher.setAttribute('aria-expanded', 'true');
+    expanded(true);
     input.focus({preventScroll: true});
   }
 
@@ -303,11 +340,12 @@ export function mountPortfolioAssistant(host, {onOpenProject} = {}) {
     if (dialog.open) input.focus({preventScroll: true});
   }
 
-  listen(launcher, 'click', openAssistant);
+  listen(launcher, 'click', () => openAssistant(launcher));
+  for (const entry of entryPoints) listen(entry, 'click', () => openAssistant(entry));
   listen(closeButton, 'click', closeAssistant);
   listen(dialog, 'cancel', event => { event.preventDefault(); closeAssistant(); });
   listen(dialog, 'close', () => {
-    launcher.setAttribute('aria-expanded', 'false');
+    expanded(false);
     stopPending('That request was stopped. You can try it again when you’re ready.');
   });
   listen(resetButton, 'click', resetConversation);
@@ -326,6 +364,8 @@ export function mountPortfolioAssistant(host, {onOpenProject} = {}) {
       requestController?.abort();
       discovery?.destroy();
       lifecycle.abort();
+      footerObserver?.disconnect();
+      for (const entry of entryPoints) { entry.hidden = true; entry.removeAttribute('aria-controls'); entry.setAttribute('aria-expanded', 'false'); }
       if (dialog.open) dialog.close();
       launcher.remove();
       invitation.remove();

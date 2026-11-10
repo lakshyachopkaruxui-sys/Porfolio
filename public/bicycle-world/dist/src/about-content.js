@@ -34,14 +34,14 @@ const chapters=[
   {
     id:'away',label:'Beyond work',title:'A song, a circle, a reason to look up.',
     body:'I sing, play Garba and head out whenever I can. Photographing clouds gives me a quieter moment. You’ll find all of those interests somewhere in this garden.',
-    detail:'Singing helps me slow down, and I love sharing it with people. Garba brings together music, movement and company. Pokémon and Toy Story are childhood favourites that found their way into this portfolio.',
+    detail:'Singing helps me slow down, and I love sharing it with people. Garba brings together music, movement and company. Pokemon and Toy Story are childhood favourites that found their way into this portfolio.',
     photoIds:['lakshya-outdoors'],
     reader:{
       photoId:'lakshya-outdoors',
       lead:'I love being around people, but I also enjoy the quieter moments between things. A song, an evening of Garba or a cloud that makes me stop for a photograph can change the pace of my day.',
       sections:[
         {title:'Give the energy somewhere to go',body:'I’m a vocalist and performed at Junoon during my M.Des studies. I also sing simply because I feel like it. Garba, meeting friends and heading out are other things I make time for.'},
-        {title:'Why this garden feels personal',body:'Cloud photography gives me a reason to pause. Pokémon GO brings back the world I imagined as a child, and Woody comes from my love for Toy Story. Those interests helped shape the place you’re exploring.'}
+        {title:'Why this garden feels personal',body:'Cloud photography gives me a reason to pause. Pokemon GO brings back the world I imagined as a child, and Woody comes from my love for Toy Story. Those interests helped shape the place you’re exploring.'}
       ]
     }
   }

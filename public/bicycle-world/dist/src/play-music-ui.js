@@ -67,7 +67,7 @@ export function mountPlayMusic({notify = () => {}} = {}) {
     input.min = '0'; input.max = '100'; input.step = '5'; input.dataset.playMusicLevel = '';
     input.setAttribute('aria-describedby', 'music-level-note');
     const note = document.createElement('p'); note.className = 'ride-sound-note'; note.id = 'music-level-note';
-    note.textContent = 'Adjust music without changing Pokémon or bicycle sounds.';
+    note.textContent = 'Adjust music without changing Pokemon or bicycle sounds.';
     levelControl.append(label, output, input, note);
     (select.closest('label') || select).after(levelControl);
   }

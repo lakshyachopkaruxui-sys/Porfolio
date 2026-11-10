@@ -70,7 +70,7 @@ export function createPokemonAudio({
     try {
       if (!buffers.has(id)) {
         buffers.set(id, Promise.resolve(fetcher(new URL(`../assets/${file[0]}`, import.meta.url), {signal: controller.signal})).then(response => {
-          if (!response.ok) throw new Error('Pokémon recording unavailable.');
+          if (!response.ok) throw new Error('Pokemon recording unavailable.');
           return response.arrayBuffer();
         }).then(bytes => context.decodeAudioData(bytes)));
       }

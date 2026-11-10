@@ -1,5 +1,5 @@
 import {mountCaseSectionNav} from './case-section-nav.js?v=20261108-recruiter-audit';
-import {mountCaseHeroArt} from './case-hero-art.js?v=20261108-care-mockups';
+import {mountCaseHeroArt} from './case-hero-art.js?v=20261110-approved-covers';
 import {mountGigglesCover} from './cover-artwork.js?v=20261108-care-mockups';
 import {mountCaseImageViewer} from './case-image-viewer.js?v=20261105-native-captions';
 import {mountCaseVideo} from './case-video.js?v=20261104-project-evidence';
@@ -379,6 +379,7 @@ export function renderCaseStudy({reader, content, project, context, process, sto
     const coverURL = contentURL(item.cover?.src, {asset: true});
     if (coverURL) {
       const frame = node('figure', undefined, link, `project-art art-${item.id} is-project-cover`);
+      frame.style.aspectRatio = `${item.cover.width} / ${item.cover.height}`;
       const image = node('img', undefined, frame);
       image.src = coverURL.href;
       image.alt = item.cover.alt; image.width = item.cover.width; image.height = item.cover.height;

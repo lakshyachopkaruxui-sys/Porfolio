@@ -11,45 +11,45 @@ export const NORMAL_WORK_ORDER=[
 export const NORMAL_WORK_COVERS={
   "connectaid": {
     "src": "./assets/work-covers/connectaid.webp",
-    "width": 1280,
-    "height": 1024,
-    "alt": "AI-generated ConnectAid presentation with two complete graphite phones showing the source-led Home and Health Records interfaces on an aqua studio plinth.",
-    "caption": "AI-generated presentation mockup using our Home and Health Records designs as references. Original screens and testing evidence are in the full case study."
+    "width": 1733,
+    "height": 907,
+    "alt": "AI-generated ConnectAid cover: two phone mockups for Home and Health Records beside the headline Care beyond the booking, on a deep blue and cyan background.",
+    "caption": "Owner-approved AI-generated presentation cover. Original interface screens, research and testing evidence remain in the case study."
   },
   "giggles": {
     "src": "./assets/work-covers/giggles.webp",
-    "width": 1280,
-    "height": 1024,
-    "alt": "AI-generated Giggles presentation: cream board, four blue shape buttons, colourful track, landscape phone, separate reader, phrase cards and die.",
-    "caption": "AI-generated presentation mockup based on our board, cards and interface designs. Actual build photographs are in the full case study."
+    "width": 1734,
+    "height": 907,
+    "alt": "AI-generated Giggles cover: cream board, four blue shape buttons, landscape phone, communication cards and die beside Learning through play, on a coral background.",
+    "caption": "Owner-approved AI-generated presentation cover based on the board, cards and interface designs. Actual build and testing photographs remain in the case study."
   },
   "pixel-mania": {
     "src": "./assets/work-covers/pixel-mania.webp",
-    "width": 1280,
-    "height": 1024,
-    "alt": "Pixel Mania high-fidelity presentation: the colourful original game board on a desktop display beside its introduction artwork.",
-    "caption": "AI-generated presentation mockup using the original Figma game artwork as reference. Device and studio are illustrative; the original screens, live game and exhibition evidence follow below."
+    "width": 1733,
+    "height": 907,
+    "alt": "AI-generated Pixel Mania cover: an open pixel board with five click-state labels, neon geometric shapes and the headline Click. Colour. Create.",
+    "caption": "Owner-approved AI-generated presentation cover illustrating the open drawing board and colour cycle. Original screens, live game and exhibition evidence remain in the case study."
   },
   "syringe": {
     "src": "./assets/work-covers/syringe.webp",
-    "width": 1280,
-    "height": 1024,
-    "alt": "Rethinking the grip: a hand holding a syringe against one pale sage background.",
-    "caption": "AI-assisted presentation edit of the existing cover, removing small captions and unifying the background. Original redesign evidence remains in the case study."
+    "width": 1734,
+    "height": 907,
+    "alt": "AI-generated syringe cover: transparent barrel, teal plunger and enlarged finger-flange detail beside A closer look at grip, on a dark teal background.",
+    "caption": "Owner-approved AI-generated presentation cover of the 20 cc syringe redesign concept. It is not testing footage or evidence of clinical or ergonomic benefit."
   },
   "workplace-mode": {
     "src": "./assets/work-covers/workplace-mode.webp",
-    "width": 1280,
-    "height": 1024,
-    "alt": "Workplace Mode high-fidelity concept display: cyan schematic route beside last-confirmed City morning and an amber Open coast request awaiting playback confirmation.",
-    "caption": "AI-generated high-fidelity concept presentation of the audio/navigation task. New illustrative styling; no Maruti firmware, Android Auto integration or live playback is shown. Original prototype states remain in the case."
+    "width": 1734,
+    "height": 907,
+    "alt": "AI-generated Workplace Mode cover: dark navigation and music display with an amber Pending state beside When a tap needs an answer.",
+    "caption": "Owner-approved AI-generated high-fidelity concept presentation. Illustrative interface only; no Maruti firmware, Android Auto integration or live playback is shown."
   },
   "jan-aushadhi": {
     "src": "./assets/work-covers/jan-aushadhi.webp",
-    "width": 1280,
-    "height": 1024,
-    "alt": "Colourful high-fidelity Jan Aushadhi concept mockup: original-layout demo health card and app in the centre, medicine kiosk on the left, and RFID carton and blister packaging on the right.",
-    "caption": "AI-generated high-fidelity concept mockup · November 2026. Card styling follows our original report design with demo fields. All three are concepts, not a deployed platform or built dispensing hardware."
+    "width": 1732,
+    "height": 908,
+    "alt": "AI-generated Jan Aushadhi cover: a demo unified health card and prescriptions app beside Connecting care, on blue and teal-lit plinths.",
+    "caption": "Owner-approved AI-generated cover for the selected health card and app concept, with demo data. The project also explored a kiosk and RFID packaging. These are concepts, not a deployed platform or built dispensing hardware."
   }
 };
 export const NORMAL_WORK_METADATA=[
