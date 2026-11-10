@@ -13,7 +13,7 @@ export function journalAtoms(chapter,index=0,total=1){
       else if(block.type==='decision'){
         if(block.title)add({type:'heading',title:block.title,keepWithNext:true},pageIndex);
         for(const [field,title]of [['friction','What happened'],['decision','The decision'],['next','What comes next']])if(block[field])add({type:'text',title,body:block[field]},pageIndex);
-        if(block.projectId)add({type:'project-link',projectId:block.projectId},pageIndex);
+        if(block.projectId)add({type:'project-link',projectId:block.projectId,projectLabel:block.projectLabel},pageIndex);
       }
       else if(block.type==='links')for(const item of block.items)add({type:'links',items:[item]},pageIndex);
       else add({...block},pageIndex);

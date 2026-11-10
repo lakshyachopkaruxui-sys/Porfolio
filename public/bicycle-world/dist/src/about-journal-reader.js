@@ -84,7 +84,7 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
       const section=node('section',undefined,parent,'journal-decision');if(block.title)node('h4',block.title,section);
       const list=node('dl',undefined,section);
       for(const [field,label]of [['friction','What happened'],['decision','The decision'],['next','What comes next']])if(block[field]){node('dt',label,list);node('dd',block[field],list);}
-      if(block.projectId){const button=node('button','Explore this project in Work',section,'journal-inline-link');button.type='button';button.dataset.journalNavigate='projects';button.dataset.journalProject=block.projectId;}return;
+      if(block.projectId){const button=node('button',`Explore ${block.projectLabel||'this project'} in Work`,section,'journal-inline-link');button.type='button';button.dataset.journalNavigate='projects';button.dataset.journalProject=block.projectId;}return;
     }
     if(block.type==='links'){
       const nav=node('nav',undefined,parent,'journal-destinations');nav.setAttribute('aria-label','Explore more of Lakshya’s portfolio');
@@ -100,7 +100,7 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     if(atom.type==='heading'){node('h3',atom.title,parent,'journal-page-title');return;}
     if(atom.type==='entry'){renderBlock({type:'timeline',entries:[atom]},parent);return;}
     if(atom.type==='tools'){if(!parent.children.length&&atom.groupLabel)node('h4',atom.groupLabel,parent,'journal-tool-context');const list=node('ul',undefined,parent,'journal-tools journal-tool-list');for(const tool of atom.tools)node('li',tool,list);return;}
-    if(atom.type==='project-link'){const button=node('button','Explore this project in Work',parent,'journal-inline-link');button.type='button';button.dataset.journalNavigate='projects';button.dataset.journalProject=atom.projectId;return;}
+    if(atom.type==='project-link'){const button=node('button',`Explore ${atom.projectLabel||'this project'} in Work`,parent,'journal-inline-link');button.type='button';button.dataset.journalNavigate='projects';button.dataset.journalProject=atom.projectId;return;}
     renderBlock(atom,parent);
   }
   function contentHeight(page){

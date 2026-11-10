@@ -70,11 +70,11 @@ export const ABOUT_JOURNAL=freeze({
       pages:[
         {title:'ConnectAid: search by specialty',blocks:[
           {type:'text',body:'I built the core Figma design system used across our shared screens. The team’s remote usability study revealed a different route to finding a doctor.'},
-          {type:'decision',friction:'Participants tried searching by a doctor’s specialty instead of following the intended category route.',decision:'We added specialty search alongside category browsing.',next:'Retest doctor discovery and check that both routes use consistent labels and destinations.',projectId:'connectaid'}
+          {type:'decision',friction:'Participants tried searching by a doctor’s specialty instead of following the intended category route.',decision:'We added specialty search alongside category browsing.',next:'Retest doctor discovery and check that both routes use consistent labels and destinations.',projectId:'connectaid',projectLabel:'ConnectAid'}
         ]},
         {title:'Giggles: make the answer surface clear',blocks:[
           {type:'text',body:'I built the electronics, embedded game logic and working prototype. Teammates designed the interfaces, which I helped review.'},
-          {type:'decision',friction:'During teacher-supported play, children tried touching the phone instead of tapping their card on the RFID reader.',decision:'For the next version, we proposed an on-screen direction, a spoken “Tap your card here” cue and a reader light.',next:'Build those cues into the next prototype and try the turn again with learners and teachers.',projectId:'giggles'},
+          {type:'decision',friction:'During teacher-supported play, children tried touching the phone instead of tapping their card on the RFID reader.',decision:'For the next version, we proposed an on-screen direction, a spoken “Tap your card here” cue and a reader light.',next:'Build those cues into the next prototype and try the turn again with learners and teachers.',projectId:'giggles',projectLabel:'Giggles'},
           {type:'photo',photoId:'giggles-recognition-at-meraki',caption:'Our game, Giggles, received Best Project at Meraki.'}
         ]}
       ]
