@@ -93,6 +93,7 @@ export const TEAR_COVER = {
   "caption": "Owner-selected AI-generated presentation artwork; actual prototype captures and iteration evidence appear below."
 };
 export const TEAR_STORY = {
+  "prototype": {"url": "https://imd-tear-webxr.vercel.app/", "label": "Explore Tear on desktop or Quest"},
   "intro": "A familiar room. A cut in the air. A world waiting on the other side. TEAR turns crossing into a deliberate gesture: pinch a seam, pull it open, then choose whether to enter. I designed the journey so wonder becomes fear, and relief arrives with a question still unanswered.",
   "readingTime": 7,
   "outcome": {
