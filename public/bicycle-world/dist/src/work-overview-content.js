@@ -4,23 +4,23 @@
 // Cover alt text comes from the current canonical thumbnail metadata.
 export const WORK_OVERVIEW_CONTENT = {
   tear: {
-  "summary": "A doorway opened by hand, and a dream that becomes harder to leave.",
-  "overviewLead": "TEAR turns the transition itself into an interaction. Pinch a seam, pull it apart and choose whether to cross from a familiar room into Ocean, Shadow and Forest. The return leaves a question: did you wake up?",
+  "summary": "A course submission became a self-directed dream journey, refined through feedback and one-to-one work with ChatGPT.",
+  "overviewLead": "TEAR began as my final Immersive Media Design course submission. After an original user session, I continued the work through self-directed study, one-to-one brainstorming with ChatGPT and detailed prototype review. A hand-opened doorway connects Ocean, Shadow and Forest before returning to a familiar room.",
   "role": "I designed the concept, gesture, emotional journey and art direction, directing AI-assisted prototyping and narrative iteration.",
   "status": "Immersive interaction · Working prototype",
   "sections": [
     {
-      "id": "interaction",
-      "title": "Make crossing a choice",
+      "id": "concept",
+      "title": "Keep the gesture, deepen the experience",
       "body": [
-        "The next world becomes visible before the visitor commits. Holding, opening and releasing give curiosity a physical form."
+        "The original grip-and-pull interaction gave the project its identity. Feedback helped me preserve its sense of choice while revisiting entry guidance and discoverable help."
       ]
     },
     {
       "id": "iteration",
-      "title": "Follow the breaks in immersion",
+      "title": "Make the next review specific",
       "body": [
-        "Informal feedback reshaped the near-ground Forest detail, volcanic Shadow atmosphere and first-person dream voice. The case shows those changes and distinguishes prototype checks from pending validation on the latest Quest 3S build."
+        "I directed ChatGPT through focused revisions: a marked ground sample before a Forest rollout, mountain and lava shape corrections, and a dream voice selected after rejecting earlier directions. Actual course images and new live captures show the progression in the full case."
       ]
     }
   ],

@@ -173,7 +173,7 @@ export const NORMAL_WORK_METADATA=[
     "subtitle": "Immersive interaction and storytelling",
     "status": "Immersive experience · Working prototype",
     "summary": "Pinch a seam. Pull reality apart. A dream journey through wonder, fear and uncertain relief.",
-    "role": "I designed the concept, spatial interaction, emotional journey and art direction, and directed AI-assisted prototyping and narrative iteration.",
+    "role": "I owned the concept, interaction, journey, art direction and design review. I directed ChatGPT-assisted brainstorming, logic development, implementation and narrative iteration, and selected external assets.",
     "sections": [
       {
         "id": "concept",
