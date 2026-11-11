@@ -1,0 +1,81 @@
+/* Prompt Motion's reviewed transfer is state continuity, not a film or loop:
+   normal-portfolio/prompt-motion-research.md. Preserve the authored room cameras.
+   Native dialog close/focus stays synchronous; display/overlay only retain paint.
+   https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog#animating_dialogs */
+body.hybrid-world {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --play-ui-modal-duration: 200ms;
+  --play-ui-panel-duration: 180ms;
+}
+
+body.hybrid-world :is(#world-map, #help) {
+  animation: none !important;
+  opacity: 0;
+  transform: translateY(6px) scale(0.985);
+  transition:
+    opacity var(--play-ui-modal-duration) var(--ease-out),
+    transform var(--play-ui-modal-duration) var(--ease-out),
+    display var(--play-ui-modal-duration) allow-discrete,
+    overlay var(--play-ui-modal-duration) allow-discrete !important;
+}
+body.hybrid-world :is(#world-map, #help)[open] { opacity: 1; transform: none; }
+body.hybrid-world :is(#world-map, #help):not([open]),
+body.hybrid-world :is(#world-map, #help):not([open]) *,
+body.hybrid-world :is(#world-map, #help):not([open])::backdrop { pointer-events: none !important; }
+body.hybrid-world :is(#world-map, #help)::backdrop {
+  opacity: 0;
+  transition:
+    opacity var(--play-ui-modal-duration) var(--ease-out),
+    display var(--play-ui-modal-duration) allow-discrete,
+    overlay var(--play-ui-modal-duration) allow-discrete !important;
+}
+body.hybrid-world :is(#world-map, #help)[open]::backdrop { opacity: 1; }
+@starting-style {
+  body.hybrid-world :is(#world-map, #help)[open] { opacity: 0; transform: translateY(6px) scale(0.985); }
+  body.hybrid-world :is(#world-map, #help)[open]::backdrop { opacity: 0; }
+}
+
+/* Nested semantic surfaces fade on entry only. Never defer their display:none:
+   a visually retained [hidden] panel could otherwise expose stale focus/AT content.
+   Existing room owners retain their camera, photograph and page-turn exits. */
+body.hybrid-world :is(
+  .works-reading, .works-index, .works-inspect, .works-places,
+  .personal-reading, .personal-media, .personal-places, .about-places,
+  .journal-photo-viewer, .cloud-photo-gallery, .cloud-gallery-index,
+  #listening-photo-viewer, #garba-viewer, #pokemon-index, #pokemon-viewer,
+  .oak-places
+) {
+  opacity: 1;
+  transition: opacity var(--play-ui-panel-duration) var(--ease-out) !important;
+}
+body.hybrid-world :is(
+  .works-reading, .works-index, .works-inspect, .works-places,
+  .personal-reading, .personal-media, .personal-places, .about-places,
+  .journal-photo-viewer, .cloud-photo-gallery, .cloud-gallery-index,
+  #listening-photo-viewer, #garba-viewer, #pokemon-index, #pokemon-viewer,
+  .oak-places
+)[hidden] { opacity: 0; pointer-events: none; }
+@starting-style {
+  body.hybrid-world :is(
+    .works-reading, .works-index, .works-inspect, .works-places,
+    .personal-reading, .personal-media, .personal-places, .about-places,
+    .journal-photo-viewer, .cloud-photo-gallery, .cloud-gallery-index,
+    #listening-photo-viewer, #garba-viewer, #pokemon-index, #pokemon-viewer,
+    .oak-places
+  ):not([hidden]) { opacity: 0; }
+}
+
+/* An explicit application preference is authoritative. OS preference is the
+   fallback before mounting, and whenever no application callback is supplied. */
+body.hybrid-world[data-play-ui-motion='reduced'] {
+  --play-ui-modal-duration: 0ms;
+  --play-ui-panel-duration: 0ms;
+}
+body.hybrid-world[data-play-ui-motion='reduced'] :is(#world-map, #help) { transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  body.hybrid-world:not([data-play-ui-motion='full']) {
+    --play-ui-modal-duration: 0ms;
+    --play-ui-panel-duration: 0ms;
+  }
+  body.hybrid-world:not([data-play-ui-motion='full']) :is(#world-map, #help) { transform: none; }
+}

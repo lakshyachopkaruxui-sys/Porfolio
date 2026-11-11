@@ -14,7 +14,7 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
       <article class="journal-page journal-page-right" data-journal-right tabindex="0"></article>
     </div><div class="journal-binding" aria-hidden="true"></div></div>
     <footer class="journal-footer"><nav class="journal-page-navigation" aria-label="Turn notebook pages"><button type="button" data-journal-prev>Previous pages</button><div><p data-journal-count aria-live="polite"></p><p class="journal-key-hint">Turn pages: A / D or ← / → · Esc to close</p></div><button type="button" data-journal-next>Turn the page</button><button type="button" data-journal-close>Close notebook</button></nav></footer>
-    <section id="about-journal-photo" class="journal-photo-viewer" data-journal-viewer role="region" aria-labelledby="${id}-photo-title" tabindex="-1" hidden>
+    <section id="about-journal-photo" class="journal-photo-viewer" data-journal-viewer aria-labelledby="${id}-photo-title" tabindex="-1" hidden>
       <header><div><p>FROM MY NOTEBOOK</p><h2 id="${id}-photo-title" data-journal-photo-title></h2></div><button type="button" data-journal-photo-close>Back to the notebook</button></header>
       <figure><img decoding="async" data-journal-full-photo alt=""><figcaption data-journal-photo-caption></figcaption></figure>
       <p class="journal-photo-status" data-journal-photo-status role="status" aria-live="polite"></p><button type="button" class="journal-photo-retry" data-journal-photo-retry hidden>Retry photograph</button>
@@ -57,7 +57,7 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     const photo=photoById.get(block.photoId);if(!photo?.src||!photo.width||!photo.height)return;
     const figure=node('figure',undefined,parent,'journal-photo');figure.dataset.loading='true';
     const button=node('button',undefined,figure,'journal-photo-button');button.type='button';button.dataset.journalPhoto=photo.id;
-    button.setAttribute('aria-label',`View full photograph: ${block.caption||photo.caption}`);
+    button.setAttribute('aria-label',`Open photograph: ${block.caption||photo.caption}`);
     const image=node('img',undefined,button);image.decoding='async';image.loading='lazy';image.width=photo.width;image.height=photo.height;
     if(!measuring)loadPagePhoto(image,photo,figure);
     node('figcaption',block.caption||photo.caption,figure);node('span','Open photograph',button,'journal-photo-affordance');
@@ -87,8 +87,8 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
       if(block.projectId){const button=node('button',`Explore ${block.projectLabel||'this project'} in Work`,section,'journal-inline-link');button.type='button';button.dataset.journalNavigate='projects';button.dataset.journalProject=block.projectId;}return;
     }
     if(block.type==='links'){
-      const nav=node('nav',undefined,parent,'journal-destinations');nav.setAttribute('aria-label','Explore more of Lakshya’s portfolio');
-      for(const item of block.items||[])if(['projects','work','cloud','music'].includes(item.destination)){const button=node('button',item.label,nav);button.type='button';button.dataset.journalNavigate=item.destination;}
+      const actions=node('div',undefined,parent,'journal-destinations');
+      for(const item of block.items||[])if(['projects','work','cloud','music'].includes(item.destination)){const button=node('button',item.label,actions);button.type='button';button.dataset.journalNavigate=item.destination;}
     }
   }
   function renderAtom(atom,parent){

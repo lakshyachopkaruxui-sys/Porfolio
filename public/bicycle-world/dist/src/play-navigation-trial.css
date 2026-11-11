@@ -1,0 +1,579 @@
+/* Local navigation trial. Scene art, reading pages and motion stay component-owned.
+   Xbox's 2023 Home refresh groups quick access at the top while leaving room for art:
+   https://news.xbox.com/en-us/2023/07/26/welcome-to-your-new-xbox-home/
+   PS5 groups Sound with its other control-center utilities:
+   https://www.playstation.com/en-us/support/games/customize-ps5-control-center/
+   The owner's cooler neutral preference supplies this trial's palette. */
+body.hybrid-world {
+  --nav-trial-face: #f1f4f5;
+  --nav-trial-hover: #e4ebed;
+  --nav-trial-selected: #dce7e9;
+  --nav-trial-ink: #243b3b;
+  --nav-trial-muted: #536568;
+  --nav-trial-edge: #718588;
+  --nav-trial-strong: #536f73;
+  --nav-trial-focus: #2b5e64;
+}
+
+/* Local tokens override the older map/guide and music skins at their boundary. */
+body.hybrid-world :is(#ride-tools, #world-map, #help, #world-bottom, #woody-guide, .play-music-dock) {
+  --play-control-paper: var(--nav-trial-face);
+  --play-control-paper-hover: var(--nav-trial-hover);
+  --play-control-edge: var(--nav-trial-edge);
+  --play-control-edge-hover: var(--nav-trial-strong);
+  --play-control-ink: var(--nav-trial-ink);
+  --play-control-depth: transparent;
+  --play-control-forest: var(--nav-trial-selected);
+  --play-control-forest-hover: var(--nav-trial-hover);
+  --play-control-forest-depth: var(--nav-trial-strong);
+  --play-control-on-forest: var(--nav-trial-ink);
+  --play-control-focus: var(--nav-trial-focus);
+}
+body.hybrid-world #help {
+  background: var(--nav-trial-face);
+  color: var(--nav-trial-ink);
+  border: 1px solid var(--nav-trial-edge);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px #243b3b24;
+}
+body.hybrid-world #help > .reader-top,
+body.hybrid-world #world-map > .reader-top { background: var(--nav-trial-face); }
+body.hybrid-world #help :is(.field-guide-settings, .guide-arrival) { background: var(--nav-trial-hover); }
+
+/* One centered rail. Wrapping follows the existing DOM and keyboard order. */
+body.hybrid-world #world-controls {
+  justify-content: center;
+}
+body.hybrid-world #ride-tools {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: max-content;
+  max-width: 100%;
+  margin-inline: auto;
+  gap: 4px;
+  padding: 6px;
+  border: 1px solid var(--nav-trial-edge);
+  border-radius: 12px;
+  background: var(--nav-trial-face);
+  box-shadow: 0 3px 14px #243b3b18;
+}
+
+/* Named room boundaries prevent this trial from reaching Normal mode. Exclude
+   photograph/card buttons: their images, aspect ratios and layouts are content.
+   Important material declarations deliberately replace older two-ID control
+   skins without changing their positions, dimensions or interaction transforms. */
+body.hybrid-world :is(
+  #ride-tools, #world-map, #help, #reader, #project-reader, #woody-guide,
+  #about-experience, #works-experience, #personal-experience, #oak-lab, #personal-experience #listening-experience,
+  .play-music-dock
+) button:where(:not(:has(img)):not(.cloud-photo-card):not(.journal-photo-button):not(.hobby-photo-open)) {
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--nav-trial-edge) !important;
+  border-radius: 8px !important;
+  background: var(--nav-trial-face) !important;
+  color: var(--nav-trial-ink) !important;
+  box-shadow: none !important;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 140ms ease, border-color 140ms ease;
+}
+body.hybrid-world :is(
+  #ride-tools, #world-map, #help, #reader, #project-reader, #woody-guide,
+  #about-experience, #works-experience, #personal-experience, #oak-lab, #personal-experience #listening-experience,
+  .play-music-dock
+) button:where(:not(:has(img)):not(.cloud-photo-card):not(.journal-photo-button):not(.hobby-photo-open)):hover:not(:disabled) {
+  background: var(--nav-trial-hover) !important;
+  border-color: var(--nav-trial-strong) !important;
+}
+
+/* Current selection keeps a structural marker and weight as well as color. */
+body.hybrid-world :is(
+  #ride-tools, #world-map, #help, #about-experience,
+  #works-experience, #personal-experience, #oak-lab, #personal-experience #listening-experience, .play-music-dock
+) button:is([aria-pressed='true'], [aria-selected='true'], [aria-current='page'], [aria-current='step'], [aria-current='true']):not(:has(img)) {
+  background: var(--nav-trial-selected) !important;
+  border-color: var(--nav-trial-strong) !important;
+  color: var(--nav-trial-ink) !important;
+  box-shadow: inset 3px 0 0 var(--nav-trial-strong) !important;
+  font-weight: 700;
+}
+
+/* Main actions remain distinguishable without the earlier deep painted faces. */
+body.hybrid-world :is(
+  #world-map [data-map-ride], #help #help-resume,
+  #works-experience .works-primary,
+  #about-experience .about-open-notebook,
+  #about-experience [data-journal-next],
+  #personal-experience .primary, #personal-experience .gr-primary,
+  #personal-experience .pgr-primary, #personal-experience .cloud-gallery-primary,
+  #oak-lab [data-oak-next], #oak-lab [data-oak-collection],
+  #oak-lab [data-oak-build-next], #oak-lab .pgr-primary
+):is(button, a) {
+  background: var(--nav-trial-hover) !important;
+  border-color: var(--nav-trial-strong) !important;
+  color: var(--nav-trial-ink) !important;
+  box-shadow: none !important;
+  font-weight: 700;
+}
+
+/* The existing anchor-based mode control keeps both labels and its moving rail. */
+body.hybrid-world .mode-selector.mode-switch {
+  --mode-face: var(--nav-trial-face);
+  --mode-edge: var(--nav-trial-edge);
+  --mode-depth: none;
+  --mode-label: var(--nav-trial-muted);
+  --mode-current: var(--nav-trial-ink);
+  --mode-track: var(--nav-trial-hover);
+  --mode-track-edge: var(--nav-trial-edge);
+  --mode-knob: var(--nav-trial-ink);
+  --mode-focus: var(--nav-trial-focus);
+}
+
+/* The rail itself groups the utilities; each utility needs less framing. */
+body.hybrid-world #ride-tools button:is(#ride-guide, #ride-help, #ride-bell, #ride-light, #ride-camera, [data-play-music]) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-width: 44px;
+  min-height: 46px;
+  padding: 9px 11px;
+  border-color: transparent !important;
+  background: transparent !important;
+  font: 600 13px/1.3 var(--font-body);
+  white-space: nowrap;
+}
+body.hybrid-world #ride-tools :is(#ride-bell, #ride-light) svg {
+  display: block;
+}
+body.hybrid-world #ride-tools kbd {
+  min-width: 0;
+  height: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--nav-trial-muted);
+  box-shadow: none;
+  font: 500 11px/1.3 var(--font-body);
+}
+body.hybrid-world #ride-tools > .play-music-dock {
+  position: static !important;
+  inset: auto !important;
+  transform: none;
+  max-width: none;
+  margin: 0;
+}
+
+/* One header rail replaces a row of independently framed utility buttons. */
+body.hybrid-world :is(
+  #about-experience .about-header nav,
+  #works-experience .works-header nav,
+  #personal-experience .personal-header nav,
+  #oak-lab .oak-header nav,
+  #personal-experience #listening-experience .masthead,
+  #personal-experience #garba-experience .gr-header > nav,
+  #personal-experience #pokemon-experience .pgr-header > nav,
+  #oak-lab #pokemon-experience .pgr-header > nav,
+  #personal-experience .cloud-gallery-header-actions
+) {
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+  padding: 4px;
+  border: 1px solid var(--nav-trial-edge);
+  border-radius: 10px;
+  background: var(--nav-trial-face);
+  box-shadow: 0 2px 12px #243b3b12;
+}
+body.hybrid-world :is(
+  #about-experience .about-header nav,
+  #works-experience .works-header nav,
+  #personal-experience .personal-header nav,
+  #oak-lab .oak-header nav,
+  #personal-experience #listening-experience .masthead,
+  #personal-experience #garba-experience .gr-header,
+  #personal-experience #pokemon-experience .pgr-header,
+  #oak-lab #pokemon-experience .pgr-header,
+  #personal-experience .cloud-gallery-header-actions
+) button:where(:not([aria-pressed='true']):not([aria-selected='true']):not([aria-current='page']):not([aria-current='step']):not(:hover)) {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+body.hybrid-world :is(
+  #about-experience, #works-experience, #personal-experience, #oak-lab,
+  #world-map, #help, #project-reader, #reader
+) :is(header, .reader-top) .play-music-dock {
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+  flex: 0 0 auto;
+  max-width: 100%;
+  margin: 0;
+}
+body.hybrid-world :is(
+  #about-experience .about-header nav,
+  #works-experience .works-header nav,
+  #personal-experience .personal-header nav,
+  #oak-lab .oak-header nav
+) { justify-content: flex-end; }
+body.hybrid-world :is(
+  #about-experience, #works-experience, #personal-experience, #oak-lab
+) :is(header, .reader-top) { column-gap: 16px; }
+
+/* Contextual riding feedback shares the rail's quiet finish. Its established
+   bottom placement and tablet movement-control clearance remain untouched. */
+body.hybrid-world #world-bottom :is(#notice, #ride-status, #interact, #route-hint) {
+  background: var(--nav-trial-face) !important;
+  color: var(--nav-trial-ink) !important;
+  border-color: var(--nav-trial-edge) !important;
+  border-radius: 9px;
+  box-shadow: 0 3px 14px #243b3b12 !important;
+}
+body.hybrid-world #world-bottom #interact {
+  border-left: 3px solid var(--nav-trial-strong);
+}
+body.hybrid-world #world-bottom #interact :is(.stop-caption, .stop-kicker) {
+  color: var(--nav-trial-muted) !important;
+}
+body.hybrid-world #world-bottom kbd {
+  background: var(--nav-trial-hover);
+  color: var(--nav-trial-ink);
+  border-color: var(--nav-trial-edge);
+  box-shadow: none;
+}
+body.hybrid-world #world-bottom #stop-route {
+  min-height: 44px;
+  background: transparent;
+  color: var(--nav-trial-ink);
+  border-color: var(--nav-trial-edge);
+  box-shadow: none;
+}
+
+/* Only these controls previously moved to simulate deep press travel. */
+body.hybrid-world #personal-experience :is(
+  #listening-experience .primary,
+  #garba-experience .gr-primary,
+  #pokemon-experience .pgr-primary
+):active:not(:disabled),
+body.hybrid-world #oak-lab #pokemon-experience .pgr-primary:active:not(:disabled) {
+  transform: none;
+}
+
+/* A dark ring and light separation remain visible on either scenery or paper.
+   Full-viewport scene rings stay owned by the existing inset-focus rules. */
+body.hybrid-world :is(
+  #ride-tools, #world-map, #help, #reader, #project-reader, #woody-guide,
+  #about-experience, #works-experience, #personal-experience, #oak-lab, #personal-experience #listening-experience,
+  #world-bottom, .play-music-dock
+) :is(button, a, select, input):focus-visible {
+  outline: 3px solid var(--nav-trial-focus) !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 2px #f1f4f5 !important;
+}
+
+@media (max-width: 1100px) {
+  body.hybrid-world #ride-tools > button,
+  body.hybrid-world #ride-tools > .play-music-dock button {
+    padding-inline: 9px;
+    gap: 6px;
+  }
+  body.hybrid-world #ride-tools kbd { display: none; }
+}
+@media (max-height: 580px) {
+  body.hybrid-world #world-controls { top: max(12px, env(safe-area-inset-top)); }
+  body.hybrid-world #ride-tools { padding: 4px; }
+}
+@media (pointer: coarse) {
+  body.hybrid-world.hybrid-touch-riding #touch-controls button {
+    background: var(--nav-trial-face) !important;
+    color: var(--nav-trial-ink) !important;
+    border-color: var(--nav-trial-edge) !important;
+    box-shadow: none !important;
+  }
+  body.hybrid-world.hybrid-touch-riding #touch-controls button.pressed {
+    background: var(--nav-trial-selected) !important;
+    box-shadow: inset 0 -3px 0 var(--nav-trial-strong) !important;
+    font-weight: 700;
+  }
+  body.hybrid-world.hybrid-touch-riding #touch-controls button:focus-visible {
+    outline: 3px solid var(--nav-trial-focus);
+    outline-offset: 3px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.hybrid-world #ride-tools,
+  body.hybrid-world :is(#world-map, #help, #about-experience, #works-experience, #personal-experience, #oak-lab, #personal-experience #listening-experience, .play-music-dock) button {
+    transition: none;
+  }
+}
+@media (forced-colors: active) {
+  body.hybrid-world {
+    --nav-trial-face: Canvas;
+    --nav-trial-hover: Canvas;
+    --nav-trial-selected: Canvas;
+    --nav-trial-ink: CanvasText;
+    --nav-trial-muted: CanvasText;
+    --nav-trial-edge: ButtonText;
+    --nav-trial-strong: Highlight;
+    --nav-trial-focus: Highlight;
+  }
+}
+/* Decorative monochrome icons survive dynamic button label updates. */
+body.hybrid-world #ride-tools #ride-camera::before,
+body.hybrid-world [data-play-music]::before {
+  content:""; display:inline-block; width:19px; height:19px; flex:0 0 19px;
+  background:currentColor; mask:center/contain no-repeat var(--navigation-icon);
+  -webkit-mask:center/contain no-repeat var(--navigation-icon);
+}
+body.hybrid-world #ride-tools #ride-camera {
+  --navigation-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 7h4l2-3h6l2 3h4v13H3z'/%3E%3Ccircle cx='12' cy='13' r='4'/%3E%3C/svg%3E");
+}
+body.hybrid-world [data-play-music] {
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  --navigation-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 5 6 9H3v6h3l5 4zM15 8a6 6 0 0 1 0 8M18 5a10 10 0 0 1 0 14'/%3E%3C/svg%3E");
+}
+body.hybrid-world [data-play-music][aria-pressed='false'] {
+  --navigation-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 5 6 9H3v6h3l5 4zM16 9l5 6m0-6-5 6'/%3E%3C/svg%3E");
+}
+
+body.hybrid-world #ride-tools svg { stroke-width:1.7; stroke-linecap:round; }
+
+/* Shared rails provide the outer boundary for the version selector. */
+body.hybrid-world :is(#ride-tools,.about-header nav,.works-header nav,.personal-header nav,.oak-header nav) .mode-selector.mode-switch { --mode-edge:transparent; }
+/* These child rooms have open scene headers rather than an enclosing rail.
+   Keep quiet light faces beneath their labels so scenery cannot reduce contrast. */
+body.hybrid-world :is(
+  #personal-experience #garba-experience .gr-header,
+  #personal-experience #pokemon-experience .pgr-header,
+  #oak-lab #pokemon-experience .pgr-header
+) button {
+  background:var(--nav-trial-face) !important;
+  border-color:transparent !important;
+}
+body.hybrid-world :is(
+  #personal-experience #garba-experience .gr-header,
+  #personal-experience #pokemon-experience .pgr-header,
+  #oak-lab #pokemon-experience .pgr-header
+) button:hover:not(:disabled) { background:var(--nav-trial-hover) !important; }
+body.hybrid-world #personal-experience #listening-experience .masthead .study-label {
+  color:var(--nav-trial-muted);
+}
+body.hybrid-world #ride-tools { gap:8px; }
+
+/* Map/Guide frame polish follows the recorded Xbox/PS5 control-center review:
+   quiet rounded panels leave the original map artwork in charge. Compensating
+   the removed border thickness preserves the map's existing content insets. */
+body.hybrid-world #world-map {
+  --map-paper: var(--nav-trial-face);
+  --map-ink: var(--nav-trial-ink);
+  --map-muted: var(--nav-trial-muted);
+  --map-edge: var(--nav-trial-edge);
+  background: var(--nav-trial-face);
+}
+body.hybrid-world #world-map .map-content {
+  background: var(--nav-trial-face);
+  box-shadow: none;
+}
+body.hybrid-world #world-map:not([data-presentation="side"]) .map-content {
+  border: 1px solid var(--nav-trial-edge);
+  border-radius: 12px;
+  padding: 39px calc(clamp(22px, 3vw, 42px) + 9px) 33px;
+}
+body.hybrid-world #world-map[data-presentation="side"] {
+  border: 1px solid var(--nav-trial-edge);
+  padding-left: 5px;
+  background: var(--nav-trial-face);
+  box-shadow: none;
+}
+body.hybrid-world #world-map .map-fold-label {
+  border-color: var(--nav-trial-edge);
+  border-radius: 8px;
+  background: var(--nav-trial-hover);
+  color: var(--nav-trial-ink);
+  transform: none;
+}
+body.hybrid-world #world-map .plan-view {
+  border-color: var(--nav-trial-edge);
+  border-radius: 10px;
+  background: var(--nav-trial-hover);
+  box-shadow: none;
+}
+body.hybrid-world #world-map .map-stop {
+  border-color: var(--nav-trial-edge);
+  border-radius: 8px;
+  background: var(--nav-trial-face);
+  box-shadow: none;
+}
+body.hybrid-world #world-map .map-reset {
+  border-color: var(--nav-trial-edge);
+  border-radius: 8px;
+  background: var(--nav-trial-hover);
+  box-shadow: none;
+}
+body.hybrid-world #help {
+  border: 1px solid var(--nav-trial-edge);
+  border-radius: 12px;
+  background: var(--nav-trial-face);
+  box-shadow: none;
+}
+body.hybrid-world #help :is(.field-guide-settings, .guide-arrival) {
+  border-radius: 10px;
+  background: var(--nav-trial-hover);
+  box-shadow: inset 0 0 0 1px var(--nav-trial-edge);
+}
+body.hybrid-world #help .guide-arrival {
+  border-color: var(--nav-trial-edge);
+  box-shadow: none;
+}
+body.hybrid-world #help kbd {
+  border-color: var(--nav-trial-edge);
+  border-radius: 4px;
+  background: var(--nav-trial-hover);
+  color: var(--nav-trial-ink);
+  box-shadow: none;
+}
+@media (max-width: 1000px) {
+  body.hybrid-world #world-map:not([data-presentation="side"]) .map-content {
+    padding: 32px 31px 29px;
+  }
+}
+@media (max-width: 760px) {
+  body.hybrid-world #world-map:not([data-presentation="side"]) .map-content {
+    padding: 27px 21px;
+  }
+}
+
+/* Console-reference correction: small corner radii, not pills or circles.
+   Preserve the light utility rail and the existing native mode switch. */
+body.hybrid-world {
+  --nav-action-dark: #243b3b;
+  --nav-action-dark-hover: #304b4b;
+  --nav-action-light: #f1f4f5;
+}
+body.hybrid-world :is(
+  #ride-tools, #world-map, #help, #reader, #project-reader, #woody-guide,
+  #about-experience, #works-experience, #personal-experience, #oak-lab,
+  #personal-experience #listening-experience, .play-music-dock
+) button:where(:not(:has(img)):not(.cloud-photo-card):not(.journal-photo-button):not(.hobby-photo-open)) {
+  border-radius: 8px !important;
+  transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+body.hybrid-world #ride-tools { border-radius: 12px; }
+body.hybrid-world .mode-selector.mode-switch { border-radius: 10px !important; }
+body.hybrid-world .mode-selector.mode-switch > a {
+  border-radius: 6px !important;
+  background: transparent !important;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+/* Current mode remains the original label and switch position, not a badge. */
+body.hybrid-world .mode-selector.mode-switch > a[aria-current='page'] {
+  background: transparent !important;
+  color: var(--mode-current) !important;
+}
+body.hybrid-world :is(
+  #ride-tools, #world-map, #help, #reader, #project-reader, #woody-guide,
+  #about-experience, #works-experience, #personal-experience, #oak-lab,
+  #personal-experience #listening-experience, .play-music-dock
+) button:is(:active, [aria-pressed='true'], [aria-selected='true'], [aria-current='page'], [aria-current='step'], [aria-current='true']):not(:has(img)):where(:not(:disabled):not(.cloud-photo-card):not(.journal-photo-button):not(.hobby-photo-open)) {
+  --nav-trial-face: var(--nav-action-dark);
+  --nav-trial-hover: var(--nav-action-dark);
+  --nav-trial-selected: var(--nav-action-dark);
+  --nav-trial-ink: var(--nav-action-light);
+  --nav-trial-muted: var(--nav-action-light);
+  background: var(--nav-action-dark) !important;
+  border-color: var(--nav-action-dark) !important;
+  color: var(--nav-action-light) !important;
+  box-shadow: inset 3px 0 0 var(--nav-action-light) !important;
+  font-weight: 700;
+}
+body.hybrid-world :is(
+  #world-map [data-map-ride], #help #help-resume,
+  #works-experience .works-primary,
+  #about-experience .about-open-notebook, #about-experience [data-journal-next],
+  #personal-experience .primary, #personal-experience .gr-primary,
+  #personal-experience .pgr-primary, #personal-experience .cloud-gallery-primary,
+  #oak-lab [data-oak-next], #oak-lab [data-oak-collection],
+  #oak-lab [data-oak-build-next], #oak-lab .pgr-primary
+):is(button, a) {
+  --nav-trial-face: var(--nav-action-dark);
+  --nav-trial-hover: var(--nav-action-dark-hover);
+  --nav-trial-ink: var(--nav-action-light);
+  --nav-trial-muted: var(--nav-action-light);
+  background: var(--nav-action-dark) !important;
+  border-color: var(--nav-action-dark) !important;
+  color: var(--nav-action-light) !important;
+  border-radius: 8px !important;
+  font-weight: 700;
+  transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+body.hybrid-world :is(
+  #ride-tools, #world-map, #help, #reader, #project-reader, #woody-guide,
+  #about-experience, #works-experience, #personal-experience, #oak-lab,
+  #personal-experience #listening-experience, .play-music-dock
+) button:is(:active, [aria-pressed='true'], [aria-selected='true'], [aria-current='page'], [aria-current='step'], [aria-current='true']):not(:has(img)):where(:not(:disabled):not(.cloud-photo-card):not(.journal-photo-button):not(.hobby-photo-open)) :is(span, strong, small, kbd) {
+  color: var(--nav-action-light) !important;
+}
+body.hybrid-world :is(#ride-tools, #world-map, #help, #woody-guide) button:is(:active, [aria-pressed='true']) kbd {
+  background: transparent !important;
+}
+@media (hover: hover) and (pointer: fine) {
+  body.hybrid-world :is(
+    #ride-tools, #world-map, #help, #reader, #project-reader, #woody-guide,
+    #about-experience, #works-experience, #personal-experience, #oak-lab,
+    #personal-experience #listening-experience, .play-music-dock
+  ) button:where(:not(:has(img)):not(.cloud-photo-card):not(.journal-photo-button):not(.hobby-photo-open)):hover:not(:disabled) {
+    --nav-trial-face: var(--nav-action-dark);
+    --nav-trial-hover: var(--nav-action-dark);
+    --nav-trial-ink: var(--nav-action-light);
+    --nav-trial-muted: var(--nav-action-light);
+    background: var(--nav-action-dark) !important;
+    border-color: var(--nav-action-dark) !important;
+    color: var(--nav-action-light) !important;
+  }
+  body.hybrid-world :is(
+    #ride-tools, #world-map, #help, #reader, #project-reader, #woody-guide,
+    #about-experience, #works-experience, #personal-experience, #oak-lab,
+    #personal-experience #listening-experience, .play-music-dock
+  ) button:where(:not(:has(img)):not(.cloud-photo-card):not(.journal-photo-button):not(.hobby-photo-open)):hover:not(:disabled) :is(span, strong, small, kbd) {
+    color: var(--nav-action-light) !important;
+  }
+  body.hybrid-world #ride-tools button:hover:not(:disabled) kbd { background: transparent !important; }
+  body.hybrid-world .mode-selector.mode-switch > a:hover {
+    background: var(--nav-action-dark) !important;
+    color: var(--nav-action-light) !important;
+    text-decoration: none !important;
+  }
+  body.hybrid-world #works-experience .works-primary:hover {
+    --nav-action-dark: var(--nav-action-dark-hover);
+  }
+}
+body.hybrid-world.hybrid-touch-riding #touch-controls button { border-radius: 8px; }
+body.hybrid-world.hybrid-touch-riding #touch-controls button.pressed {
+  background: var(--nav-action-dark) !important;
+  border-color: var(--nav-action-dark) !important;
+  color: var(--nav-action-light) !important;
+}
+/* Preserve the separation band around dark selected controls. */
+body.hybrid-world :is(
+  #ride-tools, #world-map, #help, #reader, #project-reader, #woody-guide,
+  #about-experience, #works-experience, #personal-experience, #oak-lab,
+  #personal-experience #listening-experience, #world-bottom, .play-music-dock
+) :is(button, a):not(:has(img)):focus-visible {
+  box-shadow: 0 0 0 2px #f1f4f5 !important;
+}
+body.hybrid-world[data-play-ui-motion='reduced'] :is(button, a) { transition-duration: 0ms !important; }
+@media (prefers-reduced-motion: reduce) {
+  body.hybrid-world:not([data-play-ui-motion='full']) :is(button, a) { transition-duration: 0ms !important; }
+}
+@media (forced-colors: active) {
+  body.hybrid-world {
+    --nav-action-dark: Highlight;
+    --nav-action-dark-hover: Highlight;
+    --nav-action-light: HighlightText;
+  }
+}

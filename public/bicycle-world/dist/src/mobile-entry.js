@@ -19,7 +19,7 @@ export function mountMobileEntry() {
   document.getElementById('game').hidden = true;
   document.body.classList.remove('hybrid-world', 'hybrid-intro', 'hybrid-reading', 'cloud-handoff');
   document.body.style.overflow = 'auto';
-  const notice = document.createElement('section');
+  const notice = document.createElement('main');
   notice.id = 'mobile-play-notice';
   notice.setAttribute('aria-labelledby', 'mobile-play-title');
   notice.innerHTML = `<header class="mobile-mode-bar">

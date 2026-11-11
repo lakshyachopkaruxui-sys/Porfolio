@@ -38,7 +38,7 @@ export function mountPlayMusic({notify = () => {}} = {}) {
       if (button.textContent !== text) button.textContent = text;
       const pressed = String(current.enabled);
       if (button.getAttribute('aria-pressed') !== pressed) button.setAttribute('aria-pressed', pressed);
-      button.setAttribute('aria-label', retry ? 'Retry garden sound' : current.enabled ? 'Turn garden sound off' : 'Turn garden sound on');
+      button.setAttribute('aria-label', retry ? text : `${text}. ${current.enabled ? 'Turn off' : 'Turn on'}`);
       const title = `${getMusicTrack(current.trackId).title} — Kevin MacLeod`;
       if (button.title !== title) button.title = title;
     }
@@ -82,10 +82,14 @@ export function mountPlayMusic({notify = () => {}} = {}) {
     const boundary = activeLayer || childRoom || dialog || document.body;
     // Personal-room actions occupy the bottom edge. Keep optional music in
     // the existing header's flow instead of covering those actions with a dock.
-    const headerNavigation = boundary.id === 'about-experience' ? boundary.querySelector('.about-header nav') : boundary.id === 'about-journal-photo' || boundary.matches('.about-places') ? boundary.querySelector('header') : boundary.matches('.cloud-photo-gallery') ? boundary.querySelector('.cloud-gallery-tools') : boundary.id === 'personal-experience'
+    const headerNavigation = boundary === document.body ? document.querySelector('#ride-tools')
+      : boundary.id === 'works-experience' ? boundary.querySelector('.works-header nav')
+      : boundary.id === 'garba-experience' ? boundary.querySelector('.gr-header')
+      : boundary.id === 'listening-experience' ? boundary.querySelector('.masthead')
+      : boundary.id === 'about-experience' ? boundary.querySelector('.about-header nav') : boundary.id === 'about-journal-photo' || boundary.matches('.about-places') ? boundary.querySelector('header') : boundary.matches('.cloud-photo-gallery') ? boundary.querySelector('.cloud-gallery-tools') : boundary.id === 'personal-experience'
       ? boundary.querySelector('.personal-header nav')
       : boundary.matches('.works-reading,.works-index,.works-inspect,.works-places,.oak-places') || ['about','work'].includes(dialog?.dataset.kind) && boundary.matches('.personal-reading,.personal-media,.personal-places') || boundary.id === 'listening-photo-viewer' || boundary.id === 'garba-viewer' ? boundary.querySelector('header')
-      : boundary.id === 'oak-lab' ? boundary.querySelector('.oak-tools')
+      : boundary.id === 'oak-lab' ? boundary.querySelector('.oak-header nav') || boundary.querySelector('.oak-tools')
       : boundary.id === 'help' || boundary.id === 'world-map' ? boundary.querySelector('.reader-top') : null;
     const parent = headerNavigation || boundary;
     // A modal dialog makes outside controls inert. Keep this control inside it.
