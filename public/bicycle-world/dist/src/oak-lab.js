@@ -23,7 +23,7 @@ function narrationPreferences(){
 }
 
 /** Owns one modal and its scene. The garden retains the renderer and loop. */
-export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=()=>{},onPlace=()=>{},isReduced=()=>false}={}){
+export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=()=>{},onPlace=()=>{},isReduced}={}){
   if(!renderer?.domElement)throw new Error('Oak’s lab requires the existing renderer.');
   const dialog=document.createElement('dialog');dialog.id='oak-lab';dialog.setAttribute('aria-labelledby','oak-lab-title');
   dialog.innerHTML=`<div class="oak-shell"><div class="oak-canvas" aria-hidden="true"></div><div class="oak-shade" aria-hidden="true"></div>
@@ -43,7 +43,8 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
   document.body.append(dialog);
   decorateModeSelectors(dialog,{mode:'play',navigationHandled:true});
   const $=selector=>dialog.querySelector(selector),shell=$('.oak-shell'),host=$('.oak-canvas'),veil=$('.oak-veil');
-  const listeners=[],query=window.matchMedia('(prefers-reduced-motion: reduce)'),reduced=()=>Boolean(isReduced()||query.matches);
+  // A supplied callback already resolves the app override and OS preference.
+  const listeners=[],query=window.matchMedia('(prefers-reduced-motion: reduce)'),reduced=()=>typeof isReduced==='function'?Boolean(isReduced()):query.matches;
   const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();
   let buildIndex=0,ambientMotion=true,collectionVisited=false,placesOpen=false,placeSiblings=[];
   const preference=narrationPreferences();let narrationEnabled=preference.enabled,preferredVoice=preference.voiceId,narrationPending=null,currentSpeech='',selectedMapPlace=null;
@@ -198,14 +199,20 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
   }
   function placeTalk(){if(!room||selectedZone!=='welcome')return;const point=room.headProjection(),rect=host.getBoundingClientRect(),base=shell.getBoundingClientRect(),x=(point.x+1)*rect.width/2+rect.left-base.left,y=(1-point.y)*rect.height/2+rect.top-base.top;$('[data-oak-talk]').style.left=`${x}px`;$('[data-oak-talk]').style.top=`${Math.max(164,y-13)}px`;const comic=$('.oak-comic').getBoundingClientRect();$('.oak-comic').style.setProperty('--oak-tail-x',`${Math.max(20,Math.min(comic.width-45,x-comic.left+base.left))}px`);}
   function resize(animate=false,entry=false){if(!room||phase==='closed')return;if(child?.isOpen){child.resize();return;}const rect=host.getBoundingClientRect(),width=Math.max(1,rect.width||window.innerWidth),height=Math.max(1,rect.height||window.innerHeight);renderer.setPixelRatio(Math.min(saved?.ratio||1,1.6));renderer.setSize(width,height,false);renderer.setViewport(0,0,width,height);renderer.setScissorTest(false);room.frame(selectedZone,width/height,window.innerWidth<=620,{animate:animate===true&&!reduced(),entry});placeTalk();dirty=true;}
+  let motionControlState='';
+  function syncMotionControl(){
+    const still=reduced(),state=String(still)+String(ambientMotion);
+    if(state===motionControlState)return;motionControlState=state;
+    const control=$('[data-oak-motion]');control.disabled=still;control.textContent=still?'Displays still':ambientMotion?'Pause displays':'Resume displays';control.setAttribute('aria-pressed',String(ambientMotion&&!still));
+  }
   function open({returnFocus}={}){
     if(dead)throw new Error('Oak’s lab has been disposed.');if(phase!=='closed')return false;focus=returnFocus||document.activeElement;index=0;buildIndex=0;collectionVisited=false;renderedFrames=0;setPhase('entering');dirty=true;
-    $('[data-oak-motion]').disabled=reduced();$('[data-oak-motion]').textContent=reduced()?'Displays still':ambientMotion?'Pause displays':'Resume displays';
+    syncMotionControl();
     try{onOpen();dialog.showModal();borrow();room=createOakLabScene({onChange(){dirty=true;},onAssetState(state){$('.oak-status').textContent=state==='loading'?'Oak is arriving…':state==='error'?'Oak’s model could not load. His dialogue and the collection are still available.':'';$('[data-oak-retry]').hidden=state!=='error';}});room.setPreviews(POKEMON_COLLECTION);content({animate:false,delay:1.05});resize(true,true);room.loadOak();veil.style.opacity=reduced()?'0':'1';transition=reduced()?null:{kind:'entry',elapsed:0,duration:.32};if(!transition)setPhase('viewing');$('[data-oak-next]').focus({preventScroll:true});return true;}catch(error){finishClose(false);throw error;}
   }
   function finishClose(notify){if(phase==='closed')return;setPhase('returning');hidePlaces({restoreFocus:false});stopNarration();child?.close({immediate:true,notify:false});restoreChild();room?.dispose();room=null;transition=null;setPhase('closed');dirty=false;restore();dialog.close();const previous=focus;focus=null;if(notify){try{onClose();}finally{if(previous?.isConnected&&!previous.disabled)previous.focus({preventScroll:true});}}}
   function close({immediate=false,notify=true}={}){if(phase==='closed')return false;stopNarration();hidePlaces({restoreFocus:false});if(phase==='returning'&&!immediate)return false;setPhase('returning');if(child?.isOpen){child.close({immediate:true,notify:false});restoreChild();}if(immediate||reduced()){finishClose(notify);return true;}room?.beginExit();transition={kind:'exit',elapsed:0,duration:.45,notify};dirty=true;return true;}
-  function update(dt=0){if(phase==='closed'||document.hidden||placesOpen)return false;if(child?.isOpen)return child.update(dt);if(transition){const t=transition;const progress=reduced()?1:Math.min(1,(t.elapsed+=Math.max(0,Math.min(.1,Number(dt)||0)))/t.duration);veil.style.opacity=String(t.kind==='entry'?1-progress:Math.max(0,(progress-.35)/.65));dirty=true;if(progress===1){transition=null;if(t.kind==='exit'){finishClose(t.notify);return false;}setPhase('viewing');}}if(room?.update(dt,reduced(),{active:ambientMotion})){dirty=true;placeTalk();}updateNarration(dt);if(!dirty||!room)return false;renderer.render(room.scene,room.camera);renderedFrames++;dirty=false;return true;}
+  function update(dt=0){if(phase==='closed'||document.hidden||placesOpen)return false;syncMotionControl();if(child?.isOpen)return child.update(dt);if(transition){const t=transition;const progress=reduced()?1:Math.min(1,(t.elapsed+=Math.max(0,Math.min(.1,Number(dt)||0)))/t.duration);veil.style.opacity=String(t.kind==='entry'?1-progress:Math.max(0,(progress-.35)/.65));dirty=true;if(progress===1){transition=null;if(t.kind==='exit'){finishClose(t.notify);return false;}setPhase('viewing');}}if(room?.update(dt,reduced(),{active:ambientMotion})){dirty=true;placeTalk();}updateNarration(dt);if(!dirty||!room)return false;renderer.render(room.scene,room.camera);renderedFrames++;dirty=false;return true;}
   listen($('[data-oak-close]'),'click',()=>close());listen($('[data-oak-portfolio]'),'click',event=>{if(event.target.closest?.('[data-mode-link]')?.dataset.modeLink!=='portfolio')return;close({immediate:true,notify:false});onPortfolio();});listen($('[data-oak-prev]'),'click',()=>advance(-1));listen($('[data-oak-next]'),'click',()=>advance());listen($('[data-oak-talk]'),'click',replayLine);listen($('[data-oak-making]'),'click',startMaking);listen($('[data-oak-collection]'),'click',openCollection);listen($('[data-oak-retry]'),'click',()=>room?.loadOak());dialog.querySelectorAll('[data-oak-zone]').forEach(button=>listen(button,'click',()=>selectZone(button.dataset.oakZone)));
   listen(dialog,'cancel',event=>{event.preventDefault();if(placesOpen)hidePlaces();else if(child?.isOpen)child.cancel({fromKeyboard:true});else close();});
   listen(dialog,'close',()=>{if(phase!=='closed'&&!dialog.open)finishClose(true);});
@@ -231,11 +238,11 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
   });
   listen(renderer.domElement,'pointerdown',event=>{if(!placesOpen&&phase!=='collection'&&event.button===0)press={x:event.clientX,y:event.clientY};});
   listen(renderer.domElement,'pointerup',event=>{const down=press;press=null;if(!down||placesOpen||event.button!==0||!room||!['viewing','entering'].includes(phase)||Math.hypot(event.clientX-down.x,event.clientY-down.y)>7)return;const rect=renderer.domElement.getBoundingClientRect();pointer.set((event.clientX-rect.left)/rect.width*2-1,-(event.clientY-rect.top)/rect.height*2+1);raycaster.setFromCamera(pointer,room.camera);const place=selectedZone==='making'&&buildIndex===2?room.pickBuildStop?.(raycaster.ray):null;if(place){inspectBuildPlace(place);return;}const zone=room.pick(raycaster.ray);if(zone==='welcome')replayLine();else if(zone==='collection'){selectZone(zone);openCollection();}else if(zone&&zone!==selectedZone)selectZone(zone);});
-  listen(renderer.domElement,'pointercancel',()=>{press=null;});listen(window,'resize',resize);listen(document,'visibilitychange',()=>{if(document.hidden)stopNarration();else dirty=true;});listen(window,'pagehide',stopNarration);listen(query,'change',()=>{if(reduced()&&transition){const t=transition;transition=null;veil.style.opacity=t.kind==='entry'?'0':'1';if(t.kind==='exit')finishClose(t.notify);else setPhase('viewing');}dirty=true;});
+  listen(renderer.domElement,'pointercancel',()=>{press=null;});listen(window,'resize',resize);listen(document,'visibilitychange',()=>{if(document.hidden)stopNarration();else dirty=true;});listen(window,'pagehide',stopNarration);listen(query,'change',()=>{syncMotionControl();if(reduced()&&transition){const t=transition;transition=null;veil.style.opacity=t.kind==='entry'?'0':'1';if(t.kind==='exit')finishClose(t.notify);else setPhase('viewing');}dirty=true;});
   listen($('[data-oak-read]'),'click',()=>{narrationEnabled=!narrationEnabled;rememberNarration();stopNarration();syncNarrationControls();if(narrationEnabled)replayLine();});
   listen($('[data-oak-pause]'),'click',()=>narration.togglePause());listen($('[data-oak-replay]'),'click',replayLine);
   listen($('[data-oak-voice]'),'change',()=>{const id=$('[data-oak-voice]').value;if(narration.setVoice(id)){preferredVoice=id;rememberNarration();}});
-  listen($('[data-oak-motion]'),'click',()=>{ambientMotion=!ambientMotion;$('[data-oak-motion]').textContent=ambientMotion?'Pause displays':'Resume displays';$('[data-oak-motion]').setAttribute('aria-pressed',String(ambientMotion));dirty=true;});
+  listen($('[data-oak-motion]'),'click',()=>{ambientMotion=!ambientMotion;syncMotionControl();dirty=true;});
   listen(placeNav,'click',event=>{const button=event.target.closest?.('[data-oak-place]');if(button)inspectBuildPlace(button.dataset.oakPlace);});
   listen(stageNav,'click',event=>{const button=event.target.closest?.('[data-oak-build]');if(button)setBuildStep(Number(button.dataset.oakBuild));});
   listen($('[data-oak-build-prev]'),'click',()=>advanceBuild(-1));listen($('[data-oak-build-next]'),'click',()=>advanceBuild());listen($('[data-oak-map]'),'click',()=>{if(selectedZone==='making'&&buildIndex===2)setBuildStep(2);});

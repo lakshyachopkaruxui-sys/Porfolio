@@ -112,7 +112,7 @@ export const NORMAL_WORK_METADATA=[
     "subtitle": "Collaborative ergonomics research and redesign concept",
     "status": "Ergonomics research · Redesign concept",
     "summary": "A syringe redesign focused on grip, thumb support and scale readability.",
-    "role": "I developed the selected concept. My teammate and I shared the research, Maya modelling and 3D-printed prototype work.",
+    "role": "I developed the selected concept. My teammate and I shared the research and 3D-printed prototype work; my teammate created the Maya model.",
     "timeline": "4 weeks"
   },
   {

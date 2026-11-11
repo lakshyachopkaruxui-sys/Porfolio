@@ -11,7 +11,7 @@ import {getHorizontalNavigation,getBoundaryNavigation,isKeyboardShortcutBlocked,
 
 /** An imagined setting for a real memory. The parent owns the renderer/loop;
  * this room owns its scenery and one optional, independently loaded companion. */
-export function createPokemonRoom({renderer,container,isReduced=()=>false,onClose=()=>{},onPortfolio=()=>{},loadAsset=loadPokemonAsset,poseFactory=createPikachuGait,collection=POKEMON_COLLECTION,returnLabel="Back to Hobbies"}={}){
+export function createPokemonRoom({renderer,container,isReduced,onClose=()=>{},onPortfolio=()=>{},loadAsset=loadPokemonAsset,poseFactory=createPikachuGait,collection=POKEMON_COLLECTION,returnLabel="Back to Hobbies"}={}){
   if(!renderer?.domElement||!container)throw new Error('Pokemon room requires the existing renderer and a container.');
   const v=(x,y,z)=>new THREE.Vector3(x,y,z),stories=POKEMON_STORIES;
   const poses={
@@ -20,7 +20,8 @@ export function createPokemonRoom({renderer,container,isReduced=()=>false,onClos
     outdoors:{position:v(0,11.5,-1.2),target:v(0,1.8,-16.5),fov:77,shift:.09},
     garden:{position:v(10.4,5.3,8.2),target:v(5,1.3,2.4),fov:56}
   };
-  const query=window.matchMedia('(prefers-reduced-motion: reduce)'),reduced=()=>Boolean(isReduced()||query.matches);
+  // A supplied callback already resolves the app override and OS preference.
+  const query=window.matchMedia('(prefers-reduced-motion: reduce)'),reduced=()=>typeof isReduced==='function'?Boolean(isReduced()):query.matches;
   const resources={geometry:new Set(),material:new Set(),texture:new Set(),light:new Set(),instanced:new Set()};
   const geometryCache=new Map(),listeners=[],picks=[],occluders=[],labels=[],doors=[],palette={},raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();
   let walkCurve=new THREE.CatmullRomCurve3([v(1,.15,-10),v(1.1,.15,-10.1)]);

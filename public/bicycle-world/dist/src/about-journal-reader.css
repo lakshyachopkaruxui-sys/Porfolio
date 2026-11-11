@@ -44,7 +44,7 @@
 .about-journal-reader button.journal-inline-link{padding:8px 12px;background:#e8ecd7;border-color:#9caa8b;}
 .journal-destinations{display:flex;flex-direction:column;gap:10px;margin-top:20px;}
 .journal-destinations button{text-align:left;background:#e8ecd7;}
-.journal-folio{font-size:11px;font-weight:600;color:#8a8a6a;text-align:center;font-variant-numeric:tabular-nums;margin:24px 0 0!important;}
+.journal-folio{font-size:11px;font-weight:600;color:#5f634b;text-align:center;font-variant-numeric:tabular-nums;margin:24px 0 0!important;}
 .journal-footer{position:absolute;left:var(--journal-book-left,calc((100vw - var(--journal-fallback-width))/2));top:calc(var(--journal-book-top,calc(140px + (100dvh - 214px - var(--journal-fallback-height))/2)) + var(--journal-book-height,var(--journal-fallback-height)) + 14px);width:var(--journal-book-width,var(--journal-fallback-width));}
 .journal-page-navigation{display:flex;gap:12px;align-items:center;justify-content:space-between;}
 .journal-page-navigation>div{text-align:center;}

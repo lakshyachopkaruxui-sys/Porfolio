@@ -83,7 +83,7 @@ export const WORK_OVERVIEW_CONTENT = {
   syringe: {
     summary: 'Rethinking how a hand holds, pushes and reads a 20 cc syringe.',
     overviewLead: 'A syringe asks one hand to hold the barrel, reach the plunger and read the dose. Our redesign examined each point of contact, using practitioner research and hand dimensions to develop a physical prototype with revised grip, thumb support and markings.',
-    role: 'I developed the selected concept. My teammate and I shared the research, Maya modelling and 3D-printed prototype work.',
+    role: 'I developed the selected concept. My teammate and I shared the research and 3D-printed prototype work; my teammate created the Maya model.',
     status: 'Ergonomics research · Physical redesign prototype',
     timeline: '4 weeks · Two-person team',
     sections: [

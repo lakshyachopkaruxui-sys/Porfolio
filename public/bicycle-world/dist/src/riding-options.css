@@ -32,7 +32,7 @@ body.hybrid-world #help #help-resume{background:#31594b;color:#fff9ec;border-col
 body.hybrid-world #help :is(button,a,select):focus-visible{outline:3px solid #a64d31;outline-offset:4px}
 body.hybrid-world #ride-tools :is(#ride-camera,#ride-bell,#ride-light){min-height:44px;padding:10px 14px;background:#31594b;color:#fff9ec;border:1px solid #234637;border-radius:6px;box-shadow:0 2px 0 #1e3d31;font:600 14px/1.3 var(--font-body);cursor:pointer}
 body.hybrid-world #ride-tools :is(#ride-camera,#ride-bell,#ride-light):hover{background:#244638}
-body.hybrid-world #ride-tools :is(#ride-camera,#ride-bell,#ride-light):focus-visible{outline:3px solid #a64d31;outline-offset:4px}
+body.hybrid-world #ride-tools :is(#ride-camera,#ride-bell,#ride-light):focus-visible{outline:3px solid #fff9ec;outline-offset:4px}
 body.hybrid-world #world-map > .reader-top > .play-music-dock{position:static;margin-left:auto;order:1}
 body.hybrid-world #world-map > .reader-top #map-close{order:2}
 body.hybrid-world #world-map > .reader-top{position:sticky;top:0;z-index:4;background:#d9e4db}
@@ -88,3 +88,16 @@ body.hybrid-world #help .play-music-level output{color:#243f37;font:600 15px/1.5
 body.hybrid-world #help .play-music-level input{grid-column:1/-1;width:100%;min-height:44px;margin:0;accent-color:#31594b;cursor:pointer}
 body.hybrid-world #help .play-music-level input:focus-visible{outline:3px solid #a64d31;outline-offset:4px;border-radius:4px}
 body.hybrid-world #help .play-music-level p{grid-column:1/-1;margin:0;font-size:13px;line-height:1.6}
+
+/* Restore the existing tablet buttons using the riding HUD palette. */
+/* Adjacent light and dark bands remain visible against changing 3D scenery. */
+body.hybrid-world :is(#scene,.about-canvas,.works-canvas,.personal-canvas):focus-visible{outline:3px solid #fff9ec;outline-offset:-6px;box-shadow:inset 0 0 0 3px #1e3d31}
+@media (pointer: coarse) {
+  body.hybrid-world.hybrid-touch-riding #touch-controls button{height:var(--touch-control-size);min-height:var(--touch-control-size);min-width:var(--touch-control-size);pointer-events:auto;background:#31594b;color:#fff9ec;border:1px solid #7f9b89;box-shadow:0 3px 0 #1e3d31;font:600 14px/1.3 var(--font-body);cursor:pointer}
+  body.hybrid-world.hybrid-touch-riding #touch-controls > div{gap:var(--touch-control-gap);align-self:flex-end}
+  body.hybrid-world.hybrid-touch-riding #touch-controls > .pedals{height:var(--touch-controls-height);grid-template-rows:repeat(2,var(--touch-control-size));grid-template-columns:repeat(2,minmax(var(--touch-control-size),1fr))}
+  body.hybrid-world.hybrid-touch-riding #touch-controls > #touch-help{height:var(--touch-control-size);min-width:64px;width:auto;padding:0 14px;align-self:flex-end}
+  body.hybrid-world.hybrid-touch-riding #touch-controls button.pressed{background:#f0ce8f;color:#243f37;border-color:#c5a15f;box-shadow:0 1px 0 #806a45}
+  body.hybrid-world.hybrid-touch-riding #touch-controls button:focus-visible{outline:3px solid #fff9ec;outline-offset:4px}
+  body.hybrid-world.hybrid-touch-riding > .play-music-dock{top:calc(max(24px,env(safe-area-inset-top)) + 76px);right:max(24px,env(safe-area-inset-right));bottom:auto;max-width:calc(100vw - 48px)}
+}

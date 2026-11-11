@@ -7,13 +7,17 @@ import {loadGardenPokeballs} from './garden-pokeballs.js';
 import {createGardenRiver} from './garden-river.js';
 import {createGardenAccents} from './garden-accents.js';
 
-async function loadAsset(url,signal){
+async function loadAsset(url,signal,timeoutMs=30000){
   if(signal?.aborted)throw new DOMException('Garden loading cancelled','AbortError');
   let expired=false,asset=null,released=false,cancel;
   const release=()=>{if(asset&&!released){released=true;disposeCharacterAsset(asset);}};
   const work=new GLTFLoader().loadAsync(url).then(gltf=>{asset=gltf.scene;if(expired)release();return asset;});
   const cancelled=new Promise((_,reject)=>{cancel=()=>{expired=true;release();reject(new DOMException('Garden loading cancelled','AbortError'));};signal?.addEventListener('abort',cancel,{once:true});});
-  try{return await withinDeadline(Promise.race([work,cancelled]),30000);}
+  try{
+    const result=await withinDeadline(Promise.race([work,cancelled]),timeoutMs);
+    if(signal?.aborted||expired){release();throw new DOMException('Garden loading cancelled','AbortError');}
+    return result;
+  }
   catch(error){expired=true;release();throw error;}
   finally{signal?.removeEventListener('abort',cancel);}
 }
@@ -43,28 +47,50 @@ export async function loadGarden(scene,world,{signal}={}){
     world.bridgeSurfaces.forEach(mesh=>mesh.visible=false);
     world.colliders.push(...nature.colliders,...bridges.colliders);
   }catch(error){release();throw error;}
-  // Optional static accents share their source resources. A failed decoration
-  // request must never prevent the original garden from starting.
+  // All optional decorations share one short budget after the base garden is
+  // ready. Sequential per-asset deadlines could exhaust the essential stage.
+  // Cancelling this child signal leaves the startup signal and base ride intact.
+  const decorationBudget=6000,decorationController=new AbortController();
+  const cancelDecorations=()=>decorationController.abort();
+  signal?.addEventListener('abort',cancelDecorations,{once:true});
+  if(signal?.aborted)cancelDecorations();
+  const decorationTimer=setTimeout(cancelDecorations,decorationBudget);
+  let decorationResults;
   try{
-    pokeballs=await loadGardenPokeballs(scene,{signal,deadline:6000});
-    world.colliders.push(...pokeballs.colliders);
-  }catch(error){
-    if(signal?.aborted){release();throw error;}
-    console.warn('Garden ball displays could not load; the riding paths remain available.',error);
+    decorationResults=await Promise.allSettled([
+      loadGardenPokeballs(scene,{signal:decorationController.signal,deadline:decorationBudget}),
+      loadAsset(new URL('../assets/garden/berry-bush.glb',import.meta.url).href,decorationController.signal,decorationBudget),
+      loadAsset(new URL('../assets/garden/floral-accents.glb',import.meta.url).href,decorationController.signal,decorationBudget),
+    ]);
+  }finally{
+    clearTimeout(decorationTimer);signal?.removeEventListener('abort',cancelDecorations);
   }
-  // Optional low garden planting must not block the essential riding world.
-  try{
-    const source=await loadAsset(new URL('../assets/garden/berry-bush.glb',import.meta.url).href,signal);
-    sources.push(source);let floral;
-    try{floral=await loadAsset(new URL('../assets/garden/floral-accents.glb',import.meta.url).href,signal);sources.push(floral);}
-    catch(error){if(signal?.aborted)throw error;console.warn('Flower planting could not load; berries remain available.',error);}
-    accents=createGardenAccents(source,nature.placements,floral);scene.add(accents.root);
-  }catch(error){
-    if(signal?.aborted){release();throw error;}
-    console.warn('Berry planting could not load; the garden remains available.',error);
+  const [balls,berry,flowers]=decorationResults;
+  if(signal?.aborted){
+    if(balls.status==='fulfilled')balls.value.dispose();
+    for(const result of [berry,flowers])if(result.status==='fulfilled')disposeCharacterAsset(result.value);
+    release();throw new DOMException('Garden loading cancelled','AbortError');
   }
+  if(balls.status==='fulfilled'){
+    pokeballs=balls.value;world.colliders.push(...pokeballs.colliders);
+  }else console.warn('Garden ball displays could not load; the riding paths remain available.',balls.reason);
+  if(berry.status==='fulfilled'){
+    const floral=flowers.status==='fulfilled'?flowers.value:undefined;
+    try{
+      accents=createGardenAccents(berry.value,nature.placements,floral);scene.add(accents.root);
+      sources.push(berry.value);if(floral)sources.push(floral);
+    }catch(error){
+      accents?.dispose();accents=undefined;disposeCharacterAsset(berry.value);if(floral)disposeCharacterAsset(floral);
+      console.warn('Berry planting could not load; the garden remains available.',error);
+    }
+    if(flowers.status==='rejected')console.warn('Flower planting could not load; berries remain available.',flowers.reason);
+  }else{
+    if(flowers.status==='fulfilled')disposeCharacterAsset(flowers.value);
+    console.warn('Berry planting could not load; the garden remains available.',berry.reason);
+  }
+  const decorationStatus=Object.freeze({balls:!!pokeballs,berries:!!accents,flowers:!!accents&&flowers.status==='fulfilled'});
   let disposed=false;
-  return {nature,bridges,river,pokeballs,accents,update(options){nature.update(options);accents?.update(options);river.update(options);},dispose(){
+  return {nature,bridges,river,pokeballs,accents,decorationStatus,update(options){nature.update(options);accents?.update(options);river.update(options);},dispose(){
     if(disposed)return;disposed=true;release();
   }};
 }

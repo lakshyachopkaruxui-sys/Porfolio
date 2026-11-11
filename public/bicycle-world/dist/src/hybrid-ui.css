@@ -197,6 +197,36 @@ body.hybrid-intro :is(#world-controls, #world-bottom) {
   display: none !important;
 }
 
+/* Authored tablet controls stay above the world, including diegetic status
+   clipping. The application only grants this class to unobscured coarse riding. */
+@media (pointer: coarse) {
+  html.touch-input body.hybrid-world.hybrid-touch-riding {
+    --touch-control-size: 53px;
+    --touch-control-gap: 9px;
+    --touch-controls-height: calc(var(--touch-control-size) + var(--touch-control-size) + var(--touch-control-gap));
+  }
+  html.touch-input body.hybrid-world.hybrid-touch-riding #touch-controls:not([hidden]) {
+    display: flex !important;
+    position: fixed !important;
+    inset: auto max(24px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left)) !important;
+    width: auto !important;
+    height: var(--touch-controls-height) !important;
+    min-width: 0 !important;
+    min-height: var(--touch-controls-height) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    clip-path: none !important;
+    white-space: normal !important;
+    pointer-events: none !important;
+    align-items: flex-end;
+    z-index: 7;
+  }
+  html.touch-input body.hybrid-world.hybrid-touch-riding #world-bottom {
+    bottom: calc(max(24px, env(safe-area-inset-bottom)) + var(--touch-controls-height) + 16px);
+  }
+}
+
 /* Opening and reading are screen tasks. They stay stable while the bicycle is
    paused, rather than moving or changing scale with the game camera. */
 body.hybrid-intro #welcome:not(.diegetic-surface) {

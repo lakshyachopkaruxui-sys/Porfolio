@@ -8,14 +8,15 @@ import {getHorizontalNavigation,getBoundaryNavigation,consumeNavigationKey} from
  * One borrowed renderer; the parent owns the animation loop. The light reveal
  * is a finite visual celebration, not a dance lesson or a reenacted event.
  */
-export function createGarbaRoom({renderer,container,isReduced=()=>false,onClose=()=>{},onPortfolio=()=>{}}={}){
+export function createGarbaRoom({renderer,container,isReduced,onClose=()=>{},onPortfolio=()=>{}}={}){
   if(!renderer?.domElement||!container)throw new Error('Garba courtyard requires the existing renderer and a container.');
   const v=(x,y,z)=>new THREE.Vector3(x,y,z),photos=GARBA_PHOTOS;
   const overview={position:v(1.2,4.5,7.2),target:v(0,2,-1.8),fov:60};
   const threshold={position:v(0,2.8,15.6),target:v(0,2.5,7.1),fov:50};
   const photoPlaces=[{x:-4.1,z:-3.8},{x:4.1,z:-3.8}];
   const motionQuery=window.matchMedia('(prefers-reduced-motion: reduce)');
-  const reduced=()=>Boolean(isReduced()||motionQuery.matches);
+  // A supplied callback already resolves the app override and OS preference.
+  const reduced=()=>typeof isReduced==='function'?Boolean(isReduced()):motionQuery.matches;
   const resources={geometry:new Set(),material:new Set(),texture:new Set(),lights:new Set(),instanced:new Set()};
   const listeners=[],pendingImages=[],placards=[],picks=[],photoMeshes=new Map(),geometryCache=new Map();
   let viewerSiblings=[];

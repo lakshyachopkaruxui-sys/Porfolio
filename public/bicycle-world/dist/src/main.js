@@ -19,7 +19,7 @@ import {GARDEN_PALETTE} from './garden-palette.js';
 import {createRenderQuality} from './render-quality.js';
 import {newState,stepMotion,elevation,steeringAngle} from './motion.js';
 import {createGuidedRide} from './guided-ride.js';
-import {hybridUIState} from './hybrid-ui-state.js';
+import {hybridUIState,createTouchRidingInput} from './hybrid-ui-state.js';
 import {createDestinationUI} from './destination-ui.js';
 import {STOPS,MAP_VERSION,RIDER_HALF_WHEELBASE,positionIsClear,nearbyStop} from './layout.js';
 import {planRoute} from './navigation.js';
@@ -53,7 +53,8 @@ import {createGuardedFrameLoop} from './startup-lifecycle.js';
 
 const $=id=>document.getElementById(id);
 const sceneHost=$('scene'), reader=$('reader'), help=$('help');
-const state=newState(),keys=new Set();
+const state=newState(),keys=new Set(),physicalKeys=new Set();
+let touchControlInput;
 let renderer,scene,camera,rider,world,sun,contactMarker,bicycleLight;
 let overviewCamera,followView,trailheadGuide,hemisphere,gardenLighting,followSky,cameraObstacles=[],ridingView='overview';
 let characterAsset,garden,companions;
@@ -140,8 +141,10 @@ let placeUI,mapUI,projectUI,personalRooms,worksExperience,oakLab,aboutExperience
 const riderGroundHeight=(x,z)=>elevation(z,x);
 let rideHintVisible=false;
 let readingBackdropDrawn=false;
-const coarse=matchMedia('(pointer: coarse)').matches;
+const coarsePreference=matchMedia('(pointer: coarse)');
+let coarse=coarsePreference.matches;
 document.documentElement.classList.toggle('touch-input',coarse);
+coarsePreference.addEventListener('change',event=>{coarse=event.matches;document.documentElement.classList.toggle('touch-input',coarse);clearInput();syncRideUI();});
 const motionPreference=matchMedia('(prefers-reduced-motion: reduce)');
 let reduced=motionPreference.matches,reducedOverride=null;
 const focus=new THREE.Vector3(),desired=new THREE.Vector3(),cameraOffset=WORLD_CAMERA_OFFSET.clone();
@@ -153,7 +156,7 @@ const store={get(){try{return JSON.parse(localStorage.getItem('lakshya-bicycle-v
 motionPreference.addEventListener('change',e=>{if(reducedOverride===null)reduced=e.matches;if(reduced)setRidingView('overview');document.documentElement.classList.toggle('reduce-motion',reduced);});
 
 function cancelRoute(){target=null;guidedRide=null;pendingArrival=null;blockedTime=0;$('ride-status').hidden=true;if(world){world.ring.visible=false;world.setRoute(introRouteVisible?introRoutePoints:null);}}
-function clearInput({stop=true}={}){keys.clear();cancelRoute();pointerDown=null;if(stop){state.speed=0;state.steering=0;}rideFeedback.reset(state);rideFeel={};contactMarker?.reset();rideAudio.stop();gardenBell.stop();pokemonAudio.stop();document.querySelectorAll('[data-key]').forEach(b=>b.classList.remove('pressed'));}
+function clearInput({stop=true}={}){physicalKeys.clear();touchControlInput?.clear();keys.clear();cancelRoute();pointerDown=null;if(stop){state.speed=0;state.steering=0;}rideFeedback.reset(state);rideFeel={};contactMarker?.reset();rideAudio.stop();gardenBell.stop();pokemonAudio.stop();document.querySelectorAll('[data-key]').forEach(b=>b.classList.remove('pressed'));}
 function notify(text){$('notice').textContent=text;$('notice').classList.add('visible');clearTimeout(noticeTimer);noticeTimer=setTimeout(()=>$('notice').classList.remove('visible'),3200);}
 function save(){store.set();}
 function restartJourney(){
@@ -207,9 +210,10 @@ function setBicycleLight(value){
   notify(value?'Bicycle light on.':'Bicycle light off.');
 }
 function hasOverlay(){return Boolean(reader.open||help.open||placeUI?.isOpen||projectUI?.isOpen||mapUI?.isOpen||personalRooms?.isOpen||worksExperience?.isOpen||oakLab?.isOpen||aboutExperience?.isOpen);}
+function ridingInputBlocked(){return failed||abandoned||document.hidden||cloudTransition.snapshot.active||!$('woody-guide').hidden;}
 function syncRideUI(){
   playMusic.setActive(ready&&running&&!inPortfolio);
-  const ui=hybridUIState({ready,inPortfolio,running,modalOpen:hasOverlay(),previewOpen:false,hasRoute:Boolean(target),speed:state.speed,nearStop,hintVisible:rideHintVisible,stopFocused:document.activeElement===$('stop-route')});
+  const ui=hybridUIState({ready,inPortfolio,running,modalOpen:hasOverlay(),previewOpen:false,hasRoute:Boolean(target),speed:state.speed,nearStop,hintVisible:rideHintVisible,stopFocused:document.activeElement===$('stop-route'),coarse,inputBlocked:ridingInputBlocked()});
   document.body.classList.toggle('hybrid-world',!inPortfolio);
   document.body.classList.toggle('hybrid-intro',ui.intro&&$('failure').hidden);
   document.body.classList.toggle('hybrid-reading',ui.reading);
@@ -218,7 +222,10 @@ function syncRideUI(){
   $('interact').hidden=!ui.interact;$('route-hint').hidden=!ui.hint;
   if(!nearStop&&nearTrailhead()&&ui.controls){$('interact').hidden=false;$('interact').querySelector('.stop-caption').textContent='Garden guide';$('interact-label').innerHTML='Open the riding guide <kbd>Enter</kbd>';}
   $('ride-status').hidden=!ui.status;$('stop-route').hidden=!ui.status;
-  $('touch-controls').hidden=true;$('touch-controls').inert=true;
+  const touchControls=$('touch-controls');
+  if(!ui.touchControls&&!touchControls.hidden)touchControlInput?.clear();
+  touchControls.hidden=!ui.touchControls;touchControls.inert=!ui.touchControls;
+  document.body.classList.toggle('hybrid-touch-riding',ui.touchControls);
   sceneHost.tabIndex=running?0:-1;
   if(!$('woody-guide').hidden)$('world-bottom').hidden=true;
   const status=ui.kind==='riding'?(Math.abs(state.speed)<=.05?'Stopped · Ready to explore':coarse?'Riding freely':'Riding freely · Space to brake'):null;
@@ -380,7 +387,7 @@ function beginRoute(destination,preferPaths=false,onArrival=null){
   const route=planRoute(state,destination,world.colliders,{preferPaths});
   if(!route){notify('Choose clear ground. The river is crossed at either bridge.');return false;}
   const boosting=keys.has('shift');
-  clearInput({stop:false});if(boosting)keys.add('shift');pendingArrival=onArrival;target={...destination};
+  clearInput({stop:false});if(boosting){physicalKeys.add('shift');keys.add('shift');}pendingArrival=onArrival;target={...destination};
   guidedRide=createGuidedRide(state,route,world.colliders,{preferPaths});
   world.ring.position.set(destination.x,elevation(destination.z,destination.x)+.05,destination.z);world.ring.visible=true;
   world.setRoute([{x:state.x,z:state.z},...guidedRide.points]);$('ride-status-label').textContent='Following your route';syncRideUI();return true;
@@ -466,16 +473,16 @@ document.querySelectorAll('[data-workbench]').forEach(button=>button.addEventLis
 document.addEventListener('keydown',e=>{
   if(hasOverlay()||inPortfolio||!ready||isKeyboardShortcutBlocked(e,{allowShift:true}))return;
   const key=e.key.toLowerCase();
-  if(key==='p'&&!e.repeat){e.preventDefault();showPortfolio();return;}
   if(cloudTransition.snapshot.active){if(['w','a','s','d','arrowup','arrowleft','arrowdown','arrowright',' ','shift'].includes(key))e.preventDefault();return;}
   if(!running){if(key==='enter'&&document.activeElement===sceneHost){e.preventDefault();start();}return;}
   if(key==='escape'&&!e.repeat){consumeNavigationKey(e);stopRide();return;}
   // Keep native button/keyboard activation. Riding input belongs to the canvas.
   if(document.activeElement!==sceneHost&&e.key!=='Escape')return;
+  if(key==='p'&&!e.repeat){e.preventDefault();showPortfolio();return;}
   // Shift changes pace without cancelling a click-to-ride route. Its keyup and
   // the existing blur/overlay cleanup release it just like the riding keys.
-  if(key==='shift'){e.preventDefault();keys.add(key);return;}
-  if(['w','a','s','d','arrowup','arrowleft','arrowdown','arrowright',' '].includes(key)){e.preventDefault();cancelRoute();keys.add(key);if(e.shiftKey)keys.add('shift');else keys.delete('shift');}
+  if(key==='shift'){e.preventDefault();physicalKeys.add(key);keys.add(key);return;}
+  if(['w','a','s','d','arrowup','arrowleft','arrowdown','arrowright',' '].includes(key)){e.preventDefault();cancelRoute();physicalKeys.add(key);keys.add(key);if(e.shiftKey){physicalKeys.add('shift');keys.add('shift');}else{physicalKeys.delete('shift');keys.delete('shift');}}
   if(e.repeat)return;
   if(key==='enter'){e.preventDefault();interact();}
   if(key==='?'||key==='h')showHelp();
@@ -488,7 +495,7 @@ document.addEventListener('keydown',e=>{
 function unlockResumedAudio(event){if(event.isTrusted&&pendingRideAudio&&ready&&running)unlockRideAudio();}
 document.addEventListener('keydown',unlockResumedAudio,{capture:true});
 document.addEventListener('pointerdown',unlockResumedAudio,{capture:true});
-document.addEventListener('keyup',e=>keys.delete(e.key.toLowerCase()));
+document.addEventListener('keyup',e=>{const key=e.key.toLowerCase();physicalKeys.delete(key);keys.delete(key);touchControlInput?.sync();});
 help.addEventListener('keydown',event=>{
   if(!help.open||isKeyboardShortcutBlocked(event)||event.repeat)return;
   if(event.key.toLowerCase()==='m'){consumeNavigationKey(event);showMap();}
@@ -508,15 +515,13 @@ document.addEventListener('visibilitychange',()=>{
 window.addEventListener('pagehide',save);
 window.addEventListener('pagehide',event=>{
   const deferredGuide=running&&pendingWelcomeGuide;
-  welcomeVoice.stop();clearWelcomeHandoff();
+  welcomeVoice.stop();clearInput();clearWelcomeHandoff();
   if(event.persisted){pendingWelcomeGuide=deferredGuide;return;}
-  abandoned=true;mainLoop.stop();bicycleLight?.dispose();rider?.bell?.dispose();aboutExperience?.dispose();oakLab?.dispose();worksExperience?.dispose();personalRooms?.dispose();trailheadGuide?.dispose();gardenLighting?.dispose();followSky?.dispose();world?.wayfinding.dispose();cancelAnimationFrame(loadingCloudFrame);cloudVolume?.dispose();cloudCurtain.dispose();rideProfile?.dispose();startupController.abort();pokemonControls.dispose();pokemonAudio.dispose();rideSoundControl.dispose();gardenBell.dispose();rideAudio.dispose();companions?.dispose();welcomeVoice.dispose();garden?.dispose();world?.studioDisplays.dispose();world?.landmarks.dispose();woodyWelcome?.dispose();disposeCharacterAsset(characterAsset);characterAsset=null;
+  abandoned=true;touchControlInput?.dispose();mainLoop.stop();bicycleLight?.dispose();rider?.bell?.dispose();aboutExperience?.dispose();oakLab?.dispose();worksExperience?.dispose();personalRooms?.dispose();trailheadGuide?.dispose();gardenLighting?.dispose();followSky?.dispose();world?.wayfinding.dispose();cancelAnimationFrame(loadingCloudFrame);cloudVolume?.dispose();cloudCurtain.dispose();rideProfile?.dispose();startupController.abort();pokemonControls.dispose();pokemonAudio.dispose();rideSoundControl.dispose();gardenBell.dispose();rideAudio.dispose();companions?.dispose();welcomeVoice.dispose();garden?.dispose();world?.studioDisplays.dispose();world?.landmarks.dispose();woodyWelcome?.dispose();disposeCharacterAsset(characterAsset);characterAsset=null;
   renderer?.dispose();renderer?.domElement.remove();
 });
-document.querySelectorAll('[data-key]').forEach(button=>{
-  button.addEventListener('pointerdown',e=>{e.preventDefault();button.setPointerCapture(e.pointerId);cancelRoute();keys.add(button.dataset.key);button.classList.add('pressed');});
-  const release=()=>{keys.delete(button.dataset.key);button.classList.remove('pressed');};button.addEventListener('pointerup',release);button.addEventListener('pointercancel',release);button.addEventListener('lostpointercapture',release);
-});
+touchControlInput=createTouchRidingInput({buttons:$('touch-controls').querySelectorAll('[data-key]'),keys,physicalKeys,releaseTarget:window,onStart:cancelRoute,isActive:()=>coarse&&ready&&running&&!inPortfolio&&!hasOverlay()&&!ridingInputBlocked()});
+$('touch-help').textContent='Guide';
 function selectGround(e){
   if(!ready||!running||cloudTransition.snapshot.active||hasOverlay()||inPortfolio)return;
   sceneHost.focus({preventScroll:true});const rect=renderer.domElement.getBoundingClientRect();pointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);raycaster.setFromCamera(pointer,camera);
@@ -535,7 +540,7 @@ function selectGround(e){
   if(picked){let object=picked.object;while(object&&!object.userData.stop&&!object.userData.pokemon)object=object.parent;if(object){if(object.userData.pokemon){clearInput();const pal=companions.react(object.userData.pokemon);if(pal){pokemonAudio.play(pal.id);notify(pal.kind==='sleep'?'Snorlax is sound asleep.':`${pal.name} says hello.`);}}else activateLandmark(object.userData.stop);return;}}
   if(raycaster.ray.intersectPlane(groundPlane,hit)){
     if(!ridingPickIsAllowed(hit,state,{perspective:ridingView==='follow'})){notify('Choose a nearby part of the garden path, or use Map for a distant stop.');return;}
-    if(beginRoute({x:hit.x,z:hit.z})){if(e.shiftKey)keys.add('shift');else keys.delete('shift');}
+    if(beginRoute({x:hit.x,z:hit.z})){if(e.shiftKey){physicalKeys.add('shift');keys.add('shift');}else{physicalKeys.delete('shift');keys.delete('shift');}}
   }
 }
 sceneHost.addEventListener('pointerdown',e=>{if(e.button!==0||!e.isPrimary)return;sceneHost.focus({preventScroll:true});pointerDown={x:e.clientX,y:e.clientY,id:e.pointerId};});
@@ -743,7 +748,10 @@ async function initialize(){
     cancelAnimationFrame(loadingCloudFrame);startupComplete=true;ready=true;if(!enteredGarden)woodyWelcome?.greet();$('failure').hidden=true;if(!running)$('welcome').hidden=false;$('start').disabled=false;$('start').textContent='Let’s start';
     window.__playStartup?.finish('ready');
     $('loading-state').setAttribute('aria-busy','false');$('loading-state').dataset.ready='true';
-    $('loading-status').textContent=displayImages.every(Boolean)?'Ready to ride.':'Ready to ride. Some display images could not load; every case study is still available.';
+    const missingOptional=[];
+    if(!displayImages.every(Boolean))missingOptional.push('display images');
+    if(garden?.decorationStatus&&Object.values(garden.decorationStatus).some(loaded=>!loaded))missingOptional.push('garden decorations');
+    $('loading-status').textContent=missingOptional.length?`Ready to ride. Some ${missingOptional.join(' and ')} could not load; every case study is still available.`:'Ready to ride.';
     if(enteredGarden&&!running&&!inPortfolio)start({skipWelcome:true,resuming:true});
     syncRideUI();
     // A mode change during loading cancels a stale immersive deep link.

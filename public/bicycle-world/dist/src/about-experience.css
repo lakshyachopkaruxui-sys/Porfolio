@@ -44,3 +44,6 @@
 @media(prefers-reduced-motion:reduce){#about-experience *{scroll-behavior:auto!important}}
 
 #about-experience[data-photo-open="true"] .about-header{visibility:hidden}
+
+/* Keep scene focus visible within the dialog; buttons retain external rings. */
+#about-experience .about-canvas:focus-visible{outline-offset:-6px}

@@ -80,21 +80,21 @@ export const ABOUT_JOURNAL=freeze({
       ]
     },
     {
-      id:'toolkit',label:'My toolkit',title:'Tools I work with.',
+      id:'toolkit',label:'How I work',title:'Methods, skills and tools.',
       lead:'',
       pages:[
         {blocks:[
           {type:'toolkit',groups:[
-            {title:'Research with people',body:'Interviews, contextual inquiry, surveys, usability testing and synthesis help me understand people’s experiences.',tools:['Miro','Notion','FigJam','Google Forms']},
-            {title:'Shape the experience',body:'Flows, information architecture, wireframes and prototypes help me work through structure and interaction.',tools:['Figma','Framer','ProtoPie','Illustrator','Photoshop','Figma Make']},
-            {title:'Think in systems',body:'Journey mapping, service design and systems mapping connect the touchpoints.',tools:[]}
+            {title:'Research with people',body:"5W1H helps me ask who, what, when, where, why and how before proposing a solution. Interviews, observation and surveys help me understand people’s needs. I group findings, check designs against usability guidelines (Heuristic Evaluation), and test prototypes to find what needs to change. I also use secondary research, literature reviews and affinity mapping to connect existing evidence with field observations.",tools:['Miro','Notion','FigJam','Google Forms']},
+            {title:'Shape the experience',body:"I turn research findings into a clear order of steps, pages and actions. I sketch layouts and build a clickable prototype so people can try the design. Priority and impact–effort matrices help me compare importance, expected benefit and the work needed before deciding what to improve. How Might We, SCAMPER, storyboards and task analysis help me explore and compare possible designs.",tools:['Figma','Framer','ProtoPie','Illustrator','Photoshop','Figma Make']},
+            {title:'Think in systems',body:"I look at the complete experience, including the people, services and steps around the screen. Journey maps help me see where a problem happens; 5 Whys and Fishbone help me explore possible causes. I connect these findings so that a change in one part does not create a new problem elsewhere. Flow, Sequence and Artifact models help me document people, task steps, and the materials they use.",tools:[]}
           ]}
         ]},
         {blocks:[
           {type:'toolkit',groups:[
-            {title:'Work across disciplines',body:'Electronics, physical models and interfaces let me work across disciplines.',tools:['GitHub','Maya','3D printing','Arduino C++','ESP32','RFID (MFRC522)']},
-            {title:'Code to explore',body:'With AI support, I build working prototypes and review their behaviour against the design intent.',tools:['GitHub','Xcode','VS Code','GitHub Copilot','Antigravity']},
-            {title:'Think and make with AI',body:'AI helps me think, explore and prototype. I review what it produces.',tools:['ChatGPT','Gemini','Claude','Figma Make','GitHub Copilot','Midjourney','Perplexity','NotebookLM (Google)','Antigravity','Google Search (AI Mode)','LLM Arena']}
+            {title:'Work across disciplines',body:"I discuss the problem, ideas and practical limits with my teammates so we can make decisions together. I explain my design choices and prepare the screens, components and notes needed for the next stage. In physical projects, I contribute concept development, electronics or prototype work according to my role.",tools:['GitHub','3D printing','Arduino C++','ESP32','RFID (MFRC522)']},
+            {title:'Code to explore',body:"With AI support, I build working demos to check interactions that are difficult to explain with static screens. I try the demo, compare its behaviour with the intended design and request focused changes. This helps me explore whether an idea works before it becomes a finished product.",tools:['GitHub','VS Code','GitHub Copilot','Antigravity']},
+            {title:'Think and make with AI',body:"I use AI to organise information, compare ideas, explore visual directions and help build prototypes. I give it a clear task and relevant context, then review the result against the sources and project needs. I check the facts, make corrections and take responsibility for the design decisions.",tools:['ChatGPT','Gemini','Claude','Figma Make','GitHub Copilot','Midjourney','Perplexity','NotebookLM (Google)','Antigravity','Google Search (AI Mode)','LLM Arena']}
           ]}
         ]}
       ]

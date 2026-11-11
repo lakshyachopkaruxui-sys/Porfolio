@@ -273,7 +273,12 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     event.preventDefault();event.stopPropagation();if(event.repeat)return;
     if(key==='escape'){cancel();return;}
     if(photoOpened)selectPhoto(key==='home'?0:key==='end'?photos.length-1:photoIndex+direction);
-    else if(key==='home')setChapter(0);else if(key==='end')setChapter(chapters.length-1,{atEnd:true});else turnPage(direction);
+    else if(event.target?.closest?.('[data-journal-chapter]')&&['arrowleft','arrowright','home','end'].includes(key)){
+      // Chapter tabs navigate the tablist even when the current chapter spans
+      // several facing pages. A/D and the page buttons retain page turning.
+      const next=key==='home'?0:key==='end'?chapters.length-1:(selected+direction+chapters.length)%chapters.length;
+      setChapter(next);
+    }else if(key==='home')setChapter(0);else if(key==='end')setChapter(chapters.length-1,{atEnd:true});else turnPage(direction);
   });
   return {
     open({chapter=0}={}){if(dead||opened||!chapters.length)return false;const next=Math.max(0,Math.min(chapters.length-1,Math.round(Number(chapter)||0)));if(next!==selected)selectedSpread=0;selected=next;opened=true;root.hidden=false;render();focus(pages[0]);return true;},

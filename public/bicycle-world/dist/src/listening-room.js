@@ -9,7 +9,7 @@ import {getHorizontalNavigation,getBoundaryNavigation,consumeNavigationKey} from
  * personal-room manager owns the animation loop. The approved reference proof
  * is qa/listening-room-review.html; media belongs to its physical place here.
  */
-export function createListeningRoom({renderer,container,isReduced=()=>false,onClose=()=>{},onPortfolio=()=>{}}={}) {
+export function createListeningRoom({renderer,container,isReduced,onClose=()=>{},onPortfolio=()=>{}}={}) {
   if(!renderer?.domElement||!container)throw new Error('Listening Room requires the existing renderer and a container.');
   const collection=LISTENING_COLLECTION,v=(x,y,z)=>new THREE.Vector3(x,y,z);
   const views={
@@ -21,7 +21,8 @@ export function createListeningRoom({renderer,container,isReduced=()=>false,onCl
     family:{position:v(-1.8,3.12,.55),target:v(-1.8,3.12,-4.73),fov:43},
   };
   const motionQuery=window.matchMedia('(prefers-reduced-motion: reduce)');
-  const shouldReduceMotion=()=>Boolean(isReduced()||motionQuery.matches);
+  // A supplied callback already resolves the app override and OS preference.
+  const shouldReduceMotion=()=>typeof isReduced==='function'?Boolean(isReduced()):motionQuery.matches;
   const resources={geometry:new Set(),material:new Set(),texture:new Set(),lights:new Set(),instanced:new Set()};
   const picks=[],placards=[],pendingImages=[],listeners=[];
   const itemMeshes=new Map(),recordingPosters=new Map(),boxGeometry=new Map();
