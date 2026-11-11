@@ -5,7 +5,7 @@
 <g font-family="Arial, sans-serif" fill="#202923">
 <text x="36" y="56" font-size="32" font-weight="600">Selected pilot ratings</text>
 <text x="36" y="94" font-size="23" fill="#536059">Mean ratings out of 10 · Higher is more favourable</text>
-<rect x="400" y="120" width="24" height="18" rx="3" fill="#c7d0cd"/><text x="436" y="137" font-size="22">Existing syringe</text>
+<rect x="400" y="120" width="24" height="18" rx="3" fill="#87958f"/><text x="436" y="137" font-size="22">Existing syringe</text>
 <rect x="686" y="120" width="24" height="18" rx="3" fill="#254c3d"/><text x="722" y="137" font-size="22">Prototype</text>
 <line x1="400" y1="168" x2="400" y2="807" stroke="#e4e9e5"/>
 <text x="400" y="837" text-anchor="middle" font-size="22" fill="#536059">0</text>
@@ -20,22 +20,22 @@
 <line x1="1060" y1="168" x2="1060" y2="807" stroke="#e4e9e5"/>
 <text x="1060" y="837" text-anchor="middle" font-size="22" fill="#536059">10</text>
 <text x="36" y="217" font-size="26" font-weight="500">Grip slipperiness</text>
-<rect x="400" y="190" width="151.79999999999998" height="22" rx="4" fill="#c7d0cd"/><text x="565.8" y="210" font-size="23">2.3</text>
+<rect x="400" y="190" width="151.79999999999998" height="22" rx="4" fill="#87958f"/><text x="565.8" y="210" font-size="23">2.3</text>
 <rect x="400" y="221" width="462.0" height="22" rx="4" fill="#254c3d"/><text x="876.0" y="241" font-size="23">7.0</text>
 <text x="36" y="323" font-size="26" font-weight="500">Thumb strain</text>
-<rect x="400" y="296" width="132.0" height="22" rx="4" fill="#c7d0cd"/><text x="546.0" y="316" font-size="23">2.0</text>
+<rect x="400" y="296" width="132.0" height="22" rx="4" fill="#87958f"/><text x="546.0" y="316" font-size="23">2.0</text>
 <rect x="400" y="327" width="442.2" height="22" rx="4" fill="#254c3d"/><text x="856.2" y="347" font-size="23">6.7</text>
 <text x="36" y="429" font-size="26" font-weight="500">Glove usability</text>
-<rect x="400" y="402" width="132.0" height="22" rx="4" fill="#c7d0cd"/><text x="546.0" y="422" font-size="23">2.0</text>
+<rect x="400" y="402" width="132.0" height="22" rx="4" fill="#87958f"/><text x="546.0" y="422" font-size="23">2.0</text>
 <rect x="400" y="433" width="396.0" height="22" rx="4" fill="#254c3d"/><text x="810.0" y="453" font-size="23">6.0</text>
 <text x="36" y="535" font-size="26" font-weight="500">Physical effort</text>
-<rect x="400" y="508" width="264.0" height="22" rx="4" fill="#c7d0cd"/><text x="678.0" y="528" font-size="23">4.0</text>
+<rect x="400" y="508" width="264.0" height="22" rx="4" fill="#87958f"/><text x="678.0" y="528" font-size="23">4.0</text>
 <rect x="400" y="539" width="264.0" height="22" rx="4" fill="#254c3d"/><text x="678.0" y="559" font-size="23">4.0</text>
 <text x="36" y="641" font-size="26" font-weight="500">Plunger smoothness</text>
-<rect x="400" y="614" width="415.8" height="22" rx="4" fill="#c7d0cd"/><text x="829.8" y="634" font-size="23">6.3</text>
+<rect x="400" y="614" width="415.8" height="22" rx="4" fill="#87958f"/><text x="829.8" y="634" font-size="23">6.3</text>
 <rect x="400" y="645" width="349.8" height="22" rx="4" fill="#254c3d"/><text x="763.8" y="665" font-size="23">5.3</text>
 <text x="36" y="747" font-size="26" font-weight="500">Dosage accuracy</text>
-<rect x="400" y="720" width="442.2" height="22" rx="4" fill="#c7d0cd"/><text x="856.2" y="740" font-size="23">6.7</text>
+<rect x="400" y="720" width="442.2" height="22" rx="4" fill="#87958f"/><text x="856.2" y="740" font-size="23">6.7</text>
 <rect x="400" y="751" width="330.0" height="22" rx="4" fill="#254c3d"/><text x="744.0" y="771" font-size="23">5.0</text>
 <text x="36" y="878" font-size="20" fill="#536059">Source: project research paper, Table 10. Full 21-attribute results follow in the case study.</text>
 </g></svg>

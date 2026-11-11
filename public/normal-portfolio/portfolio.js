@@ -24,7 +24,9 @@ function optionalFeature(mount, fallback = null) {
 }
 
 optionalFeature(() => mountToolkit(document.querySelector('#toolkit-board')));
-optionalFeature(() => mountPhotoCarousel(document.querySelector('[data-photo-carousel]')));
+const photoCarousels = [...document.querySelectorAll('[data-photo-carousel]')]
+  .map(host => optionalFeature(() => mountPhotoCarousel(host)))
+  .filter(Boolean);
 const grid = document.querySelector('#project-grid');
 const filters = document.querySelector('#project-filters');
 const count = document.querySelector('#result-count');
@@ -38,6 +40,9 @@ const welcome = getWelcomeIntro();
 welcome.onReveal(() => { if (!location.hash) motion.intro({replay: true, fromWelcome: true}); });
 welcome.onFinish(({shown, reason}) => {
   if (shown && reason !== 'completed') motion.cancel();
+  // The welcome dialog can disappear without a document-level close event.
+  // Recheck the hero frame after that modal has released the opening.
+  for (const carousel of photoCarousels) carousel.refresh();
 });
 const caseMotion = optionalFeature(() => mountCaseMotion(reader), {cancel() {}, capture() {}, enter() {}});
 const PROJECT_ORDER = ['connectaid', 'giggles', 'pixel-mania', 'syringe', 'workplace-mode', 'jan-aushadhi', 'tear'];
@@ -61,7 +66,7 @@ const CARD_DETAILS = {
   connectaid: ['My part: core design system and remote testing coordination.', '6 participants · 6 team refinements'],
   giggles: ['My part: electronics, game logic and the working prototype.', 'Best Project · Meraki'],
   'pixel-mania': ['My part: visual system, interface and interaction prototyping.', 'Tried by visitors at the college exhibition'],
-  syringe: ['My part: concept development, Maya modelling and 3D printing with one teammate.', '3D-printed prototype'],
+  syringe: ['My part: concept development and shared research/3D printing. Maya modelling by my teammate.', '3D-printed prototype'],
   'workplace-mode': ['My part: research, synthesis and the interaction concept.', '34 surveys · 13 interviews'],
 };
 const RELATED_PROJECTS = {
@@ -171,16 +176,14 @@ async function start() {
           companion.loading = 'eager'; companion.decoding = 'async';
         }
       }
-      const heading = node('div', undefined, link, 'project-heading');
-      node('h3', project.title, heading).id = `title-${project.id}`;
       const copy = node('div', undefined, link, 'project-copy');
-      node('p', CARD_CATEGORIES[project.id] || project.status, copy, 'project-meta');
-      node('p', CARD_SUMMARIES[project.id] || project.summary, copy, 'project-summary');
-      const details = CARD_DETAILS[project.id];
-      if (details) {
-        node('p', details[0], copy, 'project-contribution');
-        node('p', project.id === 'giggles' ? 'Best Project · Meraki' : details[1], copy, 'project-proof');
-      }
+      const context = contexts[project.id];
+      node('p', context?.type || project.subtitle, copy, 'project-meta');
+      const heading = node('div', undefined, copy, 'project-heading');
+      node('h3', project.title, heading).id = `title-${project.id}`;
+      node('p', project.summary, copy, 'project-summary');
+      node('p', context?.role || project.role, copy, 'project-contribution');
+      node('span', 'Read case study', copy, 'project-case-label');
       link.addEventListener('click', event => {
         if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
         event.preventDefault();

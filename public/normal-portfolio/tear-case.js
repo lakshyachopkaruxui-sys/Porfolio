@@ -194,11 +194,6 @@ export const TEAR_STORY = {
     {
       "id": "ai-collaboration",
       "title": "Directing ChatGPT through a concrete review loop",
-      "body": [
-        "I used ChatGPT as a thinking and prototyping partner across concept development, reference research, interaction logic, environment refinement and narration. I supplied the intended feeling, screenshots, references and constraints. ChatGPT helped propose directions, reason through behavior and turn selected ideas into a working prototype. I reviewed the result and decided what needed to change.",
-        "This was an ongoing dialogue, rather than one prompt followed by an accepted output. When a result missed the intention, I described the mismatch more precisely. I separated grass density from naturalness, mountain roughness from blockiness, and a frightened voice from a robotic voice with echo. Each distinction gave the next pass a clearer design question.",
-        "For interaction logic, I worked through what should happen when the visitor holds, releases, crosses or returns. For the story, I compared alternatives and listened to delivery options. The value of the AI-assisted process was making these ideas concrete enough to inspect and challenge; design judgment still required looking at the experience again."
-      ],
       "flow": {
         "label": "The working pattern, repeated across the project",
         "steps": [
@@ -235,6 +230,18 @@ export const TEAR_STORY = {
         }
       ],
       "blocks": [
+        {
+          "type": "paragraph",
+          "text": "I used ChatGPT as a thinking and prototyping partner across concept development, reference research, interaction logic, environment refinement and narration. I supplied the intended feeling, screenshots, references and constraints. ChatGPT helped propose directions, reason through behavior and turn selected ideas into a working prototype. I reviewed the result and decided what needed to change."
+        },
+        {
+          "type": "paragraph",
+          "text": "This was an ongoing dialogue, rather than one prompt followed by an accepted output. When a result missed the intention, I described the mismatch more precisely. I separated grass density from naturalness, mountain roughness from blockiness, and a frightened voice from a robotic voice with echo. Each distinction gave the next pass a clearer design question."
+        },
+        {
+          "type": "paragraph",
+          "text": "For interaction logic, I worked through what should happen when the visitor holds, releases, crosses or returns. For the story, I compared alternatives and listened to delivery options. The value of the AI-assisted process was making these ideas concrete enough to inspect and challenge; design judgment still required looking at the experience again."
+        },
         {
           "type": "comparison",
           "beforeTitle": "An excerpt from my design review",

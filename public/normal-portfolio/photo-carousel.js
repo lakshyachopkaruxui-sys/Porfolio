@@ -229,5 +229,10 @@ export function mountPhotoCarousel(host) {
     for (const remove of listeners) remove();
     rotation.hidden = true;
   }
-  return {destroy};
+  function refresh() {
+    if (destroyed) return;
+    measureVisibility();
+    schedule();
+  }
+  return {destroy, refresh};
 }

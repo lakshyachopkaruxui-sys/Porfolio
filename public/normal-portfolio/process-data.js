@@ -20,7 +20,7 @@ export const PROJECT_PROCESS = {
       ['Compare pilot impressions', 'Compare nurses’ ratings of 21 attributes; force and task accuracy need further testing.'],
       ['Measure task performance', 'Measure force, posture and dose-setting across hand sizes.', true],
     ],
-    tools: [['Dimensional audit', 'Measured geometry and anthropometric references inform the redesign.'], ['Autodesk Maya + 3D printing', 'My teammate and I jointly built the digital model and printed prototype.']],
+    tools: [['Dimensional audit', 'Measured geometry and anthropometric references inform the redesign.'], ['3D modelling by my teammate + shared 3D printing', 'My teammate created the Maya model from the selected concept. We worked on the printed prototype together.']],
   },
   connectaid: {
     steps: [

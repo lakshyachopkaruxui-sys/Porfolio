@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#f2f4f7">
+  <script src="./normal-theme.js?v=20261110-hierarchy"></script>
   <link rel="icon" type="image/svg+xml" href="./assets/identity/shared-curve/favicon.svg?v=07">
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/identity/shared-curve/icon-32.png?v=07">
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/identity/shared-curve/apple-touch-icon.png?v=07">
@@ -27,7 +28,7 @@
     .map-page a.skip-link, .map-page a.skip-link:hover { color: #fff; }
     .map-page a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; border-radius: 3px; }
     .map-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 28px; }
-    .map-header > a:last-child, .map-nav a, .map-footer a { display: inline-flex; align-items: center; min-height: 44px; font-size: 15px; }
+    .map-header > a:not(.identity-lockup), .map-nav a, .map-footer a { display: inline-flex; align-items: center; min-height: 44px; font-size: 15px; }
     .map-intro { padding-top: 44px; max-width: 660px; }
     .map-intro p, .map-section-intro { color: var(--muted); }
     .map-nav { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 22px; }
@@ -70,6 +71,7 @@
       .map-footer { padding-top: 64px; }
     }
   </style>
+  <link rel="stylesheet" href="./normal-reading.css?v=20261110-hierarchy">
 <!-- portfolio-publishing:start -->
 <link rel="canonical" href="https://lakshyachopkar.com/normal-portfolio/map">
 <meta property="og:url" content="https://lakshyachopkar.com/normal-portfolio/map">
@@ -95,19 +97,19 @@
   <main class="wrap">
     <header class="map-intro">
       <h1>Portfolio map</h1>
-      <p>The homepage flow, six projects, and personal photographs.</p>
+      <p>The homepage flow, seven projects, and personal photographs.</p>
     </header>
     <nav class="map-nav" aria-label="Portfolio map">
       <a href="#homepage-plan">Homepage</a><a href="#case-plan">Projects</a><a href="#photo-plan">Photos &amp; evidence</a>
     </nav>
     <section id="homepage-plan" class="map-section" aria-labelledby="homepage-plan-title">
       <h2 id="homepage-plan-title">Homepage</h2>
-      <p class="map-section-intro">A compact personal introduction sits beside the project gallery. About, toolkit, experience and education, then a wide Play invitation follow.</p>
+      <p class="map-section-intro">A personal introduction and portrait lead into alternating project rows. About, How I work, experience and education, then a wide Play invitation follow.</p>
       <ol class="map-flow">
-        <li><h3><a href="./#top">Introduction </a></h3><p>A small portrait and personal rail alongside work on desktop, becoming a compact identity block on phones.</p></li>
-        <li><h3><a href="./?filter=all#work">Work </a></h3><p>Six projects with individual covers, contribution details and case links. Jan Aushadhi is a research and concept exploration.</p></li>
+        <li><h3><a href="./#top">Introduction </a></h3><p>A single red-shirt portrait beside a short introduction, with direct links to projects and the resume. Text and portrait stack on phones.</p></li>
+        <li><h3><a href="./?filter=all#work">Work </a></h3><p>Seven projects with alternating artwork and text, contribution details and case links. Filters help visitors find relevant work.</p></li>
         <li><h3><a href="./#about">About </a></h3><p>A twelve-photo carousel beside the introduction, followed by photographs from the studio, Meraki and Junoon.</p></li>
-        <li><h3><a href="./#toolkit">Toolkit </a></h3><p>A six-part index with complete methods and images for every listed tool; no nested reveal. Works with hover, keyboard focus or tap.</p></li>
+        <li><h3><a href="./#toolkit">How I work </a></h3><p>Six areas of practice, each with a short process description, method names and tools. Select an area with a click, keyboard or tap.</p></li>
         <li><h3><a href="./#background">Experience &amp; education</a></h3><p>Roles, dates, qualifications and courses presented directly on the page.</p></li>
         <li><h3><a href="./#explore-play">Play invitation </a></h3><p>The bicycle garden offers another way to explore. Best on a desktop or laptop. A small drawing toy stays optional here.</p></li>
         <li><h3><a href="./#contact">Contact </a></h3><p>Email, resume and professional profiles, with copy controls. The footer provides a route back to the top and this map.</p></li>
@@ -123,15 +125,16 @@
         <li><a href="./#project-syringe"><span><strong>Redesign 20 cc Syringe</strong><small>Ergonomics research · Physical prototype</small></span></a></li>
         <li><a href="./#project-workplace-mode"><span><strong>Workplace Mode</strong><small>UX research · Concept awaiting validation</small></span></a></li>
         <li><a href="./#project-jan-aushadhi"><span><strong>Jan Aushadhi</strong><small>Service design · Research &amp; concept</small></span></a></li>
+        <li><a href="./#project-tear"><span><strong>TEAR</strong><small>Immersive interaction · Working prototype</small></span></a></li>
       </ul>
       <p class="map-case-note">Each story follows its own project. Research, alternatives, prototype behavior and feedback appear where relevant, followed by outcomes and remaining questions. Section shortcuts, related work and a return to the collection keep navigation straightforward.</p>
     </section>
     <section id="photo-plan" class="map-section" aria-labelledby="photo-plan-title">
       <h2 id="photo-plan-title">Photos &amp; evidence</h2>
       <div class="map-photos">
-        <figure><img src="./assets/personal/carousel/p11.webp" width="180" height="240" loading="lazy" decoding="async" alt="Lakshya Chopkar’s supplied portrait"><figcaption>Clearer portrait · Introduction</figcaption></figure>
+        <figure><img src="./assets/personal/carousel/p11.webp" width="180" height="240" loading="lazy" decoding="async" alt="Lakshya Chopkar smiling in glasses and a red Meraki T-shirt"><figcaption>Portrait · Introduction</figcaption></figure>
         <div>
-          <p>A red-shirt portrait introduces the homepage. Twelve selected personal photos rotate in About, alongside three college moments.</p>
+          <p>A still red-shirt portrait introduces Lakshya. Twelve selected personal photos rotate in About, followed by three college moments.</p>
           <ul>
             <li><strong>About:</strong> comparing logo patterns, the syringe display at Meraki, and performing at Junoon. A brief photo-spread animation settles into a readable gallery.</li>
             <li><strong>Giggles:</strong> Meraki presentation or award photographs, a working-board demo, and later testing material with children and educators.</li>
@@ -142,6 +145,6 @@
       </div>
     </section>
   </main>
-  <footer class="map-footer wrap"><a href="./">Back to portfolio</a><a href="#homepage-plan">Back to homepage map</a><span>Updated 4 November 2026</span></footer>
+  <footer class="map-footer wrap"><a href="./">Back to portfolio</a><a href="#homepage-plan">Back to homepage map</a><span>Updated 11 November 2026</span></footer>
 </body>
 </html>

@@ -14,7 +14,7 @@ export const CASE_CONTEXT = {
     summary: 'A 20 cc syringe redesign focused on a more secure grip, thumb support and readable dose markings.',
     timeline: '4 weeks',
     team: 'Two-person project',
-    role: 'I developed the selected concept. My teammate and I shared the research, Maya modelling and 3D-printed prototype work.',
+    role: 'I developed the selected concept. My teammate and I shared the research and 3D-printed prototype work; my teammate created the Maya model.',
     methods: ['Literature review', 'Practitioner questionnaire', 'Observational exposure assessment', 'Dimensional audit and form exploration', 'Physical-prototype pilot ratings across 21 Kansei attributes'],
     question: 'How do grip geometry and plunger force create different constraints for the person using the syringe?',
   },

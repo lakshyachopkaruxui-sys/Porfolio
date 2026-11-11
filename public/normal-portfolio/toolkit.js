@@ -5,14 +5,14 @@ import {RESUME_TOOLKIT_ADDITIONS} from './toolkit-resume.js';
 const TOOL_LOGOS = {
   Miro: 'miro.avif', Notion: 'notion.avif', FigJam: 'figjam.avif',
   Figma: 'figma.svg', Framer: 'framer.webp', GitHub: 'github.avif',
-  Xcode: 'xcode.avif', 'VS Code': 'vscode.avif',
+  'VS Code': 'vscode.avif',
   ChatGPT: 'chatgpt.avif', Gemini: 'gemini.avif', Claude: 'claude.avif',
   'Google Forms': 'google-forms.svg', ProtoPie: 'protopie.png',
   Illustrator: 'illustrator.svg', Photoshop: 'photoshop.svg', 'Figma Make': 'figma-make.png',
   'Arduino C++': 'arduino.jpg', ESP32: 'esp32.svg', 'RFID (MFRC522)': 'rfid.svg',
   'GitHub Copilot': 'github-copilot.svg', Antigravity: 'antigravity.svg',
   'NotebookLM (Google)': 'notebooklm.svg',
-  Maya: 'maya.svg', '3D printing': '3d-printing.svg',
+  '3D printing': '3d-printing.svg',
   Midjourney: 'midjourney.svg', Perplexity: 'perplexity.svg',
   'Google Search (AI Mode)': 'google-search.png', 'LLM Arena': 'arena.png',
 };
@@ -20,37 +20,37 @@ const TOOL_LOGOS = {
 export const TOOLKIT_ITEMS = [
   {
     id: 'research', name: 'Research with people', short: 'Research',
-    description: 'I look at what people do, listen to their experiences and test the points where an interaction gets difficult.',
-    methods: ['User Research', 'Usability Testing', 'Eye Tracking'],
+    description: "I start by understanding who will use the product, what they need and where they face problems. I use interviews, observation and surveys to collect information, then group the findings to decide which problems need attention. I also check existing designs and test prototypes with people to see what is clear and what needs to change.",
+    methods: ['5W1H', 'User Research', 'Usability Testing', 'Eye Tracking'],
     tools: ['Miro', 'Notion', 'FigJam'], tone: 'blue',
   },
   {
     id: 'experience', name: 'Shape the experience', short: 'Experience design',
-    description: 'I work through the structure, flow and small interaction details, then put a prototype in people’s hands.',
-    methods: ['Interaction Design', 'Information Architecture', 'Prototyping'],
+    description: "I turn the findings into a clear order of steps, pages and actions. I sketch possible layouts, compare ideas and build a clickable prototype so people can try the design before it is developed. I use feedback and prioritisation methods to decide what to improve first.",
+    methods: ['Interaction Design', 'Information Architecture', 'Prototyping', 'Priority matrix', 'Impact–effort matrix'],
     tools: ['Figma', 'Framer'], tone: 'pink',
   },
   {
     id: 'systems', name: 'Think in systems', short: 'Systems thinking',
-    description: 'I follow an experience across its touchpoints, looking at the relationships and dependencies that shape it.',
-    methods: ['Journey Mapping', 'Service Design', 'Systems Mapping'],
+    description: "I look at the complete experience, including the people, services and steps around the screen. Journey maps help me see where a problem happens; 5 Whys and Fishbone help me explore possible causes. I connect these findings so that a change in one part does not create a new problem elsewhere.",
+    methods: ['Journey Mapping', 'Service Design', 'Systems Mapping', '5 Whys', 'Fishbone diagram'],
     tools: [], tone: 'mint',
   },
   {
     id: 'collaboration', name: 'Work across disciplines', short: 'Cross-disciplinary',
-    description: 'I bring an electronics background into UX, connecting physical prototypes, interfaces and the people working on them.',
+    description: "I discuss the problem, ideas and practical limits with my teammates so we can make decisions together. I explain my design choices and prepare the screens, components and notes needed for the next stage. In physical projects, I contribute concept development, electronics or prototype work according to my role.",
     methods: ['Collaboration', 'Communication', 'Problem Solving'],
     tools: ['GitHub'], tone: 'yellow',
   },
   {
     id: 'code', name: 'Code to explore', short: 'Creative coding',
-    description: 'With AI support, I make working prototypes to try the behaviour that a static screen can’t show.',
+    description: "With AI support, I build working demos to check interactions that are difficult to explain with static screens. I try the demo, compare its behaviour with the intended design and request focused changes. This helps me explore whether an idea works before it becomes a finished product.",
     methods: ['HTML', 'CSS', 'GitHub', 'Rapid Prototyping'],
-    tools: ['GitHub', 'Xcode', 'VS Code'], tone: 'lilac',
+    tools: ['GitHub', 'VS Code'], tone: 'lilac',
   },
   {
     id: 'ai', name: 'Think and make with AI', short: 'AI in practice',
-    description: 'I use AI to question ideas, explore conversations and build prototypes, then review what it produces against the design intent.',
+    description: "I use AI to organise information, compare ideas, explore visual directions and help build prototypes. I give it a clear task and relevant context, then review the result against the sources and project needs. I check the facts, make corrections and take responsibility for the design decisions.",
     methods: ['AI Prototyping', 'Conversational UX', 'Prompting'],
     tools: ['ChatGPT', 'Gemini', 'Claude'], tone: 'peach',
   },
@@ -103,7 +103,10 @@ export function mountToolkit(host) {
     const methodBlock = element('div', 'toolkit-method-block', undefined, panel);
     element('h4', 'capability-subheading', 'Methods & skills', methodBlock);
     const methods = element('ul', 'capability-methods', undefined, methodBlock);
-    for (const method of new Set([...item.methods, ...(additions?.methods || [])])) element('li', undefined, method, methods);
+    for (const method of new Set([...item.methods, ...(additions?.methods || [])])) {
+      const row = element('li', undefined, undefined, methods);
+      element('span', 'capability-method-name', method, row);
+    }
     const allTools = [...new Set([...item.tools, ...(additions?.tools || [])])];
     if (allTools.length) {
       const toolBlock = element('div', 'toolkit-tools-block', undefined, panel);
@@ -142,6 +145,15 @@ export function mountToolkit(host) {
   let measureFrame = null;
   let pointerFocusButton = null;
   let clearPointerTimer = null;
+  let hoverTimer = null;
+  let hoverButton = null;
+  let lastPointerPosition = '';
+
+  function clearHoverIntent() {
+    if (hoverTimer !== null) clearTimeout(hoverTimer);
+    hoverTimer = null;
+    hoverButton = null;
+  }
 
   function cancelPanelAnimation() {
     for (const animation of panelAnimations) animation.cancel();
@@ -236,11 +248,13 @@ export function mountToolkit(host) {
     entranceTimer = setTimeout(cancelPanelAnimation, 400);
   }
   function settleMotion() {
+    clearHoverIntent();
     cancelPanelAnimation();
     syncMotionMode();
     positionMarker();
   }
   function scheduleMeasurement() {
+    clearHoverIntent();
     if (destroyed || measureFrame !== null) return;
     measureFrame = requestAnimationFrame(() => {
       measureFrame = null;
@@ -249,6 +263,7 @@ export function mountToolkit(host) {
     });
   }
   function select(id, announce = true, input = 'programmatic') {
+    clearHoverIntent();
     if (destroyed) return;
     const next = records.find(record => record.item.id === id);
     if (!next) return;
@@ -284,6 +299,8 @@ export function mountToolkit(host) {
     clearPointerIntent();
   }
   function clearPointerIntent() {
+    clearHoverIntent();
+    lastPointerPosition = '';
     pointerFocusButton = null;
     if (clearPointerTimer !== null) clearTimeout(clearPointerTimer);
     clearPointerTimer = null;
@@ -302,7 +319,6 @@ export function mountToolkit(host) {
     host.dataset.toolkitInput = 'keyboard';
     settleMotion();
   }
-  let lastPointerPosition = '';
   function handlePointer(event) {
     if (event.pointerType !== 'mouse' && event.pointerType !== 'pen') return;
     if (hoverPreference && !hoverPreference.matches) return;
@@ -311,12 +327,21 @@ export function mountToolkit(host) {
     const position = `${event.clientX},${event.clientY}`;
     if (position === lastPointerPosition) return;
     lastPointerPosition = position;
+    clearHoverIntent();
+    if (event.buttons) return;
     const button = selectedButton(event);
-    if (button) select(button.dataset.capability, true, 'pointer');
+    if (!button || button.dataset.capability === activeId) return;
+    hoverButton = button;
+    // Immediate hover styling acknowledges the target; reveal only after intent.
+    hoverTimer = setTimeout(() => {
+      if (destroyed || hoverButton !== button || document.visibilityState === 'hidden') return;
+      select(button.dataset.capability, true, 'pointer');
+    }, 300);
   }
   controls.addEventListener('click', handleClick);
   controls.addEventListener('focusin', handleFocus);
   controls.addEventListener('pointermove', handlePointer);
+  controls.addEventListener('pointerleave', clearPointerIntent);
   detail.addEventListener('focusin', cancelPanelAnimation);
   document.addEventListener('pointerdown', handlePointerDown, true);
   document.addEventListener('pointerup', handlePointerUp, true);
@@ -347,6 +372,7 @@ export function mountToolkit(host) {
       controls.removeEventListener('click', handleClick);
       controls.removeEventListener('focusin', handleFocus);
       controls.removeEventListener('pointermove', handlePointer);
+      controls.removeEventListener('pointerleave', clearPointerIntent);
       detail.removeEventListener('focusin', cancelPanelAnimation);
       document.removeEventListener('pointerdown', handlePointerDown, true);
       document.removeEventListener('pointerup', handlePointerUp, true);

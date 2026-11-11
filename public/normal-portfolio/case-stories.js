@@ -16,7 +16,7 @@ export const CASE_STORIES = {
   'pixel-mania': PIXEL_MANIA_STORY,
 
   syringe: {
-    intro: 'A human-factors redesign of the 20 cc syringe, developed through practitioner research, dimensional analysis and form exploration. I led the two-person concept work and built the Maya model and 3D-printed prototype jointly with my teammate.',
+    intro: 'A human-factors redesign of the 20 cc syringe, developed through practitioner research, dimensional analysis and form exploration. I led the two-person concept work and worked on the printed prototype with my teammate, who created the Maya model.',
     readingTime: 7,
     sections: [
       {
@@ -67,7 +67,7 @@ export const CASE_STORIES = {
       {
         id: 'prototype', title: 'Maya model and 3D-printed prototype',
         body: [
-          'My teammate and I jointly built the Maya model and 3D-printed prototype. The model made it possible to examine the relationship between the barrel, flange, thumb rest and scale as one object, rather than as separate sketches.',
+          'My teammate created the Maya model from the selected concept; we worked on the 3D-printed prototype together. The model made it possible to examine the relationship between the barrel, flange, thumb rest and scale as one object, rather than as separate sketches.',
           'The render views communicate the proposed contact surfaces and the visual hierarchy of the barrel. A printed form also gave us something physical to explain at Meraki. It does not, by itself, establish the force, posture or accuracy of use in a clinical task.',
         ],
         figures: [

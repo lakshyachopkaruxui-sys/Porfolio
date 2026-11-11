@@ -1,0 +1,155 @@
+/* Reading hierarchy: observations and decisions in docs/normal-hierarchy-20261110.md. */
+:root { --reading-section: 320px; --reading-heading: #1958d3; --control-outline: #6e7a89; }
+body { font-size: 18px; line-height: 1.75; }
+.wrap { width: min(1248px, calc(100% - 112px)); }
+.header-preferences { grid-area: version; justify-self: end; display: flex; align-items: center; gap: 20px; }
+.normal-theme-toggle { min-height: 44px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); font: 500 15px/1.4 var(--body); cursor: pointer; white-space: nowrap; }
+.normal-theme-toggle:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+#work, #about, #toolkit, #background, #explore-play, #contact { scroll-margin-top: var(--normal-nav-offset,136px); }
+.site-header nav { gap: 8px 24px; }
+.site-header nav[aria-label="Main navigation"] a { font-size: 16px; min-width: 44px; min-height: 44px; color: var(--muted); }
+.site-header nav[aria-label="Main navigation"] a:not([aria-current="location"]):hover { color: var(--ink); }
+.site-header nav[aria-label="Main navigation"] a[aria-current="location"] { color: var(--accent); font-weight: 600; }
+.site-header nav[aria-label="Main navigation"] a[hidden] { display: none; }
+.portfolio-opening { grid-template-columns: 240px minmax(0,1fr); gap: 80px; padding-block: 72px 0; margin-bottom: var(--reading-section); }
+.hero h1 { font-size: 32px; line-height: 1.35; }
+.hero-description { font-size: 18px; line-height: 1.75; margin-top: 24px; }
+.hero-availability { font-size: 16px; margin-top: 30px; }
+#work-title { position: static; width: auto; height: auto; clip: auto; overflow: visible; margin: 0 0 36px; }
+main :is(h2,.personal-section-heading h2), #contact h2 { font-size: clamp(36px,3.6vw,50px); line-height: 1.18; letter-spacing: -.035em; color: var(--reading-heading); }
+.filter-row { margin: 0 0 48px; }
+.project-filters button { font-size: 16px; }
+.project-grid { row-gap: 112px; column-gap: 48px; }
+.project-link h3, .project-card[data-project] .project-link h3 { font-size: 30px; line-height: 1.3; }
+.project-copy { padding-top: 26px; gap: 12px; }
+.project-summary { font-size: 18px; line-height: 1.75; }
+.project-meta, .project-proof { font-size: 16px; line-height: 1.6; }
+#play-break > summary { min-height: 44px; }
+.practice-section, .personal-about, .play-invitation { padding-block: 0; margin-block: var(--reading-section); }
+.section-heading, #about .personal-section-heading { margin-bottom: 44px; }
+#about .personal-bio p { font-size: 18px; line-height: 1.8; margin-bottom: 28px; }
+#about .personal-bio .personal-bio-intro { font-size: clamp(24px,2.3vw,30px); line-height: 1.55; }
+.personal-photo-strip { margin-top: 192px; gap: 48px; }
+#toolkit .toolkit-hint { margin-top: 24px; font-size: 18px; }
+#toolkit .toolkit-explorer { margin-top: 48px; }
+#toolkit .toolkit-controls { gap: 20px 24px; }
+/* Compact choices keep generous reading space in the detail below. */
+#toolkit .toolkit-tool { min-height: 64px; padding: 12px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+#toolkit .toolkit-tool[aria-pressed="true"] { background: var(--action-tint); border-color: var(--accent); }
+#toolkit .toolkit-tool-name { font-size: 19px; line-height: 1.45; }
+#toolkit .toolkit-detail { margin-top: 64px; padding-block: 0; }
+#toolkit .toolkit-panel { gap: 56px 80px; grid-template-columns: minmax(0,1fr) minmax(0,1.05fr); }
+#toolkit .toolkit-detail-title { font-size: 32px; margin-bottom: 24px; }
+#toolkit .toolkit-description { font-size: 19px; line-height: 1.8; }
+#toolkit .capability-subheading { font-size: 20px; font-weight: 500; margin: 0 0 28px; color: var(--ink); }
+#toolkit .capability-methods { gap: 12px 28px; align-items: start; }
+#toolkit .capability-methods li { font-size: 18px; line-height: 1.7; }
+#toolkit .capability-method-name { display: block; color: var(--ink); }
+#toolkit .toolkit-tools-block { padding-top: 12px; }
+#toolkit .capability-tools { gap: 36px 32px; grid-template-columns: repeat(auto-fill,minmax(104px,1fr)); }
+#toolkit .capability-tool-label, #toolkit .capability-tool-names li { font-size: 16px; line-height: 1.7; }
+#background { padding-block: 0; }
+#background .resume-journey-columns { gap: 112px; }
+#background .resume-courses { margin-top: 160px; }
+#background .resume-journey-heading { margin-bottom: 40px; font-size: 34px; color: var(--reading-heading); }
+#background .resume-entry-title { font-size: 23px; line-height: 1.4; }
+#background .resume-courses-heading { font-size: 30px; color: var(--reading-heading); }
+#background :is(.resume-entry-place,.resume-entry-date,.resume-entry-description), #background li { font-size: 18px; line-height: 1.8; }
+#contact.contact-section { padding-block: 56px; margin-block: var(--reading-section); }
+#contact .contact-intro { margin-bottom: 64px; }
+#case-reader { font-size: 19px; line-height: 1.8; }
+#case-reader .story-layout { margin-top: 96px; }
+#case-reader .story-section { padding-block: 0; margin: 0; }
+#case-reader .story-section + .story-section { margin-top: 280px; }
+#case-reader .story-section > h3 { font-size: clamp(30px,3vw,42px); line-height: 1.25; margin-bottom: 36px; color: var(--reading-heading); }
+#case-reader .story-section h4 { font-size: 24px; line-height: 1.4; margin-top: 44px; margin-bottom: 20px; }
+/* A component's title stays with its number, content or selected state. */
+#case-reader .story-section :is(.story-process-summary,.story-process,.story-points,.story-flow,.story-comparison,.story-state-view,.story-outcome) h4 { margin-top: 0; }
+#case-reader .story-section p, #case-reader .story-section li { font-size: 19px; line-height: 1.8; }
+#case-reader .story-section p { margin-bottom: 28px; }
+#case-reader .story-section .story-figure { margin-block: 56px; }
+#case-reader .story-section :is(.story-phone-spread,.story-photo-grid,.story-component-grid) .story-figure { margin-block: 0; }
+#case-reader .story-index { padding-block: 18px; }
+#case-reader .story-index nav a { font-size: 16px; }
+#case-reader .story-index nav a[data-section-target] { max-width: min(340px,calc(100vw - 140px)); white-space: normal; }
+#case-reader .story-figure figcaption { font-size: 16px; line-height: 1.75; }
+#case-reader .story-related { margin-top: 112px; }
+html[data-normal-theme="slate"] { color-scheme: dark; --paper: #202833; --surface: #2a3543; --ink: #edf2f8; --muted: #bac5d4; --line: #536174; --accent: #a6c4ff; --accent-dark: #c4d8ff; --blue: #a6c4ff; --reading-heading: #a6c4ff; --action-tint: #2c405e; --action-line: #6584b4; }
+html[data-normal-theme="slate"] :is(.profile-contact,.play-invitation-heading .text-action,#contact .contact-ai button,#case-reader .case-design-jump,#portfolio-assistant .assistant-send,#portfolio-assistant > .portfolio-assistant-launcher) { background: #315ebd; border-color: #6d97ed; color: #fff; }
+html[data-normal-theme="slate"] #toolkit .toolkit-tool[aria-pressed="true"] .toolkit-tool-index { background: #315ebd; color: #fff; }
+html[data-normal-theme="slate"] #case-reader .story-index :is(a.is-current,.story-top-link) { background: #384d69; color: #f2f4f7; }
+html[data-normal-theme="slate"] #case-reader .story-data-table thead { background: #354458; }
+html[data-normal-theme="slate"] #case-reader .story-data-table tbody tr:nth-child(even) { background: #20283380; }
+html[data-normal-theme="slate"] .case-image-viewer { color: var(--ink); }
+html[data-normal-theme="slate"] .case-image-viewer-caption { color: var(--muted); }
+html[data-normal-theme="slate"] .case-image-viewer-error a { color: var(--accent); }
+html[data-normal-theme="slate"] .case-image-viewer :is(button,.case-image-viewer-stage):focus-visible { outline-color: var(--accent); }
+html[data-normal-theme="slate"] .skip-link { background: #315ebd; color: #fff; }
+html[data-normal-theme="slate"] .photo-carousel-toggle::after { background: #2a3543ed; color: #edf2f8; }
+html[data-normal-theme="slate"] #toolkit .capability-logo { background: #f8fafc; }
+html[data-normal-theme="slate"] img.identity-mark { filter: brightness(0) invert(1); }
+html[data-normal-theme="slate"] #contact .resume-copy-button:is(:hover,[data-copied="true"]) { background: #354c6d; color: #edf2f8; }
+html[data-normal-theme="slate"] ::selection { background: #496696; color: #fff; }
+html[data-normal-theme="slate"] .map-projects a:hover { background: var(--action-tint); }
+.portfolio-assistant-dialog .assistant-input { border-color: var(--control-outline); }
+html[data-normal-theme="slate"] { --control-outline: #91a0b4; }
+.map-page .map-flow p { font-size: 18px; line-height: 1.8; }
+.map-page .map-projects small { font-size: 16px; line-height: 1.7; }
+@media (max-width: 1100px) {
+  .site-header { grid-template-columns: auto minmax(0,1fr); grid-template-areas: "identity version" "navigation navigation"; row-gap: 16px; }
+  .site-header nav { justify-self: stretch; justify-content: space-between; }
+  .wrap { width: calc(100% - 64px); }
+  .portfolio-opening { grid-template-columns: 200px minmax(0,1fr); gap: 48px; }
+  .hero h1 { font-size: 28px; }
+  .header-preferences { gap: 12px; }
+  .site-header nav { gap: 8px 18px; }
+}
+@media (max-width: 899px) {
+  :root { --reading-section: 240px; }
+  .portfolio-opening { display: block; }
+  .hero { position: static; display: grid; grid-template-columns: 116px minmax(0,1fr); gap: 32px; margin-bottom: 88px; }
+  .hero-portrait { width: 116px; height: 148px; margin: 0; }
+  .hero-copy { max-width: 520px; }
+  .hero-description { max-width: 45ch; }
+  .hero-availability { margin-top: 20px; }
+  #toolkit .toolkit-controls { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  #toolkit .toolkit-panel { column-gap: 40px; }
+}
+@media (max-width: 739px) {
+  :root { --reading-section: 192px; }
+  body { font-size: 18px; }
+  .wrap { width: calc(100% - 40px); }
+  .portfolio-opening { padding-block: 48px 0; }
+  .hero { grid-template-columns: 88px minmax(0,1fr); gap: 24px; margin-bottom: 72px; }
+  .hero-portrait { width: 88px; height: 116px; }
+  .hero h1 { font-size: 28px; }
+  .hero-description { font-size: 18px; }
+  .hero-availability { font-size: 16px; }
+  main :is(h2,.personal-section-heading h2), #contact h2 { font-size: 36px; }
+  .header-preferences { gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
+  .normal-theme-toggle { font-size: 14px; padding-inline: 12px; }
+  .project-grid { row-gap: 80px; }
+  .project-link h3, .project-card[data-project] .project-link h3 { font-size: 28px; }
+  .project-summary { font-size: 18px; }
+  .personal-photo-strip { gap: 28px; margin-top: 128px; }
+  #toolkit .toolkit-tool { padding: 6px 12px; min-height: 64px; gap: 8px; }
+  .site-header nav { justify-content: flex-start; gap: 8px 24px; }
+  .site-header nav a { font-size: 16px; }
+  #toolkit .toolkit-tool-name { font-size: 17px; }
+  #toolkit .toolkit-detail { padding: 0; margin-top: 48px; }
+  #toolkit .toolkit-panel { display: flex; gap: 44px; }
+  #toolkit .toolkit-detail-title { font-size: 30px; }
+  #toolkit .capability-methods { grid-template-columns: 1fr; }
+  #background { padding-block: 0; }
+  #background .resume-journey-columns { row-gap: 160px; }
+  #background .resume-courses { margin-top: 144px; }
+  #contact.contact-section { padding-block: 32px; }
+  #case-reader .story-section { padding-block: 0; }
+  #case-reader .story-section + .story-section { margin-top: 192px; }
+  #case-reader .story-section > h3 { font-size: 32px; }
+  #case-reader .story-section p, #case-reader .story-section li { font-size: 18px; }
+  #case-reader .story-section h4 { font-size: 23px; }
+}
+@media (max-width: 389px) {
+  #toolkit .toolkit-controls { grid-template-columns: minmax(0,1fr); gap: 12px; }
+}

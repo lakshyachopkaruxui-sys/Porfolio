@@ -97,8 +97,7 @@
       "CSS",
       "HTML",
       "Visual Studio Code",
-      "GitHub",
-      "Xcode"
+      "GitHub"
     ],
     "project_specific": [
       {
@@ -114,7 +113,6 @@
         "project": "20 cc Syringe",
         "items": [
           "Figma",
-          "Maya",
           "3D printing"
         ]
       },

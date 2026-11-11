@@ -9,9 +9,9 @@ for (const link of document.querySelectorAll('[data-play-mode-link]')) {
 
 const header = document.querySelector('.site-header');
 const navigation = header?.querySelector(':scope > nav');
-const selector = header?.querySelector(':scope > [data-mode-switch]');
+const selector = header?.querySelector(':scope > .header-preferences') || header?.querySelector(':scope > [data-mode-switch]');
 if (navigation && selector) {
-  const twoRowHeader = window.matchMedia('(max-width: 559px)');
+  const twoRowHeader = window.matchMedia('(max-width: 1100px)');
   // On phones the selector sits on the logo row, before the section links.
   // Keep tab order and focus consistent when the viewport crosses that boundary.
   function matchVisualOrder() {

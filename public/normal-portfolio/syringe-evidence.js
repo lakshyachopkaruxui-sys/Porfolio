@@ -42,7 +42,7 @@ export function enrichSyringeStory(story) {
   const existingReflection = story.sections.find(section => section.id === 'reflection');
   return {
     ...story,
-    intro: 'We redesigned a 20 cc syringe for Indian healthcare practitioners, focusing on how they hold, operate and read it. I developed the selected concept; Varun Panda and I shared the research, Maya modelling and 3D-printed prototype work over four weeks.',
+    intro: 'We redesigned a 20 cc syringe for Indian healthcare practitioners, focusing on how they hold, operate and read it. I developed the selected concept; Varun Panda and I shared the research and 3D-printed prototype work over four weeks. My teammate created the Maya model.',
     outcome: {
       title: 'Current outcome',
       text: 'We built and piloted a physical form. Effort ratings were unchanged; smoothness and perceived dosage accuracy fell, while grip ratings improved. The mean across 21 attributes rose from 4.14 to 5.62/10. Pilot size and counterbalancing remain unconfirmed; a working fluid path and measured performance are not established.',
@@ -51,7 +51,7 @@ export function enrichSyringeStory(story) {
     readingTime: 13,
     sections: [
       chapter('solution', 'Design concept', [
-        paragraph('Our 20 cc syringe concept changes the thumb rest, finger flange, barrel grip and scale markings. The aim is to give smaller hands a more secure hold while keeping the dose visible. We modelled it in Maya and 3D printed a prototype to explore its shape and contact with the hand.'),
+        paragraph('Our 20 cc syringe concept changes the thumb rest, finger flange, barrel grip and scale markings. The aim is to give smaller hands a more secure hold while keeping the dose visible. My teammate modelled it in Maya, and we 3D printed a prototype to explore its shape and contact with the hand.'),
         {
           type: 'video', src: base + 'syringe-showcase.mp4', poster: base + 'syringe-video-poster.jpg', width: 1280, height: 720,
           alt: 'Concept presentation film showing the syringe from several angles and in a hand.',
@@ -179,7 +179,7 @@ export function enrichSyringeStory(story) {
         paragraph('We still need to measure thumb pressure and joint load. The current contact changes should not be treated as proof of reduced plunger effort.'),
       ]),
       chapter('prototype', 'Physical prototype', [
-        paragraph('Varun and I built and rendered the selected concept in Autodesk Maya, then 3D printed it. The model brought the barrel, scale and redesigned contact surfaces together; the print let us examine size, grip position and contact with the hand.'),
+        paragraph('My teammate built the selected concept in Autodesk Maya. We then worked on the 3D-printed prototype together. The model brought the barrel, scale and redesigned contact surfaces together; the print let us examine size, grip position and contact with the hand.'),
         heading('Resolve the form in three dimensions'),
         gallery([
           figure('maya-full-model-1600.webp', 1600, 1600,

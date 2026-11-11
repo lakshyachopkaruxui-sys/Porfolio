@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T11:04:12.098Z",
+  "generatedAt": "2026-11-11T02:26:55.376Z",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 740,
-      "sha256": "14b20310b15d5c4d07f03f6a47fd131ada330d4319ad643356eb289e0a55a315"
+      "sha256": "048dd6c60476cca9d384c8534d67f58a26d3eaf2ba0ba7ec5ff4f4e7652df0fe"
     },
     {
       "path": "_redirects",
@@ -3853,6 +3853,11 @@
       "sha256": "2a2091e3b067104bfd2e93e1726bc779ea097a3c1928d0415362710ad88be2ea"
     },
     {
+      "path": "bicycle-world/dist/assets/work-covers/tear.webp",
+      "size": 257506,
+      "sha256": "7b0e5cd3025edddcd414bac18da81ccde74320c6ffe90f5a11e48caf8c1e235c"
+    },
+    {
       "path": "bicycle-world/dist/assets/work-covers/workplace-mode.webp",
       "size": 128686,
       "sha256": "9197d85179689271354cb0c3f3ec71733e14517620944fc3efff5dec205d438b"
@@ -3860,7 +3865,7 @@
     {
       "path": "bicycle-world/dist/index.html",
       "size": 44223,
-      "sha256": "81a8f3bc8641fedbcdfae81b49f65eca830e8ffb2a410eb7db869102b44b878e"
+      "sha256": "6acb7aca8c0626212f3bca3af5a6497308032c888341b2122540e9a9f94410b6"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
@@ -3869,8 +3874,8 @@
     },
     {
       "path": "bicycle-world/dist/projects.html",
-      "size": 27651,
-      "sha256": "335956a7553d417d35bbfe7b453781458672bcfd18c94c7c0dc91e3251ddc140"
+      "size": 30214,
+      "sha256": "f6ff232a34a6cb8869268d3f855d2fe1d92e364c742fe828f191fe29b35d60a8"
     },
     {
       "path": "bicycle-world/dist/src/about-content.js",
@@ -4344,8 +4349,8 @@
     },
     {
       "path": "bicycle-world/dist/src/normal-work-source.js",
-      "size": 8715,
-      "sha256": "ac5597a44dcd22ce969554abcf5e0ad50a5f1e28ab1cdf2b2917bf7e3f8daca7"
+      "size": 10154,
+      "sha256": "eac9a72fc06df99d71a747b683a132bb99cb6c2381015a671c5878d2e72ed356"
     },
     {
       "path": "bicycle-world/dist/src/oak-lab-content.js",
@@ -4524,8 +4529,8 @@
     },
     {
       "path": "bicycle-world/dist/src/portfolio-route.js",
-      "size": 2773,
-      "sha256": "f766624a0fb773b97d6d10cdbf6b27090ad032db0ea4ff565bf4bd331a995414"
+      "size": 2780,
+      "sha256": "d43fe6bbdeff0057d2b3316ba132ee8617b84806a749abc0256ee24cf43819d5"
     },
     {
       "path": "bicycle-world/dist/src/project-catalog.js",
@@ -4539,8 +4544,8 @@
     },
     {
       "path": "bicycle-world/dist/src/project-ui.js",
-      "size": 10123,
-      "sha256": "5fca76e696b7db034552a140498a862e29683ef28f57d3be380da9fd2fd98664"
+      "size": 10026,
+      "sha256": "65aeab9dcd243fdd1b799ade0183386518279111cde57bb58b3bff69b2ba21f7"
     },
     {
       "path": "bicycle-world/dist/src/render-quality.js",
@@ -4674,8 +4679,8 @@
     },
     {
       "path": "bicycle-world/dist/src/work-overview-content.js",
-      "size": 8837,
-      "sha256": "52a709c95b51b9e219fd61de39ebb6da21408d3b27bb98b84d4956e0e8c93394"
+      "size": 10251,
+      "sha256": "282503ad2b208c13b88fc047dcb5cc424c37d15abc0593ddedea31d0b2c5c952"
     },
     {
       "path": "bicycle-world/dist/src/works-experience.css",
@@ -4761,6 +4766,11 @@
       "path": "bicycle-world/src/welcome-fonts.css",
       "size": 899,
       "sha256": "a05d05a37eafab67eea57349fa0b27fa57cec03f89114be1aaabd0ac64fa9a57"
+    },
+    {
+      "path": "normal-portfolio/approved-opening.css",
+      "size": 6396,
+      "sha256": "4f7ac4c02a4045437b28f0af093d62af0337a05e9ad6f12435096502fdacdb17"
     },
     {
       "path": "normal-portfolio/assets/Lakshya-Chopkar-UX-Designer-Resume.pdf",
@@ -6035,7 +6045,7 @@
     {
       "path": "normal-portfolio/assets/cases/syringe/evidence/pilot-rating-comparison.svg",
       "size": 3904,
-      "sha256": "de51eed9090e1dcd1762a8053d5d9f03fc04b21e2393cc78ad951f42b420478e"
+      "sha256": "1f33ab3f5a07110cced3f2f3ee80dcf3e76bfc91a860ebdb15e1779fb83f398e"
     },
     {
       "path": "normal-portfolio/assets/cases/syringe/evidence/printed-prototype-alternate.webp",
@@ -6096,6 +6106,81 @@
       "path": "normal-portfolio/assets/cases/syringe/evidence/varun-sketches-original.png",
       "size": 3687282,
       "sha256": "44892f23a742649f3e6659aba8e8d966060663dec5b9503e6cce297ecca9230f"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/tear/current-desktop-ocean.png",
+      "size": 879773,
+      "sha256": "0cfa3ce1b7d5c6cc1bfe051471245a81d7df3e47b1b3b3f0e1efbd64926c5e65"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/tear/dream-forest.png",
+      "size": 258993,
+      "sha256": "9b3805d3a8a6492d38dd57312756fd83bb2758f40351a352545a0eb91740daea"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/tear/earlier-shadow-room-tear.png",
+      "size": 1838342,
+      "sha256": "abdcf43e2c5aff6fdd27988914d6e8ed1e69d7fc768017add03d86764efc8028"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/tear/final-forest-20261110.png",
+      "size": 308125,
+      "sha256": "1b3eb81c953b1e15ce13a1910c2b434699b0331b928a5dc1eb229a69f159e653"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/tear/final-guidance-20261110.png",
+      "size": 93633,
+      "sha256": "a1ae01af4340e1bfe9734fd3e4625a654544950dc6f8db952a2bc83f7f7cd389"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/tear/final-homepage-20261110.png",
+      "size": 70696,
+      "sha256": "5702f713046b060f8fd42e432b9ae81f25e9a5b97882c2165cc59c73a54251f1"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/tear/final-ocean-20261110.png",
+      "size": 88903,
+      "sha256": "6a92632c92b318798e940b6a4a9b138830a801336326a3f0bc73910ace6a85d8"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/tear/final-room-20261110.png",
+      "size": 64317,
+      "sha256": "3ddf21ea3f6b52b58f2fdb7e5a50458ec5576527d6e82cf59bdb83384daf3fea"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/tear/final-shadow-20261110.png",
+      "size": 96539,
+      "sha256": "8be8ebe1c9761f1e724262b9338f4e315042e7e7babadf3cee76c7ba7603db42"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/tear/forest-after.jpg",
+      "size": 593318,
+      "sha256": "6c59ca4fa8e08931fe427f08294b3ee3839b647d7188a91b0ac6d58f9539835d"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/tear/forest-before.jpg",
+      "size": 423689,
+      "sha256": "817583ce8917a3333d74a74094bc6ca9849049ea3f392c99f63d9cd0be68a8c1"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/tear/sample-review-marker.png",
+      "size": 21203,
+      "sha256": "191589974ba2bf2657f25b48751dd53db38d2bb0c960d91b765647a3a9c744cc"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/tear/shadow-current.png",
+      "size": 91574,
+      "sha256": "15eaa9bbe5320f11894580b60a3f9b19e453c9a2653c2e0c72093939dcf69c58"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/tear/submission-forest.png",
+      "size": 1986430,
+      "sha256": "b6362ca067dc4b0f20bb026e5171e1229f5b8e4d99d546dfe1099642026b5603"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/tear/submission-shadow.png",
+      "size": 251737,
+      "sha256": "a7e0b3905ca0c1c002b03e08fdf75bf4202f66667e99c79434ac7146104f554d"
     },
     {
       "path": "normal-portfolio/assets/cases/workplace-mode/audio-refinement/audio-comparison.svg",
@@ -6313,6 +6398,16 @@
       "sha256": "2a2091e3b067104bfd2e93e1726bc779ea097a3c1928d0415362710ad88be2ea"
     },
     {
+      "path": "normal-portfolio/assets/project-covers/approved-20261110/tear.png",
+      "size": 2316703,
+      "sha256": "fd384c3a07d1e322bdd70088b3935f7a6f02a0d1c4ebde917df8f2b35b7b71f6"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/approved-20261110/tear.webp",
+      "size": 257506,
+      "sha256": "7b0e5cd3025edddcd414bac18da81ccde74320c6ffe90f5a11e48caf8c1e235c"
+    },
+    {
       "path": "normal-portfolio/assets/project-covers/approved-20261110/workplace-mode.png",
       "size": 1875562,
       "sha256": "8c41365fe257cb986a344efe12ae173be63f8c267f4e22f12e90a38a88c9d2b0"
@@ -6494,8 +6589,8 @@
     },
     {
       "path": "normal-portfolio/case-context.js",
-      "size": 7359,
-      "sha256": "4f26044c964aaaccf4991f853177d197313d28a6bf36f93f5caf9ac74003f114"
+      "size": 7379,
+      "sha256": "97458452f5d600de15f2127a7a9acc89756f95ae18d899ba76f984bb7496c9a7"
     },
     {
       "path": "normal-portfolio/case-hero-art.css",
@@ -6549,8 +6644,8 @@
     },
     {
       "path": "normal-portfolio/case-stories.js",
-      "size": 21057,
-      "sha256": "2fcfb643693c7b08bcb31940881fe5b458c4f1a1e77a8d144424558c3006df8c"
+      "size": 21100,
+      "sha256": "42e4bfbe512ddf76f6bf1be90f8ca8830273e26534c0596b67d123d0ec7af2d3"
     },
     {
       "path": "normal-portfolio/case-video.js",
@@ -6699,8 +6794,8 @@
     },
     {
       "path": "normal-portfolio/editorial-case.css",
-      "size": 12006,
-      "sha256": "9a3daa4247f41def3a11067cc426f0fd9af867795be5b8a85ee3a0c45e3626e4"
+      "size": 12199,
+      "sha256": "b64a95e29f43f28cfd8fb9328f420ae6dcdd53fffc0705a255cb8e1c55603a43"
     },
     {
       "path": "normal-portfolio/editorial-toolkit.css",
@@ -6744,8 +6839,8 @@
     },
     {
       "path": "normal-portfolio/index.html",
-      "size": 22596,
-      "sha256": "566cdffeba8b22342850dcd67e9783483bc9dd01014c129ce39a2d226c1ba0e9"
+      "size": 23786,
+      "sha256": "09d8872a5483a4137add972b7e848ff5305e530b322e4b557949dcd874d3d1a0"
     },
     {
       "path": "normal-portfolio/jan-concept-data.js",
@@ -6759,13 +6854,13 @@
     },
     {
       "path": "normal-portfolio/map.html",
-      "size": 14400,
-      "sha256": "be9ea4bc8303b92772f19b5df406015acceba89d2acf08c1cf657a72dc6297cd"
+      "size": 14758,
+      "sha256": "5a63dedf99babcff4008946428e285baefce37a79d6eb1e219727c88de376784"
     },
     {
       "path": "normal-portfolio/mode-entry.js",
-      "size": 1237,
-      "sha256": "20ce696c9f488cdbd488ab2a986ce4978f8fdf1b8ad89de41f731706be80163e"
+      "size": 1295,
+      "sha256": "b964bb0e386f5376f0a08c9ea7cb7e5383d7d70968f3df49a484bd7ba29ba8c4"
     },
     {
       "path": "normal-portfolio/mode-selector.css",
@@ -6784,8 +6879,18 @@
     },
     {
       "path": "normal-portfolio/normal-projects.js",
-      "size": 13486,
-      "sha256": "72f62bfafd8758941cdc9ed6845ec7540a2be410c9f07a981208d2b5d3263fbe"
+      "size": 13894,
+      "sha256": "b4de8a3e5d6961228f789de552aeeebca81d5b605514886f5a23f34423d0055c"
+    },
+    {
+      "path": "normal-portfolio/normal-reading.css",
+      "size": 11700,
+      "sha256": "b8079b0471f57a35c0fa37ec9a7f89a61ab25f69b670235a1c87f1f6f102d0bc"
+    },
+    {
+      "path": "normal-portfolio/normal-theme.js",
+      "size": 1915,
+      "sha256": "47fc5a15e4a396fc66af87d1a0ad2b04529c83ecb5f7cde0d3ad5ca42c5b241c"
     },
     {
       "path": "normal-portfolio/personal-sections.css",
@@ -6799,8 +6904,8 @@
     },
     {
       "path": "normal-portfolio/photo-carousel.js",
-      "size": 9767,
-      "sha256": "5c3a17ecd282d967f214bbefa7ad2a8e0d5bb6097229b431424c30a696e64922"
+      "size": 9871,
+      "sha256": "dba1d90cd6d9ce44a7aec49aa88903e7c0b26e7250093dbfebf328650092d955"
     },
     {
       "path": "normal-portfolio/pixel-mania-evidence.js",
@@ -6849,13 +6954,13 @@
     },
     {
       "path": "normal-portfolio/portfolio.js",
-      "size": 20421,
-      "sha256": "38827f84b0b644b7f28b7995e6daced643c20647e4ce21f2b11088c1d92bc82a"
+      "size": 21336,
+      "sha256": "ff39ee8ae366e1723f6ec24fcf6c81e4ec8cb4fd8ccbe0c8ddf03372ab9e448a"
     },
     {
       "path": "normal-portfolio/process-data.js",
-      "size": 7682,
-      "sha256": "bc322ac1a8ae9b580433331e4ed790c5cd23d1a9600372923c7e8f76f6f8bce9"
+      "size": 7737,
+      "sha256": "3d080eeb600f1aa921bf8717a676e8a4d9fdce6d82aef5dc0faea454522ace9e"
     },
     {
       "path": "normal-portfolio/project-cover-ui.css",
@@ -6879,8 +6984,8 @@
     },
     {
       "path": "normal-portfolio/resume-content.json",
-      "size": 7548,
-      "sha256": "75d437d06576b00230703f51c27e8908e46d25484c7cc448515116718b45eac5"
+      "size": 7515,
+      "sha256": "a341ec3759c8d2fa686a017d4e735bbc883c73b7de524ed21aabcf81a9451aa7"
     },
     {
       "path": "normal-portfolio/resume-ui.css",
@@ -6891,6 +6996,11 @@
       "path": "normal-portfolio/resume-ui.js",
       "size": 12380,
       "sha256": "0610ceb1b4fdaa96230568a2ccbed2e48a58f4459d4e9514b2e61a810f5837b2"
+    },
+    {
+      "path": "normal-portfolio/section-navigation.js",
+      "size": 2844,
+      "sha256": "c9477ddda66ca1d3ed9e04cba78aca281ecf22bd01808541db02b4a6ee9dea19"
     },
     {
       "path": "normal-portfolio/sections.css",
@@ -6904,8 +7014,13 @@
     },
     {
       "path": "normal-portfolio/syringe-evidence.js",
-      "size": 28779,
-      "sha256": "28e3d8aa945a6144f4f89936bdbc8afe2b355b3b67f499562740620104a7edf3"
+      "size": 28832,
+      "sha256": "aa35f9d1a79f8e8b5e70f76e4b193cd37d1bdcfb17208bb85105f75b759263f6"
+    },
+    {
+      "path": "normal-portfolio/tear-case.js",
+      "size": 31620,
+      "sha256": "2c6023100dd0c01edd0084fb100019f73cacbceb393faaebd2e5fbfccbd3d582"
     },
     {
       "path": "normal-portfolio/toolkit-motion.css",
@@ -6914,8 +7029,8 @@
     },
     {
       "path": "normal-portfolio/toolkit-resume.js",
-      "size": 2183,
-      "sha256": "7d7fcaf9fe260e04e2bbc9796cee4219feae1b0f0b4661a6fa35a41058722cd1"
+      "size": 2508,
+      "sha256": "72ecac25bfacda127b9c3d69b94791784d67bf6e209ca11bbeec7a059a00a316"
     },
     {
       "path": "normal-portfolio/toolkit.css",
@@ -6924,8 +7039,8 @@
     },
     {
       "path": "normal-portfolio/toolkit.js",
-      "size": 17175,
-      "sha256": "fb75e0ff38f0d8d27856fe0e3f61a0cfeb286ba633ae8b46bdc1ee6de122e0c7"
+      "size": 19632,
+      "sha256": "6d8ea3fe80437f063bd1793244a624d226366c6973594e78ecd4465d6a62e2e2"
     },
     {
       "path": "normal-portfolio/typography.css",
