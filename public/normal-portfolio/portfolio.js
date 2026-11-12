@@ -46,7 +46,7 @@ welcome.onFinish(({shown, reason}) => {
 });
 const caseMotion = optionalFeature(() => mountCaseMotion(reader), {cancel() {}, capture() {}, enter() {}});
 const PROJECT_ORDER = ['connectaid', 'giggles', 'pixel-mania', 'syringe', 'workplace-mode', 'jan-aushadhi', 'tear'];
-const FEATURED_PROJECTS = new Set(['connectaid', 'giggles', 'pixel-mania']);
+const FEATURED_PROJECTS = new Set(['connectaid', 'giggles', 'pixel-mania', 'tear']);
 const CARD_SUMMARIES = {
   tear: 'Pinch a seam. Pull reality apart. A dream journey through wonder, fear and uncertain relief.',
   connectaid: 'One place to book care, order medicines and keep health records.',
