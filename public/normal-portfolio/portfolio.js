@@ -14,7 +14,7 @@ import {
   NORMAL_PROJECTS, NORMAL_PROJECT_CONTEXT, NORMAL_PROJECT_PROCESS,
   NORMAL_PROJECT_STORIES, NORMAL_PROJECT_ARTIFACTS, NORMAL_PROJECT_CATEGORIES,
   PROJECT_COVERS,
-} from './normal-projects.js?v=20261110-approved-covers';
+} from './normal-projects.js?v=20261112-ar-vr';
 import {mountGigglesCover} from './cover-artwork.js?v=20261108-care-mockups';
 import {mountProjectPreview} from './project-preview.js?v=20261110-space';
 
@@ -91,7 +91,11 @@ async function start() {
     import('../bicycle-world/src/project-catalog.js'),
     import('../bicycle-world/src/project-artifacts.js'),
   ]);
-  const {PROJECT_FILTERS, normalizeProjectFilter, projectsForFilter} = catalog;
+  // Immersive headset work belongs to Normal's extended catalogue. Keep the
+  // garden's shared filters independent so this addition cannot create empty tabs there.
+  const PROJECT_FILTERS = [...catalog.PROJECT_FILTERS, {id: 'ar-vr', label: 'AR / VR'}];
+  const normalizeProjectFilter = id => PROJECT_FILTERS.some(filter => filter.id === id) ? id : 'all';
+  const {projectsForFilter} = catalog;
   // Normal-mode additions remain independent of the garden's audited catalogue.
   const PROJECTS = [...sharedProjects, ...NORMAL_PROJECTS];
   const PROJECT_ARTIFACTS = {...sharedArtifacts, ...NORMAL_PROJECT_ARTIFACTS};
@@ -114,7 +118,8 @@ async function start() {
     if (filter === 'featured') return PROJECTS.filter(project => FEATURED_PROJECTS.has(project.id));
     const additions = NORMAL_PROJECTS.filter(project => filter === 'all'
       || NORMAL_PROJECT_CATEGORIES[project.id]?.includes(filter));
-    return [...projectsForFilter(filter), ...additions];
+    const shared = catalog.PROJECT_FILTERS.some(item => item.id === filter) ? projectsForFilter(filter) : [];
+    return [...shared, ...additions];
   }
 
   function projectUrl(id) {
