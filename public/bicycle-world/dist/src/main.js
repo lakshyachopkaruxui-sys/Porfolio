@@ -57,7 +57,7 @@ const sceneHost=$('scene'), reader=$('reader'), help=$('help');
 const state=newState(),keys=new Set(),physicalKeys=new Set();
 let touchControlInput;
 let renderer,scene,camera,rider,world,sun,contactMarker,bicycleLight;
-let overviewCamera,followView,trailheadGuide,hemisphere,gardenLighting,followSky,cameraObstacles=[],ridingView='overview';
+let overviewCamera,followView,trailheadGuide,hemisphere,gardenLighting,followSky,cameraObstacles=[],ridingView='follow';
 let characterAsset,garden,companions;
 let pokemonSoundPreference=null,rideSoundPreference=null,bicycleLightPreference=false;
 const companionCallHistory=[];
@@ -177,7 +177,7 @@ function restartJourney(){
 }
 function setRidingView(value,{persist=true}={}){
   if(!overviewCamera||!followView)return;
-  const requested=value==='follow'?'follow':'overview';
+  const requested=value==='overview'?'overview':'follow';
   ridingView=reduced?'overview':requested;
   camera=ridingView==='follow'?followView.camera:overviewCamera;
   if(ridingView==='follow'){followView.reset();followView.update(state,cameraObstacles,0,{snap:true});}

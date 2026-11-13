@@ -97,6 +97,7 @@ export async function configureSite({siteRoot,env = process.env} = {}) {
     } : null;
     const metadata = [
       '<!-- portfolio-publishing:start -->',
+      ...(file !== '404.html' && !config.preview ? ['<script defer src="/entrance/visit-session.js"></script>'] : []),
       `<link rel="canonical" href="${escapeHTML(canonical)}">`,
       `<meta property="og:url" content="${escapeHTML(canonical)}">`,
       '<meta property="og:type" content="website">',
