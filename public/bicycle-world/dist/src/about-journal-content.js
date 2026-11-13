@@ -11,12 +11,12 @@ const freeze=value=>{
 
 export const ABOUT_JOURNAL=freeze({
   title:'A little about Lakshya',
-  role:'UX & Product Designer',
+  role:'Product Designer',
   intro:'My journey, my approach and the tools behind my work.',
   chapters:[
     {
       id:'meet',label:'Meet me',title:'Hi, I’m Lakshya.',
-      lead:'I’m a UX & Product Designer studying User Experience at MIT ADT University, Pune. I came to design through Electronics & Telecommunication.',
+      lead:'I’m a Product Designer studying User Experience at MIT ADT University, Pune. I came to design through Electronics & Telecommunication.',
       pages:[
         {blocks:[
           {type:'photo',photoId:'lakshya-by-the-water'}

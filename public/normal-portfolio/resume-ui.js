@@ -198,10 +198,10 @@ export function mountResumeProfile(resume) {
     }
     const documentRow = contactRow('Resume', {id: 'resume'});
     const documentLinks = element('span', 'resume-document-links', undefined, documentRow);
-    const resumeURL = './assets/Lakshya-Chopkar-UX-Designer-Resume.pdf';
+    const resumeURL = './assets/Lakshya-Chopkar-Product-Designer-Resume.pdf';
     profileLink('View resume', resumeURL, documentLinks, {external: true});
     const download = profileLink('Download PDF', resumeURL, documentLinks);
-    download.download = 'Lakshya-Chopkar-UX-Designer-Resume.pdf';
+    download.download = 'Lakshya-Chopkar-Product-Designer-Resume.pdf';
     const profiles = contactRow('Profiles');
     const profileLinks = element('span', 'resume-document-links', undefined, profiles);
     const linkedin = externalURL(resume.contacts?.linkedin?.url);

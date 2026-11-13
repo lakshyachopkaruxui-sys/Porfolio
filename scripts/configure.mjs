@@ -12,7 +12,7 @@ const decodeHTML = value => value.replace(/&(#x[\da-f]+|#\d+|amp|quot|apos|lt|gt
   return code > 0 && code <= 0x10ffff && !(code >= 0xd800 && code <= 0xdfff) ? String.fromCodePoint(code) : entity;
 });
 const attribute = (tag, name) => new RegExp(`\\b${name}\\s*=\\s*(["'])([\\s\\S]*?)\\1`,'i').exec(tag)?.[2];
-const homepageTitle = 'Lakshya Chopkar | Product Designer & UX Designer';
+const homepageTitle = 'Lakshya Chopkar | Product Designer';
 const homepageDescription = 'Lakshya Chopkar, Product Designer focused on digital UX/UI. Explore user research, Figma design systems and prototypes. View case studies, resume and contact.';
 const previewImage = '/normal-portfolio/assets/social/portfolio-preview-v1.png';
 const previewAlt = 'Lakshya Chopkar, Product Designer focused on digital UX/UI, beside original ConnectAid healthcare-app interface designs.';

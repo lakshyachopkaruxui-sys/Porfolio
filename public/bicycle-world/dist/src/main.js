@@ -33,7 +33,7 @@ import {createRidingAudio} from './riding-audio.js';
 import {createGardenBell} from './garden-bell.js';
 import {createBicycleHeadlight} from './bicycle-headlight.js';
 import {nearestRiderAccessory} from './rider-accessory-picking.js';
-import {mountRidingAudioControl} from './riding-audio-ui.js';
+import {mountRidingAudioControl,isRidingAudioActivation} from './riding-audio-ui.js';
 import {BICYCLE_SOUNDS} from './bicycle-sound-catalog.js';
 import {mountPlayMusic} from './play-music-ui.js';
 import {createFollowCamera,createCameraObstacles,ridingPickIsAllowed} from './follow-camera.js';
@@ -316,7 +316,8 @@ function completeWelcome(showGuidance=true){
   if(!cloudTransition.snapshot.active&&pendingWelcomeGuide){pendingWelcomeGuide=false;showWelcomeGuidance();}
   syncRideUI();if(!hasOverlay())sceneHost.focus({preventScroll:true});
 }
-function unlockRideAudio(){
+function unlockRideAudio({resumeMusic=true}={}){
+  if(resumeMusic)playMusic.resumePreference();
   if(pokemonSoundPreference!==false)void pokemonAudio.setEnabled(true);
   if(rideSoundPreference!==false)void rideAudio.setEnabled(true).catch(()=>{});
   pendingRideAudio=false;
@@ -511,9 +512,15 @@ document.addEventListener('keydown',e=>{
   if(key==='r'||key==='b'){e.preventDefault();bell();}
   if(key==='l'){e.preventDefault();overlayMotion.feedback($('ride-light'));setBicycleLight(!bicycleLight?.enabled);}
 });
-function unlockResumedAudio(event){if(event.isTrusted&&pendingRideAudio&&ready&&running)unlockRideAudio();}
+function unlockResumedAudio(event){
+  if(isRidingAudioActivation(event)&&pendingRideAudio&&ready&&running){
+    unlockRideAudio({resumeMusic:!event.target?.closest?.('[data-play-music]')});
+  }
+}
 document.addEventListener('keydown',unlockResumedAudio,{capture:true});
 document.addEventListener('pointerdown',unlockResumedAudio,{capture:true});
+document.addEventListener('pointerup',unlockResumedAudio,{capture:true});
+document.addEventListener('click',unlockResumedAudio,{capture:true});
 document.addEventListener('keyup',e=>{const key=e.key.toLowerCase();physicalKeys.delete(key);keys.delete(key);touchControlInput?.sync();});
 help.addEventListener('keydown',event=>{
   if(!help.open||isKeyboardShortcutBlocked(event)||event.repeat)return;

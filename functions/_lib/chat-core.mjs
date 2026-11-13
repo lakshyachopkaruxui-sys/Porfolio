@@ -40,7 +40,7 @@ function sourcesFor(text) {
     const terms = id === 'syringe' ? /syringe|hwwe/i : id === 'workplace-mode' ? /workplace|driv|hmi/i : new RegExp(name.replace(' ', '\\s*'), 'i');
     if (terms.test(text)) sources.push({label: name, url: `#project-${id}`});
   }
-  if (!sources.length) sources.push({label: 'About and experience', url: '#about'}, {label: 'Read the resume', url: '/normal-portfolio/assets/Lakshya-Chopkar-UX-Designer-Resume.pdf'});
+  if (!sources.length) sources.push({label: 'About and experience', url: '#about'}, {label: 'Read the resume', url: '/normal-portfolio/assets/Lakshya-Chopkar-Product-Designer-Resume.pdf'});
   return sources.slice(0, 3);
 }
 

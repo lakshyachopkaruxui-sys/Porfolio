@@ -189,6 +189,12 @@ export function mountPlayMusic({notify = () => {}} = {}) {
   }
   return {
     setActive(value) { if (active === Boolean(value)) return; active = Boolean(value); synchronize(); },
+    // Call only from the riding entry's trusted user gesture. Loading and
+    // setActive() deliberately never restore a saved preference by themselves.
+    resumePreference() {
+      if (disposed || !active || controller.enabled || !controller.diagnostics().rememberedPreference) return false;
+      return controller.setEnabled(true);
+    },
     suspend(reason, value) { controller.setSuspended(reason, value); },
     diagnostics: controller.diagnostics,
     dispose

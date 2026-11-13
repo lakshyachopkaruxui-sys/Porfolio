@@ -5,10 +5,10 @@ import {mountToolkit} from './toolkit.js?v=20261104-personal-space';
 import {CASE_STORIES} from './case-stories.js?v=20261109-evidence-pass';
 import {renderCaseStudy} from './case-reader.js?v=20261110-approved-covers';
 import {mountPortfolioAssistant, mountPixelBreak} from './portfolio-extras.js?v=20261113-assistant-retry';
-import {mountResumeProfile} from './resume-ui.js?v=20261110-footer';
+import {mountResumeProfile} from './resume-ui.js?v=20261114-product-designer';
 import {mountPortfolioMotion} from './portfolio-motion.js?v=20261104-personal-space';
 import {mountCaseMotion} from './case-motion.js?v=20261103b';
-import {getWelcomeIntro} from './welcome-intro.js?v=20261103-shared-curve';
+import {getWelcomeIntro} from './welcome-intro.js?v=20261114-product-designer';
 import {mountPhotoCarousel} from './photo-carousel.js?v=20261104-carousel-fast';
 import {
   NORMAL_PROJECTS, NORMAL_PROJECT_CONTEXT, NORMAL_PROJECT_PROCESS,

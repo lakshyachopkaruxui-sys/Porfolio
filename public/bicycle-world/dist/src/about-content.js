@@ -5,12 +5,12 @@ import {ABOUT_STORY_PHOTOS} from './personal-photo-data.js';
 const chapters=[
   {
     id:'people',label:'People',title:'Usually the one starting a conversation.',
-    body:'I’m Lakshya, a UX designer and a people person. I love meeting someone new, making friends and bringing a little energy into the room.',
+    body:'I’m Lakshya, a Product Designer and a people person. I love meeting someone new, making friends and bringing a little energy into the room.',
     detail:'Empathy is something I learned from my mother. I notice pauses and hesitation, and try to understand what someone is finding difficult before jumping to an answer.',
     photoIds:['lakshya-portrait'],
     reader:{
       photoId:'lakshya-portrait',
-      lead:'I’m Lakshya, a UX designer with a background in Electronics & Telecommunication. Away from a screen, I’m usually starting a conversation, making a new friend or finding a reason to head out.',
+      lead:'I’m Lakshya, a Product Designer with a background in Electronics & Telecommunication. Away from a screen, I’m usually starting a conversation, making a new friend or finding a reason to head out.',
       sections:[
         {title:'Listening comes with the conversation',body:'Empathy is something I learned from my mother. I pay attention to pauses, hesitation and small changes in expression. They remind me to listen closely and understand what someone is feeling.'},
         {title:'What brought me to UX',body:'I wanted to understand how people think and behave, and why everyday experiences can become frustrating. Design gives me a way to act on that interest: understand the difficulty, explore ideas and make something people can try.'}
@@ -57,7 +57,7 @@ const media=[
 
 export const ABOUT_CONTENT=Object.freeze({
   id:'about',title:'Meet Lakshya',eyebrow:'A LITTLE ABOUT ME',
-  intro:'I’m Lakshya, a UX designer. A little of how I connect with people, approach my work and spend my time away from it.',
+  intro:'I’m Lakshya, a Product Designer. A little of how I connect with people, approach my work and spend my time away from it.',
   chapters:Object.freeze(chapters.map(chapter=>Object.freeze({
     ...chapter,
     photoIds:Object.freeze(chapter.photoIds),

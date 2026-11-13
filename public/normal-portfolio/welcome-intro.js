@@ -65,7 +65,7 @@ export function mountWelcomeIntro() {
           <div class="welcome-slice welcome-slice-bottom">${mark}</div>
           <div class="welcome-assembled">${mark}</div>
         </div></div>
-        <div class="welcome-caption"><p class="welcome-name">Lakshya Chopkar</p><p>UX &amp; Product Designer</p></div>
+        <div class="welcome-caption"><p class="welcome-name">Lakshya Chopkar</p><p>Product Designer</p></div>
       </div>`;
     const live = () => current?.id === id;
     const listen = (target, type, handler, options) => {

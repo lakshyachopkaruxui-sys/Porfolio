@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T17:39:20.810480+00:00",
+  "generatedAt": "2026-11-13T19:13:16.830777+00:00",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 746,
-      "sha256": "b77e1f35d99ccd8a92d1372ba9a863f340d8f2c838e4edfecbef0876cff7f1e1"
+      "sha256": "5516482aa2bc4283bbbdb4b5c41696c92a20492e0b4b7ea97289ea596bc7317b"
     },
     {
       "path": "_redirects",
@@ -3864,8 +3864,8 @@
     },
     {
       "path": "bicycle-world/dist/index.html",
-      "size": 44687,
-      "sha256": "cb88beb01d0eedee62734b84dda5e1c967c2f847b86ef9054594f5733a282ee8"
+      "size": 44692,
+      "sha256": "48f630377d2017ee898fb2bea23884e823580f4f3037d73d0e3557900f73c189"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
@@ -3879,8 +3879,8 @@
     },
     {
       "path": "bicycle-world/dist/src/about-content.js",
-      "size": 5516,
-      "sha256": "fcdcaaf110d39a85b79c2507984f0386bc4f4ba2f9eb214ea067736e8ce08923"
+      "size": 5531,
+      "sha256": "dfa95376d719ff7fcdbf282bd0265fd3d60b65ef130ca5dfe77fd678d8a7aea4"
     },
     {
       "path": "bicycle-world/dist/src/about-experience.css",
@@ -3904,8 +3904,8 @@
     },
     {
       "path": "bicycle-world/dist/src/about-journal-content.js",
-      "size": 9635,
-      "sha256": "4549a931cbdadb0dd7f06b7e627b920616dd868e8b4e3b0d0086b9ef93bd3696"
+      "size": 9625,
+      "sha256": "5a4f1283a63de68a1048da5e115c683ecb684abf9acea1712238ec36d48420ef"
     },
     {
       "path": "bicycle-world/dist/src/about-journal-fallback.js",
@@ -4294,8 +4294,8 @@
     },
     {
       "path": "bicycle-world/dist/src/main.js",
-      "size": 74783,
-      "sha256": "37ae95a496b5169ed188a890d27e6f9d7c290f82cb977b69ea4c4ae2e0128b23"
+      "size": 75114,
+      "sha256": "bee43e5c9d1f01bcc7d4200cac30bc5b257cd64055f333d497d40cc500dffefb"
     },
     {
       "path": "bicycle-world/dist/src/map-guide.css",
@@ -4434,8 +4434,8 @@
     },
     {
       "path": "bicycle-world/dist/src/play-music-ui.js",
-      "size": 11546,
-      "sha256": "55c7ad1177b4aec2073c8a29a2479909889f6718587fb247c1d2e281e8c80a15"
+      "size": 11898,
+      "sha256": "3db46636eb22f27030820b170ed28fc4f4e5d322d3317ac93bad9ab81fb7d446"
     },
     {
       "path": "bicycle-world/dist/src/play-music.css",
@@ -4589,8 +4589,8 @@
     },
     {
       "path": "bicycle-world/dist/src/riding-audio-ui.js",
-      "size": 708,
-      "sha256": "d6aa50f2866274bf3594c14cb6545e87981a02283dc63548205c02a6bb936ef5"
+      "size": 1141,
+      "sha256": "e1899a2b90f3551570192d80aea44fb63bc88a064495c1df1089cd6af59c1fc7"
     },
     {
       "path": "bicycle-world/dist/src/riding-audio.js",
@@ -4644,8 +4644,8 @@
     },
     {
       "path": "bicycle-world/dist/src/welcome-audio.js",
-      "size": 756,
-      "sha256": "33f2f422cdb47f9223ce46ab9b43fe6b4470014abc7768106ee7a79de0a226ac"
+      "size": 761,
+      "sha256": "52ed5947fb2d2044b43a8b91687b0bdf3627323a4993876d0487c78ee1ada543"
     },
     {
       "path": "bicycle-world/dist/src/welcome-flow.js",
@@ -4853,6 +4853,11 @@
       "sha256": "895980b64b42659bd8220c2cc5e9af7397120154e9e700b9dce7b09b27474f68"
     },
     {
+      "path": "entrance/8d610b9ade3f66eb.webp",
+      "size": 34340,
+      "sha256": "8d610b9ade3f66ebdbef25fe22514e7fbf7be61a7b284efe9a847060bb3a30b7"
+    },
+    {
       "path": "entrance/901a83d92253778c.webp",
       "size": 38082,
       "sha256": "901a83d92253778cd6cb1f058116717f68e8f8ce8172b71f23698fd2f8634132"
@@ -4903,6 +4908,11 @@
       "sha256": "dd3c90081775aeebc481cd6e6792040e84d13329450a46ad2a86f95359b6534f"
     },
     {
+      "path": "entrance/e6b531343ad1cf90.mp4",
+      "size": 1405194,
+      "sha256": "e6b531343ad1cf9063fc8969c7ad7c90027c714d9cdc2b1c387c194e6229776d"
+    },
+    {
       "path": "entrance/ea5a4c369a56a2e8.mp4",
       "size": 630920,
       "sha256": "ea5a4c369a56a2e8bdfeddebff17caf618ef2cc9b096edc0d6920dc425154240"
@@ -4949,8 +4959,8 @@
     },
     {
       "path": "index.html",
-      "size": 5154,
-      "sha256": "813c451b19def558e75df6827e3fd58084800c055f65e907d01011feca49d5af"
+      "size": 5159,
+      "sha256": "845515af8df7f02c5de26de67e85009945b8c0aed1d7a3be1960d0efc99cd035"
     },
     {
       "path": "normal-portfolio/approved-opening.css",
@@ -4958,9 +4968,14 @@
       "sha256": "5d8a9e006227192d91bd56bc60964701bb2d69fa36a3a35b350e58ef53a15e85"
     },
     {
+      "path": "normal-portfolio/assets/Lakshya-Chopkar-Product-Designer-Resume.pdf",
+      "size": 150165,
+      "sha256": "3ce68e01829389b26b5c8534c9484c4268a550554cf5b6b99f9a9f1ee7c03dce"
+    },
+    {
       "path": "normal-portfolio/assets/Lakshya-Chopkar-UX-Designer-Resume.pdf",
-      "size": 148956,
-      "sha256": "4898ca23379535266c194c83af3e53f6ea9068b996f2ae1932b2252686caece2"
+      "size": 150165,
+      "sha256": "3ce68e01829389b26b5c8534c9484c4268a550554cf5b6b99f9a9f1ee7c03dce"
     },
     {
       "path": "normal-portfolio/assets/cases/connectaid/design-system/button-states-source.webp",
@@ -7024,8 +7039,8 @@
     },
     {
       "path": "normal-portfolio/index.html",
-      "size": 24086,
-      "sha256": "17d0ef08d3427ba3fd9e5fd2dd92179032d89018995d6eb4fc79ac6da9641c3c"
+      "size": 24072,
+      "sha256": "9545effe84b413f3d9db9a7df65bfb7b018a7f9134f4db0fc509378f7a7cc6e0"
     },
     {
       "path": "normal-portfolio/jan-concept-data.js",
@@ -7139,8 +7154,8 @@
     },
     {
       "path": "normal-portfolio/portfolio.js",
-      "size": 21359,
-      "sha256": "734dcf41fcd01f002c30ef7faa52f05c7dab24e0b413dd50e6bfbebffb9762ff"
+      "size": 21373,
+      "sha256": "051400c7b360ddcd2a9af55566df031b977854e9856b0bfd457485cf6464190e"
     },
     {
       "path": "normal-portfolio/process-data.js",
@@ -7169,8 +7184,8 @@
     },
     {
       "path": "normal-portfolio/resume-content.json",
-      "size": 7515,
-      "sha256": "a341ec3759c8d2fa686a017d4e735bbc883c73b7de524ed21aabcf81a9451aa7"
+      "size": 7520,
+      "sha256": "eace9e6aa1fd3ff289b9803ce24de88cba43d0a7f6d304ff1ab1b2c01c17355d"
     },
     {
       "path": "normal-portfolio/resume-ui.css",
@@ -7179,8 +7194,8 @@
     },
     {
       "path": "normal-portfolio/resume-ui.js",
-      "size": 12380,
-      "sha256": "0610ceb1b4fdaa96230568a2ccbed2e48a58f4459d4e9514b2e61a810f5837b2"
+      "size": 12390,
+      "sha256": "b13fe6ee04a454e43f6a8310d71ec620e8e48d680dbd5206fd5a70e3585752ed"
     },
     {
       "path": "normal-portfolio/section-navigation.js",
@@ -7234,8 +7249,8 @@
     },
     {
       "path": "normal-portfolio/welcome-entry.js",
-      "size": 173,
-      "sha256": "ea859d108844b88d9510ef8470da46fa1ab0976354cd79f24232d0b4e6616f58"
+      "size": 177,
+      "sha256": "489b210b297a7e19b756641a7772b26eaaca0028cae8c7f71aeeb6de4702a8e8"
     },
     {
       "path": "normal-portfolio/welcome-intro.css",
@@ -7244,8 +7259,8 @@
     },
     {
       "path": "normal-portfolio/welcome-intro.js",
-      "size": 12165,
-      "sha256": "f07ce10bee6893ab8e69d929430ee3f8334494b515733125471632559eca9fc4"
+      "size": 12156,
+      "sha256": "4008a4f75eb515860741755184b3321b62d5b5e65a7511d0109bdbdddef8987f"
     },
     {
       "path": "normal-portfolio/workplace-mode-evidence.js",
