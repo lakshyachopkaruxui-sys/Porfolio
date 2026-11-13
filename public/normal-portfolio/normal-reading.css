@@ -2,6 +2,17 @@
 :root { --reading-section: 320px; --reading-heading: #1958d3; --control-outline: #6e7a89; }
 body { font-size: 18px; line-height: 1.75; }
 .wrap { width: min(1248px, calc(100% - 112px)); }
+.site-header { isolation: isolate; }
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--paper);
+  box-shadow: 0 0 0 100vmax var(--paper);
+  clip-path: inset(0 -100vmax);
+  pointer-events: none;
+}
 .header-preferences { grid-area: version; justify-self: end; display: flex; align-items: center; gap: 20px; }
 .normal-theme-toggle { min-height: 44px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); font: 500 15px/1.4 var(--body); cursor: pointer; white-space: nowrap; }
 .normal-theme-toggle:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
