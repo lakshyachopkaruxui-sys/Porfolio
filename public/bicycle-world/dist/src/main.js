@@ -350,7 +350,11 @@ function showPortfolio(hash=''){
   if(reader.open){readerScroll=reader.scrollTop;reader.close();}if(help.open){help.close();help.inert=true;}
   mapUI?.close();placeUI?.close();projectUI?.close();clearInput();syncRideUI();
   history.replaceState(null,'',returnPath);save();
-  location.assign(destination);
+  if (globalThis.portfolioShellNavigate) {
+    globalThis.portfolioShellNavigate(destination);
+  } else {
+    location.assign(destination);
+  }
 }
 function showHelp(){if(hasOverlay()||inPortfolio)return;prepareOverlay('help');$('calm-motion').checked=reduced;$('lighter-graphics').checked=renderQuality.lighter;rideSoundControl.sync();pokemonControls.sync();help.inert=false;help.showModal();help.scrollTop=0;$('help-close').focus({preventScroll:true});}
 function closeHelp(){help.close();help.inert=true;restoreRideUI();}

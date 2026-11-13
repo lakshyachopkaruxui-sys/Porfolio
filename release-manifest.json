@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T14:18:35.406979+00:00",
+  "generatedAt": "2026-11-13T15:06:15.318781+00:00",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -9,8 +9,8 @@
     },
     {
       "path": "_headers",
-      "size": 740,
-      "sha256": "98159fc1a90f52451598daeb6619dcc20e19f702d474216a2735fd003040883d"
+      "size": 746,
+      "sha256": "84db4e6ae80ab4f32eb5cef604e2e1668cf5c58435fc73ef9501c016f88ff17f"
     },
     {
       "path": "_redirects",
@@ -3864,18 +3864,18 @@
     },
     {
       "path": "bicycle-world/dist/index.html",
-      "size": 44640,
-      "sha256": "8fb842134a296569d6f47b0012a3a85969aec0c4e5beca89a39c3969bfd48fb2"
+      "size": 44687,
+      "sha256": "3cbb572538e71af5320a8885fc2db582cca69347b5b8d322825ca809060028f5"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
-      "size": 8588,
-      "sha256": "e66dbdc38ec8c8bd3826ecf7d191e125e6be14207317c2ac5dfe21127efffaea"
+      "size": 8635,
+      "sha256": "4caff8280c183b2faab5333a0c0646400a8aef11486f4e7d7fd51d475a7c7a26"
     },
     {
       "path": "bicycle-world/dist/projects.html",
-      "size": 30291,
-      "sha256": "8171c4b0bac2e871d428321027ad20c9a4a7394523ed5d3911c79efcd1b1dac7"
+      "size": 30338,
+      "sha256": "6d652fb1da611de64fdcab819b76de8a290cbbbe76a4e369981c47b263a9ebda"
     },
     {
       "path": "bicycle-world/dist/src/about-content.js",
@@ -4294,8 +4294,8 @@
     },
     {
       "path": "bicycle-world/dist/src/main.js",
-      "size": 74625,
-      "sha256": "8ae8577ae530c2381da0c47170c6fc63902cf7f68b4455599ecbed63b0ae224e"
+      "size": 74741,
+      "sha256": "3c253bc03342fce8ca847a84c844736397f9f2827fa4f3d902bc1563654b3df5"
     },
     {
       "path": "bicycle-world/dist/src/map-guide.css",
@@ -4724,8 +4724,8 @@
     },
     {
       "path": "bicycle-world/dist/story.html",
-      "size": 5648,
-      "sha256": "5d0ae75bf66e89ca236e03abc5fba8bcbc573bf340dd2895d46d8b3713d78de4"
+      "size": 5695,
+      "sha256": "3deef1680ce5487602622b864761199f38a4771b1016e9fddb7999dd42552e77"
     },
     {
       "path": "bicycle-world/dist/vendor/THREE-LICENSE.txt",
@@ -4873,6 +4873,11 @@
       "sha256": "a3c9cc3f6b97acb98f7d98f3efceae650b3e233fad4f72e2da9418f75a4e08e2"
     },
     {
+      "path": "entrance/app-route.js",
+      "size": 3430,
+      "sha256": "ac3acc1d62545cdb8791a84400a257b4022583665fb41b91953365eff092457c"
+    },
+    {
       "path": "entrance/b0ae3e89a7d3ef2b.woff2",
       "size": 48280,
       "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
@@ -4908,6 +4913,16 @@
       "sha256": "fcabf38dc3425d56fceac8b723eefedcd5115f383fae9a022daa47f35fba5f9b"
     },
     {
+      "path": "entrance/site-shell.css",
+      "size": 244,
+      "sha256": "aead38047f9ddda2114e26fe321c3f9b23c77710607ffea866d426cf4799cc23"
+    },
+    {
+      "path": "entrance/site-shell.js",
+      "size": 4315,
+      "sha256": "868334a3f090b5ccef1408477054a5ae7184ae62b03e180bbd0f48290f433dbf"
+    },
+    {
       "path": "entrance/tickets-262fcf5bd2.css",
       "size": 25625,
       "sha256": "262fcf5bd2b38f9797df957c361ba5f7dde3cea763f89f8eab09174815d13bc8"
@@ -4934,8 +4949,8 @@
     },
     {
       "path": "index.html",
-      "size": 5046,
-      "sha256": "f5f7bc51d53d12344e937e9c8d739f407bba8dd8c7d651fe70220cc34c7d16b4"
+      "size": 5154,
+      "sha256": "813c451b19def558e75df6827e3fd58084800c055f65e907d01011feca49d5af"
     },
     {
       "path": "normal-portfolio/approved-opening.css",
@@ -6849,8 +6864,8 @@
     },
     {
       "path": "normal-portfolio/design/jan-kiosk-lab-20261108/card-app.html",
-      "size": 4723,
-      "sha256": "8b84b67ce9255a61a73d4433cf83c5b47d22ea0845a8596704ccc2d845de640c"
+      "size": 4770,
+      "sha256": "72dd89eaddca6df1dca591bda483119cef3742e40e86be12a65abc03f2d17e96"
     },
     {
       "path": "normal-portfolio/design/jan-kiosk-lab-20261108/card-app.mjs",
@@ -6864,8 +6879,8 @@
     },
     {
       "path": "normal-portfolio/design/jan-kiosk-lab-20261108/index.html",
-      "size": 5510,
-      "sha256": "96bc56051007cd4c44e95b72d1880cd4ecae0366860b815f558ca5849802d683"
+      "size": 5557,
+      "sha256": "64aa21ac54962f6145266c5ffdbbdd28fccefb453563da3dc0b1b7a6f05c1d5e"
     },
     {
       "path": "normal-portfolio/design/jan-kiosk-lab-20261108/lab.css",
@@ -6879,8 +6894,8 @@
     },
     {
       "path": "normal-portfolio/design/jan-kiosk-lab-20261108/rfid-preview.html",
-      "size": 4484,
-      "sha256": "7d85693116c9265c3b7fc04476e12cf741f8958c5d023073e748f4664e6321a9"
+      "size": 4531,
+      "sha256": "e0d0a16df43d1fca0dcb5d3114ba6fef5b454e81af553119846ac84995e246c9"
     },
     {
       "path": "normal-portfolio/design/jan-kiosk-lab-20261108/rfid-preview.mjs",
@@ -6889,8 +6904,8 @@
     },
     {
       "path": "normal-portfolio/design/pixel-interaction-lab-20261108/index.html",
-      "size": 8137,
-      "sha256": "72a59c8be90a6b31f2f821da938dbe1179bc4564515edad48bd57003958d4a28"
+      "size": 8184,
+      "sha256": "3d469be60abe45a3ed6e38f6bc9d4b4eea83e913574419817bc46d72484bc73e"
     },
     {
       "path": "normal-portfolio/design/pixel-interaction-lab-20261108/lab.css",
@@ -6929,8 +6944,8 @@
     },
     {
       "path": "normal-portfolio/design/workplace-audio-lab-20261108/index.html",
-      "size": 14660,
-      "sha256": "28b3cbe66ad6526b2c793aa48421062cee6adc1467d38e352356129fc8a5101e"
+      "size": 14707,
+      "sha256": "3a82e5eea282692525baf68e867b482343fd58b93521df73f09fa2c1d58761f4"
     },
     {
       "path": "normal-portfolio/design/workplace-audio-lab-20261108/lab.css",
@@ -6954,8 +6969,8 @@
     },
     {
       "path": "normal-portfolio/design/workplace-audio-lab-20261108/session-sheet.html",
-      "size": 12316,
-      "sha256": "8c3645b64c27779ff3005bbe515ea56d751d0a3af0d396614333ae4f447c7f13"
+      "size": 12363,
+      "sha256": "84ba34c7f8c1610accd6a5293961ddaf269bba6058336a1d59b44c4af38862ea"
     },
     {
       "path": "normal-portfolio/design/workplace-audio-lab-20261108/session-sheet.mjs",
@@ -7009,8 +7024,8 @@
     },
     {
       "path": "normal-portfolio/index.html",
-      "size": 23846,
-      "sha256": "e608b477498ff59f4f8e677b833c69539548b7b33879ebf673e72893e3dc307f"
+      "size": 23893,
+      "sha256": "d62b14cff759d0f9c8e122978151df800b0725681f41db37305bdada891f2f67"
     },
     {
       "path": "normal-portfolio/jan-concept-data.js",
@@ -7024,8 +7039,8 @@
     },
     {
       "path": "normal-portfolio/map.html",
-      "size": 14815,
-      "sha256": "34eb9c561b4434b9bf594934a6faa1d7f56d916b39e7ee6def63fe7e5e9b17c6"
+      "size": 14862,
+      "sha256": "9b48d88c3c66d361784b99e2a501840bcee7d1bd054cab669db5f1d045729f6b"
     },
     {
       "path": "normal-portfolio/mode-entry.js",

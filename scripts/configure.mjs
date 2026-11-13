@@ -98,6 +98,7 @@ export async function configureSite({siteRoot,env = process.env} = {}) {
     const metadata = [
       '<!-- portfolio-publishing:start -->',
       ...(file !== '404.html' && !config.preview ? ['<script defer src="/entrance/visit-session.js"></script>'] : []),
+      ...(file !== '404.html' && file !== 'index.html' ? ['<script src="/entrance/app-route.js"></script>'] : []),
       `<link rel="canonical" href="${escapeHTML(canonical)}">`,
       `<meta property="og:url" content="${escapeHTML(canonical)}">`,
       '<meta property="og:type" content="website">',
@@ -125,8 +126,8 @@ export async function configureSite({siteRoot,env = process.env} = {}) {
       if (!/(?:^|\s)src\s*=/.test(attributes) && code.trim()) hashes.add(`'sha256-${createHash('sha256').update(code).digest('base64')}'`);
     }
   }
-  const csp = `default-src 'self'; script-src 'self' ${[...hashes].sort().join(' ')}; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' blob:; connect-src 'self' blob: data:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'`;
-  const headers = `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  X-Frame-Options: DENY\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n  Strict-Transport-Security: max-age=31536000\n  Cache-Control: public, max-age=0, must-revalidate\n  Content-Security-Policy: ${csp}\n${config.preview ? '  X-Robots-Tag: noindex, nofollow\n' : ''}`;
+  const csp = `default-src 'self'; script-src 'self' ${[...hashes].sort().join(' ')}; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' blob:; connect-src 'self' blob: data:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'`;
+  const headers = `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  X-Frame-Options: SAMEORIGIN\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n  Strict-Transport-Security: max-age=31536000\n  Cache-Control: public, max-age=0, must-revalidate\n  Content-Security-Policy: ${csp}\n${config.preview ? '  X-Robots-Tag: noindex, nofollow\n' : ''}`;
   if (headers.split('\n').some(line=>line.length>2000)) throw Error('Cloudflare header line exceeds its 2,000 character limit.');
   await fs.writeFile(path.join(publicRoot,'_headers'),headers);
   await fs.writeFile(path.join(publicRoot,'_redirects'),'/normal-portfolio /normal-portfolio/ 308\n/bicycle-world/dist /bicycle-world/dist/ 308\n');
