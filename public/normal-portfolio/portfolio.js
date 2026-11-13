@@ -227,6 +227,7 @@ async function start() {
     disposeStory?.();
     currentProject = project.id;
     const artifact = PROJECT_ARTIFACTS[id];
+    let rendered = false;
     try { disposeStory = renderCaseStudy({
       reader, content, project, context: contexts[id], process: processes[id],
       story: stories[id], artifact, artifactUrl: artPath(artifact, id),
@@ -235,7 +236,7 @@ async function start() {
         return related ? {...related, cover: PROJECT_COVERS[relatedId], href: projectUrl(relatedId)} : null;
       }).filter(Boolean),
       onRelated(nextId) { readingProgress.delete(nextId); history.replaceState(history.state, '', projectUrl(nextId)); openProject(nextId); },
-    }); } catch (error) {
+    }); rendered = true; } catch (error) {
       console.error('This case study could not render.', error);
       disposeStory = null;
       content.replaceChildren();
@@ -251,6 +252,7 @@ async function start() {
     reader.scrollTop = readingProgress.get(id) || 0;
     content.querySelector('#case-title')?.focus({preventScroll: true});
     caseMotion.enter(imageOrigin);
+    if (rendered) { try { document.dispatchEvent(new CustomEvent('portfolio:project-open', {detail:{id:project.id}})); } catch { /* Analytics is optional. */ } }
     return true;
   }
 

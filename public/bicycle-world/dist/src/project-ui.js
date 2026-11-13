@@ -14,6 +14,8 @@ export function createProjectUI({onOpen,onClose,onPortfolio,onContinue}) {
   const content=dialog.querySelector('#project-content'),select=dialog.querySelector('select');
   for(const project of PROJECTS){const option=document.createElement('option');option.value=project.id;option.textContent=project.secondary?`${project.title} · Portfolio process`:project.title;select.append(option);}
   let current=PROJECTS[0]?.id,source='play';
+  let reportedProject=null;
+  function reportOpen(){if(!dialog.open||current===reportedProject)return;reportedProject=current;try{document.dispatchEvent(new CustomEvent('portfolio:project-open',{detail:{id:current}}));}catch{/* Analytics is optional. */}}
   const hash=()=>source==='portfolio'?`#portfolio/project-${current}`:`#project-${current}`;
   const saved={};
   function node(tag,text,parent,className){const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(className)el.className=className;parent.append(el);return el;}
@@ -69,9 +71,10 @@ export function createProjectUI({onOpen,onClose,onPortfolio,onContinue}) {
     dialog.scrollTop=saved[current]?.scroll||0;
     if(dialog.open)history.replaceState(null,'',hash());
     if(focus){dialog.scrollTop=0;title.focus({preventScroll:true});}
+    reportOpen();
   }
-  function close(){if(!dialog.open)return;remember();dialog.close();history.replaceState(null,'',location.pathname+(source==='portfolio'?'#portfolio':''));onClose();}
-  function open(id,options={}){source=['portfolio','studio'].includes(options.source)?options.source:'play';onOpen();render(id||current);dialog.querySelector('#projects-close').textContent=source==='portfolio'?'Back to projects ×':source==='studio'?'Back to exhibit ×':'Return to ride ×';dialog.querySelector('#projects-continue').textContent=source==='portfolio'?'Back to projects':'Back on the bicycle';if(!dialog.open)dialog.showModal();dialog.scrollTop=saved[current]?.scroll||0;dialog.querySelector('#projects-close').focus({preventScroll:true});history.replaceState(null,'',hash());}
+  function close(){if(!dialog.open)return;remember();dialog.close();reportedProject=null;history.replaceState(null,'',location.pathname+(source==='portfolio'?'#portfolio':''));onClose();}
+  function open(id,options={}){source=['portfolio','studio'].includes(options.source)?options.source:'play';onOpen();render(id||current);dialog.querySelector('#projects-close').textContent=source==='portfolio'?'Back to projects ×':source==='studio'?'Back to exhibit ×':'Return to ride ×';dialog.querySelector('#projects-continue').textContent=source==='portfolio'?'Back to projects':'Back on the bicycle';if(!dialog.open)dialog.showModal();dialog.scrollTop=saved[current]?.scroll||0;dialog.querySelector('#projects-close').focus({preventScroll:true});history.replaceState(null,'',hash());reportOpen();}
   select.addEventListener('change',()=>{remember();render(select.value);dialog.scrollTop=0;});
   dialog.querySelector('#portfolio-process').addEventListener('click',()=>{remember();render('portfolio-world',true);});
   dialog.querySelector('#next-project').addEventListener('click',()=>{remember();render(PROJECTS[(PROJECTS.findIndex(p=>p.id===current)+1)%PROJECTS.length].id,true);});

@@ -185,6 +185,7 @@ export function createWorksExperience({renderer,onOpen=()=>{},onClose=()=>{},onP
       for(const credit of section.links||[]){const link=node('a',credit.label,block,'works-credit');link.href=new URL('../'+credit.href.replace(/^\.\//,''),import.meta.url).href;}
     }
     subView('reading',reading,q('[data-works-read-close]'));reading.scrollTop=0;
+    if(phase==='reading'&&!reading.hidden){try{document.dispatchEvent(new CustomEvent('portfolio:project-open',{detail:{id:project.id}}));}catch{/* Analytics is optional. */}}
   }
   function inspectArtwork(){
     const artifact=PLAY_WORK_COVERS[projects[selected].id];if(!artifact)return;q('#works-image-title').textContent=projects[selected].title;const image=q('[data-works-image]');image.src=new URL('../'+artifact.src.replace(/^\.\//,''),import.meta.url).href;image.width=artifact.width;image.height=artifact.height;image.alt=projects[selected].coverAlt||artifact.alt;image.style.setProperty('--works-image-width',`${artifact.width}px`);const caption=projects[selected].coverCaption??artifact.caption;q('[data-works-image-caption]').textContent=caption;q('[data-works-image-caption]').hidden=!caption;setImageZoom(false);subView('inspecting',inspect,q('[data-works-inspect-close]'));inspect.scrollTop=0;
