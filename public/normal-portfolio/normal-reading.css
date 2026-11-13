@@ -164,3 +164,26 @@ html[data-normal-theme="slate"] { --control-outline: #91a0b4; }
 @media (max-width: 389px) {
   #toolkit .toolkit-controls { grid-template-columns: minmax(0,1fr); gap: 12px; }
 }
+
+/* Owner-selected Cool slate palette; approved comparison, 13 November 2026. */
+
+    html[data-normal-theme="slate"] {
+      --paper:#1b2129; --surface:#262e38; --ink:#edf2f8;
+      --muted:#b9c4d1; --line:#526174; --control-outline:#93a2b5;
+      --accent:#a6c4ff; --accent-dark:#c4d8ff; --blue:#a6c4ff;
+      --reading-heading:#a6c4ff; --action-tint:#2c405e;
+      --action-line:#7896c5; --preview-raised:#313c49;
+    }
+    html[data-normal-theme="slate"] #case-reader .story-index :is(a.is-current,.story-top-link),
+    html[data-normal-theme="slate"] #case-reader .story-data-table thead {
+      background:var(--preview-raised); color:var(--ink);
+    }
+    html[data-normal-theme="slate"] #case-reader .story-data-table tbody tr:nth-child(even) {
+      background:var(--surface);
+    }
+    html[data-normal-theme="slate"] .photo-carousel-toggle::after {
+      background:var(--surface); color:var(--ink);
+    }
+    html[data-normal-theme="slate"] #contact .resume-copy-button:is(:hover,[data-copied="true"]) {
+      background:var(--preview-raised); color:var(--ink);
+    }
