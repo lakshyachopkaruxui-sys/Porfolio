@@ -100,12 +100,21 @@ export function mountPlayMusic({notify = () => {}} = {}) {
     const localControl = boundary.querySelector('[data-play-music]:not(.play-music-dock button)');
     const hidden = !active || Boolean(localControl && !localControl.closest('[hidden],[inert]'));
     if (dock.hidden !== hidden) dock.hidden = hidden;
-    controller.setSuspended('not-playing', !active);
-    controller.setSuspended('hidden-tab', document.hidden);
-    controller.setSuspended('listening-room', Boolean(document.querySelector('dialog[open] #listening-experience')));
-    controller.setSuspended('recording', [...document.querySelectorAll('video,audio:not([data-garden-music])')].some(media => !media.paused && !media.ended));
-    controller.setSuspended('oak-narration', Boolean(document.querySelector('#oak-lab[open][data-narrating="true"]')));
+    controller.setSuspensions({
+      'not-playing': !active,
+      'hidden-tab': document.hidden,
+      'listening-room': Boolean(document.querySelector('dialog[open] #listening-experience')),
+      recording: [...document.querySelectorAll('video,audio:not([data-garden-music])')].some(media => !media.paused && !media.ended),
+      'oak-narration': Boolean(document.querySelector('#oak-lab[open][data-narrating="true"]'))
+    });
     syncLabels();
+  }
+
+  function onMediaState(event) {
+    // Native play/pause events from this owner do not change any suspension.
+    // In particular, do not re-enter ownership synchronization during pause().
+    if (event.target?.matches?.('[data-garden-music]')) return;
+    synchronize();
   }
 
   function onClick(event) {
@@ -156,7 +165,7 @@ export function mountPlayMusic({notify = () => {}} = {}) {
   document.addEventListener('input', onLevelInput);
   document.addEventListener('change', onLevelInput);
   document.addEventListener('visibilitychange', synchronize);
-  for (const name of ['play','pause','ended','emptied']) document.addEventListener(name, synchronize, true);
+  for (const name of ['play','pause','ended','emptied']) document.addEventListener(name, onMediaState, true);
   window.addEventListener('pagehide', pageHide);
   window.addEventListener('pageshow', pageShow);
   synchronize();
@@ -170,7 +179,7 @@ export function mountPlayMusic({notify = () => {}} = {}) {
     document.removeEventListener('input', onLevelInput);
     document.removeEventListener('change', onLevelInput);
     document.removeEventListener('visibilitychange', synchronize);
-    for (const name of ['play','pause','ended','emptied']) document.removeEventListener(name, synchronize, true);
+    for (const name of ['play','pause','ended','emptied']) document.removeEventListener(name, onMediaState, true);
     window.removeEventListener('pagehide', pageHide);
     window.removeEventListener('pageshow', pageShow);
     controller.dispose();

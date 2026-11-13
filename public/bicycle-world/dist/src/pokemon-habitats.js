@@ -26,7 +26,11 @@ export function habitatIsClear(x,z,radius,obstacles=[],trees=[]){
   if(Object.values(STOPS).some(s=>Math.hypot(x-s.focus.x,z-s.focus.z)<s.size+radius+1))return false;
   if([...Object.values(STOP_SIGNS),ARRIVAL_SIGN].some(s=>Math.hypot(x-s.x,z-s.z)<radius+3))return false;
   if(obstacles.some(c=>Math.hypot(x-c.x,z-c.z)<radius+c.radius+.5))return false;
-  if(trees.some(t=>t.kind==='tree'&&Math.hypot(x-t.x,z-t.z)<radius+t.radius+.3))return false;
+  // Planting silhouettes are wider than their bicycle colliders. In particular,
+  // berry bushes are decoration-only and have no navigation collider at all.
+  // Reserve the whole roaming envelope against their actual supplied bounds,
+  // rather than letting a companion repeatedly walk through a planted clump.
+  if(trees.some(t=>Math.hypot(x-t.x,z-t.z)<radius+t.radius+.3))return false;
   // The following camera looks over foreground crowns. Protect the projected
   // view corridor as well as the physical lawn, so a small creature stays visible.
   if(trees.some(t=>{

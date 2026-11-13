@@ -733,7 +733,7 @@ async function initialize(){
         garden=await loadGarden(scene,world,{signal:startupController.signal});
         startupController.signal.throwIfAborted();
         cameraObstacles=createCameraObstacles(world,garden,[trailheadGuide.root]);setRidingView(saved?.ridingView,{persist:false});
-        try{companions=createPokemonWorld({scene,obstacles:world.colliders,trees:garden.nature.placements,onLoadTiming:profileRequested?recordCompanionLoad:undefined});}
+        try{companions=createPokemonWorld({scene,obstacles:world.colliders,trees:[...garden.nature.placements,...(garden.accents?.placements||[])],onLoadTiming:profileRequested?recordCompanionLoad:undefined});}
         catch(error){console.warn('Optional garden companions unavailable:',error);}
         // Build the three costly procedural gaits while the real loading
         // curtain is up. Duplicates reuse prepared templates; other species

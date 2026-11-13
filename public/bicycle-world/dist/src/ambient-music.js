@@ -164,16 +164,26 @@ export function createAmbientMusic({
     if (retry && audio) audio.load();
     return start();
   }
-  function setSuspended(reason, value) {
-    if (disposed || !reason) return;
-    const had = reasons.has(reason);
-    if (Boolean(value) === had) return;
-    if (value) reasons.add(reason); else reasons.delete(reason);
+  function setSuspensions(updates) {
+    if (disposed) return;
+    const wasSuspended = reasons.size > 0;
+    let changed = false;
+    for (const [reason, value] of Object.entries(updates)) {
+      if (!reason || reasons.has(reason) === Boolean(value)) continue;
+      if (value) reasons.add(reason); else reasons.delete(reason);
+      changed = true;
+    }
+    if (!changed) return;
+    // Apply a complete visibility/media snapshot before considering playback.
+    // Swapping one suspension reason for another must not call play() in between.
     if (reasons.size) {
-      generation++; pauseImmediately();
+      if (!wasSuspended) { generation++; pauseImmediately(); }
       publish(enabled ? 'paused' : 'off');
     } else if (enabled) { void start(); }
     else publish('off');
+  }
+  function setSuspended(reason, value) {
+    if (reason) setSuspensions({[reason]:value});
   }
   function setTrack(id) {
     if (disposed) return false;
@@ -216,7 +226,7 @@ export function createAmbientMusic({
   return {
     setEnabled,
     toggle: () => setEnabled(status === 'blocked' || status === 'error' ? true : !enabled),
-    setSuspended, setTrack, setLevel, dispose,
+    setSuspended, setSuspensions, setTrack, setLevel, dispose,
     get enabled() { return enabled; },
     diagnostics: snapshot
   };

@@ -187,3 +187,13 @@ html[data-normal-theme="slate"] { --control-outline: #91a0b4; }
     html[data-normal-theme="slate"] #contact .resume-copy-button:is(:hover,[data-copied="true"]) {
       background:var(--preview-raised); color:var(--ink);
     }
+
+/* Keep recoverable errors in the selected dark palette without changing Light. */
+html[data-normal-theme="slate"] .portfolio-assistant-dialog .assistant-error {
+  background: #382a2e;
+  border-color: #bc8c91;
+  color: #f4d4d2;
+}
+html[data-normal-theme="slate"] .portfolio-assistant-dialog .assistant-error .assistant-retry {
+  color: #f4d4d2;
+}

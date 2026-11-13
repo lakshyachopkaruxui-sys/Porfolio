@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T16:06:10.743985+00:00",
+  "generatedAt": "2026-11-13T17:39:20.810480+00:00",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 746,
-      "sha256": "8c5d10a0bab23e7a2e2a7788c4ea9b17aac70fc93e82476be66cbe6e1abf0b60"
+      "sha256": "b77e1f35d99ccd8a92d1372ba9a863f340d8f2c838e4edfecbef0876cff7f1e1"
     },
     {
       "path": "_redirects",
@@ -3865,7 +3865,7 @@
     {
       "path": "bicycle-world/dist/index.html",
       "size": 44687,
-      "sha256": "5a46b4a5a974506a332821430b2008dbb49de80bfbda002a09a2b4f74e2bf1ce"
+      "sha256": "cb88beb01d0eedee62734b84dda5e1c967c2f847b86ef9054594f5733a282ee8"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
@@ -3954,8 +3954,8 @@
     },
     {
       "path": "bicycle-world/dist/src/ambient-music.js",
-      "size": 9429,
-      "sha256": "957e1c58e661d3fc8a8e9a00053bceb3577362635d3142247c82986d3c140e25"
+      "size": 9889,
+      "sha256": "ca7d7bc984febada85d8141628fe0b4a4aa2ee344ff3c93680384c1b852ff144"
     },
     {
       "path": "bicycle-world/dist/src/articuno-pose.js",
@@ -4244,8 +4244,8 @@
     },
     {
       "path": "bicycle-world/dist/src/hybrid-ui.css",
-      "size": 11117,
-      "sha256": "482843fa9955c8a268714cafe0c38e0e58ad1f7130a399b9372cab641fa1c9e6"
+      "size": 11617,
+      "sha256": "c1894172e2ecab7e42f54af9ab3dbea95806ba9ecd45f05241a2e52af94b6552"
     },
     {
       "path": "bicycle-world/dist/src/identity.css",
@@ -4294,8 +4294,8 @@
     },
     {
       "path": "bicycle-world/dist/src/main.js",
-      "size": 74741,
-      "sha256": "3c253bc03342fce8ca847a84c844736397f9f2827fa4f3d902bc1563654b3df5"
+      "size": 74783,
+      "sha256": "37ae95a496b5169ed188a890d27e6f9d7c290f82cb977b69ea4c4ae2e0128b23"
     },
     {
       "path": "bicycle-world/dist/src/map-guide.css",
@@ -4434,8 +4434,8 @@
     },
     {
       "path": "bicycle-world/dist/src/play-music-ui.js",
-      "size": 11334,
-      "sha256": "8fca9439fc213cb73b6f1af1a2f602d89b080f1a4f64831c0f2176e1a322df52"
+      "size": 11546,
+      "sha256": "55c7ad1177b4aec2073c8a29a2479909889f6718587fb247c1d2e281e8c80a15"
     },
     {
       "path": "bicycle-world/dist/src/play-music.css",
@@ -4489,8 +4489,8 @@
     },
     {
       "path": "bicycle-world/dist/src/pokemon-habitats.js",
-      "size": 5641,
-      "sha256": "6fff2843646977c91c8967d0afa9d2a269f0b064913b29f172dacc5b62d872c2"
+      "size": 5943,
+      "sha256": "e2628f665120a1ccb058caabab5eae564798e1f904da09e7e6dfe567ca4377b4"
     },
     {
       "path": "bicycle-world/dist/src/pokemon-locomotion.js",
@@ -7024,8 +7024,8 @@
     },
     {
       "path": "normal-portfolio/index.html",
-      "size": 24071,
-      "sha256": "b2b5db6da1baaa656d97ec3bf556d700afd4f518351418b4c7b5bd226b9f8ee9"
+      "size": 24086,
+      "sha256": "17d0ef08d3427ba3fd9e5fd2dd92179032d89018995d6eb4fc79ac6da9641c3c"
     },
     {
       "path": "normal-portfolio/jan-concept-data.js",
@@ -7069,8 +7069,8 @@
     },
     {
       "path": "normal-portfolio/normal-reading.css",
-      "size": 13031,
-      "sha256": "53a12b04facb886ad52ba3b6605a1c3326ca61d00d78084173af429847963f08"
+      "size": 13379,
+      "sha256": "08465573e6e9c6808f619484b8ca2291f38a953808bfd1729e8c42ee66eb34ef"
     },
     {
       "path": "normal-portfolio/normal-theme.js",
@@ -7124,8 +7124,8 @@
     },
     {
       "path": "normal-portfolio/portfolio-extras.js",
-      "size": 23323,
-      "sha256": "5298ba45088bd9e9e74ee02a188ba90549e837e3e8648e3c7e3de993c088a899"
+      "size": 23546,
+      "sha256": "302ace04b0bcb13c874ebef0dde7b8fecbf3b1570a6fa173ffb21c35499499ec"
     },
     {
       "path": "normal-portfolio/portfolio-motion.css",
@@ -7139,8 +7139,8 @@
     },
     {
       "path": "normal-portfolio/portfolio.js",
-      "size": 21350,
-      "sha256": "fc6520b1b38974e40071ab499519df27cdda52abb97fa4e012b58022d1661e27"
+      "size": 21359,
+      "sha256": "734dcf41fcd01f002c30ef7faa52f05c7dab24e0b413dd50e6bfbebffb9762ff"
     },
     {
       "path": "normal-portfolio/process-data.js",

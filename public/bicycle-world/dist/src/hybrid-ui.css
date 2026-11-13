@@ -201,14 +201,16 @@ body.hybrid-intro :is(#world-controls, #world-bottom) {
    clipping. The application only grants this class to unobscured coarse riding. */
 @media (pointer: coarse) {
   html.touch-input body.hybrid-world.hybrid-touch-riding {
-    --touch-control-size: 53px;
-    --touch-control-gap: 9px;
+    --touch-control-size: 60px;
+    --touch-control-gap: 12px;
+    --touch-edge-gap: clamp(32px, 3.3vw, 48px);
+    --touch-bottom-gap: max(40px, calc(env(safe-area-inset-bottom) + 24px));
     --touch-controls-height: calc(var(--touch-control-size) + var(--touch-control-size) + var(--touch-control-gap));
   }
   html.touch-input body.hybrid-world.hybrid-touch-riding #touch-controls:not([hidden]) {
     display: flex !important;
     position: fixed !important;
-    inset: auto max(24px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left)) !important;
+    inset: auto max(var(--touch-edge-gap), calc(env(safe-area-inset-right) + 24px)) var(--touch-bottom-gap) max(var(--touch-edge-gap), calc(env(safe-area-inset-left) + 24px)) !important;
     width: auto !important;
     height: var(--touch-controls-height) !important;
     min-width: 0 !important;
@@ -223,8 +225,17 @@ body.hybrid-intro :is(#world-controls, #world-bottom) {
     z-index: 7;
   }
   html.touch-input body.hybrid-world.hybrid-touch-riding #world-bottom {
-    bottom: calc(max(24px, env(safe-area-inset-bottom)) + var(--touch-controls-height) + 16px);
+    bottom: calc(var(--touch-bottom-gap) + var(--touch-controls-height) + 16px);
   }
+}
+
+/* Holding a riding control must not open Safari's text-selection callout.
+   Reading panels retain normal text selection. */
+body.hybrid-world :is(#touch-controls, #ride-tools) button,
+body.hybrid-world :is(#touch-controls, #ride-tools) button * {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 
 /* Opening and reading are screen tasks. They stay stable while the bicycle is

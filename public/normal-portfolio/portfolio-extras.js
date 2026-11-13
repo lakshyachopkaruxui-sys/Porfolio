@@ -25,6 +25,18 @@ const SUGGESTED_QUESTIONS = [
   {label: 'Experience so far', question: 'What experience does Lakshya have?'},
 ];
 
+export function assistantResponseError(status, payload) {
+  const code = String(payload?.code || payload?.error?.code || '').toLowerCase();
+  if ([404, 501].includes(status) || payload?.configured === false || /not.configured|missing.key|setup.required/.test(code)) {
+    return 'The assistant hasn’t been connected yet. You can still browse the projects and contact details on this page.';
+  }
+  if (status === 429) return 'The assistant is busy. Please try again in a moment.';
+  if (status === 503) return 'The assistant is temporarily unavailable. Please try again in a moment.';
+  if (status < 200 || status >= 300) return typeof payload?.error === 'string' ? payload.error : 'The assistant couldn’t answer just now. Please try again.';
+  if (typeof payload?.text !== 'string' || !payload.text.trim()) return 'The assistant returned an empty answer. Please try again.';
+  return null;
+}
+
 /** POST /api/portfolio-chat accepts messages and returns {text, sources}. */
 export function mountPortfolioAssistant(host, {onOpenProject} = {}) {
   if (!host) return null;
@@ -295,13 +307,8 @@ export function mountPortfolioAssistant(host, {onOpenProject} = {}) {
       });
       const payload = await response.json().catch(() => null);
       if (destroyed || version !== requestVersion) return;
-      const code = String(payload?.code || payload?.error?.code || '').toLowerCase();
-      if ([404, 501, 503].includes(response.status) || payload?.configured === false || /not.configured|missing.key|setup.required/.test(code)) {
-        throw new Error('The assistant hasn’t been connected yet. You can still browse the projects and contact details on this page.');
-      }
-      if (response.status === 429) throw new Error('The assistant is busy. Please try again in a moment.');
-      if (!response.ok) throw new Error(typeof payload?.error === 'string' ? payload.error : 'The assistant couldn’t answer just now. Please try again.');
-      if (typeof payload?.text !== 'string' || !payload.text.trim()) throw new Error('The assistant returned an empty answer. Please try again.');
+      const failure = assistantResponseError(response.status, payload);
+      if (failure) throw new Error(failure);
       const text = payload.text.trim();
       currentTurn.loading.remove();
       currentTurn.error.remove();
