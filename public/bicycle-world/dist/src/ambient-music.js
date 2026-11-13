@@ -47,14 +47,14 @@ export function createAmbientMusic({
     || tracks.find(track => track.id === DEFAULT_MUSIC_TRACK_ID) || tracks[0];
   let selectedSource = source ?? selectedTrack.source;
   let audio = null, enabled = false, disposed = false, status = 'off', error = null;
-  let generation = 0, frame = null, timer = null, tailFading = false;
+  let generation = 0, frame = null, timer = null, tailFading = false, retryStatus = null;
   const listeners = [];
 
   function snapshot() {
     return {
       enabled, status, rememberedPreference, trackId:selectedTrack.id, suspendedReasons: [...reasons], error,
       created: Boolean(audio), playing: Boolean(audio && !audio.paused),
-      pendingFade: frame !== null, pendingRepeat: timer !== null,
+      pendingFade: frame !== null, pendingRepeat: timer !== null, retryRequired: retryStatus !== null,
       level: musicLevel, musicGain: targetVolume()
     };
   }
@@ -86,12 +86,17 @@ export function createAmbientMusic({
     }
     frame = requestFrame(tick);
   }
+  function requireRetry(message, next = 'blocked') {
+    generation++; retryStatus = next; status = next; error = message;
+    // Set the retry state before pausing so our own native pause event cannot
+    // be mistaken for another browser interruption.
+    pauseImmediately(); publish(next);
+  }
   function failure(cause) {
-    generation++; pauseImmediately();
-    error = cause?.name === 'NotAllowedError'
-      ? 'Your browser paused the garden sound. Select Garden sound on to try again.'
-      : 'Garden sound could not load. Select Garden sound on to retry.';
-    publish(cause?.name === 'NotAllowedError' ? 'blocked' : 'error');
+    const blocked = cause?.name === 'NotAllowedError';
+    requireRetry(blocked
+      ? 'Your browser paused the garden sound. Select Retry garden sound to try again.'
+      : 'Garden sound could not load. Select Retry garden sound to try again.', blocked ? 'blocked' : 'error');
   }
   function ensureAudio() {
     if (audio) return audio;
@@ -99,6 +104,10 @@ export function createAmbientMusic({
     audio.preload = 'none'; audio.loop = loop; audio.volume = 0;
     const listen = (name, callback) => { audio.addEventListener(name, callback); listeners.push([name, callback]); };
     listen('error', () => { if (wantsPlayback()) failure(audio.error); });
+    listen('pause', () => {
+      if (!wantsPlayback() || !audio.paused || audio.ended || !['starting','playing'].includes(status)) return;
+      requireRetry('Your browser paused the garden sound. Select Retry garden sound to try again.');
+    });
     listen('timeupdate', () => {
       if (loop || !wantsPlayback() || audio.paused || tailFading || !Number.isFinite(audio.duration)) return;
       const remaining = audio.duration - audio.currentTime;
@@ -108,11 +117,11 @@ export function createAmbientMusic({
       }
     });
     listen('ended', () => {
-      if (loop) return;
+      if (loop || retryStatus) return;
       cancelFade(); audio.volume = 0; tailFading = false;
       if (!wantsPlayback()) return;
       cancelRepeat();
-      publish('paused');
+      publish('between-tracks');
       timer = setTimer(() => {
         timer = null;
         if (!wantsPlayback()) return;
@@ -124,6 +133,7 @@ export function createAmbientMusic({
     return audio;
   }
   async function start() {
+    if (retryStatus) { publish(retryStatus); return false; }
     if (!wantsPlayback()) { publish(enabled ? 'paused' : 'off'); return false; }
     const attempt = ++generation;
     cancelFade(); cancelRepeat(); tailFading = false; error = null;
@@ -153,7 +163,7 @@ export function createAmbientMusic({
       if (next && status === 'off') return start();
       return next && status === 'playing';
     }
-    enabled = next; remember(next); error = null;
+    enabled = next; remember(next); error = null; retryStatus = null;
     if (!next) {
       generation++; cancelRepeat(); tailFading = false;
       publish('off');
@@ -174,6 +184,10 @@ export function createAmbientMusic({
       changed = true;
     }
     if (!changed) return;
+    if (retryStatus) {
+      if (reasons.size && !wasSuspended) { generation++; pauseImmediately(); }
+      publish(retryStatus); return;
+    }
     // Apply a complete visibility/media snapshot before considering playback.
     // Swapping one suspension reason for another must not call play() in between.
     if (reasons.size) {
@@ -189,7 +203,7 @@ export function createAmbientMusic({
     if (disposed) return false;
     const next = tracks.find(track => track.id === id);
     if (!next || next === selectedTrack && selectedSource === next.source) return false;
-    generation++; pauseImmediately(); error = null;
+    generation++; status = enabled ? 'paused' : 'off'; retryStatus = null; pauseImmediately(); error = null;
     selectedTrack = next; selectedSource = next.source;
     try { store?.setItem(TRACK_STORAGE_KEY,next.id); } catch { /* Selection works without storage. */ }
     if (audio) {
@@ -220,7 +234,7 @@ export function createAmbientMusic({
       listeners.length = 0;
       audio.removeAttribute('src'); audio.load();
     }
-    reasons.clear(); error = null; publish('disposed');
+    reasons.clear(); error = null; retryStatus = null; publish('disposed');
   }
   publish();
   return {

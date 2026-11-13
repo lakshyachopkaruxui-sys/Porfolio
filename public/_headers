@@ -5,4 +5,4 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Strict-Transport-Security: max-age=31536000
   Cache-Control: public, max-age=0, must-revalidate
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-iNSi7ZS/V6c4GjR+JZxoOFzlA20/NnVs3ioC8Cowlmk=' 'sha256-p1gw1m/DtROh3bucZd2NvcYduNEcS6QTYSym0jzziBc=' 'sha256-sm1C1fshQ63+B11GwEj0bsfoR7zPW4FxudzL1wETiQo='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' blob:; connect-src 'self' blob: data:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-EZMh/saDHZbIn/Ar4yatJ1EhiA2IVieIFcankOsgttE=' 'sha256-p1gw1m/DtROh3bucZd2NvcYduNEcS6QTYSym0jzziBc=' 'sha256-sm1C1fshQ63+B11GwEj0bsfoR7zPW4FxudzL1wETiQo='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' blob:; connect-src 'self' blob: data:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'
