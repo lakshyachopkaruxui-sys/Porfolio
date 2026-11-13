@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T13:01:49.748556+00:00",
+  "generatedAt": "2026-11-13T13:04:59.836272+00:00",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -4798,6 +4798,11 @@
       "sha256": "5114f85c6f85ede0b21450957fb64759882e2872f43910209005fb8aab856ef2"
     },
     {
+      "path": "entrance/58ba0489da7aaa7a.mp4",
+      "size": 898663,
+      "sha256": "58ba0489da7aaa7ae34b4aa2dfbff62551926b5989d52ca924c24f8908a9484f"
+    },
+    {
       "path": "entrance/66cdecd2a9c00aca.webp",
       "size": 14468,
       "sha256": "66cdecd2a9c00aca6c87f0975a117df2567ce6dadf03c510f8d47f9164747e87"
@@ -4828,9 +4833,24 @@
       "sha256": "b79a2ea7a38f33fd96a282fadb9ce97626bb0724a44d21075859f0e50239993a"
     },
     {
+      "path": "entrance/d5c05ffe500eea92.webp",
+      "size": 28946,
+      "sha256": "d5c05ffe500eea92f6dcf2df2c412309e32808958d9e232157898c65cf4d02dc"
+    },
+    {
       "path": "entrance/dd3c90081775aeeb.webp",
       "size": 38164,
       "sha256": "dd3c90081775aeebc481cd6e6792040e84d13329450a46ad2a86f95359b6534f"
+    },
+    {
+      "path": "entrance/ea5a4c369a56a2e8.mp4",
+      "size": 630920,
+      "sha256": "ea5a4c369a56a2e8bdfeddebff17caf618ef2cc9b096edc0d6920dc425154240"
+    },
+    {
+      "path": "entrance/fcabf38dc3425d56.webp",
+      "size": 27966,
+      "sha256": "fcabf38dc3425d56fceac8b723eefedcd5115f383fae9a022daa47f35fba5f9b"
     },
     {
       "path": "entrance/tickets-262fcf5bd2.css",
@@ -4845,7 +4865,7 @@
     {
       "path": "index.html",
       "size": 4990,
-      "sha256": "03114c2b3d74b19433c591f4436b700f4fbe2f31b5cb4276aa2f2c7617d531f2"
+      "sha256": "2baf09b20c1ebac780ef1d80539d68f308a0133267839acf6ec2ed99a67da3d8"
     },
     {
       "path": "normal-portfolio/approved-opening.css",
