@@ -16,7 +16,7 @@ const homepageTitle = 'Lakshya Chopkar | Product Designer & UX Designer';
 const homepageDescription = 'Lakshya Chopkar, Product Designer focused on digital UX/UI. Explore user research, Figma design systems and prototypes. View case studies, resume and contact.';
 const previewImage = '/normal-portfolio/assets/social/portfolio-preview-v1.png';
 const previewAlt = 'Lakshya Chopkar, Product Designer focused on digital UX/UI, beside original ConnectAid healthcare-app interface designs.';
-const indexCandidates = new Set(['normal-portfolio/index.html','normal-portfolio/map.html','bicycle-world/dist/index.html','bicycle-world/dist/projects.html','bicycle-world/dist/story.html']);
+const indexCandidates = new Set(['index.html','normal-portfolio/index.html','normal-portfolio/map.html','bicycle-world/dist/index.html','bicycle-world/dist/projects.html','bicycle-world/dist/story.html']);
 
 export function resolveConfiguration(config, env = {}) {
   const projectName = config.projectName;
@@ -45,6 +45,7 @@ export async function listFiles(directory, prefix = '') {
 
 // Pages redirects .html URLs to their extensionless equivalents automatically.
 export function canonicalPath(file) {
+  if (file === 'index.html') return '/';
   return '/' + (file.endsWith('/index.html') ? file.slice(0,-10) : file.replace(/\.html$/,''));
 }
 
@@ -69,7 +70,7 @@ export async function configureSite({siteRoot,env = process.env} = {}) {
     const noindex = isNoindex(html);
     const canonical = config.publicOrigin + canonicalPath(file);
     const homepage = file === 'normal-portfolio/index.html';
-    const normal = file.startsWith('normal-portfolio/');
+    const normal = file === 'index.html' || file.startsWith('normal-portfolio/');
     html = html.replace(/<link\b[^>]*>/gi,tag => /\brel\s*=\s*["']canonical["']/i.test(tag) ? '' : tag)
       .replace(/<meta\b[^>]*>/gi,tag => /\bproperty\s*=\s*["']og:(?:url|image(?::(?:width|height|type|alt))?|title|description|type)["']/i.test(tag) || /\bname\s*=\s*["'](?:google-site-verification|twitter:(?:card|title|description|image(?::alt)?))["']/i.test(tag) ? '' : tag);
     if (homepage) {
@@ -127,7 +128,7 @@ export async function configureSite({siteRoot,env = process.env} = {}) {
   const headers = `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  X-Frame-Options: DENY\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n  Strict-Transport-Security: max-age=31536000\n  Cache-Control: public, max-age=0, must-revalidate\n  Content-Security-Policy: ${csp}\n${config.preview ? '  X-Robots-Tag: noindex, nofollow\n' : ''}`;
   if (headers.split('\n').some(line=>line.length>2000)) throw Error('Cloudflare header line exceeds its 2,000 character limit.');
   await fs.writeFile(path.join(publicRoot,'_headers'),headers);
-  await fs.writeFile(path.join(publicRoot,'_redirects'),'/ /normal-portfolio/ 308\n/normal-portfolio /normal-portfolio/ 308\n/bicycle-world/dist /bicycle-world/dist/ 308\n');
+  await fs.writeFile(path.join(publicRoot,'_redirects'),'/normal-portfolio /normal-portfolio/ 308\n/bicycle-world/dist /bicycle-world/dist/ 308\n');
   await fs.writeFile(path.join(publicRoot,'_routes.json'),JSON.stringify({version:1,include:['/api/*'],exclude:[]},null,2)+'\n');
   // Crawlers must be allowed to read the preview's noindex response/meta directive.
   await fs.writeFile(path.join(publicRoot,'robots.txt'),config.preview ? 'User-agent: *\nAllow: /\nDisallow: /api/\n' : `User-agent: *\nAllow: /\nDisallow: /api/\nSitemap: ${config.publicOrigin}/sitemap.xml\n`);

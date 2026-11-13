@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-12T04:46:02.299Z",
+  "generatedAt": "2026-11-13T13:01:49.748556+00:00",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -14,8 +14,8 @@
     },
     {
       "path": "_redirects",
-      "size": 111,
-      "sha256": "4bae7645568a8f7fba115cf66f2580046d3e6d7a79014aa4b402a24ab43b7724"
+      "size": 86,
+      "sha256": "0f23545f4944b4f1c406953ef833739361dd0ddeac66c620b49210f3239960f9"
     },
     {
       "path": "_routes.json",
@@ -4783,6 +4783,71 @@
       "sha256": "a05d05a37eafab67eea57349fa0b27fa57cec03f89114be1aaabd0ac64fa9a57"
     },
     {
+      "path": "entrance/0729ea584ade9623.mp4",
+      "size": 1487292,
+      "sha256": "0729ea584ade9623e771f6532d25c2e7bc5c4245f7b89d1150da486d6dc9bc2a"
+    },
+    {
+      "path": "entrance/49cdd3462d2e1fe2.webp",
+      "size": 1978,
+      "sha256": "49cdd3462d2e1fe2f0fa7cc91ea5f76966a58c3d29cf36086ac9300f28c3ee99"
+    },
+    {
+      "path": "entrance/5114f85c6f85ede0.webp",
+      "size": 26706,
+      "sha256": "5114f85c6f85ede0b21450957fb64759882e2872f43910209005fb8aab856ef2"
+    },
+    {
+      "path": "entrance/66cdecd2a9c00aca.webp",
+      "size": 14468,
+      "sha256": "66cdecd2a9c00aca6c87f0975a117df2567ce6dadf03c510f8d47f9164747e87"
+    },
+    {
+      "path": "entrance/8462df0d48ec3d9b.mp4",
+      "size": 497366,
+      "sha256": "8462df0d48ec3d9bc99ad4c03340123118204c5898f613d6d69c0198c88fa67a"
+    },
+    {
+      "path": "entrance/90d53f9b1bdaba1d.woff2",
+      "size": 18204,
+      "sha256": "90d53f9b1bdaba1dd40efcbe18ab9f6ab72b2afb660e7db6a80a64073a8ed7e3"
+    },
+    {
+      "path": "entrance/a3c9cc3f6b97acb9.webp",
+      "size": 32494,
+      "sha256": "a3c9cc3f6b97acb98f7d98f3efceae650b3e233fad4f72e2da9418f75a4e08e2"
+    },
+    {
+      "path": "entrance/b0ae3e89a7d3ef2b.woff2",
+      "size": 48280,
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    {
+      "path": "entrance/b79a2ea7a38f33fd.woff2",
+      "size": 48280,
+      "sha256": "b79a2ea7a38f33fd96a282fadb9ce97626bb0724a44d21075859f0e50239993a"
+    },
+    {
+      "path": "entrance/dd3c90081775aeeb.webp",
+      "size": 38164,
+      "sha256": "dd3c90081775aeebc481cd6e6792040e84d13329450a46ad2a86f95359b6534f"
+    },
+    {
+      "path": "entrance/tickets-262fcf5bd2.css",
+      "size": 25625,
+      "sha256": "262fcf5bd2b38f9797df957c361ba5f7dde3cea763f89f8eab09174815d13bc8"
+    },
+    {
+      "path": "entrance/tickets-fe5072954c.js",
+      "size": 2968,
+      "sha256": "fe5072954c9eb38c55cbd7228a32d300c925a0b3fcbacf65c451f0c43add36a0"
+    },
+    {
+      "path": "index.html",
+      "size": 4990,
+      "sha256": "03114c2b3d74b19433c591f4436b700f4fbe2f31b5cb4276aa2f2c7617d531f2"
+    },
+    {
       "path": "normal-portfolio/approved-opening.css",
       "size": 5441,
       "sha256": "5d8a9e006227192d91bd56bc60964701bb2d69fa36a3a35b350e58ef53a15e85"
@@ -7089,8 +7154,8 @@
     },
     {
       "path": "sitemap.xml",
-      "size": 477,
-      "sha256": "94ef91fc7749b4c4872f6909547491168f13fd75c00fe480f6a6d4c6903ad552"
+      "size": 529,
+      "sha256": "6ea42096856f8db16d55c4c3d9e7c45ae78673a72cf1f6d1f3e54151ecac4873"
     }
   ]
 }

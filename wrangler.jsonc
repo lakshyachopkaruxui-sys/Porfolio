@@ -4,5 +4,12 @@
   "compatibility_date": "2026-11-09",
   "compatibility_flags": [
     "nodejs_compat"
+  ],
+  "d1_databases": [
+    {
+      "binding": "VISIT_DB",
+      "database_name": "lakshya-portfolio-visits",
+      "database_id": "6fe011f1-6e7f-43d6-b072-aef21f393b21"
+    }
   ]
 }
