@@ -99,7 +99,8 @@ export const OAK_MAKING_STEPS=freeze([
   {
     id:'details',title:'Another ride, another adjustment.',
     body:'Turns, pedalling, bridge crossings, signs and room entrances were revisited as Lakshya tried the garden. The aim was to make the journey feel clear, all the way back to your bicycle.',
-    detail:'',mapFocus:'hobbies',stopIds:['work'],nextLabel:'And the work itself?'
+    detail:'The build includes interface colour checks against WCAG 2.2 AA contrast targets, keyboard navigation and reduced-motion options.',
+    detailLabel:'What about accessibility?',mapFocus:'hobbies',stopIds:['work'],nextLabel:'And the work itself?'
   },
   {
     id:'access',title:'Explore, or go straight to the work.',
