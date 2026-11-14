@@ -88,11 +88,12 @@ export function riderAxles(position){
   const dx=Math.sin(position.heading)*RIDER_HALF_WHEELBASE,dz=Math.cos(position.heading)*RIDER_HALF_WHEELBASE;
   return {front:{x:position.x-dx,z:position.z-dz},rear:{x:position.x+dx,z:position.z+dz}};
 }
-export function positionIsClear(position,colliders=STRUCTURE_COLLIDERS){
-  if(!isPassable(position.x,position.z))return false;
+export function positionIsClear(position,colliders=STRUCTURE_COLLIDERS,surface){
+  const supported=(x,z)=>isPassable(x,z)||(x>=WORLD_BOUNDS.minX+RIDER_RADIUS&&x<=WORLD_BOUNDS.maxX-RIDER_RADIUS&&z>=WORLD_BOUNDS.minZ+RIDER_RADIUS&&z<=WORLD_BOUNDS.maxZ-RIDER_RADIUS&&Boolean(surface?.(x,z)));
+  if(!supported(position.x,position.z))return false;
   if(!Number.isFinite(position.heading))return colliders.every(c=>Math.hypot(position.x-c.x,position.z-c.z)>=c.radius+RIDER_RADIUS);
   const {front,rear}=riderAxles(position);
-  if(!isPassable(front.x,front.z)||!isPassable(rear.x,rear.z))return false;
+  if(!supported(front.x,front.z)||!supported(rear.x,rear.z))return false;
   const dx=rear.x-front.x,dz=rear.z-front.z,lengthSquared=dx*dx+dz*dz;
   // Clip the entire axle segment to the widened river interval. Sampling only
   // the wheels can miss a diagonal overlap at a bridge's bank-side corner.
@@ -100,7 +101,7 @@ export function positionIsClear(position,colliders=STRUCTURE_COLLIDERS){
   let enter=0,exit=1,overlapsRiver=true;
   if(Math.abs(dz)<1e-9)overlapsRiver=front.z>low&&front.z<high;
   else{const first=(low-front.z)/dz,last=(high-front.z)/dz;enter=Math.max(0,Math.min(first,last));exit=Math.min(1,Math.max(first,last));overlapsRiver=exit>enter;}
-  if(overlapsRiver){const firstX=front.x+dx*enter,lastX=front.x+dx*exit;if(!BRIDGES.some(b=>Math.abs(firstX-b.x)<=b.width/2-RIDER_RADIUS&&Math.abs(lastX-b.x)<=b.width/2-RIDER_RADIUS))return false;}
+  if(overlapsRiver){const firstX=front.x+dx*enter,lastX=front.x+dx*exit;if(!BRIDGES.some(b=>Math.abs(firstX-b.x)<=b.width/2-RIDER_RADIUS&&Math.abs(lastX-b.x)<=b.width/2-RIDER_RADIUS)){if(!surface)return false;const samples=Math.ceil(Math.sqrt(lengthSquared)/.12);for(let i=0;i<=samples;i++){const t=i/samples;if(!supported(front.x+dx*t,front.z+dz*t))return false;}}}
   return colliders.every(c=>{
     const t=Math.max(0,Math.min(1,((c.x-front.x)*dx+(c.z-front.z)*dz)/lengthSquared));
     return Math.hypot(front.x+dx*t-c.x,front.z+dz*t-c.z)>=c.radius+RIDER_RADIUS-1e-7;

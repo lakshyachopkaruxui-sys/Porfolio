@@ -16,7 +16,7 @@ export const POKEMON=Object.freeze([
   {id:'pikachu',key:'pikachu-north',name:'Pikachu',kind:'ground',anchor:{x:-29,z:-65},height:1.8,bodyRadius:1.45,travel:1.4,habitat:'the north-west lawns'},
   {id:'bulbasaur',key:'bulbasaur-north',name:'Bulbasaur',kind:'ground',anchor:{x:28,z:-90},height:1.65,bodyRadius:1.3,travel:.8,habitat:'the north-east lawns'},
   {id:'charmander',key:'charmander-west',name:'Charmander',kind:'ground',anchor:{x:-55,z:-34},height:1.8,bodyRadius:1.5,travel:.7,habitat:'the western sunny meadow'},
-  {id:'snorlax',key:'snorlax-standing',name:'Snorlax',kind:'sleep',behavior:'stand-sleep',anchor:{x:44,z:-79},height:3.4,bodyRadius:2.6,travel:0,habitat:'standing asleep in the northern meadow'},
+  {id:'snorlax',key:'snorlax-standing',name:'Snorlax',kind:'sleep',behavior:'stand-sleep',anchor:{x:57,z:-14},height:3.4,bodyRadius:2.6,travel:0,habitat:'standing asleep in the eastern meadow'},
 ].map(spec=>Object.freeze({...spec,key:spec.key||spec.id})));
 
 export function habitatIsClear(x,z,radius,obstacles=[],trees=[]){

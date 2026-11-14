@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T14:42:14.819404+00:00",
+  "generatedAt": "2026-11-14T14:44:47.408665+00:00",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 746,
-      "sha256": "117670d7f3931244ec688c17e7ae2199870106e693a535e25fa8b451ef77d168"
+      "sha256": "8549c2c88e770d7de1bcef77f9a4c9bb2cea659a59a812bc1cf48fb5f88b2f44"
     },
     {
       "path": "_redirects",
@@ -3864,8 +3864,8 @@
     },
     {
       "path": "bicycle-world/dist/index.html",
-      "size": 46200,
-      "sha256": "9dc858f6ce0dd8fc81700d9cb6e3521986ccc3f8ce9ccbb34f9067e67eb80caa"
+      "size": 46426,
+      "sha256": "88dd1de3422189b7adfe0a1a9099cc86f4c61f10f4854c3f6c7df071587202dd"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
@@ -4269,8 +4269,8 @@
     },
     {
       "path": "bicycle-world/dist/src/layout.js",
-      "size": 8713,
-      "sha256": "c5bc0bd4554f907f0e0b0908731c38b95118e09d16b43d9330181f1c0a402e22"
+      "size": 9097,
+      "sha256": "82ba18febcbdd328b482b3ec70ee93d1671275b9ac12e4c87a2efadc0991c6f3"
     },
     {
       "path": "bicycle-world/dist/src/listening-room-data.js",
@@ -4294,8 +4294,8 @@
     },
     {
       "path": "bicycle-world/dist/src/main.js",
-      "size": 79673,
-      "sha256": "7672f4f39155859110229d159fcf0f17fefa1c40b43ae7fb8626ab3926052714"
+      "size": 78327,
+      "sha256": "926df7945fc3004f1f2600a0fcc0d63fc4ed110cf77ad12d00a1b2a0c0f76d88"
     },
     {
       "path": "bicycle-world/dist/src/map-guide.css",
@@ -4334,8 +4334,8 @@
     },
     {
       "path": "bicycle-world/dist/src/motion.js",
-      "size": 7337,
-      "sha256": "e6b8d1c6b0e98485c716b90a568366671ff2ce324d3c9bd92c7dde2b88f001e7"
+      "size": 7510,
+      "sha256": "720f4b0949aef81bf349875fa826d7308c675a9a37836a5a90f62b26a15f6a60"
     },
     {
       "path": "bicycle-world/dist/src/music-catalog.js",
@@ -4489,8 +4489,8 @@
     },
     {
       "path": "bicycle-world/dist/src/pokemon-habitats.js",
-      "size": 5943,
-      "sha256": "e2628f665120a1ccb058caabab5eae564798e1f904da09e7e6dfe567ca4377b4"
+      "size": 5942,
+      "sha256": "972cc887ed347d7bd375fd7eeb6d8cf883076920e4d54e6fdfea55d7a0794649"
     },
     {
       "path": "bicycle-world/dist/src/pokemon-locomotion.js",
@@ -4619,18 +4619,28 @@
     },
     {
       "path": "bicycle-world/dist/src/river-hop/full-garden-hop.js",
-      "size": 5313,
-      "sha256": "6305ae7c69c8655964d551baf9f18ea5c19df004da305b28787770ead8cf5e79"
+      "size": 8813,
+      "sha256": "4554c267bebbdb6570fdc8a6bdb3aadd8ec7febaed5615851be102b48eeccbd7"
+    },
+    {
+      "path": "bicycle-world/dist/src/river-hop/hop-sites.js",
+      "size": 2732,
+      "sha256": "f5cc8871702b4d3b613208f6f927b0e74ff2725beab354e9745d68ad7ffa48b0"
+    },
+    {
+      "path": "bicycle-world/dist/src/river-hop/manual-flight.js",
+      "size": 4641,
+      "sha256": "38fb1bfc38dea67e2cd4b8d05b8218aa7702b846f1c17d38a240e9d48c56733b"
     },
     {
       "path": "bicycle-world/dist/src/river-hop/planting.js",
-      "size": 1489,
-      "sha256": "3ab0fcceb388396b487978ae517ca8bbb628f1ffe3c733ffc78072be6cbd0c33"
+      "size": 1636,
+      "sha256": "c30c864804544b1c8ada99e33f765d0653a90de349c511926db38cc034cecae3"
     },
     {
       "path": "bicycle-world/dist/src/river-hop/ramp-model.js",
-      "size": 3340,
-      "sha256": "1ddf178e13c58d0bdb64c4d4c43e4c153c46f6c4750e3691d1288806a4668649"
+      "size": 3597,
+      "sha256": "8d4493254c38efce208bfd98e6bd44ad098d120d4e0badae8a9452dfc5fa9e12"
     },
     {
       "path": "bicycle-world/dist/src/river-hop/run-up.js",

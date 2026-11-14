@@ -15,7 +15,7 @@ export const damp=(current,target,rate,dt)=>current+(target-current)*(1-Math.exp
 const MAX_FRAME=.12,MAX_STEP=1/120,SEPARATION_EPSILON=1e-7;
 
 export function newState(){return {...START,speed:0,steering:0,distance:0,contact:{blocked:false,kind:null,impactSpeed:0}};}
-const clearAt=(x,z,heading,colliders)=>positionIsClear({x,z,heading},colliders);
+const clearAt=(x,z,heading,colliders,surface)=>positionIsClear({x,z,heading},colliders,surface);
 
 function contactKind(state){
   const {front,rear}=riderAxles(state);
@@ -24,10 +24,10 @@ function contactKind(state){
 }
 
 // Only used to recover an invalid/overlapping input position, never normal riding.
-function recoverPosition(state,colliders){
+function recoverPosition(state,colliders,surface){
   const originX=state.x,originZ=state.z;
   let nearest=null,nearestDistance=Infinity;
-  function consider(x,z){const distance=Math.hypot(x-originX,z-originZ);if(distance<nearestDistance&&clearAt(x,z,state.heading,colliders)){nearest={x,z};nearestDistance=distance;}}
+  function consider(x,z){const distance=Math.hypot(x-originX,z-originZ);if(distance<nearestDistance&&clearAt(x,z,state.heading,colliders,surface)){nearest={x,z};nearestDistance=distance;}}
   for(const c of colliders){
     // Sample both side clearance and the full turning envelope. This recovery
     // path is only for a stale/invalid initial pose, never ordinary contact.
@@ -42,17 +42,17 @@ function recoverPosition(state,colliders){
   if(!nearest){
     for(let radius=1;radius<=16&&!nearest;radius++)for(let i=0;i<32;i++){const angle=i*Math.PI/16;consider(originX+Math.cos(angle)*radius,originZ+Math.sin(angle)*radius);}
   }
-  if(!nearest&&clearAt(START.x,START.z,state.heading,colliders))nearest=START;
+  if(!nearest&&clearAt(START.x,START.z,state.heading,colliders,surface))nearest=START;
   if(nearest){state.x=nearest.x;state.z=nearest.z;}
 }
 
-function constrainPosition(state,previousX,previousZ,previousHeading,colliders){
-  if(clearAt(state.x,state.z,state.heading,colliders))return;
+function constrainPosition(state,previousX,previousZ,previousHeading,colliders,surface){
+  if(clearAt(state.x,state.z,state.heading,colliders,surface))return;
   const impactSpeed=Math.abs(state.speed);
   if(!state.contact.blocked||impactSpeed>state.contact.impactSpeed){state.contact.kind=contactKind(state);state.contact.impactSpeed=impactSpeed;}
   state.contact.blocked=true;
   state.speed=0;
-  if(!clearAt(previousX,previousZ,previousHeading,colliders)){recoverPosition(state,colliders);return;}
+  if(!clearAt(previousX,previousZ,previousHeading,colliders,surface)){recoverPosition(state,colliders,surface);return;}
   // Resolve the full bicycle pose, including a turn made while stationary.
   // Each bounded substep is short; retain the last safe fraction rather than
   // pushing the rider sideways or allowing either wheel through a plinth.
@@ -60,13 +60,13 @@ function constrainPosition(state,previousX,previousZ,previousHeading,colliders){
   let safe=0,blocked=1;
   for(let attempt=0;attempt<22;attempt++){
     const fraction=(safe+blocked)/2;
-    if(clearAt(previousX+dx*fraction,previousZ+dz*fraction,previousHeading+dh*fraction,colliders))safe=fraction;
+    if(clearAt(previousX+dx*fraction,previousZ+dz*fraction,previousHeading+dh*fraction,colliders,surface))safe=fraction;
     else blocked=fraction;
   }
   state.x=previousX+dx*safe;state.z=previousZ+dz*safe;state.heading=previousHeading+dh*safe;
 }
 
-export function stepMotion(state,input,dt,colliders=[]){
+export function stepMotion(state,input,dt,colliders=[],onAdvance,surface){
   state.contact??={};state.contact.blocked=false;state.contact.kind=null;state.contact.impactSpeed=0;
   // Equal 1/120s slices give the same handling at 10, 30, 60 and 120 rendered FPS.
   // A long background pause is intentionally not simulated in full.
@@ -95,8 +95,9 @@ export function stepMotion(state,input,dt,colliders=[]){
     state.heading+=yaw;
     state.x-=Math.sin(middleHeading)*state.speed*step;
     state.z-=Math.cos(middleHeading)*state.speed*step;
-    constrainPosition(state,oldX,oldZ,oldHeading,colliders);
+    constrainPosition(state,oldX,oldZ,oldHeading,colliders,surface);
     state.distance+=Math.hypot(state.x-oldX,state.z-oldZ);
+    if(onAdvance?.({x:oldX,z:oldZ,heading:oldHeading},state))break;
   }
   return state;
 }

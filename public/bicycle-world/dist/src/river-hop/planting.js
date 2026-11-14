@@ -18,6 +18,7 @@ export function clearRampTree(garden,world){
    items.push({matrix:matrix.clone(),sphere});
   }
   items.forEach((item,i)=>mesh.setMatrixAt(i,item.matrix));
+  mesh.boundingSphere=new THREE.Sphere();items.forEach((item,i)=>i?mesh.boundingSphere.union(item.sphere):mesh.boundingSphere.copy(item.sphere));
   mesh.count=items.length;mesh.instanceMatrix.needsUpdate=true;batches.push({mesh,items});
  }
  const removed=world.colliders.filter(c=>c.kind==='garden'&&Math.hypot(c.x-selected.x,c.z-selected.z)<.01);

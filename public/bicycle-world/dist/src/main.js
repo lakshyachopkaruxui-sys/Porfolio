@@ -1,3 +1,4 @@
+import {assistAcrossRamps,supportsDeck} from './river-hop/hop-sites.js';
 import {createFullGardenHop} from './river-hop/full-garden-hop.js';
 import {HOP} from './river-hop/trajectory.js';
 import {planRampApproach} from './river-hop/approach-route.js';
@@ -130,27 +131,7 @@ let landmarkFramer,cameraHeight=24;
 let running=false,inPortfolio=false,ready=false,failed=false;
 let enteredGarden=false,pendingRideAudio=false;
 let riverHop=null,hopBoost=false,rampApproach=false;
-const hopButton=document.createElement('button');hopButton.id='river-hop-action';hopButton.type='button';hopButton.hidden=true;hopButton.textContent='Try River Hop (E)';hopButton.style.cssText='position:fixed;bottom:100px;left:24px;z-index:90;padding:12px 20px;min-height:44px;border-radius:10px;background:#fffaf0;color:#213d35;border:1px solid #8b9f88;font:600 15px DM Sans,sans-serif';document.body.append(hopButton);sceneHost.setAttribute('aria-label',sceneHost.getAttribute('aria-label')+' Near River Hop, E starts the optional jump and Escape cancels it. Q toggles boost.');hopButton.onclick=()=>{if(rampApproach){clearInput();notify('Approach cancelled. Ride freely or try again.');}else if(riverHop?.active)clearInput();else startRiverHop();sceneHost.focus({preventScroll:true});};
-function startRiverHop(selected){
- if(!ready||!running||hasOverlay()||riverHop?.active||rampApproach||!riverHop?.near())return;
- const gate=riverHop.entry(),direction=gate.northbound?-1:1;
- clearInput({stop:false});dismissWelcomeGuide();if(!reduced)setRidingView('follow',{persist:false});
- const launch=()=>{
-  rampApproach=false;
-  if(!riverHop.start(reduced,selected))return;
-  sceneHost.dataset.riverHopResult='running';sceneHost.dataset.riverHopStunt=riverHop.stunt;sceneHost.dataset.riverHopBank=gate.northbound?'south':'north';sceneHost.dataset.riverHopLight=gardenLighting.night?'night':'day';
-  world.setRoute([{x:state.x,z:state.z},{x:gate.x,z:gate.z},{x:gate.x,z:gate.z+direction*8}]);
- };
- const turn=Math.abs(Math.atan2(Math.sin(state.heading-gate.heading),Math.cos(state.heading-gate.heading)));
- if(Math.hypot(state.x-gate.x,state.z-gate.z)<.25&&turn<.12&&Math.abs(state.speed)<.05){launch();return;}
- const route=planRampApproach(state,gate,world.colliders);
- if(!route){notify('No clear turn into the ramp here. Move back a little and try again.');return;}
- target={x:gate.x,z:gate.z};pendingArrival=launch;
- guidedRide=createGuidedRide(state,route,world.colliders,{preferPaths:false});rampApproach=true;
- world.ring.position.set(gate.x,elevation(gate.z,gate.x)+.05,gate.z);world.ring.visible=true;
- world.setRoute([{x:state.x,z:state.z},...route]);syncRideUI();
- $('ride-status-label').textContent='Following the ramp approach';notify('Follow the dashed turn into the ramp. Steer or brake to take over.');
-}
+const hopButton=document.createElement('button');hopButton.id='river-hop-action';hopButton.type='button';hopButton.hidden=true;hopButton.textContent='Cancel jump (Esc)';hopButton.style.cssText='position:fixed;bottom:100px;left:24px;z-index:90;padding:12px 20px;min-height:44px;border-radius:10px;background:#fffaf0;color:#213d35;border:1px solid #8b9f88;font:600 15px DM Sans,sans-serif';document.body.append(hopButton);sceneHost.setAttribute('aria-label',sceneHost.getAttribute('aria-label')+' Ride onto River Hop to jump automatically. Escape cancels a jump. Q toggles boost.');hopButton.onclick=()=>{if(riverHop?.active)clearInput();sceneHost.focus({preventScroll:true});};
 const mainLoop=createGuardedFrameLoop({step:frame,onError(error){
   failed=true;startupController.abort();console.error('The 3D view could not continue',error);
   showWorldFailure('The 3D view stopped unexpectedly. Retry the world, or keep reading the projects.');
@@ -164,7 +145,7 @@ let readerScroll=0,lastFocus=null,usedReader=false;
 let pointerDown=null;
 let placeUI,mapUI,projectUI,personalRooms,worksExperience,oakLab,aboutExperience,pendingArrival=null,hoverPointer=null;
 // World coordinates for the rider's planted shoe; reuse the same terrain as wheels.
-const riderGroundHeight=(x,z)=>elevation(z,x);
+const riderGroundHeight=(x,z)=>Math.max(elevation(z,x),riverHop?.rampHeight(x,z)??0);
 let rideHintVisible=false;
 let readingBackdropDrawn=false;
 const coarsePreference=matchMedia('(pointer: coarse)');
@@ -240,7 +221,7 @@ function hasOverlay(){return Boolean(reader.open||help.open||placeUI?.isOpen||pr
 function ridingInputBlocked(){return failed||abandoned||document.hidden||cloudTransition.snapshot.active||!$('woody-guide').hidden;}
 function syncRideUI(){
   playMusic.setActive(ready&&running&&!inPortfolio);
-  const ui=hybridUIState({ready,inPortfolio,running,modalOpen:hasOverlay(),previewOpen:false,hasRoute:Boolean(target),speed:state.speed,nearStop,hintVisible:rideHintVisible,stopFocused:document.activeElement===$('stop-route'),coarse,inputBlocked:ridingInputBlocked()||Boolean(riverHop?.active)});
+  const ui=hybridUIState({ready,inPortfolio,running,modalOpen:hasOverlay(),previewOpen:false,hasRoute:Boolean(target),speed:state.speed,nearStop,hintVisible:rideHintVisible,stopFocused:document.activeElement===$('stop-route'),coarse,inputBlocked:ridingInputBlocked()});
   document.body.classList.toggle('hybrid-world',!inPortfolio);
   document.body.classList.toggle('hybrid-intro',ui.intro&&$('failure').hidden);
   document.body.classList.toggle('hybrid-reading',ui.reading);
@@ -426,7 +407,7 @@ function openLandmark(kind){
   }
   if(kind==='work')placeUI.open('collection');else if(STOPS[kind]?.content)placeUI.open(STOPS[kind].content);
 }
-function interact(){if(riverHop?.near()){startRiverHop();return;}if(nearStop)openLandmark(nearStop);else if(nearTrailhead())showHelp();}
+function interact(){if(nearStop)openLandmark(nearStop);else if(nearTrailhead())showHelp();}
 function beginRoute(destination,preferPaths=false,onArrival=null){
   if(riverHop?.active){notify("Finish the jump or press Escape before choosing a destination.");return false;}
   dismissWelcomeGuide();welcomeVoice.stop();
@@ -523,8 +504,7 @@ document.addEventListener('keydown',e=>{
   if(!running){if(key==='enter'&&document.activeElement===sceneHost){e.preventDefault();start();}return;}
   if(key==='escape'&&!e.repeat){consumeNavigationKey(e);stopRide();return;}
   // Keep native button/keyboard activation. Riding input belongs to the canvas.
-  if(document.activeElement!==sceneHost&&e.key!=='Escape')return;
-  if(key==='e'&&!e.repeat&&riverHop?.near()){e.preventDefault();startRiverHop();return;}
+  if(document.activeElement!==sceneHost&&!document.activeElement?.closest('#touch-controls')&&e.key!=='Escape')return;
   if(key==='q'&&!e.repeat){e.preventDefault();hopBoost=!hopBoost;notify(hopBoost?'Boost on. Tap Q to switch it off.':'Normal riding speed.');return;}
   if(key==='p'&&!e.repeat){e.preventDefault();showPortfolio();return;}
   // Shift changes pace without cancelling a click-to-ride route. Its keyup and
@@ -574,7 +554,7 @@ window.addEventListener('pagehide',event=>{
   abandoned=true;riverHop?.dispose();hopButton.remove();overlayMotion.dispose();touchControlInput?.dispose();mainLoop.stop();bicycleLight?.dispose();rider?.bell?.dispose();aboutExperience?.dispose();oakLab?.dispose();worksExperience?.dispose();personalRooms?.dispose();trailheadGuide?.dispose();gardenLighting?.dispose();followSky?.dispose();world?.wayfinding.dispose();cancelAnimationFrame(loadingCloudFrame);cloudVolume?.dispose();cloudCurtain.dispose();rideProfile?.dispose();startupController.abort();pokemonControls.dispose();pokemonAudio.dispose();rideSoundControl.dispose();gardenBell.dispose();rideAudio.dispose();companions?.dispose();welcomeVoice.dispose();garden?.dispose();world?.studioDisplays.dispose();world?.landmarks.dispose();woodyWelcome?.dispose();disposeCharacterAsset(characterAsset);characterAsset=null;
   renderer?.dispose();renderer?.domElement.remove();
 });
-touchControlInput=createTouchRidingInput({buttons:$('touch-controls').querySelectorAll('[data-key]'),keys,physicalKeys,releaseTarget:window,onStart:cancelRoute,isActive:()=>coarse&&ready&&running&&!inPortfolio&&!hasOverlay()&&!riverHop?.active&&!ridingInputBlocked()});
+touchControlInput=createTouchRidingInput({buttons:$('touch-controls').querySelectorAll('[data-key]'),keys,physicalKeys,releaseTarget:window,onStart:cancelRoute,isActive:()=>coarse&&ready&&running&&!inPortfolio&&!hasOverlay()&&!ridingInputBlocked()});
 $('touch-help').textContent='Guide';
 function selectGround(e){
   // The guided jump owns movement until landing or explicit cancellation.
@@ -656,8 +636,8 @@ function renderWelcome(dt=0){
 function syncRiverHopUI(){
  document.body.classList.toggle('river-hop-near',Boolean(riverHop&&(riverHop.active||riverHop.near())));
  if(riverHop?.active)$('ride-status').hidden=true;
- hopButton.hidden=!running||inPortfolio||hasOverlay()||!(riverHop?.active||rampApproach||riverHop?.near());
- const label=riverHop?.active?'Cancel River Hop (Esc)':rampApproach?'Cancel approach':'Try River Hop (E)';
+ hopButton.hidden=!running||inPortfolio||hasOverlay()||!riverHop?.active;
+ const label='Cancel jump (Esc)';
  if(hopButton.textContent!==label)hopButton.textContent=label;
  const phase=riverHop?.phase||'preparing';if(sceneHost.dataset.riverHop!==phase)sceneHost.dataset.riverHop=phase;
 }
@@ -697,8 +677,8 @@ function showWorldFailure(message){
 }
 function placeRider(){
   const half=RIDER_HALF_WHEELBASE;
-  const front=elevation(state.z-Math.cos(state.heading)*half,state.x-Math.sin(state.heading)*half);
-  const rear=elevation(state.z+Math.cos(state.heading)*half,state.x+Math.sin(state.heading)*half);
+  const front=riderGroundHeight(state.x-Math.sin(state.heading)*half,state.z-Math.cos(state.heading)*half);
+  const rear=riderGroundHeight(state.x+Math.sin(state.heading)*half,state.z+Math.cos(state.heading)*half);
   rider.group.position.set(state.x,(front+rear)/2,state.z);
   rider.group.rotation.set(Math.atan2(front-rear,half*2),state.heading,0,'YXZ');
 }
@@ -770,13 +750,13 @@ async function initialize(){
           onClose(){updateProjection();readingBackdropDrawn=false;history.replaceState(null,'',location.pathname+location.search);restoreRideUI();}
         });
         decorateModeSwitches();
-        if(saved?.mapVersion===MAP_VERSION&&Number.isFinite(saved.heading)&&positionIsClear(saved,world.colliders))Object.assign(state,{x:saved.x,z:saved.z,heading:saved.heading});
+        if(saved?.mapVersion===MAP_VERSION&&Number.isFinite(saved.heading)&&positionIsClear(saved,world.colliders,supportsDeck))Object.assign(state,{x:saved.x,z:saved.z,heading:saved.heading});
         rideFeedback.reset(state);focus.set(state.x-5,0,state.z+1);placeRider();resize();window.addEventListener('resize',resize);
         camera.position.copy(focus).add(cameraOffset);camera.lookAt(focus);scene.updateMatrixWorld(true);renderBackdrop();
       }},
       {id:'assets',label:'Preparing the garden, companions and displays…',async run(){
         garden=await loadGarden(scene,world,{signal:startupController.signal});
-        riverHop=createFullGardenHop({scene,world,garden,rider,state,notify,onFinish(){keys.clear();physicalKeys.clear();rideFeedback.reset(state);contactMarker.reset();world.setRoute(null);save();sceneHost.dataset.riverHopResult=riverHop.time>=HOP.duration?'landed':'cancelled';}});
+        riverHop=createFullGardenHop({scene,world,garden,rider,state,notify,onFinish(){if(!riverHop.manual){keys.clear();physicalKeys.clear();}rideFeedback.reset(state);contactMarker.reset();world.setRoute(null);save();sceneHost.dataset.riverHopResult=riverHop.pose?.done?'landed':'cancelled';}});
         startupController.signal.throwIfAborted();
         cameraObstacles=createCameraObstacles(world,garden,[trailheadGuide.root]);setRidingView(saved?.ridingView,{persist:false});
         try{companions=createPokemonWorld({scene,obstacles:world.colliders,trees:[...garden.nature.placements,...(garden.accents?.placements||[])],onLoadTiming:profileRequested?recordCompanionLoad:undefined});}
@@ -787,7 +767,7 @@ async function initialize(){
         // hidden all-map download or an artificial minimum loading duration.
         await companions?.prepareRiding({yieldControl:()=>new Promise(resolve=>setTimeout(resolve,0))});
         startupController.signal.throwIfAborted();
-        if(!positionIsClear(state,world.colliders)){Object.assign(state,newState());focus.set(state.x-5,0,state.z+1);placeRider();}
+        if(!positionIsClear(state,world.colliders,supportsDeck)){Object.assign(state,newState());focus.set(state.x-5,0,state.z+1);placeRider();}
         displayImages=await world.studioDisplays.ready;
         if(abandoned)throw new DOMException('World loading cancelled','AbortError');
         startupController.signal.throwIfAborted();
@@ -872,13 +852,17 @@ function frame(now){
         if(input.blocked){cancelRoute();input={brake:true};notify('There isn’t room for this turn. Reverse a little, or choose clearer ground.');}
         else if(input.arrived){const callback=pendingArrival;cancelRoute();input={brake:true};callback?.();if(hasOverlay())return;}
       }
+      if(!guidedRide)input=assistAcrossRamps(state,input);
       movingIntent=Boolean(input.forward)!==Boolean(input.reverse);
       movingIntent=movingIntent&&!input.brake;
       turnIntent=input.turnIntent??input.turn??0;
       // Lift the planted foot before starting either direction. This handoff
       // happens only at rest and never changes braking or a rolling trajectory.
       if(movingIntent&&Math.abs(state.speed)<.025&&!rider.readyToRide)input={...input,forward:false,reverse:false,brake:true};
-      const previousDistance=state.distance;stepMotion(state,input,dt,world.colliders);
+      const previousDistance=state.distance;let launched=false;
+      stepMotion(state,input,dt,world.colliders,previous=>{const intercepted=riverHop?.automatic(previous,reduced)??false;launched=Boolean(riverHop?.active);return intercepted;},supportsDeck);
+      if(launched){cancelRoute();world.setRoute(null);sceneHost.dataset.riverHopResult='running';sceneHost.dataset.riverHopStunt=riverHop.stunt;}
+
       pedaling=Boolean((input.forward||input.reverse)&&!input.brake&&!state.contact?.blocked);
       rideFeel=rideFeedback.update({state,input,dt,reduced});if(rideFeel.notice)notify(rideFeel.notice);
       rideAudioMotion.speed=state.speed;rideAudioMotion.pedaling=pedaling;rideAudioMotion.braking=Boolean(input.brake);rideAudioMotion.moved=Math.max(0,state.distance-previousDistance);rideAudioMotion.dt=dt;
