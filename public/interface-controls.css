@@ -1,5 +1,5 @@
-/* Shallow, tactile controls. References and boundaries: docs/site-audit-20261114.md.
-   Shadows/gradients are static; only the small press translation animates. */
+/* Minimal controls: quiet filled surfaces, no decorative border or raised edge.
+   References and decisions: docs/button-refinement-20261114.md. */
 :root {
   --control-face-start: #ffffff;
   --control-face-end: #edf2f9;
@@ -63,36 +63,36 @@ html:root body.hybrid-world :is(
 ) button:where(:not(:has(img)):not(.cloud-photo-card):not(.journal-photo-button):not(.hobby-photo-open)),
 html:root body.hybrid-world :is(#river-hop-action, #touch-controls button, #stop-route, #interact, #welcome .welcome-actions a) {
   min-height: 44px;
-  border: 1px solid var(--control-edge) !important;
-  border-radius: 11px !important;
+  border: 0 !important;
+  border-radius: 9px !important;
   background: linear-gradient(175deg, var(--control-face-start), var(--control-face-end)) !important;
   color: var(--control-ink) !important;
-  box-shadow: inset 0 1px 0 var(--control-highlight), 0 3px 0 var(--control-depth), 0 5px 9px #14233812 !important;
+  box-shadow: none !important;
   text-decoration: none;
-  transition: translate 120ms cubic-bezier(.2,.8,.2,1);
+  transition: background-color 140ms ease, scale 100ms ease;
   -webkit-tap-highlight-color: transparent;
 }
 
-/* The navigation links remain a compact group, with a quiet raised current tab. */
+/* Navigation stays quiet; the current section uses a soft fill. */
 html body.editorial-portfolio .site-header nav[aria-label='Main navigation'] { gap: 8px 12px; }
 html body.editorial-portfolio .site-header nav[aria-label='Main navigation'] a {
   padding: 6px 9px;
-  border: 1px solid transparent;
+  border: 0;
   border-radius: 10px;
   text-decoration: none;
-  transition: translate 120ms cubic-bezier(.2,.8,.2,1);
+  transition: background-color 140ms ease, scale 100ms ease;
 }
 html body.editorial-portfolio .site-header nav[aria-label='Main navigation'] a[aria-current='location'] {
   background: linear-gradient(175deg, var(--control-face-start), var(--control-face-end));
   color: var(--control-ink);
-  border-color: var(--control-edge);
-  box-shadow: inset 0 1px 0 var(--control-highlight), 0 2px 0 var(--control-depth);
+  border-color: transparent;
+  box-shadow: none;
 }
 html:root body.hybrid-world #ride-tools {
   gap: 8px;
   padding: 8px;
   background: #fffdf5f5;
-  border-color: var(--control-edge);
+  border-color: transparent;
   box-shadow: 0 4px 18px #18342818;
 }
 html:root body.hybrid-world #ride-tools kbd { color: inherit; opacity: .78; }
@@ -139,7 +139,7 @@ html:root body.hybrid-world #touch-controls button.pressed {
   background: linear-gradient(175deg, var(--control-primary-start), var(--control-primary-end)) !important;
   color: var(--control-primary-ink) !important;
   border-color: var(--control-primary-edge) !important;
-  box-shadow: inset 0 1px 0 #ffffff44, 0 3px 0 var(--control-primary-depth), 0 5px 9px #14233812 !important;
+  box-shadow: none !important;
 }
 html body.editorial-portfolio #portfolio-assistant .assistant-launcher-hint {
   color: inherit;
@@ -148,18 +148,18 @@ html body.editorial-portfolio #portfolio-assistant .assistant-launcher-hint {
 @media (hover: hover) and (pointer: fine) {
   html body.editorial-portfolio :is(.normal-theme-toggle,.hero-actions a,.project-filters button,.portfolio-assistant-dialog button,.portfolio-assistant-launcher):hover:not(:disabled),
   html:root body.hybrid-world :is(#ride-tools,#world-map,#help,#about-experience,#works-experience,#personal-experience,#oak-lab,#personal-experience #listening-experience,.play-music-dock) button:where(:not(:has(img)):not(.cloud-photo-card):not(.journal-photo-button):not(.hobby-photo-open)):hover:not(:disabled) {
-    translate: 0 -1px;
+    filter: brightness(1.04);
   }
   html body.editorial-portfolio .site-header nav[aria-label='Main navigation'] a:hover {
     background: linear-gradient(175deg, var(--control-face-start), var(--control-face-end));
     color: var(--control-ink);
-    border-color: var(--control-edge);
+    border-color: transparent;
   }
 }
 html body.editorial-portfolio :is(.normal-theme-toggle,.hero-actions a,.project-filters button,.portfolio-assistant-dialog button,.portfolio-assistant-launcher,.site-header nav a):active:not(:disabled),
 html:root body.hybrid-world :is(#ride-tools,#world-map,#help,#about-experience,#works-experience,#personal-experience,#oak-lab,#personal-experience #listening-experience,.play-music-dock) button:where(:not(:has(img)):not(.cloud-photo-card):not(.journal-photo-button):not(.hobby-photo-open)):active:not(:disabled),
 html:root body.hybrid-world :is(#river-hop-action,#touch-controls button):active:not(:disabled) {
-  translate: 0 2px;
+  scale: .98;
   transition-duration: 60ms;
 }
 
@@ -170,9 +170,9 @@ html:root body.hybrid-world :is(button,a):focus-visible {
   box-shadow: 0 0 0 2px var(--control-focus-gap) !important;
 }
 html:root body.hybrid-world[data-play-ui-motion='reduced'] :is(button,a),
-html.reduce-motion body :is(button,a) { translate: none !important; transition-duration: 0ms !important; }
+html.reduce-motion body :is(button,a) { translate: none !important; scale: none !important; transition-duration: 0ms !important; }
 @media (prefers-reduced-motion: reduce) {
-  html body :is(button,a) { translate: none !important; transition-duration: 0ms !important; }
+  html body :is(button,a) { translate: none !important; scale: none !important; transition-duration: 0ms !important; }
 }
 @media (forced-colors: active) {
   html body :is(button,a) {
