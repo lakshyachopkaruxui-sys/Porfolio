@@ -87,3 +87,6 @@
 #personal-experience #garba-experience .gr-viewer>header>.play-music-dock{margin:0;flex:0 0 auto;}
 #personal-experience #garba-experience .gr-viewer img{max-height:calc(100dvh - 264px);}
 #personal-experience #garba-experience .gr-footer{padding-right:190px;}
+
+/* The courtyard header sits directly over the dark evening sky. */
+html:root body.hybrid-world #garba-experience .gr-header .mode-selector.mode-switch{--mode-label:#fff9ec;--mode-current:#fff9ec;}

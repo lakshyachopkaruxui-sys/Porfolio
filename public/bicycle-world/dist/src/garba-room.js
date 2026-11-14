@@ -23,6 +23,7 @@ export function createGarbaRoom({renderer,container,isReduced,onClose=()=>{},onP
   const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2(),palette={};
   let experience=null,host=null,status=null,veil=null,scene=null,camera=null,saved=null,externalFocus=null;
   let opened=false,closing=false,dead=false,dirty=false,generation=0,clock=0,renderedFrames=0;
+  let queuedPhoto=null;
   let width=1,height=1,view='threshold',selected=null,lastSelected=null,transition=null,viewerOpen=false;
   let target=threshold.target.clone(),pointerDown=null,hover=null,assetsReady=false,assetsLoading=false;
   let openingElapsed=0,closingVeilStart=0,circleProgress=0,circleActive=false,ringLights=null,lampFlame=null,lampLight=null,lastCircleStep=-1,lastEscapeHandled=-Infinity;
@@ -38,7 +39,7 @@ export function createGarbaRoom({renderer,container,isReduced,onClose=()=>{},onP
       <header class="gr-header"><button id="garba-back-hobbies" class="gr-quiet" type="button">Back to Hobbies</button><div class="gr-heading"><p>Garba</p><h1 id="garba-heading">Always room in the circle</h1></div><span id="garba-portfolio" class="mode-switch" data-mode-switch>Portfolio / Play</span></header>
       <section id="garba-overview" class="gr-rail" aria-label="Explore the courtyard"><div class="gr-intro"><p class="gr-eyebrow">Music. Movement. People.</p><p>Garba brings together a few of my favourite things. Come in for a little of that energy.</p></div><nav id="garba-photo-choices" class="gr-photo-choices" aria-label="Lakshya’s Garba photographs"></nav><div class="gr-circle-actions"><button id="garba-circle" class="gr-primary" type="button">Light the circle</button><button id="garba-reset" class="gr-text" type="button" disabled>Reset lights</button></div></section>
       <section id="garba-context" class="gr-context" aria-labelledby="garba-photo-title" hidden><button id="garba-back-courtyard" class="gr-quiet" type="button">Back to courtyard</button><p class="gr-eyebrow">A photograph from Garba</p><h2 id="garba-photo-title"></h2><p id="garba-photo-description"></p><button id="garba-view-photo" class="gr-primary" type="button">View photograph</button></section>
-      <section id="garba-viewer" class="gr-viewer" aria-labelledby="garba-viewer-title" hidden><header><div><p class="gr-eyebrow">Lakshya’s photograph</p><h2 id="garba-viewer-title"></h2></div><button id="garba-viewer-back" class="gr-quiet" type="button">Back to photograph</button></header><div class="gr-viewer-layout"><figure><img id="garba-full-photo" alt=""><figcaption id="garba-viewer-caption"></figcaption></figure><aside><p class="gr-eyebrow">Music, movement &amp; people</p><p id="garba-viewer-description"></p><nav aria-label="Garba photographs"><button type="button" id="garba-photo-prev" class="gr-quiet">Previous photograph</button><span id="garba-photo-count" role="status" aria-live="polite"></span><button type="button" id="garba-photo-next" class="gr-quiet">Next photograph</button></nav><p id="garba-photo-error" role="status" hidden></p></aside></div></section>
+      <section id="garba-viewer" class="gr-viewer" aria-labelledby="garba-viewer-title" hidden><header><div><p class="gr-eyebrow">Lakshya’s photograph</p><h2 id="garba-viewer-title"></h2></div><button id="garba-viewer-back" class="gr-quiet" type="button">Back to courtyard</button></header><div class="gr-viewer-layout"><figure><img id="garba-full-photo" alt=""><figcaption id="garba-viewer-caption"></figcaption></figure><aside><p class="gr-eyebrow">Music, movement &amp; people</p><p id="garba-viewer-description"></p><nav aria-label="Garba photographs"><button type="button" id="garba-photo-prev" class="gr-quiet">Previous photograph</button><span id="garba-photo-count" role="status" aria-live="polite"></span><button type="button" id="garba-photo-next" class="gr-quiet">Next photograph</button></nav><p id="garba-photo-error" role="status" hidden></p></aside></div></section>
       <div id="garba-object-hint" class="gr-object-hint" hidden></div><p id="garba-status" class="gr-sr" aria-live="polite">Entering the Garba courtyard.</p>
       <footer class="gr-footer"><span id="garba-view-label">Through the entrance</span><span id="garba-load-label">Two real photographs. A little room to move.</span></footer><div id="garba-veil" class="gr-veil" aria-hidden="true"></div>`;
     experience=section;container.appendChild(section);host=$('#garba-scene');status=$('#garba-status');veil=$('#garba-veil');
@@ -48,7 +49,7 @@ export function createGarbaRoom({renderer,container,isReduced,onClose=()=>{},onP
     for(const [index,photo]of photos.entries()){
       const button=document.createElement('button');button.type='button';button.className='gr-photo-choice';button.dataset.grPhoto=photo.id;button.setAttribute('aria-pressed',String(lastSelected===photo.id));
       const number=document.createElement('span');number.className='gr-number';number.textContent=String(index+1).padStart(2,'0');
-      const text=document.createElement('span'),title=document.createElement('strong'),type=document.createElement('small');title.textContent=photo.caption;type.textContent='Photograph';text.append(title,type);button.append(number,text);$('#garba-photo-choices').appendChild(button);
+      const text=document.createElement('span'),title=document.createElement('strong'),type=document.createElement('small');title.textContent=photo.caption;type.textContent='Open photograph';text.append(title,type);button.append(number,text);$('#garba-photo-choices').appendChild(button);
     }
   }
     function snapshotRenderer(){
@@ -209,9 +210,12 @@ export function createGarbaRoom({renderer,container,isReduced,onClose=()=>{},onP
     transition={started:clock,duration,startPosition,startTarget,startFov,pose,path,onComplete,circle};experience.classList.add('gr-moving');requestRender();
   }
   function selectPhoto(id){
-    if(!opened||closing||transition||viewerOpen||!photos.some(photo=>photo.id===id))return;selected=id;lastSelected=id;view='photograph';circleActive=false;setHover(null);updateSelection();
+    if(!opened||closing||viewerOpen||!photos.some(photo=>photo.id===id))return;
+    if(transition){if(view==='overview'&&!circleActive){queuedPhoto=id;status.textContent='Opening the photograph when the view settles.';}return;}
+    queuedPhoto=null;selected=id;lastSelected=id;view='photograph';circleActive=false;setHover(null);updateSelection();
     const photo=photos.find(item=>item.id===id);$('#garba-overview').hidden=true;$('#garba-context').hidden=false;$('#garba-photo-title').textContent=photo.caption;$('#garba-photo-description').textContent=photo.description;$('#garba-view-photo').disabled=true;experience.classList.add('gr-focused');$('#garba-view-label').textContent='A closer look';
-    moveTo(photoPose(id),1050,()=>{if(!opened||closing)return;$('#garba-view-photo').disabled=false;status.textContent=`${photo.caption}. ${photo.alt}`;$('#garba-view-photo').focus({preventScroll:true});});
+    // Open the complete photograph and its context in one choice.
+    openViewer();
   }
   function updateSelection(){experience.querySelectorAll('[data-gr-photo]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.grPhoto===lastSelected)));}
   function backToOverview(){
@@ -236,7 +240,7 @@ export function createGarbaRoom({renderer,container,isReduced,onClose=()=>{},onP
     const index=photos.indexOf(photo);$('#garba-viewer-description').textContent=photo.description;$('#garba-photo-count').textContent=(index+1)+' of '+photos.length;$('#garba-photo-prev').disabled=index===0;$('#garba-photo-next').disabled=index===photos.length-1;$('#garba-photo-error').hidden=true;
   }
   function releaseViewer(){if(!experience)return;$('#garba-full-photo').removeAttribute('src');$('#garba-viewer').hidden=true;viewerOpen=false;viewerSiblings.forEach(([element,inert])=>{element.inert=inert;});viewerSiblings=[];}
-  function closeViewer(){if(!viewerOpen)return;releaseViewer();$('#garba-view-photo').focus({preventScroll:true});status.textContent='Back at the photograph in the courtyard.';requestRender();}
+  function closeViewer(){if(!viewerOpen)return;backToOverview();}
   function lightCircle(){
     if(!opened||closing||transition||viewerOpen||view!=='overview')return;circleActive=true;applyCircle(0);lastCircleStep=-1;setHover(null);$('#garba-circle').disabled=true;$('#garba-reset').disabled=true;status.textContent='The circle lights travel around the lamp.';
     moveTo({position:v(.15,4.5,7.3),target:overview.target.clone(),fov:60},2400,()=>{if(!opened||closing)return;circleActive=false;applyCircle(1);$('#garba-circle').disabled=false;$('#garba-circle').textContent='Replay the lights';$('#garba-reset').disabled=false;status.textContent='The circle is lit. The view has settled.';$('#garba-circle').focus({preventScroll:true});},{circle:true});
@@ -246,15 +250,15 @@ export function createGarbaRoom({renderer,container,isReduced,onClose=()=>{},onP
   function resize(){
     if(!opened||!camera)return;const rect=experience.getBoundingClientRect();width=Math.max(1,rect.width||container.clientWidth||window.innerWidth);height=Math.max(1,rect.height||container.clientHeight||window.innerHeight);renderer.setPixelRatio(Math.min(saved?.pixelRatio||1,1.6));renderer.setSize(width,height,false);renderer.setViewport(0,0,width,height);renderer.setScissorTest(false);camera.aspect=width/height;camera.updateProjectionMatrix();requestRender();
   }
-  function open({returnFocus}={}){
+  function open({returnFocus,returnLabel='Back to Hobbies'}={}){
     if(dead)throw new Error('Garba courtyard has been disposed.');if(opened)return false;opened=true;closing=false;generation++;clock=0;renderedFrames=0;openingElapsed=0;closingVeilStart=0;view='threshold';selected=null;transition=null;viewerOpen=false;assetsReady=false;assetsLoading=false;circleProgress=0;circleActive=false;lastCircleStep=-1;lastEscapeHandled=-Infinity;target.copy(threshold.target);externalFocus=returnFocus||document.activeElement;
     try{
-      mount();borrowRenderer();const rect=experience.getBoundingClientRect();width=Math.max(1,rect.width||window.innerWidth);height=Math.max(1,rect.height||window.innerHeight);buildScene();bindUI();resize();loadPhotos();const token=generation;document.fonts?.ready?.then(()=>{if(!opened||token!==generation)return;placards.forEach(({texture,draw})=>{draw();texture.needsUpdate=true;});requestRender();});
+      mount();$('#garba-back-hobbies').textContent=returnLabel;borrowRenderer();const rect=experience.getBoundingClientRect();width=Math.max(1,rect.width||window.innerWidth);height=Math.max(1,rect.height||window.innerHeight);buildScene();bindUI();resize();loadPhotos();const token=generation;document.fonts?.ready?.then(()=>{if(!opened||token!==generation)return;placards.forEach(({texture,draw})=>{draw();texture.needsUpdate=true;});requestRender();});
       veil.style.opacity=reduced()?'0':'1';view='overview';experience.dataset.phase='entering';$('#garba-back-hobbies').focus({preventScroll:true});moveTo(overview,2100,()=>{if(!opened||closing)return;$('#garba-view-label').textContent='In the courtyard';status.textContent='Inside the Garba courtyard. Choose a photograph or light the circle.';},{entry:true});return true;
     }catch(error){finishClose(false);throw error;}
   }
   function close({immediate=false,notify=true}={}){
-    if(!opened)return false;if(closing&&!immediate)return false;closing=true;circleActive=false;releaseViewer();setHover(null);closingVeilStart=Number(veil.style.opacity)||0;$('#garba-overview').hidden=true;$('#garba-context').hidden=true;experience.dataset.phase='returning';
+    if(!opened)return false;if(closing&&!immediate)return false;closing=true;queuedPhoto=null;circleActive=false;releaseViewer();setHover(null);closingVeilStart=Number(veil.style.opacity)||0;$('#garba-overview').hidden=true;$('#garba-context').hidden=true;experience.dataset.phase='returning';
     if(immediate||reduced()){finishClose(notify);return true;}moveTo(threshold,1450,()=>finishClose(notify),{exit:true});return true;
   }
   function finishClose(notify){
@@ -267,7 +271,7 @@ export function createGarbaRoom({renderer,container,isReduced,onClose=()=>{},onP
     if(reduced()&&transition)transition.started=clock-transition.duration;
     if(!closing&&openingElapsed<.42){openingElapsed+=delta;veil.style.opacity=reduced()?'0':String(Math.max(0,1-openingElapsed/.42));dirty=true;}
     if(viewerOpen)return false;if(!dirty&&!transition)return false;
-    if(transition){const progress=Math.min(1,(clock-transition.started)/transition.duration),ease=progress*progress*(3-2*progress);if(transition.path)camera.position.copy(transition.path.getPoint(ease));else camera.position.lerpVectors(transition.startPosition,transition.pose.position,ease);target.lerpVectors(transition.startTarget,transition.pose.target,ease);camera.fov=THREE.MathUtils.lerp(transition.startFov,transition.pose.fov,ease);camera.updateProjectionMatrix();camera.lookAt(target);if(transition.circle)applyCircle(progress);if(closing)veil.style.opacity=String(Math.max(closingVeilStart,(progress-.78)/.22));if(progress===1){const done=transition.onComplete;transition=null;experience.classList.remove('gr-moving');done?.();}}
+    if(transition){const progress=Math.min(1,(clock-transition.started)/transition.duration),ease=progress*progress*(3-2*progress);if(transition.path)camera.position.copy(transition.path.getPoint(ease));else camera.position.lerpVectors(transition.startPosition,transition.pose.position,ease);target.lerpVectors(transition.startTarget,transition.pose.target,ease);camera.fov=THREE.MathUtils.lerp(transition.startFov,transition.pose.fov,ease);camera.updateProjectionMatrix();camera.lookAt(target);if(transition.circle)applyCircle(progress);if(closing)veil.style.opacity=String(Math.max(closingVeilStart,(progress-.78)/.22));if(progress===1){const done=transition.onComplete;transition=null;experience.classList.remove('gr-moving');done?.();if(queuedPhoto&&!closing){const pending=queuedPhoto;queuedPhoto=null;selectPhoto(pending);}}}
     if(!opened||!scene)return false;experience.dataset.phase=closing?'returning':transition?'moving':'viewing';renderer.render(scene,camera);renderedFrames++;dirty=false;return true;
   }
   function diagnostics(){return {phase:!opened?'closed':closing?'returning':transition?'moving':'viewing',isOpen:opened,view,selected,lastSelected,viewerOpen,circleActive,circleProgress,moving:Boolean(transition),renderedFrames,assetsReady,assetsLoading,pendingImages:pendingImages.filter(entry=>entry.cancel).length,ownedGeometries:resources.geometry.size,ownedMaterials:resources.material.size,ownedTextures:resources.texture.size,drawCalls:opened?renderer.info.render.calls:0,triangles:opened?renderer.info.render.triangles:0,ownsRenderer:false};}

@@ -137,3 +137,65 @@
   #oak-lab .oak-making> :not(.oak-build-copy){flex:none;}
   #oak-lab .oak-build-copy{flex:none;overflow:visible;}
 }
+
+/* Read from the section label to the reply, then explore the room beside it. */
+#oak-lab .oak-comic,#oak-lab .oak-making{text-align:left;left:30px;right:auto;width:min(500px,43vw);top:178px;bottom:122px;max-height:none;}
+#oak-lab .oak-comic{display:flex;flex-direction:column;overflow:hidden;border-radius:15px;}
+#oak-lab .oak-speaker{flex:none;display:block;line-height:1.6;margin-bottom:14px;}
+#oak-lab .oak-speaker span{display:block;font-size:13px;font-weight:600;letter-spacing:0;margin-top:3px;}
+#oak-lab .oak-speech{min-height:0;overflow:auto;overscroll-behavior:contain;padding-right:5px;}
+#oak-lab .oak-comic h2,#oak-lab .oak-collection,#oak-lab .oak-key-hint{flex:none;}
+#oak-lab .oak-dialogue-nav,#oak-lab .oak-build-actions{flex:none;display:grid;grid-template-columns:minmax(100px,.8fr) minmax(0,1.7fr);align-items:stretch;gap:10px;}
+#oak-lab .oak-dialogue-nav button,#oak-lab .oak-build-actions button{width:100%;max-width:none;white-space:normal;}
+#oak-lab .oak-build-actions [data-oak-work]{grid-column:1/-1;}
+#oak-lab .oak-build-eyebrow{display:flex;flex:none;align-items:center;font-size:12px;line-height:1.5;letter-spacing:.04em;}
+#oak-lab .oak-build-eyebrow span{white-space:nowrap;font-size:13px;font-weight:600;}
+#oak-lab .oak-place-picks{position:static;max-width:none;margin-top:18px;}
+#oak-lab .oak-map-action{position:static;max-width:none;margin-top:12px;width:100%;}
+#oak-lab .oak-status,#oak-lab .oak-retry{left:auto;right:30px;}
+#oak-lab .oak-tools{box-shadow:none;background:#fff8e5ed;}
+#oak-lab .oak-tools a,#oak-lab [data-oak-narration-status]{font-size:12px;}
+@media(min-width:761px) and (max-width:1100px){#oak-lab .oak-comic,#oak-lab .oak-making{left:24px;}}
+@media(max-height:640px) and (min-width:761px){
+  #oak-lab .oak-comic,#oak-lab .oak-making{top:136px;bottom:118px;width:min(510px,45vw);}
+  #oak-lab .oak-speaker{display:block;margin-bottom:8px;font-size:10px;}
+  #oak-lab .oak-speaker span{font-size:12px;}
+  #oak-lab .oak-build-steps{grid-template-columns:repeat(3,minmax(0,1fr));}
+  #oak-lab .oak-build-steps button>span:last-child{display:inline;}
+  #oak-lab .oak-build-steps button{justify-content:flex-start;min-height:44px;font-size:11px;gap:5px;}
+}
+@media(max-width:760px){
+  #oak-lab .oak-comic,#oak-lab .oak-making{left:20px;right:20px;width:auto;top:246px;bottom:166px;max-height:none;}
+  #oak-lab .oak-comic{padding:18px;}
+  #oak-lab .oak-making{padding:18px;gap:12px;}
+  #oak-lab .oak-speaker{font-size:10px;margin-bottom:10px;}
+  #oak-lab .oak-speaker span{font-size:12px;}
+  #oak-lab .oak-speech,#oak-lab .oak-build-copy p{font-size:16px;line-height:1.65;}
+  #oak-lab .oak-comic h2,#oak-lab .oak-build-copy h2{font-size:19px;margin-bottom:12px;}
+  #oak-lab .oak-dialogue-nav{margin-top:14px;}
+  #oak-lab .oak-dialogue-nav button,#oak-lab .oak-build-actions button{font-size:12px;padding:9px;}
+  #oak-lab .oak-key-hint{display:none;}
+  #oak-lab .oak-place-picks{display:flex;}
+  #oak-lab .oak-map-action{display:block;}
+  #oak-lab .oak-status,#oak-lab .oak-retry{right:20px;}
+}
+/* Short windows keep prose readable; the same six sections use a native picker. */
+#oak-lab .oak-section-choice{display:none}
+@media(max-height:640px) and (min-width:761px){
+  #oak-lab .oak-comic,#oak-lab .oak-making{width:min(540px,54vw);top:136px;bottom:92px;padding:14px;}
+  #oak-lab .oak-speaker{display:flex;align-items:baseline;justify-content:space-between;gap:8px;font-size:10px;line-height:1.5;margin-bottom:8px;}
+  #oak-lab .oak-speaker span{display:inline;margin:0;font-size:12px;}
+  #oak-lab .oak-comic h2,#oak-lab .oak-build-copy h2{font-size:20px;line-height:1.4;margin-bottom:8px;}
+  #oak-lab .oak-dialogue-nav{margin-top:10px;}
+  #oak-lab .oak-dialogue-nav button,#oak-lab .oak-build-actions button{font-size:13px;padding:8px 10px;}
+  #oak-lab .oak-build-steps{display:none;}
+  #oak-lab .oak-section-choice{display:flex;align-items:center;gap:10px;flex:none;font-size:13px;font-weight:600;white-space:nowrap;}
+  #oak-lab .oak-section-choice select{min-width:0;flex:1;width:auto;min-height:44px;font:400 15px/1.4 'DM Sans',sans-serif;padding:8px;border:1px solid #a5b39b;border-radius:8px;background:var(--oak-paper);color:var(--oak-ink);}
+  #oak-lab .oak-making{gap:8px;}
+  #oak-lab .oak-build-copy p{font-size:16px;line-height:1.55;}
+  #oak-lab .oak-tools{bottom:8px;padding:6px 8px;align-items:center;}
+  #oak-lab .oak-tools>div.oak-narration-controls{flex-wrap:nowrap;justify-content:flex-end;}
+  #oak-lab [data-oak-narration-status]{flex-basis:auto;max-width:106px;font-size:11px;text-align:left;}
+  #oak-lab [data-oak-voice]{width:136px;}
+  #oak-lab .oak-tools :is(button,select){font-size:11px;padding-inline:7px;}
+}

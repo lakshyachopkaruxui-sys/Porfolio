@@ -139,7 +139,14 @@ export function createPersonalRooms({renderer,onOpen=()=>{},onClose=()=>{},onPor
   const sound=createSoundSketch((playing,error)=>{onSoundState(playing);q('[data-personal-stop]').disabled=!playing;q('[data-personal-play]').textContent=playing?'Play again':'Play sound sketch';soundError=error||'';dirty=true;updateStatus();});
   let profile=null,profileTime=0;if(globalThis.location&&new URLSearchParams(globalThis.location.search).get('personalProfile')==='1'){profile=document.createElement('details');profile.className='personal-profile';profile.innerHTML='<summary>Place diagnostics</summary><pre></pre>';shell.append(profile);}
   function node(tag,text,parent,className){const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(className)el.className=className;parent.append(el);return el;}
-  function setPhase(value){phase=value;dialog.dataset.phase=value;aboutPrompts.hidden=!isSpatial()||!['viewing','focusing'].includes(value);photoRetry.inert=['reading','media','places'].includes(value);syncCloudControls();}
+  function setPhase(value){
+    phase=value;dialog.dataset.phase=value;
+    aboutPrompts.hidden=kind==='work'||!isSpatial()||!['viewing','focusing'].includes(value);
+    photoRetry.inert=['reading','media','places'].includes(value);
+    const hobbyBusy=kind==='work'&&!['viewing','focusing'].includes(value);
+    aboutAction.disabled=hobbyBusy;q('[data-personal-story]').disabled=hobbyBusy;
+    syncCloudControls();
+  }
   function syncCloudControls(){
     const framing=false;
     q('.personal-sky-actions').hidden=!framing;
@@ -164,9 +171,9 @@ export function createPersonalRooms({renderer,onOpen=()=>{},onClose=()=>{},onPor
     const content=contentFor(kind),chapter=content.chapters[selected];dialog.dataset.kind=kind;dialog.style.setProperty('--personal-paper',paper[kind]);q('[data-personal-eyebrow]').textContent=content.eyebrow;q('#personal-room-title').textContent=content.title;q('#personal-chapter-title').textContent=chapter.title;q('[data-personal-body]').textContent=chapter.body;q('[data-personal-number]').textContent=`${String(selected+1).padStart(2,'0')} / ${String(content.chapters.length).padStart(2,'0')}`;
     const nav=q('[data-personal-chapters]');if(nav.dataset.kind!==kind){nav.replaceChildren();content.chapters.forEach((entry,index)=>{const button=node('button',entry.label,nav);button.type='button';button.dataset.personalChapter=String(index);});nav.dataset.kind=kind;}
     nav.querySelectorAll('button').forEach((button,index)=>button.setAttribute('aria-pressed',String(index===selected)));
-    const media=content.media.filter(item=>item.type==='image');q('[data-personal-media]').hidden=media.length===0;q('[data-personal-media]').textContent=kind==='cloud'?'Look through the camera':media.length===1?'View photograph':'View photographs';q('[data-personal-story]').textContent='Read the story';q('[data-personal-story]').hidden=kind==='cloud';q('[data-personal-recording]').hidden=true;q('[data-personal-recording]').textContent='Enter the listening room';q('[data-personal-works]').hidden=kind!=='about';q('.personal-sound-actions').hidden=kind!=='music';q('.personal-sky-actions').hidden=kind!=='cloud';
+    const media=content.media.filter(item=>item.type==='image');q('[data-personal-media]').hidden=kind==='work'||media.length===0;q('[data-personal-media]').textContent=kind==='cloud'?'Look through the camera':media.length===1?'View photograph':'View photographs';q('[data-personal-story]').textContent=kind==='work'?`About ${chapter.label}`:'Read the story';q('[data-personal-story]').hidden=kind==='cloud';q('[data-personal-recording]').hidden=true;q('[data-personal-recording]').textContent='Enter the listening room';q('[data-personal-works]').hidden=kind!=='about';q('.personal-sound-actions').hidden=kind!=='music';q('.personal-sky-actions').hidden=kind!=='cloud';
     q('[data-personal-scene-note]').textContent=kind==='cloud'?'Click the camera or press Enter · A / D chooses a reel · Esc returns to the garden':`A/D or Left/Right to explore · Enter to interact · Esc to return.${kind==='music'?' Sound sketch, not a recording of my voice.':''}`;
-    host.setAttribute('aria-label',`${content.title}. A and D or Left and Right choose a story. Enter interacts with the selected object. Escape returns.`);host.setAttribute('aria-keyshortcuts','A D ArrowLeft ArrowRight Home End Enter Escape');aboutAction.hidden=!isSpatial()||kind==='cloud';aboutPrompts.hidden=!isSpatial()||!['viewing','focusing'].includes(phase);syncAboutActions();updateStatus();dirty=true;
+    host.setAttribute('aria-label',`${content.title}. A and D or Left and Right choose a story. Enter interacts with the selected object. Escape returns.`);host.setAttribute('aria-keyshortcuts','A D ArrowLeft ArrowRight Home End Enter Escape');aboutAction.classList.toggle('primary',kind==='work');aboutAction.hidden=!isSpatial()||kind==='cloud';aboutPrompts.hidden=kind==='work'||!isSpatial()||!['viewing','focusing'].includes(phase);syncAboutActions();updateStatus();dirty=true;
   }
   function syncAboutActions(){
     if(!isSpatial()||!room)return;
@@ -243,7 +250,8 @@ export function createPersonalRooms({renderer,onOpen=()=>{},onClose=()=>{},onPor
         onPortfolio(){close({immediate:true,notify:false});onPortfolio();}
       };
       const child=isGarba?(garbaRoom??=createGarbaRoom(options)):(listeningRoom??=createListeningRoom(options));
-      child.open({returnFocus:returnFocus?.isConnected?returnFocus:aboutAction});
+      const returnLabel=hobbyReaderReturn?`Back to ${contentFor(kind).chapters[selected].label} story`:'Back to Hobbies';
+      child.open({returnFocus:returnFocus?.isConnected?returnFocus:aboutAction,returnLabel});
       const childId=isGarba?'garba-experience':'listening-experience';
       hobbySiblings=[...shell.children].filter(element=>element.id!==childId).map(element=>[element,element.inert]);
       for(const [element]of hobbySiblings)element.inert=true;
@@ -311,6 +319,7 @@ export function createPersonalRooms({renderer,onOpen=()=>{},onClose=()=>{},onPor
     if(kind==='about')renderAboutStory(article,content,selected);
     else if(kind==='work')renderHobbiesStory(article,content,selected);
     else{node('p',content.eyebrow,article,'personal-eyebrow');const title=node('h1',chapter.title,article);title.id='personal-story-title';if(isSpatial()){node('p',chapter.body,article,'personal-deck');node('p',chapter.detail,article);}else{node('p',content.intro,article,'personal-deck');node('p',chapter.body,article);node('p',chapter.detail,article);}if(content.mediaNote)node('p',content.mediaNote,article,'personal-media-note');}
+    q('[data-personal-story-close]').textContent=kind==='work'?'Back to Hobbies':'Back to the room';
     showSubView('reading',reading,q('[data-personal-story-close]'));reading.scrollTop=0;
   }
   function readAboutChapter(index){
@@ -346,12 +355,14 @@ export function createPersonalRooms({renderer,onOpen=()=>{},onClose=()=>{},onPor
   }
   function showMedia(index=0){
     if(kind==='cloud')return enterCloudGallery();
-    const items=contentFor(kind).media.filter(item=>item.type==='image');index=clamp(index,0,items.length-1);const item=items[index];if(!item)return;mediaIndex=index;
+    const content=contentFor(kind);
+    const items=content.media.filter(item=>item.type==='image'&&(kind!=='work'||content.chapters[selected].photoIds.includes(item.id)));
+    index=clamp(index,0,items.length-1);const item=items[index];if(!item)return;mediaIndex=index;
     if((kind==='about'||kind==='work')&&phase==='reading')mediaReturn={scroll:reading.scrollTop,focus:document.activeElement,roomFocus:lastSubFocus};
     else if(phase!=='media')mediaReturn=null;
-    q('[data-personal-media-close]').textContent=mediaReturn?'Back to the story':'Back to the room';
-    clearRecording();q('[data-personal-image]').hidden=false;q('[data-personal-zoom]').hidden=false;mediaView.dataset.mediaCollection=items.length>1?'photos':'single';
-    mediaKind='photograph';q('[data-personal-download]').hidden=true;q('#personal-media-title').textContent=contentFor(kind).title;const image=q('[data-personal-image]');image.src=new URL('../'+item.src.replace(/^\.\//,''),import.meta.url).href;image.width=item.width;image.height=item.height;image.alt=item.alt;image.style.setProperty('--personal-image-width',`${item.width}px`);q('[data-personal-media-caption]').textContent=item.caption;
+    q('[data-personal-media-close]').textContent=mediaReturn?(kind==='work'?`Back to ${content.chapters[selected].label} story`:'Back to the story'):(kind==='work'?'Back to Hobbies':'Back to the room');
+    clearRecording();q('[data-personal-image]').hidden=false;q('[data-personal-zoom]').hidden=kind==='work';mediaView.dataset.mediaCollection=items.length>1?'photos':'single';
+    mediaKind='photograph';q('[data-personal-download]').hidden=true;q('#personal-media-title').textContent=kind==='work'?`${content.chapters[selected].label} photographs`:content.title;const image=q('[data-personal-image]');image.src=new URL('../'+item.src.replace(/^\.\//,''),import.meta.url).href;image.width=item.width;image.height=item.height;image.alt=item.alt;image.style.setProperty('--personal-image-width',`${item.width}px`);q('[data-personal-media-caption]').textContent=item.caption;
     const nav=q('[data-personal-media-nav]'),navFocus=document.activeElement?.dataset?.aboutPhotoStep;nav.replaceChildren();nav.hidden=items.length<2;
     if(kind==='about'||kind==='work'){
       const previous=node('button','Previous photograph',nav);previous.type='button';previous.dataset.personalPhoto=String(Math.max(0,index-1));previous.dataset.aboutPhotoStep='previous';previous.disabled=index===0;
@@ -402,7 +413,7 @@ export function createPersonalRooms({renderer,onOpen=()=>{},onClose=()=>{},onPor
     if(saved){const view=viewSize(),changed=view.width!==saved.window.width||view.height!==saved.window.height;if(saved.ratio!==undefined)renderer.setPixelRatio?.(saved.ratio);if(changed)renderer.setSize?.(view.width,view.height,false);else if(saved.size)renderer.setSize?.(saved.size.x,saved.size.y,false);renderer.setRenderTarget?.(saved.target??null);if(changed){renderer.setViewport?.(0,0,view.width,view.height);renderer.setScissor?.(0,0,view.width,view.height);}else{if(saved.viewport)renderer.setViewport?.(saved.viewport);if(saved.scissor)renderer.setScissor?.(saved.scissor);}if(saved.scissorTest!==undefined)renderer.setScissorTest?.(saved.scissorTest);renderer.autoClear=saved.autoClear;}previousHost=null;previousSibling=null;
   }
   function removeRoom(){releaseCloudGallery();mediaReturn=null;q('[data-personal-article]').replaceChildren();q('[data-personal-image]').removeAttribute('src');releaseHobbyRoom();clearRecording();clearPostcard();clearPhoto();room?.dispose();room=null;}
-  function beginKind(next){releaseCloudGallery();mediaReturn=null;q('[data-personal-article]').replaceChildren();q('[data-personal-image]').removeAttribute('src');releaseHobbyRoom();sound.stop();clearRecording();clearPostcard();clearPhoto();room?.dispose();kind=next;room=createPersonalRoomScene(kind);aboutEntranceProgress=isSpatial()?0:1;queuedAboutSelection=null;photoRetry.hidden=true;selected=0;currentIndex=0;pan=0;currentPan=0;soundError='';room.select(0);photoEntryProgress=0;hideSubViews();setContent();curtain.style.setProperty('--room-cover',paper[kind]);revealCurtain(0);setPhase('entering');transition={kind:'entry',elapsed:0,duration:isReduced()?0:isSpatial()?1.25:.8};caption.hidden=isSpatial();loadPortrait();resize();if(isSpatial())applyAboutEntrance(0);else applyCamera(0,{approach:2.8});}
+  function beginKind(next){releaseCloudGallery();mediaReturn=null;q('[data-personal-article]').replaceChildren();q('[data-personal-image]').removeAttribute('src');releaseHobbyRoom();sound.stop();clearRecording();clearPostcard();clearPhoto();room?.dispose();kind=next;room=createPersonalRoomScene(kind);aboutEntranceProgress=isSpatial()?0:1;queuedAboutSelection=null;photoRetry.hidden=true;selected=0;currentIndex=0;pan=0;currentPan=0;soundError='';room.select(0);photoEntryProgress=0;hideSubViews();setContent();curtain.style.setProperty('--room-cover',paper[kind]);revealCurtain(0);setPhase('entering');transition={kind:'entry',elapsed:0,duration:isReduced()?0:isSpatial()?1.25:.8};caption.hidden=isSpatial()&&kind!=='work';loadPortrait();resize();if(isSpatial())applyAboutEntrance(0);else applyCamera(0,{approach:2.8});}
   function open(next='about'){
     if(dead||!KINDS.includes(next))return false;
     pendingPhotoEntry=false;

@@ -202,3 +202,43 @@ body.hybrid-world #personal-experience[data-kind=cloud] :is(.personal-header nav
 
 /* Full-viewport scene regions need their focus ring inside the clipped room. */
 .personal-canvas:focus-visible{outline-offset:-6px}
+
+/* Hobbies keeps a readable route beside its optional spatial entrances. */
+#personal-experience[data-kind=work] .personal-caption {
+  display: flex; flex-direction: column; align-items: stretch; gap: 0;
+  left: clamp(24px, 3vw, 48px); right: auto; bottom: 28px;
+  width: min(420px, calc(100% - 48px)); max-height: calc(100dvh - 152px);
+  margin: 0; padding: 24px; overflow: auto; overscroll-behavior: contain;
+  border-radius: 12px; background: var(--personal-paper); text-align: left;
+  pointer-events: auto; box-sizing: border-box;
+}
+#personal-experience[data-kind=work] .personal-caption[hidden] { display: none; }
+#personal-experience[data-kind=work] .personal-caption::before { display: none; }
+#personal-experience[data-kind=work] .personal-number { display: none; }
+#personal-experience[data-kind=work] #personal-chapter-title { margin: 0 0 12px; font-size: 25px; line-height: 1.35; }
+#personal-experience[data-kind=work] .personal-caption > [data-personal-body] { margin: 0; max-width: 38ch; font-size: 16px; line-height: 1.65; }
+#personal-experience[data-kind=work] .personal-chapters { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); align-self: stretch; justify-self: stretch; grid-column: auto; grid-row: auto; width: 100%; gap: 8px; margin: 20px 0 16px; }
+#personal-experience[data-kind=work] .personal-chapters button { width: 100%; min-height: 44px !important; padding: 10px 14px !important; font-size: 15px !important; }
+#personal-experience[data-kind=work] .personal-actions { display: flex; flex-direction: column; align-items: stretch; align-self: stretch; justify-self: stretch; grid-column: auto; grid-row: auto; width: 100%; gap: 8px; margin: 0; }
+#personal-experience[data-kind=work] .personal-actions > button { align-self: stretch; grid-column: auto; grid-row: auto; width: 100%; min-height: 44px; padding: 10px 14px; font-size: 15px; line-height: 1.5; text-align: left; text-decoration: none; }
+#personal-experience[data-kind=work] .personal-actions > [data-about-interact] { min-width: 0; }
+#personal-experience[data-kind=work] .personal-actions > button[hidden] { display: none; }
+#personal-experience[data-kind=work] .personal-scene-note { margin: 16px 0 0; max-width: 40ch; font-size: 13px; line-height: 1.6; }
+#personal-experience[data-kind=work] .hobby-story { text-align: left; }
+#personal-experience[data-kind=work] .hobby-story-hero { align-items: start; }
+#personal-experience[data-kind=work] .hobby-story-intro { grid-column: 1; grid-row: 1; }
+#personal-experience[data-kind=work] .hobby-story-hero > .hobby-story-photo { grid-column: 2; grid-row: 1; }
+#personal-experience[data-kind=work] .hobby-story .personal-deck { max-width: 42ch; }
+#personal-experience[data-kind=work] .hobby-story-details { display: block; max-width: 64ch; }
+#personal-experience[data-kind=work] .hobby-story-details section + section { margin-top: 32px; }
+#personal-experience[data-kind=work] .hobby-story-moments { max-width: 680px; margin-inline: 0; }
+@media (max-width: 899px) {
+  #personal-experience[data-kind=work] .personal-caption { left: 20px; bottom: 20px; width: min(400px,calc(100% - 40px)); padding: 20px; }
+  #personal-experience[data-kind=work] .hobby-story-hero { grid-template-columns: minmax(0,1fr); }
+  #personal-experience[data-kind=work] .hobby-story-hero > .hobby-story-photo { grid-column: 1; grid-row: 2; }
+}
+@media (max-height: 650px) {
+  #personal-experience[data-kind=work] .personal-caption { bottom: 12px; padding: 18px; max-height: calc(100dvh - 130px); }
+  #personal-experience[data-kind=work] #personal-chapter-title { font-size: 22px; }
+  #personal-experience[data-kind=work] .personal-chapters { margin-block: 14px 12px; }
+}

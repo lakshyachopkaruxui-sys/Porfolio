@@ -181,3 +181,12 @@
 #personal-experience #listening-experience #listening-photo-next{grid-column:2;grid-row:1;}
 #personal-experience #listening-experience #listening-photo-count{grid-column:1 / -1;grid-row:2;text-align:center;}
 #personal-experience #listening-experience .review-footer{padding-right:190px;}
+
+/* One stable reading column, with the collection in normal left-to-right order. */
+#personal-experience #listening-experience .room-controls{left:40px;right:40px;transform:none;width:auto;max-width:560px;}
+#personal-experience #listening-experience .room-instruction{text-align:left;font-size:14px;line-height:1.65;}
+#personal-experience #listening-experience .collection-label{text-transform:none;letter-spacing:0;font-size:14px;}
+#personal-experience #listening-experience .collection small{font-size:13px;color:#42513f;}
+#personal-experience #listening-experience .item-context{max-height:calc(100dvh - 160px);overflow:auto;text-align:left;}
+#personal-experience #listening-experience .singing-photo-layout aside{max-width:48ch;}
+@media(max-width:760px){#personal-experience #listening-experience .room-controls{left:20px;right:20px;max-width:none;}}
