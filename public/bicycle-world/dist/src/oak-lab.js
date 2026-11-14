@@ -36,7 +36,7 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
     <section class="oak-making" aria-labelledby="oak-making-title" hidden><p class="oak-build-eyebrow">HOW HE BUILT THIS <span data-oak-build-count></span></p><nav class="oak-build-steps" aria-label="Sections of the build story"></nav><label class="oak-section-choice">Section<select data-oak-build-select aria-label="Choose a section of the build story"></select></label><div class="oak-build-copy" tabindex="0" role="region" aria-labelledby="oak-making-title"><h2 id="oak-making-title"></h2><p data-oak-build-body></p><details data-oak-more hidden><summary data-oak-more-label>More about this</summary><p data-oak-build-detail></p></details><nav class="oak-place-picks" aria-label="Learn about a place on the garden model" hidden></nav><button class="oak-map-action" type="button" data-oak-map hidden>Show the garden model</button></div><nav class="oak-build-actions" aria-label="Your reply to Oak"><button type="button" data-oak-build-prev>Previous section</button><button type="button" data-oak-build-next>Next section</button><button type="button" data-oak-work hidden>Take me to his work</button></nav><p class="oak-key-hint" data-oak-build-hint>Previous / next section: A / D or Left / Right</p></section>
     <p class="oak-status" role="status" aria-live="polite"></p><p class="oak-response-announcement" data-oak-response-announcement aria-live="polite" aria-atomic="true"></p><button class="oak-retry" type="button" data-oak-retry hidden>Retry Oak model</button>
     <section id="oak-places" class="oak-places" aria-labelledby="oak-places-title" hidden><header><h2 id="oak-places-title">A different side of Lakshya.</h2><button type="button" data-oak-places-close>Back to the lab</button></header><div data-oak-destinations></div></section>
-    <footer class="oak-tools"><a href="./pokemon-credits.html" target="_blank" rel="noopener">Model credits</a><div class="oak-narration-controls" role="group" aria-label="Oak’s narration"><p data-oak-narration-status role="status" aria-live="polite"></p><button type="button" data-oak-read aria-pressed="true">Voice on</button><button type="button" data-oak-pause disabled>Pause voice</button><button type="button" data-oak-replay>Replay line</button><label class="oak-voice-choice">Voice<select data-oak-voice aria-label="Narrator voice"></select></label></div><button type="button" data-oak-motion aria-pressed="true">Pause displays</button></footer><div class="oak-veil" aria-hidden="true"></div></div>`;
+    <footer class="oak-tools"><a href="./pokemon-credits.html" target="_blank" rel="noopener">Model credits</a><div class="oak-narration-controls" role="group" aria-label="Oak’s narration"><p data-oak-narration-status role="status" aria-live="polite"></p><button type="button" data-oak-read aria-pressed="true">Voice on</button><button type="button" data-oak-pause disabled>Pause voice</button><button type="button" data-oak-replay>Replay line</button></div><button type="button" data-oak-motion aria-pressed="true">Pause displays</button></footer><div class="oak-veil" aria-hidden="true"></div></div>`;
   document.body.append(dialog);
   decorateModeSelectors(dialog,{mode:'play',navigationHandled:true});
   const $=selector=>dialog.querySelector(selector),shell=$('.oak-shell'),host=$('.oak-canvas'),veil=$('.oak-veil');
@@ -95,7 +95,6 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
   function syncNarrationControls(){
     $('[data-oak-read]').setAttribute('aria-pressed',String(narrationEnabled));$('[data-oak-read]').textContent=narrationEnabled?'Voice on':'Voice off';
     $('[data-oak-read]').disabled=!narration.available;$('[data-oak-replay]').disabled=!narration.available||!narrationEnabled;
-    $('[data-oak-voice]').disabled=!narration.available;
     if(!narration.available)$('[data-oak-narration-status]').textContent='Read Oak’s words below.';
     else if(!narrationEnabled)$('[data-oak-narration-status]').textContent='Voice is off.';
   }
@@ -123,11 +122,7 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
     const {text}=narrationPending;narrationPending=null;narration.read(text);
   }
   listeners.push(narration.subscribeVoices(voices=>{
-    const select=$('[data-oak-voice]'),automatic=document.createElement('option');automatic.value='';automatic.textContent='Automatic English';select.replaceChildren(automatic);
-    [...voices].sort((a,b)=>Number(/^en/i.test(b.lang))-Number(/^en/i.test(a.lang))).forEach(voice=>{const option=document.createElement('option');option.value=voice.id;option.textContent=voice.name+' · '+voice.lang;select.append(option);});
-    const defaultVoice=voices.find(voice=>voice.id==='oak-warm-20261114')||voices.find(voice=>/^Microsoft Mark(?:\s|-|$)/i.test(voice.name)&&/^en[-_]US$/i.test(voice.lang));
-    select.value=voices.some(voice=>voice.id===preferredVoice)?preferredVoice:(defaultVoice?.id||'');
-    if(select.value)narration.setVoice(select.value);
+    if(voices.some(voice=>voice.id==='oak-warm-20261114')){preferredVoice='oak-warm-20261114';narration.setVoice(preferredVoice);rememberNarration();}
   }));
   dialog.dataset.narrating='false';syncNarrationControls();
   const stageNav=$('.oak-build-steps');
@@ -248,7 +243,6 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
   listen(renderer.domElement,'pointercancel',()=>{press=null;});listen(window,'resize',resize);listen(document,'visibilitychange',()=>{if(document.hidden)stopNarration();else dirty=true;});listen(window,'pagehide',stopNarration);listen(query,'change',()=>{syncMotionControl();if(reduced()&&transition){const t=transition;transition=null;veil.style.opacity=t.kind==='entry'?'0':'1';if(t.kind==='exit')finishClose(t.notify);else setPhase('viewing');}dirty=true;});
   listen($('[data-oak-read]'),'click',()=>{narrationEnabled=!narrationEnabled;rememberNarration();stopNarration();syncNarrationControls();if(narrationEnabled)replayLine();});
   listen($('[data-oak-pause]'),'click',()=>narration.togglePause());listen($('[data-oak-replay]'),'click',replayLine);
-  listen($('[data-oak-voice]'),'change',()=>{const id=$('[data-oak-voice]').value;if(narration.setVoice(id)){preferredVoice=id;rememberNarration();}});
   listen($('[data-oak-motion]'),'click',()=>{ambientMotion=!ambientMotion;syncMotionControl();dirty=true;});
   listen(placeNav,'click',event=>{const button=event.target.closest?.('[data-oak-place]');if(button)inspectBuildPlace(button.dataset.oakPlace);});
   listen(stageNav,'click',event=>{const button=event.target.closest?.('[data-oak-build]');if(button)setBuildStep(Number(button.dataset.oakBuild));});

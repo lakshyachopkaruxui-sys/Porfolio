@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T19:27:20.945156+00:00",
+  "generatedAt": "2026-11-14T20:00:02.335560+00:00",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 746,
-      "sha256": "20077d0ac12d8181ba3da1ed682a5455f0b3024ebcedbc00926ff2f5c02f7f27"
+      "sha256": "b0e7536eb2ece03ae6bb405135d07e7bf83c3c8da62f59a74c86521247d307a6"
     },
     {
       "path": "_redirects",
@@ -3875,7 +3875,7 @@
     {
       "path": "bicycle-world/dist/index.html",
       "size": 46969,
-      "sha256": "12ae28c194d4efec3c0e2efc4a9fbd84f756e6faa2a158790bb911317092f7bb"
+      "sha256": "c13599133e0da2bdfab3560f87a3c2bfde2d421bdb721fe0244c708bce496b3d"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
@@ -4384,8 +4384,8 @@
     },
     {
       "path": "bicycle-world/dist/src/oak-lab.js",
-      "size": 36049,
-      "sha256": "e1d88495fce749bb6bb05d3c2e625737089cdf3d7259da2ff2b6b918de46a779"
+      "size": 35393,
+      "sha256": "fdc29ff3841999f3ae39000825cc03f141dfde1c36955b51a752d1917d1bb29a"
     },
     {
       "path": "bicycle-world/dist/src/oak-narration.js",
