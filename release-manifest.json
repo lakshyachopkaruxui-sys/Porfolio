@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T07:53:48.886Z",
+  "generatedAt": "2026-11-14T12:20:37.846035Z",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -7089,8 +7089,8 @@
     },
     {
       "path": "normal-portfolio/index.html",
-      "size": 24133,
-      "sha256": "b785e8a82161ea6d637ed78a7960eb4fc2e5c1ac0b9698d158a30ea46db1de2d"
+      "size": 26514,
+      "sha256": "dcbabd44f4950fff913b70fc20e98681e505ebe7ecb49f1cbeb61e633c2c1523"
     },
     {
       "path": "normal-portfolio/jan-concept-data.js",
@@ -7104,8 +7104,8 @@
     },
     {
       "path": "normal-portfolio/map.html",
-      "size": 14933,
-      "sha256": "5eba5adda2f2a14350eecb80f5ed9b3a13dd3db240aef9882ed822a715f0a321"
+      "size": 15170,
+      "sha256": "9d656c03f6ca7e61416975337d6ae5ce42c957d63b28da0462f169c602f3aa9a"
     },
     {
       "path": "normal-portfolio/mode-entry.js",
@@ -7231,6 +7231,11 @@
       "path": "normal-portfolio/refinements.css",
       "size": 2013,
       "sha256": "fc855fb03cae70fd146d77817ffc0851b3f2092bb0081eff1ea4af37bdf1e8b9"
+    },
+    {
+      "path": "normal-portfolio/resources-section.css",
+      "size": 2677,
+      "sha256": "4347bd3727e77007431ecb8576fa8e75d984d8e393761342f48bba281f99f744"
     },
     {
       "path": "normal-portfolio/resume-content.json",
