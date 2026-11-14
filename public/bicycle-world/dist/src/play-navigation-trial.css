@@ -580,3 +580,10 @@ body.hybrid-world[data-play-ui-motion='reduced'] :is(button, a) { transition-dur
 
 /* Keep global mode selection at the trailing edge when the utility rail wraps. */
 body.hybrid-world #ride-tools > #back { margin-inline-start: auto; }
+
+/* Match the guide/map control order to keyboard order, including compact views. */
+body.hybrid-world :is(#help,#world-map) > .reader-top { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:12px; }
+body.hybrid-world #help > .reader-top > #help-back { position:static; inset:auto; margin:0; }
+body.hybrid-world :is(#help,#world-map) > .reader-top > .play-music-dock { position:static; margin:0; }
+body.hybrid-world #world-map[data-presentation="side"] > .reader-top { display:flex; }
+body.hybrid-world :is(#help,#world-map) > .reader-top > * { order:0 !important; }

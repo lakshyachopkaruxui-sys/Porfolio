@@ -299,6 +299,7 @@ export function createPersonalRooms({renderer,onOpen=()=>{},onClose=()=>{},onPor
   function hideSubViews(){clearRecording();reading.hidden=true;mediaView.hidden=true;places.hidden=true;host.inert=false;header.inert=false;caption.inert=false;}
   function closeSubView(focus=true){
     if(!['reading','media','places'].includes(phase))return false;
+    if(kind==='work'&&phase==='media'&&mediaKind==='photograph')q('[data-personal-image]').removeAttribute('src');
     if(phase==='media'&&mediaReturn){
       const previous=mediaReturn;mediaReturn=null;hideSubViews();reading.hidden=false;
       host.inert=true;header.inert=true;caption.inert=true;setPhase('reading');
@@ -458,7 +459,7 @@ export function createPersonalRooms({renderer,onOpen=()=>{},onClose=()=>{},onPor
   listen(aboutAction,'click',()=>interactAbout());
   for(const button of aboutPrompts.querySelectorAll('button'))listen(button,'click',()=>interactAbout(Number(button.dataset.aboutObject)));
   listen(photoRetry,'click',()=>{const restoreFocus=document.activeElement===photoRetry;soundError='';loadPortrait();if(restoreFocus)q('[data-personal-story]').focus({preventScroll:true});});
-  listen(q('[data-personal-places]'),'click',()=>showSubView('places',places,q('[data-personal-places-close]')));
+  listen(q('[data-personal-places]'),'click',()=>{q('[data-personal-places-close]').textContent=kind==='cloud'?'Back to the Viewfinder':kind==='work'?'Back to Hobbies':'Back to '+contentFor(kind).title;showSubView('places',places,q('[data-personal-places-close]'));});
   listen(q('[data-personal-chapters]'),'click',event=>{const button=event.target.closest?.('[data-personal-chapter]');if(button)selectChapter(Number(button.dataset.personalChapter));});
   listen(q('[data-personal-media-nav]'),'click',event=>{const button=event.target.closest?.('[data-personal-photo]');if(button)showMedia(Number(button.dataset.personalPhoto));});
   listen(reading,'click',event=>{

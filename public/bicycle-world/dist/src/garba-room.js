@@ -188,7 +188,7 @@ export function createGarbaRoom({renderer,container,isReduced,onClose=()=>{},onP
       if(viewerOpen)showViewerPhoto(photos[index].id);else selectPhoto(photos[index].id);
     },true);
     listen(document,'visibilitychange',()=>{if(!document.hidden)resize();});
-    listen(window,'pagehide',()=>{if(viewerOpen)releaseViewer();});
+    listen(window,'pagehide',()=>{queuedPhoto=null;if(viewerOpen)backToOverview();});
     listen(motionQuery,'change',()=>{if(transition&&reduced()){transition.started=clock-transition.duration;requestRender();}});
   }
   function setHover(id){
@@ -211,7 +211,7 @@ export function createGarbaRoom({renderer,container,isReduced,onClose=()=>{},onP
   }
   function selectPhoto(id){
     if(!opened||closing||viewerOpen||!photos.some(photo=>photo.id===id))return;
-    if(transition){if(view==='overview'&&!circleActive){queuedPhoto=id;status.textContent='Opening the photograph when the view settles.';}return;}
+    if(transition){if(view==='overview'){queuedPhoto=id;status.textContent='Opening the photograph when the view settles.';}return;}
     queuedPhoto=null;selected=id;lastSelected=id;view='photograph';circleActive=false;setHover(null);updateSelection();
     const photo=photos.find(item=>item.id===id);$('#garba-overview').hidden=true;$('#garba-context').hidden=false;$('#garba-photo-title').textContent=photo.caption;$('#garba-photo-description').textContent=photo.description;$('#garba-view-photo').disabled=true;experience.classList.add('gr-focused');$('#garba-view-label').textContent='A closer look';
     // Open the complete photograph and its context in one choice.
@@ -219,7 +219,7 @@ export function createGarbaRoom({renderer,container,isReduced,onClose=()=>{},onP
   }
   function updateSelection(){experience.querySelectorAll('[data-gr-photo]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.grPhoto===lastSelected)));}
   function backToOverview(){
-    if(!opened||closing)return;const previous=selected;releaseViewer();selected=null;view='overview';circleActive=false;setHover(null);$('#garba-overview').hidden=false;$('#garba-context').hidden=true;experience.classList.remove('gr-focused');
+    if(!opened||closing)return;queuedPhoto=null;const previous=selected;releaseViewer();selected=null;view='overview';circleActive=false;setHover(null);$('#garba-overview').hidden=false;$('#garba-context').hidden=true;experience.classList.remove('gr-focused');
     moveTo(overview,1000,()=>{if(!opened||closing)return;$('#garba-view-label').textContent='In the courtyard';status.textContent='Back in the Garba courtyard.';const button=previous?experience.querySelector(`[data-gr-photo="${previous}"]`):$('#garba-circle');button?.focus({preventScroll:true});});
   }
   function openViewer(){
@@ -238,6 +238,7 @@ export function createGarbaRoom({renderer,container,isReduced,onClose=()=>{},onP
   }
   function syncViewerControls(photo){
     const index=photos.indexOf(photo);$('#garba-viewer-description').textContent=photo.description;$('#garba-photo-count').textContent=(index+1)+' of '+photos.length;$('#garba-photo-prev').disabled=index===0;$('#garba-photo-next').disabled=index===photos.length-1;$('#garba-photo-error').hidden=true;
+    if(document.activeElement?.disabled)$('#garba-viewer-back').focus({preventScroll:true});
   }
   function releaseViewer(){if(!experience)return;$('#garba-full-photo').removeAttribute('src');$('#garba-viewer').hidden=true;viewerOpen=false;viewerSiblings.forEach(([element,inert])=>{element.inert=inert;});viewerSiblings=[];}
   function closeViewer(){if(!viewerOpen)return;backToOverview();}

@@ -148,11 +148,14 @@ export function createWorksExperience({renderer,onOpen=()=>{},onClose=()=>{},onP
   function hideSubViews(){reading.hidden=true;indexView.hidden=true;places.hidden=true;host.inert=false;header.inert=false;caption.inert=false;q('[data-works-retry]').inert=false;}
   function showCatalogue({restore=false,focus=true}={}){
     if(['closed','returning','entering'].includes(phase))return false;
-    const state=restore?summaryReturn:null,scroll=state?.scroll??indexView.scrollTop;
+    const fromScene=['viewing','focusing'].includes(phase),state=restore?summaryReturn:null,scroll=state?.scroll??indexView.scrollTop;
     subView('index',indexView,q('#works-index-title'));indexView.scrollTop=scroll;
     for(const image of indexView.querySelectorAll('[data-works-cover]'))if(!image.getAttribute('src'))image.src=image.dataset.worksCover;
     if(focus&&state?.focus?.isConnected)state.focus.focus({preventScroll:true});
-    else if(focus&&restore)q(`[data-works-case="${projects[selected].id}"]`)?.focus({preventScroll:true});
+    else if(focus&&(restore||fromScene)){
+      const target=q(`[data-works-case="${projects[selected].id}"]`);
+      target?.focus({preventScroll:true});target?.scrollIntoView?.({block:'nearest',inline:'nearest',behavior:'instant'});
+    }
     return true;
   }
   function enterScene(){if(phase!=='index')return false;hideSubViews();settleView();q('[data-works-read]').focus({preventScroll:true});return true;}
@@ -219,7 +222,7 @@ export function createWorksExperience({renderer,onOpen=()=>{},onClose=()=>{},onP
     if(id==='projects'){button.setAttribute('aria-current','page');listen(button,'click',()=>closeSubView());}
     else listen(button,'click',()=>{if(phase!=='places')return;close({immediate:true,notify:false});onPlace(id);});
   }
-  const list=q('[data-works-list]');q('[data-works-count]').textContent=`${projects.length} projects. Case studies open in a new tab; your garden stays here.`;
+  const list=q('[data-works-list]');q('[data-works-count]').textContent=`${projects.length} projects. Case studies open in Portfolio in a new tab; your garden stays here.`;
   for(const [index,project]of projects.entries()){
     const card=node('article',undefined,list,'works-project-card');card.dataset.worksProject=project.id;
     const link=node('a',undefined,card,'works-project-link');link.dataset.worksCase=project.id;configureCaseStudyLink(link,project,location.href);

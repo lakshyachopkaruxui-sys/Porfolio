@@ -389,6 +389,7 @@ function photoPlane(path,width,height,parent,x,y,z,mode='contain',background='#e
     const image=$('#listening-full-photo');image.alt=item.alt;image.width=item.width;image.height=item.height;image.src=assetUrl(item.image);image.decoding='async';
     $('#listening-photo-title').textContent=item.title;$('#listening-photo-caption').textContent=item.caption;$('#listening-photo-description').textContent=item.description;$('#listening-photo-error').hidden=true;
     $('#listening-photo-prev').disabled=id==='junoon';$('#listening-photo-next').disabled=id==='family';$('#listening-photo-count').textContent=id==='junoon'?'1 of 2':'2 of 2';
+    if(document.activeElement?.disabled)$('#listening-photo-close').focus({preventScroll:true});
   }
   function openPhoto(){
     if(!opened||closing||transition||photoViewerOpen||collection[activeId]?.mediaType!=='image')return;

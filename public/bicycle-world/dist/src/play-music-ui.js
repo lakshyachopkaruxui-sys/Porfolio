@@ -93,7 +93,13 @@ export function mountPlayMusic({notify = () => {}} = {}) {
       : boundary.id === 'help' || boundary.id === 'world-map' ? boundary.querySelector('.reader-top') : null;
     const parent = headerNavigation || boundary;
     // A modal dialog makes outside controls inert. Keep this control inside it.
-    const modeSwitch = parent.id === 'ride-tools' ? parent.querySelector('#back') : null;
+    // Keep the version switch last in both visual and keyboard order.
+    // Room headers are separate from nested viewer sound controls.
+    for (const switcher of document.querySelectorAll('[data-mode-switch]')) {
+      const host = switcher.parentElement;
+      if (host?.matches('#ride-tools,.about-header nav,.works-header nav,.personal-header nav,.oak-header nav,.reader-top') && [...host.children].at(-1) !== switcher) host.append(switcher);
+    }
+    const modeSwitch = [...parent.children].find(child => child.matches('[data-mode-switch]')) || (parent.id === 'ride-tools' ? parent.querySelector('#back') : null);
     if (modeSwitch) {
       const children = [...parent.children];
       if (dock.parentElement !== parent || children.indexOf(dock) !== children.indexOf(modeSwitch) - 1) parent.insertBefore(dock, modeSwitch);

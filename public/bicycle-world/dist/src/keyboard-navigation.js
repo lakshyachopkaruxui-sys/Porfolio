@@ -1,5 +1,5 @@
 // Shared shortcut policy for the active Play room. Native controls own their keys.
-const NATIVE_KEYBOARD_TARGETS = 'input,textarea,select,video,audio,[contenteditable]:not([contenteditable="false"]),[role="textbox"],[role="combobox"],[role="slider"],[role="spinbutton"],[data-native-keyboard]';
+const NATIVE_KEYBOARD_TARGETS = 'input,textarea,select,video,audio,[contenteditable]:not([contenteditable="false"]),[role="textbox"],[role="combobox"],[role="slider"],[role="spinbutton"],[data-native-keyboard],[data-mode-switch]';
 
 export function isKeyboardShortcutBlocked(event, {allowShift = false} = {}) {
   if (!event || event.defaultPrevented || event.isComposing || event.keyCode === 229 || event.ctrlKey || event.metaKey || event.altKey || (!allowShift && event.shiftKey)) return true;
