@@ -333,7 +333,7 @@ function start({skipWelcome=false,resuming=false}={}){
   clearInput();
   // The explicit start gesture unlocks nearby calls. A saved mute is respected;
   // loading the page alone never requests or plays any companion recording.
-  if(resuming)pendingRideAudio=true;else unlockRideAudio();
+  if(resuming)pendingRideAudio=true;else {unlockRideAudio();pendingRideAudio=true;}
   if(skipWelcome){welcomeFlow.skip();welcomeFlow.consumeGuidance();completeWelcome(false);return;}
   const next=welcomeFlow.begin({reduced});
   if(next.phase==='departing'){cloudTransition.cover({reduced});paintClouds();}

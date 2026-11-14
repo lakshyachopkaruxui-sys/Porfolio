@@ -577,3 +577,6 @@ body.hybrid-world[data-play-ui-motion='reduced'] :is(button, a) { transition-dur
     --nav-action-light: HighlightText;
   }
 }
+
+/* Keep global mode selection at the trailing edge when the utility rail wraps. */
+body.hybrid-world #ride-tools > #back { margin-inline-start: auto; }

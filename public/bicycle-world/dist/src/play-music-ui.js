@@ -93,7 +93,11 @@ export function mountPlayMusic({notify = () => {}} = {}) {
       : boundary.id === 'help' || boundary.id === 'world-map' ? boundary.querySelector('.reader-top') : null;
     const parent = headerNavigation || boundary;
     // A modal dialog makes outside controls inert. Keep this control inside it.
-    if (dock.parentElement !== parent) parent.append(dock);
+    const modeSwitch = parent.id === 'ride-tools' ? parent.querySelector('#back') : null;
+    if (modeSwitch) {
+      const children = [...parent.children];
+      if (dock.parentElement !== parent || children.indexOf(dock) !== children.indexOf(modeSwitch) - 1) parent.insertBefore(dock, modeSwitch);
+    } else if (dock.parentElement !== parent) parent.append(dock);
     // A child viewer may have marked the dock as an inactive sibling before
     // this observer moved it into the active header. Its new owner is usable.
     if (dock.inert) dock.inert = false;

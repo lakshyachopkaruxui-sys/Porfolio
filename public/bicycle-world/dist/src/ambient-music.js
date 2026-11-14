@@ -32,8 +32,8 @@ export function createAmbientMusic({
   const reasons = new Set();
   let store = storage;
   if (store === undefined) { try { store = globalThis.localStorage; } catch { store = null; } }
-  let rememberedPreference = false;
-  try { rememberedPreference = store?.getItem(STORAGE_KEY) === '1'; } catch { /* Storage is optional. */ }
+  let rememberedPreference = true;
+  try { rememberedPreference = store?.getItem(STORAGE_KEY) !== '0'; } catch { /* Storage is optional. */ }
   let savedTrack;
   try { savedTrack = store?.getItem(TRACK_STORAGE_KEY); } catch { /* Track selection is optional. */ }
   let savedLevel;
