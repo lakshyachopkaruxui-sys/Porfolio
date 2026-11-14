@@ -199,3 +199,13 @@
   #oak-lab [data-oak-voice]{width:136px;}
   #oak-lab .oak-tools :is(button,select){font-size:11px;padding-inline:7px;}
 }
+
+/* Narrow portrait tablets follow the measured header instead of fixed tab offsets. */
+@media(min-width:761px) and (max-width:900px) and (orientation:portrait){
+  #oak-lab .oak-shell{display:grid;grid-template-rows:auto auto minmax(0,1fr);padding-bottom:122px;}
+  #oak-lab .oak-header{position:relative;inset:auto;grid-row:1;}
+  #oak-lab .oak-zones{position:relative;inset:auto;grid-row:2;margin:8px 24px 0;align-self:start;}
+  #oak-lab .oak-comic,#oak-lab .oak-making{position:relative;inset:auto;grid-row:3;grid-column:1;align-self:stretch;justify-self:start;width:min(500px,43vw);min-height:0;margin:16px 0 0 24px;}
+  #oak-lab .oak-status{position:relative;inset:auto;grid-row:3;grid-column:1;align-self:start;justify-self:end;max-width:calc(57vw - 72px);margin:16px 24px 0 0;}
+  #oak-lab .oak-retry{position:relative;inset:auto;grid-row:3;grid-column:1;align-self:start;justify-self:end;margin:96px 24px 0 0;}
+}

@@ -347,7 +347,7 @@ function photoPlane(path,width,height,parent,x,y,z,mode='contain',background='#e
     listen(document,'visibilitychange',()=>{if(document.hidden&&playerOpen)closeRecording();else if(!document.hidden)resize();});
     // A persisted browser navigation may emit pagehide without an earlier
     // visibilitychange. Release its decoder while preserving a usable room.
-    listen(window,'pagehide',()=>{if(playerOpen)closeRecording();});
+    listen(window,'pagehide',()=>{queuedSelection=null;if(playerOpen)closeRecording();});
     listen(window,'blur',()=>{if(playerOpen)player.pause();});
     listen(motionQuery,'change',()=>{if(transition&&shouldReduceMotion()){transition.started=clock-transition.duration;requestFrame();}});
   }

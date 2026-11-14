@@ -93,3 +93,11 @@ html:root body.hybrid-world #garba-experience .gr-header .mode-selector.mode-swi
 
 /* Visible photo choices remain actionable while the entrance settles. */
 #personal-experience #garba-experience.gr-moving .gr-rail{pointer-events:auto;}
+
+/* Narrow tablets keep both memories and the light controls inside the rail. */
+@media(min-width:761px) and (max-width:900px){
+  #personal-experience #garba-experience .gr-rail{grid-template-columns:minmax(0,1fr) auto;gap:12px 18px;}
+  #personal-experience #garba-experience .gr-intro{grid-column:1/-1;}
+  #personal-experience #garba-experience .gr-photo-choices{min-width:0;}
+  #personal-experience #garba-experience .gr-circle-actions{min-width:0;flex-wrap:wrap;justify-content:flex-end;}
+}

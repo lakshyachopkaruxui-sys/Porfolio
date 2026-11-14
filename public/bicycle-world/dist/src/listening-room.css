@@ -190,3 +190,10 @@
 #personal-experience #listening-experience .item-context{max-height:calc(100dvh - 160px);overflow:auto;text-align:left;}
 #personal-experience #listening-experience .singing-photo-layout aside{max-width:48ch;}
 @media(max-width:760px){#personal-experience #listening-experience .room-controls{left:20px;right:20px;max-width:none;}}
+
+/* Portrait tablets give native playback its own block above readable context. */
+@media(min-width:701px) and (max-width:1100px) and (orientation:portrait){
+  #personal-experience #listening-experience:has(#player-surface:not([hidden])){display:flex;flex-direction:column;gap:16px;padding:110px 24px 80px;}
+  #personal-experience #listening-experience #player-surface:not([hidden]){position:relative;inset:auto!important;width:100%!important;height:auto!important;flex:1 1 0;min-height:0;order:1;}
+  #personal-experience #listening-experience:has(#player-surface:not([hidden])) .item-context{position:relative;inset:auto;width:100%;max-width:none;max-height:40%;flex:0 1 auto;min-height:0;order:2;margin:0;overflow:auto;}
+}

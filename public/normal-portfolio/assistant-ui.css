@@ -161,3 +161,17 @@ body:has(dialog[open]:not(.portfolio-assistant-dialog)) #portfolio-assistant { v
   #portfolio-assistant > .portfolio-assistant-launcher { transition: none; }
   #portfolio-assistant .assistant-transcript { scroll-behavior: auto; }
 }
+
+/* Keep dismissal reachable while a short-screen conversation scrolls. */
+@media (max-width: 639px), (max-height: 580px) {
+  #portfolio-assistant .assistant-header {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--surface);
+  }
+  #portfolio-assistant .assistant-shell {
+    scroll-padding-top: 56px;
+    scroll-padding-bottom: 12px;
+  }
+}
