@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T17:24:22.854964+00:00",
+  "generatedAt": "2026-11-14T19:27:20.945156+00:00",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 746,
-      "sha256": "708922360d960a54e52c0fa491dbb31b1c458d50d38d2c461754f6347512aaf0"
+      "sha256": "20077d0ac12d8181ba3da1ed682a5455f0b3024ebcedbc00926ff2f5c02f7f27"
     },
     {
       "path": "_redirects",
@@ -3874,13 +3874,13 @@
     },
     {
       "path": "bicycle-world/dist/index.html",
-      "size": 46745,
-      "sha256": "717c038b441e02d448e4191cbbc96489527bfd89e9723e3fa39a2b984d192841"
+      "size": 46969,
+      "sha256": "12ae28c194d4efec3c0e2efc4a9fbd84f756e6faa2a158790bb911317092f7bb"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
-      "size": 8706,
-      "sha256": "eef8a8b36c5570764fa3f50fe5f29d9cb5823a93c65872119c2d4c6fee507374"
+      "size": 9241,
+      "sha256": "5fc0f21f412d637e16742a52be3340f66284ade249ce99a949d7157e2bf9c76d"
     },
     {
       "path": "bicycle-world/dist/projects.html",
@@ -4384,13 +4384,13 @@
     },
     {
       "path": "bicycle-world/dist/src/oak-lab.js",
-      "size": 35444,
-      "sha256": "6f313325cde6b3f3f6906810e8acad760e812f259a16f66b1f9b7ddca01c44b3"
+      "size": 36049,
+      "sha256": "e1d88495fce749bb6bb05d3c2e625737089cdf3d7259da2ff2b6b918de46a779"
     },
     {
       "path": "bicycle-world/dist/src/oak-narration.js",
-      "size": 11241,
-      "sha256": "94b6e2b70b18cc6f6d20fafea25506f3e51ec2b62449931838da682aeee21a47"
+      "size": 13049,
+      "sha256": "fbd7ba058722c080b653e07b5046db7106a9263396d21d8c2eb5c3aa1abde6cf"
     },
     {
       "path": "bicycle-world/dist/src/personal-photo-data.js",
@@ -7371,6 +7371,126 @@
       "path": "sitemap.xml",
       "size": 529,
       "sha256": "6ea42096856f8db16d55c4c3d9e7c45ae78673a72cf1f6d1f3e54151ecac4873"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-voice/MODEL-LICENSE.txt",
+      "size": 11343,
+      "sha256": "a44a6081c73ad75f0255bb2bb5cab74ef1829565a895a24e53a4f11290ab7655"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-voice/SOURCE.md",
+      "size": 1167,
+      "sha256": "ae446d111f939d513e6ae00caa0c6c5cef5345c0d205b8c17d51c374d35fb276"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-voice/dialogue-build-in-layers-03d050ce0e17.mp3",
+      "size": 106604,
+      "sha256": "03d050ce0e1718d99f76694a0d194bf097d26729b64d08d7ae7ac6e1b656cc75"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-voice/dialogue-childhood-wish-347f6cb8846a.mp3",
+      "size": 118124,
+      "sha256": "347f6cb8846a6293bc187b8ff43e99f8e470b4f335ec31b08ff6ee3b58204b5f"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-voice/dialogue-collection-connection-604c155e553a.mp3",
+      "size": 90188,
+      "sha256": "604c155e553a9189cd9973f9ee220ae933fa7ec8435b307620f979e61b6773fc"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-voice/dialogue-direction-and-tools-0f67c59f273d.mp3",
+      "size": 172844,
+      "sha256": "0f67c59f273df4086b6f8cfd0e26254ecfcc96629e5f68a514eb369401871c8c"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-voice/dialogue-explore-or-read-490741773ba4.mp3",
+      "size": 112364,
+      "sha256": "490741773ba4ed0b6d9003862f195da3e12d41a68d284eac1faf57e325c4f6c9"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-voice/dialogue-pokemon-go-today-e0581de2ab74.mp3",
+      "size": 106604,
+      "sha256": "e0581de2ab7465cecac50022ba6157188dd5dc36aae8ef6bdc23d513f99ba9e4"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-voice/dialogue-real-collection-7cc40d73ea60.mp3",
+      "size": 125900,
+      "sha256": "7cc40d73ea60599bf533fa9bc57cb847114132f9d22a09c05e079d5981789f11"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-voice/dialogue-woody-companion-d705aab92708.mp3",
+      "size": 149804,
+      "sha256": "d705aab92708461f467cc3b4a7a3d54cccccb6fd1b6b8374a125b43c6809f508"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-voice/making-access-95d4301a1015.mp3",
+      "size": 110348,
+      "sha256": "95d4301a10156c2f5186741b9bd716ee43ee1f7c1230c43c6a807119ed11cd0b"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-voice/making-childhood-fbe6792d7395.mp3",
+      "size": 126764,
+      "sha256": "fbe6792d7395a0d816ce584ba5c75a1b36b27934aa271a6bd7a22c792413e9e9"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-voice/making-details-63297fc974d0.mp3",
+      "size": 146060,
+      "sha256": "63297fc974d0cb1e137305594bef697de013f5c4872ec4f7ec943f3b9323acd0"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-voice/making-exploration-c47c6dd5a9cf.mp3",
+      "size": 113228,
+      "sha256": "c47c6dd5a9cf63c4372fbbba4359ddda06c00b76a31102bbd1b19a12643c9a6f"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-voice/making-layers-216561f8fd9a.mp3",
+      "size": 138284,
+      "sha256": "216561f8fd9ad5b88e4ef2d0742af3a44a8acf98fc2656d6aa29f456d1cd6ecd"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-voice/making-structure-1d11ffc83548.mp3",
+      "size": 99980,
+      "sha256": "1d11ffc83548e67f42c64e2ebce04c7d8ab985cca8919212397b63557ec4c6aa"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-voice/manifest.json",
+      "size": 15411,
+      "sha256": "00f5253925d987a6b42540968291294708e8d0527d5b5a05ce864b1f3a2ae3e7"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-voice/place-about-fb64d6d93977.mp3",
+      "size": 100844,
+      "sha256": "fb64d6d9397729239a28e30ec9042e58962fa1f2065b63f16d7f640d6723473e"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-voice/place-cloud-35400d7e2ea4.mp3",
+      "size": 114380,
+      "sha256": "35400d7e2ea4334cf73799500060cc71e8dd781b1828d0274a0b401f531efca6"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-voice/place-hobbies-faab0ff4086d.mp3",
+      "size": 109484,
+      "sha256": "faab0ff4086d7364b13cab1155373f309adcaf8de8312f04a91614e9ea58b424"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-voice/place-oak-6995eda566c1.mp3",
+      "size": 107468,
+      "sha256": "6995eda566c1f22237b6baaeb1be6c1cadc941846e2d7660ea6c70824c53551b"
+    },
+    {
+      "path": "bicycle-world/dist/assets/oak-voice/place-work-184013d787d4.mp3",
+      "size": 112364,
+      "sha256": "184013d787d4bddc98d75afe70f77a80dab3eb17f590c6c67f6d5c6210b244e7"
+    },
+    {
+      "path": "bicycle-world/dist/src/oak-recorded-narration.js",
+      "size": 8263,
+      "sha256": "9c0a908313ab000fe13a572b6ca0d07d5ea10ff33abc63b22a3babeb1703bc91"
+    },
+    {
+      "path": "bicycle-world/dist/src/oak-voice-clips.js",
+      "size": 9912,
+      "sha256": "93636f09ca2d40dc7c225dad5748901c528db6edd7f9fab51ab975ac909a4301"
     }
   ]
 }

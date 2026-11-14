@@ -66,6 +66,7 @@ export function createOakNarration({
   let current = null, generation = 0, active = false, isPaused = false, disposed = false;
   let sentences = [], index = 0, phase = 'idle', selectedVoiceId = '';
   let gapTimer = null, gapDeadline = 0, gapRemaining = 0, gapGeneration = 0;
+  let startTimer = null, voicesTimer = null, nativeStarted = false;
 
   function nativeVoices() {
     try { return synthesis?.getVoices?.() || []; } catch { return []; }
@@ -100,16 +101,31 @@ export function createOakNarration({
     gapDeadline = 0;
     gapRemaining = 0;
   }
+  function clearStartup() {
+    if (startTimer !== null) unschedule(startTimer);
+    if (voicesTimer !== null) unschedule(voicesTimer);
+    startTimer = voicesTimer = null;
+  }
+  function watchStart(utterance, token) {
+    if (startTimer !== null) unschedule(startTimer);
+    if (nativeStarted || isPaused) return;
+    startTimer = schedule(() => {
+      startTimer = null;
+      if (!disposed && active && !isPaused && !nativeStarted && generation === token && current === utterance) fail('start-timeout');
+    }, 6000);
+  }
   function cancelOwned() {
     generation++;
     const owned = active || current !== null;
     const wasPaused = isPaused;
     clearGap();
+    clearStartup();
     detach(current);
     current = null;
     active = false;
     isPaused = false;
     phase = 'idle';
+    nativeStarted = false;
     if (owned) {
       try { synthesis.cancel(); } catch { /* State still releases if the device engine has closed. */ }
       // cancel() does not reset the synthesis object's paused state.
@@ -142,25 +158,46 @@ export function createOakNarration({
       speakSentence();
     }, gapRemaining);
   }
-  function speakSentence() {
+  function speakSentence(allowEmptyVoices = false) {
     if (disposed || !active || isPaused) return false;
+    clearStartup();
+    // Browsers may discover installed voices after the first request. Give
+    // the owner's Mark voice a bounded opportunity to become available.
+    if (!allowEmptyVoices && !nativeVoices().length) {
+      phase = 'voices';
+      const token = generation;
+      emit('loading');
+      if (disposed || !active || isPaused || generation !== token) return false;
+      voicesTimer = schedule(() => {
+        voicesTimer = null;
+        if (!disposed && active && !isPaused && generation === token) speakSentence(true);
+      }, 900);
+      return true;
+    }
     const token = generation;
     let rejected = false;
     try {
       const utterance = new Utterance(sentences[index].text);
       const voice = chosenVoice();
       if (voice) utterance.voice = voice;
-      utterance.lang = voice?.lang || 'en-IN';
-      utterance.rate = .89;
-      utterance.pitch = .96;
-      utterance.volume = .9;
+      utterance.lang = voice?.lang || 'en-US';
+      utterance.rate = .98;
+      utterance.pitch = 1;
+      utterance.volume = 1;
       current = utterance;
       phase = 'utterance';
+      nativeStarted = false;
       const ownsEvent = () => !disposed && active && generation === token && current === utterance;
-      utterance.onstart = () => { if (ownsEvent()) emit(isPaused ? 'paused' : 'speaking'); };
+      utterance.onstart = () => {
+        if (!ownsEvent()) return;
+        nativeStarted = true;
+        clearStartup();
+        emit(isPaused ? 'paused' : 'speaking');
+      };
       utterance.onerror = event => { if (ownsEvent()) { rejected = true; fail(event?.error); } };
       utterance.onend = () => {
         if (!ownsEvent()) return;
+        clearStartup();
         detach(utterance);
         current = null;
         if (index === sentences.length - 1) {
@@ -177,9 +214,12 @@ export function createOakNarration({
         emit(isPaused ? 'paused' : 'gap');
         if (!isPaused) scheduleGap();
       };
-      emit('speaking');
+      emit('starting');
       if (!ownsEvent()) return false;
-      // A previous owned pause has already been released by cancelOwned().
+      // cancel() does not reset the browser's global paused flag, which may
+      // have survived another speech owner or a previous interrupted session.
+      if (synthesis.paused) synthesis.resume?.();
+      watchStart(utterance, token);
       synthesis.speak(utterance);
       return !rejected;
     } catch (error) {
@@ -203,6 +243,7 @@ export function createOakNarration({
   function pause() {
     if (disposed || !active || isPaused) return false;
     isPaused = true;
+    clearStartup();
     if (phase === 'gap' && gapTimer !== null) {
       gapRemaining = Math.max(0, gapDeadline - now());
       gapGeneration++;
@@ -227,11 +268,16 @@ export function createOakNarration({
   function resume() {
     if (disposed || !active || !isPaused) return false;
     isPaused = false;
+    if (phase === 'voices') return speakSentence();
     if (phase === 'gap') {
       emit('gap');
       scheduleGap();
     } else if (current) {
-      try { synthesis.resume(); emit('speaking'); } catch (error) { fail(error); return false; }
+      try {
+        synthesis.resume();
+        emit(nativeStarted ? 'speaking' : 'starting');
+        if (current) watchStart(current, generation);
+      } catch (error) { fail(error); return false; }
     } else return speakSentence();
     return true;
   }
@@ -260,6 +306,7 @@ export function createOakNarration({
     if (disposed) return;
     const voices = getVoices();
     for (const listener of voiceListeners) listener(voices);
+    if (active && !isPaused && phase === 'voices' && voices.length) speakSentence();
   };
   const usesEventListener = typeof synthesis?.addEventListener === 'function';
   const previousVoicesChanged = synthesis?.onvoiceschanged;

@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import {OAK_DIALOGUE,OAK_MAKING_STEPS,OAK_COLLECTION_COUNT} from './oak-lab-content.js';
-import {createOakNarration} from './oak-narration.js';
+import {createOakRecordedNarration as createOakNarration} from './oak-recorded-narration.js';
 import {createOakLabScene} from './oak-lab-scene.js';
 import {createPokemonRoom} from './pokemon-room.js';
 import {POKEMON_COLLECTION} from './pokemon-collection-data.js';
@@ -18,7 +18,7 @@ const MAP_PLACES=[
 ];
 const NARRATION_PREFERENCE='lakshya-oak-narration-v1';
 function narrationPreferences(){
-  try{const value=JSON.parse(globalThis.localStorage?.getItem(NARRATION_PREFERENCE)||'null');return {enabled:typeof value?.enabled==='boolean'?value.enabled:true,voiceId:typeof value?.voiceId==='string'?value.voiceId:''};}
+  try{const value=JSON.parse(globalThis.localStorage?.getItem(NARRATION_PREFERENCE)||'null');return {enabled:typeof value?.enabled==='boolean'?value.enabled:true,voiceId:value?.voiceVersion===2&&typeof value?.voiceId==='string'?value.voiceId:''};}
   catch{return {enabled:true,voiceId:''};}
 }
 
@@ -76,7 +76,7 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
   function borrow(){saved=snapshot();host.append(renderer.domElement);Object.assign(renderer.domElement.style,{position:'absolute',inset:'0',width:'100%',height:'100%',display:'block',touchAction:'manipulation'});renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.06;renderer.autoClear=renderer.autoClearColor=renderer.autoClearDepth=renderer.autoClearStencil=true;renderer.shadowMap.enabled=false;renderer.setRenderTarget(null);renderer.setScissorTest(false);}
   function restore(){if(!saved)return;const s=saved,canvas=renderer.domElement;saved=null;if(s.parent){if(s.sibling?.parentNode===s.parent)s.parent.insertBefore(canvas,s.sibling);else s.parent.append(canvas);}else canvas.remove();renderer.setPixelRatio(s.ratio);renderer.setSize(s.size.x,s.size.y,false);renderer.setRenderTarget(s.target);renderer.setViewport(s.viewport);renderer.setScissor(s.scissor);renderer.setScissorTest(s.scissorTest);renderer.setClearColor(s.clearColor,s.clearAlpha);Object.assign(renderer,{toneMapping:s.toneMapping,toneMappingExposure:s.exposure,outputColorSpace:s.output,autoClear:s.autoClear,autoClearColor:s.autoClearColor,autoClearDepth:s.autoClearDepth,autoClearStencil:s.autoClearStencil});Object.assign(renderer.shadowMap,{enabled:s.shadowEnabled,type:s.shadowType,autoUpdate:s.shadowAutoUpdate,needsUpdate:s.shadowNeedsUpdate});if(s.style===null)canvas.removeAttribute('style');else canvas.setAttribute('style',s.style);}
   function setPhase(value){phase=value;dialog.dataset.phase=value;}
-  function rememberNarration(){try{globalThis.localStorage?.setItem(NARRATION_PREFERENCE,JSON.stringify({enabled:narrationEnabled,voiceId:preferredVoice}));}catch{/* Reading and narration remain usable without storage. */}}
+  function rememberNarration(){try{globalThis.localStorage?.setItem(NARRATION_PREFERENCE,JSON.stringify({enabled:narrationEnabled,voiceId:preferredVoice,voiceVersion:2}));}catch{/* Reading and narration remain usable without storage. */}}
   function highlightSentence(sentence,active){
     const paragraph=selectedZone==='making'?$('[data-oak-build-body]'):$('[data-oak-speech]');
     const start=active&&sentence?currentSpeech.indexOf(sentence):-1;
@@ -85,12 +85,12 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
     before.textContent=currentSpeech.slice(0,start);mark.textContent=sentence;mark.className='oak-current-sentence';after.textContent=currentSpeech.slice(start+sentence.length);
     paragraph.replaceChildren(before,mark,after);
   }
-  const narration=createOakNarration({onState(active,error,details={}){
+  const narration=createOakNarration({audioParent:dialog,onState(active,error,details={}){
     dialog.dataset.narrating=String(active);dialog.dataset.narrationState=details.status||'idle';
     $('[data-oak-pause]').disabled=!active;$('[data-oak-pause]').textContent=details.paused?'Resume voice':'Pause voice';
-    const message=error||(!narrationEnabled?'Voice is off.':!narration.available?'Read Oak’s words below.':details.paused?'Paused.':active?'Oak is speaking.':details.status==='complete'?'Your turn.':'Ready when you are.');
+    const message=error||(!narrationEnabled?'Voice is off.':!narration.available?'Read Oak’s words below.':details.paused?'Paused.':details.status==='loading'?'Loading Oak’s voice…':details.status==='starting'?'Starting Oak’s voice…':active?(details.fallback?'Oak is speaking with the fallback voice.':'Oak is speaking.'):details.status==='complete'?'Your turn.':'Ready when you are.');
     const status=$('[data-oak-narration-status]');if(status.textContent!==message)status.textContent=message;
-    highlightSentence(details.sentence,active);
+    highlightSentence(details.sentence,active&&['speaking','gap'].includes(details.status));
   }});
   function syncNarrationControls(){
     $('[data-oak-read]').setAttribute('aria-pressed',String(narrationEnabled));$('[data-oak-read]').textContent=narrationEnabled?'Voice on':'Voice off';
@@ -105,7 +105,7 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
     // Visual sentence highlights must not repeatedly announce the whole line.
     $('[data-oak-response-announcement]').textContent=!narrationEnabled||!narration.available?currentSpeech:'';
     if(!narrationEnabled||!narration.available||document.hidden||!['entering','viewing'].includes(phase)||placesOpen||child?.isOpen)return;
-    narrationPending={text:currentSpeech,remaining:reduced()?0:delay};
+    narrationPending={text:currentSpeech,remaining:reduced()?0:delay,modelDeadline:(globalThis.performance?.now?.()??Date.now())+2500};
     $('[data-oak-narration-status]').textContent='Oak will speak when the view settles.';
   }
   function replayLine(){
@@ -117,13 +117,15 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
     if(!narrationPending)return;
     narrationPending.remaining-=Math.max(0,Math.min(.1,Number(dt)||0));
     const sceneState=room?.stats;
-    if(narrationPending.remaining>0||phase!=='viewing'||sceneState?.moving||sceneState?.assetState==='loading')return;
+    if(narrationPending.remaining>0||phase!=='viewing'||sceneState?.moving)return;
+    // The optional character download must not silence an otherwise ready room.
+    if(sceneState?.assetState==='loading'&&(globalThis.performance?.now?.()??Date.now())<narrationPending.modelDeadline)return;
     const {text}=narrationPending;narrationPending=null;narration.read(text);
   }
   listeners.push(narration.subscribeVoices(voices=>{
     const select=$('[data-oak-voice]'),automatic=document.createElement('option');automatic.value='';automatic.textContent='Automatic English';select.replaceChildren(automatic);
     [...voices].sort((a,b)=>Number(/^en/i.test(b.lang))-Number(/^en/i.test(a.lang))).forEach(voice=>{const option=document.createElement('option');option.value=voice.id;option.textContent=voice.name+' · '+voice.lang;select.append(option);});
-    const defaultVoice=voices.find(voice=>/^Microsoft Mark(?:\s|-|$)/i.test(voice.name)&&/^en[-_]US$/i.test(voice.lang));
+    const defaultVoice=voices.find(voice=>voice.id==='oak-warm-20261114')||voices.find(voice=>/^Microsoft Mark(?:\s|-|$)/i.test(voice.name)&&/^en[-_]US$/i.test(voice.lang));
     select.value=voices.some(voice=>voice.id===preferredVoice)?preferredVoice:(defaultVoice?.id||'');
     if(select.value)narration.setVoice(select.value);
   }));

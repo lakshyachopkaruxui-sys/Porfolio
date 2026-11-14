@@ -1,0 +1,437 @@
+{
+  "voice": "Warm narrator",
+  "type": "Original synthetic narration",
+  "performanceVersion": "playful-v2",
+  "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+  "preset": "Ryan",
+  "revision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+  "source": "https://github.com/QwenLM/Qwen3-TTS",
+  "files": [
+    {
+      "id": "dialogue-childhood-wish",
+      "text": "Come in. I’m Professor Oak. When Lakshya watched Pokemon as a child, he wished he could step into that world. I’ll show you what became of that wish.",
+      "cues": [
+        {
+          "start": 0,
+          "end": 0.92,
+          "text": "Come in."
+        },
+        {
+          "start": 1.3,
+          "end": 2.32,
+          "text": "I’m Professor Oak."
+        },
+        {
+          "start": 2.7,
+          "end": 7.14,
+          "text": "When Lakshya watched Pokemon as a child, he wished he could step into that world."
+        },
+        {
+          "start": 7.48,
+          "end": 9.56,
+          "text": "I’ll show you what became of that wish."
+        }
+      ],
+      "filename": "dialogue-childhood-wish-347f6cb8846a.mp3",
+      "sha256": "347f6cb8846a6293bc187b8ff43e99f8e470b4f335ec31b08ff6ee3b58204b5f",
+      "bytes": 118124,
+      "seconds": 9.76,
+      "lufs": -16.81,
+      "truePeakDbtp": -1.3
+    },
+    {
+      "id": "dialogue-pokemon-go-today",
+      "text": "That wish stayed with him. He still plays Pokemon GO. Before we look around, there’s one more childhood favourite I should introduce.",
+      "cues": [
+        {
+          "start": 0,
+          "end": 1.7,
+          "text": "That wish stayed with him."
+        },
+        {
+          "start": 1.86,
+          "end": 3.9,
+          "text": "He still plays Pokemon GO."
+        },
+        {
+          "start": 4.28,
+          "end": 8.44,
+          "text": "Before we look around, there’s one more childhood favourite I should introduce."
+        }
+      ],
+      "filename": "dialogue-pokemon-go-today-e0581de2ab74.mp3",
+      "sha256": "e0581de2ab7465cecac50022ba6157188dd5dc36aae8ef6bdc23d513f99ba9e4",
+      "bytes": 106604,
+      "seconds": 8.8,
+      "lufs": -16,
+      "truePeakDbtp": -1.28
+    },
+    {
+      "id": "dialogue-woody-companion",
+      "text": "You may notice Woody riding through this garden. Toy Story was a childhood favourite, and Woody was the character Lakshya loved. That’s why he rides along.",
+      "cues": [
+        {
+          "start": 0,
+          "end": 3.02,
+          "text": "You may notice Woody riding through this garden."
+        },
+        {
+          "start": 3.62,
+          "end": 8.5,
+          "text": "Toy Story was a childhood favourite, and Woody was the character Lakshya loved."
+        },
+        {
+          "start": 10.26,
+          "end": 12.24,
+          "text": "That’s why he rides along."
+        }
+      ],
+      "filename": "dialogue-woody-companion-d705aab92708.mp3",
+      "sha256": "d705aab92708461f467cc3b4a7a3d54cccccb6fd1b6b8374a125b43c6809f508",
+      "bytes": 149804,
+      "seconds": 12.4,
+      "lufs": -16.12,
+      "truePeakDbtp": -1.34
+    },
+    {
+      "id": "dialogue-real-collection",
+      "text": "Here’s a little of Lakshya’s Pokemon GO collection: 92 of his own screenshots. Choose one to look closer, or let Pikachu take you through the exhibition.",
+      "cues": [
+        {
+          "start": 0,
+          "end": 5.48,
+          "text": "Here’s a little of Lakshya’s Pokemon GO collection: 92 of his own screenshots."
+        },
+        {
+          "start": 6.22,
+          "end": 10.3,
+          "text": "Choose one to look closer, or let Pikachu take you through the exhibition."
+        }
+      ],
+      "filename": "dialogue-real-collection-7cc40d73ea60.mp3",
+      "sha256": "7cc40d73ea60599bf533fa9bc57cb847114132f9d22a09c05e079d5981789f11",
+      "bytes": 125900,
+      "seconds": 10.4,
+      "lufs": -16.54,
+      "truePeakDbtp": -1.3
+    },
+    {
+      "id": "dialogue-collection-connection",
+      "text": "I’ll leave you to explore these. When you’re ready, the garden on my table will help me show you how this became a portfolio.",
+      "cues": [
+        {
+          "start": 0,
+          "end": 1.9,
+          "text": "I’ll leave you to explore these."
+        },
+        {
+          "start": 2.24,
+          "end": 7.18,
+          "text": "When you’re ready, the garden on my table will help me show you how this became a portfolio."
+        }
+      ],
+      "filename": "dialogue-collection-connection-604c155e553a.mp3",
+      "sha256": "604c155e553a9189cd9973f9ee220ae933fa7ec8435b307620f979e61b6773fc",
+      "bytes": 90188,
+      "seconds": 7.44,
+      "lufs": -16.1,
+      "truePeakDbtp": -1.28
+    },
+    {
+      "id": "dialogue-direction-and-tools",
+      "text": "Let’s look at the garden. Bruno Simon’s portfolio inspired the freedom to explore through movement. Lakshya chose a bicycle and brought his own interests into the world.",
+      "cues": [
+        {
+          "start": 0,
+          "end": 2.38,
+          "text": "Let’s look at the garden."
+        },
+        {
+          "start": 3.78,
+          "end": 8.8,
+          "text": "Bruno Simon’s portfolio inspired the freedom to explore through movement."
+        },
+        {
+          "start": 9.6,
+          "end": 14.24,
+          "text": "Lakshya chose a bicycle and brought his own interests into the world."
+        }
+      ],
+      "filename": "dialogue-direction-and-tools-0f67c59f273d.mp3",
+      "sha256": "0f67c59f273df4086b6f8cfd0e26254ecfcc96629e5f68a514eb369401871c8c",
+      "bytes": 172844,
+      "seconds": 14.32,
+      "lufs": -16.01,
+      "truePeakDbtp": -1.06
+    },
+    {
+      "id": "dialogue-build-in-layers",
+      "text": "Lakshya directed the design and worked with ChatGPT to build it in layers. First came the route and riding; then the places, rooms and sound.",
+      "cues": [
+        {
+          "start": 0,
+          "end": 3.92,
+          "text": "Lakshya directed the design and worked with ChatGPT to build it in layers."
+        },
+        {
+          "start": 4.32,
+          "end": 8.66,
+          "text": "First came the route and riding; then the places, rooms and sound."
+        }
+      ],
+      "filename": "dialogue-build-in-layers-03d050ce0e17.mp3",
+      "sha256": "03d050ce0e1718d99f76694a0d194bf097d26729b64d08d7ae7ac6e1b656cc75",
+      "bytes": 106604,
+      "seconds": 8.8,
+      "lufs": -16.64,
+      "truePeakDbtp": -1.26
+    },
+    {
+      "id": "dialogue-explore-or-read",
+      "text": "I’ve shown you some of Lakshya’s world. You can keep exploring, meet the person behind the work, or switch to Portfolio mode and read the projects.",
+      "cues": [
+        {
+          "start": 0,
+          "end": 2.28,
+          "text": "I’ve shown you some of Lakshya’s world."
+        },
+        {
+          "start": 2.62,
+          "end": 8.98,
+          "text": "You can keep exploring, meet the person behind the work, or switch to Portfolio mode and read the projects."
+        }
+      ],
+      "filename": "dialogue-explore-or-read-490741773ba4.mp3",
+      "sha256": "490741773ba4ed0b6d9003862f195da3e12d41a68d284eac1faf57e325c4f6c9",
+      "bytes": 112364,
+      "seconds": 9.28,
+      "lufs": -16.48,
+      "truePeakDbtp": -1.33
+    },
+    {
+      "id": "making-childhood",
+      "text": "This garden began with Pokemon, Toy Story and a childhood wish. I’ll show you how Lakshya turned those interests into a place you can explore.",
+      "cues": [
+        {
+          "start": 0,
+          "end": 4.96,
+          "text": "This garden began with Pokemon, Toy Story and a childhood wish."
+        },
+        {
+          "start": 5.46,
+          "end": 10.2,
+          "text": "I’ll show you how Lakshya turned those interests into a place you can explore."
+        }
+      ],
+      "filename": "making-childhood-fbe6792d7395.mp3",
+      "sha256": "fbe6792d7395a0d816ce584ba5c75a1b36b27934aa271a6bd7a22c792413e9e9",
+      "bytes": 126764,
+      "seconds": 10.48,
+      "lufs": -16.32,
+      "truePeakDbtp": -1.21
+    },
+    {
+      "id": "making-exploration",
+      "text": "Bruno Simon’s portfolio gave Lakshya a reference for discovery through movement. Here, you ride a bicycle through a garden, finding different parts of his life along the way.",
+      "cues": [
+        {
+          "start": 0,
+          "end": 4.34,
+          "text": "Bruno Simon’s portfolio gave Lakshya a reference for discovery through movement."
+        },
+        {
+          "start": 4.9,
+          "end": 9.28,
+          "text": "Here, you ride a bicycle through a garden, finding different parts of his life along the way."
+        }
+      ],
+      "filename": "making-exploration-c47c6dd5a9cf.mp3",
+      "sha256": "c47c6dd5a9cf63c4372fbbba4359ddda06c00b76a31102bbd1b19a12643c9a6f",
+      "bytes": 113228,
+      "seconds": 9.36,
+      "lufs": -16.32,
+      "truePeakDbtp": -1.3
+    },
+    {
+      "id": "making-structure",
+      "text": "This is the garden you’ve been riding through. Choose a place on the miniature, or use its name below. I’ll tell you why it belongs here.",
+      "cues": [
+        {
+          "start": 0,
+          "end": 2.3,
+          "text": "This is the garden you’ve been riding through."
+        },
+        {
+          "start": 2.98,
+          "end": 5.96,
+          "text": "Choose a place on the miniature, or use its name below."
+        },
+        {
+          "start": 6.52,
+          "end": 8.18,
+          "text": "I’ll tell you why it belongs here."
+        }
+      ],
+      "filename": "making-structure-1d11ffc83548.mp3",
+      "sha256": "1d11ffc83548e67f42c64e2ebce04c7d8ab985cca8919212397b63557ec4c6aa",
+      "bytes": 99980,
+      "seconds": 8.24,
+      "lufs": -16.01,
+      "truePeakDbtp": -1.66
+    },
+    {
+      "id": "making-layers",
+      "text": "Lakshya shaped the concept and reviewed each version. He worked with ChatGPT on implementation and code checks. I’ll show you the details that kept sending him back for another ride.",
+      "cues": [
+        {
+          "start": 0,
+          "end": 3.7,
+          "text": "Lakshya shaped the concept and reviewed each version."
+        },
+        {
+          "start": 4.16,
+          "end": 7.54,
+          "text": "He worked with ChatGPT on implementation and code checks."
+        },
+        {
+          "start": 7.92,
+          "end": 11.32,
+          "text": "I’ll show you the details that kept sending him back for another ride."
+        }
+      ],
+      "filename": "making-layers-216561f8fd9a.mp3",
+      "sha256": "216561f8fd9ad5b88e4ef2d0742af3a44a8acf98fc2656d6aa29f456d1cd6ecd",
+      "bytes": 138284,
+      "seconds": 11.44,
+      "lufs": -16.03,
+      "truePeakDbtp": -1.38
+    },
+    {
+      "id": "making-details",
+      "text": "Turns, pedalling, bridge crossings, signs and room entrances were revisited as Lakshya tried the garden. The aim was to make the journey feel clear, all the way back to your bicycle.",
+      "cues": [],
+      "filename": "making-details-63297fc974d0.mp3",
+      "sha256": "63297fc974d0cb1e137305594bef697de013f5c4872ec4f7ec943f3b9323acd0",
+      "bytes": 146060,
+      "seconds": 12.08,
+      "lufs": -16.01,
+      "truePeakDbtp": -1.22
+    },
+    {
+      "id": "making-access",
+      "text": "You can wander here, or read the projects in Portfolio mode. Full case studies open in another tab, so the garden is still here when you return.",
+      "cues": [
+        {
+          "start": 0,
+          "end": 4,
+          "text": "You can wander here, or read the projects in Portfolio mode."
+        },
+        {
+          "start": 4.34,
+          "end": 8.98,
+          "text": "Full case studies open in another tab, so the garden is still here when you return."
+        }
+      ],
+      "filename": "making-access-95d4301a1015.mp3",
+      "sha256": "95d4301a10156c2f5186741b9bd716ee43ee1f7c1230c43c6a807119ed11cd0b",
+      "bytes": 110348,
+      "seconds": 9.12,
+      "lufs": -16.13,
+      "truePeakDbtp": -1.31
+    },
+    {
+      "id": "place-about",
+      "text": "Here, you can meet Lakshya before looking through his work: his personality, how he connects with people, and the way he approaches design.",
+      "cues": [
+        {
+          "start": 0,
+          "end": 8.2,
+          "text": "Here, you can meet Lakshya before looking through his work: his personality, how he connects with people, and the way he approaches design."
+        }
+      ],
+      "filename": "place-about-fb64d6d93977.mp3",
+      "sha256": "fb64d6d9397729239a28e30ec9042e58962fa1f2065b63f16d7f640d6723473e",
+      "bytes": 100844,
+      "seconds": 8.32,
+      "lufs": -16.07,
+      "truePeakDbtp": -1.26
+    },
+    {
+      "id": "place-work",
+      "text": "This is the Works Room. You can browse his projects here, then open a full case study in Portfolio mode when you want the details.",
+      "cues": [
+        {
+          "start": 0,
+          "end": 1.7,
+          "text": "This is the Works Room."
+        },
+        {
+          "start": 2.16,
+          "end": 8.88,
+          "text": "You can browse his projects here, then open a full case study in Portfolio mode when you want the details."
+        }
+      ],
+      "filename": "place-work-184013d787d4.mp3",
+      "sha256": "184013d787d4bddc98d75afe70f77a80dab3eb17f590c6c67f6d5c6210b244e7",
+      "bytes": 112364,
+      "seconds": 9.28,
+      "lufs": -16.18,
+      "truePeakDbtp": -1.19
+    },
+    {
+      "id": "place-hobbies",
+      "text": "Here, you’ll find Lakshya singing and dancing Garba. His own photographs and recordings give you a different side of the person behind the projects.",
+      "cues": [
+        {
+          "start": 0,
+          "end": 3.52,
+          "text": "Here, you’ll find Lakshya singing and dancing Garba."
+        },
+        {
+          "start": 3.92,
+          "end": 8.78,
+          "text": "His own photographs and recordings give you a different side of the person behind the projects."
+        }
+      ],
+      "filename": "place-hobbies-faab0ff4086d.mp3",
+      "sha256": "faab0ff4086d7364b13cab1155373f309adcaf8de8312f04a91614e9ea58b424",
+      "bytes": 109484,
+      "seconds": 9.04,
+      "lufs": -16.34,
+      "truePeakDbtp": -1.32
+    },
+    {
+      "id": "place-oak",
+      "text": "We’re here. I’ll show you his Pokemon GO collection and the choices behind this garden, from the childhood wish to the way it was built.",
+      "cues": [
+        {
+          "start": 0,
+          "end": 0.94,
+          "text": "We’re here."
+        },
+        {
+          "start": 1.42,
+          "end": 8.86,
+          "text": "I’ll show you his Pokemon GO collection and the choices behind this garden, from the childhood wish to the way it was built."
+        }
+      ],
+      "filename": "place-oak-6995eda566c1.mp3",
+      "sha256": "6995eda566c1f22237b6baaeb1be6c1cadc941846e2d7660ea6c70824c53551b",
+      "bytes": 107468,
+      "seconds": 8.88,
+      "lufs": -16.22,
+      "truePeakDbtp": -1.34
+    },
+    {
+      "id": "place-cloud",
+      "text": "The Viewfinder holds Lakshya’s own cloud and mobile photographs. Choose a roll, find an image that catches your eye, and take a closer look.",
+      "cues": [],
+      "filename": "place-cloud-35400d7e2ea4.mp3",
+      "sha256": "35400d7e2ea4334cf73799500060cc71e8dd781b1828d0274a0b401f531efca6",
+      "bytes": 114380,
+      "seconds": 9.44,
+      "lufs": -16.35,
+      "truePeakDbtp": -1.3
+    }
+  ]
+}
