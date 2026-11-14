@@ -18,7 +18,7 @@ function button(className, text, parent) {
   return node;
 }
 
-const PROJECT_IDS = new Set(['pixel-mania', 'syringe', 'connectaid', 'giggles', 'workplace-mode', 'jan-aushadhi']);
+const PROJECT_IDS = new Set(['pixel-mania', 'syringe', 'connectaid', 'giggles', 'workplace-mode', 'jan-aushadhi', 'tear']);
 const SUGGESTED_QUESTIONS = [
   {label: 'Which project first?', question: 'Which project should I look at first?'},
   {label: 'Lakshya’s role in Giggles', question: 'What was Lakshya’s role in Giggles?'},
@@ -35,6 +35,26 @@ export function assistantResponseError(status, payload) {
   if (status < 200 || status >= 300) return typeof payload?.error === 'string' ? payload.error : 'The assistant couldn’t answer just now. Please try again.';
   if (typeof payload?.text !== 'string' || !payload.text.trim()) return 'The assistant returned an empty answer. Please try again.';
   return null;
+}
+
+/** Keep complete recent turns within the API's UTF-8 request budget. */
+export function assistantRequestBody(history, question) {
+  const messages = [
+    ...history.slice(-6).map(item => ({
+      role: item.role,
+      content: item.content.slice(0, item.role === 'assistant' ? 2000 : 1400),
+    })),
+    {role: 'user', content: question},
+  ];
+  const encoder = new TextEncoder();
+  let body = JSON.stringify({messages});
+  // History is appended in user/assistant pairs. Drop the oldest complete turn,
+  // never the current question, when non-Latin text needs more than one byte.
+  while (encoder.encode(body).byteLength > 24000 && messages.length > 1) {
+    messages.splice(0, Math.min(2, messages.length - 1));
+    body = JSON.stringify({messages});
+  }
+  return body;
 }
 
 /** POST /api/portfolio-chat accepts messages and returns {text, sources}. */
@@ -302,7 +322,7 @@ export function mountPortfolioAssistant(host, {onOpenProject} = {}) {
         credentials: 'same-origin',
         cache: 'no-store',
         headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
-        body: JSON.stringify({messages: [...history.slice(-6).map(item => ({...item, content: item.content.slice(0, item.role === 'assistant' ? 2000 : 1400)})), {role: 'user', content: question}]}),
+        body: assistantRequestBody(history, question),
         signal: controller.signal,
       });
       const payload = await response.json().catch(() => null);

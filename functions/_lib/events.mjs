@@ -20,15 +20,36 @@ function response(status) {
   return new Response(null,{status,headers:{'Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff'}});
 }
 
-async function readEvent(request) {
+class EventBodyTimeoutError extends Error {}
+
+async function readEvent(request, timeoutMs) {
   const length=request.headers.get('Content-Length');
   if(length !== null && (!/^\d+$/.test(length)||Number(length)>MAX_BYTES)) throw Error('body');
   const reader=request.body?.getReader();
   if(!reader) throw Error('body');
-  const chunks=[];let bytes=0,complete=false;
+  const chunks=[];let bytes=0,complete=false,active=true,timer;
+  const expiresAt=Date.now()+timeoutMs;
+  const timeoutError=new EventBodyTimeoutError('Event body deadline exceeded');
+  const consume=async()=>{
+    for(;;){
+      // Also bound a source that resolves endless empty chunks without yielding
+      // to the timer queue. The same deadline covers the complete upload.
+      if(Date.now()>=expiresAt)throw timeoutError;
+      const {done,value}=await reader.read();
+      if(!active||Date.now()>=expiresAt)throw timeoutError;
+      if(done){complete=true;return;}
+      bytes+=value.byteLength;if(bytes>MAX_BYTES)throw Error('body');chunks.push(value);
+    }
+  };
   try {
-    for(;;){const {done,value}=await reader.read();if(done){complete=true;break;}bytes+=value.byteLength;if(bytes>MAX_BYTES)throw Error('body');chunks.push(value);}
-  } finally {if(!complete)try{await reader.cancel();}catch{}reader.releaseLock();}
+    await Promise.race([consume(),new Promise((_,reject)=>{timer=setTimeout(()=>reject(timeoutError),timeoutMs);})]);
+  } finally {
+    active=false;clearTimeout(timer);
+    // Cancellation is cleanup, not another unbounded upload wait. Some stream
+    // sources never settle cancel(); releasing the lock must still be attempted.
+    if(!complete)try{Promise.resolve(reader.cancel()).catch(()=>{});}catch{}
+    try{reader.releaseLock();}catch{}
+  }
   const joined=new Uint8Array(bytes);let offset=0;for(const chunk of chunks){joined.set(chunk,offset);offset+=chunk.length;}
   const event=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(joined));
   if(!event||Array.isArray(event)||Object.keys(event).sort().join(',')!=='id,item,kind'||
@@ -45,7 +66,8 @@ async function initialize(db) {
 }
 
 /** Public, anonymous action counter. Not an identity or fraud-proof metric. */
-export function createEventHandler({now=()=>Date.now(),maxPerMinute=300}={}) {
+export function createEventHandler({now=()=>Date.now(),maxPerMinute=300,bodyTimeoutMs=10000}={}) {
+  const timeoutMs=Number.isFinite(bodyTimeoutMs)&&bodyTimeoutMs>0?bodyTimeoutMs:10000;
   let minute=-1,requests=0;
   return async function onRequest({request,env}) {
     if(request.method!=='POST')return response(405);
@@ -55,7 +77,7 @@ export function createEventHandler({now=()=>Date.now(),maxPerMinute=300}={}) {
     const time=now(),window=Math.floor(time/60000);
     if(window!==minute){minute=window;requests=0;}
     if(++requests>maxPerMinute)return response(429);
-    let event;try{event=await readEvent(request);}catch{return response(400);}
+    let event;try{event=await readEvent(request,timeoutMs);}catch(error){return response(error instanceof EventBodyTimeoutError?408:400);}
     const db=env.VISIT_DB;if(!db)return response(503);
     try {
       await initialize(db);

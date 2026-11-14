@@ -5,8 +5,32 @@
   const childStateKey = 'portfolioShellChildState';
   const entranceTitle = document.title;
   const entrance = document.querySelector('main');
+  const entranceThemeMeta = document.querySelector('meta[name="theme-color"]');
+  const entranceThemeColor = entranceThemeMeta?.content;
+  let themeMeta = entranceThemeMeta;
   let frame;
   let lastRoute;
+
+  function applyThemeColor(color) {
+    if (typeof color !== 'string' || !/^#[0-9a-f]{6}$/i.test(color)) return false;
+    if (!themeMeta) {
+      themeMeta = document.createElement('meta');
+      themeMeta.name = 'theme-color';
+      document.head.appendChild(themeMeta);
+    }
+    themeMeta.content = color;
+    return true;
+  }
+
+  function restoreEntranceTheme() {
+    if (entranceThemeMeta) {
+      themeMeta = entranceThemeMeta;
+      themeMeta.content = entranceThemeColor;
+    } else {
+      themeMeta?.remove();
+      themeMeta = null;
+    }
+  }
 
   function routeFrom(value) {
     try {
@@ -30,6 +54,7 @@
     entrance.hidden = false;
     document.documentElement.classList.remove('portfolio-app-open');
     document.title = entranceTitle;
+    restoreEntranceTheme();
     const selector = lastRoute?.startsWith('/bicycle-world/') ? 'a.play' : 'a.work';
     document.querySelector(selector)?.focus({preventScroll:true});
   }
@@ -68,6 +93,8 @@
         lastRoute = current;
         frame.title = view.document.title;
         document.title = view.document.title;
+        const color = view.document.querySelector('meta[name="theme-color"]')?.content;
+        if (!applyThemeColor(color)) restoreEntranceTheme();
         // Focus the browsing context so the existing keyboard controls receive input.
         frame.focus({preventScroll:true});
       }
@@ -90,6 +117,10 @@
 
   addEventListener('message', event => {
     if (!frame || event.source !== frame.contentWindow || event.origin !== location.origin) return;
+    if (event.data?.type === 'lakshya:theme-color') {
+      applyThemeColor(event.data.color);
+      return;
+    }
     if (event.data?.type === 'lakshya:entrance') {
       record(null, null, 'pushState');
       showEntrance();

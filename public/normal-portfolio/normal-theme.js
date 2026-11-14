@@ -8,7 +8,12 @@
     theme = value;
     root.dataset.normalTheme = value;
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.content = value === 'slate' ? '#202833' : '#f2f4f7';
+    const color = value === 'slate' ? '#1b2129' : '#f2f4f7';
+    if (meta) meta.content = color;
+    // Browser chrome reads the outer document, not this same-origin app frame.
+    try {
+      if (window.parent !== window) window.parent.postMessage({type: 'lakshya:theme-color', color}, location.origin);
+    } catch { /* Theme selection still works without the optional site shell. */ }
   }
   apply(theme);
   document.addEventListener('DOMContentLoaded', () => {

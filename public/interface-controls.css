@@ -1,0 +1,188 @@
+/* Shallow, tactile controls. References and boundaries: docs/site-audit-20261114.md.
+   Shadows/gradients are static; only the small press translation animates. */
+:root {
+  --control-face-start: #ffffff;
+  --control-face-end: #edf2f9;
+  --control-ink: #253449;
+  --control-edge: #738399;
+  --control-depth: #a3b1c4;
+  --control-highlight: #ffffff;
+  --control-primary-start: #2863d5;
+  --control-primary-end: #1748af;
+  --control-primary-ink: #ffffff;
+  --control-primary-edge: #16418f;
+  --control-primary-depth: #12377d;
+  --control-focus: #1958d3;
+  --control-focus-gap: #ffffff;
+}
+html[data-normal-theme='slate'] {
+  --control-face-start: #354254;
+  --control-face-end: #283340;
+  --control-ink: #edf2f8;
+  --control-edge: #8196b0;
+  --control-depth: #10161e;
+  --control-highlight: #677b95;
+  --control-primary-start: #bed3ff;
+  --control-primary-end: #a6c4ff;
+  --control-primary-ink: #152439;
+  --control-primary-edge: #8ba9df;
+  --control-primary-depth: #536d99;
+  --control-focus: #c4d8ff;
+  --control-focus-gap: #1b2129;
+}
+body.hybrid-world {
+  --control-face-start: #fffdf5;
+  --control-face-end: #e6eddd;
+  --control-ink: #243e34;
+  --control-edge: #74876d;
+  --control-depth: #75886d;
+  --control-highlight: #ffffff;
+  --control-primary-start: #426958;
+  --control-primary-end: #284b3d;
+  --control-primary-ink: #fffdf5;
+  --control-primary-edge: #244235;
+  --control-primary-depth: #183428;
+  --control-focus: #214d3c;
+  --control-focus-gap: #fffdf5;
+}
+
+/* Content links, photographs, canvases and project artwork keep their own UI. */
+html body.editorial-portfolio :is(
+  .normal-theme-toggle, .hero-actions a, .profile-contact,
+  .project-filters button, .resume-copy-button,
+  .play-invitation-heading .text-action, #contact .contact-ai button,
+  .portfolio-assistant-dialog button, .portfolio-assistant-launcher,
+  #case-reader .reader-top button, #case-reader .reader-end-actions button,
+  #case-reader .case-design-jump, #case-reader .case-prototype-link,
+  .case-image-viewer-toolbar button
+),
+html:root body.hybrid-world :is(
+  #ride-tools, #world-map, #help, #reader, #project-reader, #woody-guide, #welcome, #failure, #mobile-play-notice,
+  #about-experience, #works-experience, #personal-experience, #oak-lab,
+  #personal-experience #listening-experience, .play-music-dock
+) button:where(:not(:has(img)):not(.cloud-photo-card):not(.journal-photo-button):not(.hobby-photo-open)),
+html:root body.hybrid-world :is(#river-hop-action, #touch-controls button, #stop-route, #interact, #welcome .welcome-actions a) {
+  min-height: 44px;
+  border: 1px solid var(--control-edge) !important;
+  border-radius: 11px !important;
+  background: linear-gradient(175deg, var(--control-face-start), var(--control-face-end)) !important;
+  color: var(--control-ink) !important;
+  box-shadow: inset 0 1px 0 var(--control-highlight), 0 3px 0 var(--control-depth), 0 5px 9px #14233812 !important;
+  text-decoration: none;
+  transition: translate 120ms cubic-bezier(.2,.8,.2,1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* The navigation links remain a compact group, with a quiet raised current tab. */
+html body.editorial-portfolio .site-header nav[aria-label='Main navigation'] { gap: 8px 12px; }
+html body.editorial-portfolio .site-header nav[aria-label='Main navigation'] a {
+  padding: 6px 9px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: translate 120ms cubic-bezier(.2,.8,.2,1);
+}
+html body.editorial-portfolio .site-header nav[aria-label='Main navigation'] a[aria-current='location'] {
+  background: linear-gradient(175deg, var(--control-face-start), var(--control-face-end));
+  color: var(--control-ink);
+  border-color: var(--control-edge);
+  box-shadow: inset 0 1px 0 var(--control-highlight), 0 2px 0 var(--control-depth);
+}
+html:root body.hybrid-world #ride-tools {
+  gap: 8px;
+  padding: 8px;
+  background: #fffdf5f5;
+  border-color: var(--control-edge);
+  box-shadow: 0 4px 18px #18342818;
+}
+html:root body.hybrid-world #ride-tools kbd { color: inherit; opacity: .78; }
+html:root body.hybrid-world #ride-tools .mode-selector.mode-switch {
+  --mode-face: transparent;
+  --mode-edge: transparent;
+  --mode-label: #4b5d50;
+  --mode-current: #243e34;
+  --mode-track: #dce6d3;
+  --mode-track-edge: var(--control-edge);
+  --mode-knob: #284b3d;
+  --mode-focus: #214d3c;
+}
+/* Match the case reader's familiar horizontal section navigation on phones,
+   rather than letting seven links push the opening down through three rows. */
+@media (max-width: 600px) {
+  html body.editorial-portfolio .site-header nav[aria-label='Main navigation'] {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-padding-inline: 9px;
+    scrollbar-width: thin;
+    padding: 4px 4px 8px;
+  }
+  html body.editorial-portfolio .site-header nav[aria-label='Main navigation'] a { flex: 0 0 auto; }
+}
+
+/* One consistent material for primary, selected and held controls. */
+html body.editorial-portfolio :is(
+  #top .hero-primary, .profile-contact, .play-invitation-heading .text-action,
+  #contact .contact-ai button, #portfolio-assistant .assistant-send,
+  #portfolio-assistant > .portfolio-assistant-launcher,
+  #case-reader .case-design-jump, .project-filters button[aria-pressed='true']
+),
+html:root body.hybrid-world :is(
+  #ride-tools, #world-map, #help, #reader, #project-reader, #welcome, #failure, #mobile-play-notice,
+  #about-experience, #works-experience, #personal-experience, #oak-lab,
+  #personal-experience #listening-experience, .play-music-dock
+) button:is([aria-pressed='true'],[aria-selected='true'],[aria-current='page'],[aria-current='step'],.primary,.works-primary,.gr-primary,.pgr-primary,.cloud-gallery-primary,[data-map-ride],[data-oak-next],[data-oak-collection],[data-oak-build-next],.about-open-notebook,[data-journal-next]):where(:not(:has(img)):not(.cloud-photo-card):not(.journal-photo-button):not(.hobby-photo-open)),
+html:root body.hybrid-world #touch-controls button.pressed {
+  background: linear-gradient(175deg, var(--control-primary-start), var(--control-primary-end)) !important;
+  color: var(--control-primary-ink) !important;
+  border-color: var(--control-primary-edge) !important;
+  box-shadow: inset 0 1px 0 #ffffff44, 0 3px 0 var(--control-primary-depth), 0 5px 9px #14233812 !important;
+}
+html body.editorial-portfolio #portfolio-assistant .assistant-launcher-hint {
+  color: inherit;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html body.editorial-portfolio :is(.normal-theme-toggle,.hero-actions a,.project-filters button,.portfolio-assistant-dialog button,.portfolio-assistant-launcher):hover:not(:disabled),
+  html:root body.hybrid-world :is(#ride-tools,#world-map,#help,#about-experience,#works-experience,#personal-experience,#oak-lab,#personal-experience #listening-experience,.play-music-dock) button:where(:not(:has(img)):not(.cloud-photo-card):not(.journal-photo-button):not(.hobby-photo-open)):hover:not(:disabled) {
+    translate: 0 -1px;
+  }
+  html body.editorial-portfolio .site-header nav[aria-label='Main navigation'] a:hover {
+    background: linear-gradient(175deg, var(--control-face-start), var(--control-face-end));
+    color: var(--control-ink);
+    border-color: var(--control-edge);
+  }
+}
+html body.editorial-portfolio :is(.normal-theme-toggle,.hero-actions a,.project-filters button,.portfolio-assistant-dialog button,.portfolio-assistant-launcher,.site-header nav a):active:not(:disabled),
+html:root body.hybrid-world :is(#ride-tools,#world-map,#help,#about-experience,#works-experience,#personal-experience,#oak-lab,#personal-experience #listening-experience,.play-music-dock) button:where(:not(:has(img)):not(.cloud-photo-card):not(.journal-photo-button):not(.hobby-photo-open)):active:not(:disabled),
+html:root body.hybrid-world :is(#river-hop-action,#touch-controls button):active:not(:disabled) {
+  translate: 0 2px;
+  transition-duration: 60ms;
+}
+
+html body.editorial-portfolio :is(button,a):focus-visible,
+html:root body.hybrid-world :is(button,a):focus-visible {
+  outline: 3px solid var(--control-focus) !important;
+  outline-offset: 4px !important;
+  box-shadow: 0 0 0 2px var(--control-focus-gap) !important;
+}
+html:root body.hybrid-world[data-play-ui-motion='reduced'] :is(button,a),
+html.reduce-motion body :is(button,a) { translate: none !important; transition-duration: 0ms !important; }
+@media (prefers-reduced-motion: reduce) {
+  html body :is(button,a) { translate: none !important; transition-duration: 0ms !important; }
+}
+@media (forced-colors: active) {
+  html body :is(button,a) {
+    background: ButtonFace !important;
+    color: ButtonText !important;
+    border-color: ButtonText !important;
+    box-shadow: none !important;
+  }
+  html body :is(button,a):is([aria-pressed='true'],[aria-selected='true'],[aria-current='location']) {
+    background: Highlight !important; color: HighlightText !important;
+  }
+  html body :is(button,a):focus-visible { outline-color: Highlight !important; }
+}

@@ -1,6 +1,6 @@
 import {Buffer} from 'node:buffer';
 // Shared request handling. Production supplies environment-only configuration and approved public knowledge.
-const names = { 'pixel-mania': 'Pixel Mania', syringe: '20 cc Syringe', connectaid: 'ConnectAid', giggles: 'Giggles', 'workplace-mode': 'Workplace Mode', 'jan-aushadhi': 'Jan Aushadhi' };
+const names = { 'pixel-mania': 'Pixel Mania', syringe: '20 cc Syringe', connectaid: 'ConnectAid', giggles: 'Giggles', 'workplace-mode': 'Workplace Mode', 'jan-aushadhi': 'Jan Aushadhi', tear: 'TEAR' };
 const requests = new Map();
 let inFlight = 0;
 

@@ -240,7 +240,7 @@ function hasOverlay(){return Boolean(reader.open||help.open||placeUI?.isOpen||pr
 function ridingInputBlocked(){return failed||abandoned||document.hidden||cloudTransition.snapshot.active||!$('woody-guide').hidden;}
 function syncRideUI(){
   playMusic.setActive(ready&&running&&!inPortfolio);
-  const ui=hybridUIState({ready,inPortfolio,running,modalOpen:hasOverlay(),previewOpen:false,hasRoute:Boolean(target),speed:state.speed,nearStop,hintVisible:rideHintVisible,stopFocused:document.activeElement===$('stop-route'),coarse,inputBlocked:ridingInputBlocked()});
+  const ui=hybridUIState({ready,inPortfolio,running,modalOpen:hasOverlay(),previewOpen:false,hasRoute:Boolean(target),speed:state.speed,nearStop,hintVisible:rideHintVisible,stopFocused:document.activeElement===$('stop-route'),coarse,inputBlocked:ridingInputBlocked()||Boolean(riverHop?.active)});
   document.body.classList.toggle('hybrid-world',!inPortfolio);
   document.body.classList.toggle('hybrid-intro',ui.intro&&$('failure').hidden);
   document.body.classList.toggle('hybrid-reading',ui.reading);
@@ -577,7 +577,9 @@ window.addEventListener('pagehide',event=>{
 touchControlInput=createTouchRidingInput({buttons:$('touch-controls').querySelectorAll('[data-key]'),keys,physicalKeys,releaseTarget:window,onStart:cancelRoute,isActive:()=>coarse&&ready&&running&&!inPortfolio&&!hasOverlay()&&!riverHop?.active&&!ridingInputBlocked()});
 $('touch-help').textContent='Guide';
 function selectGround(e){
-  if(!ready||!running||cloudTransition.snapshot.active||hasOverlay()||inPortfolio)return;
+  // The guided jump owns movement until landing or explicit cancellation.
+  // In-world companion picking must not silently reset an airborne rider.
+  if(!ready||!running||riverHop?.active||cloudTransition.snapshot.active||hasOverlay()||inPortfolio)return;
   sceneHost.focus({preventScroll:true});const rect=renderer.domElement.getBoundingClientRect();pointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);raycaster.setFromCamera(pointer,camera);
   const landmarkHit=raycaster.intersectObjects([...world.landmarks.roots.values()],true)[0],companionHit=companions?.pick(raycaster.ray);
   const guideHit=trailheadGuide&&raycaster.intersectObjects(trailheadGuide.hitMeshes,true)[0];
