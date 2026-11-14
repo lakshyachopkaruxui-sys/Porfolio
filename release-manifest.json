@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T12:41:47.268683Z",
+  "generatedAt": "2026-11-14T12:50:10.165081Z",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -7089,8 +7089,8 @@
     },
     {
       "path": "normal-portfolio/index.html",
-      "size": 26555,
-      "sha256": "fde89c2cc7036b0dd5e344e9a9881bd14fbb436894a7aa5a7b2b91ff8d73cc35"
+      "size": 26691,
+      "sha256": "ac98da2fa107a71aa530e7328448a797e472c15033b1b545eb19cc283871c2e9"
     },
     {
       "path": "normal-portfolio/jan-concept-data.js",
@@ -7234,8 +7234,8 @@
     },
     {
       "path": "normal-portfolio/resources-section.css",
-      "size": 2677,
-      "sha256": "4347bd3727e77007431ecb8576fa8e75d984d8e393761342f48bba281f99f744"
+      "size": 3381,
+      "sha256": "3d30319b3a4f16cc241073dde2227f0dd01c4eef0b48d3def89bb56e82f6e87b"
     },
     {
       "path": "normal-portfolio/resume-content.json",

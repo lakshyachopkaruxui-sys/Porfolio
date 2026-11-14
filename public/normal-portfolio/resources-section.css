@@ -95,3 +95,18 @@ html[data-normal-theme="slate"] #resources .resources-primary { color: #152439; 
   .resources-category-list { gap: 0 20px; }
   .resources-actions { align-items: flex-start; gap: 12px; }
 }
+
+/* Match the existing Normal portfolio action feedback. */
+#resources .resources-actions a {
+  transition: transform var(--portfolio-motion-feedback, 180ms) var(--portfolio-motion-ease, ease-out),
+    background-color var(--portfolio-motion-feedback, 180ms) ease,
+    border-color var(--portfolio-motion-feedback, 180ms) ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  #resources .resources-actions a:hover { transform: translateY(-2px); }
+  #resources .resources-actions a:active { transform: translateY(0); }
+}
+#resources .resources-actions a:focus-visible { transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  #resources .resources-actions a { transition: none; transform: none; }
+}
