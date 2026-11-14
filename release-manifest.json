@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T14:44:47.408665+00:00",
+  "generatedAt": "2026-11-14T15:01:45.908069+00:00",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 746,
-      "sha256": "8549c2c88e770d7de1bcef77f9a4c9bb2cea659a59a812bc1cf48fb5f88b2f44"
+      "sha256": "abef03ed504f51a0b112ffec856e6a2133d972bc0223b9ecf2a8aa0c0d49a44a"
     },
     {
       "path": "_redirects",
@@ -3865,7 +3865,7 @@
     {
       "path": "bicycle-world/dist/index.html",
       "size": 46426,
-      "sha256": "88dd1de3422189b7adfe0a1a9099cc86f4c61f10f4854c3f6c7df071587202dd"
+      "sha256": "dfe3b518ec33202102c46fa7c82fffe2cabd06854a80e4eb27f048966bd9efdf"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
@@ -4124,13 +4124,13 @@
     },
     {
       "path": "bicycle-world/dist/src/garba-room.css",
-      "size": 15480,
-      "sha256": "966d42f1fee0dbdd350c7bb53bfec67c83c293c188a2e66f0bf946ed056c3885"
+      "size": 15679,
+      "sha256": "d141a8b06fc4862925257e2f9e38405ac94f30bbdcde8010bed49af6165c4db9"
     },
     {
       "path": "bicycle-world/dist/src/garba-room.js",
-      "size": 38112,
-      "sha256": "4d80028b16e5ca86b6ff36cfaaa13f9b75ef3eec342b114af795947101bc0660"
+      "size": 38239,
+      "sha256": "b6fd7b1d63e0e10fe7470f906138937804b55b7f6e9baf2e6593be5888535be4"
     },
     {
       "path": "bicycle-world/dist/src/garden-accents.js",
@@ -4229,8 +4229,8 @@
     },
     {
       "path": "bicycle-world/dist/src/hobbies-story-reader.js",
-      "size": 3046,
-      "sha256": "a7a0120b303f020a2dbf4798caffec877a8f09245661bb3c43d5fb03a9e8d488"
+      "size": 3094,
+      "sha256": "b7aa6303244986370d68b67645059410841bcf026a345aceaa4869398bf162d6"
     },
     {
       "path": "bicycle-world/dist/src/hobby-interactions.css",
@@ -4279,13 +4279,13 @@
     },
     {
       "path": "bicycle-world/dist/src/listening-room.css",
-      "size": 21607,
-      "sha256": "6398de66b1021935928bf521057255ea62870b64bc805a7416404b577d189b2a"
+      "size": 22463,
+      "sha256": "8c3669937039e1963b901ac83f55565f991246dbd5d733faa76d080e71d8f922"
     },
     {
       "path": "bicycle-world/dist/src/listening-room.js",
-      "size": 53963,
-      "sha256": "d6a3661164b63e2e527f7cfcd282a21ce5a734d10841c16c071ff3c9221382b8"
+      "size": 53837,
+      "sha256": "e7dd8dcaed201aa00a062fd169c70c36ba6c48625341db8798f835a01cd96c21"
     },
     {
       "path": "bicycle-world/dist/src/loading.js",
@@ -4369,13 +4369,13 @@
     },
     {
       "path": "bicycle-world/dist/src/oak-lab.css",
-      "size": 14651,
-      "sha256": "6e1d639311748847ffc1617fb6aad7bf2ff90cff03e041b8f1650b7616615fd5"
+      "size": 19329,
+      "sha256": "30cda6aa4ad63ce28627d463b40bb459943b480166936e0c35dae239c3ed8cbc"
     },
     {
       "path": "bicycle-world/dist/src/oak-lab.js",
-      "size": 35695,
-      "sha256": "06ed29962c1935620fc6cc8e3099a1649c6a153b2a7f707c6bda30660adc06ca"
+      "size": 35444,
+      "sha256": "6f313325cde6b3f3f6906810e8acad760e812f259a16f66b1f9b7ddca01c44b3"
     },
     {
       "path": "bicycle-world/dist/src/oak-narration.js",
@@ -4399,13 +4399,13 @@
     },
     {
       "path": "bicycle-world/dist/src/personal-rooms.css",
-      "size": 32296,
-      "sha256": "45cd62f95e69ca68611fa8d48be6a114135065fc7906099dc8cdfba0b4a52d39"
+      "size": 36025,
+      "sha256": "cc8ff33714108f9984bf9d2f941ec4ea7f8dd15033a41f9722ed191dad1acab5"
     },
     {
       "path": "bicycle-world/dist/src/personal-rooms.js",
-      "size": 64334,
-      "sha256": "81717235b72fcc4c3454535e0237c6b940892d5e60ffeafc5a85e7c3c15e886d"
+      "size": 65183,
+      "sha256": "309b1fa4d2beed8ba06bf1c24d0c4fca526c949548ae16a24543e20c1af5564e"
     },
     {
       "path": "bicycle-world/dist/src/photography-browse.js",
@@ -4519,13 +4519,13 @@
     },
     {
       "path": "bicycle-world/dist/src/pokemon-room.css",
-      "size": 19123,
-      "sha256": "9aea208cd4bfd829e20096f1987ed387426f13ba8ad4f7ab0056d92e21b03068"
+      "size": 22606,
+      "sha256": "249017b508ac2d8b253ae48753de759c2f121693884205a876af752b8d18df1b"
     },
     {
       "path": "bicycle-world/dist/src/pokemon-room.js",
-      "size": 62563,
-      "sha256": "01bfc24a5494c0c69834a175b655370b3681e4bf44a17167b0c20ef7c9b6df0b"
+      "size": 64388,
+      "sha256": "9883ccbef6748e8814f43e585b478592139397df98177ed1143757edddc34028"
     },
     {
       "path": "bicycle-world/dist/src/pokemon-sleep-cues.js",
