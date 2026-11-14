@@ -1,0 +1,22 @@
+#river-hop-action { bottom: 184px !important; }
+/* Match the existing tablet control safe area; keep stunt action separate. */
+html.touch-input #river-hop-action {
+ left: max(var(--touch-edge-gap, 32px), calc(env(safe-area-inset-left) + 24px)) !important;
+ bottom: calc(var(--touch-bottom-gap, 40px) + var(--touch-controls-height, 132px) + 16px) !important;
+ -webkit-user-select: none;
+ user-select: none;
+ touch-action: manipulation;
+ -webkit-touch-callout: none;
+}
+
+/* At the ramp, feedback sits below the toolbar instead of over the wheels. */
+html.touch-input body.hybrid-world.river-hop-near #world-bottom {
+ top: max(156px, calc(env(safe-area-inset-top) + 140px));
+ bottom: auto;
+}
+@media (min-aspect-ratio: 1/1) {
+ html.touch-input body.hybrid-world.river-hop-near #world-bottom {
+  top: max(104px, calc(env(safe-area-inset-top) + 88px));
+  bottom: auto;
+ }
+}

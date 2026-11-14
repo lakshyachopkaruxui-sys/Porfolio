@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T20:10:30.585990+00:00",
+  "generatedAt": "2026-11-14T07:53:48.886Z",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 746,
-      "sha256": "e63bfcdcd792aee61aa760acb1a8026249d5694b79bb3223d29bada73d30eeb6"
+      "sha256": "b6c48e01da0193ff22b8be4d48e162e6cee740e41fb1fc19477b62373c1e7b3e"
     },
     {
       "path": "_redirects",
@@ -3864,8 +3864,8 @@
     },
     {
       "path": "bicycle-world/dist/index.html",
-      "size": 44763,
-      "sha256": "8ad3859083f3dbc1eec4921174d7141d3bcf987e0b1691b91969d5b5bff2882c"
+      "size": 45747,
+      "sha256": "a70091267b77e4a57d9cf123644dd71e962a13e71be3a90fbf7c618ff98ab85b"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
@@ -4294,8 +4294,8 @@
     },
     {
       "path": "bicycle-world/dist/src/main.js",
-      "size": 75114,
-      "sha256": "bee43e5c9d1f01bcc7d4200cac30bc5b257cd64055f333d497d40cc500dffefb"
+      "size": 79476,
+      "sha256": "bf12b677762704d42a1465147496be7ccde6120ee8644015e9df31a049c18eb2"
     },
     {
       "path": "bicycle-world/dist/src/map-guide.css",
@@ -4584,8 +4584,8 @@
     },
     {
       "path": "bicycle-world/dist/src/rider.js",
-      "size": 26085,
-      "sha256": "6373f26b59361d1dfbdec44b1513858485ffad75475e22c7eb45407dfa8e6c60"
+      "size": 26134,
+      "sha256": "62575ecb0a30fad513010b469e09919f49d7241af4e1c1a7aaad425d93292b1f"
     },
     {
       "path": "bicycle-world/dist/src/riding-audio-ui.js",
@@ -4606,6 +4606,51 @@
       "path": "bicycle-world/dist/src/riding.css",
       "size": 1622,
       "sha256": "5c4521740cf0e56268a3e806df1a3a9570f60ce5254a98e19ee66eeb97dfaf8f"
+    },
+    {
+      "path": "bicycle-world/dist/src/river-hop.css",
+      "size": 889,
+      "sha256": "72e998789b02c3a0600ac65882bc1b292f008c14142a124d3f95955d8b99af5f"
+    },
+    {
+      "path": "bicycle-world/dist/src/river-hop/approach-route.js",
+      "size": 2025,
+      "sha256": "daa711b7cf2850b3fe21a3be1c4b04bff107c484b53b2b94226b65918d5b611d"
+    },
+    {
+      "path": "bicycle-world/dist/src/river-hop/approaches.js",
+      "size": 2793,
+      "sha256": "ac6cbcc716ced857d0d2bcde61c7b1f07141f57148a0960ceebaf83dca18b4e7"
+    },
+    {
+      "path": "bicycle-world/dist/src/river-hop/full-garden-hop.js",
+      "size": 5313,
+      "sha256": "6305ae7c69c8655964d551baf9f18ea5c19df004da305b28787770ead8cf5e79"
+    },
+    {
+      "path": "bicycle-world/dist/src/river-hop/planting.js",
+      "size": 1489,
+      "sha256": "3ab0fcceb388396b487978ae517ca8bbb628f1ffe3c733ffc78072be6cbd0c33"
+    },
+    {
+      "path": "bicycle-world/dist/src/river-hop/ramp-model.js",
+      "size": 3340,
+      "sha256": "1ddf178e13c58d0bdb64c4d4c43e4c153c46f6c4750e3691d1288806a4668649"
+    },
+    {
+      "path": "bicycle-world/dist/src/river-hop/run-up.js",
+      "size": 1709,
+      "sha256": "e24d10bd83944b86c5bbb7b25ff0ddfe142fcbd8bbec2f946276fe6c78bbd22c"
+    },
+    {
+      "path": "bicycle-world/dist/src/river-hop/stunts.js",
+      "size": 4114,
+      "sha256": "2e33e502c972216a737d975826b87c23c0d99ada88f058fe10633d9ceb4ccb36"
+    },
+    {
+      "path": "bicycle-world/dist/src/river-hop/trajectory.js",
+      "size": 2501,
+      "sha256": "bcdced3f86862521df5b82091a6485a69138088d6ed696016d9164596f1e9e04"
     },
     {
       "path": "bicycle-world/dist/src/sky-camera.js",
