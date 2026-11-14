@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T15:01:45.908069+00:00",
+  "generatedAt": "2026-11-14T15:04:27.192643+00:00",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -3865,7 +3865,7 @@
     {
       "path": "bicycle-world/dist/index.html",
       "size": 46426,
-      "sha256": "dfe3b518ec33202102c46fa7c82fffe2cabd06854a80e4eb27f048966bd9efdf"
+      "sha256": "b697c14b5f00deb4949a04677fce882f25b63321edf8e76b60e8f1aa795b9ee5"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
@@ -4124,8 +4124,8 @@
     },
     {
       "path": "bicycle-world/dist/src/garba-room.css",
-      "size": 15679,
-      "sha256": "d141a8b06fc4862925257e2f9e38405ac94f30bbdcde8010bed49af6165c4db9"
+      "size": 15834,
+      "sha256": "0ccee8e883dd78881b283fd286f95473bbeb9d95962e70ed629d65e82c029f15"
     },
     {
       "path": "bicycle-world/dist/src/garba-room.js",
