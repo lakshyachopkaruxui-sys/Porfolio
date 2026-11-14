@@ -8,6 +8,8 @@
   const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
   let pending = false;
   let recorded = false;
+  let lastRefresh = 0;
+  let displayedTotal = -1;
 
   function reserve() {
     const prefix = reservation + '=';
@@ -33,31 +35,45 @@
     return saved ? key : null;
   }
 
-  async function register() {
-    if (recorded || pending) return;
+  function paint(total) {
+    if (!Number.isSafeInteger(total) || total < 0 || total < displayedTotal) return false;
+    displayedTotal = total;
+    const guest = document.getElementById('guest');
+    if (!guest) return true;
+    const digits = document.createElement('strong');
+    digits.textContent = total.toLocaleString();
+    guest.replaceChildren(digits, total === 1 ? ' visit so far.' : ' visits so far.');
+    guest.hidden = false;
+    return true;
+  }
+
+  async function register(force = false) {
+    if (pending || document.prerendering || document.hidden) return;
+    if (recorded && !force && Date.now() - lastRefresh < 30000) return;
     pending = true;
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
     try {
-      const key = navigator.locks
+      const key = !recorded ? (navigator.locks
         ? await navigator.locks.request('lakshya-visitor-session', reserve)
-        : reserve();
-      if (!key) return;
+        : reserve()) : null;
+      if (!recorded && !key) return;
       const response = await fetch('/api/visit', {
-        method: 'POST', headers: {'X-Visit-Key': key}, credentials: 'same-origin',
-        cache: 'no-store', keepalive: true
+        method: recorded ? 'GET' : 'POST',
+        headers: key ? {'X-Visit-Key': key} : {},
+        credentials: 'same-origin', cache: 'no-store',
+        keepalive: !recorded, signal: controller.signal
       });
       if (response.status !== 200) return;
-      const {number} = await response.json();
-      if (!Number.isSafeInteger(number) || number < 1) return;
+      const result = await response.json();
+      if (!paint(result.total)) return;
       recorded = true;
-      const guest = document.getElementById('guest');
-      if (!guest) return;
-      const digits = document.createElement('strong');
-      digits.textContent = number.toLocaleString();
-      guest.replaceChildren('You’re visitor number ', digits, '.');
-      guest.hidden = false;
+      lastRefresh = Date.now();
     } catch {
-      // Offline navigation stays usable. Reuse the same reservation on retry.
+      // Never substitute an invented or locally cached number on failure.
+      // A retry reuses the same reservation, so registration stays idempotent.
     } finally {
+      clearTimeout(timeout);
       pending = false;
     }
   }
@@ -67,6 +83,11 @@
   } else {
     register();
   }
-  window.addEventListener('pageshow', () => { if (!document.prerendering) register(); });
-  window.addEventListener('online', () => { if (!document.prerendering) register(); });
+  window.addEventListener('pageshow', () => register(true));
+  window.addEventListener('online', () => register(true));
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) register(true); });
+  setInterval(() => {
+    const guest = document.getElementById('guest');
+    if (guest && guest.getClientRects().length) register();
+  }, 30000);
 })();

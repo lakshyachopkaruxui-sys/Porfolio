@@ -15,19 +15,38 @@ function existingCookie(request) {
   return null;
 }
 
+function primary(db) {
+  return typeof db.withSession === "function" ? db.withSession("first-primary") : db;
+}
+
+async function total(db) {
+  const row = await primary(db).prepare("SELECT COUNT(*) AS total FROM visits").first();
+  if (!Number.isSafeInteger(row?.total) || row.total < 0) throw new Error("Invalid visit total");
+  return row.total;
+}
+
 async function ordinal(db, hash) {
   const insert = db.prepare("INSERT OR IGNORE INTO visits(token_hash) VALUES (?)").bind(hash);
   const lookup = db.prepare("SELECT number FROM visits WHERE token_hash = ?").bind(hash);
   // D1 runs batch statements in a single transaction. Parallel requests for
   // the same key get the same number; a retry cannot allocate a second visit.
-  const results = await db.batch([insert, lookup]);
+  const results = await primary(db).batch([insert, lookup]);
   const number = results[1]?.results?.[0]?.number;
   if (!Number.isSafeInteger(number) || number <= 0) throw new Error("Invalid visit ordinal");
   return number;
 }
 
 export async function onRequest({request, env}) {
-  if (request.method !== "POST") return reply(405, {error: "Use POST"}, {Allow:"POST"});
+  if (request.method === "GET") {
+    if (new URL(request.url).origin !== site || request.headers.get("Sec-Fetch-Site") === "cross-site") return reply(403, {error:"Origin unavailable"});
+    if (!env.VISIT_DB) return reply(503, {error:"Guestbook unavailable"});
+    try { return reply(200, {total: await total(env.VISIT_DB)}); }
+    catch (error) {
+      if (/no such table: (?:main\.)?visits/i.test(String(error))) return reply(200, {total:0});
+      return reply(503, {error:"Guestbook unavailable"});
+    }
+  }
+  if (request.method !== "POST") return reply(405, {error: "Use GET or POST"}, {Allow:"GET, POST"});
   if (new URL(request.url).origin !== site || request.headers.get("Origin") !== site ||
       request.headers.get("Sec-Fetch-Site") === "cross-site") return reply(403, {error:"Origin unavailable"});
   const cfBot = request.cf?.botManagement;
@@ -48,7 +67,7 @@ export async function onRequest({request, env}) {
       await env.VISIT_DB.prepare(schema).run();
       number = await ordinal(env.VISIT_DB, hash);
     }
-    return reply(200, {number}, {"Set-Cookie": cookieName+"="+token+"; Secure; HttpOnly; SameSite=Lax; Path=/"});
+    return reply(200, {number, total: await total(env.VISIT_DB)}, {"Set-Cookie": cookieName+"="+token+"; Secure; HttpOnly; SameSite=Lax; Path=/"});
   } catch {
     return reply(503, {error:"Guestbook unavailable"});
   }

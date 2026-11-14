@@ -83,6 +83,7 @@ export function mountPlayMusic({notify = () => {}} = {}) {
     // Personal-room actions occupy the bottom edge. Keep optional music in
     // the existing header's flow instead of covering those actions with a dock.
     const headerNavigation = boundary === document.body ? document.querySelector('#ride-tools')
+      : boundary.id === 'visitor-board' ? boundary.querySelector('.vb-header')
       : boundary.id === 'works-experience' ? boundary.querySelector('.works-header nav')
       : boundary.id === 'garba-experience' ? boundary.querySelector('.gr-header')
       : boundary.id === 'listening-experience' ? boundary.querySelector('.masthead')

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T16:50:21.842653+00:00",
+  "generatedAt": "2026-11-14T17:05:53.733Z",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 746,
-      "sha256": "e1b97fe483acf1a4aff57da94876964d37025234a9a14e675426b4a2c0e9eb10"
+      "sha256": "66b153a12fd34d836c2b5aec1bd594990abb1411678e08bb2414617eec2935d4"
     },
     {
       "path": "_redirects",
@@ -73,19 +73,29 @@
       "sha256": "97f7de53f0fe80df2ce4e256ef78c75c00e3b032f32a14a983ab615ed42f8301"
     },
     {
-      "path": "bicycle-world/dist/assets/ambient-music/clear-air.ogg",
-      "size": 1795259,
-      "sha256": "4a04fc7957fb26fa53ad8c5d7c3734646d8c5defcc921d511e65871a5f362cc2"
-    },
-    {
       "path": "bicycle-world/dist/assets/ambient-music/CREDITS.txt",
       "size": 1207,
       "sha256": "3b31c2a7a2d7f592fe22be5706a2d586bc0f3f180db668578718444a5a6a7df0"
     },
     {
+      "path": "bicycle-world/dist/assets/ambient-music/clear-air.ogg",
+      "size": 1795259,
+      "sha256": "4a04fc7957fb26fa53ad8c5d7c3734646d8c5defcc921d511e65871a5f362cc2"
+    },
+    {
       "path": "bicycle-world/dist/assets/ambient-music/porch-swing-days.ogg",
       "size": 2206308,
       "sha256": "737ed094aa01f5dc3e4391ede5b448e8f4de503b6596407c0c0d6c7f23fa0012"
+    },
+    {
+      "path": "bicycle-world/dist/assets/bicycle-audio/CC0-1.0.txt",
+      "size": 7048,
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
+    },
+    {
+      "path": "bicycle-world/dist/assets/bicycle-audio/CREDITS.txt",
+      "size": 982,
+      "sha256": "34a9c1eb2cd1fe1b4ff8fb4a9ead94861381b75d9b04d742351b64186e886b67"
     },
     {
       "path": "bicycle-world/dist/assets/bicycle-audio/bell-CREDITS.txt",
@@ -103,16 +113,6 @@
       "sha256": "25d29ca98e7dae3467b21eb7586e8ffec319f1fe2134718b7a5ddeac19035931"
     },
     {
-      "path": "bicycle-world/dist/assets/bicycle-audio/CC0-1.0.txt",
-      "size": 7048,
-      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
-    },
-    {
-      "path": "bicycle-world/dist/assets/bicycle-audio/CREDITS.txt",
-      "size": 982,
-      "sha256": "34a9c1eb2cd1fe1b4ff8fb4a9ead94861381b75d9b04d742351b64186e886b67"
-    },
-    {
       "path": "bicycle-world/dist/assets/characters/SOURCE.md",
       "size": 611,
       "sha256": "f21ba4bbf57908fd2af8ab1726d65d9bcd719a7ddb73820926646570648fcdf4"
@@ -128,14 +128,14 @@
       "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
     },
     {
-      "path": "bicycle-world/dist/assets/fonts/mochiy-pop-p-one-latin.woff2",
-      "size": 18204,
-      "sha256": "90d53f9b1bdaba1dd40efcbe18ab9f6ab72b2afb660e7db6a80a64073a8ed7e3"
-    },
-    {
       "path": "bicycle-world/dist/assets/fonts/Mochiy-Pop-P-One-OFL.txt",
       "size": 4387,
       "sha256": "76be26178f13ef82866cf6a5c54272191bb583c203ad7035021c7681c9043558"
+    },
+    {
+      "path": "bicycle-world/dist/assets/fonts/mochiy-pop-p-one-latin.woff2",
+      "size": 18204,
+      "sha256": "90d53f9b1bdaba1dd40efcbe18ab9f6ab72b2afb660e7db6a80a64073a8ed7e3"
     },
     {
       "path": "bicycle-world/dist/assets/fonts/welcome-0.woff2",
@@ -158,6 +158,21 @@
       "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
     },
     {
+      "path": "bicycle-world/dist/assets/garden/Crops-License.txt",
+      "size": 364,
+      "sha256": "83d8959f9fc56353ed571fbe2dc52e4bcd64508e2399501cd45ac2ce3df0bf8c"
+    },
+    {
+      "path": "bicycle-world/dist/assets/garden/Floral-License-Standard.txt",
+      "size": 852,
+      "sha256": "120710e542c3ebaf83856c4eb55b4a1e680593b39302eba7fdc5d942dfe78c58"
+    },
+    {
+      "path": "bicycle-world/dist/assets/garden/SOURCE.md",
+      "size": 1029,
+      "sha256": "d83a20eacefca8380cf68f50682958e02b037332a2cd7fbe1ca24a9aeccd73b4"
+    },
+    {
       "path": "bicycle-world/dist/assets/garden/berry-bush-SOURCE.md",
       "size": 2483,
       "sha256": "9cfef0e006f5b04437da990cc8ab13f75c93c194c5e6c518449c3de07062aa89"
@@ -166,11 +181,6 @@
       "path": "bicycle-world/dist/assets/garden/berry-bush.glb",
       "size": 97868,
       "sha256": "024347ca3995ef6e7e20fd4025196e266942e8514a2f13a6b56d1f8c01c0675e"
-    },
-    {
-      "path": "bicycle-world/dist/assets/garden/Crops-License.txt",
-      "size": 364,
-      "sha256": "83d8959f9fc56353ed571fbe2dc52e4bcd64508e2399501cd45ac2ce3df0bf8c"
     },
     {
       "path": "bicycle-world/dist/assets/garden/floral-accents-SOURCE.md",
@@ -183,11 +193,6 @@
       "sha256": "011cf290068b3ef67ff31a710ed119db300d93299596257fa59572690ece81af"
     },
     {
-      "path": "bicycle-world/dist/assets/garden/Floral-License-Standard.txt",
-      "size": 852,
-      "sha256": "120710e542c3ebaf83856c4eb55b4a1e680593b39302eba7fdc5d942dfe78c58"
-    },
-    {
       "path": "bicycle-world/dist/assets/garden/japanese-bridge-runtime.glb",
       "size": 118728,
       "sha256": "b069c05c1ba8dd073e0d83dc1a1ddbb6f93e2f31918d770884796a1d3b77f107"
@@ -196,11 +201,6 @@
       "path": "bicycle-world/dist/assets/garden/nature-pack-runtime.glb",
       "size": 195044,
       "sha256": "727cc068e971267f544f12da59845cfa326b6b767e180a5ab485c30b57068447"
-    },
-    {
-      "path": "bicycle-world/dist/assets/garden/SOURCE.md",
-      "size": 1029,
-      "sha256": "d83a20eacefca8380cf68f50682958e02b037332a2cd7fbe1ca24a9aeccd73b4"
     },
     {
       "path": "bicycle-world/dist/assets/identity/shared-curve/apple-touch-icon.png",
@@ -2833,49 +2833,14 @@
       "sha256": "48fdf9191113fa69ed42e461ee7f558e7a6429d5683eac8f8bdf9bdb1ba866bb"
     },
     {
-      "path": "bicycle-world/dist/assets/pokemon/articuno.glb",
-      "size": 518000,
-      "sha256": "e5b7696772055d65b575ef62259dc2db027c345ef17286ab543e9d2b3c893a11"
-    },
-    {
-      "path": "bicycle-world/dist/assets/pokemon/bulbasaur.glb",
-      "size": 384808,
-      "sha256": "3676a2658286f48de703342b588b1ef7131b46804827d602e171d400273802fa"
-    },
-    {
-      "path": "bicycle-world/dist/assets/pokemon/charizard.glb",
-      "size": 484712,
-      "sha256": "d4ccd1ed8ee160019e4f28da6c487bce1e99402272653ea91511d8ab8055fedc"
-    },
-    {
-      "path": "bicycle-world/dist/assets/pokemon/charmander.glb",
-      "size": 406668,
-      "sha256": "6d05515763d819fce0c3b785e2dee59517ff2bf01017730dc92c6dfdad44bdcd"
-    },
-    {
-      "path": "bicycle-world/dist/assets/pokemon/pikachu.glb",
-      "size": 146152,
-      "sha256": "f6adfe0dd7f3dcc6100370c5b32c003360eab4f235b920cac71d8e3a253cd5de"
-    },
-    {
-      "path": "bicycle-world/dist/assets/pokemon/snorlax.glb",
-      "size": 279848,
-      "sha256": "3c480914f2686cbad955df9c288fb9c72642094b2ec8288a3cca6d490cba5879"
-    },
-    {
-      "path": "bicycle-world/dist/assets/pokemon/vaporeon.glb",
-      "size": 415416,
-      "sha256": "5075b12f67bcba1ca2e5fd54d0a0e013ffd6d51901f82c41167bb62ae1b94c21"
+      "path": "bicycle-world/dist/assets/pokemon-audio/SOURCE.md",
+      "size": 1231,
+      "sha256": "090f909ac69843bb9289093aa0d908b4e864082dd3d26ea241c7931d6b7c8774"
     },
     {
       "path": "bicycle-world/dist/assets/pokemon-audio/articuno.ogg",
       "size": 17059,
       "sha256": "374612dfbb0a5c7e7721b9698553fc15909c0ab2b49be9eeb3385e7558d9730b"
-    },
-    {
-      "path": "bicycle-world/dist/assets/pokemon-audio/SOURCE.md",
-      "size": 1231,
-      "sha256": "090f909ac69843bb9289093aa0d908b4e864082dd3d26ea241c7931d6b7c8774"
     },
     {
       "path": "bicycle-world/dist/assets/pokemon-audio/vaporeon.ogg",
@@ -3803,6 +3768,11 @@
       "sha256": "5e7bb1c46ff9fa7f5ab0e18cd3a1a54a19b7aa0800b923e2499356d77e720a1a"
     },
     {
+      "path": "bicycle-world/dist/assets/pokemon-voices/SOURCE.md",
+      "size": 1496,
+      "sha256": "d3e40cbb8df5cf2873b0de8bf71f2f3a2e472364d93924b342147976b39e291b"
+    },
+    {
       "path": "bicycle-world/dist/assets/pokemon-voices/bulbasaur-anime-candidate.mp3",
       "size": 12717,
       "sha256": "36e0215374428edd89833008f711f386a90e098d311711d5f8831f7506c79563"
@@ -3823,9 +3793,49 @@
       "sha256": "a910dd28d7df871027b61459bac048f92efb921c284c3120da245d0070bd4621"
     },
     {
-      "path": "bicycle-world/dist/assets/pokemon-voices/SOURCE.md",
-      "size": 1496,
-      "sha256": "d3e40cbb8df5cf2873b0de8bf71f2f3a2e472364d93924b342147976b39e291b"
+      "path": "bicycle-world/dist/assets/pokemon/articuno.glb",
+      "size": 518000,
+      "sha256": "e5b7696772055d65b575ef62259dc2db027c345ef17286ab543e9d2b3c893a11"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon/bulbasaur.glb",
+      "size": 384808,
+      "sha256": "3676a2658286f48de703342b588b1ef7131b46804827d602e171d400273802fa"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon/charizard.glb",
+      "size": 484712,
+      "sha256": "d4ccd1ed8ee160019e4f28da6c487bce1e99402272653ea91511d8ab8055fedc"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon/charmander.glb",
+      "size": 406668,
+      "sha256": "6d05515763d819fce0c3b785e2dee59517ff2bf01017730dc92c6dfdad44bdcd"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon/pikachu.glb",
+      "size": 146152,
+      "sha256": "f6adfe0dd7f3dcc6100370c5b32c003360eab4f235b920cac71d8e3a253cd5de"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon/snorlax.glb",
+      "size": 279848,
+      "sha256": "3c480914f2686cbad955df9c288fb9c72642094b2ec8288a3cca6d490cba5879"
+    },
+    {
+      "path": "bicycle-world/dist/assets/pokemon/vaporeon.glb",
+      "size": 415416,
+      "sha256": "5075b12f67bcba1ca2e5fd54d0a0e013ffd6d51901f82c41167bb62ae1b94c21"
+    },
+    {
+      "path": "bicycle-world/dist/assets/visitor-board/CREDITS.txt",
+      "size": 238,
+      "sha256": "605d579e4016a1dc3991feff05c527aa3215364088abba10aba2f95cb3a34202"
+    },
+    {
+      "path": "bicycle-world/dist/assets/visitor-board/billboard.glb",
+      "size": 66696,
+      "sha256": "dece50ba1ae265df28d55aacff220b00e24aee681e6bf7ef58e1cbc5ef220804"
     },
     {
       "path": "bicycle-world/dist/assets/work-covers/connectaid.webp",
@@ -3864,8 +3874,8 @@
     },
     {
       "path": "bicycle-world/dist/index.html",
-      "size": 46467,
-      "sha256": "9cdd160cbfec3d9148a7d4b107e0f8cc2a9f635cacaf16be8ee93e99e92a6c6c"
+      "size": 46745,
+      "sha256": "da9ae515da9dded0ed117f725c6e93484d54e14e1dbb9092890817eec97acbfc"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
@@ -4294,8 +4304,8 @@
     },
     {
       "path": "bicycle-world/dist/src/main.js",
-      "size": 78351,
-      "sha256": "f6e134ccd20a94cc3d8973b307631958d8cb8e725b2c48efc5456675caf8d41a"
+      "size": 80358,
+      "sha256": "74cdb59306e2392744303b3da2e0412f6bf69d2f3521b2b7c7e2610500b07faa"
     },
     {
       "path": "bicycle-world/dist/src/map-guide.css",
@@ -4434,8 +4444,8 @@
     },
     {
       "path": "bicycle-world/dist/src/play-music-ui.js",
-      "size": 12748,
-      "sha256": "71da94046793349c37f77b01cb9f7ab4bc66efed68df7366b74ac2366dfa4e51"
+      "size": 12828,
+      "sha256": "1da5591427bbf2a8c1bb492187a3fb4170796db5984caf667477dfbffeb9bd76"
     },
     {
       "path": "bicycle-world/dist/src/play-music.css",
@@ -4608,6 +4618,11 @@
       "sha256": "5c4521740cf0e56268a3e806df1a3a9570f60ce5254a98e19ee66eeb97dfaf8f"
     },
     {
+      "path": "bicycle-world/dist/src/river-hop.css",
+      "size": 889,
+      "sha256": "72e998789b02c3a0600ac65882bc1b292f008c14142a124d3f95955d8b99af5f"
+    },
+    {
       "path": "bicycle-world/dist/src/river-hop/approach-route.js",
       "size": 2025,
       "sha256": "daa711b7cf2850b3fe21a3be1c4b04bff107c484b53b2b94226b65918d5b611d"
@@ -4658,11 +4673,6 @@
       "sha256": "bcdced3f86862521df5b82091a6485a69138088d6ed696016d9164596f1e9e04"
     },
     {
-      "path": "bicycle-world/dist/src/river-hop.css",
-      "size": 889,
-      "sha256": "72e998789b02c3a0600ac65882bc1b292f008c14142a124d3f95955d8b99af5f"
-    },
-    {
       "path": "bicycle-world/dist/src/sky-camera.js",
       "size": 4478,
       "sha256": "c5db91af7827da9b1744ed4c97b53986f77272ab03af4e6360b580f274cbd1c3"
@@ -4686,6 +4696,21 @@
       "path": "bicycle-world/dist/src/trailhead-guide.js",
       "size": 4908,
       "sha256": "84b83952e78277de0c5433b06607b4c8f9e94ca712f309492a46add63c7d0507"
+    },
+    {
+      "path": "bicycle-world/dist/src/visitor-board-ui.js",
+      "size": 10396,
+      "sha256": "22f75945aaf755dcf3aca07c6a624caa3fa89e77acba39c4552e59c6fbe211ca"
+    },
+    {
+      "path": "bicycle-world/dist/src/visitor-board.css",
+      "size": 5929,
+      "sha256": "807f1c72ae2270c929b2aa5e50c99c12d8f67c1b3cf45c215c34ed85a6e38206"
+    },
+    {
+      "path": "bicycle-world/dist/src/visitor-board.js",
+      "size": 6376,
+      "sha256": "cabac276cd72ddd5d56d1fb4c8605f23aac0d50e7a4445f6063b21a5ca3a0c9c"
     },
     {
       "path": "bicycle-world/dist/src/wayfinding-config.js",
@@ -4783,6 +4808,11 @@
       "sha256": "4c86613d5bd2302e04dd8891c8e971e80f0d90270bb17488d7b0f4f1ecf4dbc5"
     },
     {
+      "path": "bicycle-world/dist/vendor/THREE-LICENSE.txt",
+      "size": 1081,
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+    },
+    {
       "path": "bicycle-world/dist/vendor/addons/geometries/RoundedBoxGeometry.js",
       "size": 6476,
       "sha256": "c1b7c9bd2cddff2e3f3a0723f618a3d364a47450e3d25771d21faed88410bec8"
@@ -4801,11 +4831,6 @@
       "path": "bicycle-world/dist/vendor/addons/utils/SkeletonUtils.js",
       "size": 11535,
       "sha256": "b1632a703206c3d830de9fcbe515696770d04b71a15ee6b50afa6d2c3298c86f"
-    },
-    {
-      "path": "bicycle-world/dist/vendor/THREE-LICENSE.txt",
-      "size": 1081,
-      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
     },
     {
       "path": "bicycle-world/dist/vendor/three.core.js",
@@ -5014,8 +5039,8 @@
     },
     {
       "path": "entrance/visit-session.js",
-      "size": 2550,
-      "sha256": "3842c6d574ab58d79566471ce8a2b73f1b3e44086c806207bd4d56da46540bf9"
+      "size": 3509,
+      "sha256": "869d2e98d0a3712805976af073c5b96417a30b998b5ac552780d90ff49942895"
     },
     {
       "path": "index.html",
@@ -5031,6 +5056,16 @@
       "path": "normal-portfolio/approved-opening.css",
       "size": 5441,
       "sha256": "5d8a9e006227192d91bd56bc60964701bb2d69fa36a3a35b350e58ef53a15e85"
+    },
+    {
+      "path": "normal-portfolio/assets/Lakshya-Chopkar-Product-Designer-Resume.pdf",
+      "size": 150165,
+      "sha256": "3ce68e01829389b26b5c8534c9484c4268a550554cf5b6b99f9a9f1ee7c03dce"
+    },
+    {
+      "path": "normal-portfolio/assets/Lakshya-Chopkar-UX-Designer-Resume.pdf",
+      "size": 150165,
+      "sha256": "3ce68e01829389b26b5c8534c9484c4268a550554cf5b6b99f9a9f1ee7c03dce"
     },
     {
       "path": "normal-portfolio/assets/cases/connectaid/design-system/button-states-source.webp",
@@ -6508,16 +6543,6 @@
       "sha256": "308f7c5ed377c2476481bc205341747648efcd48480ce78a6f6ba673e7348b77"
     },
     {
-      "path": "normal-portfolio/assets/Lakshya-Chopkar-Product-Designer-Resume.pdf",
-      "size": 150165,
-      "sha256": "3ce68e01829389b26b5c8534c9484c4268a550554cf5b6b99f9a9f1ee7c03dce"
-    },
-    {
-      "path": "normal-portfolio/assets/Lakshya-Chopkar-UX-Designer-Resume.pdf",
-      "size": 150165,
-      "sha256": "3ce68e01829389b26b5c8534c9484c4268a550554cf5b6b99f9a9f1ee7c03dce"
-    },
-    {
       "path": "normal-portfolio/assets/personal/carousel/n001-waterfront.webp",
       "size": 38352,
       "sha256": "c4d0e5ecf8e21993ba341c9f5678fc05be958933cb34340ca3075c32add64a02"
@@ -6693,6 +6718,21 @@
       "sha256": "cb9c48acc659870f27d9c9c306f4671d5bde935e512a4b1ba3a25cd170d4e16c"
     },
     {
+      "path": "normal-portfolio/assets/toolkit/LOBE-ICONS-LICENSE.txt",
+      "size": 1064,
+      "sha256": "add9d7531d1b21646317a8958e38fc727506fa39d24bdecb44154d943c82753a"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/OCTICONS-LICENSE.txt",
+      "size": 1068,
+      "sha256": "da259c8bd0de62713ccdcf88910aebca810644f98c2c912bad814fc79ea778df"
+    },
+    {
+      "path": "normal-portfolio/assets/toolkit/TABLER-LICENSE.txt",
+      "size": 1073,
+      "sha256": "b740a1d46122672da62833e97f7e7c8a13fa85cbc7445b584b297cc00dde93db"
+    },
+    {
       "path": "normal-portfolio/assets/toolkit/antigravity.svg",
       "size": 5037,
       "sha256": "de7911c3d206a3d2fe3d5b4e76e84b185c581d7a259406f64db247b5b824f02e"
@@ -6773,11 +6813,6 @@
       "sha256": "16ab739533f7b81f013de8c09836fc5183d1cd21bc3e4da538ec990e7224e170"
     },
     {
-      "path": "normal-portfolio/assets/toolkit/LOBE-ICONS-LICENSE.txt",
-      "size": 1064,
-      "sha256": "add9d7531d1b21646317a8958e38fc727506fa39d24bdecb44154d943c82753a"
-    },
-    {
       "path": "normal-portfolio/assets/toolkit/maya.svg",
       "size": 1492,
       "sha256": "4449f319b44da8d7d9c5cd0936790cbd8e366a1cc839e2769a3f2b890524f8f9"
@@ -6803,11 +6838,6 @@
       "sha256": "eb2fb7155324af655bf8b35dae60f2435e87fcee3b213b0f17f169bf10a306e0"
     },
     {
-      "path": "normal-portfolio/assets/toolkit/OCTICONS-LICENSE.txt",
-      "size": 1068,
-      "sha256": "da259c8bd0de62713ccdcf88910aebca810644f98c2c912bad814fc79ea778df"
-    },
-    {
       "path": "normal-portfolio/assets/toolkit/perplexity.svg",
       "size": 2438,
       "sha256": "00180a688c194d684a69b247769cdf24a7720712256dbe0f334f97e8a15821e4"
@@ -6826,11 +6856,6 @@
       "path": "normal-portfolio/assets/toolkit/rfid.svg",
       "size": 540,
       "sha256": "fbdd866f8e0bfbee190910364ff746cf5f6cf17ac003f183efecb934ad85c7b9"
-    },
-    {
-      "path": "normal-portfolio/assets/toolkit/TABLER-LICENSE.txt",
-      "size": 1073,
-      "sha256": "b740a1d46122672da62833e97f7e7c8a13fa85cbc7445b584b297cc00dde93db"
     },
     {
       "path": "normal-portfolio/assets/toolkit/vscode.avif",

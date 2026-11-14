@@ -1,3 +1,5 @@
+import {createVisitorBoard,VISITOR_BOARD_LOCATION} from './visitor-board.js';
+import {createVisitorBoardUI} from './visitor-board-ui.js';
 import {assistAcrossRamps,supportsDeck} from './river-hop/hop-sites.js';
 import {createFullGardenHop} from './river-hop/full-garden-hop.js';
 import {HOP} from './river-hop/trajectory.js';
@@ -129,6 +131,10 @@ let rideFeel={},startupComplete=false;
 const rideAudioMotion={speed:0,pedaling:false,braking:false,moved:0,dt:0};
 let landmarkFramer,cameraHeight=24;
 let running=false,inPortfolio=false,ready=false,failed=false;
+let visitorBoard=null,visitorUI=null;
+let feedbackInvited=false;try{feedbackInvited=sessionStorage.getItem('visitor-feedback-invited')==='1';}catch{}
+function inviteFeedback(onLeave){if(feedbackInvited){onLeave?.();return;}feedbackInvited=true;try{sessionStorage.setItem('visitor-feedback-invited','1');}catch{}visitorUI?.invite({onLeave});}
+function openVisitorBoard(){if(!visitorUI)return;feedbackInvited=true;try{sessionStorage.setItem('visitor-feedback-invited','1');}catch{}cancelRoute();state.speed=0;visitorUI.open({invite:true});}
 let enteredGarden=false,pendingRideAudio=false;
 let riverHop=null,hopBoost=false,rampApproach=false;
 const hopButton=document.createElement('button');hopButton.id='river-hop-action';hopButton.type='button';hopButton.hidden=true;hopButton.textContent='Cancel jump (Esc)';hopButton.style.cssText='position:fixed;bottom:100px;left:24px;z-index:90;padding:12px 20px;min-height:44px;border-radius:10px;background:#fffaf0;color:#213d35;border:1px solid #8b9f88;font:600 15px DM Sans,sans-serif';document.body.append(hopButton);sceneHost.setAttribute('aria-label',sceneHost.getAttribute('aria-label')+' Ride onto River Hop to jump automatically. Escape cancels a jump. Q toggles boost.');hopButton.onclick=()=>{if(riverHop?.active)clearInput();sceneHost.focus({preventScroll:true});};
@@ -217,7 +223,7 @@ function setBicycleLight(value){
   syncBicycleLight();readingBackdropDrawn=false;save();
   notify(value?'Bicycle light on.':'Bicycle light off.');
 }
-function hasOverlay(){return Boolean(reader.open||help.open||placeUI?.isOpen||projectUI?.isOpen||mapUI?.isOpen||personalRooms?.isOpen||worksExperience?.isOpen||oakLab?.isOpen||aboutExperience?.isOpen);}
+function hasOverlay(){return Boolean(visitorUI?.isOpen||reader.open||help.open||placeUI?.isOpen||projectUI?.isOpen||mapUI?.isOpen||personalRooms?.isOpen||worksExperience?.isOpen||oakLab?.isOpen||aboutExperience?.isOpen);}
 function ridingInputBlocked(){return failed||abandoned||document.hidden||cloudTransition.snapshot.active||!$('woody-guide').hidden;}
 function syncRideUI(){
   playMusic.setActive(ready&&running&&!inPortfolio);
@@ -253,6 +259,7 @@ function restoreRideUI(){clearInput();save();syncRideUI();if(hasOverlay()||inPor
 function prepareOverlay(kind){
   cancelWelcomeDeparture();dismissWelcomeGuide();welcomeVoice.stop();
   const origin=document.activeElement;
+  if(kind!=='visitor'&&visitorUI?.isOpen)visitorUI.close();
   if(kind!=='reader'&&reader.open){readerScroll=reader.scrollTop;reader.close();}
   if(kind!=='help'&&help.open){help.close();help.inert=true;}
   if(kind!=='map')mapUI?.close();if(kind!=='place')placeUI?.close();if(kind!=='projects')projectUI?.close();
@@ -347,7 +354,10 @@ function start({skipWelcome=false,resuming=false}={}){
 function openReader(){if(ready&&oakLab)openLandmark('music');else projectUI.open('portfolio-world');usedReader=true;}
 function closeReader(){readerScroll=reader.scrollTop;reader.close();history.replaceState(null,'',location.pathname+location.search);restoreRideUI();}
 function syncModeSwitches(){decorateModeSelectors(document,{mode:'play',pageURL:location.href,navigationHandled:true});}
-function showPortfolio(hash=''){
+function showPortfolio(hash='',skipFeedback=false){
+  if(hash?.preventDefault){hash.preventDefault();hash='';}
+  if(running&&visitorUI&&!skipFeedback&&!feedbackInvited){cancelRoute();clearInput();state.speed=0;inviteFeedback(()=>showPortfolio(hash,true));return;}
+  visitorUI?.close();
   playMusic.suspend('normal-portfolio',true);
   // Capture the return URL before reader cleanup changes its hash or query.
   const returnPath=location.pathname+location.search;
@@ -407,7 +417,7 @@ function openLandmark(kind){
   }
   if(kind==='work')placeUI.open('collection');else if(STOPS[kind]?.content)placeUI.open(STOPS[kind].content);
 }
-function interact(){if(nearStop)openLandmark(nearStop);else if(nearTrailhead())showHelp();}
+function interact(){if(visitorBoard?.near){openVisitorBoard();return;}if(nearStop)openLandmark(nearStop);else if(nearTrailhead())showHelp();}
 function beginRoute(destination,preferPaths=false,onArrival=null){
   if(riverHop?.active){notify("Finish the jump or press Escape before choosing a destination.");return false;}
   dismissWelcomeGuide();welcomeVoice.stop();
@@ -551,7 +561,7 @@ window.addEventListener('pagehide',event=>{
   const deferredGuide=running&&pendingWelcomeGuide;
   welcomeVoice.stop();clearInput();clearWelcomeHandoff();
   if(event.persisted){pendingWelcomeGuide=deferredGuide;return;}
-  abandoned=true;riverHop?.dispose();hopButton.remove();overlayMotion.dispose();touchControlInput?.dispose();mainLoop.stop();bicycleLight?.dispose();rider?.bell?.dispose();aboutExperience?.dispose();oakLab?.dispose();worksExperience?.dispose();personalRooms?.dispose();trailheadGuide?.dispose();gardenLighting?.dispose();followSky?.dispose();world?.wayfinding.dispose();cancelAnimationFrame(loadingCloudFrame);cloudVolume?.dispose();cloudCurtain.dispose();rideProfile?.dispose();startupController.abort();pokemonControls.dispose();pokemonAudio.dispose();rideSoundControl.dispose();gardenBell.dispose();rideAudio.dispose();companions?.dispose();welcomeVoice.dispose();garden?.dispose();world?.studioDisplays.dispose();world?.landmarks.dispose();woodyWelcome?.dispose();disposeCharacterAsset(characterAsset);characterAsset=null;
+  abandoned=true;visitorBoard?.dispose();visitorUI?.dispose();riverHop?.dispose();hopButton.remove();overlayMotion.dispose();touchControlInput?.dispose();mainLoop.stop();bicycleLight?.dispose();rider?.bell?.dispose();aboutExperience?.dispose();oakLab?.dispose();worksExperience?.dispose();personalRooms?.dispose();trailheadGuide?.dispose();gardenLighting?.dispose();followSky?.dispose();world?.wayfinding.dispose();cancelAnimationFrame(loadingCloudFrame);cloudVolume?.dispose();cloudCurtain.dispose();rideProfile?.dispose();startupController.abort();pokemonControls.dispose();pokemonAudio.dispose();rideSoundControl.dispose();gardenBell.dispose();rideAudio.dispose();companions?.dispose();welcomeVoice.dispose();garden?.dispose();world?.studioDisplays.dispose();world?.landmarks.dispose();woodyWelcome?.dispose();disposeCharacterAsset(characterAsset);characterAsset=null;
   renderer?.dispose();renderer?.domElement.remove();
 });
 touchControlInput=createTouchRidingInput({buttons:$('touch-controls').querySelectorAll('[data-key]'),keys,physicalKeys,releaseTarget:window,onStart:cancelRoute,isActive:()=>coarse&&ready&&running&&!inPortfolio&&!hasOverlay()&&!ridingInputBlocked()});
@@ -561,6 +571,7 @@ function selectGround(e){
   // In-world companion picking must not silently reset an airborne rider.
   if(!ready||!running||riverHop?.active||cloudTransition.snapshot.active||hasOverlay()||inPortfolio)return;
   sceneHost.focus({preventScroll:true});const rect=renderer.domElement.getBoundingClientRect();pointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);raycaster.setFromCamera(pointer,camera);
+  if(visitorBoard?.pick(raycaster)){openVisitorBoard();return;}
   const landmarkHit=raycaster.intersectObjects([...world.landmarks.roots.values()],true)[0],companionHit=companions?.pick(raycaster.ray);
   const guideHit=trailheadGuide&&raycaster.intersectObjects(trailheadGuide.hitMeshes,true)[0];
   const bellHit=rider.bell?.pick(raycaster.ray,camera,rect.height);
@@ -723,7 +734,8 @@ async function initialize(){
       {id:'world',label:'Preparing Woody and the bicycle…',timeoutMs:35000,async run(){
         aboutExperience?.dispose();aboutExperience=null;personalRooms?.dispose();personalRooms=null;worksExperience?.dispose();worksExperience=null;oakLab?.dispose();oakLab=null;
         bicycleLight?.dispose();rider?.bell?.dispose();
-        world=createWorld(scene);trailheadGuide=createTrailheadGuide(scene);world.colliders.push(...trailheadGuide.colliders);rider=createRider(THREE);
+        visitorBoard?.dispose();visitorUI?.dispose();help.querySelector('[data-visitor-feedback]')?.remove();
+        world=createWorld(scene);visitorUI=createVisitorBoardUI({onOpen(){prepareOverlay('visitor');syncRideUI();},onClose:restoreRideUI,onChange(reviews){visitorBoard?.setReviews(reviews);}});visitorBoard=createVisitorBoard(scene,{onOpen:openVisitorBoard,onPass(){inviteFeedback();}});world.colliders.push({...VISITOR_BOARD_LOCATION.pole,radius:.65,height:9.4});const feedbackLink=document.createElement('button');feedbackLink.type='button';feedbackLink.dataset.visitorFeedback='';feedbackLink.textContent='Leave ride feedback';feedbackLink.addEventListener('click',openVisitorBoard);help.querySelector('.reader-top').append(feedbackLink);trailheadGuide=createTrailheadGuide(scene);world.colliders.push(...trailheadGuide.colliders);rider=createRider(THREE);
         gardenLighting=createGardenLighting({scene,sun,hemisphere,world});gardenLighting.setNight(saved?.gardenNight===true,{immediate:true});gardenLighting.setAutomatic(saved?.automaticDaylight===true);
         bicycleLight=createBicycleHeadlight(rider.group,{enabled:bicycleLightPreference});
         bicycleLight.update(0,{night:gardenLighting.progress,reduced});syncBicycleLight();
@@ -825,6 +837,7 @@ function frame(now){
   if(oakLab?.isOpen){oakLab.update(dt);return;}
   if(worksExperience?.isOpen){worksExperience.update(dt);return;}
   if(personalRooms?.isOpen){personalRooms.update(dt);return;}
+  visitorBoard?.update(state,running&&!inPortfolio&&!hasOverlay()&&!riverHop?.active,gardenLighting?.night);
   gardenLighting?.update(dt,{paused:hasOverlay()||!running,reduced,focus});
   if(gardenLighting){$('night-garden').checked=gardenLighting.night;$('automatic-daylight').checked=gardenLighting.automatic;sceneHost.dataset.daylight=gardenLighting.progress.toFixed(2);}
   if(!running&&!hasOverlay()){
