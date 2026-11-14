@@ -355,7 +355,7 @@ export function renderCaseStudy({reader, content, project, context, process, sto
   }
   if (designEntry) {
     const shortcutLabel = story?.playable?.url ? 'Read case study'
-      : ['jan-aushadhi', 'workplace-mode'].includes(project.id) ? 'Explore the concept' : 'View the design';
+      : ['jan-aushadhi', 'workplace-mode'].includes(project.id) ? 'Jump to concept' : 'Jump to design';
     const shortcut = node('a', shortcutLabel, heroActions, story?.playable?.url ? 'case-prototype-link case-story-jump' : 'case-design-jump');
     shortcut.href = location.href;
     shortcut.addEventListener('click', event => {

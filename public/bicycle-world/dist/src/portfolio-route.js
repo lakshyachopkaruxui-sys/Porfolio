@@ -3,7 +3,7 @@
 // the sibling normal-portfolio directory on the same origin.
 export const NORMAL_CASE_IDS=Object.freeze(['connectaid','giggles','pixel-mania','syringe','workplace-mode','jan-aushadhi','tear']);
 const CASE_IDS = new Set(NORMAL_CASE_IDS);
-export const CASE_STUDY_LINK_NOTE='Opens in a new tab. Your garden stays here.';
+export const CASE_STUDY_LINK_NOTE='Opens in Portfolio in a new tab. Your garden stays here.';
 
 /** Known canonical Normal cases do not depend on retired Behance URL flags. */
 export function localCaseStudyHash(project) {

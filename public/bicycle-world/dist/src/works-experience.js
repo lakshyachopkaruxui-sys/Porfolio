@@ -67,13 +67,13 @@ export function worksEntrancePose(index,count,view,progress){
 export function createWorksExperience({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=()=>{},onPlace=()=>{},isReduced=()=>false}={}){
   if(!renderer?.domElement)throw new Error('Works Room requires the existing renderer.');
   const projects=PLAY_WORK_PROJECTS,dialog=document.createElement('dialog');dialog.id='works-experience';dialog.setAttribute('aria-labelledby','works-room-title');
-  dialog.innerHTML=`<div class="works-shell"><div class="works-canvas" tabindex="0" role="region" aria-label="Works Room. A and D or Left and Right browse projects. Home and End jump to the first or last. Enter reads an overview."></div><div class="works-entry-curtain" aria-hidden="true"></div><header class="works-header"><div><p class="works-eyebrow">LAKSHYA’S WORLD</p><h1 id="works-room-title">The Works Room</h1></div><nav aria-label="Works Room navigation"><button type="button" data-works-places>Other places</button><span class="mode-switch" data-mode-switch data-works-portfolio>Portfolio / Play</span><button type="button" data-works-back>Back to garden</button></nav></header><section class="works-caption" aria-labelledby="works-selected-title"><p class="works-eyebrow" data-works-number></p><h2 id="works-selected-title"></h2><p data-works-summary></p><div class="works-actions"><button type="button" data-works-prev>Previous</button><button type="button" class="works-primary" data-works-read>Read overview</button><button type="button" data-works-next>Next</button></div><div class="works-detail-actions"><button type="button" data-works-index>Project index</button><button type="button" data-works-inspect>Look closer at the cover</button><span>A / D or Left / Right · Enter on scene to read</span></div></section><p class="works-status" role="status" aria-live="polite" data-works-status></p><button type="button" class="works-retry" data-works-retry hidden>Retry cover</button><section class="works-places" aria-labelledby="works-places-title" hidden><header><h2 id="works-places-title">A different side of Lakshya.</h2><button type="button" data-works-places-close>Back to the room</button></header><div data-works-place-list></div></section><section class="works-index" aria-labelledby="works-index-title" hidden><header><div><p class="works-eyebrow">THE PROJECT INDEX</p><h2 id="works-index-title">Follow your curiosity.</h2></div><button type="button" data-works-index-close>Back to the room</button></header><p data-works-count></p><div data-works-list></div></section><section class="works-reading" aria-labelledby="works-overview-title" hidden><header><p class="works-eyebrow" data-works-reading-kind>PROJECT OVERVIEW</p><button type="button" data-works-read-close>Back to the room</button></header><article data-works-article></article></section><section class="works-inspect" aria-labelledby="works-image-title" hidden><header><div><p class="works-eyebrow">PROJECT COVER</p><h2 id="works-image-title"></h2></div><div class="works-inspect-actions"><button type="button" data-works-zoom aria-pressed="false">Zoom cover</button><button type="button" data-works-inspect-close>Back to the room</button></div></header><figure><img data-works-image alt=""><figcaption data-works-image-caption></figcaption></figure></section></div>`;
+  dialog.innerHTML=`<div class="works-shell"><div class="works-canvas" tabindex="0" role="region" aria-label="Works Room. A and D or Left and Right browse projects. Home and End jump to the first or last. Enter opens the selected project summary."></div><div class="works-entry-curtain" aria-hidden="true"></div><header class="works-header"><div><p class="works-eyebrow">LAKSHYA’S WORLD</p><h1 id="works-room-title">The Works Room</h1></div><nav aria-label="Works Room navigation"><button type="button" data-works-places>Other places</button><span class="mode-switch" data-mode-switch data-works-portfolio>Portfolio / Play</span><button type="button" data-works-back>Back to garden</button></nav></header><section class="works-caption" aria-labelledby="works-selected-title"><p class="works-eyebrow" data-works-number></p><h2 id="works-selected-title"></h2><p class="works-project-type" data-works-category></p><p data-works-summary></p><div class="works-actions"><button type="button" data-works-prev>Previous project</button><a class="works-primary" data-works-read>Read case study</a><button type="button" data-works-next>Next project</button></div><div class="works-detail-actions"><button type="button" data-works-index>All projects</button><button type="button" data-works-summary>Project summary</button><span>A / D or Left / Right · Enter opens project summary</span></div></section><p class="works-status" role="status" aria-live="polite" data-works-status></p><button type="button" class="works-retry" data-works-retry hidden>Retry cover</button><section class="works-places" aria-labelledby="works-places-title" hidden><header><h2 id="works-places-title">A different side of Lakshya.</h2><button type="button" data-works-places-close>Back to the room</button></header><div data-works-place-list></div></section><section class="works-index" aria-labelledby="works-index-title" hidden><header><div><p class="works-eyebrow">THE WORKS ROOM</p><h2 id="works-index-title" tabindex="-1">Projects</h2></div><button type="button" data-works-index-close>Explore the 3D room</button></header><p data-works-count></p><div data-works-list></div></section><section class="works-reading" aria-labelledby="works-overview-title" hidden><header><p class="works-eyebrow" data-works-reading-kind>PROJECT OVERVIEW</p><button type="button" data-works-read-close>Back to projects</button></header><article data-works-article></article></section></div>`;
   document.body.append(dialog);
-  const q=s=>dialog.querySelector(s),host=q('.works-canvas'),curtain=q('.works-entry-curtain'),shell=q('.works-shell'),caption=q('.works-caption'),header=q('.works-header'),reading=q('.works-reading'),indexView=q('.works-index'),inspect=q('.works-inspect'),places=q('.works-places');
+  const q=s=>dialog.querySelector(s),host=q('.works-canvas'),curtain=q('.works-entry-curtain'),shell=q('.works-shell'),caption=q('.works-caption'),header=q('.works-header'),reading=q('.works-reading'),indexView=q('.works-index'),places=q('.works-places');
   const events=[];function listen(element,type,handler){element.addEventListener(type,handler);events.push(()=>element.removeEventListener(type,handler));}
   let curtainOpen=0;
   let room=null,dead=false,phase='closed',selected=0,queuedSelection=null,arcIndex=0,transition=null,thresholdProgress=1,dirty=true,previousFocus=null,previousHost=null,previousSibling=null,previousCanvasStyle='',rendererState=null,renderedFrames=0,lastSubFocus=null,hover=null,drag=null,errors=new Set();
-  let profile=null,profileClock=0;
+  let profile=null,profileClock=0,summaryReturn=null,placesReturn=null;
   if(globalThis.location&&new URLSearchParams(globalThis.location.search).get('worksProfile')==='1'){
     profile=document.createElement('details');profile.className='works-profile';profile.innerHTML='<summary>Works diagnostics</summary><pre></pre>';shell.append(profile);
   }
@@ -100,7 +100,7 @@ export function createWorksExperience({renderer,onOpen=()=>{},onClose=()=>{},onP
   }
   function updateStatus(){const project=projects[selected],artifact=PLAY_WORK_COVERS[project.id];let message='';if(!artifact)message='The project cover has not been added yet. The project overview is available.';else if(errors.has(selected))message='The project cover could not load. You can still read the overview.';else if(!pool.get(selected))message='Loading project cover…';q('[data-works-status]').textContent=message;q('[data-works-retry]').hidden=!errors.has(selected);}
   function setCaption(){
-    const project=projects[selected],focused=document.activeElement;q('[data-works-number]').textContent=`${String(selected+1).padStart(2,'0')} / ${String(projects.length).padStart(2,'0')} SELECTED PROJECTS`;q('#works-selected-title').textContent=project.title;q('[data-works-summary]').textContent=project.summary||project.subtitle;q('[data-works-prev]').disabled=selected===0;q('[data-works-next]').disabled=selected===projects.length-1;q('[data-works-inspect]').disabled=!PLAY_WORK_COVERS[project.id];
+    const project=projects[selected],focused=document.activeElement;q('[data-works-number]').textContent=`${String(selected+1).padStart(2,'0')} / ${String(projects.length).padStart(2,'0')} SELECTED PROJECTS`;q('#works-selected-title').textContent=project.title;q('[data-works-summary]').textContent=project.summary||project.subtitle;q('[data-works-prev]').disabled=selected===0;q('[data-works-next]').disabled=selected===projects.length-1;q('[data-works-category]').textContent=project.subtitle||project.status;configureCaseStudyLink(q('[data-works-read]'),project,location.href);
     if(focused?.disabled&&focused.matches?.('[data-works-prev],[data-works-next]'))host.focus({preventScroll:true});
     dialog.querySelectorAll('[data-works-project]').forEach(button=>button.setAttribute('aria-current',button.dataset.worksProject===project.id?'true':'false'));updateStatus();
   }
@@ -145,16 +145,41 @@ export function createWorksExperience({renderer,onOpen=()=>{},onClose=()=>{},onP
     }
     previousHost=null;previousSibling=null;
   }
-  function hideSubViews(){reading.hidden=true;indexView.hidden=true;inspect.hidden=true;places.hidden=true;host.inert=false;header.inert=false;caption.inert=false;q('[data-works-retry]').inert=false;}
-  function closeSubView(focus=true){if(!['reading','index','inspecting','places'].includes(phase))return false;hideSubViews();settleView();if(focus){const valid=lastSubFocus?.isConnected&&!lastSubFocus.disabled&&!lastSubFocus.closest?.('[hidden],[inert]');(valid?lastSubFocus:q('[data-works-read]')).focus({preventScroll:true});}return true;}
+  function hideSubViews(){reading.hidden=true;indexView.hidden=true;places.hidden=true;host.inert=false;header.inert=false;caption.inert=false;q('[data-works-retry]').inert=false;}
+  function showCatalogue({restore=false,focus=true}={}){
+    if(['closed','returning','entering'].includes(phase))return false;
+    const state=restore?summaryReturn:null,scroll=state?.scroll??indexView.scrollTop;
+    subView('index',indexView,q('#works-index-title'));indexView.scrollTop=scroll;
+    for(const image of indexView.querySelectorAll('[data-works-cover]'))if(!image.getAttribute('src'))image.src=image.dataset.worksCover;
+    if(focus&&state?.focus?.isConnected)state.focus.focus({preventScroll:true});
+    else if(focus&&restore)q(`[data-works-case="${projects[selected].id}"]`)?.focus({preventScroll:true});
+    return true;
+  }
+  function enterScene(){if(phase!=='index')return false;hideSubViews();settleView();q('[data-works-read]').focus({preventScroll:true});return true;}
+  function closeSubView(focus=true){
+    if(phase==='reading'){showCatalogue({restore:true,focus});return true;}
+    if(phase!=='places')return false;
+    const origin=placesReturn;placesReturn=null;
+    if(origin?.phase==='index')showCatalogue({focus:false});else{hideSubViews();settleView();}
+    if(focus)(origin?.focus?.isConnected?origin.focus:q('[data-works-index]')).focus({preventScroll:true});
+    return true;
+  }
+  function showPlaces(){
+    if(['closed','returning','entering'].includes(phase))return;
+    placesReturn={phase,focus:document.activeElement};
+    q('[data-works-places-close]').textContent=phase==='index'?'Back to projects':'Back to 3D room';
+    subView('places',places,q('[data-works-places-close]'));
+  }
   function subView(kind,element,focusTarget){
-    if(phase==='closed'||phase==='returning'||phase==='entering')return;lastSubFocus=document.activeElement;settleView();hideSubViews();element.hidden=false;host.inert=true;header.inert=true;caption.inert=true;q('[data-works-retry]').inert=true;setPhase(kind);focusTarget.focus({preventScroll:true});
+    if(phase==='closed'||phase==='returning'||phase==='entering')return;lastSubFocus=document.activeElement;settleView();hideSubViews();element.hidden=false;host.inert=true;header.inert=kind!=='index';caption.inert=true;q('[data-works-retry]').inert=true;setPhase(kind);focusTarget.focus({preventScroll:true});
   }
   function overview(id=projects[selected].id){
-    const project=PLAY_WORK_OVERVIEWS.find(item=>item.id===id);if(!project)return;
+    const project=PLAY_WORK_OVERVIEWS.find(item=>item.id===id);if(!project||['closed','returning','entering'].includes(phase))return;
+    summaryReturn={scroll:indexView.scrollTop,focus:phase==='index'?document.activeElement:null};
+    const at=projects.findIndex(item=>item.id===id);if(at>=0&&at!==selected){selected=at;assignSlots();setCaption();}
     const article=q('[data-works-article]');article.replaceChildren();
     article.classList.toggle('works-project-overview',!project.nativeProcess);
-    q('[data-works-reading-kind]').textContent=project.nativeProcess?'PORTFOLIO PROCESS':'PROJECT OVERVIEW';
+    q('[data-works-reading-kind]').textContent=project.nativeProcess?'PORTFOLIO PROCESS':'PROJECT SUMMARY';
     const hero=node('div',undefined,article,'works-overview-hero');
     const intro=node('div',undefined,hero,'works-overview-intro');
     node('p',project.status,intro,'works-meta works-project-status');
@@ -187,10 +212,6 @@ export function createWorksExperience({renderer,onOpen=()=>{},onClose=()=>{},onP
     subView('reading',reading,q('[data-works-read-close]'));reading.scrollTop=0;
     if(phase==='reading'&&!reading.hidden){try{document.dispatchEvent(new CustomEvent('portfolio:project-open',{detail:{id:project.id}}));}catch{/* Analytics is optional. */}}
   }
-  function inspectArtwork(){
-    const artifact=PLAY_WORK_COVERS[projects[selected].id];if(!artifact)return;q('#works-image-title').textContent=projects[selected].title;const image=q('[data-works-image]');image.src=new URL('../'+artifact.src.replace(/^\.\//,''),import.meta.url).href;image.width=artifact.width;image.height=artifact.height;image.alt=projects[selected].coverAlt||artifact.alt;image.style.setProperty('--works-image-width',`${artifact.width}px`);const caption=projects[selected].coverCaption??artifact.caption;q('[data-works-image-caption]').textContent=caption;q('[data-works-image-caption]').hidden=!caption;setImageZoom(false);subView('inspecting',inspect,q('[data-works-inspect-close]'));inspect.scrollTop=0;
-  }
-  function setImageZoom(zoomed){inspect.classList.toggle('is-zoomed',zoomed);const button=q('[data-works-zoom]');button.setAttribute('aria-pressed',String(zoomed));button.textContent=zoomed?'Fit cover':'Zoom cover';inspect.scrollTop=0;}
   const placeList=q('[data-works-place-list]');
   for(const id of ['about','projects','work','music','cloud']){
     const title=id==='projects'?'The Works Room':id==='music'?'Professor Oak’s lab':personalRoomContent(id==='work'?'memory':id).title;
@@ -198,18 +219,26 @@ export function createWorksExperience({renderer,onOpen=()=>{},onClose=()=>{},onP
     if(id==='projects'){button.setAttribute('aria-current','page');listen(button,'click',()=>closeSubView());}
     else listen(button,'click',()=>{if(phase!=='places')return;close({immediate:true,notify:false});onPlace(id);});
   }
-  const list=q('[data-works-list]');q('[data-works-count]').textContent=`${projects.length} projects. Choose your starting point.`;
-  for(const [index,project]of projects.entries()){const button=node('button',undefined,list,'works-index-item');button.type='button';button.dataset.worksProject=project.id;node('span',String(index+1).padStart(2,'0'),button);const label=node('span',undefined,button);node('strong',project.title,label);node('small',project.subtitle,label);listen(button,'click',()=>{selectProject(index);q('[data-works-read]').focus({preventScroll:true});});}
+  const list=q('[data-works-list]');q('[data-works-count]').textContent=`${projects.length} projects. Case studies open in a new tab; your garden stays here.`;
+  for(const [index,project]of projects.entries()){
+    const card=node('article',undefined,list,'works-project-card');card.dataset.worksProject=project.id;
+    const link=node('a',undefined,card,'works-project-link');link.dataset.worksCase=project.id;configureCaseStudyLink(link,project,location.href);
+    const artifact=PLAY_WORK_COVERS[project.id];
+    if(artifact){const image=node('img',undefined,link,'works-project-cover');image.dataset.worksCover=new URL('../'+artifact.src.replace(/^\.\//,''),import.meta.url).href;image.width=artifact.width;image.height=artifact.height;image.alt=project.coverAlt||artifact.alt;image.loading='lazy';image.decoding='async';}
+    node('h3',project.title,link);node('p',project.subtitle||project.status,link,'works-project-type');node('p',project.summary||project.subtitle,link,'works-project-summary');node('span','Read case study ↗',link,'works-project-case-label');
+    listen(link,'click',()=>{if(phase!=='index')return;selected=index;assignSlots();setCaption();});
+    const summary=node('button','Project summary',card,'works-project-summary-action');summary.type='button';summary.setAttribute('aria-label',`Project summary: ${project.title}`);listen(summary,'click',()=>overview(project.id));
+  }
   const process=node('button','How this portfolio was made',list,'works-process-link');process.type='button';listen(process,'click',()=>{close({immediate:true,notify:false});onPlace('music');});
   function completeClose(notify=true){
-    if(phase==='closed')return;transition=null;queuedSelection=null;hideSubViews();setPhase('closed');restoreRenderer();if(dialog.open)dialog.close();pool.clear();errors.clear();hover=null;drag=null;host.style.cursor='';shell.classList.remove('works-transitioning');if(notify){onClose();const parentDialog=previousFocus?.closest?.('dialog');if(previousFocus?.isConnected&&!previousFocus.closest?.('[hidden],[inert]')&&(!parentDialog||parentDialog.open))previousFocus.focus({preventScroll:true});}previousFocus=null;
+    if(phase==='closed')return;transition=null;queuedSelection=null;hideSubViews();setPhase('closed');restoreRenderer();if(dialog.open)dialog.close();pool.clear();errors.clear();for(const image of dialog.querySelectorAll('img'))image.removeAttribute('src');summaryReturn=null;placesReturn=null;hover=null;drag=null;host.style.cursor='';shell.classList.remove('works-transitioning');if(notify){onClose();const parentDialog=previousFocus?.closest?.('dialog');if(previousFocus?.isConnected&&!previousFocus.closest?.('[hidden],[inert]')&&(!parentDialog||parentDialog.open))previousFocus.focus({preventScroll:true});}previousFocus=null;
   }
   function close({immediate=false,notify=true}={}){
     if(phase==='closed')return false;if(immediate||isReduced()){completeClose(notify);return true;}if(phase==='returning')return false;const start=phase==='entering'?thresholdProgress:1;hideSubViews();caption.hidden=true;shell.classList.add('works-transitioning');transition={kind:'exit',elapsed:0,duration:.12+.92*start,from:arcIndex,start,notify,curtainFrom:curtainOpen};setPhase('returning');return true;
   }
   function resize(){if(!room||phase==='closed')return;const view=viewport();renderer.setSize?.(view.width,view.height,false);renderer.setViewport?.(0,0,view.width,view.height);renderer.setScissorTest?.(false);if(transition?.kind==='entry'||transition?.kind==='exit')applyEntrance(arcIndex,thresholdProgress);else applyView(arcIndex);dirty=true;}
   function open(id){
-    if(dead)return false;if(phase!=='closed'){if(id)selectProject(id);return false;}
+    if(dead)return false;if(phase!=='closed'){if(id){const at=projects.findIndex(project=>project.id===id);if(phase==='index'&&at>=0){selected=at;assignSlots();setCaption();}else if(phase==='reading')overview(id);else selectProject(id);}return false;}
     previousFocus=document.activeElement;
     try{
     onOpen();ensureRoom();saveRenderer();host.append(renderer.domElement);renderer.setRenderTarget?.(null);renderer.setScissorTest?.(false);renderer.autoClear=true;
@@ -219,21 +248,21 @@ export function createWorksExperience({renderer,onOpen=()=>{},onClose=()=>{},onP
     }catch(error){transition=null;if(rendererState)restoreRenderer();if(dialog.open)dialog.close();setPhase('closed');pool.clear();onClose();throw error;}
   }
   function pick(event){const rect=host.getBoundingClientRect();if(!rect.width||!rect.height)return null;pointer.set((event.clientX-rect.left)/rect.width*2-1,1-(event.clientY-rect.top)/rect.height*2);raycaster.setFromCamera(pointer,room.camera);let object=raycaster.intersectObjects(room.slots.filter(slot=>slot.root.visible).map(slot=>slot.root),true)[0]?.object??null;while(object&&object.userData.worksIndex===undefined)object=object.parent;return object;}
-  listen(q('[data-works-back]'),'click',()=>close());listen(q('[data-works-portfolio]'),'click',()=>{close({immediate:true,notify:false});onPortfolio();});listen(q('[data-works-prev]'),'click',()=>selectProject(selected-1));listen(q('[data-works-next]'),'click',()=>selectProject(selected+1));listen(q('[data-works-read]'),'click',()=>overview());listen(q('[data-works-inspect]'),'click',inspectArtwork);
+  listen(q('[data-works-back]'),'click',()=>close());listen(q('[data-works-portfolio]'),'click',()=>{close({immediate:true,notify:false});onPortfolio();});listen(q('[data-works-prev]'),'click',()=>selectProject(selected-1));listen(q('[data-works-next]'),'click',()=>selectProject(selected+1));listen(q('[data-works-summary]'),'click',()=>overview());
   listen(q('[data-works-retry]'),'click',()=>{errors.delete(selected);pool.select(windowIndexes());updateStatus();host.focus({preventScroll:true});});
-  listen(q('[data-works-places]'),'click',()=>subView('places',places,q('[data-works-places-close]')));
-  listen(q('[data-works-index]'),'click',()=>subView('index',indexView,q('[data-works-index-close]')));
-  listen(q('[data-works-zoom]'),'click',()=>setImageZoom(q('[data-works-zoom]').getAttribute('aria-pressed')!=='true'));
-  for(const selector of ['[data-works-index-close]','[data-works-read-close]','[data-works-inspect-close]','[data-works-places-close]'])listen(q(selector),'click',()=>closeSubView());
-  listen(dialog,'cancel',event=>{event.preventDefault();if(!closeSubView())close();});
+  listen(q('[data-works-places]'),'click',showPlaces);
+  listen(q('[data-works-index]'),'click',()=>showCatalogue());
+  listen(q('[data-works-index-close]'),'click',enterScene);
+  for(const selector of ['[data-works-read-close]','[data-works-places-close]'])listen(q(selector),'click',()=>closeSubView());
+  listen(dialog,'cancel',event=>{event.preventDefault();if(closeSubView())return;if(['viewing','focusing'].includes(phase))showCatalogue();else close();});
   listen(dialog,'close',()=>{if(!dialog.open&&phase!=='closed')completeClose(true);});
   listen(dialog,'keydown',event=>{
     if(event.defaultPrevented||event.isComposing||event.ctrlKey||event.metaKey||event.altKey||event.shiftKey)return;
-    if(event.key==='Escape'){consumeNavigationKey(event);if(!event.repeat&&!closeSubView())close();return;}
+    if(event.key==='Escape'){consumeNavigationKey(event);if(event.repeat)return;if(closeSubView())return;if(['viewing','focusing'].includes(phase))showCatalogue();else close();return;}
     if(isKeyboardShortcutBlocked(event))return;
     const direction=getHorizontalNavigation(event),boundary=getBoundaryNavigation(event);
     if(phase==='index'||phase==='places'){
-      if(!direction&&!boundary)return;const container=phase==='index'?q('[data-works-list]'):q('[data-works-place-list]'),buttons=[...container.querySelectorAll('button')].filter(button=>!button.disabled);if(!buttons.length)return;
+      if(!direction&&!boundary)return;const container=phase==='index'?q('[data-works-list]'):q('[data-works-place-list]'),buttons=[...container.querySelectorAll('a,button')].filter(button=>!button.disabled);if(!buttons.length)return;
       consumeNavigationKey(event);if(event.repeat)return;const current=buttons.indexOf(document.activeElement),next=boundary==='first'?0:boundary==='last'?buttons.length-1:Math.max(0,Math.min(buttons.length-1,current<0?(direction>0?0:buttons.length-1):current+direction));buttons[next].focus({preventScroll:false});return;
     }
     if(!['viewing','focusing','entering'].includes(phase))return;
@@ -242,7 +271,7 @@ export function createWorksExperience({renderer,onOpen=()=>{},onClose=()=>{},onP
   });
   listen(host,'pointermove',event=>{if(!['viewing','focusing'].includes(phase))return;hover={clientX:event.clientX,clientY:event.clientY};});listen(host,'pointerleave',()=>{hover=null;host.style.cursor='';});
   listen(host,'pointerdown',event=>{if(event.button===0)drag={x:event.clientX,y:event.clientY};});listen(host,'pointercancel',()=>{drag=null;});
-  listen(host,'click',event=>{if(!['viewing','focusing'].includes(phase))return;const moved=drag&&Math.hypot(event.clientX-drag.x,event.clientY-drag.y)>8;drag=null;if(moved)return;const object=pick(event);if(!object)return;const index=object.userData.worksIndex;if(index===selected)inspectArtwork();else selectProject(index);});
+  listen(host,'click',event=>{if(!['viewing','focusing'].includes(phase))return;const moved=drag&&Math.hypot(event.clientX-drag.x,event.clientY-drag.y)>8;drag=null;if(moved)return;const object=pick(event);if(!object)return;const index=object.userData.worksIndex;if(index===selected)overview();else selectProject(index);});
   listen(renderer.domElement,'webglcontextlost',()=>close({immediate:true,notify:true}));
   function update(dt){
     if(dead||phase==='closed'||!room)return;
@@ -250,10 +279,10 @@ export function createWorksExperience({renderer,onOpen=()=>{},onClose=()=>{},onP
     if(profile&&(profileClock>=.5||renderedFrames===0)){
       profileClock=0;profile.querySelector('pre').textContent=`Phase: ${phase}\nRendered frames: ${renderedFrames}\nLast draw: ${renderer.info?.render?.calls??'—'} calls · ${renderer.info?.render?.triangles??'—'} triangles\nImage cache: ${pool.stats.cached}/3 · Loading: ${pool.stats.pending}\nRoom display slots: ${room.slots.length}\nRenderer resources: ${renderer.info?.memory?.geometries??'—'} geometries / ${renderer.info?.memory?.textures??'—'} textures\n${transition?'Camera moving':'Idle · render on change'}`;
     }
-    if(['reading','index','inspecting','places'].includes(phase)||globalThis.document.hidden)return;
+    if(['reading','index','places'].includes(phase)||globalThis.document.hidden)return;
     dt=Math.max(0,Math.min(.1,Number(dt)||0));
     if(transition){const t=transition;t.elapsed+=dt;const p=isReduced()||t.duration===0?1:Math.min(1,t.elapsed/t.duration),blend=ease(p);
-      if(t.kind==='entry'){applyEntrance(selected,p);revealCurtain(ease(Math.min(1,p*3)));if(p===1){const queued=queuedSelection;settleView();if(queued!==null&&queued!==selected)selectProject(queued);}}
+      if(t.kind==='entry'){applyEntrance(selected,p);revealCurtain(ease(Math.min(1,p*3)));if(p===1){const queued=queuedSelection;settleView();if(queued!==null&&queued!==selected){selected=queued;assignSlots();setCaption();settleView();}showCatalogue();}}
       else if(t.kind==='focus'){arcIndex=THREE.MathUtils.lerp(t.from,t.to,blend);applyView(arcIndex,{approach:Math.sin(p*Math.PI)*.65,arc:p});if(p===1)settleView();}
       else{applyEntrance(t.from,t.start*(1-blend));revealCurtain(t.curtainFrom*(1-ease(THREE.MathUtils.clamp((p-.7)/.3,0,1))));if(p===1){completeClose(t.notify);return;}}
     }

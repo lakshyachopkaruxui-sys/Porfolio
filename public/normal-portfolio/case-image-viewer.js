@@ -75,7 +75,7 @@ export function mountCaseImageViewer({root, reader} = {}) {
     const actions = create('div', 'case-image-viewer-actions', header);
     modeButton = create('button', 'case-image-viewer-mode', actions, 'Actual size');
     modeButton.type = 'button';
-    const closeButton = create('button', 'case-image-viewer-close', actions, 'Close');
+    const closeButton = create('button', 'case-image-viewer-close', actions, 'Back to case study');
     closeButton.type = 'button';
     closeButton.setAttribute('autofocus', '');
     stage = create('div', 'case-image-viewer-stage', viewer);

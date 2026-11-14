@@ -86,3 +86,34 @@
 
 /* Full-viewport scene regions need their focus ring inside the clipped room. */
 .works-canvas:focus-visible{outline-offset:-6px}
+
+/* A direct project catalogue comes first; the physical gallery remains optional. */
+#works-experience[data-phase=index] .works-header{z-index:8;background:var(--works-paper);}
+#works-experience .works-header nav{column-gap:14px;row-gap:10px;flex-wrap:wrap;justify-content:flex-end;}
+#works-experience .works-header nav>*{flex-shrink:0;}
+#works-experience .works-header [data-mode-switch]{flex:0 0 154px;}
+#works-experience .works-index{inset:116px 0 0;padding:0 max(28px,calc((100vw - 1160px)/2)) 36px;}
+#works-experience .works-index>header{top:0;padding:16px 0 20px;margin:0;border:0;gap:20px;}
+#works-experience .works-index h2{font-size:28px;}
+#works-experience .works-index>p{margin:0 0 28px;max-width:64ch;font-size:16px;line-height:1.65;}
+#works-experience .works-index [data-works-list]{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 40px;}
+#works-experience .works-project-card{min-width:0;padding:0;background:transparent;border:0;box-shadow:none;}
+#works-experience .works-project-link{display:block;text-decoration:none;border-radius:8px;}
+#works-experience .works-project-cover{display:block;width:100%;height:auto;max-height:280px;object-fit:contain;aspect-ratio:auto;border-radius:10px;background:transparent;}
+#works-experience .works-project-link h3{font-size:22px;line-height:1.45;margin:20px 0 8px;}
+#works-experience .works-project-link:hover h3{text-decoration:underline;text-underline-offset:4px;}
+#works-experience .works-project-type{font-size:14px;line-height:1.6;color:var(--works-muted);margin:0 0 10px;}
+#works-experience .works-project-summary{font-size:16px;line-height:1.7;color:var(--works-ink);margin:0 0 14px;max-width:58ch;}
+#works-experience .works-project-case-label{display:inline-block;font-size:15px;font-weight:700;line-height:1.5;margin:0 0 4px;}
+#works-experience .works-project-summary-action{font-size:14px;min-height:44px;margin:4px 0 0;padding:10px 0;border:0;background:transparent;text-decoration:underline;text-underline-offset:4px;font-weight:500;}
+#works-experience .works-project-summary-action:hover:not(:disabled){background:transparent;}
+#works-experience .works-process-link{grid-column:1/-1;margin-top:0;font-size:15px;}
+#works-experience .works-caption .works-project-type{margin:0 auto 9px;font-size:14px;}
+#works-experience .works-actions>[data-works-read]{min-width:180px;}
+#works-experience .works-reading .works-overview-cover img{max-height:min(440px,55dvh);object-fit:contain;}
+@media(max-width:1100px){#works-experience .works-index{inset:104px 0 0;}#works-experience .works-index [data-works-list]{gap:30px;}#works-experience .works-project-link h3{font-size:21px;}}
+@media(max-width:760px){#works-experience .works-index{inset:122px 0 0;padding-inline:24px;}#works-experience .works-index>header{align-items:flex-start;}#works-experience .works-index>header>[data-works-index-close]{font-size:13px;}#works-experience .works-index [data-works-list]{grid-template-columns:1fr;gap:32px;}#works-experience .works-project-cover{max-height:280px;}#works-experience .works-index h2{font-size:24px;}#works-experience .works-project-link h3{font-size:21px;}}
+@media(max-height:620px){#works-experience .works-index{inset:96px 0 0;}#works-experience .works-index>header{padding-top:10px;padding-bottom:14px;}#works-experience .works-index>p{margin-bottom:24px;}}
+
+/* The catalogue heading receives announcement focus, but is not a control. */
+#works-experience #works-index-title:focus{outline:none;}

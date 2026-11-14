@@ -22,3 +22,25 @@ html:has(dialog[open]),body:has(dialog[open]) { overflow:hidden!important; }
 .place-reader .place-intro + p { max-width:62ch; line-height:1.75; margin-top:16px; }
 .project-case-action :is(a,button):focus-visible,.project-process-link button:focus-visible { outline:3px solid #b46a39; outline-offset:5px; }
 @media(max-width:760px){ .project-overview-sections { grid-template-columns:1fr; gap:24px; } }
+
+/* Project movement has one order and returns to the same parent at both ends. */
+#project-reader .case-footer{display:flex;flex-direction:column;align-items:stretch;gap:28px;}
+#project-reader .project-step-navigation{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:16px;align-items:center;width:100%;}
+#project-reader .project-step-navigation button{min-height:44px;white-space:normal;}
+#project-reader #previous-project{justify-self:start;}
+#project-reader #next-project{justify-self:end;}
+#project-reader #project-position{margin:0;text-align:center;font-size:14px;}
+#project-reader #projects-continue{align-self:flex-start;}
+#project-reader .project-overview-sections{display:block;max-width:68ch;}
+#project-reader .project-overview-sections>section+section,#project-reader .project-sections>section+section{margin-top:40px;}
+#project-reader .project-process-sections{display:flex;align-items:center;gap:12px;}
+#project-reader .project-process-sections select{min-height:44px;max-width:100%;min-width:0;padding:10px;font:inherit;}
+#project-reader .project-sections>section{scroll-margin-top:24px;}
+#project-reader .project-artifact img{max-height:min(480px,60dvh);background:transparent;}
+@media(max-width:600px){#project-reader .project-step-navigation{gap:8px;}#project-reader .project-step-navigation button{font-size:13px;padding:10px;}#project-reader #project-position{font-size:13px;}}
+
+#project-reader #project-title:focus{outline:none;}
+#project-reader .project-chooser{padding-top:12px;padding-bottom:20px;}
+#project-reader .project-chooser>p{margin-block:10px;font-size:14px;line-height:1.6;}
+#project-reader #portfolio-process{min-height:44px;background:none!important;box-shadow:none!important;border:0!important;padding:8px 0;text-decoration:underline;text-underline-offset:4px;}
+@media(max-height:650px){#project-reader .project-chooser>.place-caption{display:none;}}

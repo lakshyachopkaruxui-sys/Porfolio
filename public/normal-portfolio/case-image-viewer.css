@@ -37,3 +37,8 @@
   .case-image-viewer-stage { padding: 12px; }
   .case-image-viewer-caption { padding: 12px; font-size: 14px; }
 }
+
+/* Keep the named return readable beside image-size controls on small screens. */
+.case-image-viewer-title{min-width:0;overflow-wrap:anywhere;}
+.case-image-viewer-actions{flex-shrink:0;}
+@media(max-width:600px){.case-image-viewer-header{flex-wrap:wrap;}.case-image-viewer-title{flex-basis:100%;}.case-image-viewer-actions{width:100%;justify-content:flex-end;}}

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T15:43:32.289306+00:00",
+  "generatedAt": "2026-11-14T16:16:32.572744+00:00",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 746,
-      "sha256": "0e797a4dd9a31619a62ddc313dda3080398e04cde8426b775fdd3413f58147fa"
+      "sha256": "58e73a55457f002cfd22ebcce16ed3fba3305742e12829a808b455e138c1c41a"
     },
     {
       "path": "_redirects",
@@ -3865,7 +3865,7 @@
     {
       "path": "bicycle-world/dist/index.html",
       "size": 46426,
-      "sha256": "ec7232930bd423dbee643ce9f777e2f10ddcd5e6f0e8e25bddf44db7e4c2783c"
+      "sha256": "0db7521eeeae2bc912b21c9d716298f736760816e80ec5799bfef794449acd76"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
@@ -3875,7 +3875,7 @@
     {
       "path": "bicycle-world/dist/projects.html",
       "size": 30409,
-      "sha256": "469a1c7c46d863302ac839227e50b86e48078eead39369a793be0761a571a395"
+      "sha256": "9da9f60a67fc16afc53e7a9b2e39aed3378a8b87cee85d00013614f7399c5e7d"
     },
     {
       "path": "bicycle-world/dist/src/about-content.js",
@@ -4174,8 +4174,8 @@
     },
     {
       "path": "bicycle-world/dist/src/garden-polish.css",
-      "size": 2622,
-      "sha256": "3e1e59a9701d9db9e180bb778c6854cc7e2ae2b8321f6104afa651a6abe3f295"
+      "size": 4533,
+      "sha256": "c6fb4fd025922de5a18dbfe904c6b75e0a413102ad64ef2151f959d424f48d92"
     },
     {
       "path": "bicycle-world/dist/src/garden-river.js",
@@ -4544,8 +4544,8 @@
     },
     {
       "path": "bicycle-world/dist/src/portfolio-route.js",
-      "size": 2780,
-      "sha256": "d43fe6bbdeff0057d2b3316ba132ee8617b84806a749abc0256ee24cf43819d5"
+      "size": 2793,
+      "sha256": "6e311afe48a9c5d00b38769090196f3e8c2e15ed1eeb952cc064996b3692c037"
     },
     {
       "path": "bicycle-world/dist/src/project-catalog.js",
@@ -4559,8 +4559,8 @@
     },
     {
       "path": "bicycle-world/dist/src/project-ui.js",
-      "size": 10334,
-      "sha256": "6ee98b35236b754a9c40c94b6ab659f6d22d9b975a352b50172bb8ad97c4f68c"
+      "size": 11177,
+      "sha256": "83751cbabf43698584540aeab9ea6deee3a153d7e0d586829ad6b1ca169181d8"
     },
     {
       "path": "bicycle-world/dist/src/render-quality.js",
@@ -4754,13 +4754,13 @@
     },
     {
       "path": "bicycle-world/dist/src/works-experience.css",
-      "size": 15429,
-      "sha256": "edd79f7ef62d5a14e4f523841a6d9f160d041d7330e29962db9b5727845b2c3a"
+      "size": 18943,
+      "sha256": "5deab149ebd3b1358bb0854fa67ea3aee34fc683a9efd123bc1a92a19bed5e8f"
     },
     {
       "path": "bicycle-world/dist/src/works-experience.js",
-      "size": 32284,
-      "sha256": "971f66fde0e0b9fe63615f2841a90074aae43a89f961b94ebbaa338f52d3774b"
+      "size": 33492,
+      "sha256": "616c6f0341e5df1afb8f1746caad3635ae328064fa87628d93aa5c62d6964f0d"
     },
     {
       "path": "bicycle-world/dist/src/works-exterior.js",
@@ -4780,7 +4780,7 @@
     {
       "path": "bicycle-world/dist/story.html",
       "size": 5766,
-      "sha256": "0cd8484d2c23c94379bb1c8151c9c297f6e85300420bf27e7625650d193b2926"
+      "sha256": "4c86613d5bd2302e04dd8891c8e971e80f0d90270bb17488d7b0f4f1ecf4dbc5"
     },
     {
       "path": "bicycle-world/dist/vendor/addons/geometries/RoundedBoxGeometry.js",
@@ -6869,13 +6869,13 @@
     },
     {
       "path": "normal-portfolio/case-image-viewer.css",
-      "size": 2826,
-      "sha256": "ac09dd18d24c01f5cee0258373d2d249201d761e2e17dc29226ed37794f8ccaf"
+      "size": 3188,
+      "sha256": "a63df2809ab1f8755332a3d43f88db15100bb7e1e521971f1dc3e6486e46f4cf"
     },
     {
       "path": "normal-portfolio/case-image-viewer.js",
-      "size": 6423,
-      "sha256": "31bfb1a93eed22bcd8cbe25f63632e8de243bce51ec5fe55b497327d298a1f45"
+      "size": 6436,
+      "sha256": "d6aef6f0b6eb2d726d4f652133b13424e143745e532f231a9d6fe3ed9e5b9cf8"
     },
     {
       "path": "normal-portfolio/case-motion.css",
@@ -6899,8 +6899,8 @@
     },
     {
       "path": "normal-portfolio/case-reader.js",
-      "size": 23458,
-      "sha256": "f28f5c5c118638354219843beace51a6aececd9f2bd2ec860f45011c123c175c"
+      "size": 23453,
+      "sha256": "d6b7df9bffb6483b80340af60dd1a84cdf78ef7b0de3f7adc8799c31a8da8aea"
     },
     {
       "path": "normal-portfolio/case-section-nav.js",
