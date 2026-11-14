@@ -21,7 +21,7 @@ html:root body.hybrid-world :is(
   #about-experience, #works-experience, #personal-experience, #oak-lab,
   #personal-experience #listening-experience, .play-music-dock
 ) button:where(:not(:has(img)):not(.cloud-photo-card):not(.journal-photo-button):not(.hobby-photo-open)),
-html:root body.hybrid-world :is(#river-hop-action, #touch-controls button, #stop-route, #interact, #welcome .welcome-actions a) {
+html:root body.hybrid-world :is(#river-hop-action, #touch-controls button, #stop-route, #interact) {
   min-height: 44px;
   border: 0 !important;
   border-radius: 9px !important;
@@ -96,4 +96,15 @@ html.reduce-motion body.hybrid-world :is(button,a) { translate: none !important;
     background: Highlight !important; color: HighlightText !important;
   }
   html body.hybrid-world :is(button,a):focus-visible { outline-color: Highlight !important; }
+}
+
+/* Keep the two destinations quiet; depth belongs to the primary Play action. */
+html:root body.hybrid-world .mode-selector.mode-switch {
+  --mode-face: transparent;
+  --mode-edge: transparent;
+  --mode-depth: none;
+}
+html:root body.hybrid-world #welcome .mode-selector.mode-switch {
+  --mode-label: #26384b;
+  --mode-current: #26384b;
 }
