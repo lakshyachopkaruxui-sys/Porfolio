@@ -109,3 +109,18 @@
 .journal-photo-error{position:absolute;left:12px;right:12px;top:12px;margin:0!important;padding:8px;background:#fff8e6;pointer-events:none}
 .journal-tool-context{margin-bottom:10px!important}
 
+
+/* Keep section selection separate from page turns and the notebook return. */
+.journal-chapters{display:flex;align-items:center;justify-content:space-between;gap:16px;overflow:visible;padding:0 3px;min-height:44px;white-space:normal;}
+.journal-section-jump{display:flex;align-items:center;gap:10px;min-width:0;font-size:14px;font-weight:600;}
+.about-journal-reader [data-journal-jump]{min-width:0;max-width:min(340px,45vw);min-height:44px;padding:9px 36px 9px 12px;border:1px solid #9b9d7e;border-radius:7px;background:#fff8e6;color:var(--journal-ink);font:600 14px/1.45 'DM Sans',sans-serif;}
+.about-journal-reader [data-journal-jump]:focus-visible{outline:3px solid #a65b32;outline-offset:4px;}
+.journal-chapters [data-journal-close]{flex:none;margin:0;}
+.journal-page-navigation{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;}
+.journal-page-navigation [data-journal-prev]{justify-self:start;}
+.journal-page-navigation [data-journal-next]{justify-self:end;}
+.journal-page-position{min-width:0;}
+[data-journal-section]{font-size:14px;font-weight:700;line-height:1.45;}
+[data-journal-count]{font-size:13px;font-weight:500;line-height:1.45;}
+@media(max-width:1100px){.journal-page-navigation{gap:10px;}.journal-page-navigation button{padding-inline:12px;font-size:13px;}.journal-key-hint{display:none;}}
+@media(max-width:600px){.journal-chapters{gap:10px;}.journal-section-jump{gap:7px;font-size:13px;}.about-journal-reader [data-journal-jump]{max-width:45vw;padding-left:9px;font-size:13px;}.journal-chapters [data-journal-close]{padding-inline:10px;font-size:13px;}.journal-page-navigation{gap:7px;}.journal-page-navigation button{font-size:12px;padding-inline:9px;}[data-journal-section]{font-size:13px;}[data-journal-count]{font-size:12px;}}

@@ -242,3 +242,19 @@ body.hybrid-world #personal-experience[data-kind=cloud] :is(.personal-header nav
   #personal-experience[data-kind=work] #personal-chapter-title { font-size: 22px; }
   #personal-experience[data-kind=work] .personal-chapters { margin-block: 14px 12px; }
 }
+
+/* The camera is optional: two named collections and one clear browsing action. */
+#personal-experience[data-kind=cloud] .personal-caption{display:flex;flex-direction:column;align-items:stretch;left:clamp(24px,3vw,48px);right:auto;bottom:28px;width:min(420px,calc(100% - 48px));max-height:calc(100dvh - 152px);box-sizing:border-box;margin:0;padding:24px;overflow:auto;overscroll-behavior:contain;border-radius:12px;background:var(--personal-paper);text-align:left;pointer-events:auto;}
+#personal-experience[data-kind=cloud] .personal-caption[hidden]{display:none;}
+#personal-experience[data-kind=cloud] .personal-caption::before,#personal-experience[data-kind=cloud] .personal-number{display:none;}
+#personal-experience[data-kind=cloud] #personal-chapter-title{font-size:25px;line-height:1.35;margin:0 0 12px;}
+#personal-experience[data-kind=cloud] .personal-caption>[data-personal-body]{font-size:16px;line-height:1.65;max-width:38ch;margin:0;}
+#personal-experience[data-kind=cloud] :is(.personal-chapters,.personal-actions){grid-column:auto;grid-row:auto;align-self:stretch;width:100%;}
+#personal-experience[data-kind=cloud] .personal-chapters{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:20px 0 16px;}
+#personal-experience[data-kind=cloud] .personal-chapters button{width:100%;white-space:normal;min-height:44px!important;font-size:15px!important;padding:10px!important;}
+#personal-experience[data-kind=cloud] .personal-actions{display:block;margin:0;}
+#personal-experience[data-kind=cloud] [data-personal-media]{width:100%;min-height:44px;padding:12px;font-size:15px;text-decoration:none;}
+#personal-experience[data-kind=cloud] .personal-actions>button[hidden]{display:none;}
+#personal-experience[data-kind=cloud] .personal-scene-note{margin:16px 0 0;font-size:13px;line-height:1.6;}
+@media(max-height:650px){#personal-experience[data-kind=cloud] .personal-caption{bottom:12px;max-height:calc(100dvh - 130px);padding:18px;}}
+@media(max-width:760px){#personal-experience[data-kind=cloud] .personal-caption{left:20px;bottom:20px;width:calc(100% - 40px);padding:20px;}}

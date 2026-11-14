@@ -1,145 +1,156 @@
 import {CONTACT_SHEET_SIZE,PHOTO_SUBJECTS,photographySubjects,photographySelection,contactSheetPage} from './photography-browse.js';
 
-/** A bounded, DOM-only photo gallery. The parent owns scene pause and return focus. */
+/** A bounded photo catalogue and fitted detail. The parent owns the scene and return. */
 export function createCloudPhotoGallery({host,photos=[],collections=[],onClose=()=>{},isReduced=()=>false}={}){
   if(!host?.ownerDocument&&!host?.document)throw new TypeError('A gallery host is required.');
   const doc=host.ownerDocument||host.document;
-  const valid=photos=>photos.filter(photo=>photo&&typeof photo.src==='string'&&photo.src&&photo.width>0&&photo.height>0);
-  const rolls=(collections.length?collections:[{id:'clouds',label:'Clouds',title:'The skies I stop for.',intro:'Cloud photographs I’ve taken when the sky made me pause.',photos}]).map(roll=>({...roll,photos:valid(roll.photos||[])})).filter(roll=>roll.photos.length);
-  let rollIndex=0,subject='all',sheetPage=0,items=rolls[0]?.photos||[];
-  const remembered=new Map(),rememberedSubjects=new Map();
+  const valid=items=>items.filter(photo=>photo&&typeof photo.src==='string'&&photo.src&&photo.width>0&&photo.height>0);
+  const rolls=(collections.length?collections:[{id:'clouds',label:'Clouds',title:'The skies I stop for.',intro:'Cloud photographs I’ve taken when the sky made me pause.',photos}])
+    .map(roll=>({...roll,photos:valid(roll.photos||[])})).filter(roll=>roll.photos.length);
   const root=doc.createElement('section');root.className='cloud-photo-gallery';root.hidden=true;root.tabIndex=-1;
-  root.setAttribute('role','region');root.setAttribute('aria-label','Lakshya’s photography reels');
-  root.innerHTML=`<header class="cloud-gallery-header"><div><p class="cloud-gallery-eyebrow">THE VIEWFINDER <span data-cloud-total></span></p><h2 data-cloud-title>The skies I stop for.</h2><p class="cloud-gallery-intro">A few cloud photographs I’ve taken when the sky made me pause.</p></div><div class="cloud-gallery-header-actions"><button type="button" data-cloud-index>Contact sheet</button><button type="button" data-cloud-close>Back to the Viewfinder</button></div></header><nav class="cloud-gallery-rolls" aria-label="Choose a photography reel"></nav><nav class="cloud-gallery-subjects" aria-label="Filter photographs by subject"></nav><div class="cloud-gallery-stage" data-cloud-stage><button type="button" class="cloud-photo-card" data-cloud-slot="-1"><img alt="" decoding="async"><span class="cloud-photo-edge-caption"></span></button><button type="button" class="cloud-photo-card" data-cloud-slot="0"><img alt="" decoding="async"></button><button type="button" class="cloud-photo-card" data-cloud-slot="1"><img alt="" decoding="async"><span class="cloud-photo-edge-caption"></span></button><div class="cloud-gallery-load" role="status" aria-live="polite"><span data-cloud-status></span><button type="button" data-cloud-retry hidden>Retry photograph</button></div></div><div class="cloud-gallery-sheet-toolbar" hidden><p data-cloud-sheet-count role="status"></p><nav aria-label="Contact sheet pages"><button type="button" data-cloud-sheet-prev>Previous sheet</button><button type="button" data-cloud-sheet-next>Next sheet</button></nav></div><section class="cloud-gallery-index" aria-label="Photograph contact sheet" hidden></section><footer class="cloud-gallery-footer"><div class="cloud-gallery-caption"><p data-cloud-count aria-live="polite"></p><h3 data-cloud-caption></h3></div><nav class="cloud-gallery-actions" aria-label="Browse the photo reel"><button type="button" data-cloud-prev>Previous photo</button><button type="button" class="cloud-gallery-primary" data-cloud-inspect>View full photograph</button><button type="button" data-cloud-zoom hidden>Zoom photograph</button><button type="button" data-cloud-next>Next photo</button></nav><div class="cloud-gallery-bottom"><p data-cloud-hint>Scroll or drag the reel · A / D to browse · Esc to go back</p><div class="cloud-gallery-tools"></div></div></footer>`;
+  root.setAttribute('role','region');root.setAttribute('aria-label','Lakshya’s photographs');
+  root.innerHTML=`<header class="cloud-gallery-header"><div><p class="cloud-gallery-eyebrow">THE VIEWFINDER <span data-cloud-total></span></p><h2 data-cloud-title></h2><p class="cloud-gallery-intro" data-cloud-intro></p><p class="cloud-gallery-position" data-cloud-count aria-live="polite"></p></div><div class="cloud-gallery-header-actions"><button type="button" data-cloud-back hidden>Back to photos</button><button type="button" data-cloud-close>Back to the Viewfinder</button></div></header>
+    <nav class="cloud-gallery-rolls" aria-label="Choose a photography collection"></nav><nav class="cloud-gallery-subjects" aria-label="Filter photographs by subject"></nav>
+    <section class="cloud-gallery-index" aria-label="Choose a photograph"></section>
+    <figure class="cloud-gallery-stage" data-cloud-stage hidden><img data-cloud-photo alt="" decoding="async"><figcaption class="cloud-gallery-load" role="status" aria-live="polite"><span data-cloud-status></span><button type="button" data-cloud-retry hidden>Retry photograph</button></figcaption></figure>
+    <footer class="cloud-gallery-footer"><nav class="cloud-gallery-pages" aria-label="Photo catalogue pages"><button type="button" data-cloud-sheet-prev>Previous page</button><p data-cloud-sheet-count role="status"></p><button type="button" data-cloud-sheet-next>Next page</button></nav><nav class="cloud-gallery-actions" aria-label="Browse complete photographs" hidden><button type="button" data-cloud-prev>Previous photo</button><p>Complete photograph · fitted to screen</p><button type="button" data-cloud-next>Next photo</button></nav><div class="cloud-gallery-bottom"><p data-cloud-hint>Choose a photograph to open it.</p><div class="cloud-gallery-tools"></div></div></footer>`;
   host.append(root);
-  const q=selector=>root.querySelector(selector),stage=q('[data-cloud-stage]'),indexView=q('.cloud-gallery-index');
-  const cards=[...root.querySelectorAll('[data-cloud-slot]')],listeners=[],pending=new Map(),animations=new Map();
-  let dragOrigin=null,suppressClick=false,wheelDistance=0,lastWheel=0;
-  let opened=false,dead=false,selected=0,mode='gallery',zoomed=false,generation=0;
+  const q=selector=>root.querySelector(selector),indexView=q('.cloud-gallery-index'),image=q('[data-cloud-photo]');
+  const rollNav=q('.cloud-gallery-rolls'),subjectNav=q('.cloud-gallery-subjects');
+  const listeners=[],pending=new Map(),animations=new Map(),remembered=new Map(),rememberedSubjects=new Map();
+  let opened=false,dead=false,rollIndex=0,subject='all',items=rolls[0]?.photos||[],selected=0,sheetPage=0,mode='index',generation=0,detailOrigin=null;
   const listen=(element,type,fn,options)=>{element.addEventListener(type,fn,options);listeners.push(()=>element.removeEventListener(type,fn,options));};
   const focus=element=>element?.focus({preventScroll:true});
   const resolve=photo=>new URL('../'+photo.src.replace(/^\.\//,''),import.meta.url).href;
-  const rollNav=q('.cloud-gallery-rolls'),subjectNav=q('.cloud-gallery-subjects'),sheetToolbar=q('.cloud-gallery-sheet-toolbar');
   const memoryKey=()=>`${rollIndex}:${subject}`;
-  let renderedSubjectRoll=-1;
-  function renderSubjects(){
-    if(renderedSubjectRoll===rollIndex){for(const button of subjectNav.querySelectorAll('button'))button.setAttribute('aria-pressed',String(button.dataset.cloudSubject===subject));return;}
-    renderedSubjectRoll=rollIndex;subjectNav.replaceChildren();const subjects=photographySubjects(rolls[rollIndex].photos);subjectNav.hidden=subjects.length<2;
-    for(const [id,label]of [['all','All scenes'],...subjects]){const button=doc.createElement('button');button.type='button';button.dataset.cloudSubject=id;button.textContent=label;button.setAttribute('aria-pressed',String(id===subject));subjectNav.append(button);}
+  const remember=()=>remembered.set(memoryKey(),{selected,sheetPage});
+  function restorePosition(){
+    items=photographySelection(rolls[rollIndex].photos,subject);
+    const position=remembered.get(memoryKey());selected=Math.min(items.length-1,Math.max(0,position?.selected||0));
+    sheetPage=contactSheetPage(items,position?.sheetPage??Math.floor(selected/CONTACT_SHEET_SIZE)).page;
   }
   rolls.forEach((roll,index)=>{const button=doc.createElement('button');button.type='button';button.dataset.cloudRoll=String(index);button.textContent=roll.label;rollNav.append(button);});
-  rollNav.hidden=rolls.length<2;
-  function releaseImage(image){
-    animations.get(image)?.cancel();animations.delete(image);
-    const cleanup=pending.get(image);if(cleanup){cleanup();pending.delete(image);}
-    image.removeAttribute('src');image.removeAttribute('srcset');image.dataset.loaded='false';
+  function releaseImage(target){
+    animations.get(target)?.cancel();animations.delete(target);
+    pending.get(target)?.();pending.delete(target);target.removeAttribute('src');target.removeAttribute('srcset');target.dataset.loaded='false';
   }
-  function loadImage(image,photo,{primary=false}={}){
-    releaseImage(image);const token=generation;
-    image.width=photo.width;image.height=photo.height;image.alt=photo.alt||photo.caption||'Photograph by Lakshya';
+  function releaseAll(){for(const target of root.querySelectorAll('img'))releaseImage(target);indexView.replaceChildren();}
+  function loadImage(target,photo,{primary=false}={}){
+    releaseImage(target);const token=generation;
+    target.width=photo.width;target.height=photo.height;target.alt=photo.alt||photo.caption||'Photograph by Lakshya';
     const loaded=()=>{
-      if(dead||!opened||token!==generation)return;
-      if(image.dataset.loaded==='true')return;
-      image.dataset.loaded='true';if(primary){q('[data-cloud-status]').textContent='';q('[data-cloud-retry]').hidden=true;root.dataset.loading='false';}
-      if(primary&&!isReduced()&&image.animate)animations.set(image,image.animate([{opacity:0,transform:`translateX(${root.dataset.direction==='back'?-36:36}px)`},{opacity:1,transform:'translateX(0)'}],{duration:300,easing:'cubic-bezier(.2,.7,.2,1)'}));
+      if(dead||!opened||token!==generation||target.dataset.loaded==='true')return;
+      target.dataset.loaded='true';
+      if(primary){q('[data-cloud-status]').textContent='';q('[data-cloud-retry]').hidden=true;root.dataset.loading='false';
+        if(!isReduced()&&target.animate)animations.set(target,target.animate([{opacity:0},{opacity:1}],{duration:180,easing:'ease-out'}));}
     };
     const failed=()=>{
-      if(dead||!opened||token!==generation)return;
-      image.dataset.loaded='error';if(primary){q('[data-cloud-status]').textContent='This photograph could not load.';q('[data-cloud-retry]').hidden=false;root.dataset.loading='false';}
+      if(dead||!opened||token!==generation)return;target.dataset.loaded='error';
+      if(primary){q('[data-cloud-status]').textContent='This photograph could not load.';q('[data-cloud-retry]').hidden=false;root.dataset.loading='false';}
     };
-    image.addEventListener('load',loaded);image.addEventListener('error',failed);
-    pending.set(image,()=>{image.removeEventListener('load',loaded);image.removeEventListener('error',failed);});
-    image.src=resolve(photo);
-    if(image.complete&&image.naturalWidth>0)loaded();
+    target.addEventListener('load',loaded);target.addEventListener('error',failed);
+    pending.set(target,()=>{target.removeEventListener('load',loaded);target.removeEventListener('error',failed);});target.src=resolve(photo);
+    if(target.complete&&target.naturalWidth>0)loaded();
   }
-  function releaseAll(){for(const image of root.querySelectorAll('img'))releaseImage(image);indexView.replaceChildren();}
-  function setZoom(value){zoomed=Boolean(value&&mode==='full');root.dataset.zoomed=String(zoomed);q('[data-cloud-zoom]').textContent=zoomed?'Fit photograph':'Zoom photograph';q('[data-cloud-zoom]').setAttribute('aria-pressed',String(zoomed));stage.scrollTop=0;stage.scrollLeft=0;q('[data-cloud-hint]').textContent=zoomed?'Scroll to explore · Esc to fit the photograph':mode==='index'?'Tab to a photograph · Enter to open · Page Up / Down for more · Esc to go back':'Scroll or drag the reel · A / D to browse · Esc to go back';}
+  function renderSubjects(){
+    subjectNav.replaceChildren();const subjects=photographySubjects(rolls[rollIndex].photos);
+    subjectNav.hidden=mode==='full'||subjects.length<2;
+    for(const [id,label]of [['all','All scenes'],...subjects]){const button=doc.createElement('button');button.type='button';button.dataset.cloudSubject=id;button.textContent=label;button.setAttribute('aria-pressed',String(id===subject));subjectNav.append(button);}
+  }
   function render(){
-    if(!opened||dead)return;generation++;setZoom(false);
-    const roll=rolls[rollIndex];root.dataset.roll=roll.id;root.dataset.subject=subject;renderSubjects();q('[data-cloud-total]').textContent=`${subject==='all'?roll.photos.length:items.length+' of '+roll.photos.length} photographs`;sheetToolbar.hidden=mode!=='index';
-    q('[data-cloud-title]').textContent=mode==='full'?(items[selected]?.caption||roll.title):roll.title;q('.cloud-gallery-intro').textContent=roll.intro;
-    for(const button of rollNav.querySelectorAll('button'))button.setAttribute('aria-pressed',String(Number(button.dataset.cloudRoll)===rollIndex));
-    root.dataset.mode=mode;root.dataset.reduced=String(Boolean(isReduced()));
-    stage.hidden=mode==='index';indexView.hidden=mode!=='index';q('.cloud-gallery-caption').hidden=mode==='index';q('.cloud-gallery-actions').hidden=mode==='index';
-    q('[data-cloud-index]').textContent=mode==='index'?'Back to reel':'Contact sheet';q('[data-cloud-index]').setAttribute('aria-expanded',String(mode==='index'));
-    q('[data-cloud-inspect]').textContent=mode==='full'?'Back to reel':'View full photograph';q('[data-cloud-zoom]').hidden=mode!=='full';
-    q('[data-cloud-prev]').disabled=selected===0;q('[data-cloud-next]').disabled=selected===items.length-1;
-    q('[data-cloud-count]').textContent=`${String(selected+1).padStart(2,'0')} / ${String(items.length).padStart(2,'0')} · ${subject==='all'?roll.label:PHOTO_SUBJECTS[subject]}`;
-    q('[data-cloud-caption]').textContent=items[selected]?.caption||'Photograph';
+    if(!opened||dead)return;generation++;releaseAll();const roll=rolls[rollIndex],full=mode==='full';
+    root.dataset.mode=mode;root.dataset.roll=roll.id;root.dataset.subject=subject;root.dataset.reduced=String(Boolean(isReduced()));
+    q('[data-cloud-total]').textContent=`${subject==='all'?roll.photos.length:items.length+' of '+roll.photos.length} photographs`;
+    q('[data-cloud-title]').textContent=full?(items[selected]?.caption||'Photograph'):roll.title;
+    q('[data-cloud-intro]').textContent=roll.intro;q('[data-cloud-intro]').hidden=full;
+    q('[data-cloud-count]').textContent=full?`Photo ${selected+1} of ${items.length} · ${subject==='all'?roll.label:PHOTO_SUBJECTS[subject]}`:'';
+    q('[data-cloud-count]').hidden=!full;q('[data-cloud-close]').hidden=full;q('[data-cloud-back]').hidden=!full;
+    rollNav.hidden=full||rolls.length<2;for(const button of rollNav.querySelectorAll('button'))button.setAttribute('aria-pressed',String(Number(button.dataset.cloudRoll)===rollIndex));
+    renderSubjects();indexView.hidden=full;q('[data-cloud-stage]').hidden=!full;
+    q('.cloud-gallery-pages').hidden=full;q('.cloud-gallery-actions').hidden=!full;
+    q('[data-cloud-hint]').textContent=full?'A / D or Left / Right: browse · Esc: back to photos':'Choose a photograph to open it. Page Up / Down: browse pages.';
     q('[data-cloud-status]').textContent='';q('[data-cloud-retry]').hidden=true;root.dataset.loading='false';
-    for(const image of indexView.querySelectorAll('img'))releaseImage(image);indexView.replaceChildren();
-    for(const card of cards){
-      const offset=Number(card.dataset.cloudSlot),index=selected+offset,photo=items[index],image=card.querySelector('img');
-      const exposed=mode!=='index'&&photo&&(mode!=='full'||offset===0);card.hidden=!exposed;
-      if(!exposed){releaseImage(image);continue;}
-      card.dataset.index=String(index);card.style.setProperty('--cloud-photo-ratio',String(photo.width/photo.height));card.style.setProperty('--cloud-photo-width',`${photo.width}px`);
-      card.setAttribute('aria-label',offset===0?(mode==='full'?'Zoom photograph':`View full photograph: ${photo.caption}`):`${offset<0?'Previous':'Next'} photograph: ${photo.caption}`);
-      if(offset!==0)card.querySelector('.cloud-photo-edge-caption').textContent=photo.caption;
-      else{q('[data-cloud-status]').textContent='Loading photograph…';root.dataset.loading='true';}
-      loadImage(image,photo,{primary:offset===0});
-    }
-    if(mode==='index'){
-      const page=contactSheetPage(items,sheetPage);sheetPage=page.page;
-      q('[data-cloud-sheet-count]').textContent=`${page.start+1}–${page.end} of ${items.length} photographs`;
-      q('[data-cloud-sheet-prev]').disabled=page.page===0;q('[data-cloud-sheet-next]').disabled=page.page===page.pages-1;
-      page.photos.forEach((photo,offset)=>{const index=page.start+offset;
-      const button=doc.createElement('button');button.type='button';button.dataset.cloudPick=String(index);button.className='cloud-gallery-index-card';
-      button.setAttribute('aria-label',`Photograph ${index+1}: ${photo.caption}`);button.setAttribute('aria-pressed',String(index===selected));
-      const image=doc.createElement('img');image.decoding='async';image.loading='lazy';const caption=doc.createElement('span');caption.textContent=`${String(index+1).padStart(2,'0')}  ${photo.caption}`;button.append(image,caption);indexView.append(button);loadImage(image,photo.thumb?{...photo,src:photo.thumb}:photo);
-    });}
-
-    root.scrollTop=0;root.scrollLeft=0;
+    q('[data-cloud-prev]').disabled=selected===0;q('[data-cloud-next]').disabled=selected===items.length-1;
+    if(full){q('[data-cloud-status]').textContent='Loading photograph…';root.dataset.loading='true';loadImage(image,items[selected],{primary:true});return;}
+    const page=contactSheetPage(items,sheetPage);sheetPage=page.page;
+    q('[data-cloud-sheet-count]').textContent=`${page.start+1}–${page.end} of ${items.length} · Page ${page.page+1} of ${page.pages}`;
+    q('[data-cloud-sheet-prev]').disabled=page.page===0;q('[data-cloud-sheet-next]').disabled=page.page===page.pages-1;
+    page.photos.forEach((photo,offset)=>{
+      const index=page.start+offset,button=doc.createElement('button');button.type='button';button.dataset.cloudPick=String(index);button.className='cloud-gallery-index-card';
+      button.setAttribute('aria-label',`Open photograph ${index+1}: ${photo.caption}`);button.setAttribute('aria-pressed',String(index===selected));
+      const thumbnail=doc.createElement('img');thumbnail.decoding='async';thumbnail.loading='lazy';
+      const caption=doc.createElement('span');caption.textContent=`${String(index+1).padStart(2,'0')}  ${photo.caption}`;
+      button.append(thumbnail,caption);indexView.append(button);loadImage(thumbnail,photo.thumb?{...photo,src:photo.thumb}:photo);
+    });
   }
-  function select(value,{moveFocus=false}={}){
-    if(!opened||!items.length)return false;const next=Math.max(0,Math.min(items.length-1,Math.round(Number(value)||0)));if(next===selected)return false;
-    const origin=doc.activeElement,wasPrevious=origin===q('[data-cloud-prev]'),wasNext=origin===q('[data-cloud-next]');root.dataset.direction=next<selected?'back':'forward';selected=next;remembered.set(memoryKey(),selected);render();
-    if(moveFocus||(wasPrevious&&selected===0)||(wasNext&&selected===items.length-1))focus(q('[data-cloud-inspect]'));return true;
+  function setSheetPage(value,{focusIndex}={}){
+    if(!opened||mode!=='index')return false;sheetPage=contactSheetPage(items,value).page;remember();render();indexView.scrollTop=0;
+    focus(indexView.querySelector(`[data-cloud-pick="${focusIndex??sheetPage*CONTACT_SHEET_SIZE}"]`)||indexView.querySelector('button'));return true;
+  }
+  function openPhoto(value){
+    if(!opened||mode!=='index')return false;
+    const index=Math.max(0,Math.min(items.length-1,Math.round(Number(value)||0)));
+    detailOrigin={page:sheetPage,index,scrollTop:indexView.scrollTop};selected=index;mode='full';remember();render();focus(q('[data-cloud-back]'));return true;
+  }
+  function backToPhotos(){
+    if(!opened||mode!=='full')return false;const origin=detailOrigin;detailOrigin=null;mode='index';
+    sheetPage=contactSheetPage(items,origin?.page??Math.floor(selected/CONTACT_SHEET_SIZE)).page;remember();render();
+    indexView.scrollTop=origin?.scrollTop||0;focus(indexView.querySelector(`[data-cloud-pick="${origin?.index??selected}"]`)||indexView.querySelector('button'));return true;
+  }
+  function selectPhoto(value){
+    if(!opened||mode!=='full')return false;const next=Math.max(0,Math.min(items.length-1,Math.round(Number(value)||0)));if(next===selected)return false;
+    const active=doc.activeElement;selected=next;remember();render();
+    if(active?.disabled)focus(q('[data-cloud-back]'));return true;
   }
   function setRoll(index){
-    if(!opened||!rolls[index]||index===rollIndex)return false;
-    remembered.set(memoryKey(),selected);rememberedSubjects.set(rollIndex,subject);rollIndex=index;subject=rememberedSubjects.get(index)||'all';items=photographySelection(rolls[index].photos,subject);selected=remembered.get(memoryKey())||0;mode='gallery';render();focus(q('[data-cloud-inspect]'));return true;
+    if(!opened||mode!=='index'||!rolls[index]||index===rollIndex)return false;
+    remember();rememberedSubjects.set(rollIndex,subject);rollIndex=index;subject=rememberedSubjects.get(index)||'all';restorePosition();render();
+    indexView.scrollTop=0;focus(q(`[data-cloud-roll="${index}"]`));return true;
   }
   function setSubject(value){
-    if(!opened||value===subject)return false;if(value!=='all'&&!photographySubjects(rolls[rollIndex].photos).some(([id])=>id===value))return false;
-    remembered.set(memoryKey(),selected);subject=value;rememberedSubjects.set(rollIndex,subject);items=photographySelection(rolls[rollIndex].photos,subject);selected=Math.min(items.length-1,remembered.get(memoryKey())||0);sheetPage=Math.floor(selected/CONTACT_SHEET_SIZE);render();focus(q(`[data-cloud-subject="${subject}"]`));return true;
+    if(!opened||mode!=='index'||value===subject)return false;
+    if(value!=='all'&&!photographySubjects(rolls[rollIndex].photos).some(([id])=>id===value))return false;
+    remember();subject=value;rememberedSubjects.set(rollIndex,subject);restorePosition();render();indexView.scrollTop=0;focus(q(`[data-cloud-subject="${subject}"]`));return true;
   }
-  function setSheetPage(value){if(!opened||mode!=='index')return false;sheetPage=contactSheetPage(items,value).page;render();indexView.scrollTop=0;focus(indexView.querySelector('button'));return true;}
-  function setMode(value){if(!opened)return;mode=value;if(value==='index')sheetPage=Math.floor(selected/CONTACT_SHEET_SIZE);render();const target=value==='index'?indexView.querySelector(`[data-cloud-pick="${selected}"]`):q('[data-cloud-inspect]');focus(target);if(value==='index')target?.scrollIntoView?.({block:'nearest'});}
-  function close({notify=true}={}){if(!opened)return false;remembered.set(memoryKey(),selected);opened=false;generation++;dragOrigin=null;wheelDistance=0;root.hidden=true;releaseAll();q('[data-cloud-status]').textContent='';root.dataset.loading='false';if(notify)onClose({roll:rollIndex,selectedIndex:selected});return true;}
-  function goBack(){if(!opened)return false;if(zoomed){setZoom(false);focus(q('[data-cloud-zoom]'));return true;}if(mode==='index'||mode==='full'){setMode('gallery');return true;}return close();}
+  function close({notify=true}={}){
+    if(!opened)return false;remember();opened=false;generation++;detailOrigin=null;root.hidden=true;releaseAll();q('[data-cloud-status]').textContent='';root.dataset.loading='false';
+    if(notify)onClose({roll:rollIndex,selectedIndex:selected});return true;
+  }
+  function goBack(){if(!opened)return false;return mode==='full'?backToPhotos():close();}
   function onKey(event){
     if(!opened||event.defaultPrevented||event.altKey||event.ctrlKey||event.metaKey||event.shiftKey||event.isComposing)return;
-    const target=event.target;if(target?.isContentEditable||target?.closest?.('input,textarea,select,[contenteditable="true"]'))return;
-    const key=event.key?.toLowerCase();if(key==='escape'){event.preventDefault();event.stopPropagation();if(!event.repeat)goBack();return;}
+    if(event.target?.isContentEditable||event.target?.closest?.('input,textarea,select,[contenteditable="true"]'))return;
+    const key=event.key?.toLowerCase();
+    if(key==='escape'){event.preventDefault();event.stopPropagation();if(!event.repeat)goBack();return;}
     if(event.repeat)return;
-    if(mode==='index'){if(key==='pagedown'||key==='pageup'){event.preventDefault();event.stopPropagation();setSheetPage(sheetPage+(key==='pagedown'?1:-1));}return;}if(zoomed)return;
-    let value;if(key==='a'||key==='arrowleft')value=selected-1;else if(key==='d'||key==='arrowright')value=selected+1;else if(key==='home')value=0;else if(key==='end')value=items.length-1;else return;
-    event.preventDefault();event.stopPropagation();select(value);
+    if(mode==='full'){
+      const value=key==='a'||key==='arrowleft'?selected-1:key==='d'||key==='arrowright'?selected+1:key==='home'?0:key==='end'?items.length-1:null;
+      if(value===null)return;event.preventDefault();event.stopPropagation();selectPhoto(value);return;
+    }
+    if(key==='pagedown'||key==='pageup'){event.preventDefault();event.stopPropagation();setSheetPage(sheetPage+(key==='pagedown'?1:-1));return;}
+    if(event.target?.closest?.('[data-cloud-roll],[data-cloud-subject]'))return;
+    const current=Number(event.target?.closest?.('[data-cloud-pick]')?.dataset.cloudPick??sheetPage*CONTACT_SHEET_SIZE);
+    const next=key==='a'||key==='arrowleft'?current-1:key==='d'||key==='arrowright'?current+1:key==='home'?0:key==='end'?items.length-1:null;
+    if(next===null)return;event.preventDefault();event.stopPropagation();const bounded=Math.max(0,Math.min(items.length-1,next));
+    if(Math.floor(bounded/CONTACT_SHEET_SIZE)!==sheetPage)setSheetPage(Math.floor(bounded/CONTACT_SHEET_SIZE),{focusIndex:bounded});
+    else focus(indexView.querySelector(`[data-cloud-pick="${bounded}"]`));
   }
   listen(root,'keydown',onKey);
-  listen(subjectNav,'click',event=>{const button=event.target.closest?.('[data-cloud-subject]');if(button)setSubject(button.dataset.cloudSubject);});
-  listen(q('[data-cloud-sheet-prev]'),'click',()=>setSheetPage(sheetPage-1));listen(q('[data-cloud-sheet-next]'),'click',()=>setSheetPage(sheetPage+1));
   listen(rollNav,'click',event=>{const button=event.target.closest?.('[data-cloud-roll]');if(button)setRoll(Number(button.dataset.cloudRoll));});
-  listen(stage,'wheel',event=>{
-    if(!opened||mode==='index'||zoomed||event.ctrlKey||event.metaKey)return;
-    const delta=Math.abs(event.deltaX||0)>Math.abs(event.deltaY||0)?event.deltaX:event.deltaY;
-    if(!delta)return;event.preventDefault();wheelDistance+=delta*(event.deltaMode===1?16:1);
-    const now=event.timeStamp||Date.now();if(Math.abs(wheelDistance)<60||now-lastWheel<280)return;
-    select(selected+Math.sign(wheelDistance));wheelDistance=0;lastWheel=now;
-  },{passive:false});
-  listen(stage,'pointerdown',event=>{if(event.button===0&&!zoomed){dragOrigin={x:event.clientX,y:event.clientY};suppressClick=false;}});
-  listen(stage,'pointerup',event=>{if(!dragOrigin)return;const dx=event.clientX-dragOrigin.x,dy=event.clientY-dragOrigin.y;dragOrigin=null;if(Math.abs(dx)>44&&Math.abs(dx)>Math.abs(dy)){suppressClick=true;select(selected-Math.sign(dx),{moveFocus:true});}});
-  listen(stage,'pointercancel',()=>{dragOrigin=null;});
-  listen(q('[data-cloud-close]'),'click',()=>close());
-  listen(q('[data-cloud-prev]'),'click',()=>select(selected-1));listen(q('[data-cloud-next]'),'click',()=>select(selected+1));
-  listen(q('[data-cloud-inspect]'),'click',()=>setMode(mode==='full'?'gallery':'full'));
-  listen(q('[data-cloud-index]'),'click',()=>setMode(mode==='index'?'gallery':'index'));
-  listen(q('[data-cloud-zoom]'),'click',()=>setZoom(!zoomed));
-  listen(q('[data-cloud-retry]'),'click',()=>{render();focus(q('[data-cloud-inspect]'));});
-  cards.forEach(card=>listen(card,'click',()=>{if(suppressClick){suppressClick=false;return;}const offset=Number(card.dataset.cloudSlot);if(offset===0){if(mode==='full')setZoom(!zoomed);else setMode('full');}else select(selected+offset,{moveFocus:true});}));
-  listen(indexView,'click',event=>{const button=event.target.closest?.('[data-cloud-pick]');if(!button||button.parentElement!==indexView)return;selected=Number(button.dataset.cloudPick);setMode('gallery');});
+  listen(subjectNav,'click',event=>{const button=event.target.closest?.('[data-cloud-subject]');if(button)setSubject(button.dataset.cloudSubject);});
+  listen(indexView,'click',event=>{const button=event.target.closest?.('[data-cloud-pick]');if(button?.parentElement===indexView)openPhoto(Number(button.dataset.cloudPick));});
+  listen(q('[data-cloud-sheet-prev]'),'click',()=>setSheetPage(sheetPage-1));listen(q('[data-cloud-sheet-next]'),'click',()=>setSheetPage(sheetPage+1));
+  listen(q('[data-cloud-prev]'),'click',()=>selectPhoto(selected-1));listen(q('[data-cloud-next]'),'click',()=>selectPhoto(selected+1));
+  listen(q('[data-cloud-back]'),'click',backToPhotos);listen(q('[data-cloud-close]'),'click',()=>close());
+  listen(q('[data-cloud-retry]'),'click',()=>{if(mode==='full'){render();focus(q('[data-cloud-back]'));}});
   return {
-    open(index,{roll}={}){if(dead||!rolls.length)return false;if(Number.isInteger(roll)&&rolls[roll]){remembered.set(memoryKey(),selected);rememberedSubjects.set(rollIndex,subject);rollIndex=roll;subject=rememberedSubjects.get(roll)||'all';items=photographySelection(rolls[rollIndex].photos,subject);selected=remembered.get(memoryKey())||0;}if(index!==undefined)selected=Math.max(0,Math.min(items.length-1,Math.round(Number(index)||0)));opened=true;mode='gallery';root.hidden=false;render();focus(q('[data-cloud-inspect]'));return true;},
+    open(index,{roll}={}){
+      if(dead||!rolls.length)return false;remember();
+      if(Number.isInteger(roll)&&rolls[roll]){rememberedSubjects.set(rollIndex,subject);rollIndex=roll;subject=rememberedSubjects.get(roll)||'all';}
+      restorePosition();if(index!==undefined){selected=Math.max(0,Math.min(items.length-1,Math.round(Number(index)||0)));sheetPage=Math.floor(selected/CONTACT_SHEET_SIZE);}
+      opened=true;mode='index';detailOrigin=null;root.hidden=false;render();
+      focus(indexView.querySelector(`[data-cloud-pick="${selected}"]`)||indexView.querySelector('button'));return true;
+    },
     close,cancel:goBack,
     dispose(){if(dead)return;close({notify:false});dead=true;generation++;releaseAll();listeners.splice(0).forEach(remove=>remove());root.remove();},
     get isOpen(){return opened;},get selectedIndex(){return selected;},get selectedRoll(){return rollIndex;}

@@ -141,10 +141,11 @@ export function createPersonalRooms({renderer,onOpen=()=>{},onClose=()=>{},onPor
   function node(tag,text,parent,className){const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(className)el.className=className;parent.append(el);return el;}
   function setPhase(value){
     phase=value;dialog.dataset.phase=value;
-    aboutPrompts.hidden=kind==='work'||!isSpatial()||!['viewing','focusing'].includes(value);
+    aboutPrompts.hidden=['work','cloud'].includes(kind)||!isSpatial()||!['viewing','focusing'].includes(value);
     photoRetry.inert=['reading','media','places'].includes(value);
     const hobbyBusy=kind==='work'&&!['viewing','focusing'].includes(value);
     aboutAction.disabled=hobbyBusy;q('[data-personal-story]').disabled=hobbyBusy;
+    q('[data-personal-media]').disabled=kind==='cloud'&&!['viewing','focusing'].includes(value);
     syncCloudControls();
   }
   function syncCloudControls(){
@@ -169,11 +170,11 @@ export function createPersonalRooms({renderer,onOpen=()=>{},onClose=()=>{},onPor
       if(current)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');
     });
     const content=contentFor(kind),chapter=content.chapters[selected];dialog.dataset.kind=kind;dialog.style.setProperty('--personal-paper',paper[kind]);q('[data-personal-eyebrow]').textContent=content.eyebrow;q('#personal-room-title').textContent=content.title;q('#personal-chapter-title').textContent=chapter.title;q('[data-personal-body]').textContent=chapter.body;q('[data-personal-number]').textContent=`${String(selected+1).padStart(2,'0')} / ${String(content.chapters.length).padStart(2,'0')}`;
-    const nav=q('[data-personal-chapters]');if(nav.dataset.kind!==kind){nav.replaceChildren();content.chapters.forEach((entry,index)=>{const button=node('button',entry.label,nav);button.type='button';button.dataset.personalChapter=String(index);});nav.dataset.kind=kind;}
+    const nav=q('[data-personal-chapters]');nav.setAttribute('aria-label',kind==='cloud'?'Choose a photo collection':'Explore the stories');if(nav.dataset.kind!==kind){nav.replaceChildren();content.chapters.forEach((entry,index)=>{const button=node('button',entry.label,nav);button.type='button';button.dataset.personalChapter=String(index);});nav.dataset.kind=kind;}
     nav.querySelectorAll('button').forEach((button,index)=>button.setAttribute('aria-pressed',String(index===selected)));
-    const media=content.media.filter(item=>item.type==='image');q('[data-personal-media]').hidden=kind==='work'||media.length===0;q('[data-personal-media]').textContent=kind==='cloud'?'Look through the camera':media.length===1?'View photograph':'View photographs';q('[data-personal-story]').textContent=kind==='work'?`About ${chapter.label}`:'Read the story';q('[data-personal-story]').hidden=kind==='cloud';q('[data-personal-recording]').hidden=true;q('[data-personal-recording]').textContent='Enter the listening room';q('[data-personal-works]').hidden=kind!=='about';q('.personal-sound-actions').hidden=kind!=='music';q('.personal-sky-actions').hidden=kind!=='cloud';
-    q('[data-personal-scene-note]').textContent=kind==='cloud'?'Click the camera or press Enter · A / D chooses a reel · Esc returns to the garden':`A/D or Left/Right to explore · Enter to interact · Esc to return.${kind==='music'?' Sound sketch, not a recording of my voice.':''}`;
-    host.setAttribute('aria-label',`${content.title}. A and D or Left and Right choose a story. Enter interacts with the selected object. Escape returns.`);host.setAttribute('aria-keyshortcuts','A D ArrowLeft ArrowRight Home End Enter Escape');aboutAction.classList.toggle('primary',kind==='work');aboutAction.hidden=!isSpatial()||kind==='cloud';aboutPrompts.hidden=kind==='work'||!isSpatial()||!['viewing','focusing'].includes(phase);syncAboutActions();updateStatus();dirty=true;
+    const media=content.media.filter(item=>item.type==='image');q('[data-personal-media]').hidden=kind==='work'||media.length===0;q('[data-personal-media]').classList.toggle('primary',kind==='cloud');q('[data-personal-media]').textContent=kind==='cloud'?(selected===0?'Browse cloud photos':'Browse mobile photos'):media.length===1?'View photograph':'View photographs';q('[data-personal-story]').textContent=kind==='work'?`About ${chapter.label}`:'Read the story';q('[data-personal-story]').hidden=kind==='cloud';q('[data-personal-recording]').hidden=true;q('[data-personal-recording]').textContent='Enter the listening room';q('[data-personal-works]').hidden=kind!=='about';q('.personal-sound-actions').hidden=kind!=='music';q('.personal-sky-actions').hidden=kind!=='cloud';
+    q('[data-personal-scene-note]').textContent=kind==='cloud'?'Choose a collection, then browse its photos. Escape returns to the garden.':`A/D or Left/Right to explore · Enter to interact · Esc to return.${kind==='music'?' Sound sketch, not a recording of my voice.':''}`;
+    host.setAttribute('aria-label',kind==='cloud'?'The Viewfinder. Choose Clouds or Mobile photography, then Browse photos. Left and Right choose a collection. Escape returns to the garden.':`${content.title}. A and D or Left and Right choose a story. Enter interacts with the selected object. Escape returns.`);host.setAttribute('aria-keyshortcuts','A D ArrowLeft ArrowRight Home End Enter Escape');aboutAction.classList.toggle('primary',kind==='work');aboutAction.hidden=!isSpatial()||kind==='cloud';aboutPrompts.hidden=['work','cloud'].includes(kind)||!isSpatial()||!['viewing','focusing'].includes(phase);syncAboutActions();updateStatus();dirty=true;
   }
   function syncAboutActions(){
     if(!isSpatial()||!room)return;
@@ -207,7 +208,7 @@ export function createPersonalRooms({renderer,onOpen=()=>{},onClose=()=>{},onPor
     cloudSiblings=[...shell.children].filter(element=>!element.classList.contains('cloud-photo-gallery')).map(element=>[element,element.inert]);
     for(const [element]of cloudSiblings)element.inert=true;
     shell.classList.add('has-cloud-gallery');
-    dialog.removeAttribute('aria-labelledby');dialog.setAttribute('aria-label','Lakshya’s photography reels');
+    dialog.removeAttribute('aria-labelledby');dialog.setAttribute('aria-label','Lakshya’s photographs');
     setPhase('cloud-gallery');return true;
   }
   function enterCloudGallery(){
@@ -413,7 +414,7 @@ export function createPersonalRooms({renderer,onOpen=()=>{},onClose=()=>{},onPor
     if(saved){const view=viewSize(),changed=view.width!==saved.window.width||view.height!==saved.window.height;if(saved.ratio!==undefined)renderer.setPixelRatio?.(saved.ratio);if(changed)renderer.setSize?.(view.width,view.height,false);else if(saved.size)renderer.setSize?.(saved.size.x,saved.size.y,false);renderer.setRenderTarget?.(saved.target??null);if(changed){renderer.setViewport?.(0,0,view.width,view.height);renderer.setScissor?.(0,0,view.width,view.height);}else{if(saved.viewport)renderer.setViewport?.(saved.viewport);if(saved.scissor)renderer.setScissor?.(saved.scissor);}if(saved.scissorTest!==undefined)renderer.setScissorTest?.(saved.scissorTest);renderer.autoClear=saved.autoClear;}previousHost=null;previousSibling=null;
   }
   function removeRoom(){releaseCloudGallery();mediaReturn=null;q('[data-personal-article]').replaceChildren();q('[data-personal-image]').removeAttribute('src');releaseHobbyRoom();clearRecording();clearPostcard();clearPhoto();room?.dispose();room=null;}
-  function beginKind(next){releaseCloudGallery();mediaReturn=null;q('[data-personal-article]').replaceChildren();q('[data-personal-image]').removeAttribute('src');releaseHobbyRoom();sound.stop();clearRecording();clearPostcard();clearPhoto();room?.dispose();kind=next;room=createPersonalRoomScene(kind);aboutEntranceProgress=isSpatial()?0:1;queuedAboutSelection=null;photoRetry.hidden=true;selected=0;currentIndex=0;pan=0;currentPan=0;soundError='';room.select(0);photoEntryProgress=0;hideSubViews();setContent();curtain.style.setProperty('--room-cover',paper[kind]);revealCurtain(0);setPhase('entering');transition={kind:'entry',elapsed:0,duration:isReduced()?0:isSpatial()?1.25:.8};caption.hidden=isSpatial()&&kind!=='work';loadPortrait();resize();if(isSpatial())applyAboutEntrance(0);else applyCamera(0,{approach:2.8});}
+  function beginKind(next){releaseCloudGallery();mediaReturn=null;q('[data-personal-article]').replaceChildren();q('[data-personal-image]').removeAttribute('src');releaseHobbyRoom();sound.stop();clearRecording();clearPostcard();clearPhoto();room?.dispose();kind=next;room=createPersonalRoomScene(kind);aboutEntranceProgress=isSpatial()?0:1;queuedAboutSelection=null;photoRetry.hidden=true;selected=0;currentIndex=0;pan=0;currentPan=0;soundError='';room.select(0);photoEntryProgress=0;hideSubViews();setContent();curtain.style.setProperty('--room-cover',paper[kind]);revealCurtain(0);setPhase('entering');transition={kind:'entry',elapsed:0,duration:isReduced()?0:isSpatial()?1.25:.8};caption.hidden=isSpatial()&&!['work','cloud'].includes(kind);loadPortrait();resize();if(isSpatial())applyAboutEntrance(0);else applyCamera(0,{approach:2.8});}
   function open(next='about'){
     if(dead||!KINDS.includes(next))return false;
     pendingPhotoEntry=false;

@@ -8,12 +8,12 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
   const id=`about-journal-${++readerSerial}`,root=doc.createElement('section');
   root.className='about-journal-reader';root.hidden=true;root.tabIndex=-1;
   root.setAttribute('role','region');root.setAttribute('aria-label',content?.title||'Lakshya’s notebook');
-  root.innerHTML=`<nav class="journal-chapters" aria-label="Notebook chapters" role="tablist" data-journal-tabs></nav>
-    <div class="journal-book-stage" data-journal-stage><div class="journal-book" data-journal-book role="tabpanel" id="${id}-spread">
+  root.innerHTML=`<nav class="journal-chapters" aria-label="Notebook sections" data-journal-tabs><label class="journal-section-jump" for="${id}-section">Section<select id="${id}-section" data-journal-jump aria-controls="${id}-spread"></select></label><button type="button" data-journal-close>Back to studio</button></nav>
+    <div class="journal-book-stage" data-journal-stage><div class="journal-book" data-journal-book role="region" id="${id}-spread">
       <article class="journal-page journal-page-left" data-journal-left tabindex="0"></article>
       <article class="journal-page journal-page-right" data-journal-right tabindex="0"></article>
     </div><div class="journal-binding" aria-hidden="true"></div></div>
-    <footer class="journal-footer"><nav class="journal-page-navigation" aria-label="Turn notebook pages"><button type="button" data-journal-prev>Previous pages</button><div><p data-journal-count aria-live="polite"></p><p class="journal-key-hint">Turn pages: A / D or ← / → · Esc to close</p></div><button type="button" data-journal-next>Turn the page</button><button type="button" data-journal-close>Close notebook</button></nav></footer>
+    <footer class="journal-footer"><nav class="journal-page-navigation" aria-label="Turn notebook pages"><button type="button" data-journal-prev><span aria-hidden="true">← </span>Previous pages</button><div class="journal-page-position"><p id="${id}-section-title" data-journal-section></p><p data-journal-count aria-live="polite"></p><p class="journal-key-hint">A / D or ← / → turn pages · Esc returns to studio</p></div><button type="button" data-journal-next>Next pages<span aria-hidden="true"> →</span></button></nav></footer>
     <section id="about-journal-photo" class="journal-photo-viewer" data-journal-viewer aria-labelledby="${id}-photo-title" tabindex="-1" hidden>
       <header><div><p>FROM MY NOTEBOOK</p><h2 id="${id}-photo-title" data-journal-photo-title></h2></div><button type="button" data-journal-photo-close>Back to the notebook</button></header>
       <figure><img decoding="async" data-journal-full-photo alt=""><figcaption data-journal-photo-caption></figcaption></figure>
@@ -21,7 +21,7 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
       <footer><button type="button" data-journal-photo-prev>Previous photo</button><p data-journal-photo-count aria-live="polite"></p><button type="button" data-journal-photo-next>Next photo</button></footer>
     </section>`;
   host.append(root);
-  const q=selector=>root.querySelector(selector),book=q('[data-journal-book]'),stage=q('[data-journal-stage]'),tabs=q('[data-journal-tabs]');
+  const q=selector=>root.querySelector(selector),book=q('[data-journal-book]'),stage=q('[data-journal-stage]'),jump=q('[data-journal-jump]');
   const pages=[q('[data-journal-left]'),q('[data-journal-right]')],viewer=q('[data-journal-viewer]'),fullImage=q('[data-journal-full-photo]');
   const listeners=[],imageListeners=new Map(),motions=[];
   let opened=false,dead=false,selected=0,turnGeneration=0,turnLeaf=null,heldPage=null;
@@ -37,8 +37,7 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
   const node=(tag,text,parent,className)=>{const element=doc.createElement(tag);if(className)element.className=className;if(text!==undefined)element.textContent=text;parent?.append(element);return element;};
 
   chapters.forEach((chapter,index)=>{
-    const button=node('button',chapter.label,tabs);button.type='button';button.id=`${id}-tab-${index}`;button.dataset.journalChapter=String(index);
-    button.setAttribute('role','tab');button.setAttribute('aria-controls',`${id}-spread`);
+    const option=node('option',chapter.label,jump);option.value=String(index);
   });
 
   function releaseImage(image){
@@ -147,11 +146,17 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
         if(next)button.dataset.journalChapter=String(selected+1);else button.dataset.journalNavigate='garden';
       }
     }
-    const buttons=[...tabs.querySelectorAll('button')];buttons.forEach((button,index)=>{button.setAttribute('aria-selected',String(index===selected));button.tabIndex=index===selected?0:-1;});
-    book.setAttribute('aria-labelledby',`${id}-tab-${selected}`);
+    jump.value=String(selected);q('[data-journal-section]').textContent=chapter.label;
+    book.setAttribute('aria-labelledby',`${id}-section-title`);
     const firstPage=selectedSpread*2+1,lastPage=Math.min(layoutPages.length,firstPage+1);
-    q('[data-journal-count]').textContent=`${chapter.label} · ${firstPage===lastPage?'Page '+firstPage:'Pages '+firstPage+'–'+lastPage} of ${layoutPages.length}`;
-    q('[data-journal-prev]').disabled=selected===0&&selectedSpread===0;q('[data-journal-next]').disabled=selected===chapters.length-1&&selectedSpread===Math.ceil(layoutPages.length/2)-1;
+    q('[data-journal-count]').textContent=`${firstPage===lastPage?'Page '+firstPage:'Pages '+firstPage+'–'+lastPage} of ${layoutPages.length}`;
+    const atStart=selectedSpread===0,atEnd=selectedSpread===Math.ceil(layoutPages.length/2)-1;
+    const previous=q('[data-journal-prev]'),next=q('[data-journal-next]');
+    previous.disabled=selected===0&&atStart;next.disabled=selected===chapters.length-1&&atEnd;
+    previous.textContent=atStart&&selected>0?'← Previous section':'← Previous pages';
+    next.textContent=atEnd&&selected<chapters.length-1?'Next section →':'Next pages →';
+    previous.setAttribute('aria-label',atStart&&selected>0?`Previous section: ${chapters[selected-1].label}`:'Previous pages');
+    next.setAttribute('aria-label',atEnd&&selected<chapters.length-1?`Next section: ${chapters[selected+1].label}`:'Next pages');
     root.dataset.chapter=chapter.id;root.dataset.spread=String(selectedSpread);root.dataset.spreads=String(Math.ceil(layoutPages.length/2));root.dataset.reduced=String(reduced());
   }
   function clearTurn(){
@@ -194,10 +199,10 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     if(!opened||dead||!chapters.length)return false;
     const next=Math.max(0,Math.min(chapters.length-1,Math.round(Number(value)||0)));if(next===selected&&selectedSpread===0&&!atEnd){if(reduced())clearTurn();return false;}
     closePhoto({restoreFocus:false});clearTurn();
-    const origin=doc.activeElement,fromTab=Boolean(origin?.closest?.('[data-journal-chapter]')),fromPage=pages.some(page=>page===origin||page.contains?.(origin));
+    const origin=doc.activeElement,fromJump=origin===jump,fromPage=pages.some(page=>page===origin||page.contains?.(origin));
     const before=!reduced()&&typeof stage.animate==='function'?pages.map(decorativeCopy):null;
     const direction=next>selected?1:-1;selected=next;selectedSpread=atEnd?Number.MAX_SAFE_INTEGER:0;render();beginTurn(before,direction);
-    if(fromTab){const target=tabs.querySelector(`[data-journal-chapter="${selected}"]`);focus(target);target?.scrollIntoView?.({block:'nearest',inline:'nearest'});}
+    if(fromJump)focus(jump);
     else if(fromPage||origin?.disabled||!origin?.isConnected)focus(pages[0]);
     return true;
   }
@@ -227,7 +232,7 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     const photo=photos[photoIndex];if(!photo?.src)return;
     photoGeneration++;const token=photoGeneration;releaseImage(fullImage);
     q('[data-journal-photo-title]').textContent=photo.caption||'A photograph from my notebook';q('[data-journal-photo-caption]').textContent=photo.alt||photo.caption||'';
-    q('[data-journal-photo-count]').textContent=`${photoIndex+1} / ${photos.length}`;
+    q('[data-journal-photo-count]').textContent=`Photograph ${photoIndex+1} of ${photos.length}`;
     q('[data-journal-photo-prev]').disabled=photoIndex===0;q('[data-journal-photo-next]').disabled=photoIndex===photos.length-1;
     q('[data-journal-photo-status]').textContent='Loading photograph…';q('[data-journal-photo-retry]').hidden=true;
     fullImage.width=photo.width;fullImage.height=photo.height;fullImage.alt=photo.alt||photo.caption||'Photograph of Lakshya';
@@ -263,6 +268,7 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     const chapter=event.target.closest?.('[data-journal-chapter]');if(chapter){setChapter(Number(chapter.dataset.journalChapter));return;}
     const destination=event.target.closest?.('[data-journal-navigate]');if(destination&&!photoOpened)onNavigate(destination.dataset.journalProject?'project:'+destination.dataset.journalProject:destination.dataset.journalNavigate);
   });
+  listen(jump,'change',()=>setChapter(Number(jump.value)));
   listen(q('[data-journal-prev]'),'click',()=>turnPage(-1));listen(q('[data-journal-next]'),'click',()=>turnPage(1));listen(q('[data-journal-close]'),'click',()=>close());
   listen(q('[data-journal-photo-close]'),'click',()=>closePhoto());listen(q('[data-journal-photo-prev]'),'click',()=>selectPhoto(photoIndex-1));listen(q('[data-journal-photo-next]'),'click',()=>selectPhoto(photoIndex+1));listen(q('[data-journal-photo-retry]'),'click',renderPhoto);
   listen(root,'keydown',event=>{
@@ -273,12 +279,7 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     event.preventDefault();event.stopPropagation();if(event.repeat)return;
     if(key==='escape'){cancel();return;}
     if(photoOpened)selectPhoto(key==='home'?0:key==='end'?photos.length-1:photoIndex+direction);
-    else if(event.target?.closest?.('[data-journal-chapter]')&&['arrowleft','arrowright','home','end'].includes(key)){
-      // Chapter tabs navigate the tablist even when the current chapter spans
-      // several facing pages. A/D and the page buttons retain page turning.
-      const next=key==='home'?0:key==='end'?chapters.length-1:(selected+direction+chapters.length)%chapters.length;
-      setChapter(next);
-    }else if(key==='home')setChapter(0);else if(key==='end')setChapter(chapters.length-1,{atEnd:true});else turnPage(direction);
+    else if(key==='home')setChapter(0);else if(key==='end')setChapter(chapters.length-1,{atEnd:true});else turnPage(direction);
   });
   return {
     open({chapter=0}={}){if(dead||opened||!chapters.length)return false;const next=Math.max(0,Math.min(chapters.length-1,Math.round(Number(chapter)||0)));if(next!==selected)selectedSpread=0;selected=next;opened=true;root.hidden=false;render();focus(pages[0]);return true;},
