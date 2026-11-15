@@ -138,8 +138,15 @@ export function createGardenNature(source){
       float sway = sin(gardenTime * .75 + phase) * gardenStrength * gardenFlex / instanceScale;
       transformed.x += sway; transformed.z += sway * .35; }`);
   }
-  foliage.onBeforeCompile=bend;depth.onBeforeCompile=bend;
-  foliage.customProgramCacheKey=()=> 'garden-breeze-v1';depth.customProgramCacheKey=()=> 'garden-breeze-depth-v1';
+  foliage.onBeforeCompile=shader=>{
+    bend(shader);
+    // Preserve the supplied atlas and its variation; bring its saturated trees
+    // into the same quiet garden palette as timber, stone and the new details.
+    shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>',`#include <color_fragment>
+      float gardenLuma = dot(diffuseColor.rgb, vec3(.2126,.7152,.0722));
+      diffuseColor.rgb = mix(diffuseColor.rgb, vec3(gardenLuma), .32) * vec3(.91,.92,.80);`);
+  };depth.onBeforeCompile=bend;
+  foliage.customProgramCacheKey=()=> 'garden-breeze-sage-v2';depth.customProgramCacheKey=()=> 'garden-breeze-depth-v1';
   const dummy=new THREE.Object3D(),cullingBatches=[];
   for(const [name,p] of batches){
     if(!p.placements.length)continue;

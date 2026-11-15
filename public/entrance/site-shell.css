@@ -1,3 +1,4 @@
+@import url("../control-sizing.css");
 html.portfolio-app-open,
 .portfolio-app-open body {
   height: 100%;

@@ -1,3 +1,4 @@
+@import url("../control-sizing.css");
 /* Normal-only library overview. The external library is never embedded here. */
 #resources.resources-section {
   border: 0;

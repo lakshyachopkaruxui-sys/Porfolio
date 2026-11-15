@@ -320,7 +320,7 @@ export function createRider(THREE) {
   };
   const plantedContact=new THREE.Vector3();
   const gripRotation=new THREE.Quaternion();
-  function update({ speed = 0, steering = 0, wheelSteering, movingIntent = false, turnIntent = 0, groundHeight = () => 0, time = 0, dt = 1 / 60, pedaling = true, reduced = false, feedback = {}, navigationActive = false, poseModifier } = {}) {
+  function update({ mouthOpen = 0, speed = 0, steering = 0, wheelSteering, movingIntent = false, turnIntent = 0, groundHeight = () => 0, time = 0, dt = 1 / 60, pedaling = true, reduced = false, feedback = {}, navigationActive = false, poseModifier } = {}) {
     routeCue.visible = Boolean(navigationActive);
     // Match the world's bounded frame delta so wheel travel remains consistent
     // on a slower frame, while still limiting resumed-tab animation jumps.
@@ -474,6 +474,7 @@ export function createRider(THREE) {
       foot.planted=legs[i].side===-1?planted:0;
       if(foot.planted){foot.contact.lerp(plantedContact,planted);foot.contact.y+=Math.sin(Math.PI*planted)*.06;}
     }
+    characterPose.mouthOpen=mouthOpen;
     characterPose.headYaw=headPivot.rotation.y;characterPose.plantProgress=planted;
     characterPose.speed=speed;characterPose.reduced=reduced;characterPose.dt=delta;
     poseModifier?.(characterPose);

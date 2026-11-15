@@ -11,40 +11,40 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/identity/shared-curve/icon-32.png?v=07">
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/identity/shared-curve/apple-touch-icon.png?v=07">
   <title>Lakshya Chopkar | Product Designer</title>
-  <link rel="stylesheet" href="./styles.css">
-  <link rel="stylesheet" href="./personal-sections.css">
-  <link rel="stylesheet" href="./sections.css">
-  <link rel="stylesheet" href="./toolkit.css">
-  <link rel="stylesheet" href="./resume-ui.css?v=20261104-personal-space">
-  <link rel="stylesheet" href="./photo-carousel.css?v=20261104-new-portraits">
-  <link rel="stylesheet" href="./portfolio-extras.css">
-  <link rel="stylesheet" href="./case-reader.css">
-  <link rel="stylesheet" href="./refinements.css">
-  <link rel="stylesheet" href="./editorial.css?v=20261110-space">
-  <link rel="stylesheet" href="./editorial-toolkit.css?v=20261110-space">
-  <link rel="stylesheet" href="./editorial-case.css">
-  <link rel="stylesheet" href="./portfolio-motion.css?v=20261103b">
-  <link rel="stylesheet" href="./toolkit-motion.css?v=20261103b">
-  <link rel="stylesheet" href="./case-motion.css?v=20261103b">
-  <link rel="stylesheet" href="./welcome-intro.css?v=20261103-shared-curve">
+  <link rel="stylesheet" href="./portfolio-bundle.css?v=90116491564f3166">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   <script type="module" src="./welcome-entry.js?v=20261114-product-designer"></script>
   <script type="module" src="./portfolio.js?v=20261114-events"></script>
-  <link rel="stylesheet" href="./identity.css?v=20261103-logo-only">
-  <link rel="stylesheet" href="./typography.css?v=20261103-minimal">
-  <link rel="stylesheet" href="./footer-ui.css?v=20261113-accessibility">
-  <link rel="stylesheet" href="./assistant-ui.css?v=20261110-footer">
-  <link rel="stylesheet" href="./project-cover-ui.css?v=20261110-approved-covers">
-  <link rel="stylesheet" href="./cover-artwork.css?v=20261104-hritika-covers">
-  <link rel="stylesheet" href="./case-presentation.css?v=20261110-space">
-  <link rel="stylesheet" href="./pixel-mania-presentation.css?v=20261110-space">
-  <link rel="stylesheet" href="./case-hero-art.css?v=20261110-space">
-  <link rel="stylesheet" href="./case-image-viewer.css?v=20261104-case-presentation">
-  <link rel="stylesheet" href="./mode-selector.css?v=20261105-adaptive">
-  <link rel="stylesheet" href="./normal-actions.css?v=20261110-blue">
-  <script type="module" src="./mode-entry.js?v=20261105-mode-placement"></script>
-  <link rel="stylesheet" href="./normal-reading.css?v=20261113-assistant-retry">
-  <link rel="stylesheet" href="./approved-opening.css?v=20261112-project-grid">
-<link rel="stylesheet" href="./resources-section.css?v=20261114-community">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script type="module" src="./mode-entry.js?v=20261115-header-fit"></script>
+  
+  
+
 <!-- portfolio-publishing:start -->
 <script defer src="/entrance/visit-session.js"></script>
 <script defer src="/entrance/simple-analytics.js?v=20261114"></script>
@@ -75,9 +75,6 @@
     <nav aria-label="Main navigation">
       <a href="#work" aria-current="location">Work</a>
       <a href="#about">About</a>
-      <a href="#toolkit">How I work</a>
-      <a href="#background">Background</a>
-      <a href="#resources">Resources</a>
       <a href="#explore-play">Explore</a>
       <a href="#contact">Contact</a>
       <a href="./assets/Lakshya-Chopkar-Product-Designer-Resume.pdf" target="_blank" rel="noopener" aria-label="Resume PDF (opens in a new tab)">Resume</a>
@@ -88,11 +85,11 @@
       <a data-mode-link="portfolio" href="./" aria-current="page">Portfolio</a>
       <a data-mode-link="play" href="../bicycle-world/dist/">Play</a>
     </span>
-    <button type="button" class="normal-theme-toggle" data-header-theme-toggle>Slate mode</button>
+    <button type="button" class="normal-theme-toggle" data-header-theme-toggle hidden>Slate mode</button>
     </div>
   </header>
 
-  <script type="module" src="./section-navigation.js?v=20261110-active-section"></script>
+  <script type="module" src="./section-navigation.js?v=20261115-anchor-owner"></script>
   <main>
     <div class="portfolio-opening wrap">
     <section id="top" class="hero" aria-labelledby="hero-title">
@@ -119,13 +116,144 @@
         <div id="project-filters" class="project-filters" role="group" aria-label="Filter projects" hidden></div>
         <p id="result-count" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true">Seven projects</p>
       </div>
-      <div id="project-grid" class="project-grid"></div>
-      <p class="work-artwork-note">Covers are AI-generated presentation artwork. Original project artifacts, prototype captures and evidence appear inside each case study.</p>
+      <div id="project-grid" class="project-grid">
+      <!-- portfolio-projects:start -->
+      <article class="project-card" data-project="connectaid">
+        <a class="project-link" href="../bicycle-world/dist/projects.html#project-connectaid" aria-labelledby="title-connectaid">
+          <figure class="project-art art-connectaid is-project-cover" style="aspect-ratio: 1733 / 907">
+            <img src="./assets/project-covers/approved-20261110/connectaid.webp" alt="AI-generated ConnectAid cover: two phone mockups for Home and Health Records beside the headline Care beyond the booking, on a deep blue and cyan background." width="1733" height="907" loading="eager" decoding="async">
+          </figure>
+          <div class="project-copy">
+            <p class="project-meta">Collaborative UX project and tested prototype</p>
+            <div class="project-heading"><h3 id="title-connectaid">ConnectAid</h3></div>
+            <p class="project-summary">A healthcare app prototype for booking care, finding medicines and tests, and returning to health records.</p>
+            <p class="project-contribution">My part: core design system and remote testing coordination.</p>
+            <span class="project-case-label">Read project summary</span>
+          </div>
+        </a>
+        <a class="project-evidence-link" href="#evidence-connectaid">See what testing changed</a>
+      </article>
+      <article class="project-card" data-project="giggles">
+        <a class="project-link" href="../bicycle-world/dist/projects.html#project-giggles" aria-labelledby="title-giggles">
+          <figure class="project-art art-giggles is-project-cover" style="aspect-ratio: 1734 / 907">
+            <img src="./assets/project-covers/approved-20261110/giggles.webp" alt="AI-generated Giggles cover: cream board, four blue shape buttons, landscape phone, communication cards and die beside Learning through play, on a coral background." width="1734" height="907" loading="eager" decoding="async">
+          </figure>
+          <div class="project-copy">
+            <p class="project-meta">Physical–digital learning prototype</p>
+            <div class="project-heading"><h3 id="title-giggles">Giggles</h3></div>
+            <p class="project-summary">A learning game for autistic children that connects a physical board, answer cards and shape buttons to questions on a phone.</p>
+            <p class="project-contribution">My part: electronics, game logic and the working prototype.</p>
+            <span class="project-case-label">Read project summary</span>
+          </div>
+        </a>
+        <a class="project-evidence-link" href="#evidence-giggles">Follow one complete turn</a>
+      </article>
+      <article class="project-card" data-project="pixel-mania">
+        <a class="project-link" href="../bicycle-world/dist/projects.html#project-pixel-mania" aria-labelledby="title-pixel-mania">
+          <figure class="project-art art-pixel-mania is-project-cover" style="aspect-ratio: 1733 / 907">
+            <img src="./assets/project-covers/approved-20261110/pixel-mania.webp" alt="AI-generated Pixel Mania cover: an open pixel board with five click-state labels, neon geometric shapes and the headline Click. Colour. Create." width="1733" height="907" loading="lazy" decoding="async">
+          </figure>
+          <div class="project-copy">
+            <p class="project-meta">Design system and playable exploration</p>
+            <div class="project-heading"><h3 id="title-pixel-mania">Pixel Mania</h3></div>
+            <p class="project-summary">An open drawing board where clicking a square changes its colour. Make a picture, a name or a game of your own.</p>
+            <p class="project-contribution">My part: visual system, interface and interaction prototyping.</p>
+            <span class="project-case-label">Read project summary</span>
+          </div>
+        </a>
+        
+      </article>
+      <article class="project-card" data-project="syringe">
+        <a class="project-link" href="../bicycle-world/dist/projects.html#project-syringe" aria-labelledby="title-syringe">
+          <figure class="project-art art-syringe is-project-cover" style="aspect-ratio: 1734 / 907">
+            <img src="./assets/project-covers/approved-20261110/syringe.webp" alt="AI-generated syringe cover: transparent barrel, teal plunger and enlarged finger-flange detail beside A closer look at grip, on a dark teal background." width="1734" height="907" loading="lazy" decoding="async">
+          </figure>
+          <div class="project-copy">
+            <p class="project-meta">Collaborative ergonomics research and redesign concept</p>
+            <div class="project-heading"><h3 id="title-syringe">Redesign 20 cc Syringe</h3></div>
+            <p class="project-summary">A 20 cc syringe redesign focused on a more secure grip, thumb support and readable dose markings.</p>
+            <p class="project-contribution">My part: selected concept; shared research and 3D printing. Teammate: Maya modelling.</p>
+            <span class="project-case-label">Read project summary</span>
+          </div>
+        </a>
+        
+      </article>
+      <article class="project-card" data-project="workplace-mode">
+        <a class="project-link" href="../bicycle-world/dist/projects.html#project-workplace-mode" aria-labelledby="title-workplace-mode">
+          <figure class="project-art art-workplace-mode is-project-cover" style="aspect-ratio: 1734 / 907">
+            <img src="./assets/project-covers/approved-20261110/workplace-mode.webp" alt="AI-generated Workplace Mode cover: dark navigation and music display with an amber Pending state beside When a tap needs an answer." width="1734" height="907" loading="lazy" decoding="async">
+          </figure>
+          <div class="project-copy">
+            <p class="project-meta">Academic HMI study and ongoing interaction refinement</p>
+            <div class="project-heading"><h3 id="title-workplace-mode">Workplace Mode</h3></div>
+            <p class="project-summary">An in-car interaction study, narrowed to changing music and understanding playback response while keeping navigation context.</p>
+            <p class="project-contribution">My part: research, synthesis and the interaction concept.</p>
+            <span class="project-case-label">Read project summary</span>
+          </div>
+        </a>
+        
+      </article>
+      <article class="project-card" data-project="jan-aushadhi">
+        <a class="project-link" href="../bicycle-world/dist/projects.html#project-jan-aushadhi" aria-labelledby="title-jan-aushadhi">
+          <figure class="project-art art-jan-aushadhi is-project-cover" style="aspect-ratio: 1732 / 908">
+            <img src="./assets/project-covers/approved-20261110/jan-aushadhi.webp" alt="AI-generated Jan Aushadhi cover: a demo unified health card and prescriptions app beside Connecting care, on blue and teal-lit plinths." width="1732" height="908" loading="lazy" decoding="async">
+          </figure>
+          <div class="project-copy">
+            <p class="project-meta">Academic service-design research and concept exploration</p>
+            <div class="project-heading"><h3 id="title-jan-aushadhi">Jan Aushadhi</h3></div>
+            <p class="project-summary">A team exploration of medicine access through a health card and app, a dispensing kiosk and RFID packaging.</p>
+            <p class="project-contribution">My part: shared field research; later interface walkthroughs as a separate learning exercise.</p>
+            <span class="project-case-label">Read project summary</span>
+          </div>
+        </a>
+        
+      </article>
+      <article class="project-card" data-project="tear">
+        <a class="project-link" href="../bicycle-world/dist/projects.html#project-tear" aria-labelledby="title-tear">
+          <figure class="project-art art-tear is-project-cover" style="aspect-ratio: 1734 / 907">
+            <img src="./assets/project-covers/approved-20261110/tear.webp" alt="AI-generated TEAR presentation cover: hands pull a glowing seam between a room, ocean and sunlit forest beside Pull reality apart." width="1734" height="907" loading="lazy" decoding="async">
+          </figure>
+          <div class="project-copy">
+            <p class="project-meta">Immersive interaction and storytelling</p>
+            <div class="project-heading"><h3 id="title-tear">TEAR</h3></div>
+            <p class="project-summary">A dream journey opened by hand: curiosity becomes wonder, fear and uncertain relief.</p>
+            <p class="project-contribution">My part: concept, gesture, emotional journey and art direction.</p>
+            <span class="project-case-label">Read project summary</span>
+          </div>
+        </a>
+        
+      </article>
+      <!-- portfolio-projects:end -->
+      </div>
+      <p class="work-artwork-note">Covers are AI-generated presentation artwork. Original work and design decisions follow below; each project opens its complete case study.</p>
+      <button class="assistant-inline-entry" type="button" data-assistant-open hidden>Ask AI about my work</button>
       <p id="load-error" class="load-error"><span data-collection-status>Project summaries are also available in a simple reading view.</span> <a href="../bicycle-world/dist/projects.html">Read all seven project summaries</a>.</p>
       <noscript><p><a href="../bicycle-world/dist/projects.html">Read all seven project summaries</a>. JavaScript enables project filtering and the full case studies.</p></noscript>
     </section>
     </div>
 
+<!-- signature-evidence:start -->
+<section class="evidence-feature evidence-giggles" id="evidence-giggles" aria-labelledby="evidence-giggles-title">
+    <header class="evidence-heading"><p class="evidence-kicker">Giggles · Electronics into interaction</p><h2 id="evidence-giggles-title">One question. A physical answer. Feedback.</h2></header>
+    <ol class="evidence-turn" aria-label="One documented Giggles Communication turn">
+      <li><h3>Read the situation</h3><p>“Someone keeps taking your pencil.” The phone asks what you would say.</p><figure><a href="./assets/cases/giggles/build-photos/IMG-20261007-WA0008.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original Giggles board photograph at full size in a new tab"><img src="./assets/cases/giggles/build-photos/IMG-20261007-WA0008.jpg" width="960" height="1280" loading="lazy" decoding="async" alt="Giggles board during assembly, with orange holders, raised shapes and wiring."></a><figcaption>The actual board during assembly; the phone sits in the orange holder.</figcaption></figure></li>
+      <li><h3>Choose and tap</h3><p>Tap the orange <strong>“Please stop”</strong> RFID card. The controller checks its identifier.</p><figure><a href="./assets/cases/giggles/final-documentation/communication-cards.webp" target="_blank" rel="noopener noreferrer" aria-label="Open original Giggles answer cards at full size in a new tab"><img src="./assets/cases/giggles/final-documentation/communication-cards.webp" width="1324" height="491" loading="lazy" decoding="async" alt="Four Communication answer cards, with the expected orange Please stop card at the right."></a><figcaption>Original card designs · Expected answer at right.</figcaption></figure></li>
+      <li><h3>Respond and continue</h3><p>Green feedback and positive speech confirm the answer; the turn advances.</p><figure><a href="./assets/cases/giggles/evidence/child-correct.webp" target="_blank" rel="noopener noreferrer" aria-label="Open original Giggles feedback interface at full size in a new tab"><img src="./assets/cases/giggles/evidence/child-correct.webp" width="720" height="360" loading="lazy" decoding="async" alt="Original phone interface for the pencil situation showing green Right Answer feedback."></a><figcaption>Original interface design · Correct-response state.</figcaption></figure></li>
+    </ol>
+    <p class="project-evidence-note">Illustrated sequence from documented rules, not a live demonstration. I built the electronics and game logic; teammates designed the interfaces. Learning gains remain unvalidated.</p>
+    <a class="evidence-case-link" href="#project-giggles">Full Giggles case: build, retry rules and testing</a>
+  </section>
+<section class="evidence-feature evidence-connectaid" id="evidence-connectaid" aria-labelledby="evidence-connectaid-title">
+    <header class="evidence-heading"><p class="evidence-kicker">ConnectAid · Decisions from testing</p><h2 id="evidence-connectaid-title">What testing changed.</h2></header>
+    <div class="evidence-decisions">
+      <article><h3>A date you already know</h3><p>Calendar browsing caused difficulty. Separate day, month and year choices replaced it.</p><div class="control-pair"><figure class="control-excerpt"><figcaption>Before · Calendar browsing</figcaption><a href="./assets/cases/connectaid/evidence/testing-input-search-original.webp" target="_blank" rel="noopener noreferrer" aria-label="Inspect Before · Calendar browsing in the original study artifact, opens in a new tab"><svg viewBox="1148 212 177 248" role="img" aria-label="Before · Calendar browsing, detail from the original ConnectAid study artifact"><image href="./assets/cases/connectaid/evidence/testing-input-search-original.webp" width="1800" height="1013"/></svg></a></figure><figure class="control-excerpt"><figcaption>After · Day, month, year</figcaption><a href="./assets/cases/connectaid/evidence/testing-input-search-original.webp" target="_blank" rel="noopener noreferrer" aria-label="Inspect After · Day, month, year in the original study artifact, opens in a new tab"><svg viewBox="769 205 220 222" role="img" aria-label="After · Day, month, year, detail from the original ConnectAid study artifact"><image href="./assets/cases/connectaid/evidence/testing-input-search-original.webp" width="1800" height="1013"/></svg></a></figure></div></article>
+      <article><h3>The route people actually tried</h3><p>Participants searched by specialty. Search now sits alongside category browsing.</p><div class="control-pair"><figure class="control-excerpt"><figcaption>Before · Category route</figcaption><a href="./assets/cases/connectaid/evidence/testing-input-search-original.webp" target="_blank" rel="noopener noreferrer" aria-label="Inspect Before · Category route in the original study artifact, opens in a new tab"><svg viewBox="1218 605 147 310" role="img" aria-label="Before · Category route, detail from the original ConnectAid study artifact"><image href="./assets/cases/connectaid/evidence/testing-input-search-original.webp" width="1800" height="1013"/></svg></a></figure><figure class="control-excerpt"><figcaption>After · Specialty search</figcaption><a href="./assets/cases/connectaid/evidence/testing-input-search-original.webp" target="_blank" rel="noopener noreferrer" aria-label="Inspect After · Specialty search in the original study artifact, opens in a new tab"><svg viewBox="805 605 147 310" role="img" aria-label="After · Specialty search, detail from the original ConnectAid study artifact"><image href="./assets/cases/connectaid/evidence/testing-input-search-original.webp" width="1800" height="1013"/></svg></a></figure></div></article>
+    </div>
+    <p class="evidence-original-link"><a href="./assets/cases/connectaid/evidence/testing-input-search-original.webp" target="_blank" rel="noopener noreferrer">Inspect the complete original before-and-after artifact</a> · Details above are excerpts from this unchanged source.</p>
+    <p class="project-evidence-note">Six participants, eleven tasks. I coordinated testing and built the core design system. These prototype changes have no measured comparative improvement.</p>
+    <a class="evidence-case-link" href="#project-connectaid">Full ConnectAid case: findings, decisions and original screens</a>
+  </section>
+<!-- signature-evidence:end -->
 <section id="about" class="personal-about wrap" aria-labelledby="about-title">
   <div class="personal-about-layout">
     <div class="personal-portrait photo-carousel" data-photo-carousel role="group" aria-roledescription="carousel" aria-label="Personal photographs">
@@ -144,12 +272,14 @@
         <figure class="photo-carousel-slide" data-photo-slide="N103" role="group" aria-roledescription="slide" aria-label="11 of 12" hidden><img src="./assets/personal/carousel/n103-waterside.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Lakshya in a black shirt and clear glasses, seated beside the water and looking to one side."></figure>
         <figure class="photo-carousel-slide" data-photo-slide="P54" role="group" aria-roledescription="slide" aria-label="12 of 12" hidden><img src="./assets/personal/carousel/p54.webp" width="506" height="900" loading="lazy" decoding="async" alt="Lakshya in a checked shirt holding a black puppy outside a building."></figure>
       </div>
-      <p id="photo-carousel-help" class="visually-hidden" data-photo-help>Photos change automatically. Select the photo to pause or play. Use the Left and Right arrow keys to browse.</p>
+      <p id="photo-carousel-help" class="visually-hidden" data-photo-help>Personal photographs. JavaScript enables automatic rotation and keyboard browsing.</p>
       <p class="visually-hidden" data-photo-status role="status" aria-live="polite" aria-atomic="true"></p>
     </div>
     <div class="personal-about-copy">
       <header class="personal-section-heading"><h2 id="about-title" tabindex="-1">About</h2></header>
+      <nav class="about-section-links" aria-label="More about my practice"><a href="#background">Experience &amp; education</a><a href="#toolkit">How I work</a><a href="#resources">Resources</a></nav>
       <div class="personal-bio">
+        
         <p>My route to UX started in Electronics &amp; Telecommunication. I’m now studying User Experience at MIT ADT University.</p>
         <p>I enjoy talking to people and building things I can put in their hands, from app prototypes to a working game board.</p>
         <p>Away from projects, I sing, dance Garba and photograph clouds. I performed at Junoon during my M.Des, and I still make time for Pokemon GO.</p>
@@ -175,9 +305,22 @@
 <section id="toolkit" class="practice-section wrap" aria-labelledby="toolkit-title">
   <header class="section-heading"><div><h2 id="toolkit-title" tabindex="-1">How I work</h2></div></header>
   <p class="toolkit-hint">Choose an area to see my process, methods and tools.</p>
-  <div id="toolkit-board"></div>
+  <div id="toolkit-board">
+<!-- portfolio-toolkit:start -->
+<div class="toolkit-static"><details class="toolkit-static-area"><summary>Research with people</summary><p>I start by understanding who will use the product, what they need and where they face problems. I use interviews, observation and surveys to collect information, then group the findings to decide which problems need attention. I also check existing designs and test prototypes with people to see what is clear and what needs to change.</p><h3>Methods &amp; skills</h3><ul><li>5W1H</li><li>User Research</li><li>Usability Testing</li><li>Eye Tracking</li><li>User Interviews</li><li>Contextual Inquiry</li><li>Survey Design</li><li>Research Synthesis</li><li>Secondary Research</li><li>Desk Research</li><li>Literature Review</li><li>Affinity Mapping</li><li>Competitive Analysis</li><li>Persona Creation</li><li>Heuristic Evaluation</li><li>NASA-TLX</li></ul><h3>Tools I use</h3><ul><li>Miro</li><li>Notion</li><li>FigJam</li><li>Google Forms</li></ul></details>
+<details class="toolkit-static-area"><summary>Shape the experience</summary><p>I turn the findings into a clear order of steps, pages and actions. I sketch possible layouts, compare ideas and build a clickable prototype so people can try the design before it is developed. I use feedback and prioritisation methods to decide what to improve first.</p><h3>Methods &amp; skills</h3><ul><li>Interaction Design</li><li>Information Architecture</li><li>Prototyping</li><li>Priority matrix</li><li>Impact–effort matrix</li><li>User-Centered Design</li><li>User Interface Design</li><li>User Flows</li><li>Design Iteration</li><li>How Might We</li><li>SCAMPER</li><li>Storyboarding</li><li>Task Analysis</li><li>Data Portal Design</li><li>Wireframing</li><li>Interactive Prototypes</li><li>High-Fidelity Screens</li><li>Infographics</li><li>Illustrations</li><li>Animations</li></ul><h3>Tools I use</h3><ul><li>Figma</li><li>Framer</li><li>ProtoPie</li><li>Illustrator</li><li>Photoshop</li><li>Figma Make</li></ul></details>
+<details class="toolkit-static-area"><summary>Think in systems</summary><p>I look at the complete experience, including the people, services and steps around the screen. Journey maps help me see where a problem happens; 5 Whys and Fishbone help me explore possible causes. I connect these findings so that a change in one part does not create a new problem elsewhere.</p><h3>Methods &amp; skills</h3><ul><li>Journey Mapping</li><li>Service Design</li><li>Systems Mapping</li><li>5 Whys</li><li>Fishbone diagram</li><li>Design Systems</li><li>Analytical Thinking</li><li>Flow Model</li><li>Sequence Model</li><li>Artifact Model</li></ul></details>
+<details class="toolkit-static-area"><summary>Work across disciplines</summary><p>I discuss the problem, ideas and practical limits with my teammates so we can make decisions together. I explain my design choices and prepare the screens, components and notes needed for the next stage. In physical projects, I contribute concept development, electronics or prototype work according to my role.</p><p>My electronics background also supports physical prototyping: electronics and game logic for Giggles, and concept development and shared 3D-printing work for the syringe project.</p><h3>Methods &amp; skills</h3><ul><li>Collaboration</li><li>Communication</li><li>Problem Solving</li><li>Cross-Functional Collaboration</li><li>Stakeholder Communication</li><li>Planning &amp; Organising</li><li>Leadership</li><li>High-Pressure Resilience</li><li>Design Handoff</li></ul><h3>Tools I use</h3><ul><li>GitHub</li><li>3D printing</li><li>Arduino C++</li><li>ESP32</li><li>RFID (MFRC522)</li></ul></details>
+<details class="toolkit-static-area"><summary>Code to explore</summary><p>With AI support, I build working demos to check interactions that are difficult to explain with static screens. I try the demo, compare its behaviour with the intended design and request focused changes. This helps me explore whether an idea works before it becomes a finished product.</p><p>I use AI support to build and revise working prototypes, then review the behaviour against the design intent.</p><h3>Methods &amp; skills</h3><ul><li>HTML</li><li>CSS</li><li>GitHub</li><li>Rapid Prototyping</li></ul><h3>Tools I use</h3><ul><li>GitHub</li><li>VS Code</li><li>GitHub Copilot</li><li>Antigravity</li></ul></details>
+<details class="toolkit-static-area"><summary>Think and make with AI</summary><p>I use AI to organise information, compare ideas, explore visual directions and help build prototypes. I give it a clear task and relevant context, then review the result against the sources and project needs. I check the facts, make corrections and take responsibility for the design decisions.</p><p>Different tools support different tasks. I review their output; this list describes use, not a proficiency ranking.</p><h3>Methods &amp; skills</h3><ul><li>AI Prototyping</li><li>Conversational UX</li><li>Prompting</li></ul><h3>Tools I use</h3><ul><li>ChatGPT</li><li>Gemini</li><li>Claude</li><li>Figma Make</li><li>GitHub Copilot</li><li>Midjourney</li><li>Perplexity</li><li>NotebookLM (Google)</li><li>Antigravity</li><li>Google Search (AI Mode)</li><li>LLM Arena</li></ul></details></div>
+<!-- portfolio-toolkit:end -->
+</div>
   <noscript><p>My practice spans user research, usability testing, eye tracking, interaction design, information architecture, prototyping, journey mapping, service design, systems mapping, collaboration, communication, problem solving, HTML, CSS, rapid prototyping, AI prototyping, conversational UX and prompting.</p><p>Tools: Miro, Notion, FigJam, Figma, Framer, GitHub, VS Code, ChatGPT, Gemini and Claude.</p></noscript>
 </section>
+
+<!-- portfolio-background:start -->
+<section id="background" class="resume-background wrap practice-section" data-resume-background-fallback aria-label="Experience, education and courses"><div class="resume-journey-columns"><section class="resume-journey-column" aria-labelledby="resume-static-work"><h2 class="resume-journey-heading" id="resume-static-work">Experience</h2><ol class="resume-timeline"><li class="resume-timeline-item"><h3 class="resume-entry-title">Baragaun</h3><p class="resume-entry-place">Product Designer (Contract)</p><p class="resume-entry-date">Nov 2023 – Jan 2024</p><p class="resume-entry-description">Designed layouts for a responsive website after competitor and secondary research; completed the design handoff for development.</p><p class="resume-entry-description">Developed wireframes, mockups and an interactive prototype for a mobile app. Presented user flows in stakeholder reviews.</p></li><li class="resume-timeline-item"><h3 class="resume-entry-title">Novae Avenue</h3><p class="resume-entry-place">Product Design Intern</p><p class="resume-entry-date">Jul 2023 – Aug 2023</p><p class="resume-entry-description">Designed a data portal, landing page and brochure for customers of a 4G dashcam product.</p><p class="resume-entry-description">Redesigned the dashcam app&#39;s customer-facing core and secondary screens.</p></li></ol></section><section class="resume-journey-column" aria-labelledby="resume-static-education"><h2 class="resume-journey-heading" id="resume-static-education">Education</h2><ol class="resume-timeline"><li class="resume-timeline-item"><h3 class="resume-entry-title">M.Des in User Experience</h3><p class="resume-entry-place">MIT ADT University, Pune</p><p class="resume-entry-date">Jul 2025 – Jul 2027 (expected)</p></li><li class="resume-timeline-item"><h3 class="resume-entry-title">B.Tech in Electronics &amp; Telecommunication</h3><p class="resume-entry-place">SSIPMT Raipur</p><p class="resume-entry-date">2019 – 2022</p></li></ol></section></div><section class="resume-courses" aria-labelledby="resume-static-courses"><h2 class="resume-courses-heading" id="resume-static-courses">Courses &amp; workshops</h2><ul class="resume-course-list"><li><p class="resume-course-title">UX Design Process</p><p class="resume-course-provider">Google · Coursera</p></li><li><p class="resume-course-title">UI/UX Training</p><p class="resume-course-provider">Internshala</p></li><li><p class="resume-course-title">UX Workshop</p><p class="resume-course-provider">GrowthSchool</p></li><li><p class="resume-course-title">Graphic Design Elements for Non-Designers Specialization</p><p class="resume-course-provider">University of Colorado Boulder · Coursera</p></li><li><p class="resume-course-title">Basic Elements of Design: Design Principles and Software Overview</p><p class="resume-course-provider">University of Colorado Boulder · Coursera</p></li><li><p class="resume-course-title">Textual Elements of Design: Fonts, Typography, and Spacing</p><p class="resume-course-provider">University of Colorado Boulder · Coursera</p></li><li><p class="resume-course-title">Print and Digital Elements of Design: Branding and User Experience</p><p class="resume-course-provider">University of Colorado Boulder · Coursera</p></li><li><p class="resume-course-title">Graphic Elements of Design: Color Theory and Image Formats</p><p class="resume-course-provider">University of Colorado Boulder · Coursera</p></li><li><p class="resume-course-title">Fundamentals of Graphic Design</p><p class="resume-course-provider">California Institute of the Arts · Coursera</p></li><li><p class="resume-course-title">Introduction to Imagemaking</p><p class="resume-course-provider">California Institute of the Arts · Coursera</p></li><li><p class="resume-course-title">Ideas from the History of Graphic Design</p><p class="resume-course-provider">California Institute of the Arts · Coursera</p></li></ul></section></section>
+<!-- portfolio-background:end -->
 
 <section id="resources" class="practice-section resources-section wrap" aria-labelledby="resources-title">
   <header class="section-heading"><h2 id="resources-title" tabindex="-1">Resources for the design community</h2></header>
@@ -219,11 +362,17 @@
   <header class="play-invitation-heading">
     <div>
     <h2 id="play-invitation-title">Explore by bicycle</h2>
-    <p>Ride through my projects, music and a few personal favourites.</p>
+    <p>My projects, the music I make and the skies I stop to photograph—all have a place in the bicycle garden.</p>
     </div>
     <a class="text-action" href="../bicycle-world/dist/" data-play-mode-link>Enter Play mode</a>
   </header>
   <a class="play-preview" href="../bicycle-world/dist/" data-play-mode-link aria-label="Explore the bicycle garden in Play mode"><img src="./assets/play-promo/approved-20261110/play-mode.webp" width="1734" height="907" loading="lazy" decoding="async" alt="Illustrated Play-mode cover introducing the interactive portfolio garden."></a>
+  <div class="play-connection" aria-label="The work and personal moments behind Play">
+    <figure><img src="./assets/cases/giggles/build-photos/IMG-20261007-WA0008.jpg" width="960" height="1280" loading="lazy" decoding="async" alt="Original Giggles board during assembly, with phone holders and physical shape controls."><figcaption><strong>Works</strong>The same seven projects, with direct case-study access inside the garden.</figcaption></figure>
+    <figure><img src="./assets/personal/junoon.webp" width="899" height="900" loading="lazy" decoding="async" alt="Lakshya singing into a microphone on stage at Junoon."><figcaption><strong>Hobbies</strong>My singing, Junoon and Garba—through recordings and photographs.</figcaption></figure>
+    <figure><img src="../bicycle-world/dist/assets/personal/photography-library/layers-of-cloud.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Lakshya’s photograph of sunlight over layers of clouds and distant hills."><figcaption><strong>The Viewfinder</strong>My own camera roll, from cloud formations to everyday details.</figcaption></figure>
+  </div>
+  <p class="play-connection-note">Ride between these places, or choose a destination on the map. The Portfolio switch brings you back to this reading view.</p>
   <div class="play-invitation-copy">
     <p class="play-device-note">For the best experience, explore Play mode on a computer or laptop.</p>
     <details id="play-break" class="pixel-demo-disclosure"><summary>Try a small drawing toy <span aria-hidden="true">+</span></summary><p>A small portfolio toy inspired by Pixel Mania. Tap a square to cycle through five colours.</p><div id="pixel-break"></div><p><a href="https://pixel-mania-game.vercel.app/" target="_blank" rel="noopener noreferrer">Play Pixel Mania</a> · <a href="#project-pixel-mania">Read the case study</a></p></details>
@@ -256,7 +405,7 @@
 
   <footer class="site-footer wrap">
     <a class="footer-identity" href="./" aria-label="Lakshya Chopkar, home"><img class="identity-mark" src="./assets/identity/shared-curve/lc-ink.svg" width="40" height="33" alt="" aria-hidden="true"></a>
-    <nav class="footer-sections" aria-label="More portfolio sections"><a href="#resources">Resources</a><a href="#toolkit">How I work</a><a href="./map.html">Sitemap</a><a href="#top">Back to top</a></nav>
+    <nav class="footer-sections" aria-label="More portfolio sections"><a href="#resources">Resources</a><a href="#toolkit">How I work</a><a href="#background">Background</a><a href="./map.html">Sitemap</a><a href="#top">Back to top</a></nav>
     <p class="footer-accessibility">Interface colours are checked against WCAG 2.2 AA contrast targets. Keyboard navigation and reduced-motion options are available.</p>
   </footer>
   <div id="portfolio-assistant"></div>

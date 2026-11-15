@@ -4,6 +4,12 @@ import {disposeCharacterAsset} from './character-loader.js';
 
 export const VISITOR_BOARD_LOCATION=Object.freeze({x:44,z:34,yaw:2.91,pole:Object.freeze({x:42.60,z:34.46}),approach:Object.freeze({x:50,z:7})});
 
+/** Let a roadside sentence finish through the return bend without boundary chatter. */
+export function visitorNarrationPresence(position,previous=false,active=true){
+ const distance=Math.hypot(position.x-VISITOR_BOARD_LOCATION.x,position.z-VISITOR_BOARD_LOCATION.z);
+ return Boolean(active&&distance<(previous?48:28));
+}
+
 // Notice either the close roadside approach or a shortcut across the return
 // meadow. An initial arrival at the start must never count as a completed lap.
 export function visitorBoardPresence(state,previous={approached:false,passed:false},active=true){
@@ -52,5 +58,5 @@ export function createVisitorBoard(scene,{onOpen=()=>{},onPass=()=>{}}={}){
  async function refresh(){try{const r=await fetch('/api/reviews',{cache:'no-store'});if(!r.ok)throw Error();const data=await r.json();if(!dead){reviews=Array.isArray(data.reviews)?data.reviews:[];loadState='ready';draw();}}catch{if(!dead){loadState='error';draw();}}}
  draw();
  const ready=new GLTFLoader().loadAsync(new URL('../assets/visitor-board/billboard.glb',import.meta.url).href).then(gltf=>{if(dead){disposeCharacterAsset(gltf.scene);return;}source=gltf.scene;source.position.set(55,15,90);const display=source.getObjectByName('b');display.material=new THREE.MeshStandardMaterial({color:'#463b40',roughness:1});display.geometry=display.geometry.clone();display.geometry.translate(0,-405,90).scale(1,1.4,1.6).translate(0,305,-90);source.add(face);const canonical=new THREE.Group();canonical.rotation.y=Math.PI/2;canonical.add(source);source.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});root.add(canonical);void document.fonts.ready.then(()=>{if(!dead)draw();});void refresh();}).catch(e=>console.warn('Visitor board model unavailable; feedback remains in Guide.',e));
- return {ready,root,refresh,setReviews(items){reviews=Array.isArray(items)?items:[];loadState='ready';draw();},get near(){return near;},pick(raycaster){return source?raycaster.intersectObject(root,true).length>0:false;},update(state,active,night){if(dead)return;const next=visitorBoardPresence(state,{approached,passed},active);near=next.near;approached=next.approached;passed=next.passed;open.hidden=!near;if(next.invite)onPass();},dispose(){dead=true;open.remove();source&&disposeCharacterAsset(source);face.geometry.dispose();faceMaterial.dispose();texture.dispose();root.removeFromParent();}};
+ return {ready,root,refresh,setReviews(items){reviews=Array.isArray(items)?items:[];loadState='ready';draw();},get near(){return near;},get available(){return Boolean(source&&!dead&&root.children.length);},pick(raycaster){return source?raycaster.intersectObject(root,true).length>0:false;},update(state,active,night){if(dead)return;const next=visitorBoardPresence(state,{approached,passed},active);near=next.near;approached=next.approached;passed=next.passed;open.hidden=!near;if(next.invite)onPass();},dispose(){dead=true;open.remove();source&&disposeCharacterAsset(source);face.geometry.dispose();faceMaterial.dispose();texture.dispose();root.removeFromParent();}};
 }

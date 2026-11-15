@@ -1,6 +1,18 @@
 (() => {
   'use strict';
 
+  // The ticket click is the owner's explicit sound-enabled Play entry.
+  // Keep one resumed context in the persistent shell while the model loads.
+  function unlockPlayNarration() {
+    try {
+      const saved=JSON.parse(localStorage.getItem('lakshya-bicycle-v1')||'null');
+      if(saved?.tourVoice===false)return;
+      const Context=window.AudioContext||window.webkitAudioContext;if(!Context)return;
+      const context=window.__portfolioNarrationContext ||=new Context();
+      if(context.state==='suspended')void context.resume().catch(()=>{});
+    } catch {}
+  }
+  window.__unlockPortfolioNarration=unlockPlayNarration;
   const stateKey = 'portfolioShellRoute';
   const childStateKey = 'portfolioShellChildState';
   const entranceTitle = document.title;
@@ -49,6 +61,7 @@
   }
 
   function showEntrance() {
+    void window.__portfolioNarrationContext?.suspend().catch(()=>{});
     frame?.remove();
     frame = undefined;
     entrance.hidden = false;
@@ -60,6 +73,7 @@
   }
 
   function showApp(route, childState = null) {
+    if(!route.startsWith('/bicycle-world/'))void window.__portfolioNarrationContext?.suspend().catch(()=>{});
     lastRoute = route;
     if (frame) {
       const current = frame.contentWindow.location;
@@ -111,6 +125,7 @@
     const route = routeFrom(link.href);
     if (!route) return;
     event.preventDefault();
+    if(route.startsWith('/bicycle-world/'))unlockPlayNarration();
     record(route, null, 'pushState');
     showApp(route);
   });

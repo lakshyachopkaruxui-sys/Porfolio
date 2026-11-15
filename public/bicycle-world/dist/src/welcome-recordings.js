@@ -1,7 +1,14 @@
 /** Plays only supplied recordings. Missing clips remain a silent, readable UI. */
-export function createWelcomeRecordings({clips = {}, AudioClass = globalThis.Audio, mountAudio = () => {}, onState = () => {}} = {}) {
+export function createWelcomeRecordings({clips = {}, AudioClass = globalThis.Audio, mountAudio = () => {}, onState = () => {}, onEnded = () => {},
+  setTimeout: setTimer = globalThis.setTimeout, clearTimeout: clearTimer = globalThis.clearTimeout, startDeadlineMs = 8000} = {}) {
   const supported = typeof AudioClass === 'function';
   let enabled = false, speaking = false, disposed = false, active = null, kind = null, error = null, generation = 0, playback = 'idle';
+  let startTimer = null, playbackTimer = null;
+  function clearDeadlines() {
+    if (startTimer !== null) clearTimer(startTimer);
+    if (playbackTimer !== null) clearTimer(playbackTimer);
+    startTimer = playbackTimer = null;
+  }
 
   function clipFor(name) {
     const clip = clips?.[name];
@@ -13,7 +20,7 @@ export function createWelcomeRecordings({clips = {}, AudioClass = globalThis.Aud
   }
   function release(audio) {
     if (!audio) return;
-    audio.onplaying = null; audio.onended = null; audio.onerror = null;
+    audio.onplaying = null; audio.onwaiting = null; audio.onended = null; audio.onerror = null; audio.onpause = null;
     try { audio.pause(); } catch {}
     try { audio.currentTime = 0; } catch {}
     try {
@@ -25,6 +32,7 @@ export function createWelcomeRecordings({clips = {}, AudioClass = globalThis.Aud
   }
   function stop() {
     generation++;
+    clearDeadlines();
     const previous = active;
     active = null; speaking = false; kind = null; playback = 'idle';
     release(previous); emit();
@@ -45,12 +53,14 @@ export function createWelcomeRecordings({clips = {}, AudioClass = globalThis.Aud
     const clip = clipFor(name);
     stop(); error = null;
     const token = generation;
-    let audio;
+    let audio, started = false;
     const current = () => !disposed && active === audio && token === generation;
-    const finish = message => {
+    const finish = (message, ended = false) => {
       if (!current()) return;
+      clearDeadlines();
       active = null; speaking = false; kind = null; error = message; playback = message ? 'error' : 'idle';
       release(audio); emit();
+      if (ended) { try { onEnded(name); } catch {} }
     };
     try {
       // A fresh element has no old media events waiting for its new handlers.
@@ -58,11 +68,28 @@ export function createWelcomeRecordings({clips = {}, AudioClass = globalThis.Aud
       audio = new AudioClass();
       audio.preload = 'none';
       audio.src = clip.src.trim();
-      audio.onplaying = () => { if (current()) { speaking = true; playback = 'playing'; emit(); } };
-      audio.onended = () => finish(null);
+      audio.onplaying = () => {
+        if (!current()) return;
+        if (startTimer !== null) { clearTimer(startTimer); startTimer = null; }
+        if (!started) {
+          started = true;
+          const duration = Number(clip.durationSeconds);
+          playbackTimer = setTimer(() => finish('playback-timeout'), Number.isFinite(duration) && duration > 0 ? duration * 1000 + 5000 : 45000);
+        }
+        speaking = true; playback = 'playing'; emit();
+      };
+      // Buffering does not pause HTML media or release its current owner. Stop
+      // the mouth/gesture clock until native playing resumes at the same time.
+      audio.onwaiting = () => {
+        if (!current()) return;
+        playback = 'buffering'; emit();
+      };
+      audio.onended = () => finish(null, true);
+      audio.onpause = () => {if(current()&&!audio.ended)finish('recording-paused');};
       audio.onerror = () => finish('recording-unavailable');
       active = audio; speaking = true; kind = name; playback = 'loading';
       mountAudio(audio, name);
+      startTimer = setTimer(() => finish('recording-timeout'), Number.isFinite(startDeadlineMs) && startDeadlineMs > 0 ? startDeadlineMs : 8000);
       const playbackPromise = audio.play();
       // Invocation remains synchronous so a click retains its browser audio
       // permission. A rejected promise updates captions, never navigation.
@@ -70,6 +97,7 @@ export function createWelcomeRecordings({clips = {}, AudioClass = globalThis.Aud
       emit();
       return true;
     } catch {
+      clearDeadlines();
       if (active === audio) { active = null; speaking = false; kind = null; }
       release(audio); error = 'recording-unavailable'; playback = 'error'; emit();
       return false;
@@ -81,6 +109,7 @@ export function createWelcomeRecordings({clips = {}, AudioClass = globalThis.Aud
   }
   return {
     get enabled() { return enabled; }, get supported() { return supported; }, get speaking() { return speaking; }, get playback() { return playback; },
+    get frame(){return {kind,time:active?.currentTime||0,durationSeconds:clips[kind]?.durationSeconds,playing:playback==='playing'&&!active?.paused};},
     available, setEnabled, play, stop, dispose,
   };
 }

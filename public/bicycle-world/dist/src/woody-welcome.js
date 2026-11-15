@@ -1,3 +1,5 @@
+import {createWelcomeFace,sampleWelcomeExpression} from './woody-welcome-expression.js';
+import {createSpeechJaw} from './woody-speech.js';
 import {clone} from 'three/addons/utils/SkeletonUtils.js';
 import {createWelcomeGarden} from './welcome-garden.js';
 
@@ -10,7 +12,7 @@ export function sampleWoodyGreeting(time){
   const progress=Math.max(0,Math.min(1,(t-.62)/1.25));
   const envelope=ease(progress/.12)*ease((1-progress)/.12);
   const sweep=envelope>0?Math.sin(progress*Math.PI*4)*envelope:0;
-  return {lift,sweep,waveAngle:.50*sweep};
+  return {lift,sweep,waveAngle:.50*sweep*(1-.28*ease((t-1.15)/.65))};
 }
 
 /** A separately posed host. Geometry, materials and textures remain source-owned. */
@@ -32,7 +34,7 @@ export function createWoodyWelcome(THREE,sourceModel){
     if(!bone)throw new Error(`Woody welcome rig is missing ${suffix}`);
     return bone;
   };
-  const pelvis=find('Pelvis'),head=find('Head1'),neck=find('Neck1');
+  const pelvis=find('Pelvis'),head=find('Head1'),neck=find('Neck1'),spine=find('Spine');
   const rest=new Map(bones.map(bone=>[bone,{position:bone.position.clone(),quaternion:bone.quaternion.clone(),scale:bone.scale.clone()}]));
   const neutralHead=neck.getWorldQuaternion(new THREE.Quaternion());
   // The supplied eyeball objects have a baked sideways glance, independent of
@@ -50,7 +52,7 @@ export function createWoodyWelcome(THREE,sourceModel){
   const a=new THREE.Vector3(),b=new THREE.Vector3(),direction=new THREE.Vector3(),bend=new THREE.Vector3(),joint=new THREE.Vector3(),goal=new THREE.Vector3();
   const delta=new THREE.Quaternion(),world=new THREE.Quaternion(),parent=new THREE.Quaternion(),handRotation=new THREE.Quaternion(),headRotation=new THREE.Quaternion();
   const zAxis=new THREE.Vector3(0,0,1),xAxis=new THREE.Vector3(1,0,0),yAxis=new THREE.Vector3(0,1,0),pole=new THREE.Vector3(),gaze=new THREE.Vector3();
-  const portraitDirection=new THREE.Vector3(0,0,1);
+  const portraitDirection=new THREE.Vector3(0,0,1),gazeTarget=new THREE.Vector3();
   let gardenView=false;
   function setWorldRotation(bone,quaternion){
     bone.parent.getWorldQuaternion(parent).invert();bone.quaternion.copy(parent).multiply(quaternion).normalize();bone.updateWorldMatrix(false,true);
@@ -65,14 +67,20 @@ export function createWoodyWelcome(THREE,sourceModel){
     const along=(upper*upper-lower*lower+distance*distance)/(2*distance),height=Math.sqrt(Math.max(0,upper*upper-along*along));
     // Let the elbow hang below the waving hand instead of lifting the whole
     // upper arm into a rigid salute. The resting pose retains its old pole.
-    pole.set(arm.side*(1-.5*raised),.05-1.05*raised,-.2);bend.copy(pole).addScaledVector(direction,-pole.dot(direction)).normalize();
+    pole.set(arm.side*(1-.5*raised),.05-1.05*raised,-.2);if(arm.side===1){const t=expression.explain;pole.x+=(.3-pole.x)*t;pole.y+=(-1-pole.y)*t;pole.z+=(.1-pole.z)*t;}bend.copy(pole).addScaledVector(direction,-pole.dot(direction)).normalize();
     joint.copy(a).addScaledVector(direction,along).addScaledVector(bend,height);aim(arm.upper,arm.lower,joint);aim(arm.lower,arm.hand,target);
     return Math.abs(distance-requested);
   }
+  const speechJaw=createSpeechJaw(THREE,bones,{maxAngle:.16,restAngle:-.03});
+  const welcomeFace=createWelcomeFace(THREE,{head,bones,eyes});
+  let expression={blink:0,tilt:0,lean:0,explain:0,brow:0};
+  let mouthOpening=0;
   const smooth=value=>{const x=THREE.MathUtils.clamp(value,0,1);return x*x*(3-2*x);};
-  let elapsed=0,currentPhase='welcome',disposed=false,lastReduced=false,lastWave=0,lastReach=0,lastSweep=0;
-  function pose(phaseTime,reduced,phase,speaking){
+  let elapsed=3,currentPhase='welcome',disposed=false,lastReduced=false,lastWave=0,lastReach=0,lastSweep=0;
+  function pose(phaseTime,reduced,phase,speaking,dt=0){
     for(const bone of bones){const saved=rest.get(bone);bone.position.copy(saved.position);bone.quaternion.copy(saved.quaternion);bone.scale.copy(saved.scale);}
+    spine.quaternion.multiply(delta.setFromAxisAngle(zAxis,expression.lean));
+    spine.quaternion.multiply(delta.setFromAxisAngle(yAxis,.028*expression.explain));
     scene.updateMatrixWorld(true);
     const gesture=sampleWoodyGreeting(phaseTime);
     const greeting=phase==='departure'
@@ -82,10 +90,10 @@ export function createWoodyWelcome(THREE,sourceModel){
     const wave=reduced||phase==='departure'?0:gesture.waveAngle;
     lastWave=lift;lastSweep=reduced?0:gesture.sweep;lastReach=0;
     for(const arm of arms){
-      const raised=arm.side===-1?lift:0;
+      const raised=arm.side===-1?lift:expression.explain*.72;
       // Establish a relaxed raised pose with enough space outside the face
       // for the whole forearm/hand pair to sweep about the elbow.
-      goal.set(arm.side*(.225+.225*raised),.745+.745*raised,.055+.085*raised);
+      goal.set(arm.side*(.225+(arm.side===1?.12:.225)*raised),.745+(arm.side===1?.75:.745)*raised,.055+(arm.side===1?.35:.085)*raised);
       lastReach=Math.max(lastReach,armTo(arm,goal,raised));
       // The bind palm is edge-on to the camera. Turn it toward the visitor
       // before the shared sweep; there is no independent wrist oscillation.
@@ -96,17 +104,21 @@ export function createWoodyWelcome(THREE,sourceModel){
         // Align the hand's longitudinal axis with elbow-to-wrist direction.
         // Sharing an oscillation alone would retain a visibly bent wrist.
         arm.hand.getWorldPosition(a);arm.lower.getWorldPosition(b);
-        direction.copy(a).sub(b).normalize();bend.set(-1,0,0).applyQuaternion(world).normalize();
+        direction.copy(a).sub(b).normalize();bend.set(arm.side,0,0).applyQuaternion(world).normalize();
         world.premultiply(delta.setFromUnitVectors(bend,direction));
-        handRotation.slerp(world,raised);
+        const conversational=arm.side===1?expression.explain:0;
+        if(conversational)world.premultiply(delta.setFromAxisAngle(direction,.22*conversational));
+        handRotation.slerp(world,conversational>0?smooth(conversational):raised);
       }
       setWorldRotation(arm.hand,handRotation);
       for(const finger of arm.fingers){
         const digit=finger.name.split('Finger')[1].split('_')[0];
-        const curl=(digit[0]==='0'?.16:.10)*(1-raised);
+        const number=Number(digit[0])||0,segment=Number(digit[1])||0;
+        const conversational=arm.side===1?expression.explain:0;
+        const curl=(number===0?.16:.10)*(1-raised)+(conversational?(number===0?.10:(.14+number*.025)*(segment===0?.5:segment===1?.75:1))*conversational:.025*raised);
         delta.setFromAxisAngle(zAxis,-arm.side*curl);finger.quaternion.multiply(delta);
       }
-      if(raised&&wave){
+      if(arm.side===-1&&raised&&wave){
         // One world-space elbow rotation carries the forearm and all its
         // descendants together. The wrist keeps exactly the same local pose,
         // so hand and forearm share angle, direction, and timing.
@@ -115,8 +127,9 @@ export function createWoodyWelcome(THREE,sourceModel){
         setWorldRotation(arm.lower,world);
       }
     }
-    const nod=!reduced&&speaking?Math.sin(phaseTime*3.2)*.018:0;
-    headRotation.copy(neutralHead).premultiply(delta.setFromAxisAngle(xAxis,nod));
+    const nod=!reduced&&speaking?(expression.nod||0):0;
+    headRotation.copy(neutralHead).premultiply(delta.setFromAxisAngle(zAxis,expression.tilt)).premultiply(delta.setFromAxisAngle(xAxis,nod));
+    headRotation.premultiply(delta.setFromAxisAngle(yAxis,-.018*expression.explain));
     if(gardenView)headRotation.premultiply(delta.setFromUnitVectors(zAxis,portraitDirection));
     if(!reduced&&phase==='welcome')headRotation.premultiply(delta.setFromAxisAngle(zAxis,-.025*lift));
     if(!reduced&&phase==='departure')headRotation.premultiply(delta.setFromAxisAngle(yAxis,-.06*smooth(phaseTime/.4)));
@@ -128,9 +141,12 @@ export function createWoodyWelcome(THREE,sourceModel){
       // Orthographic portrait rays are parallel: look along +Z, not down at
       // the camera's full-body framing centre. Compensate the tiny head nod.
       gaze.copy(yAxis).applyQuaternion(world).normalize();
-      delta.setFromUnitVectors(gaze,portraitDirection);world.premultiply(delta);
+      gazeTarget.copy(portraitDirection);if(!reduced){gazeTarget.x-=.04*expression.explain;gazeTarget.y+=.012*expression.explain;}gazeTarget.normalize();
+      delta.setFromUnitVectors(gaze,gazeTarget);world.premultiply(delta);
       setWorldRotation(eye.object,world);
     }
+    speechJaw.apply(mouthOpening,dt,reduced,speaking);
+    welcomeFace.update(expression,{opening:speechJaw.opening,active:speaking&&!reduced});
     scene.updateMatrixWorld(true);skeletons.forEach(skeleton=>skeleton.update());
   }
   // Establish grounded boots from the actual skinned geometry, not a guessed
@@ -183,28 +199,32 @@ export function createWoodyWelcome(THREE,sourceModel){
     camera.position.set(centerX,centerY,5);camera.lookAt(centerX,centerY,0);
     camera.left=-viewWidth/2;camera.right=viewWidth/2;camera.top=viewHeight/2;camera.bottom=-viewHeight/2;camera.updateProjectionMatrix();
   }
-  function update({dt=0,reduced=false,phase='welcome',speaking=false}={}){
+  function update({dt=0,reduced=false,phase='welcome',speaking=false,speech,mouthOpen=0}={}){
     if(disposed)return;
     if(phase!==currentPhase){currentPhase=phase;elapsed=0;}
     const step=Math.max(0,Math.min(Number.isFinite(dt)?dt:0,.12));
     elapsed+=step;lastReduced=Boolean(reduced);
+    if(phase==='welcome'&&speech!==undefined)elapsed=speech?.kind==='welcome'&&speech.playing?Math.max(0,speech.time||0):3;
+    mouthOpening=mouthOpen;
+    expression=sampleWelcomeExpression(speech?.time??elapsed,{active:Boolean(speech?.playing&&speech?.kind==='welcome'),reduced,durationSeconds:speech?.durationSeconds});
     if(gardenView){
       if(lastReduced)pointerCurrent.set(0,0);
       else pointerCurrent.lerp(pointerTarget,1-Math.exp(-step*4));
       applyGardenCamera();
     }
-    pose(elapsed,lastReduced,currentPhase,Boolean(speaking));
+    pose(elapsed,lastReduced,currentPhase,Boolean(speaking),step);
   }
   function dispose(){
-    if(disposed)return;disposed=true;model.removeFromParent();skeletons.forEach(skeleton=>skeleton.dispose());garden?.dispose();shadowGeometry.dispose();shadowMaterial.dispose();scene.clear();
+    if(disposed)return;disposed=true;model.removeFromParent();skeletons.forEach(skeleton=>skeleton.dispose());welcomeFace.dispose();garden?.dispose();shadowGeometry.dispose();shadowMaterial.dispose();scene.clear();
   }
   resize(420,580);
   function setPointer(x=0,y=0){pointerTarget.set(THREE.MathUtils.clamp(Number.isFinite(x)?x:0,-1,1),THREE.MathUtils.clamp(Number.isFinite(y)?y:0,-1,1));}
-  function greet(){if(disposed||lastReduced||currentPhase!=='welcome'||elapsed<2.7)return false;elapsed=0;pose(0,false,'welcome',false);return true;}
+  function greet({force=false}={}){if(disposed||lastReduced||currentPhase!=='welcome'||(!force&&elapsed<2.7))return false;elapsed=0;pose(0,false,'welcome',false);return true;}
   return {scene,camera,model,resize,update,dispose,setPointer,greet,
     get canGreet(){return !disposed&&!lastReduced&&currentPhase==='welcome'&&elapsed>=2.7;},
+    get speechFrame(){return {blink:expression.blink,explain:expression.explain,elapsed,reduced:lastReduced,sweep:lastSweep,mouthOpen:speechJaw.opening};},
     get metrics(){
     const box=new THREE.Box3().setFromObject(model,true);
-    return {phase:currentPhase,elapsed,reduced:lastReduced,wave:lastWave,sweep:lastSweep,maxReachError:lastReach,bounds:{min:box.min.toArray(),max:box.max.toArray()},boneCount:bones.length,meshCount:meshes.length,garden:garden?.resourceCounts||null,disposed};
+    return {mouthOpen:speechJaw.opening,jawAvailable:speechJaw.available,phase:currentPhase,elapsed,reduced:lastReduced,wave:lastWave,sweep:lastSweep,maxReachError:lastReach,bounds:{min:box.min.toArray(),max:box.max.toArray()},boneCount:bones.length,meshCount:meshes.length,garden:garden?.resourceCounts||null,disposed};
   }};
 }

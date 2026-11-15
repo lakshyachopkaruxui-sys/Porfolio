@@ -1,0 +1,1141 @@
+{
+  "description": "Original synthetic expressive cowboy guide. No movie recording or actor clone.",
+  "status": "Complete locally verified revision",
+  "model": "Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice",
+  "model_revision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+  "model_license": "Apache-2.0",
+  "model_source": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice",
+  "speaker": "Built-in Aiden; no reference audio or cloning",
+  "processing": "Dry mono MP3; measured loudness normalization, no pitch shift or time stretch.",
+  "listening_approval": "Not claimed; ASR and measurements do not establish emotion or name pronunciation.",
+  "assets": [
+    {
+      "id": "controls-offer",
+      "filename": "controls-offer.mp3",
+      "text": "Before we ride, want a quick look at the guide? The Lakshya’s Garden board has the controls and shortcuts. You can open it anytime, or press the question mark key.",
+      "sha256": "f009bcf5c63d4f3f2768f53b6511df35195be8f91a5c41bad1713e53c26747ae",
+      "durationSeconds": 9.68,
+      "bytes": 117260,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "Before we ride, want a quick look at the guide? The Lakshya's garden board has the controls and shortcuts. You can open at any time, or press the question mark key.",
+          "normalized_word_error_rate": 0.0967741935483871,
+          "initial_normalized_word_error_rate": 0.0967741935483871
+        },
+        {
+          "model": "tiny.en",
+          "text": "Before we ride, want a quick look at the guide? The Lakshya's garden board has the controls and shortcuts. You can open it anytime or press the question mark key.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.0
+        }
+      ],
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_equivalences": [
+        "Case, Unicode accent and punctuation normalization",
+        "Ordinary contraction expansion; contextual has for he's brought/built and how's the ride been",
+        "UX and U X letter spelling",
+        "British/American favourites and favorites orthography",
+        "Acoustically identical visitors’/visitor’s possessive spelling; no conjunction equivalence",
+        "Natural spoken contraction wanna expanded to want to; source caption unchanged"
+      ],
+      "asr_normalization": "Unicode/case/punctuation, contractions with contextual has for brought/built/been and wanna/want to, UX letter spelling, favourites/favorites orthography, visitors’/visitor’s possessive spelling; no proper-name, conjunction or omitted-word substitutions.",
+      "integrated_lufs": -16.18,
+      "true_peak_dbtp": -1.29,
+      "seconds": 9.68,
+      "reused_unchanged": false
+    },
+    {
+      "id": "controls-yes",
+      "filename": "controls-yes.mp3",
+      "sha256": "c85571623bd9bd4f19b635307a9bd401c9ddb43b97c0bf527f8026237002938c",
+      "bytes": 85580,
+      "seconds": 7.04,
+      "durationSeconds": 7.04,
+      "integrated_lufs": -16.2,
+      "true_peak_dbtp": -1.22,
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "You got it. The shortcuts are here. Open. Read the tour lines for the full transcript. I'll wait here.",
+          "equivalent_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "You got it. The shortcuts are here. Open. Read the tour lines for the full transcript. I'll wait here.",
+          "equivalent_word_error_rate": 0.0
+        }
+      ],
+      "reused_unchanged": false
+    },
+    {
+      "id": "controls-no",
+      "filename": "controls-no.mp3",
+      "sha256": "59025a25024c1d2350500e6fe702d78944bb22eb8d809c4536b4ffe54e11b0f9",
+      "bytes": 64268,
+      "seconds": 5.28,
+      "durationSeconds": 5.28,
+      "integrated_lufs": -16.39,
+      "true_peak_dbtp": -1.32,
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.11764705882352941,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "Alright, let's explore. Need a hand later? Select guide or press the question mark key.",
+          "equivalent_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "Alright, let's explore. Need a hand later? Select Guide or press the question mark key.",
+          "equivalent_word_error_rate": 0.0
+        }
+      ],
+      "reused_unchanged": false
+    },
+    {
+      "id": "welcome",
+      "filename": "welcome.mp3",
+      "text": "Hi, I’m Woody! Welcome to Lakshya’s world. He’s brought his design projects, music, photographs and childhood favourites into this garden. I’ll show you around. Pick a path, and let’s get to know him.",
+      "sha256": "b104e81ae30f1ca0f1da78b38fda16451dcaf8c62d67c099f4eb7eba4a8e43b1",
+      "durationSeconds": 11.36,
+      "bytes": 137420,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "Hi, I'm Woody. Welcome to Lakshya's World. He's brought his design projects, music, photographs, and childhood favorites into this garden. I'll show you around. Pick a path. And let's get to know him.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.02631578947368421
+        },
+        {
+          "model": "tiny.en",
+          "text": "Hi, I'm Woody. Welcome to Lockshoes World. He's brought his design projects, music, photographs, and childhood favorites into this garden. I'll show you around. Pick a path. And let's get to know him.",
+          "normalized_word_error_rate": 0.05263157894736842,
+          "initial_normalized_word_error_rate": 0.07894736842105263
+        }
+      ],
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.02631578947368421,
+      "asr_equivalences": [
+        "Case, Unicode accent and punctuation normalization",
+        "Ordinary contraction expansion; contextual has for he's brought/built and how's the ride been",
+        "UX and U X letter spelling",
+        "British/American favourites and favorites orthography",
+        "Acoustically identical visitors’/visitor’s possessive spelling; no conjunction equivalence",
+        "Natural spoken contraction wanna expanded to want to; source caption unchanged"
+      ],
+      "asr_normalization": "Unicode/case/punctuation, contractions with contextual has for brought/built/been and wanna/want to, UX letter spelling, favourites/favorites orthography, visitors’/visitor’s possessive spelling; no proper-name, conjunction or omitted-word substitutions.",
+      "integrated_lufs": -15.99,
+      "true_peak_dbtp": -1.33,
+      "seconds": 11.36,
+      "reused_unchanged": false
+    },
+    {
+      "id": "departure",
+      "filename": "departure.mp3",
+      "sha256": "d1a5ad76d44e386f82ac46921102a11fd257c4e8f8fece3f2e300ae49a24f757",
+      "bytes": 45260,
+      "seconds": 3.68,
+      "durationSeconds": 3.68,
+      "integrated_lufs": -16.32,
+      "true_peak_dbtp": -1.29,
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "Here we go. A little of Lakshya around every bend.",
+          "equivalent_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "Here we go. A little of Lakshya around every bend.",
+          "equivalent_word_error_rate": 0.0
+        }
+      ],
+      "reused_unchanged": false
+    },
+    {
+      "id": "controls",
+      "filename": "controls.mp3",
+      "sha256": "dd89066779949e6e51ca11acbdd543a952b3b4ae8f60cd61c8824b2530453a3b",
+      "bytes": 125900,
+      "seconds": 10.4,
+      "durationSeconds": 10.4,
+      "integrated_lufs": -16.52,
+      "true_peak_dbtp": -1.34,
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0967741935483871,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "W pedals. A&D steer. Spaces your brake. Or click clear ground and I'll ride us there. Select guide or press the question mark key for every shortcut.",
+          "equivalent_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "W pedals. A&D steer. Spaces your brake. Or click clear ground and I'll ride us there. Select guide or press the question mark key for every shortcut.",
+          "equivalent_word_error_rate": 0.0
+        }
+      ],
+      "reused_unchanged": false
+    },
+    {
+      "id": "controls-takeover",
+      "filename": "controls-takeover.mp3",
+      "sha256": "34b6184070f1ae20481e3178db8526de7fa69a1420a13ea8aa618f60d8fc4ef0",
+      "bytes": 46988,
+      "seconds": 3.84,
+      "durationSeconds": 3.84,
+      "integrated_lufs": -16.36,
+      "true_peak_dbtp": -1.33,
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.1,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "Want to handle bars back, steer or break to take over.",
+          "equivalent_word_error_rate": 0.1
+        },
+        {
+          "model": "tiny.en",
+          "text": "Want the handlebars back? Steer or break to take over.",
+          "equivalent_word_error_rate": 0.0
+        }
+      ],
+      "reused_unchanged": true
+    },
+    {
+      "id": "arrival-guide",
+      "filename": "arrival-guide.mp3",
+      "sha256": "24e9e18f0992c4910ad07c5ea3a906673e303238153de6288781d8c5835bb52a",
+      "bytes": 93068,
+      "seconds": 7.68,
+      "durationSeconds": 7.68,
+      "integrated_lufs": -16.38,
+      "true_peak_dbtp": -1.32,
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "That board is our garden guide. Click it or press enter nearby for controls, the map, and the tour transcript.",
+          "equivalent_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "That board is our garden guide. Click it or press enter nearby for controls, the map and the tour transcript.",
+          "equivalent_word_error_rate": 0.0
+        }
+      ],
+      "reused_unchanged": false
+    },
+    {
+      "id": "approach:about",
+      "filename": "approach-about.mp3",
+      "text": "That’s Meet Lakshya. Step inside for his journey from engineering to UX, and a little about the person behind the work.",
+      "sha256": "5a4e376afdb97b36d7562f9d587fa3a2714d2d1cc9d4992dfd5e9a95560dd220",
+      "durationSeconds": 7.2,
+      "bytes": 87308,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "That's Meet Lakshya. Step inside for his journey from engineering to UX and a little about the person behind the work.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "That's Meet Lakshya. Step inside for his journey from engineering to UX and a little about the person behind the work.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.0
+        }
+      ],
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_equivalences": [
+        "Case, Unicode accent and punctuation normalization",
+        "Ordinary contraction expansion; contextual has for he's brought/built and how's the ride been",
+        "UX and U X letter spelling",
+        "British/American favourites and favorites orthography",
+        "Acoustically identical visitors’/visitor’s possessive spelling; no conjunction equivalence",
+        "Natural spoken contraction wanna expanded to want to; source caption unchanged"
+      ],
+      "asr_normalization": "Unicode/case/punctuation, contractions with contextual has for brought/built/been and wanna/want to, UX letter spelling, favourites/favorites orthography, visitors’/visitor’s possessive spelling; no proper-name, conjunction or omitted-word substitutions.",
+      "integrated_lufs": -16.09,
+      "true_peak_dbtp": -1.27,
+      "seconds": 7.2,
+      "reused_unchanged": false
+    },
+    {
+      "id": "approach:projects",
+      "filename": "approach-projects.mp3",
+      "text": "Here’s Works—Lakshya’s design projects. Come see the questions he explored, what he made and the decisions along the way.",
+      "sha256": "fb4bd008d2fbb256e594fce7ad84c0217fd35688403d436cebbb252706952fd1",
+      "durationSeconds": 8.24,
+      "bytes": 99980,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "Here's works. Lakshya's design projects. Come see the questions he explored. What he made and the decisions along the way.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "Here's works, Lakshya's design projects. Come see the questions he explored. Woody made and the decisions along the way.",
+          "normalized_word_error_rate": 0.09090909090909091,
+          "initial_normalized_word_error_rate": 0.09090909090909091
+        }
+      ],
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_equivalences": [
+        "Case, Unicode accent and punctuation normalization",
+        "Ordinary contraction expansion; contextual has for he's brought/built and how's the ride been",
+        "UX and U X letter spelling",
+        "British/American favourites and favorites orthography",
+        "Acoustically identical visitors’/visitor’s possessive spelling; no conjunction equivalence",
+        "Natural spoken contraction wanna expanded to want to; source caption unchanged"
+      ],
+      "asr_normalization": "Unicode/case/punctuation, contractions with contextual has for brought/built/been and wanna/want to, UX letter spelling, favourites/favorites orthography, visitors’/visitor’s possessive spelling; no proper-name, conjunction or omitted-word substitutions.",
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.45,
+      "seconds": 8.24,
+      "reused_unchanged": false
+    },
+    {
+      "id": "approach:work",
+      "filename": "approach-work.mp3",
+      "text": "Hear that? This is Hobbies. Lakshya’s singing and Garba live here—a little of the energy he brings beyond his design work.",
+      "sha256": "d5de1b13f54fe4e012dbd0a6a1d5af7fa89f7f2ccc4d5b7ecaff76613910c1dc",
+      "durationSeconds": 8.64,
+      "bytes": 104588,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "Hear that? This is Hobbes. Lakshya's singing and Garba live here. A little of the energy he brings beyond his design work.",
+          "normalized_word_error_rate": 0.043478260869565216,
+          "initial_normalized_word_error_rate": 0.043478260869565216
+        },
+        {
+          "model": "tiny.en",
+          "text": "Hear that? This is hobbies. Lakshya's singing and Garba live here. A little of the energy he brings beyond his design work.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.0
+        }
+      ],
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_equivalences": [
+        "Case, Unicode accent and punctuation normalization",
+        "Ordinary contraction expansion; contextual has for he's brought/built and how's the ride been",
+        "UX and U X letter spelling",
+        "British/American favourites and favorites orthography",
+        "Acoustically identical visitors’/visitor’s possessive spelling; no conjunction equivalence",
+        "Natural spoken contraction wanna expanded to want to; source caption unchanged"
+      ],
+      "asr_normalization": "Unicode/case/punctuation, contractions with contextual has for brought/built/been and wanna/want to, UX letter spelling, favourites/favorites orthography, visitors’/visitor’s possessive spelling; no proper-name, conjunction or omitted-word substitutions.",
+      "integrated_lufs": -16.11,
+      "true_peak_dbtp": -1.26,
+      "seconds": 8.64,
+      "reused_unchanged": false
+    },
+    {
+      "id": "approach:music",
+      "filename": "approach-music.mp3",
+      "text": "Oak’s lab is ahead. There’s a piece of Lakshya’s childhood in there—and a clue to how this garden began.",
+      "sha256": "36307a95f3811c8bbf74be24827e6ed7a45cf9fb97374c2795645e067273ecb6",
+      "durationSeconds": 5.76,
+      "bytes": 70028,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "Oak slab is ahead. There's a piece of Laksh's childhood in there and a clue to how this garden began.",
+          "normalized_word_error_rate": 0.13043478260869565,
+          "initial_normalized_word_error_rate": 0.13043478260869565
+        },
+        {
+          "model": "tiny.en",
+          "text": "Oak's lab is ahead. There's a piece of Lakshya's childhood in there and a clue to how this garden began.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.0
+        }
+      ],
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_equivalences": [
+        "Case, Unicode accent and punctuation normalization",
+        "Ordinary contraction expansion; contextual has for he's brought/built and how's the ride been",
+        "UX and U X letter spelling",
+        "British/American favourites and favorites orthography",
+        "Acoustically identical visitors’/visitor’s possessive spelling; no conjunction equivalence",
+        "Natural spoken contraction wanna expanded to want to; source caption unchanged"
+      ],
+      "asr_normalization": "Unicode/case/punctuation, contractions with contextual has for brought/built/been and wanna/want to, UX letter spelling, favourites/favorites orthography, visitors’/visitor’s possessive spelling; no proper-name, conjunction or omitted-word substitutions.",
+      "integrated_lufs": -15.99,
+      "true_peak_dbtp": -1.29,
+      "seconds": 5.76,
+      "reused_unchanged": false
+    },
+    {
+      "id": "approach:cloud",
+      "filename": "approach-cloud.mp3",
+      "text": "That’s The Viewfinder. Lakshya loves photographing clouds, and the everyday moments that catch his eye. Come see what makes him stop for a picture.",
+      "sha256": "6ba3c9ee5a180672a4109a419f5c6c504bb42f65c4cda35cca173f6bfb5abd11",
+      "durationSeconds": 10.56,
+      "bytes": 127628,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "That's the Viewfinder. Lakshya loves photographing clouds and the everyday moments that catch his eye. Come see what makes him stop for a picture.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "That's the viewfinder. Lakshya loves photographing clouds and the everyday moments that catches eye. Come see what makes him stop for a picture.",
+          "normalized_word_error_rate": 0.08,
+          "initial_normalized_word_error_rate": 0.08
+        }
+      ],
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_equivalences": [
+        "Case, Unicode accent and punctuation normalization",
+        "Ordinary contraction expansion; contextual has for he's brought/built and how's the ride been",
+        "UX and U X letter spelling",
+        "British/American favourites and favorites orthography",
+        "Acoustically identical visitors’/visitor’s possessive spelling; no conjunction equivalence",
+        "Natural spoken contraction wanna expanded to want to; source caption unchanged"
+      ],
+      "asr_normalization": "Unicode/case/punctuation, contractions with contextual has for brought/built/been and wanna/want to, UX letter spelling, favourites/favorites orthography, visitors’/visitor’s possessive spelling; no proper-name, conjunction or omitted-word substitutions.",
+      "integrated_lufs": -16.07,
+      "true_peak_dbtp": -1.31,
+      "seconds": 10.56,
+      "reused_unchanged": false
+    },
+    {
+      "id": "arrive:about",
+      "filename": "arrive-about.mp3",
+      "text": "That’s Meet Lakshya. Step inside for his journey from engineering to UX, and a little about the person behind the work.",
+      "sha256": "5a4e376afdb97b36d7562f9d587fa3a2714d2d1cc9d4992dfd5e9a95560dd220",
+      "durationSeconds": 7.2,
+      "bytes": 87308,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "That's Meet Lakshya. Step inside for his journey from engineering to UX and a little about the person behind the work.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "That's Meet Lakshya. Step inside for his journey from engineering to UX and a little about the person behind the work.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.0
+        }
+      ],
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_equivalences": [
+        "Case, Unicode accent and punctuation normalization",
+        "Ordinary contraction expansion; contextual has for he's brought/built and how's the ride been",
+        "UX and U X letter spelling",
+        "British/American favourites and favorites orthography",
+        "Acoustically identical visitors’/visitor’s possessive spelling; no conjunction equivalence",
+        "Natural spoken contraction wanna expanded to want to; source caption unchanged"
+      ],
+      "asr_normalization": "Unicode/case/punctuation, contractions with contextual has for brought/built/been and wanna/want to, UX letter spelling, favourites/favorites orthography, visitors’/visitor’s possessive spelling; no proper-name, conjunction or omitted-word substitutions.",
+      "integrated_lufs": -16.09,
+      "true_peak_dbtp": -1.27,
+      "seconds": 7.2,
+      "reused_unchanged": false
+    },
+    {
+      "id": "arrive:projects",
+      "filename": "arrive-projects.mp3",
+      "text": "Here’s Works—Lakshya’s design projects. Come see the questions he explored, what he made and the decisions along the way.",
+      "sha256": "fb4bd008d2fbb256e594fce7ad84c0217fd35688403d436cebbb252706952fd1",
+      "durationSeconds": 8.24,
+      "bytes": 99980,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "Here's works. Lakshya's design projects. Come see the questions he explored. What he made and the decisions along the way.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "Here's works, Lakshya's design projects. Come see the questions he explored. Woody made and the decisions along the way.",
+          "normalized_word_error_rate": 0.09090909090909091,
+          "initial_normalized_word_error_rate": 0.09090909090909091
+        }
+      ],
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_equivalences": [
+        "Case, Unicode accent and punctuation normalization",
+        "Ordinary contraction expansion; contextual has for he's brought/built and how's the ride been",
+        "UX and U X letter spelling",
+        "British/American favourites and favorites orthography",
+        "Acoustically identical visitors’/visitor’s possessive spelling; no conjunction equivalence",
+        "Natural spoken contraction wanna expanded to want to; source caption unchanged"
+      ],
+      "asr_normalization": "Unicode/case/punctuation, contractions with contextual has for brought/built/been and wanna/want to, UX letter spelling, favourites/favorites orthography, visitors’/visitor’s possessive spelling; no proper-name, conjunction or omitted-word substitutions.",
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.45,
+      "seconds": 8.24,
+      "reused_unchanged": false
+    },
+    {
+      "id": "arrive:work",
+      "filename": "arrive-work.mp3",
+      "text": "Hear that? This is Hobbies. Lakshya’s singing and Garba live here—a little of the energy he brings beyond his design work.",
+      "sha256": "d5de1b13f54fe4e012dbd0a6a1d5af7fa89f7f2ccc4d5b7ecaff76613910c1dc",
+      "durationSeconds": 8.64,
+      "bytes": 104588,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "Hear that? This is Hobbes. Lakshya's singing and Garba live here. A little of the energy he brings beyond his design work.",
+          "normalized_word_error_rate": 0.043478260869565216,
+          "initial_normalized_word_error_rate": 0.043478260869565216
+        },
+        {
+          "model": "tiny.en",
+          "text": "Hear that? This is hobbies. Lakshya's singing and Garba live here. A little of the energy he brings beyond his design work.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.0
+        }
+      ],
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_equivalences": [
+        "Case, Unicode accent and punctuation normalization",
+        "Ordinary contraction expansion; contextual has for he's brought/built and how's the ride been",
+        "UX and U X letter spelling",
+        "British/American favourites and favorites orthography",
+        "Acoustically identical visitors’/visitor’s possessive spelling; no conjunction equivalence",
+        "Natural spoken contraction wanna expanded to want to; source caption unchanged"
+      ],
+      "asr_normalization": "Unicode/case/punctuation, contractions with contextual has for brought/built/been and wanna/want to, UX letter spelling, favourites/favorites orthography, visitors’/visitor’s possessive spelling; no proper-name, conjunction or omitted-word substitutions.",
+      "integrated_lufs": -16.11,
+      "true_peak_dbtp": -1.26,
+      "seconds": 8.64,
+      "reused_unchanged": false
+    },
+    {
+      "id": "arrive:music",
+      "filename": "arrive-music.mp3",
+      "text": "Lakshya grew up imagining a world with Pokémon, and Toy Story stayed close to his heart, too. Here, his Pokémon GO collection sits alongside the story of turning those memories into a portfolio you can explore. Dr. Oak will take it from here.",
+      "sha256": "5c324ea27104b3230338a6c9c6f404ff26054c5bd76ce9e9e255608efddf6370",
+      "bytes": 198764,
+      "durationSeconds": 16.48,
+      "asr_best_wer": 0.0,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "Lakshya grew up imagining a world with Pokemon, and Toy Story stayed close to his heart too. Here, his Pokemon GO collection sits alongside the story of turning those memories into a portfolio you can explore. Dr. Oak will take it from here.",
+          "normalized_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "Lakshya grew up imagining a world with Pokemon, and Toy Story stayed close to his heart too. Here, his Pokemon GO collection sits alongside the story of turning those memories into a portfolio you can explore. Dr. Oak will take it from here.",
+          "normalized_word_error_rate": 0.0
+        }
+      ],
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.25,
+      "seconds": 16.48
+    },
+    {
+      "id": "arrive:cloud",
+      "filename": "arrive-cloud.mp3",
+      "text": "That’s The Viewfinder. Lakshya loves photographing clouds, and the everyday moments that catch his eye. Come see what makes him stop for a picture.",
+      "sha256": "6ba3c9ee5a180672a4109a419f5c6c504bb42f65c4cda35cca173f6bfb5abd11",
+      "durationSeconds": 10.56,
+      "bytes": 127628,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "That's the Viewfinder. Lakshya loves photographing clouds and the everyday moments that catch his eye. Come see what makes him stop for a picture.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "That's the viewfinder. Lakshya loves photographing clouds and the everyday moments that catches eye. Come see what makes him stop for a picture.",
+          "normalized_word_error_rate": 0.08,
+          "initial_normalized_word_error_rate": 0.08
+        }
+      ],
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_equivalences": [
+        "Case, Unicode accent and punctuation normalization",
+        "Ordinary contraction expansion; contextual has for he's brought/built and how's the ride been",
+        "UX and U X letter spelling",
+        "British/American favourites and favorites orthography",
+        "Acoustically identical visitors’/visitor’s possessive spelling; no conjunction equivalence",
+        "Natural spoken contraction wanna expanded to want to; source caption unchanged"
+      ],
+      "asr_normalization": "Unicode/case/punctuation, contractions with contextual has for brought/built/been and wanna/want to, UX letter spelling, favourites/favorites orthography, visitors’/visitor’s possessive spelling; no proper-name, conjunction or omitted-word substitutions.",
+      "integrated_lufs": -16.07,
+      "true_peak_dbtp": -1.31,
+      "seconds": 10.56,
+      "reused_unchanged": false
+    },
+    {
+      "id": "works-skipped",
+      "filename": "works-skipped.mp3",
+      "text": "We haven’t stopped at Works yet. Want to see Lakshya’s design projects, or keep exploring this side of him first? Your call.",
+      "sha256": "5b6c005002262f6eb7641583e140e38667d11f34ab2c58243ca8d2941802abe9",
+      "durationSeconds": 7.28,
+      "bytes": 88460,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "We haven't stopped at works yet. Wanna see Lakshya's design projects? Or keep exploring this side of him first. Your call.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.08333333333333333
+        },
+        {
+          "model": "tiny.en",
+          "text": "We haven't stopped at works yet. Wanna see Lakshya's design projects? Or keep exploring this side of him first? Your call.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.08333333333333333
+        }
+      ],
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.08333333333333333,
+      "asr_equivalences": [
+        "Case, Unicode accent and punctuation normalization",
+        "Ordinary contraction expansion; contextual has for he's brought/built and how's the ride been",
+        "UX and U X letter spelling",
+        "British/American favourites and favorites orthography",
+        "Acoustically identical visitors’/visitor’s possessive spelling; no conjunction equivalence",
+        "Natural spoken contraction wanna expanded to want to; source caption unchanged"
+      ],
+      "asr_normalization": "Unicode/case/punctuation, contractions with contextual has for brought/built/been and wanna/want to, UX letter spelling, favourites/favorites orthography, visitors’/visitor’s possessive spelling; no proper-name, conjunction or omitted-word substitutions.",
+      "integrated_lufs": -16.01,
+      "true_peak_dbtp": -1.42,
+      "seconds": 7.28,
+      "reused_unchanged": false
+    },
+    {
+      "id": "ramp-landed",
+      "filename": "ramp-landed.mp3",
+      "sha256": "bb1beed54dceec8459371ef12e8295a34135f08d0977da4dbba8eb3e51c1cabb",
+      "bytes": 52748,
+      "seconds": 4.32,
+      "durationSeconds": 4.32,
+      "integrated_lufs": -16.02,
+      "true_peak_dbtp": -2.04,
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.18181818181818182,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "Woohoo. Back on the path. Where shall we go next?",
+          "equivalent_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "Wahoo! Back on the path. Where shall we go next?",
+          "equivalent_word_error_rate": 0.1
+        }
+      ],
+      "reused_unchanged": true
+    },
+    {
+      "id": "room:about",
+      "filename": "room-about.mp3",
+      "text": "Lakshya loves starting conversations. Listening matters to him, too—it’s part of what drew him to design. His notebook brings together his background, the way he works and the things he makes time for. Choose a chapter that catches your eye.",
+      "sha256": "e7bb0bebf835be342636ea01cde2aeecd2b1953e8c7134dcd09a316ff585daf1",
+      "durationSeconds": 14.4,
+      "bytes": 173708,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "Lakshya loves starting conversations. Listening matters to him too. It's part of what drew him to design. His notebook brings together his background, the way he works and the things he makes time for. Choose a chapter that catches your eye.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "Lakshya loves starting conversations. Listening matters to him too. It's part of what drew him to design. His notebook brings together his background, the way he works and the things he makes time for. Choose a chapter that catches your eye.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.0
+        }
+      ],
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_equivalences": [
+        "Case, Unicode accent and punctuation normalization",
+        "Ordinary contraction expansion; contextual has for he's brought/built and how's the ride been",
+        "UX and U X letter spelling",
+        "British/American favourites and favorites orthography",
+        "Acoustically identical visitors’/visitor’s possessive spelling; no conjunction equivalence",
+        "Natural spoken contraction wanna expanded to want to; source caption unchanged"
+      ],
+      "asr_normalization": "Unicode/case/punctuation, contractions with contextual has for brought/built/been and wanna/want to, UX letter spelling, favourites/favorites orthography, visitors’/visitor’s possessive spelling; no proper-name, conjunction or omitted-word substitutions.",
+      "integrated_lufs": -16.12,
+      "true_peak_dbtp": -1.23,
+      "seconds": 14.4,
+      "reused_unchanged": false
+    },
+    {
+      "id": "room:projects",
+      "filename": "room-projects.mp3",
+      "text": "Pick a project to see Lakshya’s contribution and how the idea developed. The full case studies bring together his research, design decisions and original project material, including what still needs testing. Follow whichever story interests you.",
+      "sha256": "b3838f3d16b6856eee9cd0bb0a5777348aab5cb5395a1d600e5268ac694ae446",
+      "durationSeconds": 15.68,
+      "bytes": 189260,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "Pick a project to see Laksh's contribution and how the idea developed, the full case studies bring together his research, design decisions and original project material, including what still needs testing. Follow whichever story interests you.",
+          "normalized_word_error_rate": 0.02702702702702703,
+          "initial_normalized_word_error_rate": 0.02702702702702703
+        },
+        {
+          "model": "tiny.en",
+          "text": "Pick a project to see Lakshya's contribution and how the idea developed. The full case studies bring together his research, design decisions and original project material, including what still needs testing. Follow whichever story interests you.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.0
+        }
+      ],
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_equivalences": [
+        "Case, Unicode accent and punctuation normalization",
+        "Ordinary contraction expansion; contextual has for he's brought/built and how's the ride been",
+        "UX and U X letter spelling",
+        "British/American favourites and favorites orthography",
+        "Acoustically identical visitors’/visitor’s possessive spelling; no conjunction equivalence",
+        "Natural spoken contraction wanna expanded to want to; source caption unchanged"
+      ],
+      "asr_normalization": "Unicode/case/punctuation, contractions with contextual has for brought/built/been and wanna/want to, UX letter spelling, favourites/favorites orthography, visitors’/visitor’s possessive spelling; no proper-name, conjunction or omitted-word substitutions.",
+      "integrated_lufs": -16.01,
+      "true_peak_dbtp": -1.61,
+      "seconds": 15.68,
+      "reused_unchanged": false
+    },
+    {
+      "id": "room:work",
+      "filename": "room-work.mp3",
+      "text": "Lakshya enjoys sharing a song, and Garba brings together his love of music, movement and people. Visit the Listening Room for his recordings, or the courtyard for his Garba photographs. Take your time; I’ll let him do the performing.",
+      "sha256": "b369374198a7bd1cccdcae7934bdbc80658bb6bf72ca8acba2ab5e3dc3f1050e",
+      "durationSeconds": 15.92,
+      "bytes": 192140,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "Lakshya enjoys sharing a song, and Garba brings together his love of music, movement, and people. Visit the listening room for his recordings, or the courtyard for his Garba photographs. Take your time. I'll let him do the performing.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "Lakshya enjoys sharing a song and Garba brings together his love of music, movement and people. Visit the listening room for his recordings or the courtyard for his garba photographs. Take your time. I'll let him do the performing.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.0
+        }
+      ],
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_equivalences": [
+        "Case, Unicode accent and punctuation normalization",
+        "Ordinary contraction expansion; contextual has for he's brought/built and how's the ride been",
+        "UX and U X letter spelling",
+        "British/American favourites and favorites orthography",
+        "Acoustically identical visitors’/visitor’s possessive spelling; no conjunction equivalence",
+        "Natural spoken contraction wanna expanded to want to; source caption unchanged"
+      ],
+      "asr_normalization": "Unicode/case/punctuation, contractions with contextual has for brought/built/been and wanna/want to, UX letter spelling, favourites/favorites orthography, visitors’/visitor’s possessive spelling; no proper-name, conjunction or omitted-word substitutions.",
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.6,
+      "seconds": 15.92,
+      "reused_unchanged": false
+    },
+    {
+      "id": "room:cloud",
+      "filename": "room-cloud.mp3",
+      "text": "These are Lakshya’s own photographs. Clouds give him a reason to pause and look up; his mobile photographs capture other things he notices along the way. Choose a collection and have a look through his lens.",
+      "sha256": "07bd6cd3c42ce1145d11928153249a2ec259a78a597a99002900a04b1f14cb48",
+      "durationSeconds": 12.0,
+      "bytes": 144908,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "These are Lakshya's own photographs. Clouds give him a reason to pause and look up. His mobile photographs capture other things he notices along the way. Choose a collection and have a look through his lens.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "These are Lakshya's own photographs. Clouds give him a reason to pause and look up. His mobile photographs capture other things he notices along the way. Choose a collection and have a look through his lens.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.0
+        }
+      ],
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_equivalences": [
+        "Case, Unicode accent and punctuation normalization",
+        "Ordinary contraction expansion; contextual has for he's brought/built and how's the ride been",
+        "UX and U X letter spelling",
+        "British/American favourites and favorites orthography",
+        "Acoustically identical visitors’/visitor’s possessive spelling; no conjunction equivalence",
+        "Natural spoken contraction wanna expanded to want to; source caption unchanged"
+      ],
+      "asr_normalization": "Unicode/case/punctuation, contractions with contextual has for brought/built/been and wanna/want to, UX letter spelling, favourites/favorites orthography, visitors’/visitor’s possessive spelling; no proper-name, conjunction or omitted-word substitutions.",
+      "integrated_lufs": -16.15,
+      "true_peak_dbtp": -1.24,
+      "seconds": 12.0,
+      "reused_unchanged": false
+    },
+    {
+      "id": "return:about",
+      "filename": "return-about.mp3",
+      "sha256": "d48ba722783d0d032f9bb1e3e1a410aa03f54a572f9ca377cda536b848ecf2b6",
+      "bytes": 74060,
+      "seconds": 6.08,
+      "durationSeconds": 6.08,
+      "integrated_lufs": -16.46,
+      "true_peak_dbtp": -1.24,
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "Back together. You've met Lakshya. His projects are in works whenever you're curious.",
+          "equivalent_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "Back together. You've met Lakshya. His projects are in works whenever you're curious.",
+          "equivalent_word_error_rate": 0.0
+        }
+      ],
+      "reused_unchanged": false
+    },
+    {
+      "id": "return:projects",
+      "filename": "return-projects.mp3",
+      "sha256": "bcda1c13797374835fbb0563d01109af78e31ca7632a58eb0d0ec7c0bd5ea2e9",
+      "bytes": 81548,
+      "seconds": 6.72,
+      "durationSeconds": 6.72,
+      "integrated_lufs": -15.99,
+      "true_peak_dbtp": -1.46,
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "Back on the bicycle. A song. A childhood memory. Or a quieter view next. The map is yours.",
+          "equivalent_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "Back on the bicycle, a song, a childhood memory, or a quieter view next. The map is yours.",
+          "equivalent_word_error_rate": 0.0
+        }
+      ],
+      "reused_unchanged": false
+    },
+    {
+      "id": "return:work",
+      "filename": "return-work.mp3",
+      "sha256": "a528105b0df2adb776d306df9b372fe7446a5ba5335bcfa52bfba3bc2e044e0b",
+      "bytes": 74924,
+      "seconds": 6.16,
+      "durationSeconds": 6.16,
+      "integrated_lufs": -16.12,
+      "true_peak_dbtp": -1.26,
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "And we're back. Oak has a story to tell, and the viewfinder has a few quieter moments. No rush.",
+          "equivalent_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "And we're back. Oak has a story to tell, and the viewfinder has a few quieter moments. No rush.",
+          "equivalent_word_error_rate": 0.0
+        }
+      ],
+      "reused_unchanged": false
+    },
+    {
+      "id": "return:music",
+      "filename": "return-music.mp3",
+      "sha256": "f219f9ae1d4709394e3f1faaef0ba78676bd7a2f2e24fe7e6af25c6f803bf21c",
+      "bytes": 51020,
+      "seconds": 4.16,
+      "durationSeconds": 4.16,
+      "integrated_lufs": -16.24,
+      "true_peak_dbtp": -1.23,
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "Back on the bicycle, choose a place on the map or follow the path a little further.",
+          "equivalent_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "Back on the bicycle, choose a place on the map, or follow the path a little further.",
+          "equivalent_word_error_rate": 0.0
+        }
+      ],
+      "reused_unchanged": true
+    },
+    {
+      "id": "return:cloud",
+      "filename": "return-cloud.mp3",
+      "text": "Back in the garden. How has Lakshya’s world felt so far? If you’d like to share a thought, the visitor board is here for your review. Or we can keep exploring. Your call.",
+      "sha256": "6a21ed116a0c99d9a535b46dad7c0965fec123ff06ceabbfcb0fca3c7603350e",
+      "durationSeconds": 10.8,
+      "bytes": 130508,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "Back in the garden, how has Lakshya's world felt so far? If you'd like to share a thought, the visitor board is here for your review, or we can keep exploring your call.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "Back in the garden, how is Lakshya's world felt so far? If you'd like to share a thought, the visitor board is here for your review, or we can keep exploring your call.",
+          "normalized_word_error_rate": 0.02857142857142857,
+          "initial_normalized_word_error_rate": 0.02857142857142857
+        }
+      ],
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_equivalences": [
+        "Case, Unicode accent and punctuation normalization",
+        "Ordinary contraction expansion; contextual has for he's brought/built and how's the ride been",
+        "UX and U X letter spelling",
+        "British/American favourites and favorites orthography",
+        "Acoustically identical visitors’/visitor’s possessive spelling; no conjunction equivalence",
+        "Natural spoken contraction wanna expanded to want to; source caption unchanged"
+      ],
+      "asr_normalization": "Unicode/case/punctuation, contractions with contextual has for brought/built/been and wanna/want to, UX letter spelling, favourites/favorites orthography, visitors’/visitor’s possessive spelling; no proper-name, conjunction or omitted-word substitutions.",
+      "integrated_lufs": -16.01,
+      "true_peak_dbtp": -1.34,
+      "seconds": 10.8,
+      "reused_unchanged": false
+    },
+    {
+      "id": "route-unavailable",
+      "filename": "route-unavailable.mp3",
+      "sha256": "80ba0e6796dfc28c9b6f978d836a6175fe0e7badaaae11e2e857917d8d6a2055",
+      "bytes": 65420,
+      "seconds": 5.36,
+      "durationSeconds": 5.36,
+      "integrated_lufs": -16.16,
+      "true_peak_dbtp": -1.32,
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "I can't find a clear ride from here. Choose Explore on the map. We can still visit.",
+          "equivalent_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "I can't find a clear ride from here. Choose Explore on the map. We can still visit.",
+          "equivalent_word_error_rate": 0.0
+        }
+      ],
+      "reused_unchanged": false
+    },
+    {
+      "id": "route-cancelled",
+      "filename": "route-cancelled.mp3",
+      "sha256": "fd48bf51a67678d4e3c9b9416e445c6b506167edf3a6d3cdccdff82bdc8a0457",
+      "bytes": 37484,
+      "seconds": 3.04,
+      "durationSeconds": 3.04,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.49,
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "You've got the handlebars. I'm right here if you need the map.",
+          "equivalent_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "You've got the handlebars. I'm right here if you need the map.",
+          "equivalent_word_error_rate": 0.0
+        }
+      ],
+      "reused_unchanged": false
+    },
+    {
+      "id": "restart",
+      "filename": "restart.mp3",
+      "sha256": "8da6e24dfd90483baf089d5207fcaeb7ecae26a1dfcd8059385b35d9e1cdd63b",
+      "bytes": 41228,
+      "seconds": 3.36,
+      "durationSeconds": 3.36,
+      "integrated_lufs": -16.16,
+      "true_peak_dbtp": -1.3,
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "Back at arrival. Choose a stop or set off in your own direction.",
+          "equivalent_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "Back at arrival. Choose a stop or set off in your own direction.",
+          "equivalent_word_error_rate": 0.0
+        }
+      ],
+      "reused_unchanged": true
+    },
+    {
+      "id": "free-explore",
+      "filename": "free-explore.mp3",
+      "sha256": "5f12da542f08c51dbbd0ba6c34ae83f1a84f641a76b152878f901518fa62ac09",
+      "bytes": 72044,
+      "seconds": 5.92,
+      "durationSeconds": 5.92,
+      "integrated_lufs": -16.25,
+      "true_peak_dbtp": -1.32,
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "There's no required route here. Ride wherever catches your eye or open a story straight from the map.",
+          "equivalent_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "There's no required route here. Ride wherever catches your eye, or open a story straight from the map.",
+          "equivalent_word_error_rate": 0.0
+        }
+      ],
+      "reused_unchanged": true
+    },
+    {
+      "id": "ramp-airborne",
+      "filename": "ramp-airborne.mp3",
+      "text": "Woo-hoo!",
+      "sha256": "6d110ce5a78cd3fa5648da2ce1bbce104a137d0310655cb7e44854306b9cbd29",
+      "durationSeconds": 0.915,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "Woo-hoo.",
+          "normalized_word_error_rate": 0.0
+        }
+      ],
+      "asr_best_wer": 0,
+      "integrated_lufs": -16.01,
+      "true_peak_dbtp": -8.9,
+      "bytes": 12140,
+      "seconds": 0.915,
+      "asr_initial_best_wer": 0.0,
+      "reused_unchanged": false
+    },
+    {
+      "id": "room:visitor",
+      "filename": "room-visitor.mp3",
+      "text": "Welcome to the visitor board. How did the ride feel? What did you think of Lakshya’s work and the world he’s built around it? You can read shared reviews and see the visitors’ names here. Leave your own thoughts if you’d like—what stayed with you, and what could be better? Your feedback helps Lakshya improve this place.",
+      "sha256": "b278ba86892ec5a2edf57d4d79bcfed8c8d4771422adcd48f95b2c30d116fe5d",
+      "durationSeconds": 18.08,
+      "bytes": 218060,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "Welcome to the visitor board. How did the ride feel? What did you think of Lakshya's work and the world he's built around it? You can read shared reviews and see the visitors' names here. Leave your own thoughts if you'd like. What stayed with you? And what could be better? Your feedback helps Lakshya improve this place.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.0
+        },
+        {
+          "model": "tiny.en",
+          "text": "Welcome to the visitor board. How did the ride feel? What did you think of Lakshya's work and the world he's built around it? You can read shared reviews and see the visitor's names here. Leave your own thoughts if you'd like. What stayed with you? And what could be better? Your feedback helps Lakshya improve this place.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.03278688524590164
+        }
+      ],
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_equivalences": [
+        "Case, Unicode accent and punctuation normalization",
+        "Ordinary contraction expansion; contextual has for he's brought/built and how's the ride been",
+        "UX and U X letter spelling",
+        "British/American favourites and favorites orthography",
+        "Acoustically identical visitors’/visitor’s possessive spelling; no conjunction equivalence",
+        "Natural spoken contraction wanna expanded to want to; source caption unchanged"
+      ],
+      "asr_normalization": "Unicode/case/punctuation, contractions with contextual has for brought/built/been and wanna/want to, UX letter spelling, favourites/favorites orthography, visitors’/visitor’s possessive spelling; no proper-name, conjunction or omitted-word substitutions.",
+      "integrated_lufs": -16.1,
+      "true_peak_dbtp": -1.28,
+      "seconds": 18.08,
+      "reused_unchanged": false
+    },
+    {
+      "id": "feedback-nearby",
+      "filename": "feedback-nearby.mp3",
+      "text": "How’s the ride been? That’s the visitor board. If you’d like, leave a few words about Lakshya’s portfolio world. You can share your review there and read what other visitors have shared, too.",
+      "sha256": "7d86cfc62166594fa8538f7d38a6e14d816ac353fbad3590b44ca608ff3782f2",
+      "durationSeconds": 11.12,
+      "bytes": 134540,
+      "asr_checks": [
+        {
+          "model": "base.en",
+          "text": "How's the ride bin? That's the visitor board. If you'd like, leave a few words about Laksh's portfolio world. You can share your review there and read what other visitors have shared too.",
+          "normalized_word_error_rate": 0.08108108108108109,
+          "initial_normalized_word_error_rate": 0.05405405405405406
+        },
+        {
+          "model": "tiny.en",
+          "text": "How's the ride been? That's the visitor board. If you'd like, leave a few words about Lakshya's portfolio world. You can share your review there and read what other visitors have shared too.",
+          "normalized_word_error_rate": 0.0,
+          "initial_normalized_word_error_rate": 0.0
+        }
+      ],
+      "asr_best_wer": 0.0,
+      "asr_initial_best_wer": 0.0,
+      "asr_equivalences": [
+        "Case, Unicode accent and punctuation normalization",
+        "Ordinary contraction expansion; contextual has for he's brought/built and how's the ride been",
+        "UX and U X letter spelling",
+        "British/American favourites and favorites orthography",
+        "Acoustically identical visitors’/visitor’s possessive spelling; no conjunction equivalence",
+        "Natural spoken contraction wanna expanded to want to; source caption unchanged"
+      ],
+      "asr_normalization": "Unicode/case/punctuation, contractions with contextual has for brought/built/been and wanna/want to, UX letter spelling, favourites/favorites orthography, visitors’/visitor’s possessive spelling; no proper-name, conjunction or omitted-word substitutions.",
+      "integrated_lufs": -16.29,
+      "true_peak_dbtp": -1.31,
+      "seconds": 11.12,
+      "reused_unchanged": false
+    }
+  ],
+  "revision_note": "Approved personal narration, 16 November 2026: 20 replaced/new runtime recordings, including one nearby visitor-board invitation. Original built-in Aiden; local processing, ASR and waveform verification. Human listening approval is not inferred. Dr. Oak handoff updated16November2026 with coherent verified recording.",
+  "baseline_script_sha256": "ea94fb3a99a26e051b0bea8488ed4e20142be67665ec09b64ebf4c3e0d86ca87",
+  "script_sha256": "8aa4775102a6d5fdaa4df5efa1455884959ea1e775e6b4620184f55ceecd19bf",
+  "script_hash_scope": "All 38 runtime id/text pairs in runtime array order, sorted object keys, compact JSON separators and UTF-8. Historical baseline hash retained separately.",
+  "asr_normalization": "Initial recognizer metrics preserved. Final normalization expands ordinary contractions, including contextual has and wanna/want to, combines U X letter spelling, matches British/American favourites/favorites orthography and visitors’/visitor’s possessive spelling. No semantic/word substitutions; in/and remains a substantive failure."
+}

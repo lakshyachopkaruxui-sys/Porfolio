@@ -1,3 +1,4 @@
+import {createSpeechJaw} from './woody-speech.js';
 /**
  * Bone-based adaptation of the supplied TS3 Woody mesh to the existing bicycle.
  * Input contacts are in the bicycle lean rig's local coordinates. This module
@@ -14,6 +15,7 @@ export function createWoodyRig(THREE, model) {
     if(object.isBone){allBones.push(object);rest.set(object,{position:object.position.clone(),quaternion:object.quaternion.clone(),scale:object.scale.clone()});}
     if(object.isMesh){meshes.push(object);object.castShadow=true;object.receiveShadow=true;object.frustumCulled=false;}
   });
+  const speechJaw=createSpeechJaw(THREE,allBones);
   const find=suffix=>{
     const bone=allBones.find(item=>item.name===`ValveBipedBip01_${suffix}_Woody_arm`);
     if(!bone)throw new Error(`Woody rig is missing ${suffix}`);
@@ -195,6 +197,7 @@ export function createWoodyRig(THREE, model) {
     targetQ.setFromAxisAngle(up,pose.headYaw||0).multiply(neutralHead).premultiply(groupQ);setWorldRotation(head,targetQ);
     // SkinnedMesh overrides updateMatrixWorld to refresh bindMatrixInverse.
     // updateWorldMatrix alone updates bones but leaves CPU vertex inspection stale.
+    speechJaw.apply(pose.mouthOpen,pose.dt,pose.reduced);
     group.updateMatrixWorld(true);for(const mesh of meshes)if(mesh.isSkinnedMesh)mesh.skeleton.update();
   }
   function dispose(){

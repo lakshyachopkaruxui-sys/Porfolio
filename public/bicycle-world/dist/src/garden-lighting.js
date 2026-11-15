@@ -12,7 +12,8 @@ const palette=(background,sky,ground,sun,hemisphereIntensity,sunIntensity)=>({
   background:new THREE.Color(background),sky:new THREE.Color(sky),ground:new THREE.Color(ground),
   sun:new THREE.Color(sun),hemisphereIntensity,sunIntensity,
 });
-const DAY=palette(GARDEN_PALETTE.outer,'#fff6df','#a5b390','#fff1d5',1.8,2.5);
+// A quieter sky fill lets the existing sunlight describe roof, foliage and rider volume.
+const DAY=palette(GARDEN_PALETTE.outer,'#fff6df','#a5b390','#fff1d5',1.45,2.35);
 const DUSK=palette('#777e89','#e7bda6','#89936e','#f5ba91',1.2,1.9);
 const NIGHT=palette('#273f57','#a8c0ec','#637d68','#9eafe7',.82,.85);
 const FOLLOW_SKY=[new THREE.Color('#b8d9ee'),new THREE.Color('#c5aec0'),new THREE.Color('#203b5b')];

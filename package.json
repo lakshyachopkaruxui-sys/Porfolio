@@ -6,6 +6,7 @@
     "node": ">=22"
   },
   "scripts": {
-    "build": "node scripts/configure.mjs"
+    "build": "node scripts/build.mjs",
+    "preview": "node ../audit-preview-server.mjs"
   }
 }

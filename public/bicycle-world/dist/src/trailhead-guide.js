@@ -1,10 +1,11 @@
 import * as THREE from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
+import {LOOP_POINTS,PATHS,STOPS} from './layout.js';
 
 // A stationary trailhead object, separate from both the rider and road layout.
 // The placement is clear of the original circuit and existing arrival signs.
 export const TRAILHEAD_GUIDE_POSITION=Object.freeze({x:11,z:14});
-export const TRAILHEAD_GUIDE_YAW=.9;
+export const TRAILHEAD_GUIDE_YAW=Math.atan2(12,17.5);
 
 export function createTrailheadGuide(scene,{
   position=TRAILHEAD_GUIDE_POSITION,
@@ -13,6 +14,7 @@ export function createTrailheadGuide(scene,{
   const canvas=canvasFactory();canvas.width=768;canvas.height=512;
   const ctx=canvas.getContext('2d');
   if(!ctx)throw new Error('The garden guide drawing surface could not initialize.');
+  let disposed=false;
   const root=new THREE.Group();
   root.name='Garden trailhead guide';
   root.position.set(position.x,0,position.z);
@@ -46,27 +48,39 @@ export function createTrailheadGuide(scene,{
   const frame=new THREE.Mesh(geometry,material);
   frame.name='Trailhead timber frame';frame.castShadow=true;frame.receiveShadow=true;root.add(frame);
 
-  ctx.fillStyle='#faf2df';ctx.fillRect(0,0,768,512);
-  ctx.fillStyle='#d7ddbf';ctx.fillRect(0,0,768,15);
-  ctx.fillStyle='#294c3d';ctx.textAlign='center';ctx.textBaseline='middle';
-  ctx.font='400 49px "Mochiy Pop P One", sans-serif';ctx.fillText('Garden guide',384,69);
-  ctx.fillStyle='#4c6051';ctx.font='400 27px "DM Sans", sans-serif';ctx.fillText('A little help for the ride',384,119);
-
-  function key(label,x,y) {
-    ctx.fillStyle='#dedfc8';ctx.fillRect(x,y+5,62,57);
-    ctx.fillStyle='#fffaf0';ctx.fillRect(x,y,62,57);
-    ctx.strokeStyle='#a6b59a';ctx.lineWidth=2;ctx.strokeRect(x,y,62,57);
-    ctx.fillStyle='#294c3d';ctx.font='700 31px "DM Sans", sans-serif';ctx.fillText(label,x+31,y+29);
+  function paint() {
+    ctx.fillStyle='#faf2df';ctx.fillRect(0,0,768,512);
+    ctx.fillStyle='#d7ddbf';ctx.fillRect(0,0,768,15);
+    ctx.fillStyle='#294c3d';ctx.textAlign='center';ctx.textBaseline='middle';
+    // Leave a generous top inset: the timber cap occludes the upper face
+    // from the elevated riding camera, especially in the night garden.
+    ctx.font='400 72px "Mochiy Pop P One", sans-serif';
+    ctx.fillText('Lakshya’s',384,94);ctx.fillText('garden',384,174);
+    // The same winding circuit and spurs as the ride, not an invented flourish.
+    // Preserve world proportions; the five dots sit at their real arrivals.
+    const dots=Object.values(STOPS).map(stop=>stop.arrival);
+    const all=[...LOOP_POINTS.map(([x,z])=>({x,z})),...dots,...PATHS.flatMap(path=>path.points)];
+    const minX=Math.min(...all.map(p=>p.x)),maxX=Math.max(...all.map(p=>p.x));
+    const minZ=Math.min(...all.map(p=>p.z)),maxZ=Math.max(...all.map(p=>p.z));
+    const fit=Math.min(570/(maxX-minX),168/(maxZ-minZ));
+    const project=p=>({x:384+(p.x-(minX+maxX)/2)*fit,y:306+(p.z-(minZ+maxZ)/2)*fit});
+    ctx.strokeStyle='#a8b397';ctx.lineWidth=6;ctx.lineJoin='round';ctx.lineCap='round';
+    for(const path of PATHS){
+      ctx.beginPath();path.points.forEach((p,index)=>{const q=project(p);if(index===0)ctx.moveTo(q.x,q.y);else ctx.lineTo(q.x,q.y);});
+      if(path.closed)ctx.closePath();ctx.stroke();
+    }
+    dots.forEach((p,index)=>{const q=project(p);ctx.fillStyle=index===0?'#294c3d':'#a67c55';ctx.beginPath();ctx.arc(q.x,q.y,9,0,Math.PI*2);ctx.fill();});
+    ctx.fillStyle='#294c3d';ctx.font='600 32px "DM Sans", sans-serif';ctx.fillText('First stop: Meet Lakshya',384,432);
+    ctx.fillStyle='#4c6051';ctx.font='400 28px "DM Sans", sans-serif';ctx.fillText('Select for riding guide',384,477);
   }
-  key('W',175,166);key('A',106,231);key('S',175,231);key('D',244,231);
-  ctx.textAlign='left';ctx.font='600 32px "DM Sans", sans-serif';ctx.fillStyle='#294c3d';ctx.fillText('Pedal & steer',365,220);
-  ctx.font='400 26px "DM Sans", sans-serif';ctx.fillStyle='#4c6051';ctx.fillText('WASD or arrow keys',365,261);
-  ctx.textAlign='center';ctx.fillStyle='#294c3d';ctx.font='600 31px "DM Sans", sans-serif';ctx.fillText('Click a path to ride there',384,342);
-  ctx.font='500 26px "DM Sans", sans-serif';ctx.fillText('Shift · faster       Space · brake',384,390);
-  ctx.font='500 24px "DM Sans", sans-serif';ctx.fillText('R · bell       L · bicycle light',384,430);
-  ctx.fillStyle='#4c6051';ctx.font='400 24px "DM Sans", sans-serif';ctx.fillText('Select this board for the full guide',384,463);
+  paint();
 
   const texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=4;
+  const fonts=canvas.ownerDocument?.fonts;
+  if(fonts?.load)Promise.all([fonts.load('400 72px "Mochiy Pop P One"'),fonts.load('600 32px "DM Sans"'),fonts.load('400 28px "DM Sans"')]).then(()=>{
+    if(disposed)return;
+    paint();texture.needsUpdate=true;
+  }).catch(()=>{});
   const faceGeometry=new THREE.PlaneGeometry(3.91,2.61);
   const faceMaterial=new THREE.MeshBasicMaterial({map:texture,toneMapped:false});
   const face=new THREE.Mesh(faceGeometry,faceMaterial);
@@ -74,7 +88,6 @@ export function createTrailheadGuide(scene,{
   face.position.set(0,3.14,.132);root.add(face);
   for(const mesh of [frame,face])mesh.userData.gardenGuide=true;
   root.updateMatrixWorld(true);
-  let disposed=false;
   return {
     root,
     title:'Garden guide',

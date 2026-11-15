@@ -41,10 +41,13 @@ function paintBoard(ctx,board,following){
 
 /** Static park signs: small local textures and one instanced post batch. */
 export function createWayfinding(scene){
+  // The welcome board supplies the first-stop cue. Keep junction signs along
+  // the circuit, without a competing second board in the opening composition.
+  const boards=DIRECTION_BOARDS.filter(board=>board.id!=='arrival');
   const root=new THREE.Group();root.name='Garden direction boards';scene.add(root);
   const postGeometry=new THREE.CylinderGeometry(.11,.14,3.7,6);
   const postMaterial=new THREE.MeshStandardMaterial({color:'#6b7051',roughness:1});
-  const posts=new THREE.InstancedMesh(postGeometry,postMaterial,DIRECTION_BOARDS.length);
+  const posts=new THREE.InstancedMesh(postGeometry,postMaterial,boards.length);
   posts.castShadow=true;root.add(posts);
   const dummy=new THREE.Object3D();
   const colliders=[];
@@ -52,7 +55,7 @@ export function createWayfinding(scene){
   const shaftGeometry=new THREE.BoxGeometry(.18,.12,1),headGeometry=new THREE.ConeGeometry(.42,.8,3);
   const arrowMaterial=new THREE.MeshStandardMaterial({color:'#fff4d7',roughness:1});
   let following=false,disposed=false;
-  for(const [index,board] of DIRECTION_BOARDS.entries()){
+  for(const [index,board] of boards.entries()){
     const group=new THREE.Group();group.position.set(board.x,0,board.z);
     group.rotation.y=Math.atan2(12,17.5);root.add(group);
     // Mount planks on the front of the post, so the post cannot cross lettering.

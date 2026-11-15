@@ -34,6 +34,8 @@
       try { localStorage.setItem(key, theme); } catch {}
       sync();
     }));
+    // Expose the progressive control only after its action is bound.
+    button.hidden = false;
     const mode = header.querySelector('.mode-selector');
     if (mode && !existing) {
       const controls = document.createElement('div');

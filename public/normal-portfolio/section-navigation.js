@@ -7,7 +7,92 @@ export function currentSection(sections, readingLine, atBottom = false) {
   return current;
 }
 
+/** Own a short fragment landing while asynchronous layout settles; yield on user intent. */
+export function mountDocumentAnchors(doc = document, view = window) {
+  let anchor = null, frame = null, timer = null, dead = false;
+  const off = [];
+  const listen = (target, type, fn, options) => {
+    target.addEventListener(type, fn, options);
+    off.push(() => target.removeEventListener(type, fn, options));
+  };
+  function release() {
+    anchor = null;
+    if (timer !== null) view.clearTimeout(timer);
+    timer = null;
+    if (frame !== null) view.cancelAnimationFrame(frame);
+    frame = null;
+  }
+  function targetFor(hash) {
+    if (!hash || hash.startsWith('#project-')) return null;
+    let id;
+    try { id = decodeURIComponent(hash.slice(1)); } catch { return null; }
+    const aliases = {approach: 'work', highlights: 'work', life: 'about', questions: 'contact'};
+    const target = doc.getElementById(aliases[id] || id);
+    return target && !target.closest?.('dialog') ? target : null;
+  }
+  function align() {
+    frame = null;
+    if (dead || !anchor || doc.querySelector('#case-reader[open]')) return;
+    const header = doc.querySelector('.site-header');
+    const offset = header && view.getComputedStyle(header).position === 'sticky'
+      ? header.getBoundingClientRect().height + 32 : 32;
+    const delta = anchor.target.id === 'top' ? -view.scrollY : anchor.target.getBoundingClientRect().top - offset;
+    if (Math.abs(delta) > 1) view.scrollTo({top: Math.max(0, view.scrollY + delta), behavior: 'instant'});
+  }
+  function schedule() {
+    if (!dead && anchor && frame === null) frame = view.requestAnimationFrame(align);
+  }
+  function land(target, focus = false) {
+    release();
+    const heading = target.matches?.('h1,h2,h3') ? target : target.querySelector?.('h1,h2,h3');
+    anchor = {target, heading};
+    if (focus && heading) {
+      if (!heading.hasAttribute('tabindex')) heading.setAttribute('tabindex', '-1');
+      heading.focus({preventScroll: true});
+    }
+    timer = view.setTimeout(release, 6000);
+    align();
+    schedule();
+  }
+  listen(doc, 'click', event => {
+    if (event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    const link = event.target.closest?.('a[href]');
+    if (!link || link.hasAttribute('download') || link.target && link.target !== '_self') return;
+    let url;
+    try { url = new URL(link.href, view.location.href); } catch { return; }
+    if (url.origin !== view.location.origin || url.pathname !== view.location.pathname || url.search !== view.location.search) return;
+    const target = targetFor(url.hash);
+    if (!target || link.closest?.('#case-reader')) return;
+    event.preventDefault();
+    // Capture before the older per-link smooth-scroll handler. One owner prevents races.
+    event.stopImmediatePropagation();
+    if (view.location.hash !== url.hash) view.history.replaceState(null, '', url.pathname + url.search + url.hash);
+    land(target, true);
+  }, true);
+  for (const type of ['wheel', 'touchstart', 'pointerdown']) listen(doc, type, release, {capture: true, passive: true});
+  listen(doc, 'keydown', event => {
+    if (['ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' ','Escape','Tab'].includes(event.key)) release();
+  }, true);
+  listen(doc, 'focusin', event => { if (anchor && event.target !== anchor.heading) release(); });
+  const route = () => {
+    // A case close owns exact card/reading-position restoration, not a section landing.
+    if (doc.querySelector('#case-reader[open]')) { release(); return; }
+    const target = targetFor(view.location.hash);
+    if (target) land(target); else release();
+  };
+  for (const type of ['hashchange', 'popstate', 'pageshow']) listen(view, type, route);
+  for (const type of ['resize','scroll']) listen(view, type, schedule, {passive: true});
+  listen(doc, 'load', schedule, true);
+  const observer = view.ResizeObserver ? new view.ResizeObserver(schedule) : null;
+  const main = doc.querySelector('main');
+  if (main) observer?.observe(main);
+  doc.fonts?.ready.then(schedule, () => {});
+  route();
+  return () => { dead = true; release(); observer?.disconnect(); off.forEach(fn => fn()); };
+}
+
 function mount() {
+  mountDocumentAnchors();
   const header = document.querySelector('.site-header');
   const navigation = header?.querySelector('nav[aria-label="Main navigation"]');
   if (!header || !navigation) return;

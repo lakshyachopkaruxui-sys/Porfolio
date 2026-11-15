@@ -74,6 +74,8 @@ export function mountResumeProfile(resume) {
   const pendingParent = pending?.parentNode;
   const pendingNext = pending?.nextSibling;
   const created = [];
+  let retainedBackground = null;
+  let backgroundChildren = null;
   let copyVersion = 0;
   let destroyed = false;
 
@@ -89,11 +91,19 @@ export function mountResumeProfile(resume) {
   }
 
   if (about) {
-    const journey = element('section', 'resume-background wrap practice-section');
+    // Keep the build-rendered background available when enhancement fails or is disposed.
+    const journey = document.querySelector('[data-resume-background-fallback]')
+      || element('section', 'resume-background wrap practice-section');
+    const reusedBackground = journey.hasAttribute('data-resume-background-fallback');
+    if (reusedBackground) {
+      retainedBackground = journey;
+      backgroundChildren = [...journey.childNodes].map(node => node.cloneNode(true));
+      journey.replaceChildren();
+    }
     journey.id = 'background';
     journey.setAttribute('aria-label', 'Experience, education and courses');
     (document.querySelector('#toolkit') || about).after(journey);
-    created.push(journey);
+    if (!reusedBackground) created.push(journey);
     const columns = element('div', 'resume-journey-columns', undefined, journey);
     const work = element('section', 'resume-journey-column', undefined, columns);
     work.setAttribute('aria-labelledby', `${prefix}-work`);
@@ -227,6 +237,7 @@ export function mountResumeProfile(resume) {
       copyVersion += 1;
       lifecycle.abort();
       created.forEach(node => node.remove());
+      if (retainedBackground && backgroundChildren) retainedBackground.replaceChildren(...backgroundChildren);
       if (bio) bio.replaceChildren(...originalBio);
       if (slots) {
         slots.replaceChildren(...originalSlots);

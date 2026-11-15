@@ -1,8 +1,12 @@
 (() => {
   'use strict';
 
-  if (['4186','4187'].includes(location.port) &&
-      ['localhost','127.0.0.1','[::1]'].includes(location.hostname)) return;
+  // Local composition QA can use a complete document instead of the shell's
+  // provisional child frame. Public navigation remains unchanged.
+  const localReviewQuery=/(?:\?|&)local-review=standalone(?:&|$)/.test(location.search||'') ||
+    /(?:\?|&)welcome-layout=(?:field-guide|gallery|panorama)(?:&|$)/.test(location.search||'');
+  if (['localhost','127.0.0.1','[::1]'].includes(location.hostname) &&
+      (['4186','4187'].includes(location.port)||localReviewQuery)) return;
 
   const route = () => location.pathname + location.search + location.hash;
   if (self === top) {

@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {STOPS, RIDER_HALF_WHEELBASE, RIDER_RADIUS, RIDER_HEADROOM} from './layout.js';
+import {STOPS, START, RIDER_HALF_WHEELBASE, RIDER_RADIUS, RIDER_HEADROOM} from './layout.js';
 
 /** Shift the composition into the unobscured area without rotating the camera. */
 export function frameBesidePanel(frame,width,height,panel,cameraOffset) {
@@ -65,7 +65,10 @@ export function createLandmarkFramer(roots, cameraOffset, {minHeight=24,minWidth
       const center=right.clone().multiplyScalar((minX+maxX)/2).addScaledVector(up,(minY+maxY)/2);
       // Position along the view axis does not affect orthographic composition.
       center.addScaledVector(forward,(1.5-center.y)/forward.y);
-      const localBaseHeight=Math.max(localMinHeights[id]??minHeight,minWidth/aspect);
+      // Travel keeps its broad overview. At a destination, bring its silhouette
+      // and Woody forward together; the exact-fit bounds below still reserve
+      // the same clearance for the navigation rail and interaction prompt.
+      const localBaseHeight=Math.max(localMinHeights[id]??minHeight*.86,minWidth/aspect);
       const fittedHeight=Math.max(localBaseHeight,(maxX-minX)/(aspect*.86),(maxY-minY)/.72);
       targetOffset.addScaledVector(center.sub(rideTarget),influence);
       heightOffset+=(fittedHeight-baseHeight)*influence;
@@ -74,9 +77,20 @@ export function createLandmarkFramer(roots, cameraOffset, {minHeight=24,minWidth
     // Blend overlapping approach zones continuously instead of switching the
     // selected landmark abruptly at the midpoint between two nearby stops.
     const normalizer=Math.max(1,totalWeight);
+    // Arrival is a human-scale threshold, not another destination silhouette.
+    // Keep the riding target and viewing axis stable while its clearing opens
+    // gently into the broader travel frame. Explicit always-fit users retain
+    // their existing destination-only contract.
+    const arrivalDistance=Math.hypot(state.x-START.x,state.z-START.z);
+    const arrivalInfluence=!alwaysFit&&totalWeight===0
+      ?1-smoothstep(Math.max(0,Math.min(1,(arrivalDistance-3)/9))):0;
+    const arrivalHeight=Math.max(minHeight*.73,minWidth/aspect);
+    // Compose Woody and the welcome board as one threshold. The short-lived
+    // offset excludes the large lawn props instead of adding a camera effect.
+    targetOffset.addScaledVector(new THREE.Vector3(-3.5,1.5,-4),arrivalInfluence*normalizer);
     return {
       target: rideTarget.clone().addScaledVector(targetOffset,1/normalizer),
-      height: baseHeight+heightOffset/normalizer,
+      height: baseHeight+heightOffset/normalizer+(arrivalHeight-baseHeight)*arrivalInfluence,
     };
   };
 }

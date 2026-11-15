@@ -11,8 +11,8 @@ export const GARDEN_POKEBALL_VARIANTS = Object.freeze(['ClassicBall','UltraBall'
 // as landmarks while the smaller companion balls keep a clear sense of scale.
 // Positions preserve the original roads and avoid actual tree crown envelopes.
 export const GARDEN_POKEBALL_PLACEMENTS = Object.freeze([
-  {id:'arrival-ultra',variant:'UltraBall',x:27,z:14,height:3.7,yaw:-.19,kind:'monument'},
-  {id:'arrival-classic',variant:'ClassicBall',x:30.5,z:15,height:1.15,yaw:.059,lean:.12,kind:'small'},
+  {id:'arrival-ultra',variant:'UltraBall',x:27,z:14,height:1.5,yaw:-.19,kind:'medium'},
+  {id:'arrival-classic',variant:'ClassicBall',x:30.5,z:15,height:.75,yaw:.059,lean:.12,kind:'small'},
   {id:'south-love',variant:'LoveBall',x:-7,z:28,height:1.6,yaw:2.669,lean:-.1,kind:'medium'},
   {id:'south-heal',variant:'HealBall',x:-8.5,z:26.5,height:1.2,yaw:2.543,kind:'small'},
   {id:'west-master',variant:'MasterBall',x:-33,z:-31,height:3.8,yaw:-.163,kind:'monument'},

@@ -47,7 +47,8 @@ export function createWorld(scene,{landmarkFactory=createLandmarks}={}){
   const bridgeSurfaces=[];
   for(const bridge of BRIDGES)bridgeSurfaces.push(raisedSurface(bridge.x,bridge.minZ,bridge.maxZ,bridge.width,'#d4c7ae'));
   // The continuous sand surface reads as a garden path; navigation supplies its own route cue.
-  disc(START.x,START.z,5.2,colors.path);label('ARRIVAL',ARRIVAL_SIGN.x,1.3,ARRIVAL_SIGN.z,4.6,.8);box(ARRIVAL_SIGN.x,.4,ARRIVAL_SIGN.z,.25,.8,.25,colors.structure);
+  // One welcome board owns arrival. A second "ARRIVAL" plaque only repeats it.
+  disc(START.x,START.z,5.2,colors.path);
   for(const [id,stop]of Object.entries(STOPS)){
     disc(stop.focus.x,stop.focus.z,stop.size,colors.court);
     const ring=new THREE.Mesh(new THREE.RingGeometry(stop.size-.1,stop.size,64),new THREE.MeshBasicMaterial({color:'#acb5a3',side:THREE.DoubleSide}));ring.rotation.x=-Math.PI/2;ring.position.set(stop.focus.x,.047,stop.focus.z);scene.add(ring);
@@ -61,5 +62,5 @@ export function createWorld(scene,{landmarkFactory=createLandmarks}={}){
   const ring=new THREE.Mesh(new THREE.RingGeometry(.25,.34,40),new THREE.MeshBasicMaterial({color:'#365e4f',side:THREE.DoubleSide}));ring.rotation.x=-Math.PI/2;ring.visible=false;scene.add(ring);
   let routeLine=null;
   function setRoute(points){if(routeLine){scene.remove(routeLine);routeLine.geometry.dispose();routeLine.material.dispose();routeLine=null;}if(!points?.length)return;const linePoints=[];for(let i=0;i<points.length;i++){const a=points[Math.max(0,i-1)],b=points[i],steps=Math.max(1,Math.ceil(Math.hypot(b.x-a.x,b.z-a.z)/.5));for(let j=i?1:0;j<=steps;j++){const t=j/steps,x=a.x+(b.x-a.x)*t,z=a.z+(b.z-a.z)*t;linePoints.push(new THREE.Vector3(x,terrainHeight(z,x)+.10,z));}}routeLine=new THREE.Line(new THREE.BufferGeometry().setFromPoints(linePoints),new THREE.LineDashedMaterial({color:GARDEN_PALETTE.route,dashSize:.7,gapSize:.45,transparent:true,opacity:.95}));routeLine.computeLineDistances();scene.add(routeLine);}
-  return {ground,riverSurface,ring,landmarks,studioDisplays,bridgeDecks,bridgeSurfaces,wayfinding,colliders:[...STRUCTURE_COLLIDERS,...wayfinding.colliders],setRoute,update(time,reduced,dt=.016){studioDisplays.update(dt,reduced);}};
+  return {ground,riverSurface,ring,landmarks,studioDisplays,bridgeDecks,bridgeSurfaces,wayfinding,colliders:[...STRUCTURE_COLLIDERS.filter(c=>c.x!==ARRIVAL_SIGN.x||c.z!==ARRIVAL_SIGN.z),...wayfinding.colliders],setRoute,update(time,reduced,dt=.016){studioDisplays.update(dt,reduced);}};
 }

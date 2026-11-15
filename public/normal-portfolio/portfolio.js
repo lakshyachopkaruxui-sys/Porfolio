@@ -1,3 +1,4 @@
+import {projectContribution} from './project-card-copy.js?v=20261115-evidence';
 // This proposal consumes the audited catalog without changing shared source.
 import {CASE_CONTEXT, normalProject} from './case-context.js?v=20261109-evidence-pass';
 import {PROJECT_PROCESS} from './process-data.js?v=20261109-evidence-pass';
@@ -17,6 +18,20 @@ import {
 } from './normal-projects.js?v=20261112-ar-vr';
 import {mountGigglesCover} from './cover-artwork.js?v=20261108-care-mockups';
 import {mountProjectPreview} from './project-preview.js?v=20261110-space';
+
+/** Keep browser tabs and the optional shell title aligned with the visible reader. */
+export function createCaseTitleController(pageDocument) {
+  const homepageTitle = pageDocument.title;
+  return {
+    show(title) {
+      const name = typeof title === 'string' ? title.trim() : '';
+      pageDocument.title = name ? `${name} \u2014 ${homepageTitle}` : homepageTitle;
+    },
+    restore() { pageDocument.title = homepageTitle; },
+  };
+}
+
+const caseTitles = createCaseTitleController(document);
 
 function optionalFeature(mount, fallback = null) {
   try { return mount(); }
@@ -187,8 +202,12 @@ async function start() {
       const heading = node('div', undefined, copy, 'project-heading');
       node('h3', project.title, heading).id = `title-${project.id}`;
       node('p', project.summary, copy, 'project-summary');
-      node('p', context?.role || project.role, copy, 'project-contribution');
+      node('p', projectContribution(project.id, context?.role || project.role), copy, 'project-contribution');
       node('span', 'Read case study', copy, 'project-case-label');
+      if (['connectaid', 'giggles'].includes(project.id)) {
+        const evidence = node('a', project.id === 'giggles' ? 'Follow one complete turn' : 'See what testing changed', article, 'project-evidence-link');
+        evidence.href = `#evidence-${project.id}`;
+      }
       link.addEventListener('click', event => {
         if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
         event.preventDefault();
@@ -249,6 +268,7 @@ async function start() {
       try { reader.showModal(); }
       catch { disposeStory?.(); disposeStory = null; location.assign(summaryURL); return true; }
     }
+    caseTitles.show(project.title);
     reader.scrollTop = readingProgress.get(id) || 0;
     content.querySelector('#case-title')?.focus({preventScroll: true});
     caseMotion.enter(imageOrigin);
@@ -257,6 +277,7 @@ async function start() {
   }
 
   function restorePage() {
+    caseTitles.restore();
     if (!reader.open) return;
     caseMotion.cancel();
     if (currentProject) readingProgress.set(currentProject, reader.scrollTop);

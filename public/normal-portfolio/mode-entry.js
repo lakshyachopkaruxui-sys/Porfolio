@@ -26,3 +26,12 @@ if (navigation && selector) {
   matchVisualOrder();
   twoRowHeader.addEventListener('change', matchVisualOrder);
 }
+
+// Preserve the explicit Play gesture while the persistent shell loads the world.
+document.addEventListener('click',event=>{
+  if(!event.isTrusted||event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
+  const link=event.target.closest?.('a[href]');if(!link)return;
+  try{const url=new URL(link.href,location.href);
+    if(url.origin===location.origin&&url.pathname.startsWith('/bicycle-world/'))window.parent.__unlockPortfolioNarration?.();
+  }catch{}
+},{capture:true});

@@ -1,13 +1,10 @@
-/** Supplied recordings only. Null entries never request a placeholder file. */
-export const WELCOME_AUDIO = Object.freeze({
-  welcome: null,
-  departure: null,
-  controls: null,
-});
+import {WOODY_TOUR_CLIPS} from './woody-tour-data.js';
+
+/** Only verified supplied recordings. Null entries never request a placeholder. */
+const welcomeIds=['welcome','departure','controls','controls-offer','controls-yes','controls-no','controls-takeover','arrival-guide','free-explore'];
+export const WELCOME_AUDIO = Object.freeze(Object.fromEntries(welcomeIds.map(id=>[id,
+  WOODY_TOUR_CLIPS[id]?.src?WOODY_TOUR_CLIPS[id]:null
+])));
 
 /** Suggested recording script; final text will match the supplied audio. */
-export const WELCOME_TRANSCRIPTS = Object.freeze({
-  welcome: 'Hi, I’m Woody. Welcome to Lakshya’s portfolio. He’s a Product Designer. This world brings his work, hobbies and childhood memories together. I’ll guide you through his projects, his design process and the story behind this place. Ready to explore?',
-  departure: 'Come on, I’ll show you around.',
-  controls: 'Use W to pedal, A and D to steer, and S to reverse. Or click clear ground and I’ll ride there. Space brakes.',
-});
+export const WELCOME_TRANSCRIPTS = Object.freeze(Object.fromEntries(welcomeIds.map(id=>[id,WOODY_TOUR_CLIPS[id].text])));

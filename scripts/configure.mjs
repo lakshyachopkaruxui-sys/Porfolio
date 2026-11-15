@@ -1,3 +1,5 @@
+import {prerenderPortfolio} from './prerender-portfolio.mjs';
+import {bundlePortfolioCSS} from './bundle-portfolio-css.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -64,6 +66,10 @@ export async function configureSite({siteRoot,env = process.env} = {}) {
     const target = path.join(publicRoot,file);
     // Match HTML parser newline normalization before calculating script hashes.
     let html = (await fs.readFile(target,'utf8')).replace(/\r\n?/g,'\n').replace(block,'');
+    if (file === 'normal-portfolio/index.html') {
+      html = await prerenderPortfolio({html, publicRoot});
+      ({html} = await bundlePortfolioCSS({siteRoot, html}));
+    }
     html = await versionPlayAssets({html, publicRoot, htmlPath:file});
     // Some existing generated attribution pages use a valid implicit HTML head.
     if (!/<\/head>/i.test(html) && !/<title\b/i.test(html)) throw Error(`Missing metadata insertion point in ${file}`);

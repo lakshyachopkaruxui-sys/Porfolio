@@ -14,6 +14,7 @@ export function mountCaseSectionNav({scroller, nav, sections = []} = {}) {
   let disposed = false;
   let frame = null;
   let current = null;
+  let anchor = null;
   const cleanups = [];
   const offset = () => Math.max(0, sticky.getBoundingClientRect().height) + 24;
 
@@ -43,6 +44,17 @@ export function mountCaseSectionNav({scroller, nav, sections = []} = {}) {
 
   function update() {
     if (disposed) return;
+    // Late media can change the height of earlier chapters after a shortcut.
+    // Preserve the requested reading position until the visitor takes control.
+    if (anchor) {
+      const delta = anchor.entry.section.getBoundingClientRect().top
+        - scroller.getBoundingClientRect().top - offset();
+      if (Math.abs(delta) > 1) {
+        scroller.scrollTo({top: Math.max(0, scroller.scrollTop + delta), behavior: 'instant'});
+      }
+      select(anchor.entry);
+      return;
+    }
     const threshold = scroller.getBoundingClientRect().top + offset() + 2;
     let active = entries[0];
     for (const entry of entries) {
@@ -69,6 +81,7 @@ export function mountCaseSectionNav({scroller, nav, sections = []} = {}) {
       // Every target is focusable without becoming an extra Tab stop.
       if (!heading.hasAttribute('tabindex')) heading.setAttribute('tabindex', '-1');
       heading.focus({preventScroll: true});
+      anchor = {entry, heading};
       select(entry);
       // A chapter shortcut should deliver its heading immediately, even in a long case.
       scroller.scrollTo({top, behavior: 'instant'});
@@ -77,6 +90,21 @@ export function mountCaseSectionNav({scroller, nav, sections = []} = {}) {
     cleanups.push(() => entry.link.removeEventListener('click', activate));
   }
 
+  function releaseAnchor() { anchor = null; }
+  function onKey(event) {
+    if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' ', 'Spacebar', 'Escape'].includes(event.key)) releaseAnchor();
+  }
+  function onFocus(event) {
+    if (anchor && event.target !== anchor.heading) releaseAnchor();
+  }
+  for (const name of ['wheel', 'touchstart', 'pointerdown']) {
+    scroller.addEventListener(name, releaseAnchor, {passive: true, capture: true});
+    cleanups.push(() => scroller.removeEventListener(name, releaseAnchor, true));
+  }
+  scroller.addEventListener('keydown', onKey, true);
+  scroller.addEventListener('focusin', onFocus);
+  cleanups.push(() => scroller.removeEventListener('keydown', onKey, true));
+  cleanups.push(() => scroller.removeEventListener('focusin', onFocus));
   scroller.addEventListener('scroll', schedule, {passive: true});
   scroller.addEventListener('load', schedule, true);
   view?.addEventListener?.('resize', schedule, {passive: true});
@@ -88,6 +116,7 @@ export function mountCaseSectionNav({scroller, nav, sections = []} = {}) {
   observer?.observe(nav);
   if (sticky !== nav) observer?.observe(sticky);
   observer?.observe(scroller);
+  for (const entry of entries) observer?.observe(entry.section);
   scroller.ownerDocument?.fonts?.ready?.then(schedule, () => {});
   update();
   schedule();
@@ -95,6 +124,7 @@ export function mountCaseSectionNav({scroller, nav, sections = []} = {}) {
   return () => {
     if (disposed) return;
     disposed = true;
+    anchor = null;
     cleanups.forEach(cleanup => cleanup());
     observer?.disconnect();
     if (frame !== null) cancelFrame?.(frame);

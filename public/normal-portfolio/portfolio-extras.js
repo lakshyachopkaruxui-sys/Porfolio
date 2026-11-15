@@ -178,8 +178,8 @@ export function mountPortfolioAssistant(host, {onOpenProject} = {}) {
   let requestVersion = 0;
   let busy = false;
   let destroyed = false;
-  const discovery = mountAssistantDiscovery({host, launcher, invitation, dismiss: invitationDismiss,
-    open: invitationOpen, onOpen: openAssistant});
+  // Explicit in-page entry points keep the assistant available without interrupting reading.
+  const discovery = null;
 
   function updateBusy(value) {
     busy = value;
@@ -247,7 +247,7 @@ export function mountPortfolioAssistant(host, {onOpenProject} = {}) {
         if (match && PROJECT_IDS.has(match[1]) && typeof onOpenProject === 'function') {
           event.preventDefault();
           closeAssistant();
-          onOpenProject(match[1], launcher);
+          onOpenProject(match[1], returnTrigger);
         } else if (url.hash && url.pathname === window.location.pathname) {
           closeAssistant();
         }
