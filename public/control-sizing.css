@@ -12,7 +12,7 @@
   }
   body.editorial-portfolio :is(#project-filters, .story-index, .story-state-controls, .story-tool-selectors) button,
   body.editorial-portfolio .assistant-suggestion,
-  body.hybrid-world :is(#ride-tools, #world-map, .oak-tools, .woody-tour, .cloud-gallery-rolls, .cloud-gallery-subjects, .play-music-dock) button {
+  body.hybrid-world :is(#ride-tools, #world-map, .oak-tools, .woody-tour, .cloud-gallery-rolls, .cloud-gallery-subjects) button {
     min-height:var(--compact-height)!important; padding:10px var(--compact-inset)!important;
     font-size:14px!important; line-height:20px!important;
   }

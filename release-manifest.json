@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T02:41:38.854Z",
+  "generatedAt": "2026-11-16T02:53:10.714Z",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 746,
-      "sha256": "acbce8969ccdc734bb3346d165beeb05bfdca388a5c49f919b7b4e3750fb1f0a"
+      "sha256": "355d6e752146b809af318edde911afc7eedb087503210b2ab20cfb5fa0b454c1"
     },
     {
       "path": "_redirects",
@@ -4174,8 +4174,8 @@
     },
     {
       "path": "bicycle-world/dist/index.html",
-      "size": 49231,
-      "sha256": "0f6e99e23c1b86d15bf491faef6b8e13066cc3c998dfa0e0d6caee5efd16383c"
+      "size": 49245,
+      "sha256": "bcad1bbd80ee9f73e8a717f95a2b710bd50435b305a49a519932d708c20715f5"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
@@ -4614,8 +4614,8 @@
     },
     {
       "path": "bicycle-world/dist/src/main.js",
-      "size": 102403,
-      "sha256": "6d5b3d22705028a54e8a0bed4e592aa871b01db4065a519ec60a5c8b4547a3c1"
+      "size": 102492,
+      "sha256": "64ba7c2cbe926cb4b5f13820e4f9cdfa325924c0c05cdd92de0d2d51ed8bb782"
     },
     {
       "path": "bicycle-world/dist/src/map-guide.css",
@@ -4644,8 +4644,8 @@
     },
     {
       "path": "bicycle-world/dist/src/mode-selector.css",
-      "size": 6235,
-      "sha256": "ddcd7f25e97d1b5262d8319b0533491c08b575930130aa516e55d5f7bd56dce7"
+      "size": 6784,
+      "sha256": "f0aeb33a28f377351f697ebaae17843b654050f608757abc2d342ab920f6bf7c"
     },
     {
       "path": "bicycle-world/dist/src/mode-selector.js",
@@ -4659,8 +4659,8 @@
     },
     {
       "path": "bicycle-world/dist/src/music-catalog.js",
-      "size": 619,
-      "sha256": "a73274ac6e23aae10f29bf73e389520d5d09cb0f7749499c9faada7afa6dc8c5"
+      "size": 636,
+      "sha256": "8f0c6d002d6b2ffa1fbdd58814cc33452637540cabbe9ccec0a7336f273333be"
     },
     {
       "path": "bicycle-world/dist/src/navigation.js",
@@ -5234,8 +5234,8 @@
     },
     {
       "path": "control-sizing.css",
-      "size": 4063,
-      "sha256": "b12d270f2ec8dff7d1ae60ecbfda1831c702194746eb746d4e3d4e0907c675e2"
+      "size": 4045,
+      "sha256": "73c40915459af5695905b0934c6ff35398baa6a4d493c387c4caac7f7aa1409c"
     },
     {
       "path": "entrance/0729ea584ade9623.mp4",
@@ -5424,8 +5424,8 @@
     },
     {
       "path": "interface-controls.css",
-      "size": 5557,
-      "sha256": "3c7eed8a9eb0aefdcbfa857e5e3821bccd81c879e3d7573a8ab544367618f7de"
+      "size": 6405,
+      "sha256": "2e21f6c6276833a3aec4d66314641246b5f92fdddafa55253c64f6990daa8233"
     },
     {
       "path": "normal-portfolio/approved-opening.css",
@@ -7505,7 +7505,7 @@
     {
       "path": "normal-portfolio/index.html",
       "size": 50694,
-      "sha256": "d1fc656984c859e0b4d97f7d920cb95f44e892415afc5c5a613083fa4031c47c"
+      "sha256": "b9c38da661fe3d7d87c50b2ac08b5d21fb61a6d3ada6beeab36da22df03e03f1"
     },
     {
       "path": "normal-portfolio/jan-concept-data.js",
@@ -7529,8 +7529,8 @@
     },
     {
       "path": "normal-portfolio/mode-selector.css",
-      "size": 6235,
-      "sha256": "ddcd7f25e97d1b5262d8319b0533491c08b575930130aa516e55d5f7bd56dce7"
+      "size": 6784,
+      "sha256": "f0aeb33a28f377351f697ebaae17843b654050f608757abc2d342ab920f6bf7c"
     },
     {
       "path": "normal-portfolio/mode-selector.js",
@@ -7599,8 +7599,8 @@
     },
     {
       "path": "normal-portfolio/portfolio-bundle.css",
-      "size": 210169,
-      "sha256": "90116491564f3166487519ea737d410e3683764216c6f01f09306997a5dd69a3"
+      "size": 210700,
+      "sha256": "06c1d43d8a2fcf96b8529e84a8f9887cfd6c57d6ba5859390d57c8c4192f5f59"
     },
     {
       "path": "normal-portfolio/portfolio-extras.css",

@@ -9,7 +9,9 @@
   --mode-track-edge: var(--play-control-forest-depth, #7c3529);
   --mode-knob: var(--play-control-on-forest, #fff9ec);
   --mode-focus: var(--play-control-focus, #b94f38);
-  --mode-type: 13px;
+  --mode-type: 16px;
+  --mode-weight: 600;
+  --mode-width: 184px;
   --mode-rail-column: 32px;
 
   /* The welcome and reader have older ID-scoped button positioning. */
@@ -24,8 +26,8 @@
   isolation: isolate;
   flex: 0 0 auto;
   box-sizing: border-box !important;
-  width: 154px !important;
-  min-width: 154px !important;
+  width: var(--mode-width) !important;
+  min-width: var(--mode-width) !important;
   max-width: none !important;
   height: 46px !important;
   min-height: 46px !important;
@@ -42,8 +44,17 @@
   --normal-mode-label: var(--muted, #646b68);
   --normal-mode-ink: var(--ink, #222725);
   --normal-mode-surface: var(--surface, #f2f5f3);
-  --mode-type: 14px;
+  --mode-type: 15px;
+  --mode-weight: 500;
+  --mode-width: 176px;
 }
+/* Compact riding utilities use the same 14px labels as their neighbours.
+   Room and welcome actions retain the shared 16px action scale. */
+body.hybrid-world :is(#ride-tools, #world-map, .oak-tools) .mode-selector.mode-switch {
+  --mode-type: 14px;
+  --mode-width: 168px;
+}
+
 .mode-selector[data-mode='portfolio']:not([data-visual-mode]),
 .mode-selector[data-visual-mode='portfolio'] {
   --mode-face: transparent;
@@ -72,7 +83,7 @@
   border-radius: 6px;
   background: transparent;
   color: var(--mode-label) !important;
-  font: 500 var(--mode-type) / 1.2 'DM Sans', Arial, sans-serif !important;
+  font: var(--mode-weight) var(--mode-type) / 1.2 'DM Sans', Arial, sans-serif !important;
   letter-spacing: normal;
   text-decoration: none !important;
   white-space: nowrap;
@@ -146,6 +157,13 @@
 }
 .mode-selector[data-mode-moving] .mode-selector-plate::after {
   transition: transform 180ms cubic-bezier(0.77, 0, 0.175, 1), background-color 180ms ease;
+}
+
+@media (max-width: 739px) {
+  .mode-selector[data-mode='portfolio'] {
+    --mode-type: 14px;
+    --mode-width: 168px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

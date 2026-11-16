@@ -163,7 +163,7 @@ function inviteViewfinderFeedback(){if(viewfinderFeedbackInvited)return;viewfind
 function openVisitorBoard(){if(!visitorUI)return;feedbackInvited=true;tour?.emit('feedback-invited');try{sessionStorage.setItem('visitor-feedback-invited','1');}catch{}cancelRoute();state.speed=0;visitorUI.open({invite:true});}
 let enteredGarden=false,pendingRideAudio=false;
 let riverHop=null,hopBoost=false,rampApproach=false;
-const hopButton=document.createElement('button');hopButton.id='river-hop-action';hopButton.type='button';hopButton.hidden=true;hopButton.textContent='Cancel jump (Esc)';hopButton.style.cssText='position:fixed;bottom:100px;left:24px;z-index:90;padding:12px 20px;min-height:44px;border-radius:10px;background:#fffaf0;color:#213d35;border:1px solid #8b9f88;font:600 15px DM Sans,sans-serif';document.body.append(hopButton);sceneHost.setAttribute('aria-label',sceneHost.getAttribute('aria-label')+' Ride onto River Hop to jump automatically. Escape cancels a jump. Q toggles boost.');hopButton.onclick=()=>{if(riverHop?.active)clearInput();sceneHost.focus({preventScroll:true});};
+const hopButton=document.createElement('button');hopButton.id='river-hop-action';hopButton.type='button';hopButton.hidden=true;hopButton.innerHTML='Cancel jump <kbd>Esc</kbd>';hopButton.setAttribute('aria-label','Cancel jump: Escape');hopButton.style.cssText='position:fixed;bottom:100px;left:24px;z-index:90;padding:12px 20px;min-height:44px;border-radius:10px;background:#fffaf0;color:#213d35;border:1px solid #8b9f88;font:600 15px DM Sans,sans-serif';document.body.append(hopButton);sceneHost.setAttribute('aria-label',sceneHost.getAttribute('aria-label')+' Ride onto River Hop to jump automatically. Escape cancels a jump. Q toggles boost.');hopButton.onclick=()=>{if(riverHop?.active)clearInput();sceneHost.focus({preventScroll:true});};
 const mainLoop=createGuardedFrameLoop({step:frame,onError(error){
   failed=true;startupController.abort();console.error('The 3D view could not continue',error);
   showWorldFailure('The 3D view stopped unexpectedly. Retry the world, or keep reading the projects.');
@@ -227,8 +227,8 @@ function setRidingView(value,{persist=true}={}){
   updateProjection();readingBackdropDrawn=false;
   sceneHost.dataset.ridingView=ridingView;
   $('riding-view').value=ridingView;
-  $('ride-camera').textContent=ridingView==='follow'?'Overview (C)':'Follow Woody (C)';
-  $('ride-camera').setAttribute('aria-label',ridingView==='follow'?'Overview (C): switch to overview camera':'Follow Woody (C): switch to closer third-person camera');
+  $('ride-camera').innerHTML=(ridingView==='follow'?'Overview':'Follow Woody')+' <kbd>C</kbd>';
+  $('ride-camera').setAttribute('aria-label',ridingView==='follow'?'Overview C: switch to overview camera':'Follow Woody C: switch to closer third-person camera');
   world?.wayfinding.update(camera,{follow:ridingView==='follow'});
   if(persist)save();
 }
@@ -906,8 +906,8 @@ function syncRiverHopUI(){
  document.body.classList.toggle('river-hop-near',Boolean(riverHop&&(riverHop.active||riverHop.near())));
  if(riverHop?.active)$('ride-status').hidden=true;
  hopButton.hidden=!running||inPortfolio||hasOverlay()||!riverHop?.active;
- const label='Cancel jump (Esc)';
- if(hopButton.textContent!==label)hopButton.textContent=label;
+ const label='Cancel jump Esc';
+ if(hopButton.textContent!==label)hopButton.innerHTML='Cancel jump <kbd>Esc</kbd>';
  const phase=riverHop?.phase||'preparing';if(sceneHost.dataset.riverHop!==phase)sceneHost.dataset.riverHop=phase;
 }
 function renderWorld(){syncRiverHopUI();if(renderer.domElement.parentElement!==sceneHost)sceneHost.append(renderer.domElement);gardenLighting?.update(0,{paused:true,reduced,focus});followSky?.update({camera,focus,time,active:ridingView==='follow',reduced,lighter:!renderSettings.ambientMotion,night:gardenLighting?.progress??0});garden?.update({time,reduced,lighter:!renderSettings.ambientMotion,camera,sun,night:gardenLighting?.progress??0});companions?.update({time,reduced,lighter:!renderSettings.ambientMotion,camera,player:state,active:running&&!hasOverlay()&&!inPortfolio});renderer.render(scene,camera);renderCloudEntry();}

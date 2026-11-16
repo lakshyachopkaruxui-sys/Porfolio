@@ -109,3 +109,25 @@ html:root body.hybrid-world #welcome .mode-selector.mode-switch {
   --mode-label: #26384b;
   --mode-current: #26384b;
 }
+
+/* Action shortcuts share the label's type; keycaps never change text hierarchy. */
+html:root body.hybrid-world :is(button,a) kbd {
+  display: inline-block !important;
+  font-family: inherit !important;
+  font-size: 1em !important;
+  font-weight: 600 !important;
+  line-height: inherit !important;
+  letter-spacing: normal !important;
+  color: inherit !important;
+  opacity: 1 !important;
+}
+/* The shared mode width also replaces the old room-specific 154px reservation. */
+html:root body.hybrid-world #about-experience .about-header .mode-selector.mode-switch {
+  flex-basis: var(--mode-width, 184px);
+  width: var(--mode-width, 184px) !important;
+  min-width: var(--mode-width, 184px) !important;
+}
+
+html:root body.hybrid-world #works-experience .works-header [data-mode-switch] {
+  flex-basis: var(--mode-width, 184px);
+}
