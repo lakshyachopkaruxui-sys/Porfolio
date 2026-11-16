@@ -13,7 +13,7 @@ export const PORTFOLIO_CSS_SOURCES = Object.freeze([
   'project-cover-ui.css', 'cover-artwork.css', 'case-presentation.css',
   'pixel-mania-presentation.css', 'case-hero-art.css', 'case-image-viewer.css',
   'mode-selector.css', 'normal-actions.css', 'normal-reading.css',
-  'approved-opening.css', 'resources-section.css',
+  'approved-opening.css', 'resources-section.css', 'dhan-drishti.css',
 ]);
 
 const ORIGIN = 'https://portfolio.invalid';

@@ -1,3 +1,4 @@
+import {mountDhanContent} from './dhan-drishti-content.js';
 import {mountCaseSectionNav} from './case-section-nav.js?v=20261108-recruiter-audit';
 import {mountCaseHeroArt} from './case-hero-art.js?v=20261110-approved-covers';
 import {mountGigglesCover} from './cover-artwork.js?v=20261108-care-mockups';
@@ -72,7 +73,8 @@ function figure(parent, visual) {
 function evidenceBlocks(parent, blocks = [], {reader, cleanups} = {}) {
   for (let index = 0; index < blocks.length; index++) {
     const block = blocks[index];
-    if (block.type === 'paragraph') node('p', block.text, parent, block.sourceNote ? 'story-body story-source-note' : 'story-body');
+    if (block.type === 'dhan-content') { mountDhanContent(parent, block.nodes, {reader, cleanups}); }
+    else if (block.type === 'paragraph') node('p', block.text, parent, block.sourceNote ? 'story-body story-source-note' : 'story-body');
     else if (block.type === 'heading') node('h4', block.text, parent, 'story-block-heading');
     else if (block.type === 'details') {
       const disclosure = node('details', undefined, parent, 'story-disclosure');
@@ -175,9 +177,11 @@ export function renderCaseStudy({reader, content, project, context, process, sto
     const group = node('div', undefined, facts, label === 'My contribution' ? 'story-role' : '');
     node('dt', label, group); node('dd', value, group);
   }
+  if (!story?.omitContribution) {
   const contribution = node('section', undefined, content, 'story-contribution');
   node('h3', 'My contribution', contribution);
   node('p', project.role, contribution);
+  }
   const layout = node('div', undefined, content, 'story-layout');
   const aside = node('aside', undefined, layout, 'story-index');
   node('p', 'Jump to', aside);

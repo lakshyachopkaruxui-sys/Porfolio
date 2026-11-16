@@ -1,3 +1,4 @@
+import {DHAN_PROJECT, DHAN_CONTEXT, DHAN_PROCESS, DHAN_STORY, DHAN_COVER} from './dhan-drishti-case.js';
 import {TEAR_PROJECT, TEAR_CONTEXT, TEAR_PROCESS, TEAR_COVER, TEAR_STORY} from './tear-case.js?v=20261110-tear';
 // Normal-only additions. Evidence and image provenance live in
 // docs/project-covers-task-20261104.md and assets/project-covers/SOURCE.json.
@@ -137,3 +138,11 @@ NORMAL_PROJECT_PROCESS.tear = TEAR_PROCESS;
 NORMAL_PROJECT_STORIES.tear = TEAR_STORY;
 PROJECT_COVERS.tear = TEAR_COVER;
 NORMAL_PROJECT_ARTIFACTS.tear = TEAR_COVER;
+
+NORMAL_PROJECTS.push(DHAN_PROJECT);
+NORMAL_PROJECT_CATEGORIES['dhan-drishti'] = ['research', 'interaction'];
+NORMAL_PROJECT_CONTEXT['dhan-drishti'] = DHAN_CONTEXT;
+NORMAL_PROJECT_PROCESS['dhan-drishti'] = DHAN_PROCESS;
+NORMAL_PROJECT_STORIES['dhan-drishti'] = DHAN_STORY;
+PROJECT_COVERS['dhan-drishti'] = DHAN_COVER;
+NORMAL_PROJECT_ARTIFACTS['dhan-drishti'] = DHAN_COVER;

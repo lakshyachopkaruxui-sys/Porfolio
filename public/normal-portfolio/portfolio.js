@@ -25,7 +25,7 @@ export function createCaseTitleController(pageDocument) {
   return {
     show(title) {
       const name = typeof title === 'string' ? title.trim() : '';
-      pageDocument.title = name ? `${name} \u2014 ${homepageTitle}` : homepageTitle;
+      pageDocument.title = name === 'Dhan Drishti' ? `${name} | ${homepageTitle}` : name ? `${name} \u2014 ${homepageTitle}` : homepageTitle;
     },
     restore() { pageDocument.title = homepageTitle; },
   };
@@ -60,7 +60,7 @@ welcome.onFinish(({shown, reason}) => {
   for (const carousel of photoCarousels) carousel.refresh();
 });
 const caseMotion = optionalFeature(() => mountCaseMotion(reader), {cancel() {}, capture() {}, enter() {}});
-const PROJECT_ORDER = ['connectaid', 'giggles', 'pixel-mania', 'syringe', 'workplace-mode', 'jan-aushadhi', 'tear'];
+const PROJECT_ORDER = ['connectaid', 'giggles', 'pixel-mania', 'syringe', 'workplace-mode', 'jan-aushadhi', 'tear', 'dhan-drishti'];
 const FEATURED_PROJECTS = new Set(['connectaid', 'giggles', 'pixel-mania', 'tear']);
 const CARD_SUMMARIES = {
   tear: 'Pinch a seam. Pull reality apart. A dream journey through wonder, fear and uncertain relief.',
@@ -85,6 +85,7 @@ const CARD_DETAILS = {
   'workplace-mode': ['My part: research, synthesis and the interaction concept.', '34 surveys · 13 interviews'],
 };
 const RELATED_PROJECTS = {
+  'dhan-drishti': ['workplace-mode', 'jan-aushadhi'],
   tear: ['pixel-mania', 'giggles'],
   connectaid: ['giggles', 'pixel-mania'], giggles: ['syringe', 'connectaid'],
   'pixel-mania': ['connectaid', 'giggles'], syringe: ['giggles', 'workplace-mode'],
@@ -202,7 +203,7 @@ async function start() {
       const heading = node('div', undefined, copy, 'project-heading');
       node('h3', project.title, heading).id = `title-${project.id}`;
       node('p', project.summary, copy, 'project-summary');
-      node('p', projectContribution(project.id, context?.role || project.role), copy, 'project-contribution');
+      if (project.id !== 'dhan-drishti') node('p', projectContribution(project.id, context?.role || project.role), copy, 'project-contribution');
       node('span', 'Read case study', copy, 'project-case-label');
       if (['connectaid', 'giggles'].includes(project.id)) {
         const evidence = node('a', project.id === 'giggles' ? 'Follow one complete turn' : 'See what testing changed', article, 'project-evidence-link');
@@ -236,7 +237,7 @@ async function start() {
   function openProject(id, imageOrigin = null) {
     const sourceProject = PROJECTS.find(item => item.id === id);
     if (!sourceProject) return false;
-    const summaryURL = new URL(`../bicycle-world/dist/projects.html#project-${id}`, import.meta.url).href;
+    const summaryURL = id === 'dhan-drishti' ? new URL('./dhan-drishti-reading.html', import.meta.url).href : new URL(`../bicycle-world/dist/projects.html#project-${id}`, import.meta.url).href;
     if (typeof reader.showModal !== 'function') { location.assign(summaryURL); return true; }
     if (reader.open && currentProject === id) return true;
     for (const preview of previews) preview.pause();

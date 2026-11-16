@@ -29,10 +29,10 @@ export async function loadPortfolioCards(publicRoot) {
   }
   const order = [...literal.matchAll(/'([a-z0-9-]+)'/g)].map(match => match[1]);
   const projects = [...PROJECTS, ...additions.NORMAL_PROJECTS];
-  if (order.length !== 7 || new Set(order).size !== order.length || projects.length !== order.length
+  if (order.length !== 8 || new Set(order).size !== order.length || projects.length !== order.length
       || new Set(projects.map(project => project.id)).size !== projects.length
       || projects.some(project => !order.includes(project.id))) {
-    throw new Error('Prerendering requires the seven unique projects used by the current Normal catalogue.');
+    throw new Error('Prerendering requires the eight unique projects used by the current Normal catalogue.');
   }
   const contexts = {...CASE_CONTEXT, ...additions.NORMAL_PROJECT_CONTEXT};
   return Promise.all(order.map(async id => {
@@ -50,22 +50,22 @@ export async function loadPortfolioCards(publicRoot) {
     return {
       id, title: project.title, summary: project.summary,
       type: contexts[id]?.type || project.subtitle || project.status,
-      contribution: projectContribution(id, contexts[id]?.role || project.role),
-      cover: {...cover}, href: `../bicycle-world/dist/projects.html#project-${id}`,
+      contribution: id === 'dhan-drishti' ? '' : projectContribution(id, contexts[id]?.role || project.role),
+      cover: {...cover}, href: id === 'dhan-drishti' ? './dhan-drishti-reading.html' : `../bicycle-world/dist/projects.html#project-${id}`,
     };
   }));
 }
 
 function renderCards(cards) {
-  if (!Array.isArray(cards) || cards.length !== 7 || new Set(cards.map(card => card.id)).size !== 7) {
-    throw new Error('Exactly seven unique portfolio cards are required.');
+  if (!Array.isArray(cards) || cards.length !== 8 || new Set(cards.map(card => card.id)).size !== 8) {
+    throw new Error('Exactly eight unique portfolio cards are required.');
   }
   return cards.map(card => {
     const {id, title, summary, type, contribution, cover, href} = card;
-    if (!/^[a-z0-9-]+$/.test(id) || [title, summary, type, contribution, cover?.alt].some(value => typeof value !== 'string' || !value.trim())
+    if (!/^[a-z0-9-]+$/.test(id) || [title, summary, type, ...(id === 'dhan-drishti' ? [] : [contribution]), cover?.alt].some(value => typeof value !== 'string' || !value.trim())
         || !/^\.\/assets\/[a-zA-Z0-9/_.-]+$/.test(cover?.src)
         || !Number.isInteger(cover?.width) || cover.width <= 0 || !Number.isInteger(cover?.height) || cover.height <= 0
-        || href !== `../bicycle-world/dist/projects.html#project-${id}`) {
+        || href !== (id === 'dhan-drishti' ? './dhan-drishti-reading.html' : `../bicycle-world/dist/projects.html#project-${id}`)) {
       throw new Error(`Incomplete or unsafe portfolio card: ${id}.`);
     }
     return `      <article class="project-card" data-project="${escapeHTML(id)}">
@@ -77,12 +77,12 @@ function renderCards(cards) {
             <p class="project-meta">${escapeHTML(type)}</p>
             <div class="project-heading"><h3 id="title-${escapeHTML(id)}">${escapeHTML(title)}</h3></div>
             <p class="project-summary">${escapeHTML(summary)}</p>
-            <p class="project-contribution">${escapeHTML(contribution)}</p>
+            ${contribution ? `<p class="project-contribution">${escapeHTML(contribution)}</p>` : ''}
             <span class="project-case-label">Read project summary</span>
           </div>
         </a>
         ${['connectaid','giggles'].includes(id) ? `<a class="project-evidence-link" href="#evidence-${id}">${id === 'giggles' ? 'Follow one complete turn' : 'See what testing changed'}</a>` : ''}
-      </article>`;
+      </article>`.replace(/^[ \t]+$/gm, '');
   }).join('\n');
 }
 

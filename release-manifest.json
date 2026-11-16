@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T02:53:10.714Z",
+  "generatedAt": "2026-11-16T04:20:20.047Z",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 746,
-      "sha256": "355d6e752146b809af318edde911afc7eedb087503210b2ab20cfb5fa0b454c1"
+      "sha256": "f4a4a8253a6bc5e8083c99275574dd9474a52854334398b97bedec6e0dd434c3"
     },
     {
       "path": "_redirects",
@@ -4175,7 +4175,7 @@
     {
       "path": "bicycle-world/dist/index.html",
       "size": 49245,
-      "sha256": "bcad1bbd80ee9f73e8a717f95a2b710bd50435b305a49a519932d708c20715f5"
+      "sha256": "4c74c05714b59cd32763bad54bb77a2ed01e1836301534a721d35d9c3445d8fd"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
@@ -4184,8 +4184,8 @@
     },
     {
       "path": "bicycle-world/dist/projects.html",
-      "size": 30485,
-      "sha256": "9159e10b4e44aeea437615b3b575322a6a5e63735aef6861327e94777f005b5e"
+      "size": 31381,
+      "sha256": "b0a9497cbddb77aec49ca4534c42767afd21af17ff013744b96a1b2bb9b86525"
     },
     {
       "path": "bicycle-world/dist/src/about-content.js",
@@ -4669,8 +4669,8 @@
     },
     {
       "path": "bicycle-world/dist/src/normal-work-source.js",
-      "size": 10174,
-      "sha256": "7e6d1bdd383cca6ab730a5b2a6f7739f1f6eadd8f3b309b0324c813594f21993"
+      "size": 11993,
+      "sha256": "989152646eb5ee3abff404d52ce005399ca776b16582d9f4f10682bb49d4e4d5"
     },
     {
       "path": "bicycle-world/dist/src/oak-lab-content.js",
@@ -4874,8 +4874,8 @@
     },
     {
       "path": "bicycle-world/dist/src/portfolio-route.js",
-      "size": 2793,
-      "sha256": "6e311afe48a9c5d00b38769090196f3e8c2e15ed1eeb952cc064996b3692c037"
+      "size": 2808,
+      "sha256": "dd98d85ce88106f2976661d9d93c29302b8469692603fb1e476842f854cd97a7"
     },
     {
       "path": "bicycle-world/dist/src/project-catalog.js",
@@ -5154,8 +5154,8 @@
     },
     {
       "path": "bicycle-world/dist/src/works-experience.js",
-      "size": 33691,
-      "sha256": "bd69dd87f79b6111e72f389f3d8894e8dd613e63f6effc37df5b430751660345"
+      "size": 33697,
+      "sha256": "851ead7846e4b3f77fd374336ebdceba36c90e6c4632e580ed21aa5e14f97d1a"
     },
     {
       "path": "bicycle-world/dist/src/works-exterior.js",
@@ -5641,6 +5641,441 @@
       "path": "normal-portfolio/assets/cases/connectaid/records.png",
       "size": 77077,
       "sha256": "dcfc882f9f5de907f3f4fb94d5a40f3cf7046c8093ba4d2ba5879bc4ce4de311"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/assets/aqua-rice.jpg",
+      "size": 318264,
+      "sha256": "024c3c9a8f28eb221b453f3c304b3bcd7ea6af14ff1f6aa8b64cdeba23a75247"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/assets/cover-terraces.jpg",
+      "size": 274683,
+      "sha256": "a98584c2863a2c2d86870d1ffccd5e9f485c8a0759fae602501c9d751dd77ae9"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/assets/hero-aeroponic.jpg",
+      "size": 239040,
+      "sha256": "8732a1f1737a821d24c5b1a503a813e73913b1d1ef7aec803e134b6a52fb13a9"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/assets/mist-root-macro.jpg",
+      "size": 208401,
+      "sha256": "20149951aa1c7977678b3c45af2bac42a38a54e0f3b15b4fb9150ad70d8d6a40"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/assets/problem-dryfield.jpg",
+      "size": 316633,
+      "sha256": "5b05ea43738175443e79e4d03e52b8eb29a91fd2ef94c0a42a44ae2f361e3466"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/assets/smart-paddy.jpg",
+      "size": 282829,
+      "sha256": "52e52c3ff58293583153fe95c989dab2d4df7275fb87fa54e0c392aeb5cf3a4d"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/assets/speculative-journey.png",
+      "size": 2576450,
+      "sha256": "c13466068c7c8d6c91b9bedabe3b866090afe3b8e325ebeedd7889bb2bbdd831"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/assets/vertical-farm.jpg",
+      "size": 310153,
+      "sha256": "fdebe72a6307793aa6ebb9cf49bb52a7c16c6efcf45213def661f5cfbbaaa335"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/media/ad6672e3-descriptions.vtt",
+      "size": 581,
+      "sha256": "78827a34406d9c2aaadfa7b6bee211e9dda3087227300a519780ce822cecdda7"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/media/eced39f8-descriptions.vtt",
+      "size": 554,
+      "sha256": "93af93a8b6074429775cbf7fb4123257b4e9ed79d78ed25b9996e8ae2cfb8748"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/media/gemini_generated_video_ad6672e3-poster.jpg",
+      "size": 87558,
+      "sha256": "6b6729169b2320604fcd990e2b9b92599a27d15024f7e286a135a2ce54c6ec55"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/media/gemini_generated_video_ad6672e3.mp4",
+      "size": 6264770,
+      "sha256": "7ac7feb7022dfff757a051f83c9540b941c95e9e0ab213c31f8b7e5cf8261b8f"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/media/gemini_generated_video_eced39f8-poster.jpg",
+      "size": 86382,
+      "sha256": "26f962665d2c73615246d2b2af33ff67561afe2e47838f044c2897f45f86273d"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/media/gemini_generated_video_eced39f8.mp4",
+      "size": 2937678,
+      "sha256": "8d7e68bff126f4440efa5b93644e65f3a8780e3b0e42c2be09d9cd6dd702e039"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/references.html",
+      "size": 6725,
+      "sha256": "4da65f8b718879e0cfab57c93dbf44f06591c04633c4459581f11b42944be8dc"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/research-appendix.html",
+      "size": 8800,
+      "sha256": "a839f6cae5d214b28003255fc7a0e6f21d037928d08cd2d52a7fdd1e99d1b8d5"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/research/figures/image1.png",
+      "size": 432396,
+      "sha256": "118784b6e014b262edfcd329995915732bc1dfcb65a2e8f2c9e0c5c901caaf32"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/research/figures/image10.png",
+      "size": 352960,
+      "sha256": "e3f13d9a5f4c63fa09323a1b60c0ec8fcb14f2eddece3f62636d882d408b62bb"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/research/figures/image11.png",
+      "size": 363409,
+      "sha256": "143489b99980b11be4f1aefaf5ff06241928be2feae90e2a2f35b4f6f7cf05aa"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/research/figures/image12.png",
+      "size": 335214,
+      "sha256": "1a67d5f399198ee6108f86d5f77eb96e49351bf20e45cf5c5bc7e5d36d1da2ed"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/research/figures/image13.png",
+      "size": 363965,
+      "sha256": "0d0c56e9e91219451ad7b6a89ebb950c95efeb8c16a335a7580123a71545ee36"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/research/figures/image14.png",
+      "size": 361711,
+      "sha256": "9996d31ce7bd2e653c09250f9fdd4244ca9533c9843e6885b1fad01568ca7006"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/research/figures/image15.png",
+      "size": 39728,
+      "sha256": "83402c8600c35e0a7e4e86d46cfce8bdbf256ea5bab3975bfd694b6ffc507a9b"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/research/figures/image16.png",
+      "size": 41135,
+      "sha256": "d32e5aa2a07c3566a3836c4a815bc4e727531c07f947ca3b9504bb3f3eb7fbcb"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/research/figures/image17.png",
+      "size": 38328,
+      "sha256": "d0091541a89315cf8f9858aa04645256cd042d36561c56d6e1fca5fdbaff2005"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/research/figures/image18.png",
+      "size": 272894,
+      "sha256": "f1128f5ee8cfa851bf1f1c51d13ae54f7a51ca65610db7f2a7c30d52e52281cb"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/research/figures/image19.png",
+      "size": 99604,
+      "sha256": "e3ccdc881b0602ac7f3fab1044640f80214c5517a5d7f1bffe5593560d600050"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/research/figures/image2.png",
+      "size": 479972,
+      "sha256": "4c6fe7844b4d5853a84881bcf9888f996e264ecd430cb83adc148803a27ea5de"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/research/figures/image20.png",
+      "size": 439134,
+      "sha256": "80e11f7ab56fcf77730557efe0445a3345b32c34ed5bc9bd1e5a913c7498951b"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/research/figures/image3.png",
+      "size": 343872,
+      "sha256": "4e4001e06dfa91e06c750a8b83d5df0b878263c4d525f4a028078ec8e07ff433"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/research/figures/image4.png",
+      "size": 365283,
+      "sha256": "28adff5fc76897edc1041230fc87732f1cefe51e05ff12e9286de608f11f8899"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/research/figures/image5.png",
+      "size": 388956,
+      "sha256": "120a72b703ca4616ad5b71a98307eb4cc7b644d3428dd82cca02d1da919997da"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/research/figures/image6.png",
+      "size": 399930,
+      "sha256": "ce1fe016eea76d973cea0ab9c3180e25ef28ae60c70b413ccf8cea42f5725952"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/research/figures/image7.png",
+      "size": 428520,
+      "sha256": "6ad2345913c9d4e04d0c3dc5e1f063ffecea5c75ef449e628b15febfc23b4320"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/research/figures/image8.png",
+      "size": 54008,
+      "sha256": "0bcb74ac4e21f3397179cc842ddb70033527d015da62bba4e9ec3b93d58aca4e"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/research/figures/image9.png",
+      "size": 69664,
+      "sha256": "32a4a5a24616a03dcc80e2335982ab405a9d6e2fcb8b358fa95ba0baa10e0cf6"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/research/original-report.md",
+      "size": 7608751,
+      "sha256": "2d7cf847a26ac43ee743091583e6c740497b4498ce557cd42814644da46a08cf"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/research/sources.json",
+      "size": 4992,
+      "sha256": "3adcbb7271551f563b1772b58ba66fd196e550bd9fc5a50f6e454abffefab11a"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/concept-aeroponic-rice-1024.webp",
+      "size": 203118,
+      "sha256": "92bbc94874c72dba132bf933f193b2b961f9ca696d83c0590f62131e318a7b82"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/concept-aeroponic-rice-640.webp",
+      "size": 92480,
+      "sha256": "5e1b6bf2ec0ffd0c6306851e94321be318b4fcfc5b92c9dcb5c9817954cb6edb"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/concept-aeroponic-rice.webp",
+      "size": 492818,
+      "sha256": "1230c43c42e07e11ff989ce0c6d5790382c6051245fa374168e2ef9005029871"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/concept-aqua-rice-1024.webp",
+      "size": 196776,
+      "sha256": "d9b0c069648756c26b14338e45bfa5b77e10530a3014c0b52ff1d85dff6afd0d"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/concept-aqua-rice-640.webp",
+      "size": 87300,
+      "sha256": "749e251faf857ce62df5b1d7fe3ff668cce7de84bd99951d53169a8549667fff"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/concept-aqua-rice.webp",
+      "size": 501784,
+      "sha256": "6b7fa78c8e99efb05a512f1d39c6c8b7c86a02b35ff2dd462ad966e33b9d76cf"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/concept-smart-paddy-v2-1024.webp",
+      "size": 247406,
+      "sha256": "0c99cc6d9537bf105e5c796f1a8229f1f1dc9040538f2e2f51cee2321c717f42"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/concept-smart-paddy-v2-640.webp",
+      "size": 98164,
+      "sha256": "b77325314c96501bee6ecfc3837bf894525dd98b6a1afb595b69731ea932ffe6"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/concept-smart-paddy-v2.webp",
+      "size": 595334,
+      "sha256": "5e16ab187d03cc22596163b150a7fd8eecb686c39ddeb606834f050eeaff6dc9"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/concept-vertical-rice-1024.webp",
+      "size": 207822,
+      "sha256": "02af2f1e591dac9ee1317d2700518f9c8425c45ecaa2942485cfcc5746d5d247"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/concept-vertical-rice-640.webp",
+      "size": 91576,
+      "sha256": "50eac414a51dd31ad37e8acce15e306996b7e15bfbfec6f549350c409a6bb37e"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/concept-vertical-rice.webp",
+      "size": 496110,
+      "sha256": "033ce6f0f261b661e88662d44c38e1dd789dabfd570488f014c024f75532d411"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/era-ancient-v2-1024.webp",
+      "size": 255872,
+      "sha256": "327335e9c2b7bf4522a3d0feefbcd115cf6599fdd6f8a9467e1c40ea01dc81a5"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/era-ancient-v2-640.webp",
+      "size": 105998,
+      "sha256": "18676d0516a33c751429c9840ebddb54b165fc1d6fb77f52eb2c903c3a77d273"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/era-ancient-v2.webp",
+      "size": 601572,
+      "sha256": "a63fcc840f73a5753ded42f51579e64f1fc72976463a9853e05d5838acd8caa4"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/era-colonial-v2-1024.webp",
+      "size": 192686,
+      "sha256": "af06fe8f61e72b37a7b4ece26ee9fc88c969713969bb8e508501782552c963b2"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/era-colonial-v2-640.webp",
+      "size": 79388,
+      "sha256": "bd4e7838e4abfa64a2b867bc6bc4575c93daf02db734be9c0213f127aed51f0a"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/era-colonial-v2.webp",
+      "size": 410556,
+      "sha256": "cd7fca4dc7ccf7f15ea20c885f99794da8a51090e066fed71976e1eeda1ab563"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/era-green-revolution-v2-1024.webp",
+      "size": 198814,
+      "sha256": "8bbabfe49a238e4b1449b70c088eab4ded900d2ba42f8a3e4218b15d92136f0e"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/era-green-revolution-v2-640.webp",
+      "size": 85274,
+      "sha256": "4c469e8d3a65bf524f985615f94a6243090755c24eadcb29a432b8417cea5c7a"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/era-green-revolution-v2.webp",
+      "size": 400826,
+      "sha256": "b1247696990f8c0fd39df73c3464c3f5dcd4983b2ee9d787f6eab01c9bec2b1e"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/era-present-v2-1024.webp",
+      "size": 248022,
+      "sha256": "f27272e62f7a138234fa49be729860c876450a241e6d19542df7e90f84e3669d"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/era-present-v2-640.webp",
+      "size": 99160,
+      "sha256": "6ec075230899d30ff6011665a385f99d67836b9d2d21edaba702183425476767"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/era-present-v2.webp",
+      "size": 619614,
+      "sha256": "fcd10331031ea41cafce76caf1312dc79f8299e7dff8bbc5af91a78e615c6952"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/future-plausible-v2-1024.webp",
+      "size": 252746,
+      "sha256": "a49ea1409cddedec06f24d8b959ca5fc727b84ca1ed697e0e7dfcd05e6edc847"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/future-plausible-v2-640.webp",
+      "size": 104484,
+      "sha256": "6f69756480988223e444619e6fdba7cdd1cb36c5419d8255475fd11752c956cf"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/future-plausible-v2.webp",
+      "size": 572836,
+      "sha256": "85f9df8e47f36df1fc3df95ebb0243d5288ea5abbd539295f72bb1fc65e8e619"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/future-possible-v2-1024.webp",
+      "size": 163770,
+      "sha256": "0410e4fdaad69f0afd04e442e7d9930ab46f10eea8343aead3914a9274e4067e"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/future-possible-v2-640.webp",
+      "size": 68644,
+      "sha256": "63f2b36e11cc1ac32191b65bada8205a1ccaee642fda27724588f3b8dc198713"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/future-possible-v2.webp",
+      "size": 339186,
+      "sha256": "0abe0fe5ac3be538ef54382ef71503c2ecf53a7566808318c1fd319280ed8ba6"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/future-preferred-v2-1024.webp",
+      "size": 210354,
+      "sha256": "635dcf373984f31a73f26d4f399a4ad97d7d28225837067b0723d4ba58b160b7"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/future-preferred-v2-640.webp",
+      "size": 91168,
+      "sha256": "77190b11171b4968172a76b73cb005d40d3c3b34c35e30e755fc7f763cbae7cd"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/future-preferred-v2.webp",
+      "size": 448440,
+      "sha256": "1922690bcedc07814625f2cd987fa510d3ccb93083b83de58f518bab4a13de56"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/future-probable-v2-1024.webp",
+      "size": 245738,
+      "sha256": "39fb2a06e3d214f90e8ed7ea3edbc33d4897852ebdc951fa44a6933dd2e3f903"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/future-probable-v2-640.webp",
+      "size": 100296,
+      "sha256": "c50a73cb3e5c2796e325c1eeb7d8beefe7d4e104502046c14382edb922ff6828"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/future-probable-v2.webp",
+      "size": 575726,
+      "sha256": "bba592a0a9402bd03f5eb5256de73523c418ec3cb5ec5ca5cf726d6276a5049e"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/roots-in-mist.webp",
+      "size": 225172,
+      "sha256": "b211435d1ff5051bb2ec2caf9b08cbfe43cb21ec29bc00d5a055d757305c2677"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/wildcard-automation-1024.webp",
+      "size": 198604,
+      "sha256": "9f89f05e23ddcf91120fc8666ee28a0c05b640a78dc84b8264ae534e40855387"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/wildcard-automation-640.webp",
+      "size": 89602,
+      "sha256": "8ed9c1ae01a0fd65d067a2a46d6ca8881c7bf702128858f975c178138dcfd584"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/wildcard-automation.webp",
+      "size": 466550,
+      "sha256": "9a42bd8bef7f67ef3dd11da486c3e8d819edc0ad44340c007801b0ec5656b62e"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/wildcard-climate-v2-1024.webp",
+      "size": 182584,
+      "sha256": "7cd55710ba2bbdcf16adf10a46b39c98223c621e96bc4f0050432454acaee495"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/wildcard-climate-v2-640.webp",
+      "size": 74728,
+      "sha256": "9012976646f4806bf4eb3bf1d706a5a250e1b797b0f03e019bd6b22bfa33f349"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/wildcard-climate-v2.webp",
+      "size": 434804,
+      "sha256": "bc70a6f3621d3976943b86965fcc3016a912ef6f8f4fb336b024a2a51266196c"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/wildcard-data-control-v2-1024.webp",
+      "size": 154952,
+      "sha256": "b79a5d3a03f6c0615cdad016bcc615d131eeceb05bd7c50f9d6c20b3d18954fd"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/wildcard-data-control-v2-640.webp",
+      "size": 71984,
+      "sha256": "0ac238aeea38f725c0ec326ffb73ee0b2c650047c461a9bbfeb74a7834290cc5"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/wildcard-data-control-v2.webp",
+      "size": 328528,
+      "sha256": "6d78477c2f549a85dc371f1409c42f48c4e4f0c4a80d89446b29dd70f4bfa472"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/wildcard-shared-technology-v2-1024.webp",
+      "size": 178244,
+      "sha256": "2938384fd2cd9b3bae9d030ab41d5d062b460e11f1cc74b178f40a38131ccc26"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/wildcard-shared-technology-v2-640.webp",
+      "size": 77844,
+      "sha256": "5da106a7e18fc94b92eac98be1dbb7c7e73e83395128f080dd315779ba4a89d5"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/dhan-drishti/visuals/wildcard-shared-technology-v2.webp",
+      "size": 345214,
+      "sha256": "8bddad4bfdf430f9e4786f119401de3d28201d11623852f56c0c1bc76d68d846"
     },
     {
       "path": "normal-portfolio/assets/cases/giggles/build-photos/IMG-20260815-WA0009.jpg",
@@ -7083,6 +7518,16 @@
       "sha256": "9197d85179689271354cb0c3f3ec71733e14517620944fc3efff5dec205d438b"
     },
     {
+      "path": "normal-portfolio/assets/project-covers/approved-20261116/dhan-drishti.png",
+      "size": 2518540,
+      "sha256": "4224511580e2b4e6e77926ccb61467c01618736f8aad0d42cd2002bba2ce8ff2"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/approved-20261116/dhan-drishti.webp",
+      "size": 387658,
+      "sha256": "ced2707507ce724a58d2f3099f77af6efdcd0a3e534a32c4c60b349f0c6a9cfe"
+    },
+    {
       "path": "normal-portfolio/assets/social/portfolio-preview-v1.png",
       "size": 381440,
       "sha256": "58580b4d672b3e7c4cefd421109a728d19f3788d6b3a7f44a21480d5a971e76c"
@@ -7264,8 +7709,8 @@
     },
     {
       "path": "normal-portfolio/case-hero-art.js",
-      "size": 3421,
-      "sha256": "f7140ff8ea298c36c67fd7e16bc60b9fdf11521228c7f02852d82595fd6ae68e"
+      "size": 3784,
+      "sha256": "ed889678334bf433d35885469ae495ad47c69ff6f8b89846629140056692434d"
     },
     {
       "path": "normal-portfolio/case-image-viewer.css",
@@ -7299,8 +7744,8 @@
     },
     {
       "path": "normal-portfolio/case-reader.js",
-      "size": 23453,
-      "sha256": "d6b7df9bffb6483b80340af60dd1a84cdf78ef7b0de3f7adc8799c31a8da8aea"
+      "size": 23658,
+      "sha256": "202805ec79ffbcd09d1b419b2fdd54ae7b0a5661d1385c1868cbbc306378cb8c"
     },
     {
       "path": "normal-portfolio/case-section-nav.js",
@@ -7458,6 +7903,26 @@
       "sha256": "b7f2b285a11b42cc3588a695268e44b6b3211a8119e8b8c89893d9ce2b8ba263"
     },
     {
+      "path": "normal-portfolio/dhan-drishti-case.js",
+      "size": 381052,
+      "sha256": "fb731063205502ac2814fbb503562f33463e23d582f2d4162fdbf581cd4522bd"
+    },
+    {
+      "path": "normal-portfolio/dhan-drishti-content.js",
+      "size": 3011,
+      "sha256": "a65e0bf480aa06bfd1b62ed9837e54a251dc988a96e615a247f540516fbe6062"
+    },
+    {
+      "path": "normal-portfolio/dhan-drishti-reading.html",
+      "size": 75929,
+      "sha256": "f982ee81f9a27756d40a7008209ab18c25b033f60944abd19d01dae21f28f6e1"
+    },
+    {
+      "path": "normal-portfolio/dhan-drishti.css",
+      "size": 3446,
+      "sha256": "624f1f4cb8a5c1097c1315a139a95d74d149c69fabd5c4b73c5898f274d24660"
+    },
+    {
       "path": "normal-portfolio/editorial-case.css",
       "size": 12199,
       "sha256": "b64a95e29f43f28cfd8fb9328f420ae6dcdd53fffc0705a255cb8e1c55603a43"
@@ -7504,8 +7969,8 @@
     },
     {
       "path": "normal-portfolio/index.html",
-      "size": 50694,
-      "sha256": "b9c38da661fe3d7d87c50b2ac08b5d21fb61a6d3ada6beeab36da22df03e03f1"
+      "size": 51715,
+      "sha256": "5762fe95820504f748b2b815e2f6df3f1ce3f91bc3e63e1dd33655bf62431928"
     },
     {
       "path": "normal-portfolio/jan-concept-data.js",
@@ -7519,8 +7984,8 @@
     },
     {
       "path": "normal-portfolio/map.html",
-      "size": 15170,
-      "sha256": "9d656c03f6ca7e61416975337d6ae5ce42c957d63b28da0462f169c602f3aa9a"
+      "size": 15299,
+      "sha256": "3698cf377348df8544afd7fef6bc94dcce28cf85af7c9b5d7e60330ca841acc7"
     },
     {
       "path": "normal-portfolio/mode-entry.js",
@@ -7544,8 +8009,8 @@
     },
     {
       "path": "normal-portfolio/normal-projects.js",
-      "size": 13903,
-      "sha256": "38667641d70f51213c5d69a20d926210ce760b2dd640a403635aea29e815d6a3"
+      "size": 14381,
+      "sha256": "98c6b8a2398892fb741f83d0867ad63352a4aa06d5175a6232f107c3d02f91b7"
     },
     {
       "path": "normal-portfolio/normal-reading.css",
@@ -7599,8 +8064,8 @@
     },
     {
       "path": "normal-portfolio/portfolio-bundle.css",
-      "size": 210700,
-      "sha256": "06c1d43d8a2fcf96b8529e84a8f9887cfd6c57d6ba5859390d57c8c4192f5f59"
+      "size": 214195,
+      "sha256": "a328009746bd0223f9cc4a650db07942c046ccfe7858a32655f381e23239fbab"
     },
     {
       "path": "normal-portfolio/portfolio-extras.css",
@@ -7609,8 +8074,8 @@
     },
     {
       "path": "normal-portfolio/portfolio-extras.js",
-      "size": 24162,
-      "sha256": "e8c007a5650b13c85f7e274290a9f79d92b7cdae49820acc3f06d684e1e86bc5"
+      "size": 24178,
+      "sha256": "9ba671540423ef6468466b2dd6736a936916d792f174dcca85ccef6324fc8f33"
     },
     {
       "path": "normal-portfolio/portfolio-motion.css",
@@ -7624,8 +8089,8 @@
     },
     {
       "path": "normal-portfolio/portfolio.js",
-      "size": 22942,
-      "sha256": "69506f5eace67ff02cc3e8c606cd31947a06174b0411c2f90019a11ebb5a7b1a"
+      "size": 23192,
+      "sha256": "3578d1f0e0d90c5d25f9332ec72fbb0b049d9cbc050c30bd8cac0ee39a0063c6"
     },
     {
       "path": "normal-portfolio/process-data.js",

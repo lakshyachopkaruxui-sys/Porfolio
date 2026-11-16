@@ -7,7 +7,8 @@ export const NORMAL_WORK_ORDER=[
   "syringe",
   "workplace-mode",
   "jan-aushadhi",
-  "tear"
+  "tear",
+  "dhan-drishti"
 ];
 export const NORMAL_WORK_COVERS={
   "connectaid": {
@@ -58,6 +59,13 @@ export const NORMAL_WORK_COVERS={
     "height": 907,
     "alt": "AI-generated TEAR presentation cover: hands pull a glowing seam between a room, ocean and sunlit forest beside Pull reality apart.",
     "caption": "Owner-selected AI-generated presentation artwork; actual prototype captures and iteration evidence appear below."
+  },
+  "dhan-drishti": {
+    "src": "../../normal-portfolio/assets/project-covers/approved-20261116/dhan-drishti.webp",
+    "width": 1733,
+    "height": 908,
+    "alt": "AI-generated Dhan Drishti cover presenting speculative rice-farming concepts.",
+    "caption": "AI-generated presentation cover for an academic speculative-design study. The cultivation systems are concepts."
   }
 };
 export const NORMAL_WORK_METADATA=[
@@ -189,6 +197,33 @@ export const NORMAL_WORK_METADATA=[
           "Feedback reshaped the forest floor, volcanic atmosphere and first-person dream narration."
         ],
         "limitation": "Informal feedback and prototype checks; latest Quest 3S validation remains pending."
+      }
+    ]
+  },
+  {
+    "id": "dhan-drishti",
+    "title": "Dhan Drishti",
+    "subtitle": "Academic speculative-design study",
+    "status": "Speculative design · Rice farming",
+    "summary": "A secondary-research study of future rice farming, explored through four scenarios and four cultivation concepts.",
+    "timeline": "3 weeks",
+    "categories": ["research", "interaction"],
+    "sections": [
+      {
+        "id": "research",
+        "title": "Secondary research and future scenarios",
+        "body": [
+          "The course study used research papers, reports, historical material and Google NotebookLM. Historical context, six signals, STEEP, drivers and uncertainty informed four future scenarios.",
+          "The preferred future considers accessible tools, local support, fair institutions and farmer control. The full case follows the research through 17 sections."
+        ]
+      },
+      {
+        "id": "concepts",
+        "title": "Four cultivation concepts",
+        "body": [
+          "AI Smart Paddy, Vertical Paddy, Aqua Rice and aeroponic Dhan Drishti explore different relationships between cultivation, resources and the farmer's work. A hypothetical journey considers adoption and support.",
+          "These are speculative concepts and intended benefits, not measured cultivation outcomes. The later portfolio literature review is separate from the original course study."
+        ]
       }
     ]
   }

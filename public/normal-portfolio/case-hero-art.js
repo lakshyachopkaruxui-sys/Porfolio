@@ -77,7 +77,16 @@ export function mountCaseHeroArt(figure, {project, artifact, artifactUrl}) {
     return {caption: mockup.caption};
   }
 
-  sourceImage(stage, {
+  let imageParent = stage;
+  if (project.id === 'dhan-drishti') {
+    const link = element('a', 'case-hero-mockup-link', stage);
+    link.dataset.caseImage = '';
+    link.href = artifactUrl;
+    link.target = '_blank'; link.rel = 'noopener';
+    link.setAttribute('aria-label', 'Inspect Dhan Drishti speculative concept cover');
+    imageParent = link;
+  }
+  sourceImage(imageParent, {
     src: artifactUrl,
     alt: artifact.alt,
     width: artifact.width,

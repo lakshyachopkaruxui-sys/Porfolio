@@ -251,7 +251,7 @@ export function createWorksExperience({renderer,onOpen=()=>{},onClose=()=>{},onP
     }catch(error){transition=null;if(rendererState)restoreRenderer();if(dialog.open)dialog.close();setPhase('closed');pool.clear();onClose();throw error;}
   }
   function pick(event){const rect=host.getBoundingClientRect();if(!rect.width||!rect.height)return null;pointer.set((event.clientX-rect.left)/rect.width*2-1,1-(event.clientY-rect.top)/rect.height*2);raycaster.setFromCamera(pointer,room.camera);let object=raycaster.intersectObjects(room.slots.filter(slot=>slot.root.visible).map(slot=>slot.root),true)[0]?.object??null;while(object&&object.userData.worksIndex===undefined)object=object.parent;return object;}
-  listen(q('[data-works-back]'),'click',()=>close());listen(q('[data-works-portfolio]'),'click',()=>{close({immediate:true,notify:false});onPortfolio();});listen(q('[data-works-prev]'),'click',()=>selectProject(selected-1));listen(q('[data-works-next]'),'click',()=>selectProject(selected+1));listen(q('[data-works-summary]'),'click',()=>overview());
+  listen(q('[data-works-back]'),'click',()=>close());listen(q('[data-works-portfolio]'),'click',()=>{close({immediate:true,notify:false});onPortfolio();});listen(q('[data-works-prev]'),'click',()=>selectProject(selected-1));listen(q('[data-works-next]'),'click',()=>selectProject(selected+1));listen(q('button[data-works-summary]'),'click',()=>overview());
   listen(q('[data-works-retry]'),'click',()=>{errors.delete(selected);pool.select(windowIndexes());updateStatus();host.focus({preventScroll:true});});
   listen(q('[data-works-places]'),'click',showPlaces);
   listen(q('[data-works-index]'),'click',()=>showCatalogue());

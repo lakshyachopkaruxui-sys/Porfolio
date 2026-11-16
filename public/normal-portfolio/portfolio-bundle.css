@@ -4165,3 +4165,53 @@ html[data-normal-theme="slate"] #resources .resources-primary { color: #152439; 
 @media (prefers-reduced-motion: reduce) {
   #resources .resources-actions a { transition: none; transform: none; }
 }
+
+/* Source: normal-portfolio/dhan-drishti.css */
+/* Dhan's content uses Normal's existing fonts, ink, surfaces and chapter shell.
+   This scoped adapter arranges project-specific evidence, not a separate theme. */
+#case-reader[data-project="dhan-drishti"] .dhan-content { min-width:0; }
+#case-reader[data-project="dhan-drishti"] .case-hero-stage { height:auto; aspect-ratio:1733 / 908; background:var(--surface); }
+#case-reader[data-project="dhan-drishti"] .case-hero-mockup-link { height:auto; }
+#case-reader[data-project="dhan-drishti"] .case-hero-source { width:100%; height:auto; object-fit:contain; }
+.dhan-content :where(div,article,figure,dl,nav) { min-width:0; }
+.dhan-content :where(p,li,dd,dt,summary) { overflow-wrap:break-word; }
+.dhan-content :where(.dd-method-output,.dd-transition,.dd-scenario-question,.dd-closing-thought,.dd-baseline,#dd-literature-update) { margin-top:48px; }
+.dhan-content :where(.dd-implication,.dd-tradeoff,.dd-transition) strong { display:block; margin-bottom:8px; }
+.dhan-content img { display:block; max-width:100%; width:100%; height:auto; object-fit:contain; }
+.dhan-content video { display:block; max-width:100%; width:100%; height:auto; object-fit:contain; }
+.dhan-content :where(.dd-scene,.dd-source-small) img { max-height:var(--case-media-height,76svh); }
+.dhan-content figure { margin-inline:0; }
+.dhan-content .dd-process-map ol { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px 32px; }
+.dhan-content .dd-process-map a { display:inline-flex; align-items:center; min-height:44px; }
+.dhan-content .dd-table-region { max-width:100%; overflow-x:auto; margin-block:32px; }
+.dhan-content table { width:100%; border-collapse:collapse; font-size:17px; }
+.dhan-content :where(th,td) { padding:18px 16px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line); }
+.dhan-content th { color:var(--ink); }
+.dhan-content .dd-diagram { margin-block:40px; color:var(--ink); }
+.dhan-content .dd-diagram-svg { overflow-x:auto; padding-block:16px; }
+.dhan-content svg { display:block; width:100%; height:auto; }
+.dhan-content .dd-cone-mobile { display:none; }
+.dhan-content .dd-diagram-equivalent { max-width:76ch; margin-top:24px; }
+.dhan-content .dd-cone-legend { display:grid; grid-template-columns:120px 1fr; gap:12px 24px; }
+.dhan-content .dd-cone-legend :where(dt,dd) { margin:0; }
+.dhan-content .dd-driver-list { columns:2; column-gap:48px; }
+.dhan-content .dd-driver-list li { break-inside:avoid; }
+.dhan-content a:focus-visible,.dhan-content summary:focus-visible { outline:3px solid var(--accent); outline-offset:4px; }
+@media (max-width:850px) {
+ .dhan-content .dd-process-map ol { grid-template-columns:1fr; }
+ .dhan-content .dd-driver-list { columns:1; }
+ .dhan-content .dd-diagram-svg > svg { min-width:760px; }
+ .dhan-content [data-diagram="futures-cone"] .dd-diagram-svg { display:none; }
+ .dhan-content [data-diagram="futures-cone"] .dd-cone-mobile { display:block; }
+ .dhan-content .dd-cone-mobile svg { max-height:420px; }
+ .dhan-content .dd-cone-legend { grid-template-columns:1fr; gap:6px; }
+ .dhan-content .dd-cone-legend dd { margin-bottom:16px; }
+ .dhan-content th,.dhan-content td { min-width:160px; }
+}
+
+
+/* Existing reader components supply all text styles and media geometry. */
+.dhan-content .dd-lens-letter { display:none; }
+.dhan-content .dd-chapter-lead { margin-top:0; }
+.dhan-content dt.story-body { font-weight:500; margin-bottom:8px; }
+.dhan-content .dd-method-output { margin-top:44px; }

@@ -1,0 +1,90 @@
+{
+  "checked_on": "2026-11-16",
+  "provenance": "Later literature check for portfolio revision, not original course source history",
+  "sources": [
+    {
+      "id": "water",
+      "title": "How much water does rice use?",
+      "author": "IRRI / Rice Today",
+      "year": 2009,
+      "url": "https://ricetoday.irri.org/how-much-water-does-rice-use/",
+      "type": "Institutional explanation",
+      "supports": "Field water inputs include rainfall and irrigation; an Asian experimental average is about 2,500 L per kg of rough rice.",
+      "limit": "Not a current India-specific rate or a direct benchmark for an untested chamber. Measurement boundaries must match."
+    },
+    {
+      "id": "awd",
+      "title": "Alternate Wetting and Drying",
+      "author": "IRRI",
+      "year": null,
+      "url": "https://ghgmitigation.irri.org/mitigation-technologies/alternate-wetting-and-drying",
+      "type": "Institutional guidance",
+      "supports": "AWD is an existing soil-based field-water practice.",
+      "limit": "It does not establish aeroponic performance or guaranteed carbon-credit income."
+    },
+    {
+      "id": "carrijo",
+      "title": "Rice yields and water use under alternate wetting and drying irrigation: A meta-analysis",
+      "author": "Carrijo, Lundy & Linquist",
+      "year": 2017,
+      "url": "https://doi.org/10.1016/j.fcr.2016.12.002",
+      "full_text": "https://linquist.ucdavis.edu/sites/g/files/dgvnsk6581/files/inline-files/2017-Carrijo-et-al-AWD-meta-analysis-FCR.pdf",
+      "type": "Peer-reviewed research synthesis",
+      "supports": "Mild AWD reduced total water input by 23.4% versus continuous flooding, without a significant yield reduction in most circumstances.",
+      "limit": "Severe drying carried yield risk. Results are conditional and belong to the published studies, not this project."
+    },
+    {
+      "id": "plant-factory",
+      "title": "Machine-learning-assisted comparative analysis of rice growth and yield formation in field and plant factory systems",
+      "author": "Yang et al.",
+      "year": 2026,
+      "url": "https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2026.1875450/full",
+      "doi": "10.3389/fpls.2026.1875450",
+      "type": "Peer-reviewed experimental study",
+      "supports": "Controlled-environment rice developed faster in the experiment, without a significant increase in final grain yield.",
+      "limit": "Resource-use and economic indicators were incomplete; it does not validate the proposed stacked system."
+    },
+    {
+      "id": "rice-fish",
+      "title": "Pertumbuhan dan Hasil Empat Genotipe Padi (Oryiza Satifa L.) pada Sistem Budidaya Integrasi Padi-Ikan Secara Aquaponik",
+      "author": "Suparmin et al.",
+      "year": 2025,
+      "url": "https://journal.umpr.ac.id/index.php/daun/article/view/9605",
+      "doi": "10.33084/daun.v12i1.9605",
+      "type": "Peer-reviewed experimental study",
+      "supports": "Rice–fish cultivation was studied with and without additional NPK; some yield components benefited from supplementation.",
+      "limit": "Soil-filled pots and catfish differ from the proposed soil-free system. No proof of zero fertiliser, zero methane, or higher income."
+    },
+    {
+      "id": "root-study",
+      "title": "Cytogenetic, electrophoretic, and root studies of javanica rices, in Rice Genetics II",
+      "author": "Chang et al. / IRRI",
+      "year": 1991,
+      "url": "https://books.irri.org/9712200272_content.pdf",
+      "type": "Rice research chapter; indexed passages checked",
+      "supports": "Aeroponic culture was used for comparative rice-root research.",
+      "limit": "Root measurements do not establish full-cycle commercial grain production. Indexed publisher passages were checked; full-PDF retrieval timed out."
+    },
+    {
+      "id": "maintenance",
+      "title": "Hydroponics in physiological studies of trace element tolerance and accumulation in plants focussing on metallophytes and hyperaccumulator plants",
+      "author": "van der Ent et al.",
+      "year": 2024,
+      "url": "https://link.springer.com/article/10.1007/s11104-024-06537-6",
+      "doi": "10.1007/s11104-024-06537-6",
+      "type": "Peer-reviewed methodological review",
+      "supports": "Its aeroponics discussion identifies specialised equipment, high-pressure pumps, and mister-clogging disadvantages.",
+      "limit": "Not a rice-yield trial; it does not establish a crop-death timeframe or validate predictive alerts."
+    },
+    {
+      "id": "voros",
+      "title": "The Futures Cone, use and history",
+      "author": "Joseph Voros",
+      "year": 2017,
+      "url": "https://thevoroscope.com/2017/02/24/the-futures-cone-use-and-history/",
+      "type": "Original author’s methodological explanation",
+      "supports": "Future categories are nested; preferable is a normative judgement that can overlap categories.",
+      "limit": "Not a probability model or evidence that any project scenario will occur."
+    }
+  ]
+}

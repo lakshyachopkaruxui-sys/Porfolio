@@ -1,6 +1,6 @@
 const ORIGIN = 'https://lakshyachopkar.com';
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-const PROJECTS = ['connectaid','giggles','pixel-mania','syringe','workplace-mode','jan-aushadhi','tear'];
+const PROJECTS = ['connectaid','giggles','pixel-mania','syringe','workplace-mode','jan-aushadhi','tear','dhan-drishti'];
 const ITEMS = {project_open:PROJECTS,resume_download:['resume'],contact_click:['email','phone','linkedin','behance']};
 const MAX_BYTES = 512;
 const prepared = new WeakMap();

@@ -18,7 +18,7 @@ function button(className, text, parent) {
   return node;
 }
 
-const PROJECT_IDS = new Set(['pixel-mania', 'syringe', 'connectaid', 'giggles', 'workplace-mode', 'jan-aushadhi', 'tear']);
+const PROJECT_IDS = new Set(['pixel-mania', 'syringe', 'connectaid', 'giggles', 'workplace-mode', 'jan-aushadhi', 'tear', 'dhan-drishti']);
 const SUGGESTED_QUESTIONS = [
   {label: 'Which project first?', question: 'Which project should I look at first?'},
   {label: 'Lakshya’s role in Giggles', question: 'What was Lakshya’s role in Giggles?'},
