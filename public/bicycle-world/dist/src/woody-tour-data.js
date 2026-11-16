@@ -232,8 +232,8 @@ const lines = [
 
 const verifiedAudio=Object.freeze({
   "controls-offer": {
-    "durationSeconds": 9.68,
-    "sha256": "f009bcf5c63d4f3f2768f53b6511df35195be8f91a5c41bad1713e53c26747ae"
+    "durationSeconds": 10.08,
+    "sha256": "66e78066a0c7d41aed7619ff71c9697198529276602fa620a35609952a1526e0"
   },
   "controls-yes": {
     "durationSeconds": 7.04,
@@ -244,8 +244,8 @@ const verifiedAudio=Object.freeze({
     "sha256": "59025a25024c1d2350500e6fe702d78944bb22eb8d809c4536b4ffe54e11b0f9"
   },
   "welcome": {
-    "durationSeconds": 11.36,
-    "sha256": "b104e81ae30f1ca0f1da78b38fda16451dcaf8c62d67c099f4eb7eba4a8e43b1"
+    "durationSeconds": 12.72,
+    "sha256": "aa380677c1a84fed6c1e8124938ebca5bbf17306581f4fadbb9349ebe5300031"
   },
   "departure": {
     "durationSeconds": 3.68,
@@ -264,68 +264,68 @@ const verifiedAudio=Object.freeze({
     "sha256": "24e9e18f0992c4910ad07c5ea3a906673e303238153de6288781d8c5835bb52a"
   },
   "approach:about": {
-    "durationSeconds": 7.2,
-    "sha256": "5a4e376afdb97b36d7562f9d587fa3a2714d2d1cc9d4992dfd5e9a95560dd220"
+    "durationSeconds": 7.12,
+    "sha256": "1f99a8cd1ad02861780bf75de03dd01638e8670e479dee441905113e8845d88b"
   },
   "approach:projects": {
-    "durationSeconds": 8.24,
-    "sha256": "fb4bd008d2fbb256e594fce7ad84c0217fd35688403d436cebbb252706952fd1"
+    "durationSeconds": 7.52,
+    "sha256": "8dd130fdadc119a2470ec77d72576c1546109a232cb641a94274ec779b1c0c96"
   },
   "approach:work": {
-    "durationSeconds": 8.64,
-    "sha256": "d5de1b13f54fe4e012dbd0a6a1d5af7fa89f7f2ccc4d5b7ecaff76613910c1dc"
+    "durationSeconds": 7.84,
+    "sha256": "0b1fa0a262cee4067a33c236695273d0f3426e2a782161ec19450a07ff9081fc"
   },
   "approach:music": {
-    "durationSeconds": 5.76,
-    "sha256": "36307a95f3811c8bbf74be24827e6ed7a45cf9fb97374c2795645e067273ecb6"
+    "durationSeconds": 5.44,
+    "sha256": "861d3d91f4fde175503e48a0d990d1123094cd8969dd2b9ee4548b463848d5a4"
   },
   "approach:cloud": {
-    "durationSeconds": 10.56,
-    "sha256": "6ba3c9ee5a180672a4109a419f5c6c504bb42f65c4cda35cca173f6bfb5abd11"
+    "durationSeconds": 9.28,
+    "sha256": "59770e9dcdd840975b1992bdee5dcd87d20a100ba3e019883abc63d74dd1cc5f"
   },
   "arrive:about": {
-    "durationSeconds": 7.2,
-    "sha256": "5a4e376afdb97b36d7562f9d587fa3a2714d2d1cc9d4992dfd5e9a95560dd220"
+    "durationSeconds": 7.12,
+    "sha256": "1f99a8cd1ad02861780bf75de03dd01638e8670e479dee441905113e8845d88b"
   },
   "arrive:projects": {
-    "durationSeconds": 8.24,
-    "sha256": "fb4bd008d2fbb256e594fce7ad84c0217fd35688403d436cebbb252706952fd1"
+    "durationSeconds": 7.52,
+    "sha256": "8dd130fdadc119a2470ec77d72576c1546109a232cb641a94274ec779b1c0c96"
   },
   "arrive:work": {
-    "durationSeconds": 8.64,
-    "sha256": "d5de1b13f54fe4e012dbd0a6a1d5af7fa89f7f2ccc4d5b7ecaff76613910c1dc"
+    "durationSeconds": 7.84,
+    "sha256": "0b1fa0a262cee4067a33c236695273d0f3426e2a782161ec19450a07ff9081fc"
   },
   "arrive:music": {
-    "durationSeconds": 16.48,
-    "sha256": "5c324ea27104b3230338a6c9c6f404ff26054c5bd76ce9e9e255608efddf6370"
+    "durationSeconds": 16.64,
+    "sha256": "2287c5814b4b8cd1e09aff291d66f707aa91d6c4bff3584b94fcf8343523ce8e"
   },
   "arrive:cloud": {
-    "durationSeconds": 10.56,
-    "sha256": "6ba3c9ee5a180672a4109a419f5c6c504bb42f65c4cda35cca173f6bfb5abd11"
+    "durationSeconds": 9.28,
+    "sha256": "59770e9dcdd840975b1992bdee5dcd87d20a100ba3e019883abc63d74dd1cc5f"
   },
   "works-skipped": {
-    "durationSeconds": 7.28,
-    "sha256": "5b6c005002262f6eb7641583e140e38667d11f34ab2c58243ca8d2941802abe9"
+    "durationSeconds": 7.44,
+    "sha256": "9ce73e761e18b48e5c1a8872a199b157827fb382f386b9af06b11d0ddee3a3c4"
   },
   "ramp-landed": {
     "durationSeconds": 4.32,
     "sha256": "bb1beed54dceec8459371ef12e8295a34135f08d0977da4dbba8eb3e51c1cabb"
   },
   "room:about": {
-    "durationSeconds": 14.4,
-    "sha256": "e7bb0bebf835be342636ea01cde2aeecd2b1953e8c7134dcd09a316ff585daf1"
+    "durationSeconds": 14.24,
+    "sha256": "478150a6db191b27d8c99393df7572eaa040954ea25c44106eebc2b91a3b91ac"
   },
   "room:projects": {
-    "durationSeconds": 15.68,
-    "sha256": "b3838f3d16b6856eee9cd0bb0a5777348aab5cb5395a1d600e5268ac694ae446"
+    "durationSeconds": 15.52,
+    "sha256": "c84215abf9e1ec1b9211bb657fce92a408f5061cd64c53ea1d975dc9559f260d"
   },
   "room:work": {
-    "durationSeconds": 15.92,
-    "sha256": "b369374198a7bd1cccdcae7934bdbc80658bb6bf72ca8acba2ab5e3dc3f1050e"
+    "durationSeconds": 13.44,
+    "sha256": "18ee48da54d2f9cd62a9882aa806d9842b66213a2db85911a1388e960c4882c8"
   },
   "room:cloud": {
     "durationSeconds": 12.0,
-    "sha256": "07bd6cd3c42ce1145d11928153249a2ec259a78a597a99002900a04b1f14cb48"
+    "sha256": "5a64a95424c6a556aa67dfecf6ffbe27252ae4d49ac079c95716110d23dc9796"
   },
   "return:about": {
     "durationSeconds": 6.08,
@@ -344,8 +344,8 @@ const verifiedAudio=Object.freeze({
     "sha256": "f219f9ae1d4709394e3f1faaef0ba78676bd7a2f2e24fe7e6af25c6f803bf21c"
   },
   "return:cloud": {
-    "durationSeconds": 10.8,
-    "sha256": "6a21ed116a0c99d9a535b46dad7c0965fec123ff06ceabbfcb0fca3c7603350e"
+    "durationSeconds": 10.24,
+    "sha256": "b5f55a519c0417de405482841108e0018492df49c8c15caa817f0571e338de11"
   },
   "route-unavailable": {
     "durationSeconds": 5.36,
@@ -368,12 +368,12 @@ const verifiedAudio=Object.freeze({
     "sha256": "6d110ce5a78cd3fa5648da2ce1bbce104a137d0310655cb7e44854306b9cbd29"
   },
   "room:visitor": {
-    "durationSeconds": 18.08,
-    "sha256": "b278ba86892ec5a2edf57d4d79bcfed8c8d4771422adcd48f95b2c30d116fe5d"
+    "durationSeconds": 18.8,
+    "sha256": "3950852eca8c007c66f9f4532e4db9abe8956c5755aa11cdf5b6ddd9dc08a630"
   },
   "feedback-nearby": {
-    "durationSeconds": 11.12,
-    "sha256": "7d86cfc62166594fa8538f7d38a6e14d816ac353fbad3590b44ca608ff3782f2"
+    "durationSeconds": 10.16,
+    "sha256": "34d8ee1a7a075151b39de03a3de19261a8d060ce7c151cdf1f22507e0c014f8d"
   }
 });
 export const WOODY_TOUR_CLIPS = Object.freeze(Object.fromEntries(lines.map(([id, text, stopId, captionOnly = false]) => [id, Object.freeze({

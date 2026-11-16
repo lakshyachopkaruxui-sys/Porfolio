@@ -1,14 +1,12 @@
-import {createOakNarration} from './oak-narration.js';
 import {OAK_RECORDED_VOICE, OAK_VOICE_CLIPS} from './oak-voice-clips.js';
 
 const normalize = value => String(value ?? '').replace(/\s+/g, ' ').trim();
 
-/** One lazily loaded performance at a time, with the installed Mark voice as fallback. */
+/** One lazily loaded performance at a time, using only the approved recording. */
 export function createOakRecordedNarration({
   onState = () => {},
   audioFactory = typeof globalThis.Audio === 'function' ? () => new globalThis.Audio() : null,
   audioParent = globalThis.document?.body,
-  fallbackFactory = createOakNarration,
   clips = OAK_VOICE_CLIPS,
   timers = {},
 } = {}) {
@@ -17,7 +15,7 @@ export function createOakRecordedNarration({
   const byText = new Map(clips.map(clip => [normalize(clip.text), clip]));
   const recordedAvailable = typeof audioFactory === 'function';
   let audio = null, active = false, paused = false, disposed = false, disposing = false, engine = 'none';
-  let generation = 0, playAttempt = 0, startupTimer = null, selectedVoice = '', currentText = '', removeListeners = () => {};
+  let generation = 0, playAttempt = 0, startupTimer = null, currentText = '', removeListeners = () => {};
   let currentClip = null;
   let recordedPlaying = false;
 
@@ -31,14 +29,6 @@ export function createOakRecordedNarration({
     onState(active, error, {status, sentence: cues[index]?.text || currentText, index, total: cues.length || 1,
       paused, voiceId: OAK_RECORDED_VOICE.id, engine: 'recorded'});
   }
-  const fallback = fallbackFactory({onState(value, error, details = {}) {
-    if (disposed || engine !== 'device') return;
-    active = value;
-    paused = Boolean(details.paused);
-    onState(value, error, {...details, engine: 'device', fallback: prefersRecorded()});
-  }});
-  const prefersRecorded = () => recordedAvailable && (!selectedVoice || selectedVoice === OAK_RECORDED_VOICE.id);
-
   function clearStartup() {
     if (startupTimer !== null) unschedule(startupTimer);
     startupTimer = null;
@@ -61,21 +51,19 @@ export function createOakRecordedNarration({
     active = paused = false;
     currentClip = null;
     releaseAudio();
-    fallback.stop();
     emit('idle');
   }
-  function useDevice() {
+  function unavailable() {
     if (disposed || disposing) return false;
     generation++;
     engine = 'none';
+    active = paused = false;
     currentClip = null;
     releaseAudio();
-    fallback.stop();
-    fallback.setVoice(prefersRecorded() ? '' : selectedVoice);
-    engine = 'device';
-    active = true;
-    paused = false;
-    return fallback.read(currentText);
+    emit('unavailable', recordedAvailable
+      ? 'Oak’s recorded voice is unavailable. Read the words below or select Replay line to try again.'
+      : 'Oak’s recorded voice is unavailable in this browser. Read the words below.');
+    return false;
   }
   function ensureAudio() {
     if (audio) return audio;
@@ -93,7 +81,7 @@ export function createOakRecordedNarration({
     clearStartup();
     startupTimer = schedule(() => {
       startupTimer = null;
-      if (!disposed && generation === token && playAttempt === attempt && engine === 'recorded' && active && !paused) useDevice();
+      if (!disposed && generation === token && playAttempt === attempt && engine === 'recorded' && active && !paused) unavailable();
     }, 12000);
   }
   function playRecording(token) {
@@ -104,11 +92,11 @@ export function createOakRecordedNarration({
     try {
       const result = audio.play();
       result?.catch(() => {
-        if (!disposed && generation === token && playAttempt === attempt && engine === 'recorded' && !paused) useDevice();
+        if (!disposed && generation === token && playAttempt === attempt && engine === 'recorded' && !paused) unavailable();
       });
       return true;
     } catch {
-      return useDevice();
+      return !disposed && generation === token && playAttempt === attempt && engine === 'recorded' && !paused ? unavailable() : false;
     }
   }
   function read(text) {
@@ -118,8 +106,8 @@ export function createOakRecordedNarration({
     if (disposed || disposing || generation !== stoppedGeneration) return false;
     currentText = normalize(text);
     if (!currentText) return false;
-    const clip = prefersRecorded() && byText.get(currentText);
-    if (!clip) return useDevice();
+    const clip = recordedAvailable && byText.get(currentText);
+    if (!clip) return unavailable();
     const token = ++generation;
     engine = 'recorded';
     currentClip = clip;
@@ -163,7 +151,7 @@ export function createOakRecordedNarration({
           releaseAudio();
           emit('complete');
         },
-        error() { if (owned() && !paused) useDevice(); },
+        error() { if (owned()) unavailable(); },
         timeupdate() {
           if (!owned() || !recordedPlaying || paused) return;
           const next = cueIndex();
@@ -178,12 +166,11 @@ export function createOakRecordedNarration({
       emit('loading');
       return playRecording(token);
     } catch {
-      return useDevice();
+      return unavailable();
     }
   }
   function pause() {
     if (disposed || disposing || !active || paused) return false;
-    if (engine === 'device') return fallback.pause();
     playAttempt++;
     recordedPlaying = false;
     paused = true;
@@ -194,46 +181,30 @@ export function createOakRecordedNarration({
   }
   function resume() {
     if (disposed || disposing || !active || !paused) return false;
-    if (engine === 'device') return fallback.resume();
-    if (engine === 'pending') return read(currentText);
     const token = generation;
     paused = false;
     emit('starting');
     return playRecording(token);
   }
   function getVoices() {
-    return [...(recordedAvailable ? [OAK_RECORDED_VOICE] : []), ...fallback.getVoices()];
+    return recordedAvailable ? [OAK_RECORDED_VOICE] : [];
   }
-  function setVoice(id = '') {
-    if (disposed || disposing || (id && !getVoices().some(voice => voice.id === id))) return false;
-    if (selectedVoice === id) return true;
-    const wasActive = active, wasPaused = paused, text = currentText;
-    const stoppedGeneration = generation + 1;
-    stop();
-    if (disposed || disposing || generation !== stoppedGeneration) return false;
-    selectedVoice = id;
-    if (wasActive && wasPaused) {
-      currentText = text;
-      active = paused = true;
-      engine = 'pending';
-      emit('paused');
-    } else if (wasActive) read(text);
-    return true;
+  function setVoice(id = OAK_RECORDED_VOICE.id) {
+    return !disposed && !disposing && id === OAK_RECORDED_VOICE.id;
   }
   return {
-    available: recordedAvailable || fallback.available,
+    available: recordedAvailable,
     read, stop, pause, resume, setVoice, getVoices,
-    subscribeVoices(listener) { return fallback.subscribeVoices(() => listener(getVoices())); },
+    subscribeVoices(listener) { if (!disposed && !disposing) listener(getVoices()); return () => {}; },
     togglePause: () => paused ? resume() : pause(),
     get speaking() { return active; },
     get paused() { return paused; },
-    get voiceId() { return selectedVoice; },
+    get voiceId() { return OAK_RECORDED_VOICE.id; },
     dispose() {
       if (disposed || disposing) return;
       disposing = true;
       stop();
       disposed = true;
-      fallback.dispose();
       audio?.remove();
       audio = null;
     },

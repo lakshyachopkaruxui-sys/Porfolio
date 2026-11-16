@@ -1,7 +1,7 @@
 {
   "voice": "Warm narrator",
   "type": "Original synthetic narration",
-  "performanceVersion": "playful-v2",
+  "performanceVersion": "name-pronunciation-20261116",
   "model": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
   "preset": "Ryan",
   "revision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
@@ -13,31 +13,77 @@
       "cues": [
         {
           "start": 0,
-          "end": 0.92,
+          "end": 0.96,
           "text": "Come in."
         },
         {
-          "start": 1.3,
-          "end": 2.32,
+          "start": 1.52,
+          "end": 3.06,
           "text": "I’m Professor Oak."
         },
         {
-          "start": 2.7,
-          "end": 7.14,
+          "start": 3.56,
+          "end": 7.5,
           "text": "When Lakshya watched Pokemon as a child, he wished he could step into that world."
         },
         {
-          "start": 7.48,
-          "end": 9.56,
+          "start": 7.94,
+          "end": 9.86,
           "text": "I’ll show you what became of that wish."
         }
       ],
-      "filename": "dialogue-childhood-wish-347f6cb8846a.mp3",
-      "sha256": "347f6cb8846a6293bc187b8ff43e99f8e470b4f335ec31b08ff6ee3b58204b5f",
-      "bytes": 118124,
-      "seconds": 9.76,
-      "lufs": -16.81,
-      "truePeakDbtp": -1.3
+      "filename": "dialogue-childhood-wish-0441a5a3893d.mp3",
+      "sha256": "0441a5a3893deabff476d9a5e15e7e5aa70fdf8e6deba276002a38653d7ad3f6",
+      "bytes": 121004,
+      "seconds": 10.0,
+      "lufs": -16.43,
+      "truePeakDbtp": -1.24,
+      "rawASR": [
+        {
+          "model": "base.en",
+          "text": "Come in. I'm Professor Oak. When Lexa watched Pokemon as a child, he wished he could step into that world. I'll show you what became of that wish.",
+          "normalized_word_error_rate": 0.0,
+          "raw_normalized_word_error_rate": 0.03333333333333333,
+          "name_slot_check": {
+            "allNonNameWordsExact": true,
+            "approvedNameSlotEquivalence": true,
+            "slots": [
+              {
+                "label": "name0",
+                "recognized": "lexa",
+                "expected": [
+                  "lakshya"
+                ],
+                "possessive": false,
+                "approvedLexicalEquivalence": true,
+                "exactRecordingListeningEvidence": {
+                  "heard": true,
+                  "sourceSHA256": "0441a5a3893deabff476d9a5e15e7e5aa70fdf8e6deba276002a38653d7ad3f6",
+                  "kind": "full-context",
+                  "scope": "This exact recording and name occurrence only."
+                },
+                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
+              }
+            ]
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        },
+        {
+          "model": "tiny.en",
+          "text": "Come in. I'm Professor Oak. When Lexer Watch Pokemon is a child, he wished he could step into that world. I'll show you what became of that wish.",
+          "normalized_word_error_rate": 0.1,
+          "raw_normalized_word_error_rate": 0.1,
+          "name_slot_check": {
+            "allNonNameWordsExact": false,
+            "approvedNameSlotEquivalence": false,
+            "slots": []
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        }
+      ],
+      "rawBestWER": 0.03333333333333333,
+      "nameSlotNormalizedWER": 0.0,
+      "listeningApproval": "Every name occurrence has exact-source owner listening evidence; see per-slot scope. Context excerpts do not establish full-performance listening."
     },
     {
       "id": "dialogue-pokemon-go-today",
@@ -72,26 +118,89 @@
       "cues": [
         {
           "start": 0,
-          "end": 3.02,
+          "end": 3.4,
           "text": "You may notice Woody riding through this garden."
         },
         {
-          "start": 3.62,
-          "end": 8.5,
+          "start": 3.88,
+          "end": 9.0,
           "text": "Toy Story was a childhood favourite, and Woody was the character Lakshya loved."
         },
         {
-          "start": 10.26,
-          "end": 12.24,
+          "start": 9.44,
+          "end": 11.16,
           "text": "That’s why he rides along."
         }
       ],
-      "filename": "dialogue-woody-companion-d705aab92708.mp3",
-      "sha256": "d705aab92708461f467cc3b4a7a3d54cccccb6fd1b6b8374a125b43c6809f508",
-      "bytes": 149804,
-      "seconds": 12.4,
-      "lufs": -16.12,
-      "truePeakDbtp": -1.34
+      "filename": "dialogue-woody-companion-03376f401590.mp3",
+      "sha256": "03376f4015902848e84410e0b624872cdb0deb16af453e7c99c45d2a30f6e92e",
+      "bytes": 136268,
+      "seconds": 11.28,
+      "lufs": -16.14,
+      "truePeakDbtp": -1.14,
+      "rawASR": [
+        {
+          "model": "base.en",
+          "text": "You may notice Woody riding through this garden. Toy Story was a childhood favorite. And Woody was the character Lakshya loved. That's why he rides along.",
+          "normalized_word_error_rate": 0.0,
+          "raw_normalized_word_error_rate": 0.0,
+          "name_slot_check": {
+            "allNonNameWordsExact": true,
+            "approvedNameSlotEquivalence": true,
+            "slots": [
+              {
+                "label": "name0",
+                "recognized": "lakshya",
+                "expected": [
+                  "lakshya"
+                ],
+                "possessive": false,
+                "approvedLexicalEquivalence": true,
+                "exactRecordingListeningEvidence": {
+                  "heard": true,
+                  "sourceSHA256": "03376f4015902848e84410e0b624872cdb0deb16af453e7c99c45d2a30f6e92e",
+                  "kind": "exact-context-excerpt",
+                  "scope": "This exact recording and name occurrence only."
+                },
+                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
+              }
+            ]
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        },
+        {
+          "model": "tiny.en",
+          "text": "You may notice Woody riding through this garden. Toy Story was a childhood favorite and Woody was the character Lakshya loved. That's why he rides along.",
+          "normalized_word_error_rate": 0.0,
+          "raw_normalized_word_error_rate": 0.0,
+          "name_slot_check": {
+            "allNonNameWordsExact": true,
+            "approvedNameSlotEquivalence": true,
+            "slots": [
+              {
+                "label": "name0",
+                "recognized": "lakshya",
+                "expected": [
+                  "lakshya"
+                ],
+                "possessive": false,
+                "approvedLexicalEquivalence": true,
+                "exactRecordingListeningEvidence": {
+                  "heard": true,
+                  "sourceSHA256": "03376f4015902848e84410e0b624872cdb0deb16af453e7c99c45d2a30f6e92e",
+                  "kind": "exact-context-excerpt",
+                  "scope": "This exact recording and name occurrence only."
+                },
+                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
+              }
+            ]
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        }
+      ],
+      "rawBestWER": 0.0,
+      "nameSlotNormalizedWER": 0.0,
+      "listeningApproval": "Every name occurrence has exact-source owner listening evidence; see per-slot scope. Context excerpts do not establish full-performance listening."
     },
     {
       "id": "dialogue-real-collection",
@@ -99,21 +208,68 @@
       "cues": [
         {
           "start": 0,
-          "end": 5.48,
+          "end": 5.12,
           "text": "Here’s a little of Lakshya’s Pokemon GO collection: 92 of his own screenshots."
         },
         {
-          "start": 6.22,
-          "end": 10.3,
+          "start": 5.78,
+          "end": 10.18,
           "text": "Choose one to look closer, or let Pikachu take you through the exhibition."
         }
       ],
-      "filename": "dialogue-real-collection-7cc40d73ea60.mp3",
-      "sha256": "7cc40d73ea60599bf533fa9bc57cb847114132f9d22a09c05e079d5981789f11",
+      "filename": "dialogue-real-collection-e0b2b8ea20f7.mp3",
+      "sha256": "e0b2b8ea20f730d2cf5b64d24ea3f589369d2a1d52f95217ee78312975afc19a",
       "bytes": 125900,
       "seconds": 10.4,
-      "lufs": -16.54,
-      "truePeakDbtp": -1.3
+      "lufs": -16.58,
+      "truePeakDbtp": -1.35,
+      "rawASR": [
+        {
+          "model": "base.en",
+          "text": "Here's a little of Lexus Pokemon GO collection. 92 of his own screenshots. Choose one to look closer. Or, let Pikachu take you through the exhibition.",
+          "normalized_word_error_rate": 0.0,
+          "raw_normalized_word_error_rate": 0.06896551724137931,
+          "name_slot_check": {
+            "allNonNameWordsExact": true,
+            "approvedNameSlotEquivalence": true,
+            "slots": [
+              {
+                "label": "name0",
+                "recognized": "lexus",
+                "expected": [
+                  "lakshya",
+                  "s"
+                ],
+                "possessive": true,
+                "approvedLexicalEquivalence": true,
+                "exactRecordingListeningEvidence": {
+                  "heard": true,
+                  "sourceSHA256": "e0b2b8ea20f730d2cf5b64d24ea3f589369d2a1d52f95217ee78312975afc19a",
+                  "kind": "exact-context-excerpt",
+                  "scope": "This exact recording and name occurrence only."
+                },
+                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
+              }
+            ]
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        },
+        {
+          "model": "tiny.en",
+          "text": "Here's a little of lectures Pokemon GO collection. 92 zone screenshots. Choose one to look closer. Or let Pikachu take you through the exhibition. .",
+          "normalized_word_error_rate": 0.1724137931034483,
+          "raw_normalized_word_error_rate": 0.1724137931034483,
+          "name_slot_check": {
+            "allNonNameWordsExact": false,
+            "approvedNameSlotEquivalence": false,
+            "slots": []
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        }
+      ],
+      "rawBestWER": 0.06896551724137931,
+      "nameSlotNormalizedWER": 0.0,
+      "listeningApproval": "Every name occurrence has exact-source owner listening evidence; see per-slot scope. Context excerpts do not establish full-performance listening."
     },
     {
       "id": "dialogue-collection-connection",
@@ -143,26 +299,72 @@
       "cues": [
         {
           "start": 0,
-          "end": 2.38,
+          "end": 1.36,
           "text": "Let’s look at the garden."
         },
         {
-          "start": 3.78,
-          "end": 8.8,
+          "start": 2.22,
+          "end": 8.4,
           "text": "Bruno Simon’s portfolio inspired the freedom to explore through movement."
         },
         {
-          "start": 9.6,
-          "end": 14.24,
+          "start": 9.04,
+          "end": 12.94,
           "text": "Lakshya chose a bicycle and brought his own interests into the world."
         }
       ],
-      "filename": "dialogue-direction-and-tools-0f67c59f273d.mp3",
-      "sha256": "0f67c59f273df4086b6f8cfd0e26254ecfcc96629e5f68a514eb369401871c8c",
-      "bytes": 172844,
-      "seconds": 14.32,
-      "lufs": -16.01,
-      "truePeakDbtp": -1.06
+      "filename": "dialogue-direction-and-tools-7b15e8ff68a5.mp3",
+      "sha256": "7b15e8ff68a53c7111930d611608aa21144dc4661f38870226811cebbdd44c86",
+      "bytes": 156428,
+      "seconds": 12.96,
+      "lufs": -16.14,
+      "truePeakDbtp": -1.28,
+      "rawASR": [
+        {
+          "model": "base.en",
+          "text": "Let's look at the garden. Bruno Simon's portfolio inspired the freedom to explore through movement. Lakshya chose a bicycle and brought his own interests into the world. All right.",
+          "normalized_word_error_rate": 0.06896551724137931,
+          "raw_normalized_word_error_rate": 0.06896551724137931,
+          "name_slot_check": {
+            "allNonNameWordsExact": false,
+            "approvedNameSlotEquivalence": false,
+            "slots": []
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        },
+        {
+          "model": "tiny.en",
+          "text": "Let's look at the garden. Bruno Simon's portfolio inspired the freedom to explore through movement. Lakshya chose a bicycle and brought his own interests into the world.",
+          "normalized_word_error_rate": 0.0,
+          "raw_normalized_word_error_rate": 0.0,
+          "name_slot_check": {
+            "allNonNameWordsExact": true,
+            "approvedNameSlotEquivalence": true,
+            "slots": [
+              {
+                "label": "name0",
+                "recognized": "lakshya",
+                "expected": [
+                  "lakshya"
+                ],
+                "possessive": false,
+                "approvedLexicalEquivalence": true,
+                "exactRecordingListeningEvidence": {
+                  "heard": true,
+                  "sourceSHA256": "7b15e8ff68a53c7111930d611608aa21144dc4661f38870226811cebbdd44c86",
+                  "kind": "full-context",
+                  "scope": "This exact recording and name occurrence only."
+                },
+                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
+              }
+            ]
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        }
+      ],
+      "rawBestWER": 0.0,
+      "nameSlotNormalizedWER": 0.0,
+      "listeningApproval": "Every name occurrence has exact-source owner listening evidence; see per-slot scope. Context excerpts do not establish full-performance listening."
     },
     {
       "id": "dialogue-build-in-layers",
@@ -170,21 +372,84 @@
       "cues": [
         {
           "start": 0,
-          "end": 3.92,
+          "end": 4.74,
           "text": "Lakshya directed the design and worked with ChatGPT to build it in layers."
         },
         {
-          "start": 4.32,
-          "end": 8.66,
+          "start": 5.18,
+          "end": 10.18,
           "text": "First came the route and riding; then the places, rooms and sound."
         }
       ],
-      "filename": "dialogue-build-in-layers-03d050ce0e17.mp3",
-      "sha256": "03d050ce0e1718d99f76694a0d194bf097d26729b64d08d7ae7ac6e1b656cc75",
-      "bytes": 106604,
-      "seconds": 8.8,
-      "lufs": -16.64,
-      "truePeakDbtp": -1.26
+      "filename": "dialogue-build-in-layers-a20400bbd189.mp3",
+      "sha256": "a20400bbd189647d062a8d652025f87b917e219f17f715a477109bb66811a863",
+      "bytes": 124748,
+      "seconds": 10.32,
+      "lufs": -16.0,
+      "truePeakDbtp": -1.48,
+      "rawASR": [
+        {
+          "model": "base.en",
+          "text": "Lakshya directed the design and worked with ChatGPT to build it in layers. First came the route and riding. Then the places, rooms, and sound.",
+          "normalized_word_error_rate": 0.0,
+          "raw_normalized_word_error_rate": 0.0,
+          "name_slot_check": {
+            "allNonNameWordsExact": true,
+            "approvedNameSlotEquivalence": true,
+            "slots": [
+              {
+                "label": "name0",
+                "recognized": "lakshya",
+                "expected": [
+                  "lakshya"
+                ],
+                "possessive": false,
+                "approvedLexicalEquivalence": true,
+                "exactRecordingListeningEvidence": {
+                  "heard": true,
+                  "sourceSHA256": "a20400bbd189647d062a8d652025f87b917e219f17f715a477109bb66811a863",
+                  "kind": "exact-context-excerpt",
+                  "scope": "This exact recording and name occurrence only."
+                },
+                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
+              }
+            ]
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        },
+        {
+          "model": "tiny.en",
+          "text": "Lakshya directed the design and worked with ChatGPT to build it in layers. First came the route and riding. Then the places, rooms and sound.",
+          "normalized_word_error_rate": 0.0,
+          "raw_normalized_word_error_rate": 0.0,
+          "name_slot_check": {
+            "allNonNameWordsExact": true,
+            "approvedNameSlotEquivalence": true,
+            "slots": [
+              {
+                "label": "name0",
+                "recognized": "lakshya",
+                "expected": [
+                  "lakshya"
+                ],
+                "possessive": false,
+                "approvedLexicalEquivalence": true,
+                "exactRecordingListeningEvidence": {
+                  "heard": true,
+                  "sourceSHA256": "a20400bbd189647d062a8d652025f87b917e219f17f715a477109bb66811a863",
+                  "kind": "exact-context-excerpt",
+                  "scope": "This exact recording and name occurrence only."
+                },
+                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
+              }
+            ]
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        }
+      ],
+      "rawBestWER": 0.0,
+      "nameSlotNormalizedWER": 0.0,
+      "listeningApproval": "Every name occurrence has exact-source owner listening evidence; see per-slot scope. Context excerpts do not establish full-performance listening."
     },
     {
       "id": "dialogue-explore-or-read",
@@ -192,43 +457,136 @@
       "cues": [
         {
           "start": 0,
-          "end": 2.28,
+          "end": 2.74,
           "text": "I’ve shown you some of Lakshya’s world."
         },
         {
-          "start": 2.62,
-          "end": 8.98,
+          "start": 3.24,
+          "end": 10.84,
           "text": "You can keep exploring, meet the person behind the work, or switch to Portfolio mode and read the projects."
         }
       ],
-      "filename": "dialogue-explore-or-read-490741773ba4.mp3",
-      "sha256": "490741773ba4ed0b6d9003862f195da3e12d41a68d284eac1faf57e325c4f6c9",
-      "bytes": 112364,
-      "seconds": 9.28,
-      "lufs": -16.48,
-      "truePeakDbtp": -1.33
+      "filename": "dialogue-explore-or-read-c7414ab0d317.mp3",
+      "sha256": "c7414ab0d317fb694a3c2b2bc63fbedf085c91407e020ef58cf0b1f9f7bfeaa1",
+      "bytes": 133388,
+      "seconds": 11.04,
+      "lufs": -16.08,
+      "truePeakDbtp": -1.29,
+      "rawASR": [
+        {
+          "model": "base.en",
+          "text": "I've shown you some of Lexus' world. You can keep exploring, meet the person behind the work, or switch to portfolio mode and read the projects.",
+          "normalized_word_error_rate": 0.0,
+          "raw_normalized_word_error_rate": 0.07142857142857142,
+          "name_slot_check": {
+            "allNonNameWordsExact": true,
+            "approvedNameSlotEquivalence": true,
+            "slots": [
+              {
+                "label": "name0",
+                "recognized": "lexus",
+                "expected": [
+                  "lakshya",
+                  "s"
+                ],
+                "possessive": true,
+                "approvedLexicalEquivalence": true,
+                "exactRecordingListeningEvidence": {
+                  "heard": true,
+                  "sourceSHA256": "c7414ab0d317fb694a3c2b2bc63fbedf085c91407e020ef58cf0b1f9f7bfeaa1",
+                  "kind": "full-context",
+                  "scope": "This exact recording and name occurrence only."
+                },
+                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
+              }
+            ]
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        },
+        {
+          "model": "tiny.en",
+          "text": "I've shown you some of Lexhu's world. You can keep exploring, meet the person behind the work, or switch to portfolio mode, and read the projects. Thanks.",
+          "normalized_word_error_rate": 0.07142857142857142,
+          "raw_normalized_word_error_rate": 0.07142857142857142,
+          "name_slot_check": {
+            "allNonNameWordsExact": false,
+            "approvedNameSlotEquivalence": false,
+            "slots": []
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        }
+      ],
+      "rawBestWER": 0.07142857142857142,
+      "nameSlotNormalizedWER": 0.0,
+      "listeningApproval": "Every name occurrence has exact-source owner listening evidence; see per-slot scope. Context excerpts do not establish full-performance listening."
     },
     {
       "id": "making-childhood",
       "text": "This garden began with Pokemon, Toy Story and a childhood wish. I’ll show you how Lakshya turned those interests into a place you can explore.",
       "cues": [
         {
-          "start": 0,
-          "end": 4.96,
+          "start": 0.8,
+          "end": 5.8,
           "text": "This garden began with Pokemon, Toy Story and a childhood wish."
         },
         {
-          "start": 5.46,
-          "end": 10.2,
+          "start": 6.36,
+          "end": 11.28,
           "text": "I’ll show you how Lakshya turned those interests into a place you can explore."
         }
       ],
-      "filename": "making-childhood-fbe6792d7395.mp3",
-      "sha256": "fbe6792d7395a0d816ce584ba5c75a1b36b27934aa271a6bd7a22c792413e9e9",
-      "bytes": 126764,
-      "seconds": 10.48,
-      "lufs": -16.32,
-      "truePeakDbtp": -1.21
+      "filename": "making-childhood-f872681c3c1a.mp3",
+      "sha256": "f872681c3c1aa7c0bec169b2103da40ddb2cffa1751fd199bbf20be0ddbddca2",
+      "bytes": 138284,
+      "seconds": 11.44,
+      "lufs": -16.54,
+      "truePeakDbtp": -1.26,
+      "rawASR": [
+        {
+          "model": "base.en",
+          "text": "This garden began with Pokemon Toy Story and a childhood wish. I'll show you how Lex turned those interests into a place you can explore.",
+          "normalized_word_error_rate": 0.0,
+          "raw_normalized_word_error_rate": 0.038461538461538464,
+          "name_slot_check": {
+            "allNonNameWordsExact": true,
+            "approvedNameSlotEquivalence": true,
+            "slots": [
+              {
+                "label": "name0",
+                "recognized": "lex",
+                "expected": [
+                  "lakshya"
+                ],
+                "possessive": false,
+                "approvedLexicalEquivalence": true,
+                "exactRecordingListeningEvidence": {
+                  "heard": true,
+                  "sourceSHA256": "f872681c3c1aa7c0bec169b2103da40ddb2cffa1751fd199bbf20be0ddbddca2",
+                  "kind": "exact-context-excerpt",
+                  "scope": "This exact recording and name occurrence only."
+                },
+                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
+              }
+            ]
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        },
+        {
+          "model": "tiny.en",
+          "text": "This garden began with Pokemon Toy Story and a childhood wish. I'll show you how let's turn those interests into a place you can explore.",
+          "normalized_word_error_rate": 0.11538461538461539,
+          "raw_normalized_word_error_rate": 0.11538461538461539,
+          "name_slot_check": {
+            "allNonNameWordsExact": false,
+            "approvedNameSlotEquivalence": false,
+            "slots": []
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        }
+      ],
+      "rawBestWER": 0.038461538461538464,
+      "nameSlotNormalizedWER": 0.0,
+      "listeningApproval": "Every name occurrence has exact-source owner listening evidence; see per-slot scope. Context excerpts do not establish full-performance listening."
     },
     {
       "id": "making-exploration",
@@ -236,21 +594,84 @@
       "cues": [
         {
           "start": 0,
-          "end": 4.34,
+          "end": 4.32,
           "text": "Bruno Simon’s portfolio gave Lakshya a reference for discovery through movement."
         },
         {
-          "start": 4.9,
-          "end": 9.28,
+          "start": 4.74,
+          "end": 9.9,
           "text": "Here, you ride a bicycle through a garden, finding different parts of his life along the way."
         }
       ],
-      "filename": "making-exploration-c47c6dd5a9cf.mp3",
-      "sha256": "c47c6dd5a9cf63c4372fbbba4359ddda06c00b76a31102bbd1b19a12643c9a6f",
-      "bytes": 113228,
-      "seconds": 9.36,
-      "lufs": -16.32,
-      "truePeakDbtp": -1.3
+      "filename": "making-exploration-ec483acc926a.mp3",
+      "sha256": "ec483acc926a9b6a787166d341801a50538998b0063105e16fa35b89059985b2",
+      "bytes": 120140,
+      "seconds": 9.92,
+      "lufs": -16.2,
+      "truePeakDbtp": -1.28,
+      "rawASR": [
+        {
+          "model": "base.en",
+          "text": "Bruno Simon's portfolio gave lecture a reference for discovery through movement. Here, you ride a bicycle through a garden, finding different parts of his life along the way. . .",
+          "normalized_word_error_rate": 0.0,
+          "raw_normalized_word_error_rate": 0.034482758620689655,
+          "name_slot_check": {
+            "allNonNameWordsExact": true,
+            "approvedNameSlotEquivalence": true,
+            "slots": [
+              {
+                "label": "name0",
+                "recognized": "lecture",
+                "expected": [
+                  "lakshya"
+                ],
+                "possessive": false,
+                "approvedLexicalEquivalence": true,
+                "exactRecordingListeningEvidence": {
+                  "heard": true,
+                  "sourceSHA256": "ec483acc926a9b6a787166d341801a50538998b0063105e16fa35b89059985b2",
+                  "kind": "exact-context-excerpt",
+                  "scope": "This exact recording and name occurrence only."
+                },
+                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
+              }
+            ]
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        },
+        {
+          "model": "tiny.en",
+          "text": "Bruno Simon's portfolio gave lecture a reference for discovery through movement. Here, you ride a bicycle through a garden, finding different parts of his life along the way.",
+          "normalized_word_error_rate": 0.0,
+          "raw_normalized_word_error_rate": 0.034482758620689655,
+          "name_slot_check": {
+            "allNonNameWordsExact": true,
+            "approvedNameSlotEquivalence": true,
+            "slots": [
+              {
+                "label": "name0",
+                "recognized": "lecture",
+                "expected": [
+                  "lakshya"
+                ],
+                "possessive": false,
+                "approvedLexicalEquivalence": true,
+                "exactRecordingListeningEvidence": {
+                  "heard": true,
+                  "sourceSHA256": "ec483acc926a9b6a787166d341801a50538998b0063105e16fa35b89059985b2",
+                  "kind": "exact-context-excerpt",
+                  "scope": "This exact recording and name occurrence only."
+                },
+                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
+              }
+            ]
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        }
+      ],
+      "rawBestWER": 0.034482758620689655,
+      "nameSlotNormalizedWER": 0.0,
+      "listeningApproval": "Every name occurrence has exact-source owner listening evidence; see per-slot scope. Context excerpts do not establish full-performance listening."
     },
     {
       "id": "making-structure",
@@ -285,37 +706,177 @@
       "cues": [
         {
           "start": 0,
-          "end": 3.7,
+          "end": 2.92,
           "text": "Lakshya shaped the concept and reviewed each version."
         },
         {
-          "start": 4.16,
-          "end": 7.54,
+          "start": 3.34,
+          "end": 6.96,
           "text": "He worked with ChatGPT on implementation and code checks."
         },
         {
-          "start": 7.92,
-          "end": 11.32,
+          "start": 7.38,
+          "end": 10.8,
           "text": "I’ll show you the details that kept sending him back for another ride."
         }
       ],
-      "filename": "making-layers-216561f8fd9a.mp3",
-      "sha256": "216561f8fd9ad5b88e4ef2d0742af3a44a8acf98fc2656d6aa29f456d1cd6ecd",
-      "bytes": 138284,
-      "seconds": 11.44,
-      "lufs": -16.03,
-      "truePeakDbtp": -1.38
+      "filename": "making-layers-16671ac1817b.mp3",
+      "sha256": "16671ac1817bcb2b8ccd5950ed4a764712a2a69fbd0d42e556db94ec4fd3d03b",
+      "bytes": 131660,
+      "seconds": 10.88,
+      "lufs": -16.0,
+      "truePeakDbtp": -1.52,
+      "rawASR": [
+        {
+          "model": "base.en",
+          "text": "Lux just shaped the concept and reviewed each version. He worked with ChatGPT on implementation and code checks. I'll show you the details that kept sending him back for another ride.",
+          "normalized_word_error_rate": 0.0,
+          "raw_normalized_word_error_rate": 0.06451612903225806,
+          "name_slot_check": {
+            "allNonNameWordsExact": true,
+            "approvedNameSlotEquivalence": true,
+            "slots": [
+              {
+                "label": "name0",
+                "recognized": "lux just",
+                "expected": [
+                  "lakshya"
+                ],
+                "possessive": false,
+                "approvedLexicalEquivalence": true,
+                "exactRecordingListeningEvidence": {
+                  "heard": true,
+                  "sourceSHA256": "16671ac1817bcb2b8ccd5950ed4a764712a2a69fbd0d42e556db94ec4fd3d03b",
+                  "kind": "exact-context-excerpt",
+                  "scope": "This exact recording and name occurrence only."
+                },
+                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
+              }
+            ]
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        },
+        {
+          "model": "tiny.en",
+          "text": "Luxus shaped the concept and reviewed each version. He worked with ChatGPT on implementation and code checks. I'll show you the details that kept sending him back for another ride. .",
+          "normalized_word_error_rate": 0.0,
+          "raw_normalized_word_error_rate": 0.03225806451612903,
+          "name_slot_check": {
+            "allNonNameWordsExact": true,
+            "approvedNameSlotEquivalence": true,
+            "slots": [
+              {
+                "label": "name0",
+                "recognized": "luxus",
+                "expected": [
+                  "lakshya"
+                ],
+                "possessive": false,
+                "approvedLexicalEquivalence": true,
+                "exactRecordingListeningEvidence": {
+                  "heard": true,
+                  "sourceSHA256": "16671ac1817bcb2b8ccd5950ed4a764712a2a69fbd0d42e556db94ec4fd3d03b",
+                  "kind": "exact-context-excerpt",
+                  "scope": "This exact recording and name occurrence only."
+                },
+                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
+              }
+            ]
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        }
+      ],
+      "rawBestWER": 0.03225806451612903,
+      "nameSlotNormalizedWER": 0.0,
+      "listeningApproval": "Every name occurrence has exact-source owner listening evidence; see per-slot scope. Context excerpts do not establish full-performance listening."
     },
     {
       "id": "making-details",
       "text": "Turns, pedalling, bridge crossings, signs and room entrances were revisited as Lakshya tried the garden. The aim was to make the journey feel clear, all the way back to your bicycle.",
-      "cues": [],
-      "filename": "making-details-63297fc974d0.mp3",
-      "sha256": "63297fc974d0cb1e137305594bef697de013f5c4872ec4f7ec943f3b9323acd0",
-      "bytes": 146060,
-      "seconds": 12.08,
-      "lufs": -16.01,
-      "truePeakDbtp": -1.22
+      "cues": [
+        {
+          "start": 0,
+          "end": 6.9,
+          "text": "Turns, pedalling, bridge crossings, signs and room entrances were revisited as Lakshya tried the garden."
+        },
+        {
+          "start": 7.52,
+          "end": 11.9,
+          "text": "The aim was to make the journey feel clear, all the way back to your bicycle."
+        }
+      ],
+      "filename": "making-details-633084dda090.mp3",
+      "sha256": "633084dda0904b3aa4fbcbaac024c5cf903414737df946c560ddbb2f25b8b7d9",
+      "bytes": 146348,
+      "seconds": 12.118166666666667,
+      "lufs": -15.99,
+      "truePeakDbtp": -1.58,
+      "rawASR": [
+        {
+          "model": "base.en",
+          "text": "Turns. Pedaling. Bridge crossings. Signs. And room entrances were revisited as Lakshya tried the garden. The aim was to make the journey feel clear all the way back to your bicycle.",
+          "normalized_word_error_rate": 0.0,
+          "raw_normalized_word_error_rate": 0.0,
+          "name_slot_check": {
+            "allNonNameWordsExact": true,
+            "approvedNameSlotEquivalence": true,
+            "slots": [
+              {
+                "label": "name0",
+                "recognized": "lakshya",
+                "expected": [
+                  "lakshya"
+                ],
+                "possessive": false,
+                "approvedLexicalEquivalence": true,
+                "exactRecordingListeningEvidence": {
+                  "heard": true,
+                  "sourceSHA256": "633084dda0904b3aa4fbcbaac024c5cf903414737df946c560ddbb2f25b8b7d9",
+                  "kind": "full-context",
+                  "scope": "This exact recording and name occurrence only."
+                },
+                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
+              }
+            ]
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        },
+        {
+          "model": "tiny.en",
+          "text": "Turns, pedaling, bridge crossings, signs and room entrances were revisited as Lakshya tried the garden. The aim was to make the journey feel clear all the way back to your bicycle. Cool.",
+          "normalized_word_error_rate": 0.03225806451612903,
+          "raw_normalized_word_error_rate": 0.03225806451612903,
+          "name_slot_check": {
+            "allNonNameWordsExact": false,
+            "approvedNameSlotEquivalence": false,
+            "slots": []
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        }
+      ],
+      "rawBestWER": 0.0,
+      "nameSlotNormalizedWER": 0.0,
+      "listeningApproval": "Every name occurrence has exact-source owner listening evidence; see per-slot scope. Context excerpts do not establish full-performance listening.",
+      "publicPronunciationRepair": {
+        "method": "editedfromapprovedsamevoiceanchor",
+        "speaker": "Ryan",
+        "newVoiceGenerated": false,
+        "noPitchOrTimeChange": true,
+        "finalSHA256": "633084dda0904b3aa4fbcbaac024c5cf903414737df946c560ddbb2f25b8b7d9",
+        "bodySourceSHA256": "b8e267741be74858ec2a4f74f72d5af057bae7ba30f9c6deead0647f2c02fd62",
+        "anchorSourceSHA256": "7b15e8ff68a53c7111930d611608aa21144dc4661f38870226811cebbdd44c86",
+        "bodyRemovedSeconds": [
+          5.590041666666667,
+          6.210416666666666
+        ],
+        "anchorSeconds": [
+          8.913125,
+          9.339666666666666
+        ],
+        "joinCrossfadeSeconds": 0.004,
+        "boundaryMethod": "ASR name interval estimates plus nearest waveform zero crossings; not phoneme forced alignment",
+        "gainTreatment": "No local gain change; whole sentence remastered with original -16 LUFS/peak process"
+      }
     },
     {
       "id": "making-access",
@@ -345,16 +906,82 @@
       "cues": [
         {
           "start": 0,
-          "end": 8.2,
+          "end": 8.72,
           "text": "Here, you can meet Lakshya before looking through his work: his personality, how he connects with people, and the way he approaches design."
         }
       ],
-      "filename": "place-about-fb64d6d93977.mp3",
-      "sha256": "fb64d6d9397729239a28e30ec9042e58962fa1f2065b63f16d7f640d6723473e",
-      "bytes": 100844,
-      "seconds": 8.32,
-      "lufs": -16.07,
-      "truePeakDbtp": -1.26
+      "filename": "place-about-1a423cd208b7.mp3",
+      "sha256": "1a423cd208b768679c2ddd5d18cada9aa80abd614950ebd73456994e180e0f14",
+      "bytes": 106892,
+      "seconds": 8.824541666666667,
+      "lufs": -16.13,
+      "truePeakDbtp": -1.3,
+      "rawASR": [
+        {
+          "model": "base.en",
+          "text": "Here, you can meet Lakshya before looking through his work, his personality, how he connects with people, and the way he approaches design.",
+          "normalized_word_error_rate": 0.0,
+          "raw_normalized_word_error_rate": 0.0,
+          "name_slot_check": {
+            "allNonNameWordsExact": true,
+            "approvedNameSlotEquivalence": true,
+            "slots": [
+              {
+                "label": "name0",
+                "recognized": "lakshya",
+                "expected": [
+                  "lakshya"
+                ],
+                "possessive": false,
+                "approvedLexicalEquivalence": true,
+                "exactRecordingListeningEvidence": {
+                  "heard": true,
+                  "sourceSHA256": "1a423cd208b768679c2ddd5d18cada9aa80abd614950ebd73456994e180e0f14",
+                  "kind": "full-context",
+                  "scope": "This exact recording and name occurrence only."
+                },
+                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
+              }
+            ]
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        },
+        {
+          "model": "tiny.en",
+          "text": "Here, you can meet lectures before looking through his work, his personality, how he connects with people and the way he approaches design. Thank you.",
+          "normalized_word_error_rate": 0.13043478260869565,
+          "raw_normalized_word_error_rate": 0.13043478260869565,
+          "name_slot_check": {
+            "allNonNameWordsExact": false,
+            "approvedNameSlotEquivalence": false,
+            "slots": []
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        }
+      ],
+      "rawBestWER": 0.0,
+      "nameSlotNormalizedWER": 0.0,
+      "listeningApproval": "Every name occurrence has exact-source owner listening evidence; see per-slot scope. Context excerpts do not establish full-performance listening.",
+      "publicPronunciationRepair": {
+        "method": "editedfromapprovedsamevoiceanchor",
+        "speaker": "Ryan",
+        "newVoiceGenerated": false,
+        "noPitchOrTimeChange": true,
+        "finalSHA256": "1a423cd208b768679c2ddd5d18cada9aa80abd614950ebd73456994e180e0f14",
+        "bodySourceSHA256": "1cbdff814ce4653fa853eef663e770b7a7e77b432f033629a5b4ed4791758793",
+        "anchorSourceSHA256": "7b15e8ff68a53c7111930d611608aa21144dc4661f38870226811cebbdd44c86",
+        "bodyRemovedSeconds": [
+          1.5819166666666666,
+          1.909
+        ],
+        "anchorSeconds": [
+          8.990333333333334,
+          9.429958333333333
+        ],
+        "joinCrossfadeSeconds": 0.004,
+        "boundaryMethod": "English ASR name interval estimates plus nearest waveform zero crossing; not phoneme forced alignment",
+        "gainTreatment": "No local gain change; complete edited sentence remastered with original -16 LUFS/peak process"
+      }
     },
     {
       "id": "place-work",
@@ -384,21 +1011,87 @@
       "cues": [
         {
           "start": 0,
-          "end": 3.52,
+          "end": 3.12,
           "text": "Here, you’ll find Lakshya singing and dancing Garba."
         },
         {
-          "start": 3.92,
-          "end": 8.78,
+          "start": 3.48,
+          "end": 7.68,
           "text": "His own photographs and recordings give you a different side of the person behind the projects."
         }
       ],
-      "filename": "place-hobbies-faab0ff4086d.mp3",
-      "sha256": "faab0ff4086d7364b13cab1155373f309adcaf8de8312f04a91614e9ea58b424",
-      "bytes": 109484,
-      "seconds": 9.04,
-      "lufs": -16.34,
-      "truePeakDbtp": -1.32
+      "filename": "place-hobbies-6d1a11b27168.mp3",
+      "sha256": "6d1a11b27168c603293495960bf716743813f60a58f4c11b5ab1c53f94baed69",
+      "bytes": 95372,
+      "seconds": 7.85775,
+      "lufs": -16.42,
+      "truePeakDbtp": -1.25,
+      "rawASR": [
+        {
+          "model": "base.en",
+          "text": "Here, you'll find Lakshya's hanging and dancing garba. His own photographs and recordings give you a different side of the person behind the projects. next.",
+          "normalized_word_error_rate": 0.12,
+          "raw_normalized_word_error_rate": 0.12,
+          "name_slot_check": {
+            "allNonNameWordsExact": false,
+            "approvedNameSlotEquivalence": false,
+            "slots": []
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        },
+        {
+          "model": "tiny.en",
+          "text": "Here, you'll find Luxia singing and dancing Garba. His own photographs and recordings give you a different side of the person behind the projects. .",
+          "normalized_word_error_rate": 0.0,
+          "raw_normalized_word_error_rate": 0.04,
+          "name_slot_check": {
+            "allNonNameWordsExact": true,
+            "approvedNameSlotEquivalence": true,
+            "slots": [
+              {
+                "label": "name0",
+                "recognized": "luxia",
+                "expected": [
+                  "lakshya"
+                ],
+                "possessive": false,
+                "approvedLexicalEquivalence": true,
+                "exactRecordingListeningEvidence": {
+                  "heard": true,
+                  "sourceSHA256": "6d1a11b27168c603293495960bf716743813f60a58f4c11b5ab1c53f94baed69",
+                  "kind": "full-context",
+                  "scope": "This exact recording and name occurrence only."
+                },
+                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
+              }
+            ]
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        }
+      ],
+      "rawBestWER": 0.04,
+      "nameSlotNormalizedWER": 0.0,
+      "listeningApproval": "Every name occurrence has exact-source owner listening evidence; see per-slot scope. Context excerpts do not establish full-performance listening.",
+      "publicPronunciationRepair": {
+        "method": "editedfromapprovedsamevoiceanchor",
+        "speaker": "Ryan",
+        "newVoiceGenerated": false,
+        "noPitchOrTimeChange": true,
+        "finalSHA256": "6d1a11b27168c603293495960bf716743813f60a58f4c11b5ab1c53f94baed69",
+        "bodySourceSHA256": "6b189ed9182a044fa7ec00e86086712c5cb9969abbcba6d8c5319f31c5262b8d",
+        "anchorSourceSHA256": "7b15e8ff68a53c7111930d611608aa21144dc4661f38870226811cebbdd44c86",
+        "bodyRemovedSeconds": [
+          1.3192083333333333,
+          1.64
+        ],
+        "anchorSeconds": [
+          8.913125,
+          9.339666666666666
+        ],
+        "joinCrossfadeSeconds": 0.004,
+        "boundaryMethod": "ASR name interval estimates plus nearest waveform zero crossings; not phoneme forced alignment",
+        "gainTreatment": "No local gain change; whole sentence remastered with original -16 LUFS/peak process"
+      }
     },
     {
       "id": "place-oak",
@@ -424,14 +1117,94 @@
     },
     {
       "id": "place-cloud",
-      "text": "The Viewfinder holds Lakshya’s own cloud and mobile photographs. Choose a roll, find an image that catches your eye, and take a closer look.",
-      "cues": [],
-      "filename": "place-cloud-35400d7e2ea4.mp3",
-      "sha256": "35400d7e2ea4334cf73799500060cc71e8dd781b1828d0274a0b401f531efca6",
-      "bytes": 114380,
-      "seconds": 9.44,
-      "lufs": -16.35,
-      "truePeakDbtp": -1.3
+      "text": "The Viewfinder holds cloud and mobile photographs by Lakshya. Choose a roll, find an image that catches your eye, and take a closer look.",
+      "cues": [
+        {
+          "start": 0,
+          "end": 4.2,
+          "text": "The Viewfinder holds cloud and mobile photographs by Lakshya."
+        },
+        {
+          "start": 4.48,
+          "end": 9.34,
+          "text": "Choose a roll, find an image that catches your eye, and take a closer look."
+        }
+      ],
+      "filename": "place-cloud-48fbc39a6049.mp3",
+      "sha256": "48fbc39a6049c52cdbf81935225a113f1a7d0c63843f17c04d9494eb6050d3f7",
+      "bytes": 113228,
+      "seconds": 9.36,
+      "lufs": -16.34,
+      "truePeakDbtp": -1.35,
+      "rawASR": [
+        {
+          "model": "base.en",
+          "text": "The viewfinder holds cloud and mobile photographs by Lakshya. Choose a role, find an image that catches your eye and take a closer look.",
+          "normalized_word_error_rate": 0.0,
+          "raw_normalized_word_error_rate": 0.041666666666666664,
+          "name_slot_check": {
+            "allNonNameWordsExact": true,
+            "approvedNameSlotEquivalence": true,
+            "slots": [
+              {
+                "label": "name0",
+                "recognized": "lakshya",
+                "expected": [
+                  "lakshya"
+                ],
+                "possessive": false,
+                "approvedLexicalEquivalence": true,
+                "exactRecordingListeningEvidence": {
+                  "heard": true,
+                  "sourceSHA256": "48fbc39a6049c52cdbf81935225a113f1a7d0c63843f17c04d9494eb6050d3f7",
+                  "kind": "full-context",
+                  "scope": "This exact recording and name occurrence only."
+                },
+                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
+              }
+            ]
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        },
+        {
+          "model": "tiny.en",
+          "text": "The Viewfinder holds cloud and mobile photographs by Lakshya. Choose a roll, find an image that catches your eye and take a closer look.",
+          "normalized_word_error_rate": 0.0,
+          "raw_normalized_word_error_rate": 0.0,
+          "name_slot_check": {
+            "allNonNameWordsExact": true,
+            "approvedNameSlotEquivalence": true,
+            "slots": [
+              {
+                "label": "name0",
+                "recognized": "lakshya",
+                "expected": [
+                  "lakshya"
+                ],
+                "possessive": false,
+                "approvedLexicalEquivalence": true,
+                "exactRecordingListeningEvidence": {
+                  "heard": true,
+                  "sourceSHA256": "48fbc39a6049c52cdbf81935225a113f1a7d0c63843f17c04d9494eb6050d3f7",
+                  "kind": "full-context",
+                  "scope": "This exact recording and name occurrence only."
+                },
+                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
+              }
+            ]
+          },
+          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
+        }
+      ],
+      "rawBestWER": 0.0,
+      "nameSlotNormalizedWER": 0.0,
+      "listeningApproval": "Every name occurrence has exact-source owner listening evidence; see per-slot scope. Context excerpts do not establish full-performance listening.",
+      "captionRevision": {
+        "oldText": "The Viewfinder holds Lakshya’s own cloud and mobile photographs. Choose a roll, find an image that catches your eye, and take a closer look.",
+        "newText": "The Viewfinder holds cloud and mobile photographs by Lakshya. Choose a roll, find an image that catches your eye, and take a closer look.",
+        "reason": "Rephrase the first sentence for natural same-Ryan delivery while preserving the photography meaning.",
+        "finalSHA256": "48fbc39a6049c52cdbf81935225a113f1a7d0c63843f17c04d9494eb6050d3f7"
+      }
     }
   ]
 }

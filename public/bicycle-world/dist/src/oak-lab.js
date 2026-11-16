@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import {OAK_DIALOGUE,OAK_MAKING_STEPS,OAK_COLLECTION_COUNT} from './oak-lab-content.js';
 import {createOakRecordedNarration as createOakNarration} from './oak-recorded-narration.js';
+import {OAK_RECORDED_VOICE} from './oak-voice-clips.js';
 import {createOakLabScene} from './oak-lab-scene.js';
 import {createPokemonRoom} from './pokemon-room.js';
 import {POKEMON_COLLECTION} from './pokemon-collection-data.js';
@@ -14,12 +15,12 @@ const MAP_PLACES=[
   {id:'work',label:'Work',text:'This is the Works Room. You can browse his projects here, then open a full case study in Portfolio mode when you want the details.'},
   {id:'hobbies',label:'Hobbies',text:'Here, you’ll find Lakshya singing and dancing Garba. His own photographs and recordings give you a different side of the person behind the projects.'},
   {id:'oak',label:'Oak’s lab',text:'We’re here. I’ll show you his Pokemon GO collection and the choices behind this garden, from the childhood wish to the way it was built.'},
-  {id:'cloud',label:'The Viewfinder',text:'The Viewfinder holds Lakshya’s own cloud and mobile photographs. Choose a roll, find an image that catches your eye, and take a closer look.'}
+  {id:'cloud',label:'The Viewfinder',text:'The Viewfinder holds cloud and mobile photographs by Lakshya. Choose a roll, find an image that catches your eye, and take a closer look.'}
 ];
 const NARRATION_PREFERENCE='lakshya-oak-narration-v1';
 function narrationPreferences(){
-  try{const value=JSON.parse(globalThis.localStorage?.getItem(NARRATION_PREFERENCE)||'null');return {enabled:typeof value?.enabled==='boolean'?value.enabled:true,voiceId:value?.voiceVersion===2&&typeof value?.voiceId==='string'?value.voiceId:''};}
-  catch{return {enabled:true,voiceId:''};}
+  try{const value=JSON.parse(globalThis.localStorage?.getItem(NARRATION_PREFERENCE)||'null');return {enabled:typeof value?.enabled==='boolean'?value.enabled:true};}
+  catch{return {enabled:true};}
 }
 
 /** Owns one modal and its scene. The garden retains the renderer and loop. */
@@ -44,7 +45,7 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
   const listeners=[],query=window.matchMedia('(prefers-reduced-motion: reduce)'),reduced=()=>typeof isReduced==='function'?Boolean(isReduced()):query.matches;
   const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();
   let buildIndex=0,ambientMotion=true,collectionVisited=false,placesOpen=false,placeSiblings=[];
-  const preference=narrationPreferences();let narrationEnabled=preference.enabled,preferredVoice=preference.voiceId,narrationPending=null,currentSpeech='',selectedMapPlace=null;
+  const preference=narrationPreferences();let narrationEnabled=preference.enabled,narrationPending=null,currentSpeech='',selectedMapPlace=null;
   let room=null,child=null,saved=null,focus=null,phase='closed',dead=false,dirty=false,index=0,selectedZone='welcome',transition=null,renderedFrames=0,press=null,childSiblings=[],lastCollectionFocus=null;
   const listen=(element,type,fn,options)=>{element.addEventListener(type,fn,options);listeners.push(()=>element.removeEventListener(type,fn,options));};
   const destinations=$('.oak-places'),placesButton=$('[data-oak-places]');
@@ -76,7 +77,7 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
   function borrow(){saved=snapshot();host.append(renderer.domElement);Object.assign(renderer.domElement.style,{position:'absolute',inset:'0',width:'100%',height:'100%',display:'block',touchAction:'manipulation'});renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.06;renderer.autoClear=renderer.autoClearColor=renderer.autoClearDepth=renderer.autoClearStencil=true;renderer.shadowMap.enabled=false;renderer.setRenderTarget(null);renderer.setScissorTest(false);}
   function restore(){if(!saved)return;const s=saved,canvas=renderer.domElement;saved=null;if(s.parent){if(s.sibling?.parentNode===s.parent)s.parent.insertBefore(canvas,s.sibling);else s.parent.append(canvas);}else canvas.remove();renderer.setPixelRatio(s.ratio);renderer.setSize(s.size.x,s.size.y,false);renderer.setRenderTarget(s.target);renderer.setViewport(s.viewport);renderer.setScissor(s.scissor);renderer.setScissorTest(s.scissorTest);renderer.setClearColor(s.clearColor,s.clearAlpha);Object.assign(renderer,{toneMapping:s.toneMapping,toneMappingExposure:s.exposure,outputColorSpace:s.output,autoClear:s.autoClear,autoClearColor:s.autoClearColor,autoClearDepth:s.autoClearDepth,autoClearStencil:s.autoClearStencil});Object.assign(renderer.shadowMap,{enabled:s.shadowEnabled,type:s.shadowType,autoUpdate:s.shadowAutoUpdate,needsUpdate:s.shadowNeedsUpdate});if(s.style===null)canvas.removeAttribute('style');else canvas.setAttribute('style',s.style);}
   function setPhase(value){phase=value;dialog.dataset.phase=value;}
-  function rememberNarration(){try{globalThis.localStorage?.setItem(NARRATION_PREFERENCE,JSON.stringify({enabled:narrationEnabled,voiceId:preferredVoice,voiceVersion:2}));}catch{/* Reading and narration remain usable without storage. */}}
+  function rememberNarration(){try{globalThis.localStorage?.setItem(NARRATION_PREFERENCE,JSON.stringify({enabled:narrationEnabled,voiceId:OAK_RECORDED_VOICE.id,voiceVersion:3}));}catch{/* Reading and narration remain usable without storage. */}}
   function highlightSentence(sentence,active){
     const paragraph=selectedZone==='making'?$('[data-oak-build-body]'):$('[data-oak-speech]');
     const start=active&&sentence?currentSpeech.indexOf(sentence):-1;
@@ -88,7 +89,7 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
   const narration=createOakNarration({audioParent:dialog,onState(active,error,details={}){
     dialog.dataset.narrating=String(active);dialog.dataset.narrationState=details.status||'idle';
     $('[data-oak-pause]').disabled=!active;$('[data-oak-pause]').textContent=details.paused?'Resume voice':'Pause voice';
-    const message=error||(!narrationEnabled?'Voice is off.':!narration.available?'Read Oak’s words below.':details.paused?'Paused.':details.status==='loading'?'Loading Oak’s voice…':details.status==='starting'?'Starting Oak’s voice…':active?(details.fallback?'Oak is speaking with the fallback voice.':'Oak is speaking.'):details.status==='complete'?'Your turn.':'Ready when you are.');
+    const message=error||(!narrationEnabled?'Voice is off.':!narration.available?'Read Oak’s words below.':details.paused?'Paused.':details.status==='loading'?'Loading Oak’s voice…':details.status==='starting'?'Starting Oak’s voice…':active?'Oak is speaking.':details.status==='complete'?'Your turn.':'Ready when you are.');
     const status=$('[data-oak-narration-status]');if(status.textContent!==message)status.textContent=message;
     highlightSentence(details.sentence,active&&['speaking','gap'].includes(details.status));
   }});
@@ -121,9 +122,8 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
     if(sceneState?.assetState==='loading'&&(globalThis.performance?.now?.()??Date.now())<narrationPending.modelDeadline)return;
     const {text}=narrationPending;narrationPending=null;narration.read(text);
   }
-  listeners.push(narration.subscribeVoices(voices=>{
-    if(voices.some(voice=>voice.id==='oak-warm-20261114')){preferredVoice='oak-warm-20261114';narration.setVoice(preferredVoice);rememberNarration();}
-  }));
+  // Legacy device choices no longer select a different narrator; keep explicit mute.
+  rememberNarration();
   dialog.dataset.narrating='false';syncNarrationControls();
   const stageNav=$('.oak-build-steps');
   const shortStages=['Memories','Movement','The map','The build','Details','Access'];
