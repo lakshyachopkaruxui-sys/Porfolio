@@ -283,6 +283,11 @@ export function enrichGigglesStory(story, {fieldVisit, buildPhotos = [], compone
         paragraph('We tested Giggles with four participants at Vishwansh Foundation, Pune: one adult aged 24 individually, and three children aged 8–10 in a group game. We first explained the board, cards, shape buttons and a complete turn to the teachers. They then introduced and supported play using their familiar classroom approach.'),
         table('Four participants, two session formats', ['Format', 'Participants', 'Age', 'Support'], GIGGLES_TESTING_SESSIONS),
         paragraph('Participants were selected because they could read independently. Each participant played one session during a single visit, with teachers introducing and supporting both formats.'),
+        gallery([
+          {src: 'assets/cases/giggles/field-visit/session-answer-cards.jpg', width: 614, height: 460, alt: 'Giggles board during the Foundation visit, with a hand near three communication answer cards.', caption: 'During the visit · Communication cards beside the board and phone.'},
+          {src: 'assets/cases/giggles/field-visit/session-board-reader.jpg', width: 614, height: 460, alt: 'Hands around the Giggles board during the Foundation visit, with a card over the reader.', caption: 'During play · A card is held over the reader beside the phone.'},
+          {src: 'assets/cases/giggles/field-visit/session-answer-decks.jpg', width: 614, height: 460, alt: 'Giggles board and two sets of answer cards arranged on a table during the Foundation visit.', caption: 'During the visit · Communication and emotion cards laid out beside the board.'},
+        ], 'photos'),
         ...(fieldVisit ? [picture({...fieldVisit, alt: 'The Giggles team with a Foundation representative during the documented testing visit.', caption: 'The team at Vishwansh Foundation, Pune, during the Giggles testing visit.'})] : []),
         heading('Use the classroom’s existing routines'),
         paragraph('Before play, the teacher wrote each player’s pawn colour on the whiteboard. This reused the class’s familiar place for instructions and reminders, giving players a visible reference for their pawn. Teachers supported the first one or two attempts as participants learned where to tap, press and choose.'),

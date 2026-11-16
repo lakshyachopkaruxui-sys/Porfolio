@@ -2764,6 +2764,12 @@ html:has(#case-reader[open]) { overflow: hidden; scrollbar-gutter: auto; }
 #case-reader .story-phase-connector { display: none; }
 #case-reader .story-process h4 { font-size: 16px; line-height: 1.5; }
 #case-reader .story-process p { font-size: 15px; line-height: 1.7; }
+/* Keep supporting project explanations as readable as the main narrative.
+   Dhan's own adapter and Giggles' separately maintained evidence stay untouched. */
+#case-reader:not([data-project="dhan-drishti"]):not([data-project="giggles"]) :is(.story-process p, .story-tool-detail p, .story-methods, .story-flow p, .story-comparison p, .story-comparison-note) {
+  font-size: 16px;
+  line-height: 1.7;
+}
 #case-reader .story-points { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 40px 64px; margin: 48px 0; }
 #case-reader .story-points > div { display: block; padding: 0; }
 #case-reader .story-point-number { display: block; margin-bottom: 12px; font-size: 14px; }

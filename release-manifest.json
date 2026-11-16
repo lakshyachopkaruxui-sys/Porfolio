@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T09:34:18.747Z",
+  "generatedAt": "2026-11-16T12:42:03.769Z",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 746,
-      "sha256": "09d5c5d50e254451b368c90552dd0bda098448a143b795fd800ea230c6174d4f"
+      "sha256": "62eb9e9bb7fee02d292f739a10b16e4f9cb978eedde22ded9ed47cd3aacc55cc"
     },
     {
       "path": "_redirects",
@@ -536,6 +536,21 @@
       "path": "bicycle-world/dist/assets/personal/photography-library/between-the-palms.webp",
       "size": 321242,
       "sha256": "6991f38205c10a2c7180c56cc8d1ed96c610c9c3319881ed058190bbfff61536"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography-library/clouds-and-rooftops.webp",
+      "size": 81608,
+      "sha256": "4233add5080df94de0153f4f1ef051d4651af47dda8389cc4a23e765689e60b6"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography-library/clouds-over-fields.webp",
+      "size": 111930,
+      "sha256": "7ec5eb3751cddc0b1ba9379df45ddda79ab3d736e6f5591620836023d5c93d3e"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography-library/clouds-over-neighbourhood.webp",
+      "size": 218694,
+      "sha256": "086922d86c5339ea13304dd151512de4c6b49edb880dc391bc03a46410026de3"
     },
     {
       "path": "bicycle-world/dist/assets/personal/photography-library/in-the-shade.webp",
@@ -1763,6 +1778,21 @@
       "sha256": "7dacbc0a10fe45819d0f85a8423b420c38432224cc7de2ba3b86ea947496af7b"
     },
     {
+      "path": "bicycle-world/dist/assets/personal/photography-library/thumbs/clouds-and-rooftops.webp",
+      "size": 11108,
+      "sha256": "dff804ca06ead51f7fd8eabd7e6d256e28686916625c6d1b5f527a3875a9100e"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography-library/thumbs/clouds-over-fields.webp",
+      "size": 11676,
+      "sha256": "f3298dcc28e2e84083392829100f11ba9a58f1779ecb3f065c388d8752e2c3a9"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography-library/thumbs/clouds-over-neighbourhood.webp",
+      "size": 17916,
+      "sha256": "940cd4e679b630cd9c85be355bf9b0733e235bb859157d4b03012fb17806db58"
+    },
+    {
       "path": "bicycle-world/dist/assets/personal/photography-library/thumbs/in-the-shade.webp",
       "size": 11874,
       "sha256": "e62be406245fb80fac9afd6c952261c959a828b4169697bfabb524dd682eb029"
@@ -2956,6 +2986,16 @@
       "path": "bicycle-world/dist/assets/personal/photography-library/thumbs/sunlight-overhead.webp",
       "size": 3674,
       "sha256": "914cc18ac2dbd2d4049c94a2507130eda57e23b8f030676c17633e872b7467c3"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography-library/thumbs/wide-sky-over-fields.webp",
+      "size": 18668,
+      "sha256": "40e4e1fa1ba0d01bfe57bd91c3a8c53cdd2b6ee801999b6d9fc11767cca130c0"
+    },
+    {
+      "path": "bicycle-world/dist/assets/personal/photography-library/wide-sky-over-fields.webp",
+      "size": 227022,
+      "sha256": "ddfd4e61bad41a4f2bcdc87129ed93d885f7d94396d1a397a2c888be9e0d482f"
     },
     {
       "path": "bicycle-world/dist/assets/personal/recordings/spontaneous-song.mp4",
@@ -4240,7 +4280,7 @@
     {
       "path": "bicycle-world/dist/index.html",
       "size": 49231,
-      "sha256": "4f25ecdbe4bb04cd5705c7075e08d7fd414303a41cdc4dac064626bc627b68ef"
+      "sha256": "3a5b8bc354f030f97100711e9f1bbbcaecd0522f33f81b3b79fc78893566852c"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
@@ -4809,13 +4849,13 @@
     },
     {
       "path": "bicycle-world/dist/src/photography-library-data.js",
-      "size": 116338,
-      "sha256": "8fb52dea46c34cb1194e909ed98d6d3feaeda6f3118368f07209807bb32b5934"
+      "size": 118303,
+      "sha256": "f1a43b1433bee41e40b594fe068b25239141ba7e4c9e2debabe8f299ead31d52"
     },
     {
       "path": "bicycle-world/dist/src/photography-rolls.js",
-      "size": 820,
-      "sha256": "cbf1ea4c83fe3caadc03e73d2ceeb642b16cfa3efc85d3bc4c266fc743acbab8"
+      "size": 846,
+      "sha256": "1cade6b37d4c3a61cef4244c1033c0e757d66c6f2885fee83272fdc35bb7bc7d"
     },
     {
       "path": "bicycle-world/dist/src/pikachu-gait.js",
@@ -6321,6 +6361,21 @@
       "path": "normal-portfolio/assets/cases/giggles/field-visit/foundation-team.jpg",
       "size": 151649,
       "sha256": "cdf19044a669341d8ca341ee311909449dbf4d8236504f1e00aa87c032f7f768"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/field-visit/session-answer-cards.jpg",
+      "size": 47265,
+      "sha256": "c4bea4d949db255799f99744bbfd6bd99ad9b365129797b49829c671363a454f"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/field-visit/session-answer-decks.jpg",
+      "size": 43794,
+      "sha256": "3ef1a03113655fd89da1e708b149f46b74f04a00ed2242f491de56d4b56cc97b"
+    },
+    {
+      "path": "normal-portfolio/assets/cases/giggles/field-visit/session-board-reader.jpg",
+      "size": 39474,
+      "sha256": "db97bf429f9fcc33c108fad874a9bfbfb00fcdb6cf8261431bda78db4f542fbf"
     },
     {
       "path": "normal-portfolio/assets/cases/giggles/final-documentation/asset-data.js",
@@ -7884,8 +7939,8 @@
     },
     {
       "path": "normal-portfolio/case-presentation.css",
-      "size": 18642,
-      "sha256": "e085855d725f291a686cb1bb2697182b0faed2b5efae10bfa035a39a018430e5"
+      "size": 19043,
+      "sha256": "aeb666583ed06ba331edb8acbe61812f0b6c17cb97ba0bef153c634c2878e46d"
     },
     {
       "path": "normal-portfolio/case-reader.css",
@@ -8094,8 +8149,8 @@
     },
     {
       "path": "normal-portfolio/giggles-evidence.js",
-      "size": 37022,
-      "sha256": "2dfe1db8debc98b3bf92abd941e48307db7ea99bf6fa2add5c6e7da1c324a2c4"
+      "size": 37917,
+      "sha256": "dbec1c7702e4e67493936fe4db0530507fdc08e2f5d3a36d3bc411163c6e499e"
     },
     {
       "path": "normal-portfolio/giggles-final-data.js",
@@ -8120,7 +8175,7 @@
     {
       "path": "normal-portfolio/index.html",
       "size": 51744,
-      "sha256": "aee04d1f2c81c03ae3e7714cde1dd82478c57630c5a1b0dee4f2bae122926c99"
+      "sha256": "d6a3c760bed8ab6c4eff386ef3117e0a0e48b317706c9787eec4f8a88b35c059"
     },
     {
       "path": "normal-portfolio/jan-concept-data.js",
@@ -8214,8 +8269,8 @@
     },
     {
       "path": "normal-portfolio/portfolio-bundle.css",
-      "size": 214435,
-      "sha256": "c5deecafa17274c1ccb79b6603c4156151277c5ed1f054eb8af4f79161ee9e7e"
+      "size": 214836,
+      "sha256": "04b36db02c06371423c627c481014f69f1ef007f68976eb09db50663f5a9d586"
     },
     {
       "path": "normal-portfolio/portfolio-extras.css",

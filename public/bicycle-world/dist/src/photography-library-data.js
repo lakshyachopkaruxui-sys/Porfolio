@@ -2,6 +2,54 @@
 // Literal image and thumbnail paths are required by the production dependency scanner.
 export const PHOTOGRAPHY_LIBRARY=Object.freeze([
   {
+    "id": "clouds-over-fields",
+    "category": "clouds",
+    "caption": "Clouds over the fields",
+    "alt": "White clouds gathering above fields beneath a broad blue sky.",
+    "type": "image",
+    "src": "./assets/personal/photography-library/clouds-over-fields.webp",
+    "thumb": "./assets/personal/photography-library/thumbs/clouds-over-fields.webp",
+    "width": 1600,
+    "height": 900,
+    "sourceSHA256": "f2698b05d973bd5ec7ce2150faa7fd2e66e014b7136f5e218c6b414a3a1d60cd"
+  },
+  {
+    "id": "clouds-over-neighbourhood",
+    "category": "clouds",
+    "caption": "Clouds over the neighbourhood",
+    "alt": "White clouds above houses and green fields.",
+    "type": "image",
+    "src": "./assets/personal/photography-library/clouds-over-neighbourhood.webp",
+    "thumb": "./assets/personal/photography-library/thumbs/clouds-over-neighbourhood.webp",
+    "width": 1600,
+    "height": 1024,
+    "sourceSHA256": "e8ef69fa9e3f1413044884e9c67e71874089cb08bb6afcc7cd8e4219642f73df"
+  },
+  {
+    "id": "wide-sky-over-fields",
+    "category": "clouds",
+    "caption": "A wide sky over the fields",
+    "alt": "A wide view of clouds, green fields and houses.",
+    "type": "image",
+    "src": "./assets/personal/photography-library/wide-sky-over-fields.webp",
+    "thumb": "./assets/personal/photography-library/thumbs/wide-sky-over-fields.webp",
+    "width": 1600,
+    "height": 851,
+    "sourceSHA256": "91e1e8cc59a158a32b8ce1a682bc3da987fac68d69ac0de2f7bcf44d7fe3cb32"
+  },
+  {
+    "id": "clouds-and-rooftops",
+    "category": "clouds",
+    "caption": "Clouds and rooftops",
+    "alt": "Grey and white clouds over distant rooftops and fields.",
+    "type": "image",
+    "src": "./assets/personal/photography-library/clouds-and-rooftops.webp",
+    "thumb": "./assets/personal/photography-library/thumbs/clouds-and-rooftops.webp",
+    "width": 1600,
+    "height": 900,
+    "sourceSHA256": "085e541808cd657a3cefafc8b2ff61bb23fc737ece3f54fb1ce4650cc1861b71"
+  },
+  {
     "id": "layers-of-cloud",
     "category": "clouds",
     "caption": "Layers of cloud",
