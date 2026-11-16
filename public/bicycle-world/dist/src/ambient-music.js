@@ -95,8 +95,8 @@ export function createAmbientMusic({
   function failure(cause) {
     const blocked = cause?.name === 'NotAllowedError';
     requireRetry(blocked
-      ? 'Your browser paused the garden sound. Select Retry garden sound to try again.'
-      : 'Garden sound could not load. Select Retry garden sound to try again.', blocked ? 'blocked' : 'error');
+      ? 'Your browser paused the music. Select Retry music to try again.'
+      : 'Music could not load. Select Retry music to try again.', blocked ? 'blocked' : 'error');
   }
   function ensureAudio() {
     if (audio) return audio;
@@ -106,7 +106,7 @@ export function createAmbientMusic({
     listen('error', () => { if (wantsPlayback()) failure(audio.error); });
     listen('pause', () => {
       if (!wantsPlayback() || !audio.paused || audio.ended || !['starting','playing'].includes(status)) return;
-      requireRetry('Your browser paused the garden sound. Select Retry garden sound to try again.');
+      requireRetry('Your browser paused the music. Select Retry music to try again.');
     });
     listen('timeupdate', () => {
       if (loop || !wantsPlayback() || audio.paused || tailFading || !Number.isFinite(audio.duration)) return;

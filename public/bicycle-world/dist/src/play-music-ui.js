@@ -9,7 +9,7 @@ export function mountPlayMusic({notify = () => {}} = {}) {
   const toggle = document.createElement('button');
   toggle.type = 'button';
   toggle.dataset.playMusic = '';
-  toggle.textContent = 'Garden sound off';
+  toggle.textContent = 'Music off';
   toggle.setAttribute('aria-pressed', 'false');
   toggle.title = 'Optional background music by Kevin MacLeod';
   dock.append(toggle);
@@ -31,9 +31,9 @@ export function mountPlayMusic({notify = () => {}} = {}) {
   function syncLabels() {
     if (!current) return;
     const retry = current.status === 'error' || current.status === 'blocked';
-    const text = retry ? 'Retry garden sound' : current.enabled
-      ? current.status === 'paused' ? 'Garden sound paused' : 'Garden sound on'
-      : 'Garden sound off';
+    const text = retry ? 'Retry music' : current.enabled
+      ? current.status === 'paused' ? 'Music paused' : 'Music on'
+      : 'Music off';
     for (const button of document.querySelectorAll('[data-play-music]')) {
       if (button.textContent !== text) button.textContent = text;
       const pressed = String(current.enabled);
