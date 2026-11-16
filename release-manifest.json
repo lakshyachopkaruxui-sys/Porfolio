@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T06:29:38.000Z",
+  "generatedAt": "2026-11-16T06:44:41.309Z",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -6708,6 +6708,11 @@
       "sha256": "6dce06b6cda9ce7daa32ae799c8de0adf977c5579def5bdde08fbf6617150726"
     },
     {
+      "path": "normal-portfolio/assets/cases/pixel-mania/evidence/homepage-to-heart.mp4",
+      "size": 1473142,
+      "sha256": "7b4fff5abd70dfd00d41c0762013dfadd1be00e047f7bdda85a08d79de5ef026"
+    },
+    {
       "path": "normal-portfolio/assets/cases/pixel-mania/evidence/intro-demo-poster.webp",
       "size": 68374,
       "sha256": "e8be287604a8f860342565f1c23c3fe4617e3ddd0d75331379aab81047701b5a"
@@ -8194,8 +8199,8 @@
     },
     {
       "path": "normal-portfolio/project-preview.js",
-      "size": 5376,
-      "sha256": "06616c7c2b35cd9a36c01538392b2e568f16dc6a9cbec05f5229e3549ddc280b"
+      "size": 5383,
+      "sha256": "cfb6b819a2619559982267f0a55c72b69ffc39e9879e2eb3d3df4ff532cbaba1"
     },
     {
       "path": "normal-portfolio/project-research-evidence.js",

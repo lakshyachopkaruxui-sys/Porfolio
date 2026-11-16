@@ -2,7 +2,7 @@
 // their own native controls; these muted card previews never load on page entry.
 const PREVIEWS = {
   'pixel-mania': {
-    src: './assets/cases/pixel-mania/evidence/board-demo.mp4',
+    src: './assets/cases/pixel-mania/evidence/homepage-to-heart.mp4',
     width: 1440, height: 1024,
   },
   syringe: {
