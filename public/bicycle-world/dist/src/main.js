@@ -406,12 +406,13 @@ function start({skipWelcome=false,resuming=false}={}){
   if(skipWelcome){welcomeFlow.skip();welcomeFlow.consumeGuidance();completeWelcome(false);return;}
   const next=welcomeFlow.begin({reduced});
   if(next.phase==='departing'){cloudTransition.cover({reduced});paintClouds();}
-  const departureClip=onboarding?.snapshot.answer==='no'?'controls-no':'departure';
-  $('welcome').dataset.phase=next.phase;$('welcome-dialogue').textContent=WELCOME_TRANSCRIPTS[departureClip];$('start').disabled=true;
+  $('welcome').dataset.phase=next.phase;$('welcome-dialogue').textContent='See you in the garden.';$('start').disabled=true;
   // Elevate a transparent, already-composited frame in this same task. An old
   // opaque welcome framebuffer must not briefly hide the HTML introduction.
   if(next.phase==='departing')renderWelcome();
-  if(welcomeVoice.enabled)welcomeVoice.play(departureClip);
+  // The cloud handoff is shorter than the departure recording. Starting that
+  // line here cuts it off when the garden guide question begins. Keep the
+  // transition quiet and let the invitation speak once the garden is visible.
   if(next.phase==='riding')completeWelcome();
 }
 function greetAtEntry(){

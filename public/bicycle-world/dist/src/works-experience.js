@@ -67,13 +67,14 @@ export function worksEntrancePose(index,count,view,progress){
 export function createWorksExperience({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=()=>{},onPlace=()=>{},isReduced=()=>false}={}){
   if(!renderer?.domElement)throw new Error('Works Room requires the existing renderer.');
   const projects=PLAY_WORK_PROJECTS,dialog=document.createElement('dialog');dialog.id='works-experience';dialog.setAttribute('aria-labelledby','works-room-title');
-  dialog.innerHTML=`<div class="works-shell"><div class="works-canvas" tabindex="0" role="region" aria-label="Works Room. A and D or Left and Right browse projects. Home and End jump to the first or last. Enter opens the selected project summary."></div><div class="works-entry-curtain" aria-hidden="true"></div><header class="works-header"><div><p class="works-eyebrow">LAKSHYA’S WORLD</p><h1 id="works-room-title">The Works Room</h1></div><nav aria-label="Works Room navigation"><button type="button" data-works-places>Other places</button><span class="mode-switch" data-mode-switch data-works-portfolio>Portfolio / Play</span><button type="button" data-works-back>Back to garden</button></nav></header><section class="works-caption" aria-labelledby="works-selected-title"><p class="works-eyebrow" data-works-number></p><h2 id="works-selected-title"></h2><p class="works-project-type" data-works-category></p><p data-works-summary></p><div class="works-actions"><button type="button" data-works-prev>Previous project</button><a class="works-primary" data-works-read>Read case study</a><button type="button" data-works-next>Next project</button></div><div class="works-detail-actions"><button type="button" data-works-index>All projects</button><button type="button" data-works-summary>Project summary</button><span>A / D or Left / Right · Enter opens project summary</span></div></section><p class="works-status" role="status" aria-live="polite" data-works-status></p><button type="button" class="works-retry" data-works-retry hidden>Retry cover</button><section class="works-places" aria-labelledby="works-places-title" hidden><header><h2 id="works-places-title">A different side of Lakshya.</h2><button type="button" data-works-places-close>Back to the room</button></header><div data-works-place-list></div></section><section class="works-index" aria-labelledby="works-index-title" hidden><header><div><p class="works-eyebrow">THE WORKS ROOM</p><h2 id="works-index-title" tabindex="-1">Projects</h2></div><button type="button" data-works-index-close>Explore the 3D room</button></header><p data-works-count></p><div data-works-list></div></section><section class="works-reading" aria-labelledby="works-overview-title" hidden><header><p class="works-eyebrow" data-works-reading-kind>PROJECT OVERVIEW</p><button type="button" data-works-read-close>Back to projects</button></header><article data-works-article></article></section></div>`;
+  dialog.innerHTML=`<div class="works-shell"><div class="works-canvas" tabindex="0" role="region" aria-label="Works Room. A and D or Left and Right browse projects. Home and End jump to the first or last. Enter opens the selected project summary."></div><div class="works-entry-curtain" aria-hidden="true"></div><header class="works-header"><div><p class="works-eyebrow">LAKSHYA’S WORLD</p><h1 id="works-room-title">The Works Room</h1></div><nav aria-label="Works Room navigation"><button type="button" data-works-places>Other places</button><span class="mode-switch" data-mode-switch data-works-portfolio>Portfolio / Play</span><button type="button" data-works-back>Back to garden</button></nav></header><section class="works-caption" aria-labelledby="works-selected-title"><p class="works-eyebrow" data-works-number></p><h2 id="works-selected-title"></h2><p class="works-project-type" data-works-category></p><p data-works-summary></p><div class="works-actions"><button type="button" data-works-prev>Previous project</button><button type="button" class="works-primary" data-works-summary>Project summary</button><button type="button" data-works-next>Next project</button></div><div class="works-detail-actions"><button type="button" data-works-index>All projects</button><span>A / D or ← / → to browse · Enter or click the project to open</span></div></section><p class="works-status" role="status" aria-live="polite" data-works-status></p><button type="button" class="works-retry" data-works-retry hidden>Retry cover</button><section class="works-places" aria-labelledby="works-places-title" hidden><header><h2 id="works-places-title">A different side of Lakshya.</h2><button type="button" data-works-places-close>Back to the room</button></header><div data-works-place-list></div></section><section class="works-index" aria-labelledby="works-index-title" hidden><header><div><p class="works-eyebrow">THE WORKS ROOM</p><h2 id="works-index-title" tabindex="-1">Projects</h2></div><button type="button" data-works-index-close>Explore the 3D room</button></header><p data-works-count></p><div data-works-list></div></section><section class="works-reading" aria-labelledby="works-overview-title" hidden><header><p class="works-eyebrow" data-works-reading-kind>PROJECT OVERVIEW</p><button type="button" data-works-read-close>Back to projects</button></header><article data-works-article></article></section></div>`;
   document.body.append(dialog);
   const q=s=>dialog.querySelector(s),host=q('.works-canvas'),curtain=q('.works-entry-curtain'),shell=q('.works-shell'),caption=q('.works-caption'),header=q('.works-header'),reading=q('.works-reading'),indexView=q('.works-index'),places=q('.works-places');
   const events=[];function listen(element,type,handler){element.addEventListener(type,handler);events.push(()=>element.removeEventListener(type,handler));}
   let curtainOpen=0;
   let room=null,dead=false,phase='closed',selected=0,queuedSelection=null,arcIndex=0,transition=null,thresholdProgress=1,dirty=true,previousFocus=null,previousHost=null,previousSibling=null,previousCanvasStyle='',rendererState=null,renderedFrames=0,lastSubFocus=null,hover=null,drag=null,errors=new Set();
   let profile=null,profileClock=0,summaryReturn=null,placesReturn=null;
+  const heldNavigationKeys=new Set();
   if(globalThis.location&&new URLSearchParams(globalThis.location.search).get('worksProfile')==='1'){
     profile=document.createElement('details');profile.className='works-profile';profile.innerHTML='<summary>Works diagnostics</summary><pre></pre>';shell.append(profile);
   }
@@ -100,7 +101,7 @@ export function createWorksExperience({renderer,onOpen=()=>{},onClose=()=>{},onP
   }
   function updateStatus(){const project=projects[selected],artifact=PLAY_WORK_COVERS[project.id];let message='';if(!artifact)message='The project cover has not been added yet. The project overview is available.';else if(errors.has(selected))message='The project cover could not load. You can still read the overview.';else if(!pool.get(selected))message='Loading project cover…';q('[data-works-status]').textContent=message;q('[data-works-retry]').hidden=!errors.has(selected);}
   function setCaption(){
-    const project=projects[selected],focused=document.activeElement;q('[data-works-number]').textContent=`${String(selected+1).padStart(2,'0')} / ${String(projects.length).padStart(2,'0')} SELECTED PROJECTS`;q('#works-selected-title').textContent=project.title;q('[data-works-summary]').textContent=project.summary||project.subtitle;q('[data-works-prev]').disabled=selected===0;q('[data-works-next]').disabled=selected===projects.length-1;q('[data-works-category]').textContent=project.subtitle||project.status;configureCaseStudyLink(q('[data-works-read]'),project,location.href);
+    const project=projects[selected],focused=document.activeElement;q('[data-works-number]').textContent=`${String(selected+1).padStart(2,'0')} / ${String(projects.length).padStart(2,'0')} SELECTED PROJECTS`;q('#works-selected-title').textContent=project.title;q('[data-works-summary]').textContent=project.summary||project.subtitle;q('[data-works-prev]').disabled=selected===0;q('[data-works-next]').disabled=selected===projects.length-1;q('[data-works-category]').textContent=project.subtitle||project.status;
     if(focused?.disabled&&focused.matches?.('[data-works-prev],[data-works-next]'))host.focus({preventScroll:true});
     dialog.querySelectorAll('[data-works-project]').forEach(button=>button.setAttribute('aria-current',button.dataset.worksProject===project.id?'true':'false'));updateStatus();
   }
@@ -158,9 +159,13 @@ export function createWorksExperience({renderer,onOpen=()=>{},onClose=()=>{},onP
     }
     return true;
   }
-  function enterScene(){if(phase!=='index')return false;hideSubViews();settleView();q('[data-works-read]').focus({preventScroll:true});return true;}
+  function enterScene(){if(phase!=='index')return false;hideSubViews();settleView();host.focus({preventScroll:true});return true;}
   function closeSubView(focus=true){
-    if(phase==='reading'){showCatalogue({restore:true,focus});return true;}
+    if(phase==='reading'){
+      if(summaryReturn?.phase==='index')showCatalogue({restore:true,focus});
+      else{hideSubViews();settleView();if(focus)host.focus({preventScroll:true});}
+      return true;
+    }
     if(phase!=='places')return false;
     const origin=placesReturn;placesReturn=null;
     if(origin?.phase==='index')showCatalogue({focus:false});else{hideSubViews();settleView();}
@@ -178,7 +183,8 @@ export function createWorksExperience({renderer,onOpen=()=>{},onClose=()=>{},onP
   }
   function overview(id=projects[selected].id){
     const project=PLAY_WORK_OVERVIEWS.find(item=>item.id===id);if(!project||['closed','returning','entering'].includes(phase))return;
-    summaryReturn={scroll:indexView.scrollTop,focus:phase==='index'?document.activeElement:null};
+    summaryReturn={phase,scroll:indexView.scrollTop,focus:phase==='index'?document.activeElement:null};
+    q('[data-works-read-close]').textContent=phase==='index'?'Back to projects':'Back to 3D room';
     const at=projects.findIndex(item=>item.id===id);if(at>=0&&at!==selected){selected=at;assignSlots();setCaption();}
     const article=q('[data-works-article]');article.replaceChildren();
     article.classList.toggle('works-project-overview',!project.nativeProcess);
@@ -234,7 +240,7 @@ export function createWorksExperience({renderer,onOpen=()=>{},onClose=()=>{},onP
   }
   const process=node('button','How this portfolio was made',list,'works-process-link');process.type='button';listen(process,'click',()=>{close({immediate:true,notify:false});onPlace('music');});
   function completeClose(notify=true){
-    if(phase==='closed')return;transition=null;queuedSelection=null;hideSubViews();setPhase('closed');restoreRenderer();if(dialog.open)dialog.close();pool.clear();errors.clear();for(const image of dialog.querySelectorAll('img'))image.removeAttribute('src');summaryReturn=null;placesReturn=null;hover=null;drag=null;host.style.cursor='';shell.classList.remove('works-transitioning');if(notify){onClose();const parentDialog=previousFocus?.closest?.('dialog');if(previousFocus?.isConnected&&!previousFocus.closest?.('[hidden],[inert]')&&(!parentDialog||parentDialog.open))previousFocus.focus({preventScroll:true});}previousFocus=null;
+    if(phase==='closed')return;transition=null;queuedSelection=null;heldNavigationKeys.clear();hideSubViews();setPhase('closed');restoreRenderer();if(dialog.open)dialog.close();pool.clear();errors.clear();for(const image of dialog.querySelectorAll('img'))image.removeAttribute('src');summaryReturn=null;placesReturn=null;hover=null;drag=null;host.style.cursor='';shell.classList.remove('works-transitioning');if(notify){onClose();const parentDialog=previousFocus?.closest?.('dialog');if(previousFocus?.isConnected&&!previousFocus.closest?.('[hidden],[inert]')&&(!parentDialog||parentDialog.open))previousFocus.focus({preventScroll:true});}previousFocus=null;
   }
   function close({immediate=false,notify=true}={}){
     if(phase==='closed')return false;if(immediate||isReduced()){completeClose(notify);return true;}if(phase==='returning')return false;const start=phase==='entering'?thresholdProgress:1;hideSubViews();caption.hidden=true;shell.classList.add('works-transitioning');transition={kind:'exit',elapsed:0,duration:.12+.92*start,from:arcIndex,start,notify,curtainFrom:curtainOpen};setPhase('returning');return true;
@@ -269,9 +275,17 @@ export function createWorksExperience({renderer,onOpen=()=>{},onClose=()=>{},onP
       consumeNavigationKey(event);if(event.repeat)return;const current=buttons.indexOf(document.activeElement),next=boundary==='first'?0:boundary==='last'?buttons.length-1:Math.max(0,Math.min(buttons.length-1,current<0?(direction>0?0:buttons.length-1):current+direction));buttons[next].focus({preventScroll:false});return;
     }
     if(!['viewing','focusing','entering'].includes(phase))return;
-    if(direction||boundary){consumeNavigationKey(event);if(event.repeat)return;selectProject(boundary==='first'?0:boundary==='last'?projects.length-1:(queuedSelection??selected)+direction);}
+    if(direction||boundary){
+      consumeNavigationKey(event);
+      const key=event.key.toLowerCase();
+      if(event.repeat||heldNavigationKeys.has(key))return;
+      heldNavigationKeys.add(key);
+      selectProject(boundary==='first'?0:boundary==='last'?projects.length-1:(queuedSelection??selected)+direction);
+    }
     else if((event.key==='Enter'||event.key===' ')&&event.target===host){consumeNavigationKey(event);if(!event.repeat)overview();}
   });
+  listen(dialog,'keyup',event=>heldNavigationKeys.delete(event.key.toLowerCase()));
+  if(typeof globalThis.addEventListener==='function')listen(globalThis,'blur',()=>heldNavigationKeys.clear());
   listen(host,'pointermove',event=>{if(!['viewing','focusing'].includes(phase))return;hover={clientX:event.clientX,clientY:event.clientY};});listen(host,'pointerleave',()=>{hover=null;host.style.cursor='';});
   listen(host,'pointerdown',event=>{if(event.button===0)drag={x:event.clientX,y:event.clientY};});listen(host,'pointercancel',()=>{drag=null;});
   listen(host,'click',event=>{if(!['viewing','focusing'].includes(phase))return;const moved=drag&&Math.hypot(event.clientX-drag.x,event.clientY-drag.y)>8;drag=null;if(moved)return;const object=pick(event);if(!object)return;const index=object.userData.worksIndex;if(index===selected)overview();else selectProject(index);});
@@ -285,7 +299,7 @@ export function createWorksExperience({renderer,onOpen=()=>{},onClose=()=>{},onP
     if(['reading','index','places'].includes(phase)||globalThis.document.hidden)return;
     dt=Math.max(0,Math.min(.1,Number(dt)||0));
     if(transition){const t=transition;t.elapsed+=dt;const p=isReduced()||t.duration===0?1:Math.min(1,t.elapsed/t.duration),blend=ease(p);
-      if(t.kind==='entry'){applyEntrance(selected,p);revealCurtain(ease(Math.min(1,p*3)));if(p===1){const queued=queuedSelection;settleView();if(queued!==null&&queued!==selected){selected=queued;assignSlots();setCaption();settleView();}showCatalogue();}}
+      if(t.kind==='entry'){applyEntrance(selected,p);revealCurtain(ease(Math.min(1,p*3)));if(p===1){const queued=queuedSelection;settleView();if(queued!==null&&queued!==selected){selected=queued;assignSlots();setCaption();settleView();}}}
       else if(t.kind==='focus'){arcIndex=THREE.MathUtils.lerp(t.from,t.to,blend);applyView(arcIndex,{approach:Math.sin(p*Math.PI)*.65,arc:p});if(p===1)settleView();}
       else{applyEntrance(t.from,t.start*(1-blend));revealCurtain(t.curtainFrom*(1-ease(THREE.MathUtils.clamp((p-.7)/.3,0,1))));if(p===1){completeClose(t.notify);return;}}
     }
