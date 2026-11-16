@@ -52,7 +52,6 @@ import {mountPlayMusic} from './play-music-ui.js';
 import {createFollowCamera,createCameraObstacles,ridingPickIsAllowed} from './follow-camera.js';
 import {createTrailheadGuide} from './trailhead-guide.js';
 import {createGardenLighting} from './garden-lighting.js';
-import {createLandmarkArtDirection} from './landmark-art-direction.js';
 import {createFollowSky} from './follow-sky.js';
 import {createContactMarker} from './contact-marker.js';
 import {createPokemonWorld} from './pokemon-world.js';
@@ -79,7 +78,6 @@ const state=newState(),keys=new Set(),physicalKeys=new Set();
 let touchControlInput;
 let renderer,scene,camera,rider,world,sun,contactMarker,bicycleLight;
 let overviewCamera,followView,trailheadGuide,hemisphere,gardenLighting,followSky,cameraObstacles=[],ridingView='follow';
-let landmarkArt;
 let characterAsset,garden,companions;
 let pokemonSoundPreference=null,rideSoundPreference=null,bicycleLightPreference=false;
 const companionCallHistory=[];
@@ -817,7 +815,7 @@ window.addEventListener('pagehide',event=>{
   const deferredGuide=running&&pendingWelcomeGuide;
   departureControlsPending=false;welcomeVoice.stop();tour?.update({hidden:true});clearInput();clearWelcomeHandoff();
   if(event.persisted){pendingWelcomeGuide=deferredGuide;return;}
-  abandoned=true;tour?.dispose();tourAudio?.dispose();tourUI?.dispose();landmarkArt?.dispose();visitorBoard?.dispose();visitorUI?.dispose();riverHop?.dispose();hopButton.remove();overlayMotion.dispose();touchControlInput?.dispose();mainLoop.stop();bicycleLight?.dispose();rider?.bell?.dispose();aboutExperience?.dispose();oakLab?.dispose();worksExperience?.dispose();personalRooms?.dispose();trailheadGuide?.dispose();gardenLighting?.dispose();followSky?.dispose();world?.wayfinding.dispose();cancelAnimationFrame(loadingCloudFrame);cloudVolume?.dispose();cloudCurtain.dispose();rideProfile?.dispose();startupController.abort();pokemonControls.dispose();pokemonAudio.dispose();rideSoundControl.dispose();gardenBell.dispose();rideAudio.dispose();companions?.dispose();welcomeVoice.dispose();garden?.dispose();world?.studioDisplays.dispose();world?.landmarks.dispose();woodyWelcome?.dispose();disposeCharacterAsset(characterAsset);characterAsset=null;
+  abandoned=true;tour?.dispose();tourAudio?.dispose();tourUI?.dispose();visitorBoard?.dispose();visitorUI?.dispose();riverHop?.dispose();hopButton.remove();overlayMotion.dispose();touchControlInput?.dispose();mainLoop.stop();bicycleLight?.dispose();rider?.bell?.dispose();aboutExperience?.dispose();oakLab?.dispose();worksExperience?.dispose();personalRooms?.dispose();trailheadGuide?.dispose();gardenLighting?.dispose();followSky?.dispose();world?.wayfinding.dispose();cancelAnimationFrame(loadingCloudFrame);cloudVolume?.dispose();cloudCurtain.dispose();rideProfile?.dispose();startupController.abort();pokemonControls.dispose();pokemonAudio.dispose();rideSoundControl.dispose();gardenBell.dispose();rideAudio.dispose();companions?.dispose();welcomeVoice.dispose();garden?.dispose();world?.studioDisplays.dispose();world?.landmarks.dispose();woodyWelcome?.dispose();disposeCharacterAsset(characterAsset);characterAsset=null;
   renderer?.dispose();renderer?.domElement.remove();
 });
 touchControlInput=createTouchRidingInput({buttons:$('touch-controls').querySelectorAll('[data-key]'),keys,physicalKeys,releaseTarget:window,onStart:cancelRoute,isActive:()=>coarse&&ready&&running&&!inPortfolio&&!hasOverlay()&&!ridingInputBlocked()});
@@ -1031,13 +1029,10 @@ async function initialize(){
       }},
       {id:'assets',label:'Preparing the garden, companions and displays…',async run(){
         garden=await loadGarden(scene,world,{signal:startupController.signal});
-        landmarkArt?.dispose();
-        landmarkArt=createLandmarkArtDirection({naturePlacements:garden.nature?.placements||[],accentPlacements:garden.accents?.placements||[],colliders:world.colliders});
-        scene.add(landmarkArt.group);
         riverHop=createFullGardenHop({scene,world,garden,rider,state,notify,onFinish(){if(!riverHop.manual){keys.clear();physicalKeys.clear();}rideFeedback.reset(state);contactMarker.reset();world.setRoute(null);save();tourJumped=Boolean(riverHop.pose?.done);sceneHost.dataset.riverHopResult=tourJumped?'landed':'cancelled';if(tourJumped)sceneHost.dataset.riverHopLandedAt=String(performance.now());}});
         startupController.signal.throwIfAborted();
         cameraObstacles=createCameraObstacles(world,garden,[trailheadGuide.root]);setRidingView(saved?.ridingView,{persist:false});
-        try{companions=createPokemonWorld({scene,obstacles:world.colliders,trees:[...garden.nature.placements,...(garden.accents?.placements||[])],onLoadTiming:profileRequested?recordCompanionLoad:undefined});}
+        try{companions=createPokemonWorld({scene,obstacles:world.colliders,trees:garden.nature.placements,onLoadTiming:profileRequested?recordCompanionLoad:undefined});}
         catch(error){console.warn('Optional garden companions unavailable:',error);}
         // Build the three costly procedural gaits while the real loading
         // curtain is up. Duplicates reuse prepared templates; other species
@@ -1081,7 +1076,7 @@ async function initialize(){
     if(location.hash===initialHash&&!inPortfolio){const personal=Object.keys(PERSONAL_ROUTES).find(kind=>PERSONAL_ROUTES[kind]===initialHash||(kind==='work'&&initialHash==='#memory-pavilion')||(kind==='music'&&['#music-corner','#making-of'].includes(initialHash)));if(personal)openLandmark(personal);else if(initialHash==='#works-room')openWorks();}
     mainLoop.start();
     greetAtEntry();
-  }catch(error){if(abandoned)return;landmarkArt?.dispose();failed=true;startupController.abort();companions?.dispose();console.error('World could not initialize',error);showWorldFailure('The 3D world could not finish loading. Retry, or read the projects directly.');}
+  }catch(error){if(abandoned)return;failed=true;startupController.abort();companions?.dispose();console.error('World could not initialize',error);showWorldFailure('The 3D world could not finish loading. Retry, or read the projects directly.');}
 }
 function frame(now){
   if(abandoned)return;

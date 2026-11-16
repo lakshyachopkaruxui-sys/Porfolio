@@ -3,6 +3,8 @@ import {createGardenCulling} from './garden-culling.js';
 import {PATHS,STOPS,WORLD_BOUNDS,RIVER,BRIDGES,START,STOP_SIGNS,ARRIVAL_SIGN,STRUCTURE_COLLIDERS} from './layout.js';
 import {DIRECTION_BOARDS} from './wayfinding-config.js';
 import {createGardenStonePrototype,GARDEN_STONE_NAME} from './garden-stones.js';
+import {HOP_SITES,localPoint} from './river-hop/hop-sites.js';
+import {HOP} from './river-hop/trajectory.js';
 
 // Small groves frame open lawns. Placement is deterministic and respects the
 // entire canopy, not just a tree's trunk, around roads and destination courts.
@@ -15,6 +17,39 @@ const TREE_NAMES=['Tree_01_Material_0','Tree_02_Material_0','Tree_03_Material_0'
 // Mature trees should read clearly above the rider. Uniform scaling preserves
 // the supplied models; the larger crowns participate in every clearance check.
 const TREE_SCALE=1.4;
+
+// Authored transplants frame the return bridge's outer banks and far corner.
+// Donor groves retain a pair; the existing tree identities, scale and rotation
+// are preserved rather than reseeding the landscape.
+const TREE_TRANSPLANTS=Object.freeze([
+  {grove:25,name:'Tree_05_Material_0',x:56,z:-64,pocket:'lower east bank'},
+  {grove:26,name:'Tree_01_Material_0',x:60,z:-43,pocket:'upper east bank'},
+  {grove:11,name:'Tree_01_Material_0',x:62,z:-68,pocket:'lower east bank companion'},
+  {grove:8,name:'Tree_01_Material_0',x:59,z:-96,pocket:'far outer corner from Meet Lakshya'},
+  {grove:13,name:'Tree_03_Material_0',x:61,z:-85,pocket:'outer corner companion from Viewfinder'}
+]);
+
+export function treeTransplantClearance(x,z,radius){
+  if(!gardenClearance(x,z,radius))return false;
+  return HOP_SITES.every(site=>{
+    const p=localPoint({x,z},site);
+    return Math.abs(p.x-HOP.x)>=radius+6||Math.abs(p.z-(HOP.launch+HOP.land)/2)>=radius+27;
+  });
+}
+
+export function planGardenTreeTransplants(placements){
+  const proposed=placements.map(p=>({...p})),moves=[];
+  for(const target of TREE_TRANSPLANTS){
+    const tree=proposed.find(p=>p.kind==='tree'&&p.grove===target.grove&&p.name===target.name);
+    if(!tree||!treeTransplantClearance(target.x,target.z,tree.radius))continue;
+    const trunk=Math.max(.32,tree.height*.065);
+    if(proposed.some(q=>q!==tree&&Math.hypot(target.x-q.x,target.z-q.z)<
+      (q.kind==='tree'?(tree.radius+q.radius)*.82:trunk+q.radius+.2)))continue;
+    moves.push({grove:tree.grove,name:tree.name,from:{x:tree.x,z:tree.z},to:{x:target.x,z:target.z},pocket:target.pocket});
+    tree.x=target.x;tree.z=target.z;
+  }
+  return moves;
+}
 export function gardenClearance(x,z,radius){
   if(DIRECTION_BOARDS.some(b=>Math.hypot(x-b.x,z-b.z)<radius+5.3))return false;
   // Ground separation alone does not prevent a foreground canopy from hiding
@@ -91,6 +126,9 @@ export function createGardenNature(source){
         if(place(TREE_NAMES[(i+slot*2)%5],x+Math.cos(angle)*distance,z+Math.sin(angle)*distance,height,i*.73+slot,'tree',i))break;
       }
     }
+    // Keep the previous placement reservations until mushroom selection has
+    // completed, then discard them below. Removing them earlier would silently
+    // move already accepted mushroom clusters to newly freed candidate sites.
     if(i%3===0)place('Bush_01_Material_0',x-3.5,z-2.2,1.35,i*.8,'shrub',i);
   });
   // A few unequal stones at selected grove edges, never a carpet of props.
@@ -124,6 +162,23 @@ export function createGardenNature(source){
         mushrooms.placements.splice(mushrooms.placements.length-removed.length,removed.length);
       }
     }
+  }
+  // Remove the unapproved shrubs from both rendering and collision ownership.
+  // Stones and mushroom clusters retain their exact established positions.
+  for(let i=placements.length-1;i>=0;i--){
+    const item=placements[i];if(item.kind!=='shrub')continue;
+    placements.splice(i,1);
+    const own=batches.get(item.name).placements;own.splice(own.indexOf(item),1);
+    const at=colliders.findIndex(c=>c.x===item.x&&c.z===item.z);if(at>=0)colliders.splice(at,1);
+  }
+  const transplants=planGardenTreeTransplants(placements);
+  for(const move of transplants){
+    const item=placements.find(p=>p.kind==='tree'&&p.name===move.name&&p.grove===move.grove);
+    const collider=colliders.find(c=>c.x===item.x&&c.z===item.z);
+    if(!collider)throw new Error('A tree transplant needs its matching garden collider.');
+    // Batches hold this same placement object, so the final instance matrices,
+    // culling bounds and collision obstacle are created at one shared position.
+    item.x=move.to.x;item.z=move.to.z;collider.x=item.x;collider.z=item.z;
   }
   const wind={time:{value:0},strength:{value:0}};
   const foliage=material.clone();
@@ -161,7 +216,7 @@ export function createGardenNature(source){
     batch.instanceMatrix.needsUpdate=true;batch.computeBoundingSphere();batch.boundingSphere.radius+=.18;batch.castShadow=true;batch.receiveShadow=true;root.add(batch);cullingBatches.push({mesh:batch,items});
   }
   const culling=createGardenCulling(cullingBatches);
-  return {root,placements,colliders,culling,update({time=0,reduced=false,lighter=false,camera,sun}={}){
+  return {root,placements,colliders,culling,transplants,update({time=0,reduced=false,lighter=false,camera,sun}={}){
     if(camera)culling.update(camera,sun);
     wind.time.value=time;wind.strength.value=reduced||lighter?0:.12;
   },dispose(){root.removeFromParent();root.traverse(o=>{if(o.isInstancedMesh)o.dispose();});geometries.forEach(g=>g.dispose());foliage.dispose();depth.dispose();}};

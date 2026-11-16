@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-15T21:07:25.739Z",
+  "generatedAt": "2026-11-16T02:31:12.021Z",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 746,
-      "sha256": "36a80a690d3dc808856545c39cb70612458adf129705575f54c7583d4eb8edb0"
+      "sha256": "98c1096fddf9ff195605ae11bd5cea11bbf8bbd0d1f5dc00acf51d7321910045"
     },
     {
       "path": "_redirects",
@@ -4175,7 +4175,7 @@
     {
       "path": "bicycle-world/dist/index.html",
       "size": 49238,
-      "sha256": "34b52bbe061130fce9bafca8641c35bb76fa7d58734b4546282de356273ec1d3"
+      "sha256": "893350859f36a084c45ab664cb67bc75a6eacb0ab74d678a877b1356a3a9af43"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
@@ -4474,8 +4474,8 @@
     },
     {
       "path": "bicycle-world/dist/src/garden-nature.js",
-      "size": 10579,
-      "sha256": "f2603107efc96d414175b34b9f14e36a08b6d29d8de03ab9fec39841240f4f49"
+      "size": 13715,
+      "sha256": "3422ea5bdfad19379dd998a06a31cf4f6121be9b85148de8719a0056e2d0018e"
     },
     {
       "path": "bicycle-world/dist/src/garden-palette.js",
@@ -4484,8 +4484,8 @@
     },
     {
       "path": "bicycle-world/dist/src/garden-pokeballs.js",
-      "size": 8478,
-      "sha256": "6bee6295445f05e720950731bb0c1bb9eb7bb532b8e51ddd8bd4c39b1bb8d224"
+      "size": 9393,
+      "sha256": "7bc621e3f9a8cc5246b6745bb8ec37961c43527ec562dc7a625cdec10fbc660c"
     },
     {
       "path": "bicycle-world/dist/src/garden-polish.css",
@@ -4509,8 +4509,8 @@
     },
     {
       "path": "bicycle-world/dist/src/garden.js",
-      "size": 5992,
-      "sha256": "49408f269e77e68432c489d999ab302afd4330df6cb35376eae10fb51ebc8822"
+      "size": 4635,
+      "sha256": "e3de14ddf0b47efe781d2870837e55daa025640c5f5e02edb5bdbfcca0974b8a"
     },
     {
       "path": "bicycle-world/dist/src/ground-pokemon-gait.js",
@@ -4614,8 +4614,8 @@
     },
     {
       "path": "bicycle-world/dist/src/main.js",
-      "size": 102826,
-      "sha256": "4bf00b41a7ad5f9489710cf6c3855208fcbfac24e48cb012a375254fd4dbf4c0"
+      "size": 102403,
+      "sha256": "6d5b3d22705028a54e8a0bed4e592aa871b01db4065a519ec60a5c8b4547a3c1"
     },
     {
       "path": "bicycle-world/dist/src/map-guide.css",
