@@ -52,7 +52,7 @@ export function createFullGardenHop({scene,world,garden,rider,state,notify,onFin
   gate={x:state.x,z:state.z,heading:state.heading};
   stunt=STUNTS.includes(selected)?selected:chooseStunt();
   traceCleared=false;active=true;t=0;returnBlend=0;inspectionPaused=false;pivot.add(rider.group);
-  notify(calm?'A steady river crossing. Escape returns to the ramp.':STUNT_LABELS[stunt]+'! Escape cancels; riding returns after landing.');return true;
+  notify(calm?'A steady river crossing. Riding resumes after landing.':STUNT_LABELS[stunt]+'! Riding resumes after landing.');return true;
  }
  function step(dt,calm=false){
   if(!active)return;
