@@ -41,7 +41,7 @@ export function mountCaseHeroArt(figure, {project, artifact, artifactUrl}) {
   const stage = element('div', 'case-hero-stage');
   figure.replaceChildren(stage);
 
-  if (artifact.src?.includes('/approved-20261110/')) {
+  if (/\/project-covers\/approved-\d{8}[a-z]*\//.test(artifact.src || '')) {
     figure.dataset.presentation = 'generated';
     const ratio = artifact.width / artifact.height;
     stage.style.aspectRatio = `${artifact.width} / ${artifact.height}`;

@@ -12,59 +12,59 @@ export const NORMAL_WORK_ORDER=[
 ];
 export const NORMAL_WORK_COVERS={
   "connectaid": {
-    "src": "./assets/work-covers/connectaid.webp",
+    "src": "../../normal-portfolio/assets/project-covers/approved-20261116b/connectaid.webp",
     "width": 1733,
     "height": 907,
-    "alt": "AI-generated ConnectAid cover: two phone mockups for Home and Health Records beside the headline Care beyond the booking, on a deep blue and cyan background.",
+    "alt": "AI-generated ConnectAid cover: two healthcare phone mockups on navy and cyan, with the project name and Care beyond the booking.",
     "caption": "Owner-approved AI-generated presentation cover. Original interface screens, research and testing evidence remain in the case study."
   },
   "giggles": {
-    "src": "./assets/work-covers/giggles.webp",
+    "src": "../../normal-portfolio/assets/project-covers/approved-20261116b/giggles.webp",
     "width": 1734,
     "height": 907,
-    "alt": "AI-generated Giggles cover: cream board, four blue shape buttons, landscape phone, communication cards and die beside Learning through play, on a coral background.",
+    "alt": "AI-generated Giggles cover: a cream learning board with blue shape buttons, a phone, cards and a die on coral, with the project name and Learning through play.",
     "caption": "Owner-approved AI-generated presentation cover based on the board, cards and interface designs. Actual build and testing photographs remain in the case study."
   },
   "pixel-mania": {
-    "src": "./assets/work-covers/pixel-mania.webp",
+    "src": "../../normal-portfolio/assets/project-covers/approved-20261116b/pixel-mania.webp",
     "width": 1733,
-    "height": 907,
-    "alt": "AI-generated Pixel Mania cover: an open pixel board with five click-state labels, neon geometric shapes and the headline Click. Colour. Create.",
+    "height": 908,
+    "alt": "AI-generated Pixel Mania cover: a five-colour pixel drawing board on neon purple, with the project name and Click. Colour. Create.",
     "caption": "Owner-approved AI-generated presentation cover illustrating the open drawing board and colour cycle. Original screens, live game and exhibition evidence remain in the case study."
   },
   "syringe": {
-    "src": "./assets/work-covers/syringe.webp",
+    "src": "../../normal-portfolio/assets/project-covers/approved-20261116b/syringe.webp",
     "width": 1734,
     "height": 907,
-    "alt": "AI-generated syringe cover: transparent barrel, teal plunger and enlarged finger-flange detail beside A closer look at grip, on a dark teal background.",
+    "alt": "AI-generated 20 cc Syringe cover: a transparent syringe with teal plunger and finger-flange close-up, with the project name and Rethinking grip and control.",
     "caption": "Owner-approved AI-generated presentation cover of the 20 cc syringe redesign concept. It is not testing footage or evidence of clinical or ergonomic benefit."
   },
   "workplace-mode": {
-    "src": "./assets/work-covers/workplace-mode.webp",
+    "src": "../../normal-portfolio/assets/project-covers/approved-20261116b/workplace-mode.webp",
     "width": 1734,
     "height": 907,
-    "alt": "AI-generated Workplace Mode cover: dark navigation and music display with an amber Pending state beside When a tap needs an answer.",
+    "alt": "AI-generated Workplace Mode cover: a navigation and music concept display with amber Pending feedback, with the project name and Making playback feedback clear.",
     "caption": "Owner-approved AI-generated high-fidelity concept presentation. Illustrative interface only; no Maruti firmware, Android Auto integration or live playback is shown."
   },
   "jan-aushadhi": {
-    "src": "./assets/work-covers/jan-aushadhi.webp",
-    "width": 1732,
+    "src": "../../normal-portfolio/assets/project-covers/approved-20261116b/jan-aushadhi.webp",
+    "width": 1733,
     "height": 908,
-    "alt": "AI-generated Jan Aushadhi cover: a demo unified health card and prescriptions app beside Connecting care, on blue and teal-lit plinths.",
+    "alt": "AI-generated Jan Aushadhi cover: a prescription concept screen and a clearly marked demo health card, with the project name and Connecting medicine access.",
     "caption": "Owner-approved AI-generated cover for the selected health card and app concept, with demo data. The project also explored a kiosk and RFID packaging. These are concepts, not a deployed platform or built dispensing hardware."
   },
   "tear": {
-    "src": "./assets/work-covers/tear.webp",
+    "src": "../../normal-portfolio/assets/project-covers/approved-20261116b/tear.webp",
     "width": 1734,
     "height": 907,
-    "alt": "AI-generated TEAR presentation cover: hands pull a glowing seam between a room, ocean and sunlit forest beside Pull reality apart.",
+    "alt": "AI-generated TEAR cover: hands opening a glowing seam between a room, ocean and sunlit forest, with the project name and Pull reality apart.",
     "caption": "Owner-selected AI-generated presentation artwork; actual prototype captures and iteration evidence appear below."
   },
   "dhan-drishti": {
-    "src": "../../normal-portfolio/assets/project-covers/approved-20261116/dhan-drishti.webp",
+    "src": "../../normal-portfolio/assets/project-covers/approved-20261116b/dhan-drishti.webp",
     "width": 1733,
-    "height": 908,
-    "alt": "AI-generated Dhan Drishti cover presenting speculative rice-farming concepts.",
+    "height": 907,
+    "alt": "AI-generated Dhan Drishti cover: rice plants above a misted root chamber in a greenhouse, with the project name and Futures of rice farming.",
     "caption": "AI-generated presentation cover for an academic speculative-design study. The cultivation systems are concepts."
   }
 };

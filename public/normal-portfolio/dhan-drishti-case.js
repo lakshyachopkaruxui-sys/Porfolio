@@ -8866,9 +8866,9 @@ export const DHAN_STORY = {
   ]
 };
 export const DHAN_COVER = {
-  "src": "./assets/project-covers/approved-20261116/dhan-drishti.webp",
+  "src": "./assets/project-covers/approved-20261116b/dhan-drishti.webp",
   "width": 1733,
-  "height": 908,
-  "alt": "AI-generated Dhan Drishti cover: rice plants above an open misted root chamber beside the title Dhan Drishti and Futures of rice farming.",
+  "height": 907,
+  "alt": "AI-generated Dhan Drishti cover: rice plants above a misted root chamber in a greenhouse, with the project name and Futures of rice farming.",
   "caption": "AI-generated cover of the speculative aeroponic rice concept. The study explores alternative futures; this is not a built or validated cultivation system."
 };

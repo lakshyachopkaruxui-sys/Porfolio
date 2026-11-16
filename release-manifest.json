@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T05:08:46.025Z",
+  "generatedAt": "2026-11-16T06:29:38.000Z",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 746,
-      "sha256": "ce29074ce8c9b36d7b822103b9992008a5df95e54b99f9a93afb819584eaa673"
+      "sha256": "5a574e62157cf62962177912c6725d97c89b94af0d67d46d6718b0ac3c684802"
     },
     {
       "path": "_redirects",
@@ -4175,7 +4175,7 @@
     {
       "path": "bicycle-world/dist/index.html",
       "size": 49245,
-      "sha256": "58f7a9594c2ac43a692c7fddd8b91288fb580ef5b63e6762fc95526a9f9e5192"
+      "sha256": "6f950b9deeda0418a9a3152851a4f03befd8cbcf66a91449c8d686060fd882be"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
@@ -4669,8 +4669,8 @@
     },
     {
       "path": "bicycle-world/dist/src/normal-work-source.js",
-      "size": 11993,
-      "sha256": "989152646eb5ee3abff404d52ce005399ca776b16582d9f4f10682bb49d4e4d5"
+      "size": 12376,
+      "sha256": "9490b31f04c4239594acd1035deea1d827305cfe817da21300737d3b158ae56e"
     },
     {
       "path": "bicycle-world/dist/src/oak-lab-content.js",
@@ -7528,6 +7528,86 @@
       "sha256": "ced2707507ce724a58d2f3099f77af6efdcd0a3e534a32c4c60b349f0c6a9cfe"
     },
     {
+      "path": "normal-portfolio/assets/project-covers/approved-20261116b/connectaid.png",
+      "size": 1785582,
+      "sha256": "7e97cc759528c4f1c2656ddae8771448b3aa4c7430e741185353dd16944c4990"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/approved-20261116b/connectaid.webp",
+      "size": 195494,
+      "sha256": "864e2c6c4fb20f8107f460ca11f71c08bee1131f17889282e37267ba70dee762"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/approved-20261116b/dhan-drishti.png",
+      "size": 2520717,
+      "sha256": "73d259212570b0a9e45377adfffc8006d1bb62524b427c50b1320fdc5ce07800"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/approved-20261116b/dhan-drishti.webp",
+      "size": 436594,
+      "sha256": "f6aefc64e8fa41d20bebad7fa8911c638ccf403253b1be35ae09ed776f986a00"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/approved-20261116b/giggles.png",
+      "size": 1981345,
+      "sha256": "9e8a08d64daff8c85d705e262a36a684ba109c876173e63ec285c8120604e00c"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/approved-20261116b/giggles.webp",
+      "size": 237800,
+      "sha256": "cd77cf5d259bfb9afd581fa5472d0bc83cfb1817d327f70d8a5f6d13282d4ea1"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/approved-20261116b/jan-aushadhi.png",
+      "size": 1789830,
+      "sha256": "c8a0c018812d86c31a0ae9b6483d2c40db3e90cd64ec9536f2b20a000823ab33"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/approved-20261116b/jan-aushadhi.webp",
+      "size": 192358,
+      "sha256": "c5a3afa6fa9d1362dc16cceb4b5babf9ca8fa3431999574dd091e799d66bef22"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/approved-20261116b/pixel-mania.png",
+      "size": 1829838,
+      "sha256": "af9f42975c1e10f09cb2f999a1e27a6f56a0155c93800a07225765a85319b094"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/approved-20261116b/pixel-mania.webp",
+      "size": 239588,
+      "sha256": "2cb2a497cab667ed37ca622d0b29ca2228e0329e4f9aaf8fa2a0a9b45ed84174"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/approved-20261116b/syringe.png",
+      "size": 1880377,
+      "sha256": "ce94c0393916ad671e55c06d9ba5d4a1d6188a94185771c59c830a12f1433e62"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/approved-20261116b/syringe.webp",
+      "size": 198106,
+      "sha256": "a302c9bdfa12dd4b23cc4038922a67f655f13a6fa200410d571450d2a9ccaba9"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/approved-20261116b/tear.png",
+      "size": 2254964,
+      "sha256": "25044ffba64775586c1db882fe166163d2d12ddf4e7f023f0264d932f5891fe8"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/approved-20261116b/tear.webp",
+      "size": 344688,
+      "sha256": "eebba7cbae8714a4a0585b14c30861ef78ce583eaeb772a9ea4003d48f86c45d"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/approved-20261116b/workplace-mode.png",
+      "size": 1794134,
+      "sha256": "e149433874892f6dbb6cea6508c710431dced7d0d21551802065fd1c450f434d"
+    },
+    {
+      "path": "normal-portfolio/assets/project-covers/approved-20261116b/workplace-mode.webp",
+      "size": 170992,
+      "sha256": "8c24c1c78e4abeb131081ebaeff2c3c4f4e17e5c4707c35a194ffbd55d84a8e0"
+    },
+    {
       "path": "normal-portfolio/assets/social/portfolio-preview-v1.png",
       "size": 381440,
       "sha256": "58580b4d672b3e7c4cefd421109a728d19f3788d6b3a7f44a21480d5a971e76c"
@@ -7709,8 +7789,8 @@
     },
     {
       "path": "normal-portfolio/case-hero-art.js",
-      "size": 3784,
-      "sha256": "ed889678334bf433d35885469ae495ad47c69ff6f8b89846629140056692434d"
+      "size": 3806,
+      "sha256": "1b36a7f1065b5bf6329c47aa35eeeadee7a97870aaaae2f00cf9e213f87d405a"
     },
     {
       "path": "normal-portfolio/case-image-viewer.css",
@@ -7904,8 +7984,8 @@
     },
     {
       "path": "normal-portfolio/dhan-drishti-case.js",
-      "size": 381052,
-      "sha256": "fb731063205502ac2814fbb503562f33463e23d582f2d4162fdbf581cd4522bd"
+      "size": 381056,
+      "sha256": "1ad15e1f11c312d2655b99c191de34c05d725b35c1d20e622e88010629f55932"
     },
     {
       "path": "normal-portfolio/dhan-drishti-content.js",
@@ -7969,8 +8049,8 @@
     },
     {
       "path": "normal-portfolio/index.html",
-      "size": 51715,
-      "sha256": "752c1fd2fab9b32f763cf312b1c413cb464f162b61a5276c4a33311a5c59b87b"
+      "size": 51744,
+      "sha256": "aee04d1f2c81c03ae3e7714cde1dd82478c57630c5a1b0dee4f2bae122926c99"
     },
     {
       "path": "normal-portfolio/jan-concept-data.js",
@@ -8009,8 +8089,8 @@
     },
     {
       "path": "normal-portfolio/normal-projects.js",
-      "size": 14381,
-      "sha256": "98c6b8a2398892fb741f83d0867ad63352a4aa06d5175a6232f107c3d02f91b7"
+      "size": 14406,
+      "sha256": "4face3120e7a5003806af381df12731128a4b8bdecb29bb8217e3fa79355a3ce"
     },
     {
       "path": "normal-portfolio/normal-reading.css",
@@ -8169,8 +8249,8 @@
     },
     {
       "path": "normal-portfolio/tear-case.js",
-      "size": 31620,
-      "sha256": "2c6023100dd0c01edd0084fb100019f73cacbceb393faaebd2e5fbfccbd3d582"
+      "size": 31631,
+      "sha256": "b75a6d9ec7c25dc8a5480226fc28e3fb40fc57692df3987d8dd8d24192afec0e"
     },
     {
       "path": "normal-portfolio/toolkit-motion.css",

@@ -92,10 +92,10 @@ export const TEAR_PROCESS = {
   ]
 };
 export const TEAR_COVER = {
-  "src": "./assets/project-covers/approved-20261110/tear.webp",
+  "src": "./assets/project-covers/approved-20261116b/tear.webp",
   "width": 1734,
   "height": 907,
-  "alt": "AI-generated TEAR presentation cover: hands pull a glowing seam between a room, ocean and sunlit forest beside Pull reality apart.",
+  "alt": "AI-generated TEAR cover: hands opening a glowing seam between a room, ocean and sunlit forest, with the project name and Pull reality apart.",
   "caption": "Owner-selected AI-generated presentation artwork; actual prototype captures and iteration evidence appear below."
 };
 export const TEAR_STORY = {
