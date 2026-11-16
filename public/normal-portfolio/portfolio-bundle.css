@@ -3421,6 +3421,7 @@ html:has(#case-reader[open]) { overflow: hidden; scrollbar-gutter: auto; }
   --mode-type: 16px;
   --mode-weight: 600;
   --mode-width: 184px;
+  --mode-height: var(--action-height, 48px);
   --mode-rail-column: 32px;
 
   /* The welcome and reader have older ID-scoped button positioning. */
@@ -3429,7 +3430,7 @@ html:has(#case-reader[open]) { overflow: hidden; scrollbar-gutter: auto; }
   transform: none !important;
   display: inline-grid !important;
   grid-template-columns: minmax(0, 1.3fr) var(--mode-rail-column) minmax(44px, 1fr) !important;
-  grid-template-rows: 44px;
+  grid-template-rows: calc(var(--mode-height) - 2px);
   align-items: center !important;
   gap: 0 !important;
   isolation: isolate;
@@ -3438,8 +3439,8 @@ html:has(#case-reader[open]) { overflow: hidden; scrollbar-gutter: auto; }
   width: var(--mode-width) !important;
   min-width: var(--mode-width) !important;
   max-width: none !important;
-  height: 46px !important;
-  min-height: 46px !important;
+  height: var(--mode-height) !important;
+  min-height: var(--mode-height) !important;
   padding: 0 !important;
   border: 1px solid var(--mode-edge) !important;
   border-radius: 10px !important;
@@ -3456,12 +3457,14 @@ html:has(#case-reader[open]) { overflow: hidden; scrollbar-gutter: auto; }
   --mode-type: 15px;
   --mode-weight: 500;
   --mode-width: 176px;
+  --mode-height: var(--compact-height, 44px);
 }
 /* Compact riding utilities use the same 14px labels as their neighbours.
    Room and welcome actions retain the shared 16px action scale. */
 body.hybrid-world :is(#ride-tools, #world-map, .oak-tools) .mode-selector.mode-switch {
   --mode-type: 14px;
   --mode-width: 168px;
+  --mode-height: var(--compact-height, 44px);
 }
 
 .mode-selector[data-mode='portfolio']:not([data-visual-mode]),
@@ -3486,6 +3489,7 @@ body.hybrid-world :is(#ride-tools, #world-map, .oak-tools) .mode-selector.mode-s
   box-sizing: border-box;
   min-width: 0;
   min-height: 44px !important;
+  min-height: var(--mode-height) !important;
   margin: 0;
   padding: 0;
   border: 0;

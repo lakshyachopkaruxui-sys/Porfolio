@@ -79,7 +79,8 @@ export function createWoodyTour({clips = {}, play, onState = () => {}, now = () 
     return true;
   }
   function offerWorks() {
-    if (!enabled || blocked() || isQuiet() || !['work','music',null].includes(context.roomId) || (!context.roomId&&!context.stopped) || active || worksOpened || choiceOffered || !['work','music'].includes(context.roomId || arrivedStop) || (!context.roomId&&arrivedStop !== context.stopId)) return false;
+    // Preserve a failed room intro as the relevant caption and replay target.
+    if (!enabled || error || blocked() || isQuiet() || !['work','music',null].includes(context.roomId) || (!context.roomId&&!context.stopped) || active || worksOpened || choiceOffered || !['work','music'].includes(context.roomId || arrivedStop) || (!context.roomId&&arrivedStop !== context.stopId)) return false;
     if (!clips['works-skipped'] || context.roomId&&!seen.has(`room:${context.roomId}`)) return false;
     // This one explicit choice replaces any completed caption; it never interrupts a line.
     if (!speak('works-skipped', {manual:true, automatic:false, stopId:context.roomId?null:arrivedStop,roomId:context.roomId})) return false;
