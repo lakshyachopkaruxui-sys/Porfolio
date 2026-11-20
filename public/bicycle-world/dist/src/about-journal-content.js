@@ -33,7 +33,7 @@ export const ABOUT_JOURNAL=freeze({
       pages:[
         {title:'Learning to design',blocks:[
           {type:'timeline',entries:[
-            {date:'2019–2022 · B.Tech',title:'Electronics & Telecommunication',body:'SSIPMT Raipur.'},
+            {date:'2018–2022 · B.Tech',title:'Electronics & Telecommunication',body:'SSIPMT Raipur.'},
             {date:'Jul 2025–Jul 2027 · expected',title:'M.Des · User Experience',body:'Pursuing my master’s at MIT ADT University, Pune.'}
           ]},
           {type:'text',title:'DesignBoat bootcamp',body:'Vignesh Pujar taught and mentored me during my DesignBoat bootcamp.'},
@@ -108,7 +108,7 @@ export const ABOUT_JOURNAL=freeze({
           {type:'text',body:'I’m energetic and sociable, and I like making things with other people. This garden brings that part of me into my work.'}
         ]},
         {blocks:[
-          {type:'text',body:'I’m open to internships and full-time roles from January 2027, after my juries, in any location, remote or in office.'},
+          {type:'text',body:'I’m available for a design internship from January 2027, remote or in office. I expect to complete my M.Des in July 2027.'},
           {type:'links',items:[
             {label:'See my projects',destination:'projects'},
             {label:'Visit Singing & Garba',destination:'work'},

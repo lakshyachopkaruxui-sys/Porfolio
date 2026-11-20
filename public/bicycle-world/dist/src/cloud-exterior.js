@@ -41,17 +41,17 @@ export function buildCloudExterior({root,spec,mesh,box,material}){
   for(const side of [-1,1]){
     box(deck,side*1.63,1.78,-.05,.20,2.36,2.70,plaster);
     box(deck,side*1.20,1.78,1.30,.80,2.36,.20,plaster);
-    box(deck,side*.68,1.80,1.42,.18,2.40,.30,trim);
-    box(deck,side*1.69,1.80,1.30,.22,2.40,.26,trim);
+    box(deck,side*.68,1.80,1.42,.18,2.37,.30,trim);
+    box(deck,side*1.69,1.80,1.30,.22,2.37,.26,trim);
     box(deck,side*.68,.68,1.44,.29,.18,.36,gold);
     box(deck,side*.68,2.92,1.44,.29,.16,.36,gold);
     // Deep front window bays with sill, broad surround and slim mullion.
-    box(deck,side*1.18,1.89,1.418,.76,1.88,.08,shadow);
+    box(deck,side*1.18,1.89,1.418,.73,1.88,.08,shadow);
     box(deck,side*1.18,1.89,1.462,.61,1.70,.028,turquoise);
     box(deck,side*1.18,1.03,1.50,.82,.12,.22,trim);
     box(deck,side*1.18,2.78,1.49,.82,.12,.16,trim);
-    box(deck,side*1.18,1.88,1.49,.052,1.68,.055,goldEdge);
-    box(deck,side*1.18,1.89,1.49,.64,.055,.055,goldEdge);
+    box(deck,side*1.18,1.88,1.49,.052,1.64,.055,goldEdge);
+    box(deck,side*1.18,1.89,1.506,.64,.055,.055,goldEdge);
     box(deck,side*1.18-.16,2.29,1.483,.10,.65,.012,reflection);
     // Side glazing is recessed within the same cream structural piers.
     box(deck,side*1.742,1.91,-.18,.035,1.70,1.70,shadow);
@@ -92,7 +92,7 @@ export function buildCloudExterior({root,spec,mesh,box,material}){
   // genuinely open terrace for the camera instead of becoming a telescope lab.
   const capX=-.78,capZ=-.38;
   cylinder(deck,.85,.82,capX,3.62,capZ,plaster,20);
-  cylinder(deck,.90,.12,capX,3.25,capZ,gold,20);
+  cylinder(deck,.90,.12,capX,3.28,capZ,gold,20);
   for(const angle of [-.90,-.30,.30,.90]){
     const pane=new THREE.Group();pane.position.set(capX+Math.sin(angle)*.853,3.66,capZ+Math.cos(angle)*.853);pane.rotation.y=angle;deck.add(pane);
     box(pane,0,0,0,.33,.52,.045,shadow);

@@ -2,20 +2,22 @@ import * as THREE from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {disposeCharacterAsset} from './character-loader.js';
+import {createOakPerformance} from './oak-performance.js';
 import {PATHS,WORLD_BOUNDS,RIVER,BRIDGES,LANDMARKS,STOPS,START} from './layout.js';
 
 const url=path=>new URL('../'+path.replace(/^\.\//,''),import.meta.url).href;
 
 /** Original cutaway scenery. The caller owns renderer, activity and animation. */
 export function createOakLabScene({onChange=()=>{},onAssetState=()=>{}}={}){
-  const scene=new THREE.Scene();scene.background=new THREE.Color('#d9e5d8');
+  const scene=new THREE.Scene();scene.background=new THREE.Color('#c3e6ef');
   const camera=new THREE.PerspectiveCamera(45,1,.1,65);
   const materials=new Map(),geometry=new Set(),textures=new Set(),batches=new Map();
+  let perform=null;
   let disposed=false,oak=null,serial=0,assetState='idle',previewSerial=0,assetController=null,assetTimer=null;
   const previews=[],imageRequests=[],pickZones=[],displayBalls=[],buildPins=[];
   let displayTime=0,displayAccumulator=0,lastReduced=false,reaction=null,buildStage='all';
   const mat=(color)=>{if(!materials.has(color))materials.set(color,new THREE.MeshStandardMaterial({color,roughness:.86}));return materials.get(color);};
-  const p={cream:mat('#eee2c4'),wood:mat('#806247'),timber:mat('#a17b55'),mint:mat('#a7c7b7'),deepMint:mat('#628c7c'),ink:mat('#334f47'),paper:mat('#fff7df'),red:mat('#ab5144'),tile:mat('#f6f3df'),seam:mat('#d8d7c8'),green:mat('#73946b'),leaf:mat('#4b785b'),blue:mat('#88b8bc'),gold:mat('#d7b769')};
+  const p={cream:mat('#d7eaf0'),wood:mat('#745342'),timber:mat('#aa7654'),mint:mat('#4dada3'),deepMint:mat('#297c78'),ink:mat('#334f47'),paper:mat('#f3f7f4'),red:mat('#c95c53'),tile:mat('#e4eeef'),seam:mat('#b8ced1'),green:mat('#73946b'),leaf:mat('#4b785b'),blue:mat('#559fb7'),gold:mat('#d7b769')};
   function part(geo,material,x=0,y=0,z=0,rotation=null){
     const object=new THREE.Mesh(geo,material);object.position.set(x,y,z);if(rotation)object.rotation.set(...rotation);object.updateMatrix();geo.applyMatrix4(object.matrix);const list=batches.get(material)||[];list.push(geo);batches.set(material,list);return object;
   }
@@ -65,8 +67,8 @@ export function createOakLabScene({onChange=()=>{},onAssetState=()=>{}}={}){
     const axes=[new THREE.Vector3(0,1,0),new THREE.Vector3(.72,.9,.12).normalize(),new THREE.Vector3(.1,.8,.6).normalize()];
     displayBalls.push({mesh:ball,axis:axes[index],speed:[.29,-.23,.26][index],phase:index*2.1});
   }
-  scene.add(new THREE.HemisphereLight('#fff4da','#8c9c7e',2.4));
-  const sun=new THREE.DirectionalLight('#fff1cf',3.1);sun.position.set(-5,11,8);scene.add(sun);
+  scene.add(new THREE.HemisphereLight('#f3faff','#8eaca9',2.4));
+  const sun=new THREE.DirectionalLight('#fffaf2',3.1);sun.position.set(-5,11,8);scene.add(sun);
   // Open cutaway: diagonal white floor, timber dado and cream upper walls.
   box(17,.20,11,0,-.1,0,p.wood);box(16.8,.025,10.8,0,.015,0,p.tile);
   for(let i=-12;i<=12;i++)for(const sign of [-1,1]){
@@ -76,11 +78,11 @@ export function createOakLabScene({onChange=()=>{},onAssetState=()=>{}}={}){
     for(const [v,d,min,max]of [[start.x,dx,-8.35,8.35],[start.z,dz,-5.35,5.35]]){const lo=(min-v)/d,hi=(max-v)/d;a=Math.max(a,Math.min(lo,hi));b=Math.min(b,Math.max(lo,hi));}
     if(b>a){const mid=start.clone().addScaledVector(new THREE.Vector3(dx,0,dz),(a+b)/2);box(.018,.008,Math.hypot(dx,dz)*(b-a),mid.x,.035,mid.z,p.seam,[0,Math.atan2(dx,dz),0]);}
   }
-  box(17,4.8,.22,0,2.4,-5.5,p.cream);box(17,1.18,.10,0,.59,-5.34,p.wood);box(17,.10,.18,0,1.22,-5.25,p.timber);
-  box(.2,4.8,8.2,-8.5,2.4,-1.3,p.cream);box(.12,1.18,8.2,-8.35,.59,-1.3,p.wood);
+  box(17,4.8,.22,0,2.4,-5.5,p.cream);box(16.96,1.18,.10,0,.57,-5.34,p.wood);box(17,.10,.18,0,1.22,-5.25,p.timber);
+  box(.2,4.8,8.2,-8.5,2.4,-1.3,p.cream);box(.12,1.18,8.14,-8.35,.57,-1.3,p.wood);
   // Right opening frames the garden; wall stops below the roof sightline.
   box(.22,1.2,8.2,8.5,.6,-1.3,p.cream);
-  for(const z of [-5.3,-1.9,1.6])box(.22,4.7,.22,8.5,2.35,z,p.timber);
+  for(const z of [-5.3,-1.9,1.6])box(.26,4.74,.22,8.5,2.33,z,p.timber);
   box(.3,.24,8.7,8.5,4.65,-1.25,p.red);
   for(const z of [-5.3,-1.6,2.1])box(17.4,.2,.22,0,4.8,z,p.red);
   box(17.7,.16,.18,0,4.96,-5.5,p.red);
@@ -89,12 +91,40 @@ export function createOakLabScene({onChange=()=>{},onAssetState=()=>{}}={}){
   for(let i=0;i<6;i++){
     const x=-6.8+i*1.3;box(.045,1.0,.03,x,.65,-3.88,p.deepMint);box(.45,.05,.06,x+.55,1.05,-3.82,p.ink);
   }
-  box(3.6,2.15,.10,-4.3,3.18,-5.29,p.wood);box(3.34,1.91,.025,-4.3,3.18,-5.22,p.paper);
-  for(let i=0;i<4;i++)box(2.0-i*.24,.035,.012,-4.35,3.75-i*.28,-5.195,p.deepMint);
-  for(const x of [-7.8,-6.7]){box(.82,1.05,.10,x,3.3,-5.28,p.timber);box(.65,.85,.02,x,3.3,-5.20,p.paper);cylinder(.12,.02,x,3.35,-5.17,p.gold);}
-  // Central three-partner counter, with small round selection pedestals.
-  box(5.65,1.20,1.55,-2.5,.6,-.95,p.mint);box(5.95,.16,1.85,-2.5,1.28,-.95,p.paper);
-  box(5.3,.06,.03,-2.5,.86,.0,p.deepMint);
+  function framedPrint(name,file,x,y,width,height){
+    box(width+.13,height+.13,.10,x,y,-5.29,p.wood);
+    box(width+.045,height+.045,.026,x,y,-5.222,p.paper);
+    const geo=new THREE.PlaneGeometry(width,height);geometry.add(geo);
+    const material=new THREE.MeshBasicMaterial({color:0xffffff,toneMapped:false});materials.set(name,material);
+    const print=new THREE.Mesh(geo,material);print.name=name;print.position.set(x,y,-5.20);scene.add(print);
+    if(typeof Image==='undefined')return;
+    const image=new Image();imageRequests.push(image);image.decoding='async';
+    image.onload=()=>{
+      if(disposed)return;
+      const texture=new THREE.Texture(image);texture.colorSpace=THREE.SRGBColorSpace;
+      texture.needsUpdate=true;textures.add(texture);material.map=texture;material.needsUpdate=true;onChange();
+    };
+    image.src=url('assets/oak-lab/'+file);
+  }
+  framedPrint('Lakshya’s bicycle garden','garden-route-field.webp',-4.30,3.18,3.43,1.96);
+  framedPrint('Pikachu, CP 506','pg027-field.webp',-7.62,3.23,.79,1.02);
+  framedPrint('Bulbasaur, CP 860','pg003-field.webp',-6.60,3.23,.79,1.02);
+  // Recess the plinth beneath the lacquered cabinet and give the worktop
+  // a continuous eased edge around its corners and front lip.
+  box(5.37,.14,1.35,-2.5,.07,-.95,p.ink);
+  box(5.65,1.06,1.55,-2.5,.67,-.95,p.deepMint);
+  for(const x of [-4.32,-2.50,-.68]){
+    box(1.72,.84,.055,x,.68,-.154,p.mint);
+    box(.34,.045,.08,x,.99,-.10,p.wood);
+  }
+  const outline=new THREE.Shape(),w=2.94,d=.89,r=.15;
+  outline.moveTo(-w+r,-d);outline.lineTo(w-r,-d);outline.quadraticCurveTo(w,-d,w,-d+r);
+  outline.lineTo(w,d-r);outline.quadraticCurveTo(w,d,w-r,d);outline.lineTo(-w+r,d);
+  outline.quadraticCurveTo(-w,d,-w,d-r);outline.lineTo(-w,-d+r);outline.quadraticCurveTo(-w,-d,-w+r,-d);
+  const slab=new THREE.ExtrudeGeometry(outline,{depth:.10,bevelEnabled:true,bevelThickness:.025,bevelSize:.025,bevelSegments:3,curveSegments:6});
+  slab.rotateX(-Math.PI/2);geometry.add(slab);
+  const enamel=new THREE.MeshStandardMaterial({color:'#eef5f4',roughness:.30});materials.set('polished-enamel',enamel);
+  const counter=new THREE.Mesh(slab,enamel);counter.name='Pearl enamel display counter';counter.position.set(-2.5,1.24,-.95);scene.add(counter);
   for(const [index,x]of [-4.2,-2.5,-.8].entries()){
     cylinder(.43,.11,x,1.42,-.7,p.paper);
     createDisplayBall(['classic','ultra','master'][index],x,index);
@@ -195,10 +225,10 @@ export function createOakLabScene({onChange=()=>{},onAssetState=()=>{}}={}){
   // Beyond the open side: a small, quiet green courtyard.
   box(7,.12,13,12,-.12,-2,p.green);
   for(const [x,z]of [[10,-5],[12,-1],[11,3]]){cylinder(.16,2.3,x,1.05,z,p.wood);part(new THREE.IcosahedronGeometry(1.3,1),p.leaf,x,3.0,z);}
-  // The lead visually approved this static relaxed-pose derivative of the supplied model.
+  // Oak's performance is layered over his relaxed stance.
   const oakAnchor=new THREE.Group();oakAnchor.name='Professor Oak acknowledgement anchor';oakAnchor.position.set(-2.5,.04,-2.35);scene.add(oakAnchor);
   // A small placard signals the host while preserving a useful HTML fallback.
-  box(1.0,.07,.45,-2.5,1.40,-1.1,p.mint);
+  box(1.0,.07,.45,-2.5,1.40,-1.52,p.mint);
   pickZones.push({id:'welcome',box:new THREE.Box3(new THREE.Vector3(-4.2,0,-3.1),new THREE.Vector3(-.6,3.7,-.5))},{id:'collection',box:new THREE.Box3(new THREE.Vector3(-.8,1.7,-5.1),new THREE.Vector3(7.9,4.1,-3.9))},{id:'making',box:new THREE.Box3(new THREE.Vector3(2.3,0,-1.3),new THREE.Vector3(7.1,2.9,2.6))});
   // Every static surface uses the same roughness. Bake its palette into vertices
   // so the richer miniature costs geometry, not a draw call for every colour.
@@ -218,9 +248,10 @@ export function createOakLabScene({onChange=()=>{},onAssetState=()=>{}}={}){
     if(currentZone!=='welcome'){reaction=null;oakAnchor.rotation.y=0;}
     const safeAspect=Number.isFinite(aspect)&&aspect>0?aspect:1,making=currentZone==='making';
     camera.aspect=safeAspect;camera.fov=compact?51:making?38:45;camera.updateProjectionMatrix();
-    const target=making?new THREE.Vector3(4.4,1.68,.6):new THREE.Vector3(-2.5,1.75,-1.65);
+    const conversation=currentZone==='welcome'||(compact&&!making);
+    const target=conversation?new THREE.Vector3(-2.5,compact?2.62:2.25,-2.35):making?new THREE.Vector3(4.4,1.68,.6):new THREE.Vector3(-2.5,1.75,-1.65);
     const direction=making?new THREE.Vector3(2.3,4.1,4.3).normalize():new THREE.Vector3(currentZone==='collection'?.18:.30,.20,1).normalize();
-    const span=compact?(making?5.4:7.7):Math.max(making?4.6:6.6,(making?7.2:11.4)/safeAspect);
+    const span=conversation?(compact?Math.max(1.67,2.6/safeAspect):Math.max(4.2,5.7/safeAspect)):compact?(making?5.4:7.7):Math.max(making?4.6:6.6,(making?7.2:11.4)/safeAspect);
     const distance=span/(2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2)));
     // Keep the physical subject on the left, leaving the existing semantic
     // dialogue on the right. Narrow desktop windows pull back instead of crop.
@@ -235,7 +266,7 @@ export function createOakLabScene({onChange=()=>{},onAssetState=()=>{}}={}){
     if(disposed||currentZone!=='welcome')return false;
     reaction=reduced?null:{elapsed:0};oakAnchor.rotation.y=0;onChange();return !reduced;
   }
-  function update(dt=0,reduced=false,{active=true}={}){
+  function update(dt=0,reduced=false,{active=true,playback=null}={}){
     if(disposed)return false;
     const step=Number.isFinite(dt)?THREE.MathUtils.clamp(dt,0,.1):0;let changed=false;
     if(moving){
@@ -260,22 +291,22 @@ export function createOakLabScene({onChange=()=>{},onAssetState=()=>{}}={}){
       }
       if(reaction){
         reaction.elapsed+=step;const progress=Math.min(1,reaction.elapsed/.6);
-        // The supplied figure has no usable arm rig. A small, grounded whole-
-        // figure turn acknowledges a tap without distorting its authored pose.
+        // Acknowledge a silent tap while narration is muted.
         oakAnchor.rotation.y=Math.sin(progress*Math.PI)*.065;
         if(progress===1){reaction=null;oakAnchor.rotation.y=0;}changed=true;
       }
     }
+    if(perform?.(active&&!reduced ? playback : null,camera.position))changed=true;
     return changed;
   }
   function loadOak(){
     if(disposed||assetState==='loading'||assetState==='ready')return;const token=++serial;assetState='loading';onAssetState(assetState);
     assetController=new AbortController();assetTimer=setTimeout(()=>assetController?.abort(),20000);
-    fetch(url('assets/oak-lab/professor-oak-relaxed.glb'),{signal:assetController.signal}).then(response=>{if(!response.ok)throw new Error('Oak model request failed.');return response.arrayBuffer();}).then(bytes=>{if(disposed||token!==serial)throw new DOMException('Oak loading cancelled','AbortError');return new GLTFLoader().parseAsync(bytes,url('assets/oak-lab/'));}).then(gltf=>{
+    fetch(url('assets/oak-lab/professor-oak-relaxed.glb?v=7944bf709f03'),{signal:assetController.signal}).then(response=>{if(!response.ok)throw new Error('Oak model request failed.');return response.arrayBuffer();}).then(bytes=>{if(disposed||token!==serial)throw new DOMException('Oak loading cancelled','AbortError');return new GLTFLoader().parseAsync(bytes,url('assets/oak-lab/'));}).then(gltf=>{
       if(disposed||token!==serial){disposeCharacterAsset(gltf.scene);return;}
       oak=gltf.scene;const bounds=new THREE.Box3().setFromObject(oak,true),size=bounds.getSize(new THREE.Vector3());
       if(!Number.isFinite(size.y)||size.y<=0){disposeCharacterAsset(oak);oak=null;throw new Error('Oak model has invalid bounds.');}
-      const scale=3.2/size.y;oak.scale.multiplyScalar(scale);oak.position.set(-(bounds.min.x+size.x/2)*scale,-bounds.min.y*scale,-(bounds.min.z+size.z/2)*scale);oak.traverse(object=>{if(object.isMesh){object.castShadow=false;object.receiveShadow=false;}});oakAnchor.add(oak);assetState='ready';onAssetState(assetState);onChange();
+      const scale=3.2/size.y;oak.scale.multiplyScalar(scale);oak.position.set(-(bounds.min.x+size.x/2)*scale,-bounds.min.y*scale,-(bounds.min.z+size.z/2)*scale);oak.traverse(object=>{if(object.isMesh){object.castShadow=false;object.receiveShadow=false;}});oakAnchor.add(oak);perform=createOakPerformance(oak,previews[1]);assetState='ready';onAssetState(assetState);onChange();
     }).catch(()=>{if(disposed||token!==serial)return;assetState='error';onAssetState(assetState);onChange();}).finally(()=>{if(token!==serial)return;clearTimeout(assetTimer);assetTimer=null;assetController=null;});
   }
   function setPreviews(entries=[]){
@@ -289,7 +320,7 @@ export function createOakLabScene({onChange=()=>{},onAssetState=()=>{}}={}){
     beginExit(){const position=camera.position.clone().addScaledVector(camera.position.clone().sub(cameraTarget).normalize(),2);moving={from:camera.position.clone(),fromTarget:cameraTarget.clone(),position,target:cameraTarget.clone(),elapsed:0,duration:.45};onChange();},
     headProjection(){camera.updateMatrixWorld(true);return new THREE.Vector3(-2.5,3.2,-2.35).project(camera);},
     pick(ray){let nearest=null;for(const entry of pickZones){const point=ray.intersectBox(entry.box,new THREE.Vector3());if(point){const distance=ray.origin.distanceToSquared(point);if(!nearest||distance<nearest.distance)nearest={id:entry.id,distance};}}return nearest?.id||null;},
-    dispose(){if(disposed)return;disposed=true;serial++;previewSerial++;clearTimeout(assetTimer);assetController?.abort();assetController=null;imageRequests.forEach(image=>{image.onload=image.onerror=null;image.src='';});disposeCharacterAsset(oak);oak=null;selectionRings.dispose();geometry.forEach(value=>value.dispose());materials.forEach(value=>value.dispose());textures.forEach(value=>value.dispose());scene.clear();geometry.clear();materials.clear();textures.clear();},
+    dispose(){if(disposed)return;disposed=true;serial++;previewSerial++;clearTimeout(assetTimer);assetController?.abort();assetController=null;imageRequests.forEach(image=>{image.onload=image.onerror=null;image.src='';});perform=null;disposeCharacterAsset(oak);oak=null;selectionRings.dispose();geometry.forEach(value=>value.dispose());materials.forEach(value=>value.dispose());textures.forEach(value=>value.dispose());scene.clear();geometry.clear();materials.clear();textures.clear();},
     get stats(){let meshes=0,triangles=0;scene.traverse(object=>{if(object.isMesh){meshes++;triangles+=(object.geometry.index?.count||object.geometry.attributes.position.count)/3*(object.isInstancedMesh?object.count:1);}});return {meshes,triangles,textures:textures.size,assetState,zone:currentZone,moving:Boolean(moving),reacting:Boolean(reaction),buildStage};}
   };
 }

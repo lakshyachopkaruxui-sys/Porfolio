@@ -13,13 +13,17 @@ export function createGarbaRoom({renderer,container,isReduced,onClose=()=>{},onP
   const v=(x,y,z)=>new THREE.Vector3(x,y,z),photos=GARBA_PHOTOS;
   const overview={position:v(1.2,4.5,7.2),target:v(0,2,-1.8),fov:60};
   const threshold={position:v(0,2.8,15.6),target:v(0,2.5,7.1),fov:50};
-  const photoPlaces=[{x:-4.1,z:-3.8},{x:4.1,z:-3.8}];
+  const photoPlaces=[{x:-4.1,z:-3.8},{x:4.1,z:-3.8},{x:-6.8,z:-1.5},{x:-1.65,z:-6.4},{x:6.9,z:-1.5},{x:1.75,z:-6.6}];
   const motionQuery=window.matchMedia('(prefers-reduced-motion: reduce)');
   // A supplied callback already resolves the app override and OS preference.
   const reduced=()=>typeof isReduced==='function'?Boolean(isReduced()):motionQuery.matches;
   const resources={geometry:new Set(),material:new Set(),texture:new Set(),lights:new Set(),instanced:new Set()};
   const listeners=[],pendingImages=[],placards=[],picks=[],photoMeshes=new Map(),geometryCache=new Map();
   let viewerSiblings=[];
+  let canopyBulbs=null;
+  const pennants=[];
+  const lanternTints=['#ffbc77','#f89eb6','#8ee4de','#ffdb8c'].map(hex=>new THREE.Color(hex));
+  const lanternColour=new THREE.Color();
   const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2(),palette={};
   let experience=null,host=null,status=null,veil=null,scene=null,camera=null,saved=null,externalFocus=null;
   let opened=false,closing=false,dead=false,dirty=false,generation=0,clock=0,renderedFrames=0;
@@ -41,15 +45,20 @@ export function createGarbaRoom({renderer,container,isReduced,onClose=()=>{},onP
       <section id="garba-context" class="gr-context" aria-labelledby="garba-photo-title" hidden><button id="garba-back-courtyard" class="gr-quiet" type="button">Back to courtyard</button><p class="gr-eyebrow">A photograph from Garba</p><h2 id="garba-photo-title"></h2><p id="garba-photo-description"></p><button id="garba-view-photo" class="gr-primary" type="button">View photograph</button></section>
       <section id="garba-viewer" class="gr-viewer" aria-labelledby="garba-viewer-title" hidden><header><div><p class="gr-eyebrow">Lakshya’s photograph</p><h2 id="garba-viewer-title"></h2></div><button id="garba-viewer-back" class="gr-quiet" type="button">Back to courtyard</button></header><div class="gr-viewer-layout"><figure><img id="garba-full-photo" alt=""><figcaption id="garba-viewer-caption"></figcaption></figure><aside><p class="gr-eyebrow">Music, movement &amp; people</p><p id="garba-viewer-description"></p><nav aria-label="Garba photographs"><button type="button" id="garba-photo-prev" class="gr-quiet">Previous photograph</button><span id="garba-photo-count" role="status" aria-live="polite"></span><button type="button" id="garba-photo-next" class="gr-quiet">Next photograph</button></nav><p id="garba-photo-error" role="status" hidden></p></aside></div></section>
       <div id="garba-object-hint" class="gr-object-hint" hidden></div><p id="garba-status" class="gr-sr" aria-live="polite">Entering the Garba courtyard.</p>
-      <footer class="gr-footer"><span id="garba-view-label">Through the entrance</span><span id="garba-load-label">Two real photographs. A little room to move.</span></footer><div id="garba-veil" class="gr-veil" aria-hidden="true"></div>`;
+      <footer class="gr-footer"><span id="garba-view-label">Through the entrance</span><span id="garba-load-label">Garba photographs</span></footer><div id="garba-veil" class="gr-veil" aria-hidden="true"></div>`;
     experience=section;container.appendChild(section);host=$('#garba-scene');status=$('#garba-status');veil=$('#garba-veil');
+    const header=experience.querySelector('.gr-header');
+    const title=header.querySelector('.gr-heading');
+    title.textContent='Garba courtyard';title.className='hobby-room-name';
+    const nav=document.createElement('nav');nav.setAttribute('aria-label','Room navigation');
+    nav.append($('#garba-back-hobbies'),$('#garba-portfolio'));header.replaceChildren(title,nav);
     experience.setAttribute('aria-description','A and D or Left and Right browse photographs. Home and End choose the first or last photograph. Escape returns one level.');
     $('#garba-load-label').textContent='A/D or Left/Right to browse · Esc to return';
     const viewerHint=document.createElement('p');viewerHint.className='gr-eyebrow';viewerHint.textContent='A/D or Left/Right to browse · Esc to return';$('#garba-viewer').querySelector('header').querySelector('div').appendChild(viewerHint);
-    for(const [index,photo]of photos.entries()){
+    for(const photo of photos){
       const button=document.createElement('button');button.type='button';button.className='gr-photo-choice';button.dataset.grPhoto=photo.id;button.setAttribute('aria-pressed',String(lastSelected===photo.id));
-      const number=document.createElement('span');number.className='gr-number';number.textContent=String(index+1).padStart(2,'0');
-      const text=document.createElement('span'),title=document.createElement('strong'),type=document.createElement('small');title.textContent=photo.caption;type.textContent='Open photograph';text.append(title,type);button.append(number,text);$('#garba-photo-choices').appendChild(button);
+      const print=document.createElement('img');print.alt='';print.className='gr-print';print.src=assetUrl(photo.src);print.decoding='async';
+      const text=document.createElement('span'),title=document.createElement('strong'),type=document.createElement('small');title.textContent=photo.caption;type.textContent='Open photograph';text.append(title,type);button.append(print,text);$('#garba-photo-choices').appendChild(button);
     }
   }
     function snapshotRenderer(){
@@ -94,17 +103,17 @@ export function createGarbaRoom({renderer,container,isReduced,onClose=()=>{},onP
   }
   function buildScene(){
     scene=new THREE.Scene();
-    scene.background=new THREE.Color('#56696b');
+    scene.background=new THREE.Color('#797caa');
     // Three applies fog after tone mapping; the unlit sky bypasses it too.
     // The low horizon stays exactly fog-coloured; only the upper sky darkens.
-    const skyGeometry=ownGeometry(new THREE.SphereGeometry(55,32,16)),skyPositions=skyGeometry.attributes.position,skyColours=new Float32Array(skyPositions.count*3),horizonColour=new THREE.Color('#56696b'),upperColour=new THREE.Color('#263c47'),skyColour=new THREE.Color();
+    const skyGeometry=ownGeometry(new THREE.SphereGeometry(55,32,16)),skyPositions=skyGeometry.attributes.position,skyColours=new Float32Array(skyPositions.count*3),horizonColour=new THREE.Color('#797caa'),upperColour=new THREE.Color('#303766'),skyColour=new THREE.Color();
     for(let i=0;i<skyPositions.count;i++){const blend=THREE.MathUtils.clamp((skyPositions.getY(i)/55-.12)/.65,0,1);skyColour.copy(horizonColour).lerp(upperColour,blend);skyColours[i*3]=skyColour.r;skyColours[i*3+1]=skyColour.g;skyColours[i*3+2]=skyColour.b;}
     skyGeometry.setAttribute('color',new THREE.BufferAttribute(skyColours,3));const skyMaterial=new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.BackSide,fog:false,toneMapped:false,depthWrite:false,depthTest:false});resources.material.add(skyMaterial);const sky=new THREE.Mesh(skyGeometry,skyMaterial);sky.renderOrder=-1000;scene.add(sky);
-    scene.fog=new THREE.Fog('#56696b',20,46);camera=new THREE.PerspectiveCamera(50,width/height,.1,80);camera.position.copy(threshold.position);camera.lookAt(target);
-    Object.assign(palette,{plaster:material('#dfd5bc'),cap:material('#e8dabb'),earth:material('#b68d6b'),wood:material('#926843'),woodLight:material('#c0a075'),darkWood:material('#5f4936'),forest:material('#52654d'),clay:material('#ae6c4a'),darkClay:material('#754d39'),ink:material('#39493d'),brass:material('#aa8b4d',{metalness:.35,roughness:.5})});
-    scene.add(new THREE.HemisphereLight('#eee1c7','#59654e',1.65));
-    const key=new THREE.DirectionalLight('#ffdfb6',2.0);key.position.set(-6,12,8);key.castShadow=true;key.shadow.mapSize.set(1024,1024);Object.assign(key.shadow.camera,{left:-13,right:13,top:13,bottom:-13,near:.5,far:35});key.shadow.normalBias=.035;key.shadow.bias=-.00025;scene.add(key);resources.lights.add(key);
-    const bounce=new THREE.PointLight('#ffe1ab',12,20,2);bounce.position.set(0,5,-2);scene.add(bounce);
+    scene.fog=new THREE.Fog('#797caa',20,46);camera=new THREE.PerspectiveCamera(50,width/height,.1,80);camera.position.copy(threshold.position);camera.lookAt(target);
+    Object.assign(palette,{plaster:material('#7f9fc2'),cap:material('#d4d7e6'),earth:material('#d8a185'),wood:material('#926843'),woodLight:material('#c0a075'),darkWood:material('#5f4936'),forest:material('#23797d'),clay:material('#c95e47'),darkClay:material('#754d39'),ink:material('#39493d'),brass:material('#aa8b4d',{metalness:.35,roughness:.5})});
+    scene.add(new THREE.HemisphereLight('#eaefff','#797f9f',1.65));
+    const key=new THREE.DirectionalLight('#fff0e6',2.0);key.position.set(-6,12,8);key.castShadow=true;key.shadow.mapSize.set(1024,1024);Object.assign(key.shadow.camera,{left:-13,right:13,top:13,bottom:-13,near:.5,far:35});key.shadow.normalBias=.035;key.shadow.bias=-.00025;scene.add(key);resources.lights.add(key);
+    const bounce=new THREE.PointLight('#ffd7ab',12,20,2);bounce.position.set(0,5,-2);scene.add(bounce);
     // Extend beyond the fog range so a finite green plane never cuts the sky.
     box(180,.2,180,palette.forest,scene,0,-.38,0);
     cylinder(8.85,9,.28,palette.darkClay,scene,0,-.12,0,80);cylinder(8.67,8.67,.065,palette.earth,scene,0,.055,0,80);
@@ -122,9 +131,18 @@ export function createGarbaRoom({renderer,container,isReduced,onClose=()=>{},onP
       for(let i=0;i<16;i++){const t=(i+.5)/16;bulbPositions.push(v(-7+t*14,6.2-Math.sin(t*Math.PI)*.65-.045,z));}
     }
     const wires=new THREE.LineSegments(ownGeometry(new THREE.BufferGeometry().setFromPoints(wirePoints)),new THREE.LineBasicMaterial({color:'#8c8970'}));resources.material.add(wires.material);scene.add(wires);
-    const bulbMat=new THREE.MeshBasicMaterial({color:'#ffe4aa',toneMapped:false});resources.material.add(bulbMat);const bulbs=new THREE.InstancedMesh(ownGeometry(new THREE.SphereGeometry(.055,8,6)),bulbMat,bulbPositions.length);const dummy=new THREE.Object3D();bulbPositions.forEach((p,i)=>{dummy.position.copy(p);dummy.updateMatrix();bulbs.setMatrixAt(i,dummy.matrix);});scene.add(bulbs);resources.instanced.add(bulbs);
+    const bulbMat=new THREE.MeshBasicMaterial({color:'#ffe4aa',toneMapped:false});resources.material.add(bulbMat);const bulbs=new THREE.InstancedMesh(ownGeometry(new THREE.SphereGeometry(.055,8,6)),bulbMat,bulbPositions.length);const dummy=new THREE.Object3D();bulbPositions.forEach((p,i)=>{dummy.position.copy(p);dummy.updateMatrix();bulbs.setMatrixAt(i,dummy.matrix);});scene.add(bulbs);resources.instanced.add(bulbs);canopyBulbs=bulbs;
+    const pennantShape=new THREE.Shape();
+    pennantShape.moveTo(-.27,0);pennantShape.lineTo(.27,0);pennantShape.lineTo(.06,-.68);pennantShape.closePath();
+    const cloth=ownGeometry(new THREE.ShapeGeometry(pennantShape));
+    const fabrics=['#f05a74','#299f9d','#eab455','#826bb4'].map(tint=>material(tint,{side:THREE.DoubleSide}));
+    for(const z of [-5.4,.8])for(let i=0;i<12;i++){
+      const t=(i+.5)/12,flag=new THREE.Mesh(cloth,fabrics[i%4]);
+      flag.position.set(-7+14*t,6.2-Math.sin(t*Math.PI)*.65,z);
+      flag.rotation.z=.08;scene.add(flag);pennants.push(flag);
+    }
     for(const x of [-7,7])for(const z of [-5.4,3.9])box(.16,6.25,.16,palette.wood,scene,x,3.1,z,.025);
-    // Two large full-frame photographs, each with its own modest timber place.
+    // Full-frame photographs, each with its own modest timber place.
     photos.forEach((photo,index)=>buildPhotoPlace(photo,index));
     buildCircle();
     // One low bench and planted edge establish a courtyard without a crowd set.
@@ -133,13 +151,13 @@ export function createGarbaRoom({renderer,container,isReduced,onClose=()=>{},onP
     renderer.shadowMap.needsUpdate=true;
   }
   function buildPhotoPlace(photo,index){
-    const {x,z}=photoPlaces[index],imageHeight=3.3,imageWidth=imageHeight*photo.width/photo.height,y=2.8;
+    const {x,z}=photoPlaces[index],imageHeight=Math.min(3.3,3.6*photo.height/photo.width),imageWidth=imageHeight*photo.width/photo.height,y=2.8;
     [-1,1].forEach(side=>box(.14,4.6,.18,palette.wood,scene,x+side*(imageWidth/2+.22),2.3,z-.12,.025));box(imageWidth+.75,.16,.3,palette.woodLight,scene,x,4.61,z-.12,.035);
     box(imageWidth+.26,imageHeight+.26,.13,palette.darkWood,scene,x,y,z,.035);box(imageWidth+.1,imageHeight+.1,.025,palette.cap,scene,x,y,z+.08,.02);
     const canvas=document.createElement('canvas');canvas.width=Math.round(1024*photo.width/photo.height);canvas.height=1024;const context=canvas.getContext('2d');context.fillStyle='#d7c9ac';context.fillRect(0,0,canvas.width,canvas.height);
     const texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());resources.texture.add(texture);
     const mat=new THREE.MeshBasicMaterial({map:texture,toneMapped:false});resources.material.add(mat);const mesh=new THREE.Mesh(ownGeometry(new THREE.PlaneGeometry(imageWidth,imageHeight)),mat);mesh.position.set(x,y,z+.101);mesh.userData.photoId=photo.id;scene.add(mesh);picks.push(mesh);photoMeshes.set(photo.id,mesh);pendingImages.push({photo,canvas,context,texture});
-    label(`${String(index+1).padStart(2,'0')}  ${photo.caption.toUpperCase()}`,imageWidth+.2,.29,scene,x,.76,z+.02,{background:'#b68d6b',color:'#3e4938',size:24});
+    label(`${String(index+1).padStart(2,'0')}  ${photo.caption.toUpperCase()}`,imageWidth+.2,.29,scene,x,.76,z+.02,{background:'#d8a185',color:'#272337',size:24});
   }
   function buildCircle(){
     for(const radius of [3.55,4.25]){const ring=new THREE.Mesh(ownGeometry(new THREE.TorusGeometry(radius,.022,5,80)),palette.cap);ring.rotation.x=-Math.PI/2;ring.position.y=.102;scene.add(ring);}
@@ -156,6 +174,15 @@ export function createGarbaRoom({renderer,container,isReduced,onClose=()=>{},onP
   function applyCircle(progress){
     circleProgress=THREE.MathUtils.clamp(progress,0,1);const count=Math.floor(circleProgress*24);
     if(count!==lastCircleStep){const lit=new THREE.Color('#ffd084'),dim=new THREE.Color('#8b7957');for(let i=0;i<24;i++)ringLights.setColorAt(i,i<count?lit:dim);ringLights.instanceColor.needsUpdate=true;lastCircleStep=count;}
+    // A single warm wave crosses the overhead strings and settles on their base colours.
+    for(let i=0;i<canopyBulbs.count;i++){
+      const strand=Math.floor(i/16), column=i%16;
+      const envelope=Math.sin(Math.PI*circleProgress)**2;
+      const crest=(1+Math.cos(2*Math.PI*(circleProgress-column/16-strand*.12)))/2;
+      lanternColour.copy(lanternTints[(column+strand)%4]).multiplyScalar(.75+.25*envelope*crest);
+      canopyBulbs.setColorAt(i,lanternColour);
+    }
+    canopyBulbs.instanceColor.needsUpdate=true;
     lampLight.intensity=1.8+circleProgress*7;lampFlame.material.color.set(circleProgress?'#ffd99a':'#e7b168');
   }
   async function loadPhotos(){
@@ -165,7 +192,7 @@ export function createGarbaRoom({renderer,container,isReduced,onClose=()=>{},onP
       image.onload=()=>{if(!opened||generation!==token){resolve(false);return;}const {canvas,context,texture}=entry;const scale=Math.min(canvas.width/image.width,canvas.height/image.height),w=image.width*scale,h=image.height*scale;context.fillStyle='#d7c9ac';context.fillRect(0,0,canvas.width,canvas.height);context.drawImage(image,(canvas.width-w)/2,(canvas.height-h)/2,w,h);texture.needsUpdate=true;entry.cancel=null;requestRender();resolve(true);};
       image.onerror=()=>{entry.cancel=null;resolve(false);};image.src=assetUrl(entry.photo.src);
     })));
-    if(!opened||token!==generation)return;assetsReady=true;assetsLoading=false;experience.dataset.ready='true';$('#garba-load-label').textContent=outcomes.every(Boolean)?'Two photographs from Lakshya’s Garba memories.':'A photograph could not load. Reopen the courtyard to retry.';status.textContent=outcomes.every(Boolean)?'Both Garba photographs are ready.':'A photograph could not load. The courtyard controls remain available.';requestRender();
+    if(!opened||token!==generation)return;assetsReady=true;assetsLoading=false;experience.dataset.ready='true';$('#garba-load-label').textContent=outcomes.every(Boolean)?'Photographs from Lakshya’s Garba evenings.':'A photograph could not load. Reopen the courtyard to retry.';status.textContent=outcomes.every(Boolean)?'Both Garba photographs are ready.':'A photograph could not load. The courtyard controls remain available.';requestRender();
   }
   function bindUI(){
     decorateModeSelectors(experience,{mode:'play',pageURL:location.href,navigationHandled:true});
@@ -223,7 +250,7 @@ export function createGarbaRoom({renderer,container,isReduced,onClose=()=>{},onP
     moveTo(overview,1000,()=>{if(!opened||closing)return;$('#garba-view-label').textContent='In the courtyard';status.textContent='Back in the Garba courtyard.';const button=previous?experience.querySelector(`[data-gr-photo="${previous}"]`):$('#garba-circle');button?.focus({preventScroll:true});});
   }
   function openViewer(){
-    if(!opened||closing||transition||!selected||viewerOpen)return;viewerOpen=true;const photo=photos.find(item=>item.id===selected),image=$('#garba-full-photo');image.alt=photo.alt;image.width=photo.width;image.height=photo.height;image.src=assetUrl(photo.src);$('#garba-viewer-title').textContent=photo.caption;$('#garba-viewer-caption').textContent=photo.caption;syncViewerControls(photo);$('#garba-viewer').hidden=false;
+    if(!opened||closing||transition||!selected||viewerOpen)return;viewerOpen=true;const photo=photos.find(item=>item.id===selected),image=$('#garba-full-photo');image.alt=photo.alt;image.width=photo.width;image.height=photo.height;image.src=assetUrl(photo.src);$('#garba-viewer-title').textContent=photo.caption;$('#garba-viewer-caption').textContent=photo.caption;$('#garba-viewer-description').textContent=photo.description;syncViewerControls(photo);$('#garba-viewer').hidden=false;
     viewerSiblings=[...experience.children].filter(element=>element.id!=='garba-viewer').map(element=>[element,element.inert]);viewerSiblings.forEach(([element])=>{element.inert=true;});
     $('#garba-viewer-back').focus({preventScroll:true});status.textContent=`Full photograph: ${photo.caption}.`;
   }
@@ -264,13 +291,21 @@ export function createGarbaRoom({renderer,container,isReduced,onClose=()=>{},onP
   }
   function finishClose(notify){
     if(!opened)return;generation++;releaseViewer();transition=null;opened=false;closing=false;dirty=false;circleActive=false;listeners.splice(0).forEach(remove=>remove());pendingImages.forEach(entry=>{entry.cancel?.();if(entry.image){entry.image.onload=null;entry.image.onerror=null;}});
-    resources.instanced.forEach(value=>value.dispose());resources.lights.forEach(light=>light.shadow?.dispose());resources.geometry.forEach(value=>value.dispose());resources.material.forEach(value=>value.dispose());resources.texture.forEach(value=>value.dispose());Object.values(resources).forEach(set=>set.clear());pendingImages.length=0;picks.length=0;placards.length=0;photoMeshes.clear();geometryCache.clear();Object.keys(palette).forEach(key=>delete palette[key]);scene?.clear();restoreRenderer();experience?.remove();experience=null;host=null;status=null;veil=null;scene=null;camera=null;ringLights=null;lampFlame=null;lampLight=null;assetsLoading=false;assetsReady=false;const focus=externalFocus;externalFocus=null;
+    resources.instanced.forEach(value=>value.dispose());resources.lights.forEach(light=>light.shadow?.dispose());resources.geometry.forEach(value=>value.dispose());resources.material.forEach(value=>value.dispose());resources.texture.forEach(value=>value.dispose());Object.values(resources).forEach(set=>set.clear());pendingImages.length=0;picks.length=0;placards.length=0;photoMeshes.clear();geometryCache.clear();Object.keys(palette).forEach(key=>delete palette[key]);scene?.clear();restoreRenderer();experience?.remove();experience=null;host=null;status=null;veil=null;scene=null;camera=null;canopyBulbs=null;pennants.length=0;ringLights=null;lampFlame=null;lampLight=null;assetsLoading=false;assetsReady=false;const focus=externalFocus;externalFocus=null;
     if(notify){try{onClose();}finally{if(focus?.isConnected&&!focus.disabled)focus.focus({preventScroll:true});}}
   }
   function update(dtSeconds=0){
     if(!opened||document.hidden||!scene)return false;const delta=Math.min(.1,Math.max(0,Number(dtSeconds)||0));clock+=delta*1000;
     if(reduced()&&transition)transition.started=clock-transition.duration;
     if(!closing&&openingElapsed<.42){openingElapsed+=delta;veil.style.opacity=reduced()?'0':String(Math.max(0,1-openingElapsed/.42));dirty=true;}
+    if(!viewerOpen&&!closing){
+      const time=circleActive?circleProgress*3:clock/1000;
+      const breeze=reduced()?0:Math.sin(Math.PI*Math.min(1,time/5))**2;
+      pennants.forEach((flag,i)=>{
+        const lean=.08+.45*breeze*Math.sin(time*4-i*.62);
+        if(flag.rotation.z!==lean){flag.rotation.z=lean;dirty=true;}
+      });
+    }
     if(viewerOpen)return false;if(!dirty&&!transition)return false;
     if(transition){const progress=Math.min(1,(clock-transition.started)/transition.duration),ease=progress*progress*(3-2*progress);if(transition.path)camera.position.copy(transition.path.getPoint(ease));else camera.position.lerpVectors(transition.startPosition,transition.pose.position,ease);target.lerpVectors(transition.startTarget,transition.pose.target,ease);camera.fov=THREE.MathUtils.lerp(transition.startFov,transition.pose.fov,ease);camera.updateProjectionMatrix();camera.lookAt(target);if(transition.circle)applyCircle(progress);if(closing)veil.style.opacity=String(Math.max(closingVeilStart,(progress-.78)/.22));if(progress===1){const done=transition.onComplete;transition=null;experience.classList.remove('gr-moving');done?.();if(queuedPhoto&&!closing){const pending=queuedPhoto;queuedPhoto=null;selectPhoto(pending);}}}
     if(!opened||!scene)return false;experience.dataset.phase=closing?'returning':transition?'moving':'viewing';renderer.render(scene,camera);renderedFrames++;dirty=false;return true;

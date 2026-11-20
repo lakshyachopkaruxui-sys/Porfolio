@@ -1,5 +1,5 @@
 /* Scoped Listening Room styles; fonts remain application-owned. */
-#personal-experience #listening-experience{--cream:#f5f0e5;--ink:#203b32;--muted:#625e51;--line:#ccc4b0;--wood:#b78350;--green:#285441;--font-body:"DM Sans",sans-serif;--font-heading:"Mochiy Pop P One",sans-serif;color-scheme:light;font-family:var(--font-body);color:var(--ink);background:#d7dfcf}
+#personal-experience #listening-experience{--cream:#eff8f6;--ink:#193b42;--muted:#405e62;--line:#ccc4b0;--wood:#b78350;--green:#285441;--font-body:"DM Sans",sans-serif;--font-heading:"Mochiy Pop P One",sans-serif;color-scheme:light;font-family:var(--font-body);color:var(--ink);background:#ccebe7}
 #personal-experience #listening-experience *{box-sizing:border-box}
 #personal-experience #listening-experience button,#personal-experience #listening-experience a{-webkit-tap-highlight-color:transparent}
 #personal-experience #listening-experience button{font:inherit;cursor:pointer}
@@ -143,14 +143,14 @@
 @media(max-width:700px){#personal-experience #listening-experience .collection-items{grid-template-columns:1fr}}
 
 
-#personal-experience #listening-experience{position:absolute;inset:0;z-index:30;isolation:isolate;overflow:hidden;background:#d7dfcf}
+#personal-experience #listening-experience{position:absolute;inset:0;z-index:30;isolation:isolate;overflow:hidden;background:#ccebe7}
 #personal-experience #listening-experience .garden-link{border:0;color:var(--ink);font:inherit;cursor:pointer}
 #personal-experience #listening-experience .masthead .quiet-button{background:#f8f4e9ed}
 
-#personal-experience #listening-experience .listening-veil{position:absolute;inset:0;z-index:20;pointer-events:none;background:#f5f0e5;opacity:1}
+#personal-experience #listening-experience .listening-veil{position:absolute;inset:0;z-index:20;pointer-events:none;background:#eff8f6;opacity:1}
 #personal-experience #listening-experience #back-room{position:static;inset:auto;transform:none;z-index:auto;display:inline-flex;align-items:center;justify-content:center;width:auto;height:auto;min-height:44px}
 /* Readable media context and full photographs; no additional 3D assets. */
-#personal-experience #listening-experience .room-heading{background:#f5f0e5f2;padding:14px 22px;border-radius:10px;}
+#personal-experience #listening-experience .room-heading{background:#eff8f6f2;padding:14px 22px;border-radius:10px;}
 #personal-experience #listening-experience .room-instruction{font-size:14px;}
 #personal-experience #listening-experience .collection{background:#f7f3e8fa;backdrop-filter:none;}
 #personal-experience #listening-experience .collection strong{font-size:15px;line-height:1.5;}

@@ -25,3 +25,6 @@ body.hybrid-world #woody-guide:has(#welcome-controls-choice:not([hidden])){max-h
 
 /* Keep the physical board action below its spoken invitation on narrow screens. */
 @media(max-width:767px){.woody-tour[data-clip="feedback-nearby"]{bottom:176px;max-height:calc(100dvh - 280px);overflow:auto}}
+
+.woody-spoken-word{color:#fff;background-color:#173d32;border-radius:.15em}
+@media(forced-colors:active){.woody-spoken-word{color:HighlightText;background:Highlight;forced-color-adjust:none;text-decoration:underline}}

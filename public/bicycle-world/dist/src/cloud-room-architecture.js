@@ -7,7 +7,7 @@ export function createCloudRoomScene(){
   const scene=new THREE.Scene();scene.background=new THREE.Color('#b9d4df');scene.fog=new THREE.Fog('#c8dadd',70,170);
   const camera=new THREE.PerspectiveCamera(43,1,.1,220),geometries=new Set(),materials=new Set(),pickRoots=[],pickEnvelopes=[];
   let disposed=false;
-  const p={wood:'#946846',edge:'#c8ab7d',cream:'#f1eddd',stone:'#cfcab7',green:'#355b4b',dark:'#29493f',clay:'#bd8d68',leaf:'#aebea2',sky:'#bdd5df',cloud:'#fff9e9',shade:'#e8eddf',blue:'#789eaa'};
+  const p={wood:'#946846',edge:'#edbd78',cream:'#f1eddd',stone:'#bcaa99',green:'#176e73',dark:'#183945',clay:'#bd8d68',leaf:'#aebea2',sky:'#bdd5df',cloud:'#fff9e9',shade:'#e8eddf',blue:'#307696'};
   const matte=new THREE.MeshStandardMaterial({color:'#ffffff',vertexColors:true,roughness:.89});materials.add(matte);
   const colors=new Map(),color=tint=>{if(!colors.has(tint))colors.set(tint,new THREE.Color(tint));return colors.get(tint);};
   function part(root,geometry,tint,at=[0,0,0]){
@@ -27,10 +27,46 @@ export function createCloudRoomScene(){
   function envelope(root,min,max){pickEnvelopes.push({root,bounds:new THREE.Box3(new THREE.Vector3(...min),new THREE.Vector3(...max))});}
   const architecture=new THREE.Group();architecture.name='Open cloud photography deck';scene.add(architecture);
   // Spare deck and a low edge establish human scale; nothing encloses the sky.
-  box(architecture,[42,.30,50],[0,-.22,15],p.stone);box(architecture,[33,.12,15],[0,-.02,-.6],p.cream);
+  box(architecture,[42,.30,50],[0,-.22,15],p.stone);box(architecture,[33.14,.12,15],[0,-.02,-.6],p.cream);
   for(let x=-16;x<=16;x+=1.5)box(architecture,[.025,.012,14.8],[x,.047,-.6],p.stone);
-  box(architecture,[33,.65,.42],[0,.35,-8.1],p.green);box(architecture,[33,.10,.60],[0,.72,-8.1],p.edge);
-  for(const side of [-1,1]){box(architecture,[.45,.65,14],[side*16.3,.35,-1.3],p.green);box(architecture,[.62,.10,14],[side*16.3,.72,-1.3],p.edge);}
+  box(architecture,[33,.65,.42],[0,.35,-8.1],p.green);box(architecture,[33.08,.10,.60],[0,.72,-8.1],p.edge);
+  for(const side of [-1,1]){box(architecture,[.45,.65,14],[side*16.3,.35,-1.3],p.green);box(architecture,[.62,.10,14.08],[side*16.3,.72,-1.3],p.edge);}
+  // Distant ridgelines give the open deck a horizon below the cloud banks.
+  function ridge(points,z,tint){
+    const contour=new THREE.Shape();
+    contour.moveTo(-68,-9);
+    for(const [x,y] of points)contour.lineTo(x,y);
+    contour.lineTo(68,-9);contour.closePath();
+    part(architecture,new THREE.ShapeGeometry(contour),tint,[0,0,z]);
+  }
+  ridge([[-68,3],[-49,5],[-32,3],[-20,7],[-15,6],[-5,2],[8,4],[21,6],[29,4],[44,7],[68,4]],-44,'#83a8b2');
+  ridge([[-68,0],[-48,3],[-30,1],[-18,3],[-4,.8],[12,2],[26,4],[41,1],[68,3]],-31,'#689b91');
+
+  // Two freestanding print racks flank the instrument like a small outdoor exhibition.
+  const prints=new THREE.Group();scene.add(prints);
+  let printsArrived=false;
+  const printTexture=new THREE.TextureLoader().load('./assets/personal/viewfinder-prints.webp',()=>{printsArrived=true;});
+  printTexture.colorSpace=THREE.SRGBColorSpace;
+  const printMaterial=new THREE.MeshBasicMaterial({map:printTexture,toneMapped:false});
+  materials.add(printMaterial);
+  for(const [index,x] of [-10.4,-8.15,8.15,10.4].entries()){
+    const mount=new THREE.Group();
+    mount.position.set(x,2.95,-6.95);
+    mount.rotation.y=x<0?.12:-.12;
+    architecture.add(mount);
+    box(mount,[.12,2.9,.12],[0,-1.48,-.1],p.wood);
+    box(mount,[2.12,1.88,.12],[0,0,0],p.cream);
+    box(mount,[.50,.09,.09],[0,.93,.075],index<2?'#63adc3':'#cd6853');
+    const surface=new THREE.PlaneGeometry(1.86,1.36);
+    const uv=surface.attributes.uv;
+    for(let i=0;i<uv.count;i++)uv.setX(i,(index+(2+uv.getX(i)*252)/256)/4);
+    geometries.add(surface);
+    const print=new THREE.Mesh(surface,printMaterial);
+    mount.updateWorldMatrix(true,false);
+    print.position.set(0,.08,.066).applyMatrix4(mount.matrixWorld);
+    print.rotation.y=mount.rotation.y;
+    prints.add(print);
+  }
   // One generous camera silhouette leads into the actual photographs. Its top
   // finder is four solid rails around an empty tunnel, not an opaque screen.
   const photography=new THREE.Group();photography.name='Camera and open viewfinder';scene.add(photography);
@@ -56,6 +92,20 @@ export function createCloudRoomScene(){
     box(photography,[.12,1.85,.15],[finderX+side*1.35,finderY,CLOUD_REEL_APERTURE.rearZ+.02],p.edge);
     box(photography,[2.58,.12,.15],[finderX,finderY+side*.96,CLOUD_REEL_APERTURE.rearZ+.02],p.edge);
   }
+  // Enamel stripes, a recessed iris and a small reflection give the lens depth.
+  for(const [index,tint] of ['#df6859','#edaa52','#70bdaf','#6093bc'].entries())
+    box(photography,[.19,.85,.055],[-2.65+index*.21,4.80,-3.15],tint);
+  function lensDisc(radius,z,tint){
+    const disc=cylinder(photography,radius,.045,[0,4.6,z],tint,32);
+    disc.rotation.x=Math.PI/2;
+    return disc;
+  }
+  lensDisc(.85,-.90,'#264f70');
+  lensDisc(.60,-.85,'#213b51');
+  lensDisc(.36,-.80,'#142c39');
+  part(photography,new THREE.TorusGeometry(.78,.024,5,32),'#80bdc7',[0,4.6,-.86]);
+  const glint=lensDisc(.14,-.75,'#c6ede8');
+  glint.position.x=-.27;glint.position.y+=.30;
   batch(photography);
 
   // Two open-spoked reels are chapter selectors, rather than extra scene toys.
@@ -63,7 +113,7 @@ export function createCloudRoomScene(){
     const reel=target(index===0?'Cloud photograph film reel':'Mobile photograph film reel',index);
     reel.position.set(x,1.47,-4.05);
     for(const z of [-.25,.25]){
-      part(reel,new THREE.TorusGeometry(1.24,.095,5,24),p.edge,[0,0,z]);
+      part(reel,new THREE.TorusGeometry(1.24,.095,5,24),index===0?'#60b9ca':'#e38067',[0,0,z]);
       for(let spoke=0;spoke<5;spoke++){
         const angle=spoke*Math.PI*2/5,arm=box(reel,[.15,1.12,.12],[Math.sin(angle)*.59,Math.cos(angle)*.59,z],p.edge);arm.rotation.z=-angle;
       }
@@ -98,7 +148,7 @@ export function createCloudRoomScene(){
   }
   // One inexpensive sky shell supplies the horizon gradient, without images.
   const skyGeometry=new THREE.SphereGeometry(150,24,12);geometries.add(skyGeometry);
-  const atmosphere=new THREE.ShaderMaterial({side:THREE.BackSide,depthWrite:false,toneMapped:false,uniforms:{horizon:{value:new THREE.Color('#dce7e1')},zenith:{value:new THREE.Color('#82b7d1')}},vertexShader:'varying vec3 skyDirection; void main(){skyDirection=position; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}',fragmentShader:'uniform vec3 horizon; uniform vec3 zenith; varying vec3 skyDirection; void main(){float h=normalize(skyDirection).y; gl_FragColor=vec4(mix(horizon,zenith,smoothstep(-0.08,0.35,h)),1.0);\n#include <tonemapping_fragment>\n#include <colorspace_fragment>\n}'});materials.add(atmosphere);
+  const atmosphere=new THREE.ShaderMaterial({side:THREE.BackSide,depthWrite:false,toneMapped:false,uniforms:{horizon:{value:new THREE.Color('#ffe1bf')},zenith:{value:new THREE.Color('#519dcc')}},vertexShader:'varying vec3 skyDirection; void main(){skyDirection=position; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}',fragmentShader:'uniform vec3 horizon; uniform vec3 zenith; varying vec3 skyDirection; void main(){float h=normalize(skyDirection).y; gl_FragColor=vec4(mix(horizon,zenith,smoothstep(-0.08,0.35,h)),1.0);\n#include <tonemapping_fragment>\n#include <colorspace_fragment>\n}'});materials.add(atmosphere);
   const sky=new THREE.Mesh(skyGeometry,atmosphere);sky.name='Illustrated sky atmosphere';sky.renderOrder=-1;scene.add(sky);batch(architecture);
 
   const anchors=[{position:new THREE.Vector3(-5.65,3.25,-3.7),label:'Open cloud reel'},{position:new THREE.Vector3(5.65,3.25,-3.7),label:'Open photography reel'}];
@@ -114,10 +164,10 @@ export function createCloudRoomScene(){
     interact(){return false;},
     interactionState(){return false;},
     getViewFraming(){return 0;},
-    updateInteraction(){return false;},
+    updateInteraction(){const redraw=printsArrived;printsArrived=false;return redraw;},
     animateSound(){return false;},
     setEntrance(){entrance.visible=false;},
-    dispose(){if(disposed)return;disposed=true;geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());sun.shadow.dispose();scene.clear();},
-    get resourceCounts(){let meshes=0,triangles=0;scene.traverse(object=>{if(object.isMesh){meshes++;triangles+=(object.geometry.index?.count||object.geometry.attributes.position.count)/3;}});return {meshes,triangles,ownedGeometries:geometries.size,materials:materials.size,ownedTextures:0};}
+    dispose(){if(disposed)return;disposed=true;printTexture.dispose();geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());sun.shadow.dispose();scene.clear();},
+    get resourceCounts(){let meshes=0,triangles=0;scene.traverse(object=>{if(object.isMesh){meshes++;triangles+=(object.geometry.index?.count||object.geometry.attributes.position.count)/3;}});return {meshes,triangles,ownedGeometries:geometries.size,materials:materials.size,ownedTextures:1};}
   };
 }

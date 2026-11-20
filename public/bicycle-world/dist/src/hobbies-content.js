@@ -14,18 +14,18 @@ const chapters=[
     detail:'I’m a vocalist. I’ve shared songs at Junoon, at a family function and at Tiny Desk. I also record myself simply because I feel like singing.',
     photoIds:['junoon','family'],
     reader:{photoId:'junoon',lead:'I’m a vocalist, but singing doesn’t need a stage. Sometimes I share a song with a room full of people. Sometimes I’m just in the mood to record one.',sections:[
-      {title:'From a quiet recording to a room of people',body:'The listening room holds a spontaneous recording and a performance at Tiny Desk. Choose either one, settle by the screen and listen at your own pace.'},
+      {title:'From a quiet recording to a room of people',body:'The listening room holds my performance at Tiny Desk and a spontaneous recording. Choose either one, settle by the screen and listen at your own pace.'},
       {title:'A few moments from the stage',body:'I performed at Junoon, the M.Des event at my college, and at a family function. These photographs hold a little of that side of me: the energy of sharing something I love.'}
     ]}
   },
   {
     id:'garba',label:'Garba',title:'Always room in the circle.',
     body:'Music, movement and people. Garba brings together a few of my favourite things—and usually another reason to make a friend.',
-    detail:'I love socialising, meeting new people and joining in. Garba is another place for that energy. These are photographs from my own evenings, with more to explore in the courtyard.',
-    photoIds:['garba-p26','garba-p24'],
+    detail:'I love socialising, meeting new people and joining in. Garba is another place for that energy. The courtyard has photos from Garba at my college and from evenings with my family.',
+    photoIds:GARBA_PHOTOS.map(photo=>photo.id),
     reader:{photoId:'garba-p26',lead:'I love playing Garba. The music, the movement and being around people all feel at home with my social side. I’m usually ready to join in.',sections:[
       {title:'The people are part of it',body:'I enjoy meeting someone new and making friends. Garba brings that energy into a shared space, where there’s a reason to move, laugh and be around people.'},
-      {title:'A little of that evening, kept here',body:'These are my own photographs from Garba. The courtyard gives them a place in this garden: an open circle, warm lights and space to look closer at each moment.'}
+      {title:'A little of that evening, kept here',body:'The solo photos are from my college Garba. There’s also a family photo and one of me with my favourite nephew.'}
     ]}
   }
 ];

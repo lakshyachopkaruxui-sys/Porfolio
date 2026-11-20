@@ -117,3 +117,22 @@
 
 /* The catalogue heading receives announcement focus, but is not a control. */
 #works-experience #works-index-title:focus{outline:none;}
+
+.works-process-samples{margin:28px 0;}
+.works-sample-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
+.works-sample-pair figure{margin:0;min-width:0;}
+.works-sample-pair img{display:block;width:100%;height:clamp(140px,21vw,245px);object-fit:contain;background:#e7e7de;}
+.works-sample-pair figcaption{margin-top:7px;color:#314a50;font-size:14px;line-height:1.45;}
+@media(max-width:520px){.works-sample-pair{grid-template-columns:1fr;}.works-sample-pair img{height:200px;}}
+
+/* A gallery label occupies its own solid strip below the artwork. */
+#works-experience .works-caption{inset:auto 0 0;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:20px;background:#f6f3ea;border-top:1px solid #c8cec4;padding:14px clamp(18px,4vw,72px);text-align:left;pointer-events:auto;}
+#works-experience .works-caption::before{content:none;}
+#works-experience .works-assistive{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
+#works-experience .works-caption .works-eyebrow{margin:0;font-size:13px;letter-spacing:.08em;font-variant-numeric:tabular-nums;}
+#works-experience .works-caption .works-project-type{margin:0;text-align:left;color:#42594d;}
+#works-experience .works-caption .works-actions{margin:0;gap:8px;}
+#works-experience .works-caption .works-actions>button{min-width:0;}
+#works-experience .works-header>div{background:var(--works-paper);border:0;padding:10px 14px;}
+@media(max-width:760px){#works-experience .works-caption{grid-template-columns:auto 1fr;gap:6px 14px;padding:10px 16px max(12px,env(safe-area-inset-bottom));}#works-experience .works-caption .works-actions{grid-column:1/-1;justify-content:center;}#works-experience .works-header{padding:8px;gap:4px;}#works-experience .works-header nav{gap:4px;padding:0;}#works-experience .works-header nav button{padding:6px 8px;}}
+@media(max-height:520px) and (min-width:761px){#works-experience .works-header{padding:6px 14px;}#works-experience .works-caption{padding-block:6px;}}

@@ -197,6 +197,10 @@ export function createOakRecordedNarration({
     read, stop, pause, resume, setVoice, getVoices,
     subscribeVoices(listener) { if (!disposed && !disposing) listener(getVoices()); return () => {}; },
     togglePause: () => paused ? resume() : pause(),
+    get playback() {
+      if (!recordedPlaying || paused || !currentClip || audio.paused || audio.ended) return null;
+      return {clip: currentClip, time: audio.currentTime};
+    },
     get speaking() { return active; },
     get paused() { return paused; },
     get voiceId() { return OAK_RECORDED_VOICE.id; },

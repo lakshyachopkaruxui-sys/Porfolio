@@ -121,7 +121,7 @@ export const WORK_OVERVIEW_CONTENT = {
     overviewLead: 'A lower price matters only if people can get the medicine they need. Our Jan Aushadhi study followed patients, caregivers and pharmacy teams through prescription questions, uncertain stock and repeat visits, then explored services that could connect those gaps.',
     role: 'I helped guide research and concept discussions. Our four-person team shared the fieldwork, synthesis and concept development.',
     status: 'Service design · Research and concept exploration',
-    timeline: '2025 team project · November 2026 interface explorations',
+    timeline: '2025 team project',
     sections: [
       {
         id: 'service', title: 'Look beyond the counter',
@@ -129,7 +129,7 @@ export const WORK_OVERVIEW_CONTENT = {
       },
       {
         id: 'concepts', title: 'Compare three routes to access',
-        body: ['We developed a health card and app, a dispensing kiosk and RFID packaging, then took the card/app further. The case shows that choice and later interactive walkthroughs, including a separate kiosk exploration of stock checks, collection and getting help.'],
+        body: ['We explored three concepts. The team chose a health card and app for checking prescription information and planning a pharmacy visit. A dispensing kiosk and RFID packaging were alternatives.'],
       },
     ],
     coverCaption: '',

@@ -105,7 +105,7 @@ export function buildHobbiesExterior({root,spec,mesh,box,material}){
   for(let i=8;i>=0;i--){const a=i/8*Math.PI;trimTop.lineTo(Math.cos(a)*.68,1.90+Math.sin(a)*.61);}trimTop.closePath();
   extrude(hall,trimTop,.08,mint,0,0,2.30);
   box(hall,0,1.48,1.12,1.46,1.83,.10,dark);
-  box(hall,0,.66,1.88,1.46,.10,1.56,wood);
+  box(hall,0,.685,1.88,1.41,.10,1.56,wood);
   // Curtain and microphone glimpses communicate performance, with no Pokémon props.
   for(const side of [-1,1])for(let j=0;j<2;j++)cylinder(hall,.085,1.39,side*(.47+j*.12),1.45,1.47,roof,6);
   cylinder(hall,.12,.04,0,.75,1.60,dark,8);

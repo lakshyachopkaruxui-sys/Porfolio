@@ -4,10 +4,10 @@ import {HOBBIES_FOCUS_BOUNDS} from './hobbies-room-camera.js';
 
 /** Original open-air hobby courtyard. No renderer, network fetch or idle RAF. */
 export function createHobbiesRoomScene(){
-  const scene=new THREE.Scene();scene.background=new THREE.Color('#b9c8b4');scene.fog=new THREE.Fog('#b9c8b4',58,145);
+  const scene=new THREE.Scene();scene.background=new THREE.Color('#8acfe8');scene.fog=new THREE.Fog('#8acfe8',58,145);
   const camera=new THREE.PerspectiveCamera(43,1,.1,180),geometries=new Set(),materials=new Set(),textures=new Set(),pickRoots=[],pickEnvelopes=[];
   let disposed=false,plaqueDirty=false;
-  const p={stone:'#c9c2ad',cream:'#f0e9d5',plaster:'#dfd7be',wood:'#91643f',edge:'#c6a374',green:'#365c47',dark:'#233e34',cloth:'#bb795b',ochre:'#d2ab58',blue:'#a7c8c5',leaf:'#6c8e5a',lightLeaf:'#96aa70',ink:'#334c3f',red:'#c96c52'};
+  const p={stone:'#80aab1',cream:'#f9f7ee',plaster:'#cce4df',wood:'#745046',edge:'#eaa97c',green:'#15786f',dark:'#20374f',cloth:'#dc4868',ochre:'#f5a535',blue:'#33adbb',leaf:'#318866',lightLeaf:'#79b977',ink:'#203a49',red:'#a42d56'};
   const matte=new THREE.MeshStandardMaterial({color:'#ffffff',vertexColors:true,roughness:.87});materials.add(matte);
   const cache=new Map(),color=tint=>{if(!cache.has(tint))cache.set(tint,new THREE.Color(tint));return cache.get(tint);};
   function part(root,geometry,tint,position=[0,0,0]){
@@ -37,13 +37,13 @@ export function createHobbiesRoomScene(){
   const architecture=new THREE.Group();architecture.name='Continuous hobby courtyard';scene.add(architecture);
   const canopy=new THREE.Group();canopy.name='Open pavilion canopy';scene.add(canopy);
   box(architecture,[50,.32,70],[0,-.22,12],p.stone);
-  box(architecture,[35,.08,16],[0,-.02,-1],p.plaster);
+  box(architecture,[35.12,.08,16],[0,-.02,-1],p.plaster);
   // Broad joints and low masonry, not a dense field of decorative props.
   for(let x=-17;x<18;x+=2)box(architecture,[.027,.015,16],[x,.031,-1],p.stone);
   for(let z=-9;z<=7;z+=2)box(architecture,[35,.015,.027],[0,.031,z],p.stone);
   box(architecture,[35,1.25,.65],[0,.60,-9.1],p.green);
-  box(architecture,[35,.15,.85],[0,1.27,-9.1],p.edge);
-  for(const x of [-17,17]){box(architecture,[.65,1.25,18],[x,.60,-.5],p.green);box(architecture,[.85,.15,18],[x,1.27,-.5],p.edge);}
+  box(architecture,[35.08,.15,.85],[0,1.27,-9.1],p.edge);
+  for(const x of [-17,17]){box(architecture,[.65,1.25,18],[x,.60,-.5],p.green);box(architecture,[.85,.15,18.08],[x,1.27,-.5],p.edge);}
   // An inhabited colonnade frames two spacious stories while leaving the foreground open.
   for(const x of [-15.5,0,15.5]){
     box(architecture,[.30,8.4,.34],[x,4.2,-7.9],p.wood);
@@ -54,7 +54,7 @@ export function createHobbiesRoomScene(){
   box(architecture,[31.6,.26,.35],[-.15,8.23,-7.9],p.wood);
   // Continuous transverse rails support the slats at both ends and at midspan.
   for(const z of [-7.65,-4.0,-.35])box(architecture,[31.9,.18,.22],[0,8.38,z],p.wood);
-  for(let i=0;i<11;i++)box(canopy,[1.5,.13,7.7],[-15+i*3,8.55,-4.0],i%2?p.plaster:p.cream);
+  for(let i=0;i<11;i++)box(canopy,[1.5,.13,7.7],[-15+i*3,8.55,-4.0],[p.blue,p.cream,p.cloth,p.cream][i%4]);
   for(const x of [-16.6,16.6]){cylinder(architecture,.60,1.05,[x,.56,-6.2],p.cloth,16);for(const [dx,dy,dz]of [[-.3,.25,0],[.25,.5,.05],[0,1,-.1]])sphere(architecture,.68,[x+dx,1.5+dy,-6.2+dz],p.leaf);}
 
   // Preserve the approved subjects at their authored size, with a shared open aisle.
@@ -66,7 +66,7 @@ export function createHobbiesRoomScene(){
   const stageTop=cylinder(stageArchitecture,4.38,.06,[-9,.50,-4],p.edge,48);stageTop.scale.z=.72;
   for(let step=0;step<2;step++)box(stageArchitecture,[4.2+step*.8,.16,1.0],[-9,.17-step*.08,-.85+step*.55],p.wood);
   box(stageArchitecture,[8.4,5.7,.45],[-9,3.3,-7.25],p.dark);
-  for(let i=0;i<9;i++){const panel=box(stageArchitecture,[.76,5.35,.20],[-12.45+i*.86,3.2,-6.91],i%2?p.wood:p.green);panel.rotation.y=i%2?.16:-.16;}
+  for(let i=0;i<9;i++){const panel=box(stageArchitecture,[.76,5.35,.20],[-12.45+i*.86,3.2,-6.91],i%2?p.dark:p.green);panel.rotation.y=i%2?.16:-.16;}
   // A designed title plaque names the owner's real performance context. It is
   // deliberately not represented as an event poster, photograph or recording.
   let stagePlaque=null;
@@ -97,7 +97,7 @@ export function createHobbiesRoomScene(){
   const curtains=[];
   for(const side of [-1,1]){
     const curtain=new THREE.Group();curtain.position.set(side*1.9,.55,-2.48);stage.add(curtain);
-    for(let i=0;i<7;i++){const fold=box(curtain,[.58,5.2,.15],[-1.6+i*.53,2.6,(i%2)*.14],i%2?p.cloth:p.red);fold.rotation.y=i%2?.16:-.16;}
+    for(let i=0;i<7;i++){const fold=box(curtain,[.58,i%2?5.16:5.20,.15],[-1.6+i*.53,2.6,(i%2)*.14],i%2?p.cloth:p.red);fold.rotation.y=i%2?.16:-.16;}
     box(curtain,[3.8,.12,.25],[0,.1,.06],p.ochre);batch(curtain);curtains.push({curtain,side});
   }
   const micGroup=new THREE.Group();stage.add(micGroup);
@@ -123,9 +123,16 @@ export function createHobbiesRoomScene(){
   cylinder(danceArchitecture,4.20,.13,[.8,.12,-2.5],p.cream,64);
   for(const [r,w,tint]of [[4.12,.20,p.cloth],[3.70,.06,p.ochre],[2.70,.08,p.cloth],[1.33,.14,p.ochre]])ring(danceArchitecture,r,w,.20,[.8,-2.5],tint);
   for(let i=0;i<12;i++){const a=i/12*Math.PI*2;const inlay=box(danceArchitecture,[.34,.025,.34],[.8+Math.cos(a)*3.18,.23,-2.5-Math.sin(a)*3.18],i%2?p.ochre:p.cloth);inlay.rotation.y=-a+Math.PI/4;}
+  // Radial inlays lead the eye back towards the lamp.
+  for(let i=0;i<12;i++){
+    const angle=i*Math.PI/6;
+    const petal=sphere(danceArchitecture,1,[.8+2.06*Math.cos(angle),.224,-2.5-2.06*Math.sin(angle)],i%2?p.blue:p.cloth,0);
+    petal.scale.set(.42,.025,.18);
+    petal.rotation.y=angle;
+  }
   const lampStand=cylinder(dance,.70,.20,[0,.32,0],p.wood,20);
   const potPoints=[[.20,0],[.40,.07],[.47,.27],[.41,.52],[.23,.63],[.28,.69]].map(([x,y])=>new THREE.Vector2(x,y));
-  part(dance,new THREE.LatheGeometry(potPoints,20),p.cloth,[0,.42,0]);
+  part(dance,new THREE.LatheGeometry(potPoints,20),'#ba593e',[0,.42,0]);
   const potRim=part(dance,new THREE.TorusGeometry(.26,.045,6,20),p.ochre,[0,1.13,0]);potRim.rotation.x=Math.PI/2;
   batch(dance);
   const flameGeometry=new THREE.IcosahedronGeometry(.17,1);geometries.add(flameGeometry);
@@ -140,7 +147,7 @@ export function createHobbiesRoomScene(){
   for(let i=0;i<9;i++){
     const x=-3.15+i*.985,y=5.2-Math.sin(i/8*Math.PI)*.45;
     if(i<8)beam(danceArchitecture,[x,y,-6.0],[x+.985,5.2-Math.sin((i+1)/8*Math.PI)*.45,-6.0],.026,p.ink);
-    const triangle=new THREE.Shape();triangle.moveTo(-.26,0);triangle.lineTo(.26,0);triangle.lineTo(0,-.52);triangle.closePath();part(danceArchitecture,new THREE.ExtrudeGeometry(triangle,{depth:.018,bevelEnabled:false}),i%2?p.cloth:p.ochre,[x,y,-5.98]);
+    const triangle=new THREE.Shape();triangle.moveTo(-.26,0);triangle.lineTo(.26,0);triangle.lineTo(0,-.52);triangle.closePath();part(danceArchitecture,new THREE.ExtrudeGeometry(triangle,{depth:.018,bevelEnabled:false}),[p.cloth,p.blue,p.ochre][i%3],[x,y,-5.98]);
   }
   for(const x of [-2.9,4.5]){beam(danceArchitecture,[x,5.3,-5.9],[x,4.3,-5.9],.025,p.ink);const lantern=sphere(danceArchitecture,.35,[x,4.05,-5.9],p.ochre);lantern.scale.y=1.3;cylinder(danceArchitecture,.19,.10,[x,4.48,-5.9],p.wood,12);}
   envelope(dance,[-3.45,.08,-6.75],[5.05,1.6,1.8]);
@@ -156,9 +163,9 @@ export function createHobbiesRoomScene(){
   box(entrance,[10.7,.36,.95],[0,9,0],p.wood);box(entrance,[11,.15,1.2],[0,9.3,0],p.edge);box(entrance,[10.6,.10,1.9],[0,-.05,0],p.stone);batch(entrance);
   const leaves=[];
   for(const side of [-1,1]){const hinge=new THREE.Group();hinge.position.set(side*4.86,0,0);entrance.add(hinge);const center=-side*2.43;for(const x of [center-2.35,center+2.35])box(hinge,[.16,8.7,.24],[x,4.4,0],p.green);for(const y of [.1,4.1,8.7])box(hinge,[4.86,.18,.24],[center,y,0],p.green);for(let row=0;row<12;row++)box(hinge,[4.65,.42,.15],[center,.52+row*.68,0],p.edge);batch(hinge);leaves.push({hinge,side});}
-  scene.add(new THREE.HemisphereLight('#fff4dc','#7c8c70',1.65));
-  const sun=new THREE.DirectionalLight('#fff0cf',2.05);sun.position.set(-8,18,12);sun.target.position.set(0,1,-3);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);Object.assign(sun.shadow.camera,{left:-23,right:23,top:18,bottom:-13,near:1,far:70});sun.shadow.bias=-.00025;sun.shadow.normalBias=.024;scene.add(sun,sun.target);
-  const targetStates=[false,false],states=[0,0];let selected=0;
+  scene.add(new THREE.HemisphereLight('#f5fbff','#879eac',1.65));
+  const sun=new THREE.DirectionalLight('#fff9f1',2.05);sun.position.set(-8,18,12);sun.target.position.set(0,1,-3);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);Object.assign(sun.shadow.camera,{left:-23,right:23,top:18,bottom:-13,near:1,far:70});sun.shadow.bias=-.00025;sun.shadow.normalBias=.024;scene.add(sun,sun.target);
+  const targetStates=[true,false],states=[0,0];let selected=0;
   const circleTint=new THREE.Color();
   const smooth=value=>value*value*(3-2*value);
   function applyInteraction(){
@@ -175,7 +182,7 @@ export function createHobbiesRoomScene(){
     select(index){selected=THREE.MathUtils.clamp(Math.round(Number(index)||0),0,1);},
     interact(index=selected){index=THREE.MathUtils.clamp(Math.round(Number(index)||0),0,1);targetStates[index]=!targetStates[index];return targetStates[index];},
     interactionState(index=selected){return Boolean(targetStates[index]);},
-    updateInteraction(dt,reduced=false){if(disposed)return false;let changed=plaqueDirty;plaqueDirty=false;dt=Math.min(.1,Math.max(0,Number(dt)||0));for(let i=0;i<2;i++){const goal=Number(targetStates[i]);if(states[i]===goal)continue;const duration=i===0?1.15:3.4;const step=dt/(goal?duration:.7);states[i]=reduced?goal:goal?Math.min(goal,states[i]+step):Math.max(goal,states[i]-step);changed=true;}if(changed)applyInteraction();return changed;},
+    updateInteraction(dt,reduced=false){if(disposed)return false;let changed=plaqueDirty;plaqueDirty=false;dt=Math.min(.1,Math.max(0,Number(dt)||0));for(let i=0;i<2;i++){const goal=Number(targetStates[i]);if(states[i]===goal)continue;const duration=i===0?2.65:3.4;const step=dt/(goal?duration:.7);states[i]=reduced?goal:goal?Math.min(goal,states[i]+step):Math.max(goal,states[i]-step);changed=true;}if(changed)applyInteraction();return changed;},
     animateSound(){return false;},
     setEntrance(progress,pose){entrance.visible=progress<1&&Boolean(pose?.entrance);if(!entrance.visible)return;entrance.position.copy(pose.entrance.position);entrance.rotation.y=pose.entrance.rotationY;for(const {hinge,side}of leaves)hinge.rotation.y=side*pose.openness*1.54;entrance.updateMatrixWorld(true);},
     dispose(){if(disposed)return;disposed=true;for(const instance of [footlights,circleLights])instance.dispose();geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());textures.forEach(texture=>texture.dispose());sun.shadow.dispose();scene.clear();},

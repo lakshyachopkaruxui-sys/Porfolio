@@ -1,6 +1,9 @@
+import {createWordCaption} from './woody-caption.js';
+
 /** Quiet semantic companion. Rendering never changes focus or starts playback. */
 export function mountWoodyTourUI({document: doc = globalThis.document, host = doc.body,
   onEnable = () => {}, onReplay = () => {}, onStop = () => {}, onVisitWorks = () => {}, onStay = () => {}} = {}) {
+  const highlight = createWordCaption();
   const panel = doc.createElement('section'); panel.className = 'woody-tour'; panel.setAttribute('aria-label', 'Woody’s garden guide');
   const controls = doc.createElement('div'); controls.className = 'woody-tour-controls';
   const label = doc.createElement('span'); label.className = 'woody-tour-label'; label.textContent = 'Woody’s guide';
@@ -18,6 +21,7 @@ export function mountWoodyTourUI({document: doc = globalThis.document, host = do
   events.forEach(([element, handler]) => element.addEventListener('click', handler));
   return {
     element: panel,
+    updateCaption: highlight.update,
     render(state) {
       if (disposed) return;
       const signature = JSON.stringify(state); if (signature === lastSignature) return; lastSignature = signature;
@@ -28,6 +32,7 @@ export function mountWoodyTourUI({document: doc = globalThis.document, host = do
       const text = enabled ? state.clip?.text || '' : '';
       caption.setAttribute('aria-live', state.error ? 'polite' : 'off');
       if (caption.textContent !== text) caption.textContent = text;
+      highlight.bind(state.speaking && !panel.hidden ? state.clip : null, [caption]);
       caption.hidden = !text; choice.hidden = !state.choice || !enabled;
       status.textContent = state.error || ''; status.hidden = !state.error;
     },

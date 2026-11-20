@@ -23,7 +23,7 @@ export async function loadWoodyCharacter({signal}={}){
   if(signal?.aborted)throw new DOMException('Character loading cancelled','AbortError');
   let expired=false,disposed=false;
   const release=scene=>{if(!disposed){disposed=true;disposeCharacterAsset(scene);}};
-  const work=new GLTFLoader().loadAsync(new URL('../assets/characters/woody.glb',import.meta.url).href);
+  const work=new GLTFLoader().loadAsync(new URL('../assets/characters/woody.glb?v=69291bb05a62',import.meta.url).href);
   work.then(gltf=>{if(expired)release(gltf.scene);},()=>{});
   let cancel;
   const cancelled=new Promise((_,reject)=>{

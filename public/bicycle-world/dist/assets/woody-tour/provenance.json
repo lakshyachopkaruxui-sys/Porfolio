@@ -735,7 +735,7 @@
     },
     {
       "id": "arrive:about",
-      "filename": "arrive-about.mp3",
+      "filename": "approach-about.mp3",
       "text": "That’s Meet Lakshya. Step inside for his journey from engineering to UX, and a little about the person behind the work.",
       "sha256": "1f99a8cd1ad02861780bf75de03dd01638e8670e479dee441905113e8845d88b",
       "durationSeconds": 7.12,
@@ -825,7 +825,7 @@
     },
     {
       "id": "arrive:projects",
-      "filename": "arrive-projects.mp3",
+      "filename": "approach-projects.mp3",
       "text": "Here’s Works—Lakshya’s design projects. Come see the questions he explored, what he made and the decisions along the way.",
       "sha256": "8dd130fdadc119a2470ec77d72576c1546109a232cb641a94274ec779b1c0c96",
       "durationSeconds": 7.52,
@@ -900,7 +900,7 @@
     },
     {
       "id": "arrive:work",
-      "filename": "arrive-work.mp3",
+      "filename": "approach-work.mp3",
       "text": "Hear that? This is Hobbies. Lakshya’s singing and Garba live here—a little of the energy he brings beyond his design work.",
       "sha256": "0b1fa0a262cee4067a33c236695273d0f3426e2a782161ec19450a07ff9081fc",
       "durationSeconds": 7.84,
@@ -1047,7 +1047,7 @@
     },
     {
       "id": "arrive:cloud",
-      "filename": "arrive-cloud.mp3",
+      "filename": "approach-cloud.mp3",
       "text": "That’s The Viewfinder. Lakshya loves photographing clouds, and the everyday moments that catch his eye. Come see what makes him stop for a picture.",
       "sha256": "59770e9dcdd840975b1992bdee5dcd87d20a100ba3e019883abc63d74dd1cc5f",
       "durationSeconds": 9.28,

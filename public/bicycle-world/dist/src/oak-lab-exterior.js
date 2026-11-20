@@ -37,13 +37,14 @@ export function buildOakLabExterior({root,spec,mesh,box,material}){
   box(root,centre,2.72,front+.07,2.22,.46,.10,trim);box(root,centre,2.72,front+.13,2.03,.30,.035,glass);
   for(const x of [centre-.69,centre,centre+.69])box(root,x,2.72,front+.165,.055,.32,.05,mint);
   // Recessed, parted double doors beneath a projecting research-lab canopy.
-  box(root,centre,1.43,front+.035,1.25,1.85,.09,dark);
+  box(root,centre,1.43,front+.065,1.25,1.85,.09,dark);
   for(const side of [-1,1]){
     box(root,centre+side*.69,1.43,front+.14,.13,1.99,.17,trim);
     const door=box(root,centre+side*.47,1.40,front+.22,.31,1.68,.11,mint);door.rotation.y=side*.35;
-    box(root,centre+side*.47,1.68,front+.29,.20,.64,.025,glass);
+    const pane=box(root,0,.28,.075,.20,.64,.025,glass);
+    door.add(pane);pane.scale.set(.20/.31,.64/1.68,.025/.11);pane.position.set(0,.28/1.68,.075/.11);
   }
-  box(root,centre,2.35,1.73,1.72,.15,.70,mint);box(root,centre,2.44,1.73,1.84,.08,.77,trim);
+  box(root,centre,2.385,1.73,1.72,.15,.70,mint);box(root,centre,2.475,1.73,1.84,.08,.77,trim);
   box(root,centre,.48,1.94,1.8,.16,.72,stone);box(root,centre,.31,2.39,2.12,.18,.49,stone);
   // Lower side wing has a separate roof and broad research-room windows.
   box(root,1.43,1.37,-.03,2.12,1.90,3.05,cream);box(root,1.43,.62,-.03,2.19,.24,3.12,stone);

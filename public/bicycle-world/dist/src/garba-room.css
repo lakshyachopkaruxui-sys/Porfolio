@@ -1,5 +1,5 @@
 /* Namespaced destination styles. Existing application owns fonts and modal. */
-#personal-experience #garba-experience{--gr-paper:#f3ebd8;--gr-ink:#2d4536;--gr-wood:#b99268;position:absolute;inset:0;z-index:30;isolation:isolate;overflow:hidden;background:#454e50;color:var(--gr-ink);font-family:'DM Sans',sans-serif}
+#personal-experience #garba-experience{--gr-paper:#f9f2f6;--gr-ink:#30354c;--gr-wood:#b99268;position:absolute;inset:0;z-index:30;isolation:isolate;overflow:hidden;background:#374367;color:var(--gr-ink);font-family:'DM Sans',sans-serif}
 #personal-experience #garba-experience *{box-sizing:border-box}
 #personal-experience #garba-experience [hidden]{display:none!important}
 #personal-experience #garba-experience #garba-scene{position:absolute;inset:0}
@@ -38,7 +38,7 @@
 #personal-experience #garba-experience .gr-context .gr-primary{font-size:12px}
 #personal-experience #garba-experience .gr-footer{position:absolute;bottom:20px;left:40px;right:40px;z-index:4;display:flex;justify-content:space-between;gap:15px;font-size:10px;color:#f2e9d4;pointer-events:none;letter-spacing:.02em}
 #personal-experience #garba-experience .gr-footer span{padding:5px 8px;background:#35433bed;border-radius:5px}
-#personal-experience #garba-experience .gr-object-hint{position:absolute;z-index:7;pointer-events:none;padding:10px 14px;border-radius:8px;font-size:12px;background:#f2e9d4;color:#2d4536;box-shadow:0 4px 16px #172e2340;max-width:230px}
+#personal-experience #garba-experience .gr-object-hint{position:absolute;z-index:7;pointer-events:none;padding:10px 14px;border-radius:8px;font-size:12px;background:#f2e9d4;color:#30354c;box-shadow:0 4px 16px #172e2340;max-width:230px}
 #personal-experience #garba-experience .gr-viewer{position:absolute;inset:0;z-index:10;background:#f3ebd9;padding:26px 40px 24px}
 #personal-experience #garba-experience .gr-viewer>header{display:flex;align-items:center;justify-content:space-between;gap:24px;max-width:1460px;margin:auto}
 #personal-experience #garba-experience .gr-viewer h2{font-family:'Mochiy Pop P One',sans-serif;font-size:22px;line-height:1.5;margin:0;font-weight:400}
@@ -101,3 +101,5 @@ html:root body.hybrid-world #garba-experience .gr-header .mode-selector.mode-swi
   #personal-experience #garba-experience .gr-photo-choices{min-width:0;}
   #personal-experience #garba-experience .gr-circle-actions{min-width:0;flex-wrap:wrap;justify-content:flex-end;}
 }
+
+#personal-experience #garba-experience .gr-print{width:clamp(32px,4vw,48px);aspect-ratio:3/4;object-fit:cover;flex:none;border-radius:3px;}

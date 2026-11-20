@@ -4,12 +4,12 @@ import {getAboutJournalPose} from './about-journal-camera.js';
 
 /** A quiet working studio. The notebook is the single content-bearing interaction. */
 export function createAboutJournalScene({onChange=()=>{}}={}){
-  const scene=new THREE.Scene();scene.background=new THREE.Color('#c9c4ae');
-  scene.fog=new THREE.Fog('#c9c4ae',45,100);
+  const scene=new THREE.Scene();scene.background=new THREE.Color('#d4e2df');
+  scene.fog=new THREE.Fog('#d4e2df',45,100);
   const camera=new THREE.PerspectiveCamera(42,1,.1,100);
   const geometries=new Set(),materials=new Set(),textures=new Set();
   const colors=new Map(),matte=new THREE.MeshStandardMaterial({color:'#ffffff',vertexColors:true,roughness:.82});materials.add(matte);
-  const p={floor:'#c8bda1',wall:'#667463',recess:'#334b40',paper:'#eee3c8',paperEdge:'#c5b99d',wood:'#956b48',edge:'#ba9467',darkWood:'#634b36',green:'#344f43',trim:'#b9b59a',cloth:'#79826b',brass:'#bf9a50',ink:'#293c33',clay:'#b47f5b',leaf:'#5d7452',shadow:'#aa9a7a'};
+  const p={floor:'#d9bfa2',wall:'#659695',recess:'#244954',paper:'#eee3c8',paperEdge:'#c5b99d',wood:'#ad7857',edge:'#d6aa7d',darkWood:'#634b36',green:'#255765',trim:'#b9b59a',cloth:'#be6451',brass:'#bf9a50',ink:'#293c33',clay:'#c57355',leaf:'#518570',shadow:'#aa9a7a'};
   let disposed=false,openProgress=0,assetState='idle',serial=0,request=null,requestTimer=null,portraitBitmap=null;
   const color=value=>{if(!colors.has(value))colors.set(value,new THREE.Color(value));return colors.get(value);};
   function part(parent,geometry,tint,at=[0,0,0]){
@@ -38,9 +38,9 @@ export function createAboutJournalScene({onChange=()=>{}}={}){
   }
 
   const architecture=new THREE.Group();architecture.name='Warm timber personal studio';scene.add(architecture);
-  roundedSlab(architecture,25,24,.3,.7,[-.8,-.22,2.3],p.floor);
-  box(architecture,[21,9.5,.32],[-1.4,4.65,-5.1],p.wall);
-  box(architecture,[.32,9.5,13],[-11.75,4.65,1.25],p.paper);
+  roundedSlab(architecture,68,65,.3,.7,[-.8,-.22,2.3],p.floor);
+  box(architecture,[48,26,.32],[-1.4,12.9,-5.1],p.wall);
+  box(architecture,[.32,26,32],[-11.75,12.9,10.8],p.paper);
   box(architecture,[21,.18,.45],[-1.4,.12,-4.86],p.darkWood);
   for(const x of [-11.4,-8.7,-1.3,3.6,8.8])box(architecture,[.13,9.2,.18],[x,4.65,-4.86],p.darkWood);
   for(const x of [-10.8,-6.5,-2.2,2.1,6.4])box(architecture,[.02,.008,16],[x,.015,2.6],p.shadow);
@@ -59,6 +59,23 @@ export function createAboutJournalScene({onChange=()=>{}}={}){
   }
   const planter=cylinder(architecture,.34,.48,[6.65,5.44,-4.42],p.clay,14);
   const foliage=new THREE.IcosahedronGeometry(.38,1);part(architecture,foliage,p.leaf,[6.65,5.98,-4.42]);
+  // Work from research, the studio and Meraki shares a single pinboard.
+  box(architecture,[6.12,3.72,.16],[.2,5.69,-4.68],p.darkWood);
+  const boardGeometry=new THREE.PlaneGeometry(5.94,3.51);
+  geometries.add(boardGeometry);
+  const boardMap=new THREE.TextureLoader().load('./assets/personal/about-journal/studio-process-board.webp',()=>{if(!disposed)onChange();});
+  boardMap.colorSpace=THREE.SRGBColorSpace;textures.add(boardMap);
+  const boardMaterial=new THREE.MeshBasicMaterial({map:boardMap,toneMapped:false});
+  materials.add(boardMaterial);
+  const board=new THREE.Mesh(boardGeometry,boardMaterial);
+  board.name='Listening, Meraki and Giggles';board.position.set(.2,5.69,-4.586);scene.add(board);
+
+  // A little stage microphone on the shelf recalls singing at Junoon.
+  cylinder(architecture,.33,.08,[5.05,5.27,-4.36],p.ink);
+  beam(architecture,[5.05,5.3,-4.36],[5.05,6.02,-4.36],.045,p.brass);
+  const mic=part(architecture,new THREE.CapsuleGeometry(.17,.32,4,12),p.ink,[5.05,6.21,-4.35]);
+  mic.rotation.z=-.32;
+  for(const y of [6.18,6.26,6.34]){const band=cylinder(architecture,.174,.026,[5.05+(y-6.21)*.32,y,-4.35],p.trim);band.rotation.z=-.32;}
   batch(architecture);
 
   const furniture=new THREE.Group();furniture.name='Writing desk and grounded furniture';scene.add(furniture);
@@ -91,6 +108,20 @@ export function createAboutJournalScene({onChange=()=>{}}={}){
   roundedSlab(furniture,1.08,1.46,.055,.06,[-4.95,2.99,1.55],p.paperEdge);
   roundedSlab(furniture,.98,1.36,.035,.04,[-4.95,3.035,1.55],p.paper);
   for(const x of [-4.7,4.7])for(const z of [-2.43,3.60]){const foot=cylinder(furniture,.22,.008,[x,.012,z],p.shadow,16);foot.castShadow=false;}
+  // An electronics sketch beside the notebook connects the two parts of Lakshya’s training.
+  const circuit=new THREE.Group();circuit.position.set(-2.85,3.00,-.65);circuit.rotation.y=-.19;furniture.add(circuit);
+  roundedSlab(circuit,1.55,1.25,.06,.06,[0,0,0],'#26756c');
+  box(circuit,[.51,.08,.37],[0,.075,0],p.ink);
+  for(const side of [-1,1])for(let n=0;n<4;n++){
+    const x=-.18+n*.12;
+    box(circuit,[.039,.025,.17],[x,.054,side*.245],p.brass);
+    box(circuit,[.022,.012,.16],[x,.043,side*.40],p.paperEdge);
+  }
+  box(circuit,[.28,.16,.38],[-.66,.12,.14],p.trim);
+  cylinder(circuit,.062,.08,[.55,.09,-.33],p.clay);
+  // A woven rug anchors the chair and table in the room.
+  roundedSlab(furniture,12.4,6.2,.035,.15,[-1.9,.065,1.9],'#48757a');
+  for(const z of [-.85,-.64,4.44,4.65])box(furniture,[12.0,.009,.065],[-1.9,.114,z],p.edge);
   batch(furniture);
 
   const bookAnchor=new THREE.Group();bookAnchor.position.set(0,3.005,.4);bookAnchor.name='Notebook gutter';scene.add(bookAnchor);
@@ -114,6 +145,9 @@ export function createAboutJournalScene({onChange=()=>{}}={}){
   roundedSlab(cover,4.12,4.32,.025,.06,[2.12,-.065,0],p.paper);
   for(const z of [-1.65,-1.24,-.83,-.42,-.01,.40,.81,1.22,1.63])box(cover,[3.25,.004,.007],[2.13,-.083,z],p.paperEdge);
   box(cover,[.014,.004,3.90],[.62,-.083,.02],p.clay);
+  for(const [index,tint] of [p.clay,p.brass,'#75a7aa'].entries())
+    box(cover,[.28,.025,.36],[4.15,-.055,-1.33+index*.52],tint);
+  box(cover,[.13,.016,4.32],[3.75,.072,0],p.clay);
   batch(cover);
 
   let coverLabel=null;
@@ -135,8 +169,8 @@ export function createAboutJournalScene({onChange=()=>{}}={}){
   const portraitGeometry=new THREE.PlaneGeometry(1,1);geometries.add(portraitGeometry);
   const portrait=new THREE.Mesh(portraitGeometry,portraitMaterial);portrait.name='Lakshya’s actual portrait';portrait.scale.set(3.82,3.82,1);portrait.position.set(-5.6,5.65,-4.435);portraitTarget.add(portrait);
 
-  scene.add(new THREE.HemisphereLight('#fff5dc','#8a9a7e',2.15));
-  const sunlight=new THREE.DirectionalLight('#ffe0ad',2.35);sunlight.position.set(-5,13,9);sunlight.target.position.set(0,2,0);sunlight.castShadow=true;sunlight.shadow.mapSize.set(1024,1024);Object.assign(sunlight.shadow.camera,{left:-13,right:13,top:12,bottom:-10,near:1,far:35});sunlight.shadow.bias=-.0003;sunlight.shadow.normalBias=.025;scene.add(sunlight,sunlight.target);
+  scene.add(new THREE.HemisphereLight('#fffaf0','#8a9a7e',2.15));
+  const sunlight=new THREE.DirectionalLight('#fff0d9',2.35);sunlight.position.set(-5,13,9);sunlight.target.position.set(0,2,0);sunlight.castShadow=true;sunlight.shadow.mapSize.set(1024,1024);Object.assign(sunlight.shadow.camera,{left:-13,right:13,top:12,bottom:-10,near:1,far:35});sunlight.shadow.bias=-.0003;sunlight.shadow.normalBias=.025;scene.add(sunlight,sunlight.target);
   const raycaster=new THREE.Raycaster();
   function setOpen(value){if(disposed)return false;const next=THREE.MathUtils.clamp(Number(value)||0,0,1);if(next===openProgress)return false;openProgress=next;cover.rotation.z=Math.PI*next;sunlight.shadow.needsUpdate=true;scene.updateMatrixWorld(true);onChange();return true;}
   function frame({width=1280,height=720,progress=openProgress}={}){const pose=getAboutJournalPose({width,height,progress});if(disposed)return pose;camera.position.copy(pose.position);camera.fov=pose.fov;camera.aspect=pose.aspect;camera.lookAt(pose.target);camera.updateProjectionMatrix();camera.updateMatrixWorld(true);scene.updateMatrixWorld(true);return pose;}

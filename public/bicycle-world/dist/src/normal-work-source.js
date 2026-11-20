@@ -156,7 +156,7 @@ export const NORMAL_WORK_METADATA=[
     "status": "Service design · Research and concept exploration",
     "summary": "A team exploration of medicine access through a health card and app, a dispensing kiosk and RFID packaging.",
     "role": "I helped guide research and concept discussions in our four-person team. We carried out the fieldwork, synthesis and concept development together.",
-    "timeline": "2025 team project · November 2026 interface explorations",
+    "timeline": "2025 team project",
     "sections": [
       {
         "id": "context",
@@ -169,9 +169,9 @@ export const NORMAL_WORK_METADATA=[
         "id": "direction",
         "title": "Three directions, one selected service concept",
         "body": [
-          "We developed a unified health card and app, a dispensing kiosk alternative, and RFID-enabled packaging. The report took the card/app further. New November 2026 interface walkthroughs explore collection and a separate kiosk-learning exercise."
+          "We developed a unified health card and app, a dispensing kiosk alternative, and RFID-enabled packaging. The report took the card/app further."
         ],
-        "limitation": "Service concept only; new walkthroughs use simulated data and have not been evaluated with participants. No live prescription, stock, payment or dispensing service is connected."
+        "limitation": "Concept stage. Pharmacy staff and patients still need to review the proposed service."
       }
     ]
   },

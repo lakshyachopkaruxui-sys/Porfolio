@@ -29,6 +29,8 @@ export function createListeningRoom({renderer,container,isReduced,onClose=()=>{}
   const palette={},raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2(),pointerPixel={x:0,y:0};
   let experience=null,host=null,status=null,player=null,playerSurface=null;
   let scene=null,camera=null,door=null,doorLeaf=null,roomGroup=null,monitorScreen=null,veil=null;
+  let windowPatch=null;
+  const levelBars=[];
   let opened=false,closing=false,dead=false,dirty=false,clock=0,renderedFrames=0,generation=0;
   let width=1,height=1,saved=null,externalFocus=null,lastFocused=null;
   let photoViewerOpen=false,photoViewerSiblings=[];
@@ -44,16 +46,21 @@ export function createListeningRoom({renderer,container,isReduced,onClose=()=>{}
   function isRecording(id){return Boolean(collection[id]?.video);}
   function mount(){
     const template=document.createElement('template');
-    template.innerHTML="<section id=\"listening-experience\" aria-label=\"Listening Room\">\n    <div id=\"listening-scene\" aria-hidden=\"true\"></div>\n    <div class=\"vignette\" aria-hidden=\"true\"></div>\n    <header class=\"masthead\">\n      <button class=\"garden-link\" id=\"listening-back-hobbies\" type=\"button\">Back to Hobbies</button>\n      <span class=\"study-label\">A room to listen.</span>\n      <span class=\"mode-switch\" data-mode-switch id=\"listening-portfolio\">Portfolio / Play</span>\n    </header>\n\n    <section id=\"threshold\" class=\"threshold-copy\" aria-labelledby=\"entry-heading\">\n      <p class=\"eyebrow\">Lakshya, away from the desk</p>\n      <h1 id=\"entry-heading\">There’s usually<br>a song.</h1>\n      <p class=\"entry-description\">I sing when I’m happy, and singing helps me slow down. Come in for a recording or a moment from the stage.</p>\n      \n      <p class=\"concept-note\">Two recordings and a few moments from the stage.</p>\n    </section>\n\n    <section id=\"room-controls\" class=\"room-controls\" aria-label=\"Room navigation\" hidden>\n      <div class=\"room-heading\">\n        <div><p class=\"eyebrow\">Make yourself at home</p><h1>A song, shared with you.</h1></div>\n        <button id=\"leave-room\" class=\"quiet-button\" type=\"button\">Back to Hobbies</button>\n      </div>\n      <p class=\"room-instruction\">Choose a video to watch or a photograph to read.</p>\n    </section>\n\n    <nav id=\"collection\" class=\"collection\" aria-label=\"Lakshya’s singing collection\" hidden>\n      <p class=\"collection-label\">The collection</p>\n      <div class=\"collection-items\">\n        <button type=\"button\" data-select=\"spontaneous\" aria-pressed=\"false\"><span class=\"item-number\">01</span><span><strong>Just felt like singing</strong><small>Watch video · 1:10</small></span></button>\n        <button type=\"button\" data-select=\"tiny-desk\" aria-pressed=\"false\"><span class=\"item-number\">02</span><span><strong>At Tiny Desk</strong><small>Watch video · 2:00</small></span></button>\n        <button type=\"button\" data-select=\"junoon\" aria-pressed=\"false\"><span class=\"item-number\">03</span><span><strong>A moment at Junoon</strong><small>Open photo · college performance</small></span></button>\n        <button type=\"button\" data-select=\"family\" aria-pressed=\"false\"><span class=\"item-number\">04</span><span><strong>A song with family</strong><small>Open photo · family function</small></span></button>\n      </div>\n    </nav>\n\n    <section id=\"item-context\" class=\"item-context\" aria-labelledby=\"item-title\" hidden>\n      <button id=\"back-room\" class=\"quiet-button back-button\" type=\"button\">Back to recordings</button>\n      <p id=\"item-type\" class=\"eyebrow\"></p>\n      <h2 id=\"item-title\"></h2>\n      <p id=\"item-description\"></p>\n      <button id=\"view-singing-photo\" class=\"button primary\" type=\"button\" hidden>View photograph</button>\n      <button id=\"watch-recording\" class=\"button primary\" type=\"button\" hidden>Open recording</button>\n      <p id=\"player-hint\" class=\"player-hint\" hidden>Press Play on the screen. Take your time.</p>\n      <button id=\"expand-recording\" class=\"text-button\" type=\"button\" hidden>Expand video</button>\n    </section>\n\n    <div id=\"player-surface\" hidden>\n      <video id=\"recording-player\" controls playsinline preload=\"none\" aria-label=\"Lakshya’s spontaneous singing recording\"></video>\n    </div>\n    <div id=\"object-hint\" class=\"object-hint\" hidden></div>\n    <p id=\"status\" class=\"sr-only\" aria-live=\"polite\">Listening Room is ready.</p>\n    <div id=\"fallback\" class=\"fallback\" hidden><h1>The room needs WebGL.</h1><p>Your browser could not open the 3D view. The recordings and photographs remain available below.</p><a href=\"#\">Watch the spontaneous singing recording</a><a href=\"#\">Watch the Tiny Desk performance</a><a href=\"#\">Junoon photograph</a><a href=\"#\">Family performance photograph</a></div>\n    <footer class=\"review-footer\"><span id=\"view-label\">At the doorway</span><span id=\"load-label\">No audio plays automatically.</span></footer>\n  </section>";
+    template.innerHTML="<section id=\"listening-experience\" aria-label=\"Listening Room\">\n    <div id=\"listening-scene\" aria-hidden=\"true\"></div>\n    <div class=\"vignette\" aria-hidden=\"true\"></div>\n    <header class=\"masthead\">\n      <button class=\"garden-link\" id=\"listening-back-hobbies\" type=\"button\">Back to Hobbies</button>\n      <span class=\"study-label\">A room to listen.</span>\n      <span class=\"mode-switch\" data-mode-switch id=\"listening-portfolio\">Portfolio / Play</span>\n    </header>\n\n    <section id=\"threshold\" class=\"threshold-copy\" aria-labelledby=\"entry-heading\">\n      <p class=\"eyebrow\">Lakshya, away from the desk</p>\n      <h1 id=\"entry-heading\">There’s usually<br>a song.</h1>\n      <p class=\"entry-description\">I sing when I’m happy, and singing helps me slow down. Come in for a recording or a moment from the stage.</p>\n      \n      <p class=\"concept-note\">Two recordings and a few moments from the stage.</p>\n    </section>\n\n    <section id=\"room-controls\" class=\"room-controls\" aria-label=\"Room navigation\" hidden>\n      <div class=\"room-heading\">\n        <div><p class=\"eyebrow\">Make yourself at home</p><h1>A song, shared with you.</h1></div>\n        <button id=\"leave-room\" class=\"quiet-button\" type=\"button\">Back to Hobbies</button>\n      </div>\n      <p class=\"room-instruction\">Choose a video to watch or a photograph to read.</p>\n    </section>\n\n    <nav id=\"collection\" class=\"collection\" aria-label=\"Lakshya’s singing collection\" hidden>\n      <p class=\"collection-label\">The collection</p>\n      <div class=\"collection-items\">\n        <button type=\"button\" data-select=\"tiny-desk\" aria-pressed=\"false\"><span class=\"item-number\">01</span><span><strong>At Tiny Desk</strong><small>Watch video · 2:00</small></span></button>\n        <button type=\"button\" data-select=\"spontaneous\" aria-pressed=\"false\"><span class=\"item-number\">02</span><span><strong>Just felt like singing</strong><small>Watch video · 1:10</small></span></button>\n        <button type=\"button\" data-select=\"junoon\" aria-pressed=\"false\"><span class=\"item-number\">03</span><span><strong>A moment at Junoon</strong><small>Open photo · college performance</small></span></button>\n        <button type=\"button\" data-select=\"family\" aria-pressed=\"false\"><span class=\"item-number\">04</span><span><strong>A song with family</strong><small>Open photo · family function</small></span></button>\n      </div>\n    </nav>\n\n    <section id=\"item-context\" class=\"item-context\" aria-labelledby=\"item-title\" hidden>\n      <button id=\"back-room\" class=\"quiet-button back-button\" type=\"button\">Back to recordings</button>\n      <p id=\"item-type\" class=\"eyebrow\"></p>\n      <h2 id=\"item-title\"></h2>\n      <p id=\"item-description\"></p>\n      <button id=\"view-singing-photo\" class=\"button primary\" type=\"button\" hidden>View photograph</button>\n      <button id=\"watch-recording\" class=\"button primary\" type=\"button\" hidden>Open recording</button>\n      <p id=\"player-hint\" class=\"player-hint\" hidden>Press Play on the screen. Take your time.</p>\n      <button id=\"expand-recording\" class=\"text-button\" type=\"button\" hidden>Expand video</button>\n    </section>\n\n    <div id=\"player-surface\" hidden>\n      <video id=\"recording-player\" controls playsinline preload=\"none\" aria-label=\"Lakshya’s spontaneous singing recording\"></video>\n    </div>\n    <div id=\"object-hint\" class=\"object-hint\" hidden></div>\n    <p id=\"status\" class=\"sr-only\" aria-live=\"polite\">Listening Room is ready.</p>\n    <div id=\"fallback\" class=\"fallback\" hidden><h1>The room needs WebGL.</h1><p>Your browser could not open the 3D view. The recordings and photographs remain available below.</p><a href=\"#\">Watch the Tiny Desk performance</a><a href=\"#\">Watch the spontaneous singing recording</a><a href=\"#\">Junoon photograph</a><a href=\"#\">Family performance photograph</a></div>\n    <footer class=\"review-footer\"><span id=\"view-label\">At the doorway</span><span id=\"load-label\">No audio plays automatically.</span></footer>\n  </section>";
     experience=template.content.firstElementChild;container.appendChild(experience);
     host=$('#listening-scene');status=$('#status');player=$('#recording-player');playerSurface=$('#player-surface');
     veil=document.createElement('div');veil.className='listening-veil';veil.setAttribute('aria-hidden','true');experience.appendChild(veil);
     $('#leave-room').hidden=true;
     const photoViewer=document.createElement('section');photoViewer.id='listening-photo-viewer';photoViewer.hidden=true;photoViewer.setAttribute('aria-labelledby','listening-photo-title');photoViewer.innerHTML='<header><h2 id="listening-photo-title"></h2><button type="button" id="listening-photo-close" class="quiet-button">Back to recordings</button></header><div class="singing-photo-layout"><figure><img id="listening-full-photo" alt=""><figcaption id="listening-photo-caption"></figcaption></figure><aside><p class="eyebrow">A moment from the stage</p><p id="listening-photo-description"></p><nav aria-label="Performance photographs"><button type="button" id="listening-photo-prev" class="quiet-button">Previous photograph</button><span id="listening-photo-count" role="status" aria-live="polite"></span><button type="button" id="listening-photo-next" class="quiet-button">Next photograph</button></nav><p id="listening-photo-error" role="status" hidden></p></aside></div>';experience.append(photoViewer);
+    const header=experience.querySelector('.masthead');
+    const title=header.querySelector('.study-label');
+    title.textContent='Listening room';title.className='hobby-room-name';
+    const nav=document.createElement('nav');nav.setAttribute('aria-label','Room navigation');
+    nav.append($('#listening-back-hobbies'),$('#listening-portfolio'));header.replaceChildren(title,nav);
     experience.setAttribute('aria-description','A and D or Left and Right browse the collection. Home and End choose the first or last item. Escape returns one level. Video controls keep their normal keys.');
     experience.querySelector('.room-instruction').textContent='Choose a video or photograph below. Left / Right changes selection; Escape goes back.';
     const links=$('#fallback').querySelectorAll('a');
-    ['spontaneous','tiny-desk','junoon','family'].forEach((id,index)=>{links[index].href=assetUrl(collection[id].video||collection[id].image);});
+    ['tiny-desk','spontaneous','junoon','family'].forEach((id,index)=>{links[index].href=assetUrl(collection[id].video||collection[id].image);});
   }
   function snapshotRenderer(){
     const canvas=renderer.domElement;
@@ -85,13 +92,13 @@ export function createListeningRoom({renderer,container,isReduced,onClose=()=>{}
     if(original.style===null)canvas.removeAttribute('style');else canvas.setAttribute('style',original.style);
   }
   function buildScene(){
-    scene=new THREE.Scene();scene.background=new THREE.Color('#dce2d1');scene.fog=new THREE.Fog('#dce2d1',28,58);
+    scene=new THREE.Scene();scene.background=new THREE.Color('#aadced');scene.fog=new THREE.Fog('#aadced',28,58);
     camera=new THREE.PerspectiveCamera(48,width/height,.1,90);camera.position.copy(views.threshold.position);camera.lookAt(target);
-    Object.assign(palette,{plaster:material('#eee7d5'),plasterLight:material('#f8f0dc'),forest:material('#45634d'),wood:material('#b78350'),darkWood:material('#795133'),paleWood:material('#d6b88a'),brass:material('#a58842',{metalness:.55,roughness:.4}),charcoal:material('#28352d'),linen:material('#eee3c8'),brown:material('#856849'),rug:material('#a5ad8e'),ground:material('#bdc9ad'),path:material('#d8c5a1'),glass:material('#8bafa2',{roughness:.28})});
-    scene.add(new THREE.HemisphereLight('#fff5db','#889676',2.1));
-    const sun=new THREE.DirectionalLight('#fff0d1',3.1);sun.position.set(-6,13,7);sun.castShadow=true;
+    Object.assign(palette,{plaster:material('#bfe4df'),plasterLight:material('#f6f6f1'),forest:material('#17665e'),wood:material('#b78350'),darkWood:material('#795133'),paleWood:material('#d6b88a'),brass:material('#a58842',{metalness:.55,roughness:.4}),charcoal:material('#28352d'),linen:material('#ebc4b6'),brown:material('#856849'),rug:material('#348a95'),ground:material('#89b89a'),path:material('#e0b9a7'),glass:material('#74c8cf',{roughness:.28})});
+    scene.add(new THREE.HemisphereLight('#f5fbff','#83a0a8',2.1));
+    const sun=new THREE.DirectionalLight('#fff9f3',3.1);sun.position.set(-6,13,7);sun.castShadow=true;
     sun.shadow.mapSize.set(1536,1536);Object.assign(sun.shadow.camera,{left:-14,right:14,top:13,bottom:-13,near:.5,far:35});sun.shadow.bias=-.00025;sun.shadow.normalBias=.035;scene.add(sun);resources.lights.add(sun);
-    const windowLight=new THREE.PointLight('#fff2d4',15,15,2);windowLight.position.set(5.7,4.5,-1);scene.add(windowLight);
+    const windowLight=new THREE.PointLight('#effaff',15,15,2);windowLight.position.set(5.7,4.5,-1);scene.add(windowLight);
     buildGround();buildArchitecture();buildRoom();scene.traverse(object=>{if(object.isInstancedMesh)resources.instanced.add(object);});
     renderer.shadowMap.needsUpdate=true;
   }
@@ -131,7 +138,7 @@ function buildGround() {
   path.rotation.y = -.045;
   // A few shared garden forms establish continuity without adding model downloads.
   const canopyGeometry = ownGeometry(new THREE.IcosahedronGeometry(1, 1));
-  const canopyMaterial = material('#7a9569');
+  const canopyMaterial = material('#4aa88f');
   [[-13.5,-5.2,2.7],[-5.3,10.4,2.8],[9.2,-7,3.5],[10,4,2.9],[-1.6,-8,3.9]].forEach(([x,z,h],i) => {
     cylinder(.13,.22,h,palette.darkWood,scene,x,h/2-.2,z,7);
     const canopy = new THREE.Mesh(canopyGeometry,canopyMaterial); canopy.position.set(x,h+.2,z); canopy.scale.set(1.3+i%2*.2,1.6,1.3); canopy.castShadow=true; scene.add(canopy);
@@ -162,8 +169,8 @@ function buildArchitecture() {
   box(.35,.3,11.4,palette.wood,roomGroup,7.05,5.75,.5,.035);
   box(14,.2,.2,palette.paleWood,roomGroup,0,5.75,.25,.025);
   // The doorway faces the garden. Opening sweeps the leaf out of the passage.
-  [-.04,3.18].forEach((offset) => box(.5,4.48,.23,palette.wood,roomGroup,-7.12,2.24,.95+offset,.045));
-  box(.5,.3,3.7,palette.wood,roomGroup,-7.12,4.45,2.49,.04);
+  [-.04,3.18].forEach((offset) => box(.5,4.48,.23,palette.wood,roomGroup,-7.12,2.22,.95+offset,.045));
+  box(.5,.3,3.7,palette.wood,roomGroup,-7.12,4.42,2.49,.04);
   box(.9,.09,3.5,palette.paleWood,roomGroup,-7.11,.11,2.49,.03);
   door = new THREE.Group();door.position.set(-7.11,.15,1.04);roomGroup.add(door);
   doorLeaf=box(.16,4.12,2.96,palette.forest,door,0,2.06,1.48,.045);
@@ -173,7 +180,7 @@ function buildArchitecture() {
   const inset = box(.185,1.5,2.45,palette.darkWood,door,-.012,2.85,1.48,.03);
   inset.material = palette.forest;
   const handle = cylinder(.065,.065,.3,palette.brass,door,-.15,1.9,2.6,10);handle.rotation.z=Math.PI/2;
-  label('COME ON IN',1.9,.42,door,-.105,3.1,1.5,{background:'#45634d',color:'#eee8ce',size:20}).rotation.y=-Math.PI/2;
+  label('COME ON IN',1.9,.42,door,-.105,3.1,1.5,{background:'#17665e',color:'#eee8ce',size:20}).rotation.y=-Math.PI/2;
   const sign=label('THE LISTENING ROOM',3.9,.65,roomGroup,-7.255,5.05,2.5,{background:'#d6b88a',heading:true,size:27});sign.rotation.y=-Math.PI/2;
   const doorPick=box(.2,3.8,3.0,new THREE.MeshBasicMaterial({visible:false}),roomGroup,-7.3,2.15,2.5);resources.material.add(doorPick.material);doorPick.userData.item='enter';picks.push(doorPick);
   // A framed cloud photograph creates a view rather than a second gallery.
@@ -182,9 +189,9 @@ function buildArchitecture() {
   box(.55,.13,4.8,palette.paleWood,roomGroup,6.8,1.69,-1.05,.03);
   box(.18,3.15,.07,palette.paleWood,roomGroup,6.93,3.26,-1.05,.02);
   const cloud = photoPlane('clouds/layers-of-cloud.webp',4.45,3.0,roomGroup,7.06,3.27,-1.05,'cover'); cloud.rotation.y=-Math.PI/2;
-  // Light falling across the floor is static: no animated shader or shadow pass.
+  // A single passing cloud softens the window light on arrival.
   const lightMat = new THREE.MeshBasicMaterial({color:'#fff2c2',transparent:true,opacity:.16,depthWrite:false});resources.material.add(lightMat);
-  const light=box(3.8,.004,3.4,lightMat,roomGroup,4.2,.115,-.2);light.rotation.y=-.35;light.castShadow=false;light.receiveShadow=false;
+  const light=box(3.8,.004,3.4,lightMat,roomGroup,4.2,.115,-.2);windowPatch=light;light.rotation.y=-.35;light.castShadow=false;light.receiveShadow=false;
 }
 function buildRoom() {
   // Low-key floor rug and seating leave a generous, legible route through the room.
@@ -210,22 +217,29 @@ function buildRoom() {
   // The native HTML video is registered to this plane after the camera settles.
   box(4.02,2.39,.19,palette.darkWood,roomGroup,2.05,3.02,-2.81,.09);
   box(3.84,2.22,.025,palette.charcoal,roomGroup,2.05,3.02,-2.7,.025);
-  monitorScreen=photoPlane(collection.spontaneous.image,3.7,2.08,roomGroup,2.05,3.02,-2.675,'contain','#1e2922');
-  monitorScreen.userData.item='spontaneous';picks.push(monitorScreen);itemMeshes.set('spontaneous',monitorScreen);
-  recordingPosters.set('spontaneous',monitorScreen.material.map);
-  const secondPoster=photoPlane(collection['tiny-desk'].image,3.7,2.08,roomGroup,2.05,3.02,-2.675,'contain','#1e2922');secondPoster.visible=false;
-  recordingPosters.set('tiny-desk',secondPoster.material.map);
+  monitorScreen=photoPlane(collection['tiny-desk'].image,3.7,2.08,roomGroup,2.05,3.02,-2.675,'contain','#1e2922');
+  monitorScreen.userData.item='tiny-desk';picks.push(monitorScreen);itemMeshes.set('tiny-desk',monitorScreen);
+  recordingPosters.set('tiny-desk',monitorScreen.material.map);
+  const secondPoster=photoPlane(collection['spontaneous'].image,3.7,2.08,roomGroup,2.05,3.02,-2.675,'contain','#1e2922');secondPoster.visible=false;
+  recordingPosters.set('spontaneous',secondPoster.material.map);
   box(.2,.37,.15,palette.charcoal,roomGroup,2.05,1.98,-2.99,.03);
   box(1.0,.07,.65,palette.charcoal,roomGroup,2.05,1.93,-2.95,.05);
   // Two visible recording sleeves share this one listening screen. Poster maps
   // are reused; each physical sleeve has an equivalent named HTML control.
-  ['spontaneous','tiny-desk'].forEach((id,index)=>{
+  ['tiny-desk','spontaneous'].forEach((id,index)=>{
     const x=1.14+index*1.82;
     box(1.48,.99,.1,palette.darkWood,roomGroup,x,1.22,-2.36,.035);
     const cardMaterial=new THREE.MeshBasicMaterial({map:recordingPosters.get(id)});resources.material.add(cardMaterial);
     const card=new THREE.Mesh(ownGeometry(new THREE.PlaneGeometry(1.32,.742)),cardMaterial);card.position.set(x,1.3,-2.302);card.userData.item=id;roomGroup.add(card);picks.push(card);
-    label(index?'02  TINY DESK':'01  SPONTANEOUS',1.35,.17,roomGroup,x,.82,-2.302,{size:16,background:'#795133',color:'#f0e7ce'});
+    label(index?'02  SPONTANEOUS':'01  TINY DESK',1.35,.17,roomGroup,x,.82,-2.302,{size:16,background:'#795133',color:'#f0e7ce'});
   });
+  // A row of coloured meters in the desk fascia wakes up as the room opens.
+  const paints=['#2d9889','#65bba0','#edaa59','#e37b66'].map(c=>material(c));
+  box(2.44,.50,.09,palette.charcoal,roomGroup,2.05,4.46,-2.81,.035);
+  for(let i=0;i<14;i++){
+    const bar=box(.10,.33,.035,paints[Math.floor(i/4)],roomGroup,1.04+i*.155,4.46,-2.74);
+    levelBars.push(bar);
+  }
   // Phone rests upright in its cradle; the front is deliberately small and quiet.
   const phone=new THREE.Group();phone.position.set(.14,1.94,-3.0);phone.rotation.y=.28;phone.rotation.x=-.12;roomGroup.add(phone);
   box(.36,.67,.055,palette.charcoal,phone,0,.3,0,.035);
@@ -238,14 +252,14 @@ function buildRoom() {
   // Two truthful photographic memories form the room's second focal point.
   framedPhoto('junoon',-4.3,3.15,2.16,2.16,'03  JUNOON');
   framedPhoto('family',-1.8,3.12,2.24,1.5,'04  FAMILY');
-  label('Songs are better shared.',5.0,.45,roomGroup,-2.9,4.83,-4.95,{heading:true,size:31,background:'#eee7d5',color:'#4d6348'});
+  label('Songs are better shared.',5.0,.45,roomGroup,-2.9,4.83,-4.95,{heading:true,size:31,background:'#bfe4df',color:'#4d6348'});
   // Small open storage, with three recording sleeves rather than a fictitious discography.
   const shelf=new THREE.Group();shelf.position.set(5.85,0,2.65);shelf.rotation.y=-Math.PI/2;roomGroup.add(shelf);
   [-.91,.91].forEach(x=>box(.12,2.45,.68,palette.wood,shelf,x,1.36,0,.035));
   [.22,1.25,2.51].forEach(y=>box(1.95,.12,.7,palette.wood,shelf,0,y,0,.035));
   box(1.75,2.24,.05,palette.darkWood,shelf,0,1.36,-.32,.02);
   [-.65,-.44,-.25,.03,.23,.47,.65].forEach((x,i)=>{const book=box(.13,.55+(i%3)*.06,.4,[palette.forest,palette.linen,palette.paleWood][i%3],shelf,x,.58,0,.018);book.rotation.z=(i===0?-.12:0);});
-  label('RECORDINGS &\nLITTLE MEMORIES',1.34,.55,shelf,0,2.08,.36,{background:'#b78350',size:21});
+  label('RECORDINGS &\nLITTLE MEMORIES',1.34,.55,shelf,0,2.08,.36,{background:'#e8ceae',size:21});
   cylinder(.19,.17,.3,palette.linen,roomGroup,5.92,2.76,2.65,16);
   // A standing lamp gives the seating a human scale.
   cylinder(.31,.34,.06,palette.darkWood,roomGroup,-5.95,.2,-.15,20);
@@ -260,7 +274,7 @@ function framedPhoto(id,x,y,width,height,caption){
   box(width+.08,height+.08,.015,palette.linen,roomGroup,x,y,-4.827);
   const photo=photoPlane(collection[id].image,width-.12,height-.12,roomGroup,x,y,-4.806,'contain');
   photo.userData.item=id;picks.push(photo);itemMeshes.set(id,photo);
-  label(caption,width,.26,roomGroup,x,y-height/2-.39,-4.89,{background:'#eee7d5',size:22,color:'#445d43'});
+  label(caption,width,.26,roomGroup,x,y-height/2-.39,-4.89,{background:'#bfe4df',size:22,color:'#445d43'});
 }
 function photoPlane(path,width,height,parent,x,y,z,mode='contain',background='#e5deca'){
   const canvas=document.createElement('canvas');const scale=1024/Math.max(width,height);canvas.width=Math.round(width*scale);canvas.height=Math.round(height*scale);
@@ -336,7 +350,7 @@ function photoPlane(path,width,height,parent,x,y,z,mode='contain',background='#e
       const direction=getHorizontalNavigation(event),boundary=getBoundaryNavigation(event);
       if(!direction&&!boundary)return;
       if(transition&&activeView!=='room')return;
-      const ids=['spontaneous','tiny-desk','junoon','family'],current=ids.indexOf(activeId||selectedId);
+      const ids=['tiny-desk','spontaneous','junoon','family'],current=ids.indexOf(activeId||selectedId);
       const index=boundary==='first'?0:boundary==='last'?ids.length-1:current<0?(direction>0?0:ids.length-1):THREE.MathUtils.clamp(current+direction,0,ids.length-1);
       consumeNavigationKey(event);if(ids[index]!==activeId)selectItem(ids[index]);
     },true);
@@ -527,13 +541,30 @@ function updateProjection(){
     listeners.splice(0).forEach(remove=>remove());pendingImages.forEach(entry=>{entry.cancel?.();if(entry.image){entry.image.onload=null;entry.image.onerror=null;}});
     resources.instanced.forEach(object=>object.dispose());resources.lights.forEach(light=>light.shadow?.dispose());resources.geometry.forEach(resource=>resource.dispose());resources.material.forEach(resource=>resource.dispose());resources.texture.forEach(resource=>resource.dispose());
     Object.values(resources).forEach(set=>set.clear());picks.length=0;placards.length=0;pendingImages.length=0;itemMeshes.clear();recordingPosters.clear();boxGeometry.clear();Object.keys(palette).forEach(key=>delete palette[key]);scene?.clear();
-    restoreRenderer();experience?.remove();experience=null;host=null;scene=null;camera=null;door=null;doorLeaf=null;roomGroup=null;monitorScreen=null;player=null;playerSurface=null;status=null;veil=null;assetsReady=false;assetsLoading=false;
+    restoreRenderer();experience?.remove();experience=null;host=null;scene=null;camera=null;door=null;doorLeaf=null;roomGroup=null;levelBars.length=0;windowPatch=null;monitorScreen=null;player=null;playerSurface=null;status=null;veil=null;assetsReady=false;assetsLoading=false;
     const focus=externalFocus;externalFocus=null;
     if(notify){try{onClose();}finally{if(focus?.isConnected&&!focus.disabled)focus.focus({preventScroll:true});}}
   }
   function update(dtSeconds=0){
     if(!opened||document.hidden||!scene)return false;
     const delta=Math.min(.1,Math.max(0,Number(dtSeconds)||0));clock+=delta*1000;
+    const playing=playerOpen&&player&&!player.paused&&!player.ended;
+    const t=playing?player.currentTime:clock/1000;
+    const amplitude=shouldReduceMotion()||photoViewerOpen||closing?0:playing?1:Math.sin(Math.PI*Math.min(1,t/6))**2;
+    levelBars.forEach((bar,i)=>{
+      const height=.22+amplitude*(.42+.36*Math.sin(t*3-i*.63));
+      if(bar.scale.y!==height){bar.scale.y=height;bar.position.y=4.29+.165*height;dirty=true;}
+    });
+    if(windowPatch){
+      const fraction=Math.min(1,clock/4800);
+      const breath=closing||shouldReduceMotion()||playerOpen||photoViewerOpen?0:Math.sin(Math.PI*fraction)**2;
+      const x=4.2-.34*breath;
+      if(windowPatch.position.x!==x){
+        windowPatch.position.x=x;
+        windowPatch.material.opacity=.16+.10*breath;
+        dirty=true;
+      }
+    }
     if(shouldReduceMotion()&&transition)transition.started=clock-transition.duration;
     if(!closing&&openingElapsed<.42){openingElapsed+=delta;veil.style.opacity=shouldReduceMotion()?'0':String(Math.max(0,1-openingElapsed/.42));dirty=true;}
     if(closing&&transition)veil.style.opacity=String(Math.max(closingVeilStart,(Math.min(1,(clock-transition.started)/transition.duration)-.78)/.22));

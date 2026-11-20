@@ -14,7 +14,12 @@ export function createBufferedWelcomeAudio(context,{AudioClass=globalThis.Audio,
   currentTime:{get:()=>paused?offset:Math.max(0,context.currentTime-startedAt),set:value=>{offset=Number(value)||0;}},
   paused:{get:()=>paused},ended:{get:()=>ended},duration:{get:()=>duration},
  });
- function contextStateChanged(){if(source&&context.state!=='running')audio.pause();}
+ function contextStateChanged(){
+  if(!source)return;
+  if(context.state==='closed')audio.onerror?.();
+  else if(context.state==='running')audio.onplaying?.();
+  else audio.onwaiting?.();
+ }
  audio.pause=()=>{const wasPlaying=!paused;stop();if(wasPlaying)audio.onpause?.();};
  audio.load=()=>{stop();};
  audio.play=async()=>{

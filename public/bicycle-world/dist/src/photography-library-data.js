@@ -2,6 +2,42 @@
 // Literal image and thumbnail paths are required by the production dependency scanner.
 export const PHOTOGRAPHY_LIBRARY=Object.freeze([
   {
+    "id": "cloud-banks-near-home",
+    "category": "clouds",
+    "caption": "Cloud banks near home",
+    "alt": "Layers of white and grey cloud above green fields and rooftops near my home.",
+    "type": "image",
+    "src": "./assets/personal/photography-library/cloud-banks-near-home.webp",
+    "thumb": "./assets/personal/photography-library/thumbs/cloud-banks-near-home.webp",
+    "width": 1600,
+    "height": 902,
+    "sourceSHA256": "b00c21fa641ab394af30bbc54b6c7a51acb75614e3a8537e427b864630155ec1"
+  },
+  {
+    "id": "sunlight-at-cloud-edge",
+    "category": "clouds",
+    "caption": "Sunlight at the cloud edge",
+    "alt": "Sunlight breaks through the edge of a large cloud against a deep blue sky.",
+    "type": "image",
+    "src": "./assets/personal/photography-library/sunlight-at-cloud-edge.webp",
+    "thumb": "./assets/personal/photography-library/thumbs/sunlight-at-cloud-edge.webp",
+    "width": 1600,
+    "height": 902,
+    "sourceSHA256": "5fd0a02359bed5305541aa51bb57b6779feb4dc201d28a1f2ec3340d9a1ec06b"
+  },
+  {
+    "id": "flower-buds-under-blue-sky",
+    "category": "clouds",
+    "caption": "Looking up from the flowers",
+    "alt": "White flower buds reach into a blue sky with scattered white clouds.",
+    "type": "image",
+    "src": "./assets/personal/photography-library/flower-buds-under-blue-sky.webp",
+    "thumb": "./assets/personal/photography-library/thumbs/flower-buds-under-blue-sky.webp",
+    "width": 1600,
+    "height": 902,
+    "sourceSHA256": "878401b11d9e6668960be652664be2419b6502b800b39084c7c548d6c33d3c98"
+  },
+  {
     "id": "clouds-over-fields",
     "category": "clouds",
     "caption": "Clouds over the fields",
@@ -50,18 +86,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "085e541808cd657a3cefafc8b2ff61bb23fc737ece3f54fb1ce4650cc1861b71"
   },
   {
-    "id": "layers-of-cloud",
-    "category": "clouds",
-    "caption": "Layers of cloud",
-    "alt": "Sunlight above layered white and grey clouds, with low hills at the horizon.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/layers-of-cloud.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/layers-of-cloud.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "09cc5b87b2cb3fbc9d86b9d827b1fc1fb501fb2e150057586e4d5bb35683398c"
-  },
-  {
     "id": "a-break-in-the-clouds",
     "category": "clouds",
     "caption": "A break in the clouds",
@@ -96,18 +120,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "width": 1600,
     "height": 900,
     "sourceSHA256": "7890d894ba7bc06379bab0a06b40d643d44df6210f3c96b1ceb37e923fde6409"
-  },
-  {
-    "id": "sky-along-the-path",
-    "category": "clouds",
-    "caption": "Sky along the path",
-    "alt": "A dirt path through fields beneath a broad blue sky, white clouds and a distant row of palms.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/sky-along-the-path.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/sky-along-the-path.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "6f0f22b03d0b49b41f01d6df550e7e0aec533e385d5e8a6f76fe84f62bd8df5a"
   },
   {
     "id": "a-quieter-sky",
@@ -158,18 +170,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "9cb233b49d3d16d2a57ca40e5974d272639c8eaeff67295b5970d4e3b8f839c5"
   },
   {
-    "id": "library-c08",
-    "category": "clouds",
-    "caption": "Above the open field",
-    "alt": "White and grey clouds above an open brown field and distant palm trees.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-c08.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-c08.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "1c18e2eb947bc14c736bfd1d9ed83fa97a97d89d599b3d297b61271f830c8482"
-  },
-  {
     "id": "library-c09",
     "category": "clouds",
     "caption": "A path under blue sky",
@@ -194,54 +194,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "57ba70ab9952407baa6782283f0e3d3aecacc67154fece08c92fc36ef94a38b3"
   },
   {
-    "id": "library-c13",
-    "category": "clouds",
-    "caption": "Clouds on the horizon",
-    "alt": "Large white clouds above green field edges and a low building.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-c13.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-c13.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "5aefaaf75d88c041bed8f3216e45ff9c9fe6fb3aa1a5c371b9925620174fbea2"
-  },
-  {
-    "id": "library-c14",
-    "category": "clouds",
-    "caption": "Above the planted rows",
-    "alt": "White clouds and blue sky above planted field rows and a dark utility pole.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-c14.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-c14.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "27610fbe06783d9b240916653bbf7c954de4c7c0fd1a46e0b89f19ac077c30a6"
-  },
-  {
-    "id": "library-c15",
-    "category": "clouds",
-    "caption": "A cloud over the rows",
-    "alt": "A large grey-white cloud above parallel field rows and green edges.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-c15.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-c15.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "64f89103d28765e799e24fabeef90b4dc36e784f82ff12955ffdc48c64476a0d"
-  },
-  {
-    "id": "library-c16",
-    "category": "clouds",
-    "caption": "Sky and field lines",
-    "alt": "Clouds, overhead wires and parallel rows of green crops.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-c16.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-c16.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "2c2ef9968e7946b3ba4aa60ea862e5fa85024625f26e94e8c08f91e4b131d03e"
-  },
-  {
     "id": "library-c17",
     "category": "clouds",
     "caption": "Clouds over green rows",
@@ -264,42 +216,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "width": 900,
     "height": 1600,
     "sourceSHA256": "b6202622fe2f4f32fc51dbc6f3897f5bdc850fd0974a0fb224c9e1b8b5601ec6"
-  },
-  {
-    "id": "library-c25",
-    "category": "clouds",
-    "caption": "Where the path opens",
-    "alt": "A stony dirt path beside a field, beneath white clouds and blue sky.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-c25.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-c25.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "612a8e5661cddc7f8200704d17567537996bdcf965440c7d83a9707faebf176a"
-  },
-  {
-    "id": "library-p03",
-    "category": "clouds",
-    "caption": "Light behind the clouds",
-    "alt": "Sunlight spreads beneath a dark cloud above green land and scattered buildings.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p03.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p03.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "bb4e84e9cce1fcd7f5dcabf833456d653838bb26a2839f545a77198fe65a1fe7"
-  },
-  {
-    "id": "library-p07",
-    "category": "clouds",
-    "caption": "Palms under a cloud bank",
-    "alt": "Palm trees and green fields beneath large white clouds.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p07.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p07.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "7243ad01496aa9247268478bfea25318e096529ceb476518e2a3966813529f3b"
   },
   {
     "id": "library-p61",
@@ -458,18 +374,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "b4f6ba5dc06561a42a449f73e2b1c0e210b9a6f4b907dd41680684ebc753839d"
   },
   {
-    "id": "library-p88",
-    "category": "clouds",
-    "caption": "Rays through the clouds",
-    "alt": "Light spreads through a gap in dark grey clouds.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p88.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p88.webp",
-    "width": 783,
-    "height": 1600,
-    "sourceSHA256": "c80e62e5077e01803016da5d65e72bba6ebe9422ee63236a4cf7a924f75392b1"
-  },
-  {
     "id": "library-p92",
     "category": "clouds",
     "caption": "A warm horizon",
@@ -492,18 +396,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "width": 1600,
     "height": 783,
     "sourceSHA256": "9861eeedafdd759a013b03fad457bb76c6dff74e3f7659b0823f1952b4833d28"
-  },
-  {
-    "id": "library-p96",
-    "category": "clouds",
-    "caption": "At the upper edge",
-    "alt": "White cloud edges enter an otherwise open blue sky.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p96.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p96.webp",
-    "width": 783,
-    "height": 1600,
-    "sourceSHA256": "c2b476a65688f412b0cc07a0ff942f1f8bbe632b67d4292ba968e00eb92633f5"
   },
   {
     "id": "library-p97",
@@ -530,18 +422,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "cb9cf5f43152a4cd4aff729a76626d043998e0bfc48ec1631c29fbe5aa0c5200"
   },
   {
-    "id": "library-p144",
-    "category": "clouds",
-    "caption": "Clouds above the dome",
-    "alt": "Sunlit white clouds above a pale domed building and green trees.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p144.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p144.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "fa46724b75e6376ddf777272434c1f649424e1600ea2138d45a0109ff973ba88"
-  },
-  {
     "id": "library-p145",
     "category": "clouds",
     "caption": "Sky above the palms",
@@ -552,18 +432,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "width": 1600,
     "height": 900,
     "sourceSHA256": "2d220f0bb4db47403ae01965aec7e895cc1c296da86ae14eb36bd324cdcbf853"
-  },
-  {
-    "id": "library-p146",
-    "category": "clouds",
-    "caption": "Clouds above the grounds",
-    "alt": "Dense white cloud forms above green grounds and pale buildings.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p146.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p146.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "fe1f16fa9811b421e5e140d48ee88276107d2f91a464372cb9b59420e7102209"
   },
   {
     "id": "library-p152",
@@ -578,18 +446,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "842e7b5819f4c9a15db3fdac426d78a9a1f0441f8b262e339d6d4965d81b633e"
   },
   {
-    "id": "library-p153",
-    "category": "clouds",
-    "caption": "A blue opening",
-    "alt": "A blue strip of sky separates a grey-white cloud layer from a pale building and trees.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p153.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p153.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "0811eb3d32611efd30fb2372dfbd858f0033d92ad489d2dca5b57fbcfd90cbd3"
-  },
-  {
     "id": "library-p154",
     "category": "clouds",
     "caption": "A cloud shelf above trees",
@@ -600,18 +456,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "width": 1600,
     "height": 900,
     "sourceSHA256": "6c72100d549e4ebb62ea77d599f4016f611d218a8e5e3643f2dd2769109f01e2"
-  },
-  {
-    "id": "library-p155",
-    "category": "clouds",
-    "caption": "Cloud texture overhead",
-    "alt": "Rounded grey-white clouds above the corner of a pale domed building.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p155.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p155.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "198c8398eecfcd9d7f0fdcf3112dad40de3b6882ff6defa80522bc22b3100ddb"
   },
   {
     "id": "library-p165",
@@ -626,18 +470,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "b75dc7311f2b5b0b8aa75dd7a86061e4616b78ce732eb505d7885dda67b0434d"
   },
   {
-    "id": "library-p168",
-    "category": "clouds",
-    "caption": "Sun at the edge",
-    "alt": "Bright sunlight at the edge of dark clouds.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p168.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p168.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "21958fea53f6d2d15dd5f67c58cb0ecf5f3144fb2d06cc1904eca1763e0a2292"
-  },
-  {
     "id": "library-p169",
     "category": "clouds",
     "caption": "A bright cloud opening",
@@ -648,42 +480,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "width": 900,
     "height": 1600,
     "sourceSHA256": "b9643f3e1216d2144eddbd8e5db8da9819eadf05b0d5bba71b22b1d3f56baa54"
-  },
-  {
-    "id": "library-p170",
-    "category": "clouds",
-    "caption": "A darker cloud bank",
-    "alt": "Dark clouds with bright white edges around a sunlit opening.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p170.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p170.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "02f93392cfd9a8ab6e7a68d2e75aa808ec8ff1b2336eb1d9e2a09b98693658f0"
-  },
-  {
-    "id": "library-p199",
-    "category": "clouds",
-    "caption": "Sky between the trees",
-    "alt": "White clouds and blue sky seen between leafy trees.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p199.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p199.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "911214bea50a70896d7353f8f021a0e8e4e05b8d40f888ed75b8930a60343b80"
-  },
-  {
-    "id": "library-p260",
-    "category": "clouds",
-    "caption": "A broad grey sky",
-    "alt": "A wide grey sky above a low distant landscape.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p260.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p260.webp",
-    "width": 1600,
-    "height": 1200,
-    "sourceSHA256": "6b39b844ca1916d93a90926cafe5f0d5f58176eb70a756259f686a6ba0140220"
   },
   {
     "id": "library-p270",
@@ -734,30 +530,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "c5e4a0494bdcea12b450ff7584f305e712aec4718d78f57b4875cb5491d4c73e"
   },
   {
-    "id": "library-p284",
-    "category": "clouds",
-    "caption": "Clouds beyond the hills",
-    "alt": "White clouds and a blue opening above low hills and open green ground.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p284.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p284.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "8e2f3fed43beef05c4ab7bf7b8574c83918e49f076e25330418533bcd881296b"
-  },
-  {
-    "id": "library-p285",
-    "category": "clouds",
-    "caption": "A bright patch in the grey",
-    "alt": "A bright sunlit patch beneath clouds above a distant green landscape.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p285.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p285.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "7297e84da50146b89fbddf6cd279caa042de5858bfc783c2c7f7e0c79a5711fa"
-  },
-  {
     "id": "library-p288",
     "category": "clouds",
     "caption": "Sun above the horizon",
@@ -782,54 +554,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "37a733935b4e15069d9fc3ca550285ef0c067dacf09cafe0f8771ddf3b3eb1c7"
   },
   {
-    "id": "library-p291",
-    "category": "clouds",
-    "caption": "Light through the haze",
-    "alt": "Sunlight spreads through haze above a distant green landscape.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p291.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p291.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "5409acba64a6fcbcadf48df616e0fe01b3eec13ac211362060dce7704cb2239e"
-  },
-  {
-    "id": "library-p294",
-    "category": "clouds",
-    "caption": "Grey clouds gather",
-    "alt": "Large grey cloud forms with a pale bright edge.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p294.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p294.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "a5f8dbd123c65c15bf195dfa5282f50f1d1e2a1aaac026e055bd17ef27187a84"
-  },
-  {
-    "id": "library-p295",
-    "category": "clouds",
-    "caption": "The underside of a cloud",
-    "alt": "A dark grey cloud with a brighter lower edge.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p295.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p295.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "59f39bab991bdef932dab1137f72933bc9c3fe633f97ea1b01a84eeed21188a5"
-  },
-  {
-    "id": "library-p296",
-    "category": "clouds",
-    "caption": "Sun behind the grey",
-    "alt": "Sunlight shines behind a dark grey cloud above a distant horizon.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p296.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p296.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "b906c3b05f9c846b4aa2c0f5e23c802ea96231bc1ec5d0a02a6af5380d005cfe"
-  },
-  {
     "id": "library-p298",
     "category": "clouds",
     "caption": "A blue break above the hills",
@@ -840,18 +564,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "width": 1200,
     "height": 1600,
     "sourceSHA256": "9d4543b11246e257dbc3ca3c4948c405b26f0b7e941cf6e0335a5ebafb5593ed"
-  },
-  {
-    "id": "library-p304",
-    "category": "clouds",
-    "caption": "Cloud layers above the green",
-    "alt": "Fine bright cloud layers above a green landscape.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p304.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p304.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "f2b4a40d4f2199c05f900abb48d8ee3ac64cc8b2ad62f0f761bb9928aa1e576c"
   },
   {
     "id": "library-p305",
@@ -890,18 +602,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "283b42d210fd18b5a64a2b9ef53dceb966819d4a303ff5d1e65b335514b85e6a"
   },
   {
-    "id": "library-n010",
-    "category": "clouds",
-    "caption": "White streaks overhead",
-    "alt": "White cloud streaks in deep blue sky, with a thin wire crossing above.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n010.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n010.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "309cc877819900033b85d36e7324d7efafc1083697c15f0c7ab74587878b2d5d"
-  },
-  {
     "id": "library-n011",
     "category": "clouds",
     "caption": "Clouds above the parked cars",
@@ -912,30 +612,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "width": 1600,
     "height": 900,
     "sourceSHA256": "cebc1ef65df1c1617466fae021cee9ceefa761193b173d466f91b81ec647030b"
-  },
-  {
-    "id": "library-n012",
-    "category": "clouds",
-    "caption": "A blue sky above trees",
-    "alt": "Small white clouds above leafy trees and a row of parked cars.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n012.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n012.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "0b197bcfd60e197d17d4f95c6875cf6794e204015584503480625d5a6b11d58b"
-  },
-  {
-    "id": "library-n013",
-    "category": "clouds",
-    "caption": "A wide cloud bank",
-    "alt": "A bank of white clouds above green trees and a small distant dome.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n013.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n013.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "94852fe96dec5a8ad81edd3b6d68d4abd78ef2dd88ff4b707b276ba1f1185bdd"
   },
   {
     "id": "library-n014",
@@ -950,30 +626,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "bbf2b2dab53f7be69196c6f0d4cecbbdd476de085f68fab8a2d660f4b1dcafdd"
   },
   {
-    "id": "library-n015",
-    "category": "clouds",
-    "caption": "Sun in the cloud layers",
-    "alt": "Bright sun surrounded by grey and white clouds, with palms below.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n015.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n015.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "28719229c7cf940320dbb89cb3a38a602b080f40c1bf744383bf1154c25e42da"
-  },
-  {
-    "id": "library-n016",
-    "category": "clouds",
-    "caption": "A gap of light",
-    "alt": "Bright sky between grey-white cloud banks above a distant dome and palms.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n016.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n016.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "d2f1f422f870a36987b47293eb08bb20aacd9f85dfddddddf5fc875db29552f2"
-  },
-  {
     "id": "library-n017",
     "category": "clouds",
     "caption": "The sun through a break",
@@ -986,30 +638,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "5aa3a18cfb233e28b0bde8087f331bf0a3f675842cd244675697ed4567f2bd45"
   },
   {
-    "id": "library-n018",
-    "category": "clouds",
-    "caption": "An opening overhead",
-    "alt": "Sunlight breaks through a blue opening between dark clouds.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n018.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n018.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "a008076e895af0d4771fffe8bf7fd87819b0610e3c6594c7076439780e6ab7c9"
-  },
-  {
-    "id": "library-n019",
-    "category": "clouds",
-    "caption": "Between the treetops",
-    "alt": "A blue strip of sky and bright cloud edges above tall trees.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n019.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n019.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "7c9b9cfbcc66eb763d8e18d805514c7d1de88be19da5f0ef26191e123afd639f"
-  },
-  {
     "id": "library-n020",
     "category": "clouds",
     "caption": "Clouds over dark palms",
@@ -1020,18 +648,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "width": 1600,
     "height": 900,
     "sourceSHA256": "0ce01834cdf3ece13353eabd0c178dc0e6da8e587079684c6d1d5b8db9f133ba"
-  },
-  {
-    "id": "library-n021",
-    "category": "clouds",
-    "caption": "White clouds, wide sky",
-    "alt": "Scattered white clouds above trees and low buildings.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n021.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n021.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "9d1b402929ff4168521e2dc7250c3986e7700ce6890cb8cffa88e9916418eb5c"
   },
   {
     "id": "library-n022",
@@ -1094,42 +710,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "0473d66ec9ef9e0db45c1d91448a50a60189b7df57326a3670bbef4a58144ada"
   },
   {
-    "id": "library-n028",
-    "category": "clouds",
-    "caption": "White clouds above rooftops",
-    "alt": "Broken white cloud layers above palms and low rooftops.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n028.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n028.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "186dfab87174fcfbea47a7ee0305d1ebaa468db3fd559904ca00647d1c0a1269"
-  },
-  {
-    "id": "library-n029",
-    "category": "clouds",
-    "caption": "Clouds in long streaks",
-    "alt": "Textured white cloud streaks across blue sky above dark palms.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n029.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n029.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "bdbdb42b56bda79482b4bcaf7a5831ca11e9c7868c4c5b7786b09adef78f1be8"
-  },
-  {
-    "id": "library-n030",
-    "category": "clouds",
-    "caption": "A sky full of texture",
-    "alt": "Fine white cloud forms above palms and a pale building edge.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n030.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n030.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "0a3745e0f126a5c7d70602dc91eec2d52b2ffacbb8c0d0fd4463794410c0b4b1"
-  },
-  {
     "id": "library-n031",
     "category": "clouds",
     "caption": "Looking up through palms",
@@ -1140,30 +720,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "width": 900,
     "height": 1600,
     "sourceSHA256": "9f6518d8b3841b6dd54ac9bce7e51826069620c634584e80e94e1a0168e2297b"
-  },
-  {
-    "id": "library-n032",
-    "category": "clouds",
-    "caption": "White layers above palms",
-    "alt": "Bands of small white clouds above dark palm fronds.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n032.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n032.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "99c36e5252d7e2a5501295afe20331ff807212ca2b48442d3f2a1835977e2731"
-  },
-  {
-    "id": "library-n033",
-    "category": "clouds",
-    "caption": "Grey sky beside the road",
-    "alt": "Grey clouds above a roadside billboard, low buildings and green hills.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n033.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n033.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "a9459f62bdc81ef7e35591da2af845f7f98f04b07263d1aa3ba6dd6acc3f712f"
   },
   {
     "id": "library-n034",
@@ -1178,42 +734,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "68a9e01bdcf75d9bbb0da997d7561403a72ec050dba934064e748493ce426136"
   },
   {
-    "id": "library-n035",
-    "category": "clouds",
-    "caption": "A pink evening sky",
-    "alt": "Pink and peach cloud layers above a low building and trees.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n035.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n035.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "1063e31b874823de35b086327f434476fbbbf4391f748cd45685d875704a7a10"
-  },
-  {
-    "id": "library-n036",
-    "category": "clouds",
-    "caption": "Pink above the street",
-    "alt": "Pink cloud layers above roadside trees and a streetlamp.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n036.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n036.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "d4a41e64e0b86898d5b7a19d1b527e5e169c2bba4ba4e5bc805adfe3c5a27955"
-  },
-  {
-    "id": "library-n037",
-    "category": "clouds",
-    "caption": "Pink clouds beyond the road",
-    "alt": "A soft pink sky above roadside buildings, trees and a low hill.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n037.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n037.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "f64ea66a7ca0fc8d190f6d28f253174081c4259b3d89e5751ec7ed167da0e1b0"
-  },
-  {
     "id": "library-n038",
     "category": "clouds",
     "caption": "A broad sweep of pink",
@@ -1226,42 +746,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "1bc8f54c13455e3b9f87a3599ec60eb2a8a067c2d7298712f3687f345b5ff12a"
   },
   {
-    "id": "library-n041",
-    "category": "clouds",
-    "caption": "Clouds through palm fronds",
-    "alt": "White clouds in blue sky framed by palms and pale buildings.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n041.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n041.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "593312b913013ca0d0097ded297c21d1dc9bed75cdb844b63633bce29d7b1077"
-  },
-  {
-    "id": "library-n043",
-    "category": "clouds",
-    "caption": "Sun beside the building",
-    "alt": "Sunlight and white clouds between a tall building and leafy trees.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n043.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n043.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "3c8ce5fa4cbab381264090aada89f683f6a7363c28f332dd9ef3108aded4525d"
-  },
-  {
-    "id": "library-n044",
-    "category": "clouds",
-    "caption": "Streaks over an open square",
-    "alt": "White cloud streaks above a broad paved area and low buildings.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n044.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n044.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "d93a8de6ca636e6d6786b715d00c1ac4997388d633be3d10e4aca728817202b6"
-  },
-  {
     "id": "library-n045",
     "category": "clouds",
     "caption": "Clouds over the square",
@@ -1272,18 +756,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "width": 1600,
     "height": 900,
     "sourceSHA256": "9e63274b29e43856d98af887e19c576f304f80c3b2e4d47451558c4350fd896c"
-  },
-  {
-    "id": "library-n046",
-    "category": "clouds",
-    "caption": "Cloud bands over the rooftops",
-    "alt": "Dense white cloud bands above a broad paved area and low roofs.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n046.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n046.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "bad2520b441a13d7b936856c7453cd98121a2bf305a185cc4b3a58cf2892d332"
   },
   {
     "id": "library-n047",
@@ -1308,30 +780,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "width": 1600,
     "height": 900,
     "sourceSHA256": "e023044926d7e5ed26192df2e9e370de4b71d3129cbd4bdfc794112050cd364d"
-  },
-  {
-    "id": "library-n049",
-    "category": "clouds",
-    "caption": "Clouds beyond the palms",
-    "alt": "White clouds above palms and a distant pale domed building.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n049.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n049.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "57aff932c67fbc2b13df9b401097aa488dc94d12ffbe018a5bfd636b16d69d8c"
-  },
-  {
-    "id": "library-n050",
-    "category": "clouds",
-    "caption": "Clouds between the trees",
-    "alt": "White clouds in pale blue sky above a streetlamp and green trees.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n050.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n050.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "57a15dd13e198a71b689140c201d3e3f04b296ed85807ffe79de1f63a14c5bd1"
   },
   {
     "id": "library-n051",
@@ -1478,30 +926,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "b31ea6c6b1f053be87fa6d11c2d37c71152b7ce4b162ddd97f92d9ab0a407688"
   },
   {
-    "id": "library-n118",
-    "category": "clouds",
-    "caption": "Clouds above the green",
-    "alt": "White cloud layers and a blue opening above green trees and distant buildings.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n118.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n118.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "8e96767b96bc8387c2fd0e3ea40634c8ce46ad4a5acfcefd20c5bde398b87fa0"
-  },
-  {
-    "id": "library-n119",
-    "category": "clouds",
-    "caption": "White clouds over a dome",
-    "alt": "Large white clouds above a pale domed building and green trees.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n119.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n119.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "04282ec75b4f524ae7f895d3a7e34ee722b5baa23f96f1e537135b6eb0412649"
-  },
-  {
     "id": "library-n120",
     "category": "clouds",
     "caption": "Cloud shapes above the dome",
@@ -1512,78 +936,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "width": 1600,
     "height": 900,
     "sourceSHA256": "5e9a98826e41d474a72821e40e63c7dd8026f05933a72ba6f723866476028457"
-  },
-  {
-    "id": "library-n121",
-    "category": "clouds",
-    "caption": "Grey and white overhead",
-    "alt": "Grey and white clouds above a pale domed building and trees.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n121.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n121.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "9221f466bef82896e51b04b63031dc523dc62d8a601aa0d59d40ac2d5614754f"
-  },
-  {
-    "id": "library-n122",
-    "category": "clouds",
-    "caption": "A cloud-filled sky",
-    "alt": "Rounded grey-white clouds above a large domed building.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n122.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n122.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "338cb7d40e7185532afbae676fef08605d12ca67a4e4f760aac1a33a936bc508"
-  },
-  {
-    "id": "library-n123",
-    "category": "clouds",
-    "caption": "Clouds beyond a wall",
-    "alt": "White clouds above a pale domed building, with a stone wall at the right edge.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n123.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n123.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "95993c52fc85510fe31179fafee063fa5fc831844566d9e01ae97b7b34eb6033"
-  },
-  {
-    "id": "library-n124",
-    "category": "clouds",
-    "caption": "A cloud break above the dome",
-    "alt": "Grey-white clouds and blue sky above a pale domed building beside a stone wall.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n124.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n124.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "7f80c8ec7ff82a81f2823c4d39fd54779c4c8237fa4681c723ca8fa0911fa471"
-  },
-  {
-    "id": "library-n125",
-    "category": "clouds",
-    "caption": "White edges over the dome",
-    "alt": "Bright-edged clouds above a pale domed building and green canopy.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n125.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n125.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "2813d4c137f8ff3d3ee1b0683493530ad9021d9f8e56b2e245a5d824d6fe0f63"
-  },
-  {
-    "id": "library-n126",
-    "category": "clouds",
-    "caption": "Deep blue between the clouds",
-    "alt": "White cloud forms against blue sky above a pale domed building.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n126.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n126.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "130cadbff68db3c3b8187c4109a595f498d8db1c2e7bc57e50149c79a017c71b"
   },
   {
     "id": "library-n127",
@@ -1598,18 +950,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "d774929af587345680af2b87e105f7fc5bffafffb929b7e5aa8ca029111c932d"
   },
   {
-    "id": "library-n128",
-    "category": "clouds",
-    "caption": "Cloud layers above the skyline",
-    "alt": "White cloud layers above a dark cloud bank and a low urban horizon.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n128.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n128.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "58ec80f9a7eeb95929fbc5f244d2a54291a0ed1641377ca7f9c7e24474141f8e"
-  },
-  {
     "id": "library-n129",
     "category": "clouds",
     "caption": "Sun in a blue opening",
@@ -1620,66 +960,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "width": 1600,
     "height": 900,
     "sourceSHA256": "b8fb33cf3a3ee394c6b2c40700bf887c9fca6e399d17453d6b0eb4969aadaf91"
-  },
-  {
-    "id": "library-n130",
-    "category": "clouds",
-    "caption": "A sunlit sky from below",
-    "alt": "A bright sun and fine white clouds beneath a narrow overhang.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n130.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n130.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "c9d1c84f51f82d4b8c0e42d55cf482517cebf0b311c22ec4726113db935df658"
-  },
-  {
-    "id": "library-n131",
-    "category": "clouds",
-    "caption": "Light beyond the overhang",
-    "alt": "Bright sunlight in blue sky with white clouds beneath a dark overhang.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n131.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n131.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "29e21d0eddff10a13fbda1b1980586a8c73e5b9d4fba317c7100e8584590ede0"
-  },
-  {
-    "id": "library-c19",
-    "category": "nature",
-    "caption": "Small flowers in a field",
-    "alt": "A field of low flowering plants with green edges and white buildings behind.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-c19.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-c19.webp",
-    "width": 1400,
-    "height": 788,
-    "sourceSHA256": "ee8a03c82ff1316b5f7e80af95ced8b437380f46f7ed8e3aae95d3de9bad6973"
-  },
-  {
-    "id": "library-c20",
-    "category": "nature",
-    "caption": "Across the flowering field",
-    "alt": "Small pale flowers across a green field, with houses beyond.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-c20.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-c20.webp",
-    "width": 1400,
-    "height": 788,
-    "sourceSHA256": "b295429efcb06a633888bb83579df1de954d634570bd759588bbf70fbdfccf07"
-  },
-  {
-    "id": "library-c21",
-    "category": "nature",
-    "caption": "Flowers beneath a grey sky",
-    "alt": "A wide flowering field beneath grey clouds and overhead wires.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-c21.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-c21.webp",
-    "width": 1280,
-    "height": 720,
-    "sourceSHA256": "15f9d97a59c4c6e8b431d54c800ec977d96cb4b834c16a4565e888bf5a1b37e1"
   },
   {
     "id": "library-c22",
@@ -1790,42 +1070,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "ac91af91ce0b1bfe14ee866974d99415c65130b2351f7c1756cbd1f5bbd4d23d"
   },
   {
-    "id": "library-p196",
-    "category": "nature",
-    "caption": "A flowering tree, looking up",
-    "alt": "The upper branches of a pale flowering tree beneath an open sky.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p196.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p196.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "77c725a8835cb5a935f6033f967e4cd978e5fbaa4cdefce2f692c1aaddb0ab65"
-  },
-  {
-    "id": "library-p197",
-    "category": "nature",
-    "caption": "Flowers at the treetop",
-    "alt": "Pale flowers and green leaves at the top of a tree.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p197.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p197.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "567d3a4c1440b61509be839568d2ecd20217ade2806b87f9ff0a02642d1c5c01"
-  },
-  {
-    "id": "library-p198",
-    "category": "nature",
-    "caption": "A tree beside the path",
-    "alt": "A rounded tree with pale flowers beside a gravel path.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p198.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p198.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "1c8f719fe63b856c15036d5112f872d573b1b7facc5f2a675d82235ff5656632"
-  },
-  {
     "id": "library-p223",
     "category": "nature",
     "caption": "A pale sun over the fields",
@@ -1838,18 +1082,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "66fc5224ef0dd5458fddf52db63c52c00497c2cc594bbb8739900b2060ae628b"
   },
   {
-    "id": "library-p224",
-    "category": "nature",
-    "caption": "Plants beside the shelter",
-    "alt": "Tall green leaves and potted plants beside a metal-roofed shelter.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p224.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p224.webp",
-    "width": 1200,
-    "height": 1600,
-    "sourceSHA256": "3891fb9d50fb7a6d73fd379380ea9695795c588d15d5137dab80d6547c0fa827"
-  },
-  {
     "id": "library-p225",
     "category": "nature",
     "caption": "A garden corner",
@@ -1860,18 +1092,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "width": 1200,
     "height": 1600,
     "sourceSHA256": "1e82aabe262f95b3cfc792f7398d6eab547ee066ba73a0e6eb62776ed40f38af"
-  },
-  {
-    "id": "library-p226",
-    "category": "nature",
-    "caption": "Green around the courtyard",
-    "alt": "Garden plants and tall leaves beside a sheltered courtyard.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p226.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p226.webp",
-    "width": 1200,
-    "height": 1600,
-    "sourceSHA256": "c8dc566539fb97e42046e6eb3371d096dd4450991fb8cf4f9ce29790a06f7f32"
   },
   {
     "id": "library-p230",
@@ -1946,18 +1166,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "c1d34348e595080e27c97a80fb08d1e40a06d42466a5524724bef28a30e2d49d"
   },
   {
-    "id": "library-p273",
-    "category": "nature",
-    "caption": "An open green landscape",
-    "alt": "An open green landscape with low flat-topped hills beneath grey clouds.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p273.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p273.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "2a0c72fc909d439878a7095cdec80be252650cefcb474e91109872f56ea39d1b"
-  },
-  {
     "id": "library-p274",
     "category": "nature",
     "caption": "Across the green plain",
@@ -1994,18 +1202,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "df9d9bbca6ffe2964f2586c5e0de47b8965a28359910987348b270502dbef181"
   },
   {
-    "id": "library-p283",
-    "category": "nature",
-    "caption": "Hills beyond the plain",
-    "alt": "Low flat-topped hills beyond open green ground beneath scattered clouds.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p283.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p283.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "b4b3e0ae1a209b0f6c5fd5cea0ab93199b4f62e66725cc8d8c10999961913d79"
-  },
-  {
     "id": "library-p286",
     "category": "nature",
     "caption": "A distant ridge",
@@ -2016,18 +1212,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "width": 1600,
     "height": 900,
     "sourceSHA256": "1cd13592fe06fa78c202a92e2a2a9ecb937f2be81521db4cdabcb44f80bceaa5"
-  },
-  {
-    "id": "library-p287",
-    "category": "nature",
-    "caption": "Clouds along the ridge",
-    "alt": "A low ridge beyond green ground beneath textured white clouds.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p287.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p287.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "5954137c41b101f97261ee4011819257849ec71ea355bbf1247a6d1460f35fba"
   },
   {
     "id": "library-p292",
@@ -2042,30 +1226,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "c9dc55596646b2e7060698526e1cac2303c3a1ebc26fd1be91379d8d693cf6c5"
   },
   {
-    "id": "library-p293",
-    "category": "nature",
-    "caption": "A quiet distant view",
-    "alt": "Green ground and distant buildings beneath a pale clouded sky.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p293.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p293.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "4b1a27889ebcfcec8ca7becac53f73e98a67eaf13d7d0bde2a68e7358d717568"
-  },
-  {
-    "id": "library-n057",
-    "category": "nature",
-    "caption": "A flowering tree",
-    "alt": "A rounded tree with pale flowers beside a stony track.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n057.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n057.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "6ef267f8cb853b9de6a833bcf22aafc9167bdfc1e3ead50d39c7d11dfaef49fb"
-  },
-  {
     "id": "a-tree-in-bloom",
     "category": "nature",
     "caption": "A tree in bloom",
@@ -2076,18 +1236,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "width": 1600,
     "height": 900,
     "sourceSHA256": "93563ff7f7145003d74d76a31fc2dae96a580195f6c470a06e15f31bf3b8a2b8"
-  },
-  {
-    "id": "library-n059",
-    "category": "nature",
-    "caption": "Pale flowers at dusk",
-    "alt": "A pale flowering tree beneath an open, softly coloured sky.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n059.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n059.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "7f86b7bb305f77084718d03179ab648925073c85aa608a65df4201c658182d94"
   },
   {
     "id": "a-closer-look",
@@ -2114,18 +1262,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "372b867d6a5d2193ef35360360aabe556431c409892f7eb04599642d466cdd43"
   },
   {
-    "id": "library-n062",
-    "category": "nature",
-    "caption": "Yellow flowers above fine leaves",
-    "alt": "Small yellow flowers above fine green leaves in a garden pot.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n062.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n062.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "dc3ea813216afa56d09ea4dde658e129770ac574e869bb5dbdb761c4e342b9a5"
-  },
-  {
     "id": "library-n063",
     "category": "nature",
     "caption": "In yellow",
@@ -2138,30 +1274,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "04b7ce3913edc53d436e7d46739af867f80fe81a97088cd92b733ff129af102d"
   },
   {
-    "id": "library-n077",
-    "category": "nature",
-    "caption": "Sun over the mist",
-    "alt": "A low warm sun above mist, grass and distant trees.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n077.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n077.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "87d47c1476aa531fa6b8efbb6ea4cd2b7987624d8600dc8baaaffff05762dc3d"
-  },
-  {
-    "id": "library-n078",
-    "category": "nature",
-    "caption": "Mist along the horizon",
-    "alt": "A pale warm horizon above mist and thick low vegetation.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n078.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n078.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "23f46b4fe52c96ad70be195f94ddf36134d79754e9006898c2d3403ac55c6762"
-  },
-  {
     "id": "library-n079",
     "category": "nature",
     "caption": "A low sun in haze",
@@ -2172,30 +1284,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "width": 900,
     "height": 1600,
     "sourceSHA256": "b659be11701d3145698d7e89693bbec76b4e9888a2765d96c1b0d15d66af5aa4"
-  },
-  {
-    "id": "library-n080",
-    "category": "nature",
-    "caption": "Fields in soft light",
-    "alt": "A low sun above misty fields, with a wire crossing the pale sky.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n080.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n080.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "412041837175e6d396c62752b9a72d9bc9016314c83b0cd49d942d2742a9ad6e"
-  },
-  {
-    "id": "library-n081",
-    "category": "nature",
-    "caption": "Orange above the wall",
-    "alt": "A rounded orange flower above green leaves beside a garden wall.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n081.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n081.webp",
-    "width": 1200,
-    "height": 1600,
-    "sourceSHA256": "b9a3826d2191b2163a531f127f918a3af330b697fb3495d44bf716cb00d2d600"
   },
   {
     "id": "library-n082",
@@ -2258,18 +1346,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "ad46d8c9d8f0d3ac74cff035f01c11bb6db5302f1f51848c52a7ef486cf1a59b"
   },
   {
-    "id": "library-n087",
-    "category": "nature",
-    "caption": "Purple among the branches",
-    "alt": "Purple flowers among green leaves and thin branches beneath a pale sky.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n087.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n087.webp",
-    "width": 1200,
-    "height": 1600,
-    "sourceSHA256": "0439f8a45137e37ab46aaebfca52f99e33c417884bb9b5bf40356c8d8f9f6bcb"
-  },
-  {
     "id": "library-n088",
     "category": "nature",
     "caption": "Pale flowers by the pot",
@@ -2304,30 +1380,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "width": 900,
     "height": 1600,
     "sourceSHA256": "bc8327976cc2be6849a1af68152992e7b770ee93b358599ea4a06679c236fdf9"
-  },
-  {
-    "id": "library-n091",
-    "category": "nature",
-    "caption": "Orange flowers in depth",
-    "alt": "Orange flowers and fine green stems at different depths in a garden.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n091.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n091.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "e0ea9dafa617889f2118bc5dab9f4e7ea89e4fd079e2eecb6a8d4c6f06fa3784"
-  },
-  {
-    "id": "library-n092",
-    "category": "nature",
-    "caption": "Yellow among broad leaves",
-    "alt": "Small yellow flowers and fine green foliage beneath broad banana leaves.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n092.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n092.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "b4d3d5abc29713d40c1811cc162b1630dc4142119b2fcdee8830300fdc3eb643"
   },
   {
     "id": "library-n093",
@@ -2366,54 +1418,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "96b6a012eb7634aa4f606b3fea0e0ccb75c97cf939323b614d18701e9b46ad08"
   },
   {
-    "id": "library-n105",
-    "category": "nature",
-    "caption": "Flowers beneath a cloud",
-    "alt": "Bright pink flowers below large white clouds and blue sky.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n105.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n105.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "c5cbc0e255839d58ca4f0b15db182474ce1c6bff3dcaf3642d4f9de9c964f267"
-  },
-  {
-    "id": "library-n106",
-    "category": "nature",
-    "caption": "Pink flowers and open sky",
-    "alt": "A pink flowering hedge beneath a blue sky and large white clouds.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n106.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n106.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "6b30e833dbaa17b32f437ee4fbbc0b2783996727db3635ff47986183ed0e9339"
-  },
-  {
-    "id": "library-n107",
-    "category": "nature",
-    "caption": "Flowers along a vine",
-    "alt": "Pale purple flowers hanging down among broad green vine leaves.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n107.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n107.webp",
-    "width": 1200,
-    "height": 1600,
-    "sourceSHA256": "19c8ed930390d0e3dcbb0df4c7f497c702a606245a0072b4ee16f1b9f8e54e0c"
-  },
-  {
-    "id": "purple-flowers",
-    "category": "nature",
-    "caption": "Purple flowers",
-    "alt": "Pale purple flowers and buds hanging among broad green leaves.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/purple-flowers.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/purple-flowers.webp",
-    "width": 1200,
-    "height": 1600,
-    "sourceSHA256": "2557e5fc141acd4c2c2fa0da0ce3fd704b725647c6d46733e355b8a9568211cb"
-  },
-  {
     "id": "library-n109",
     "category": "nature",
     "caption": "Purple petals up close",
@@ -2448,18 +1452,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "width": 1600,
     "height": 900,
     "sourceSHA256": "e47e545bf5077985c81463dd1310b621868f413b0103fe4575de057f6016c182"
-  },
-  {
-    "id": "library-p101",
-    "category": "places",
-    "caption": "Above the rooftops",
-    "alt": "Low rooftops and buildings beneath a hazy blue sky.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p101.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p101.webp",
-    "width": 1600,
-    "height": 783,
-    "sourceSHA256": "fd0b7f4ee4956632316a52a8d79317561a2f3319c0ddc087dedec181a5452fc5"
   },
   {
     "id": "library-p102",
@@ -2522,18 +1514,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "8af285c7cb68195ff8c225272453fd67ccb107c483657e4df042a470c9dece9c"
   },
   {
-    "id": "library-p190",
-    "category": "places",
-    "caption": "Carved entrance",
-    "alt": "An ornate carved entrance and a warm-lit interior beyond.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p190.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p190.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "86fc72839bb2a428d8e573f5a8965de1c195ac7ef67dd320643ebe51260e7e85"
-  },
-  {
     "id": "library-p191",
     "category": "places",
     "caption": "An ornate interior",
@@ -2544,18 +1524,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "width": 900,
     "height": 1600,
     "sourceSHA256": "2ec5a352e930b178306d49611e3f636d90bbf7eb6d027e88e3856db8f8760ab4"
-  },
-  {
-    "id": "library-p192",
-    "category": "places",
-    "caption": "Gold and carved stone",
-    "alt": "A gold-coloured central recess surrounded by dark ornate carving.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p192.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p192.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "2636fbe74c39802930ed662f1f1acef2313803c7d6414899bafe60fc83677057"
   },
   {
     "id": "lit-after-dark",
@@ -2582,90 +1550,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "13751dc62a73a87a0fe3c3489553be61b8996b76f547f6af0c3cae38131e149a"
   },
   {
-    "id": "library-p213",
-    "category": "places",
-    "caption": "City lights from above",
-    "alt": "A wide city view after dark, with scattered lights across the horizon.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p213.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p213.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "5989eefd2f0e350661421bed92168411d6b37b8c88b85794faf4628143f353fb"
-  },
-  {
-    "id": "library-p214",
-    "category": "places",
-    "caption": "City lights from above",
-    "alt": "A wide city view after dark, with scattered lights across the horizon.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p214.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p214.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "d197e8eda38d464dedb5bad6208e05467b83aba7db59a245b1d1896dcb3d5daf"
-  },
-  {
-    "id": "library-p215",
-    "category": "places",
-    "caption": "City lights from above",
-    "alt": "A wide city view after dark, with scattered lights across the horizon.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p215.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p215.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "c3fe46e2fe0cdde733ff22f93538630b7d492767b5a9c6905b084165faa76769"
-  },
-  {
-    "id": "library-p216",
-    "category": "places",
-    "caption": "City lights from above",
-    "alt": "A wide city view after dark, with scattered lights across the horizon.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p216.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p216.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "bd5c10a10474a107fe313d1c60c5c25e7122e523fce3b1eca640b318bbf04f38"
-  },
-  {
-    "id": "library-p217",
-    "category": "places",
-    "caption": "City lights from above",
-    "alt": "A wide city view after dark, with scattered lights across the horizon.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p217.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p217.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "870bbf4ccd29304799c73ff16dac267b39afcdd0fb7d38a08d63fe4b91f652e2"
-  },
-  {
-    "id": "library-p218",
-    "category": "places",
-    "caption": "City lights from above",
-    "alt": "A wide city view after dark, with scattered lights across the horizon.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p218.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p218.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "12cde21dc35fc06a3b477e27d62d9b350f2d8d43b4c166a96035242509d19fe4"
-  },
-  {
-    "id": "library-p219",
-    "category": "places",
-    "caption": "City lights from above",
-    "alt": "A wide city view after dark, with scattered lights across the horizon.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p219.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p219.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "8a4986a1d814d336957265c7cd9e8343e2cbe0ec4f9d3f0f084272501b257510"
-  },
-  {
     "id": "library-p220",
     "category": "places",
     "caption": "City lights from above",
@@ -2676,42 +1560,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "width": 1600,
     "height": 900,
     "sourceSHA256": "664e2b0f5bf60ab6b08be77d284a6c5d67fdde4a2f863173a9ff4391946afc35"
-  },
-  {
-    "id": "library-p221",
-    "category": "places",
-    "caption": "City lights from above",
-    "alt": "A wide city view after dark, with scattered lights across the horizon.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p221.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p221.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "44e6d540487150810c276efc679b3ae371f323fd38f50f8ee09b32abb428b072"
-  },
-  {
-    "id": "library-p222",
-    "category": "places",
-    "caption": "City lights from above",
-    "alt": "A wide city view after dark, with scattered lights across the horizon.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p222.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p222.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "cc41d064b0b309b828072823adcb77e73e09e939b49dce17a532abb25442ec14"
-  },
-  {
-    "id": "library-p258",
-    "category": "places",
-    "caption": "A road under grey clouds",
-    "alt": "A paved road and open green ground beneath layered grey clouds.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p258.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p258.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "72b36b710a36c317f97eafc3e3620400d270d882c75af2650589aace529f7c8e"
   },
   {
     "id": "library-p259",
@@ -2726,18 +1574,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "dfe216c67c976630b0673e2d35e5045c4d994e9a141125d300b04c6f05426914"
   },
   {
-    "id": "library-p261",
-    "category": "places",
-    "caption": "A small building under clouds",
-    "alt": "A small dark building and open ground beneath layered grey clouds.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p261.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p261.webp",
-    "width": 1600,
-    "height": 1200,
-    "sourceSHA256": "744f55a2bbe9e03ca8ea1cb97588c1aba22b63710940def00e6df3fadbb3ed14"
-  },
-  {
     "id": "library-p262",
     "category": "places",
     "caption": "Grey sky above open ground",
@@ -2748,18 +1584,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "width": 1600,
     "height": 1200,
     "sourceSHA256": "29c961b60a236cb7a7c8b71d36e9d28e96b130def998baeb60ea789c4313c983"
-  },
-  {
-    "id": "library-p263",
-    "category": "places",
-    "caption": "A bend beneath the clouds",
-    "alt": "A curving road beside open fields beneath a dramatic grey sky.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-p263.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-p263.webp",
-    "width": 1600,
-    "height": 1200,
-    "sourceSHA256": "fa4d61e4513fd388723288d956fe02ea8d08496a5024ac27753abefc74d38504"
   },
   {
     "id": "library-p280",
@@ -2786,42 +1610,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "87ede0df1c6eb3d28ccd08a64a6c48a7308a8d4609bee66cc4d25d50d9e01c03"
   },
   {
-    "id": "library-n040",
-    "category": "places",
-    "caption": "Palms beside the buildings",
-    "alt": "A row of palms and pale buildings beneath scattered white clouds.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n040.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n040.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "8fbb3ba7196f6ff0d553220cd04c322830906b42eed93f5cda194be3a6ecb14b"
-  },
-  {
-    "id": "library-n042",
-    "category": "places",
-    "caption": "A lawn under open sky",
-    "alt": "A green lawn beside a palm-lined path and pale buildings.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n042.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n042.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "20f94f92a80b74d72bc59a7f567a4da2144ae34a922a9c6d10a8a812b380efd7"
-  },
-  {
-    "id": "library-n055",
-    "category": "places",
-    "caption": "Palms in softer light",
-    "alt": "Dark palm trunks and green lawn in front of a pale domed building.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n055.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n055.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "eea4ad0457c5d79df295848a846789c9f65e88e48a454c3335ddd398a3397b6a"
-  },
-  {
     "id": "between-the-palms",
     "category": "places",
     "caption": "Between the palms",
@@ -2834,30 +1622,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "sourceSHA256": "fa5fa497f91b57a3ed7df5cd8b4d63e7a194a662b3fa10035840eddeefa2af17"
   },
   {
-    "id": "library-n064",
-    "category": "places",
-    "caption": "A road through the trees",
-    "alt": "A narrow paved road bordered by green trees beneath white clouds.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n064.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n064.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "7bef4e2c4e7f34715d98b35222fc6b15a340b9a81baede1774373b0269eb4235"
-  },
-  {
-    "id": "library-n065",
-    "category": "places",
-    "caption": "Along the road",
-    "alt": "A tree-lined road with several motorcyclists ahead.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n065.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n065.webp",
-    "width": 1600,
-    "height": 900,
-    "sourceSHA256": "5e89bbb94c16b7a13cd624566850f919b3d647c5e426c3fc56d34a57b0cc1b91"
-  },
-  {
     "id": "library-n066",
     "category": "places",
     "caption": "Tree shadows across the road",
@@ -2868,42 +1632,6 @@ export const PHOTOGRAPHY_LIBRARY=Object.freeze([
     "width": 1600,
     "height": 900,
     "sourceSHA256": "187869c7745e46fbe71ae6243ed35bacc524f3bee7c7dec14430093b5fcfdc34"
-  },
-  {
-    "id": "library-n069",
-    "category": "places",
-    "caption": "Under a wide sky",
-    "alt": "A road and green roadside trees beneath scattered white clouds.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n069.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n069.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "aebf01c339128b05e87e65c019f407104cbfa5b60f5e047baf6b374c15af50e3"
-  },
-  {
-    "id": "library-n070",
-    "category": "places",
-    "caption": "A cloud above the road",
-    "alt": "A large white cloud above a paved road and roadside greenery.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n070.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n070.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "181ec5714a2f06537a56d21f2746f18a0de3f00076bd49002576cd2e780c286a"
-  },
-  {
-    "id": "library-n071",
-    "category": "places",
-    "caption": "Clouds along the roadside",
-    "alt": "Grey-white clouds above a road, low buildings and trees.",
-    "type": "image",
-    "src": "./assets/personal/photography-library/library-n071.webp",
-    "thumb": "./assets/personal/photography-library/thumbs/library-n071.webp",
-    "width": 900,
-    "height": 1600,
-    "sourceSHA256": "5303cd5eb23608bec39be50cdf48e4dae56492441266f7f0f09d524e9d53e845"
   },
   {
     "id": "library-n072",

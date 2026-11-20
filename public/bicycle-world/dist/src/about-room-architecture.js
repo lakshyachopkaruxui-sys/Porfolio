@@ -38,20 +38,20 @@ export function createAboutRoomScene(){
   const daylightCanopy=new THREE.Group();daylightCanopy.name='Light-filtering studio canopy';scene.add(daylightCanopy);
   box(architecture,[44,.35,70],[0,-.2,12],palette.stone);
   box(architecture,[30,.035,16],[0,.0,1.0],palette.cream);
-  for(let x=-15;x<=15;x+=1.5)box(architecture,[.025,.012,16],[x,.023,1],palette.stone);
+  for(let x=-15;x<=15;x+=1.5)box(architecture,[.025,.012,15.94],[x,.023,1],palette.stone);
   for(let z=-7;z<=9;z+=2)box(architecture,[30,.012,.025],[0,.025,z],palette.stone);
   // A substantial rear wall and warm plaster return keep the space continuous.
   box(architecture,[17.5,15,.5],[-4.3,7.5,-6.2],palette.wall);
   box(architecture,[10.5,15,.5],[16.8,7.5,-6.2],palette.wall);
   box(architecture,[8.8,2.15,.5],[7.0,1.075,-6.2],palette.wall);
   box(architecture,[8.8,7,.5],[7.0,11.5,-6.2],palette.wall);
-  box(architecture,[.5,15,24],[-15,7.5,5.5],palette.cream);
-  box(architecture,[.5,15,24],[22,7.5,5.5],palette.cream);
+  box(architecture,[.5,15.12,24],[-15,7.5,5.5],palette.cream);
+  box(architecture,[.5,15.12,24],[22,7.5,5.5],palette.cream);
   // The canopy admits diffuse daylight. It must not shadow the entire room
   // into a flat dark box; furniture and structural ribs still cast contact shadows.
   box(daylightCanopy,[37,.4,28],[3.5,14.5,6.3],palette.cream);
   for(const x of [-14,-10.5,-2.65,3.0,11.0,16,21]){
-    box(architecture,[.3,13.6,.52],[x,6.8,-5.8],palette.wood);
+    box(architecture,[.3,13.52,.52],[x,6.8,-5.8],palette.wood);
     box(architecture,[.5,.25,.7],[x,.15,-5.72],palette.edge);
     beam(architecture,[x,11.1,-5.6],[x,13.8,5.7],.22,palette.wood,.38);
     beam(architecture,[x,13.8,5.7],[x,11.3,15.5],.22,palette.wood,.38);
@@ -78,9 +78,9 @@ export function createAboutRoomScene(){
     const group=new THREE.Group();group.position.fromArray(at);group.rotation.y=yaw;root.add(group);
     for(const x of [-.64,.64])for(const z of [-.55,.55])beam(group,[x*1.12,.08,z*1.12],[x,1.35,z],.12,palette.wood);
     box(group,[1.65,.15,1.55],[0,1.38,0],palette.wood);
-    box(group,[1.51,.21,1.4],[0,1.54,.03],palette.cloth);
+    box(group,[1.47,.21,1.4],[0,1.54,.03],palette.cloth);
     for(const x of [-.69,.69])box(group,[.12,1.38,.15],[x,2.0,-.62],palette.wood);
-    const back=box(group,[1.5,.85,.17],[0,2.40,-.60],palette.cloth);back.rotation.x=-.10;
+    const back=box(group,[1.46,.85,.17],[0,2.40,-.60],palette.cloth);back.rotation.x=-.10;
     for(const x of [-.84,.84]){beam(group,[x,1.4,-.5],[x,1.95,-.5],.10,palette.wood);box(group,[.14,.11,1.22],[x,1.96,.02],palette.edge);}
     return group;
   }
@@ -158,7 +158,7 @@ export function createAboutRoomScene(){
   const shade=mesh(architecture,new THREE.ConeGeometry(.48,.40,18,1,true),palette.ink,[1.98,3.55,-.25]);shade.rotation.x=.15;
   cylinder(architecture,.19,.48,[-2.8,2.45,.95],palette.clay,16);
   for(let i=0;i<4;i++){const pencil=box(architecture,[.038,.72,.038],[-2.92+i*.08,2.93,.95],i%2?palette.ink:palette.brass);pencil.rotation.z=(i-1.5)*.07;}
-  for(let i=0;i<3;i++){const card=box(architecture,[.68,.025,.9],[-1.90+i*.13,2.19,-.52+i*.20],i===1?palette.cream:palette.paper);card.rotation.y=-.17+i*.18;}
+  for(let i=0;i<3;i++){const card=box(architecture,[.68,.025,.9],[-1.90+i*.13,2.19+i*.030,-.52+i*.20],i===1?palette.cream:palette.paper);card.rotation.y=-.17+i*.18;}
 
   // Window-side hobby shelf: layered outdoor geometry is an illustration, not
   // one of Lakshya's photographs. No transparent panes or particle system.

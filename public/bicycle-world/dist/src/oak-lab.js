@@ -109,7 +109,7 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
     $('[data-oak-narration-status]').textContent='Oak will speak when the view settles.';
   }
   function replayLine(){
-    stopNarration();room?.react?.({reduced:reduced()||!ambientMotion});
+    stopNarration();if(!narrationEnabled)room?.react?.({reduced:reduced()||!ambientMotion});
     if(!narrationEnabled||document.hidden||!['viewing','entering'].includes(phase)||placesOpen||child?.isOpen)return false;
     return narration.read(currentSpeech);
   }
@@ -185,11 +185,17 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
     if(!['welcome','collection','making'].includes(zone)||!['viewing','entering'].includes(phase))return false;
     index=zone==='collection'&&collectionVisited?OAK_DIALOGUE.findIndex(entry=>entry.id==='collection-connection'):OAK_DIALOGUE.findIndex(entry=>entry.zone===zone);content();room?.react?.({reduced:reduced()||!ambientMotion});return true;
   }
+  function openModelMap(){
+    buildIndex=2;
+    if(selectedZone!=='making')selectZone('making');
+    else setBuildStep(buildIndex);
+    $('.oak-build-copy').focus({preventScroll:true});
+  }
   function startMaking(){buildIndex=0;return selectZone('making');}
   function restoreChild(){childSiblings.forEach(([element,inert])=>{element.inert=inert;});childSiblings=[];shell.classList.remove('oak-has-collection');dialog.setAttribute('aria-labelledby','oak-lab-title');dialog.removeAttribute('aria-label');if(phase!=='closed'&&phase!=='returning'){setPhase('viewing');if(collectionVisited)index=OAK_DIALOGUE.findIndex(entry=>entry.id==='collection-connection');content({animate:false});resize();dirty=true;}}
   function openCollection(){
     if(!['viewing','entering'].includes(phase)||child?.isOpen)return false;stopNarration();transition=null;veil.style.opacity='0';lastCollectionFocus=document.activeElement;
-    try{child??=createPokemonRoom({renderer,container:shell,isReduced,returnLabel:'Back to Oak’s lab',onClose:restoreChild,onPortfolio(){close({immediate:true,notify:false});onPortfolio();}});child.open({returnFocus:lastCollectionFocus,initialCollection:true,initialIndex:true});childSiblings=[...shell.children].filter(element=>element.id!=='pokemon-experience').map(element=>[element,element.inert]);childSiblings.forEach(([element])=>{element.inert=true;});shell.classList.add('oak-has-collection');dialog.removeAttribute('aria-labelledby');dialog.setAttribute('aria-label','Lakshya’s Pokemon GO collection');collectionVisited=true;dialog.dataset.collectionVisited='true';setPhase('collection');return true;}
+    try{child??=createPokemonRoom({renderer,container:shell,isReduced,returnLabel:'Back to Oak’s lab',onClose:restoreChild,onGardenMap(){restoreChild();openModelMap();},onPortfolio(){close({immediate:true,notify:false});onPortfolio();}});child.open({returnFocus:lastCollectionFocus,initialCollection:true,initialIndex:true});childSiblings=[...shell.children].filter(element=>element.id!=='pokemon-experience').map(element=>[element,element.inert]);childSiblings.forEach(([element])=>{element.inert=true;});shell.classList.add('oak-has-collection');dialog.removeAttribute('aria-labelledby');dialog.setAttribute('aria-label','Lakshya’s Pokemon GO collection');collectionVisited=true;dialog.dataset.collectionVisited='true';setPhase('collection');return true;}
     catch{restoreChild();$('.oak-status').textContent='The collection could not open. Please try again.';return false;}
   }
   function resize(animate=false,entry=false){
@@ -201,6 +207,8 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
     if(compact)room.camera.clearViewOffset();else room.camera.setViewOffset(width,height,-width*.38,0,width,height);
     dirty=true;
   }
+  const stageObserver=new ResizeObserver(()=>{if(room&&!child?.isOpen)resize();});
+  stageObserver.observe(host);
   let motionControlState='';
   function syncMotionControl(){
     const still=reduced(),state=String(still)+String(ambientMotion);
@@ -214,7 +222,7 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
   }
   function finishClose(notify){if(phase==='closed')return;setPhase('returning');hidePlaces({restoreFocus:false});stopNarration();child?.close({immediate:true,notify:false});restoreChild();room?.dispose();room=null;transition=null;setPhase('closed');dirty=false;restore();dialog.close();const previous=focus;focus=null;if(notify){try{onClose();}finally{if(previous?.isConnected&&!previous.disabled)previous.focus({preventScroll:true});}}}
   function close({immediate=false,notify=true}={}){if(phase==='closed')return false;stopNarration();hidePlaces({restoreFocus:false});if(phase==='returning'&&!immediate)return false;setPhase('returning');if(child?.isOpen){child.close({immediate:true,notify:false});restoreChild();}if(immediate||reduced()){finishClose(notify);return true;}room?.beginExit();transition={kind:'exit',elapsed:0,duration:.45,notify};dirty=true;return true;}
-  function update(dt=0){if(phase==='closed'||document.hidden||placesOpen)return false;syncMotionControl();if(child?.isOpen)return child.update(dt);if(transition){const t=transition;const progress=reduced()?1:Math.min(1,(t.elapsed+=Math.max(0,Math.min(.1,Number(dt)||0)))/t.duration);veil.style.opacity=String(t.kind==='entry'?1-progress:Math.max(0,(progress-.35)/.65));dirty=true;if(progress===1){transition=null;if(t.kind==='exit'){finishClose(t.notify);return false;}setPhase('viewing');}}if(room?.update(dt,reduced(),{active:ambientMotion})){dirty=true;}updateNarration(dt);if(!dirty||!room)return false;renderer.render(room.scene,room.camera);renderedFrames++;dirty=false;return true;}
+  function update(dt=0){if(phase==='closed'||document.hidden||placesOpen)return false;syncMotionControl();if(child?.isOpen)return child.update(dt);if(transition){const t=transition;const progress=reduced()?1:Math.min(1,(t.elapsed+=Math.max(0,Math.min(.1,Number(dt)||0)))/t.duration);veil.style.opacity=String(t.kind==='entry'?1-progress:Math.max(0,(progress-.35)/.65));dirty=true;if(progress===1){transition=null;if(t.kind==='exit'){finishClose(t.notify);return false;}setPhase('viewing');}}if(room?.update(dt,reduced(),{active:ambientMotion,playback:narration.playback})){dirty=true;}updateNarration(dt);if(!dirty||!room)return false;renderer.render(room.scene,room.camera);renderedFrames++;dirty=false;return true;}
   listen($('[data-oak-close]'),'click',()=>close());listen($('[data-oak-portfolio]'),'click',event=>{if(event.target.closest?.('[data-mode-link]')?.dataset.modeLink!=='portfolio')return;close({immediate:true,notify:false});onPortfolio();});listen($('[data-oak-prev]'),'click',()=>advance(-1));listen($('[data-oak-next]'),'click',()=>advance());listen($('[data-oak-collection]'),'click',openCollection);listen($('[data-oak-retry]'),'click',()=>room?.loadOak());dialog.querySelectorAll('[data-oak-zone]').forEach(button=>listen(button,'click',()=>selectZone(button.dataset.oakZone)));
   listen(dialog,'cancel',event=>{event.preventDefault();if(placesOpen)hidePlaces();else if(child?.isOpen)child.cancel({fromKeyboard:true});else close();});
   listen(dialog,'close',()=>{if(phase!=='closed'&&!dialog.open)finishClose(true);});
@@ -239,7 +247,7 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
     else{if(boundary){const indices=OAK_DIALOGUE.map((entry,i)=>entry.zone===selectedZone?i:-1).filter(i=>i>=0);index=boundary==='first'?indices[0]:indices.at(-1);content();}else advance(direction);if(document.activeElement?.disabled)$('[data-oak-next]').focus({preventScroll:true});}
   });
   listen(renderer.domElement,'pointerdown',event=>{if(!placesOpen&&phase!=='collection'&&event.button===0)press={x:event.clientX,y:event.clientY};});
-  listen(renderer.domElement,'pointerup',event=>{const down=press;press=null;if(!down||placesOpen||event.button!==0||!room||!['viewing','entering'].includes(phase)||Math.hypot(event.clientX-down.x,event.clientY-down.y)>7)return;const rect=renderer.domElement.getBoundingClientRect();pointer.set((event.clientX-rect.left)/rect.width*2-1,-(event.clientY-rect.top)/rect.height*2+1);raycaster.setFromCamera(pointer,room.camera);const place=selectedZone==='making'&&buildIndex===2?room.pickBuildStop?.(raycaster.ray):null;if(place){inspectBuildPlace(place);return;}const zone=room.pick(raycaster.ray);if(zone==='welcome')replayLine();else if(zone==='collection'){selectZone(zone);openCollection();}else if(zone&&zone!==selectedZone)selectZone(zone);});
+  listen(renderer.domElement,'pointerup',event=>{const down=press;press=null;if(!down||placesOpen||event.button!==0||!room||!['viewing','entering'].includes(phase)||Math.hypot(event.clientX-down.x,event.clientY-down.y)>7)return;const rect=renderer.domElement.getBoundingClientRect();pointer.set((event.clientX-rect.left)/rect.width*2-1,-(event.clientY-rect.top)/rect.height*2+1);raycaster.setFromCamera(pointer,room.camera);const place=selectedZone==='making'&&buildIndex===2?room.pickBuildStop?.(raycaster.ray):null;if(place){inspectBuildPlace(place);return;}const zone=room.pick(raycaster.ray);if(zone==='welcome')replayLine();else if(zone==='collection'){selectZone(zone);openCollection();}else if(zone==='making'&&(selectedZone!=='making'||buildIndex!==2))openModelMap();});
   listen(renderer.domElement,'pointercancel',()=>{press=null;});listen(window,'resize',resize);listen(document,'visibilitychange',()=>{if(document.hidden)stopNarration();else dirty=true;});listen(window,'pagehide',stopNarration);listen(query,'change',()=>{syncMotionControl();if(reduced()&&transition){const t=transition;transition=null;veil.style.opacity=t.kind==='entry'?'0':'1';if(t.kind==='exit')finishClose(t.notify);else setPhase('viewing');}dirty=true;});
   listen($('[data-oak-read]'),'click',()=>{narrationEnabled=!narrationEnabled;rememberNarration();stopNarration();syncNarrationControls();if(narrationEnabled)replayLine();});
   listen($('[data-oak-pause]'),'click',()=>narration.togglePause());listen($('[data-oak-replay]'),'click',replayLine);
@@ -251,7 +259,7 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
   listen($('[data-oak-work]'),'click',()=>{if(selectedZone!=='making'||buildIndex!==OAK_MAKING_STEPS.length-1||!['viewing','entering'].includes(phase))return;close({immediate:true,notify:false});onPlace('projects');});
   const previewHost=$('.oak-previews');POKEMON_COLLECTION.slice(0,3).forEach(entry=>{const image=document.createElement('img');image.dataset.oakSource=entry.thumbnail;image.alt=entry.name;image.width=66;image.height=88;image.loading='lazy';previewHost.append(image);});$('[data-oak-collection]').textContent=`Browse ${POKEMON_COLLECTION.length} catches`;
   return {open,close,update,resize,openCollection,selectZone,advance,
-    dispose(){if(dead)return;close({immediate:true,notify:false});child?.dispose();child=null;narration.dispose();listeners.splice(0).forEach(remove=>remove());dialog.remove();dead=true;},
+    dispose(){if(dead)return;close({immediate:true,notify:false});child?.dispose();child=null;stageObserver.disconnect();narration.dispose();listeners.splice(0).forEach(remove=>remove());dialog.remove();dead=true;},
     diagnostics(){return {phase,placesOpen,isOpen:phase!=='closed',dialogueIndex:index,zone:selectedZone,buildIndex,selectedMapPlace,ambientMotion,narrating:narration.speaking,narrationEnabled,narrationPaused:narration.paused,narrationPending:Boolean(narrationPending),narrationText:currentSpeech,renderedFrames,resources:room?.stats||null,collection:child?.isOpen?child.diagnostics():null,ownsRenderer:false};},
     get isOpen(){return phase!=='closed';},get phase(){return phase;}
   };

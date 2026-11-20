@@ -1,0 +1,157 @@
+@import url("/control-sizing.css");
+/* Play-only softly modelled controls. Normal portfolio does not load this file. */
+body.hybrid-world {
+  --control-face-start: #fffdf5;
+  --control-face-end: #e6eddd;
+  --control-ink: #243e34;
+  --control-edge: #74876d;
+  --control-depth: #75886d;
+  --control-highlight: #ffffff;
+  --control-primary-start: #426958;
+  --control-primary-end: #284b3d;
+  --control-primary-ink: #fffdf5;
+  --control-primary-edge: #244235;
+  --control-primary-depth: #183428;
+  --control-focus: #214d3c;
+  --control-focus-gap: #fffdf5;
+}
+
+/* Content links, photographs, canvases and project artwork keep their own UI. */
+html:root body.hybrid-world :is(
+  #ride-tools, #world-map, #help, #reader, #project-reader, #woody-guide, #welcome, #failure, #mobile-play-notice,
+  #about-experience, #works-experience, #personal-experience, #oak-lab,
+  #personal-experience #listening-experience, .play-music-dock
+) button:where(:not(:has(img)):not(.cloud-photo-card):not(.journal-photo-button):not(.hobby-photo-open)),
+html:root body.hybrid-world :is(#river-hop-action, #touch-controls button, #stop-route, #interact) {
+  min-height: 44px;
+  border: 0 !important;
+  border-radius: 9px !important;
+  background: linear-gradient(175deg, var(--control-face-start), var(--control-face-end)) !important;
+  color: var(--control-ink) !important;
+  box-shadow: inset 0 1px 0 #ffffff70, 0 2px 5px #18342824 !important;
+  text-decoration: none;
+  transition: translate 120ms ease, scale 100ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html:root body.hybrid-world #ride-tools {
+  gap: 8px;
+  padding: 8px;
+  background: #fffdf5f5;
+  border-color: transparent;
+  box-shadow: 0 4px 18px #18342818;
+}
+html:root body.hybrid-world #ride-tools kbd { color: inherit; opacity: .78; }
+html:root body.hybrid-world #ride-tools .mode-selector.mode-switch {
+  --mode-face: transparent;
+  --mode-edge: transparent;
+  --mode-label: #4b5d50;
+  --mode-current: #243e34;
+  --mode-track: #dce6d3;
+  --mode-track-edge: var(--control-edge);
+  --mode-knob: #284b3d;
+  --mode-focus: #214d3c;
+}
+/* One consistent material for primary, selected and held controls. */
+html:root body.hybrid-world :is(
+  #ride-tools, #world-map, #help, #reader, #project-reader, #welcome, #failure, #mobile-play-notice,
+  #about-experience, #works-experience, #personal-experience, #oak-lab,
+  #personal-experience #listening-experience, .play-music-dock
+) button:is([aria-pressed='true'],[aria-selected='true'],[aria-current='page'],[aria-current='step'],.primary,.works-primary,.gr-primary,.pgr-primary,.cloud-gallery-primary,[data-map-ride],[data-oak-next],[data-oak-collection],[data-oak-build-next],.about-open-notebook,[data-journal-next]):where(:not(:has(img)):not(.cloud-photo-card):not(.journal-photo-button):not(.hobby-photo-open)),
+html:root body.hybrid-world #touch-controls button.pressed {
+  background: linear-gradient(175deg, var(--control-primary-start), var(--control-primary-end)) !important;
+  color: var(--control-primary-ink) !important;
+  border-color: transparent !important;
+  box-shadow: inset 0 1px 0 #ffffff22, 0 2px 5px #18342830 !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html:root body.hybrid-world :is(#ride-tools,#world-map,#help,#about-experience,#works-experience,#personal-experience,#oak-lab,#personal-experience #listening-experience,.play-music-dock) button:where(:not(:has(img)):not(.cloud-photo-card):not(.journal-photo-button):not(.hobby-photo-open)):hover:not(:disabled) {
+    filter: brightness(1.04);
+  }
+}
+html:root body.hybrid-world :is(#ride-tools,#world-map,#help,#about-experience,#works-experience,#personal-experience,#oak-lab,#personal-experience #listening-experience,.play-music-dock) button:where(:not(:has(img)):not(.cloud-photo-card):not(.journal-photo-button):not(.hobby-photo-open)):active:not(:disabled),
+html:root body.hybrid-world :is(#river-hop-action,#touch-controls button):active:not(:disabled) {
+  scale: .98;
+  transition-duration: 60ms;
+}
+
+html:root body.hybrid-world :is(button,a):focus-visible {
+  outline: 3px solid var(--control-focus) !important;
+  outline-offset: 4px !important;
+  box-shadow: 0 0 0 2px var(--control-focus-gap) !important;
+}
+html:root body.hybrid-world[data-play-ui-motion='reduced'] :is(button,a),
+html.reduce-motion body.hybrid-world :is(button,a) { translate: none !important; scale: none !important; transition-duration: 0ms !important; }
+@media (prefers-reduced-motion: reduce) {
+  html body.hybrid-world :is(button,a) { translate: none !important; scale: none !important; transition-duration: 0ms !important; }
+}
+@media (forced-colors: active) {
+  html body.hybrid-world :is(button,a) {
+    background: ButtonFace !important;
+    color: ButtonText !important;
+    border-color: ButtonText !important;
+    box-shadow: none !important;
+  }
+  html body.hybrid-world :is(button,a):is([aria-pressed='true'],[aria-selected='true'],[aria-current='location']) {
+    background: Highlight !important; color: HighlightText !important;
+  }
+  html body.hybrid-world :is(button,a):focus-visible { outline-color: Highlight !important; }
+}
+
+/* Keep the two destinations quiet; depth belongs to the primary Play action. */
+html:root body.hybrid-world .mode-selector.mode-switch {
+  --mode-face: transparent;
+  --mode-edge: transparent;
+  --mode-depth: none;
+}
+html:root body.hybrid-world #welcome .mode-selector.mode-switch {
+  --mode-label: #26384b;
+  --mode-current: #26384b;
+}
+
+/* Action shortcuts share the label's type; keycaps never change text hierarchy. */
+html:root body.hybrid-world :is(button,a) kbd {
+  display: inline-block !important;
+  font-family: inherit !important;
+  font-size: 1em !important;
+  font-weight: 600 !important;
+  line-height: inherit !important;
+  letter-spacing: normal !important;
+  color: inherit !important;
+  opacity: 1 !important;
+}
+/* The shared mode width also replaces the old room-specific 154px reservation. */
+html:root body.hybrid-world #about-experience .about-header .mode-selector.mode-switch {
+  flex-basis: var(--mode-width, 184px);
+  width: var(--mode-width, 184px) !important;
+  min-width: var(--mode-width, 184px) !important;
+}
+
+html:root body.hybrid-world #works-experience .works-header [data-mode-switch] {
+  flex-basis: var(--mode-width, 184px);
+}
+
+/* The toolbar, guide and lower controls share a single porcelain surface.
+   A shallow press and a focus outline carry feedback through every state. */
+@layer play-navigation {
+  body.hybrid-world :is(#ride-tools,#help,#world-map,#woody-guide,#world-bottom,#touch-controls) button:not(:has(img)),
+  body.hybrid-world :is(#stop-route,#river-hop-action) {
+    background:linear-gradient(175deg,#fffdf5,#e6eddd) !important;
+    color:#243e34 !important;border:0 !important;
+    box-shadow:inset 0 1px 0 #ffffff70,0 2px 5px #18342824 !important;
+    filter:none !important;
+  }
+  body.hybrid-world :is(#ride-tools,#help,#world-map,#woody-guide,#world-bottom,#touch-controls) button :is(span,small,strong,kbd),
+  body.hybrid-world #world-bottom .stop-caption {color:inherit !important;}
+  body.hybrid-world :is(#ride-tools,#help,#world-map,#woody-guide,#world-bottom) kbd {
+    color:#334b40 !important;background:transparent !important;border:0 !important;
+    box-shadow:none !important;opacity:1 !important;padding-inline:.2em;
+  }
+  body.hybrid-world :is(#ride-tools,#help,#world-map,#woody-guide,#world-bottom,#touch-controls) button:is([aria-pressed=true],[aria-selected=true],[aria-current=step]) {
+    text-decoration:underline;text-underline-offset:.22em;
+  }
+  @media (forced-colors:active) {
+    body.hybrid-world :is(#ride-tools,#help,#world-map,#woody-guide,#world-bottom,#touch-controls) button:not(:has(img)) {background:ButtonFace !important;color:ButtonText !important;border:1px solid ButtonText !important;}
+  }
+}

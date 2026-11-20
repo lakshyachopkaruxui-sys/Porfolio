@@ -40,10 +40,10 @@ export function buildWorksExterior({root,spec,mesh,box,beam,material}) {
     const g=new THREE.Group();g.position.set(x,y,z);g.rotation.y=yaw;root.add(g);
     box(g,0,0,-.035,w+.14,h+.14,.15,stone);
     box(g,0,0,.052,w,h,.045,blue);
-    box(g,-w*.18,h*.08,.079,w*.48,h*.71,.012,mint);
+    box(g,-w*.18,h*.08,.09,w*.48,h*.71,.012,mint);
     for(const a of [-1,1])box(g,a*(w/2+.015),0,.093,.05,h+.10,.09,light);
     box(g,0,0,.105,.045,h,.055,light);box(g,0,h*.05,.105,w,.045,.055,light);
-    box(g,0,-h/2-.09,.07,w+.22,.12,.23,stone);
+    box(g,0,-h/2-.09,.085,w+.22,.12,.23,stone);
     box(g,0,h/2+.08,.03,w+.20,.09,.17,light);
   }
   // Low side wings distinguish a central entrance from the exhibition volumes.
@@ -56,13 +56,13 @@ export function buildWorksExterior({root,spec,mesh,box,beam,material}) {
     hipRoof(x,3.09,-.16,1.34,3.72,.51,.79,3.05);
     windowPanel(x,1.95,1.63,.64,1.38);
     for(const z of [-1.18,.10])windowPanel(side*2.24,1.95,z,.82,1.35,side*Math.PI/2);
-    for(const z of [-1.81,1.54])box(root,side*2.18,1.80,z,.16,2.25,.20,stone);
+    for(const z of [-1.81,1.54])box(root,side*2.18,1.80,z,.16,2.31,.24,stone);
     box(root,side*1.12,1.85,1.72,.21,2.40,.28,stone);
   }
   // A genuine recessed threshold, with no opaque wall sheet across the opening.
   box(root,0,2.43,-1.78,2.10,3.58,.24,cream);
   for(const side of [-1,1]){
-    box(root,side*.99,2.39,-.15,.23,3.48,3.37,cream);
+    box(root,side*.99,2.375,-.15,.23,3.48,3.37,cream);
     box(root,side*1.015,2.25,1.64,.20,3.20,.30,stone);
     bevel(side*1.03,.82,1.65,.31,.35,.38,light);
     bevel(side*1.03,3.45,1.65,.33,.22,.38,light);
@@ -76,12 +76,12 @@ export function buildWorksExterior({root,spec,mesh,box,beam,material}) {
     box(leaf,-side*.30,.34,.08,.43,.40,.025,stone);
     mesh(leaf,new THREE.SphereGeometry(.038,8,6),brass,-side*.53,.95,.14);
   }
-  mesh(root,new THREE.ExtrudeGeometry(archShape(1.12,.87,2.25,.70),{depth:.34,bevelEnabled:true,bevelSegments:1,bevelThickness:.03,bevelSize:.025,steps:1,curveSegments:1}),stone,0,0,1.58);
+  mesh(root,new THREE.ExtrudeGeometry(archShape(1.12,.87,2.25,.715),{depth:.34,bevelEnabled:true,bevelSegments:1,bevelThickness:.03,bevelSize:.025,steps:1,curveSegments:1}),stone,0,0,1.58);
   for(let i=0;i<9;i++){
     const a=(i+.5)*Math.PI/9;
     const joint=box(root,Math.cos(a)*1.01,2.25+Math.sin(a)*1.01,1.955,.023,.20,.018,cream);joint.rotation.z=a-Math.PI/2;
   }
-  bevel(0,.71,1.77,2.32,.16,.59,stone);
+  bevel(0,.73,1.77,2.32,.16,.59,stone);
   bevel(0,.52,2.12,2.12,.22,.54,light);
   bevel(0,.32,2.47,1.92,.18,.44,stone);
   // Tiered tower roof, thick eaves and recessed glazing read at riding distance.

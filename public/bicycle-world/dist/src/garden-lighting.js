@@ -96,6 +96,8 @@ export function createGardenLighting({scene,sun,hemisphere,world}={}){
   let progress=0,target=0,automatic=false,cycleTime=0,from=0,elapsed=0,duration=0,disposed=false,lastApplied=-1;
   let focusX=0,focusZ=0,perspective=false,lastPerspective=false;
 
+  const lightOffset = new THREE.Vector3(), axisX = new THREE.Vector3(), axisY = new THREE.Vector3();
+  const anchor = new THREE.Vector3();
   function apply(){
     if(progress!==lastApplied||perspective!==lastPerspective){
       const first=progress<.4?DAY:DUSK,last=progress<.4?DUSK:NIGHT;
@@ -114,8 +116,22 @@ export function createGardenLighting({scene,sun,hemisphere,world}={}){
     }
     // Keep the existing shadow camera following the rider. A second owner must
     // not overwrite this offset after update; main owns when update is called.
-    sun.position.set(focusX-12-progress*6,25-progress*4,focusZ+14-progress*23);
-    sun.target.position.set(focusX,0,focusZ);
+    lightOffset.set(-12-progress*6,25-progress*4,14-progress*23);
+    anchor.set(focusX,0,focusZ);
+    // Snap only in the shadow camera's image plane. Sub-texel camera travel
+    // otherwise slides the shadow pattern across walls and beam undersides.
+    const shadow = sun.shadow;
+    if (shadow?.mapSize.x && shadow?.mapSize.y) {
+      axisX.crossVectors(sun.up,lightOffset).normalize();
+      axisY.crossVectors(lightOffset,axisX).normalize();
+      const texelX = (shadow.camera.right-shadow.camera.left)/shadow.mapSize.x;
+      const texelY = (shadow.camera.top-shadow.camera.bottom)/shadow.mapSize.y;
+      const x = anchor.dot(axisX), y = anchor.dot(axisY);
+      anchor.addScaledVector(axisX,Math.round(x/texelX)*texelX-x);
+      anchor.addScaledVector(axisY,Math.round(y/texelY)*texelY-y);
+    }
+    sun.target.position.copy(anchor);
+    sun.position.copy(anchor).add(lightOffset);
   }
   function setNight(value,{immediate=false}={}){
     if(disposed)return;

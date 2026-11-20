@@ -51,7 +51,7 @@ export const HOBBY_PHOTOS=Object.freeze([
   },
   {
     "id": "an-evening-of-garba",
-    "caption": "Garba with friends",
+    "caption": "Together under the lights",
     "alt": "Five people posing together in traditional clothing on a grassy Garba ground at night, with lights and a decorated pavilion behind them.",
     "type": "image",
     "src": "./assets/personal/garba/friends-under-the-lights-r001.webp",

@@ -3,11 +3,10 @@ export function createWelcomeRecordings({clips = {}, AudioClass = globalThis.Aud
   setTimeout: setTimer = globalThis.setTimeout, clearTimeout: clearTimer = globalThis.clearTimeout, startDeadlineMs = 8000} = {}) {
   const supported = typeof AudioClass === 'function';
   let enabled = false, speaking = false, disposed = false, active = null, kind = null, error = null, generation = 0, playback = 'idle';
-  let startTimer = null, playbackTimer = null;
+  let startTimer = null;
   function clearDeadlines() {
     if (startTimer !== null) clearTimer(startTimer);
-    if (playbackTimer !== null) clearTimer(playbackTimer);
-    startTimer = playbackTimer = null;
+    startTimer = null;
   }
 
   function clipFor(name) {
@@ -53,7 +52,7 @@ export function createWelcomeRecordings({clips = {}, AudioClass = globalThis.Aud
     const clip = clipFor(name);
     stop(); error = null;
     const token = generation;
-    let audio, started = false;
+    let audio;
     const current = () => !disposed && active === audio && token === generation;
     const finish = (message, ended = false) => {
       if (!current()) return;
@@ -71,11 +70,6 @@ export function createWelcomeRecordings({clips = {}, AudioClass = globalThis.Aud
       audio.onplaying = () => {
         if (!current()) return;
         if (startTimer !== null) { clearTimer(startTimer); startTimer = null; }
-        if (!started) {
-          started = true;
-          const duration = Number(clip.durationSeconds);
-          playbackTimer = setTimer(() => finish('playback-timeout'), Number.isFinite(duration) && duration > 0 ? duration * 1000 + 5000 : 45000);
-        }
         speaking = true; playback = 'playing'; emit();
       };
       // Buffering does not pause HTML media or release its current owner. Stop

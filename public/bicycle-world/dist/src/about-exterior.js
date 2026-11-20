@@ -44,8 +44,8 @@ export function buildAboutExterior({root,spec,mesh,box,material}){
   box(root,1.76,1.82,.59,.16,2.52,1.18,cream);
   box(root,1.76,.97,-.48,.16,.82,.96,cream);
   box(root,1.76,2.77,-.48,.16,.62,.96,cream);
-  box(root,0,.72,-.17,3.68,.24,3.04,stone);
-  box(root,0,3.0,-.24,3.72,.16,3.02,trim);
+  box(root,0,.72,-.17,3.75,.24,3.04,stone);
+  box(root,0,3.0,-.24,3.72,.20,3.16,trim);
 
   // Front wall is built around a broad window and an offset open doorway.
   const facade=1.18;
@@ -64,8 +64,8 @@ export function buildAboutExterior({root,spec,mesh,box,material}){
   box(root,.79,2.72,1.28,1.43,.13,.27,trim);
   const doorPivot=new THREE.Group();doorPivot.position.set(1.37,.64,.86);doorPivot.rotation.y=.52;root.add(doorPivot);
   box(doorPivot,-.30,.94,0,.60,1.88,.10,mint);
-  box(doorPivot,-.30,1.22,.06,.43,.77,.035,glass);
-  box(doorPivot,-.30,.44,.06,.43,.43,.035,cream);
+  box(doorPivot,-.30,1.22,.075,.43,.77,.035,glass);
+  box(doorPivot,-.30,.44,.075,.43,.43,.035,cream);
   mesh(doorPivot,new THREE.SphereGeometry(.045,6,4),wood,-.51,.89,.10);
 
   // A real gable opening keeps the small upper window recessed as well.
@@ -107,7 +107,7 @@ export function buildAboutExterior({root,spec,mesh,box,material}){
     box(root,x,.67,1.98,.29,.24,.29,stone);
     box(root,x,2.42,1.98,.30,.14,.26,mint);
   }
-  box(root,.76,.52,1.85,1.73,.18,1.0,stone);
+  box(root,.76,.54,1.85,1.73,.18,1.0,stone);
   box(root,.65,.43,2.44,1.70,.14,.32,stone);
   box(root,.65,.39,2.61,1.78,.07,.14,trim);
 

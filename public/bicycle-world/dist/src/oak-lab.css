@@ -209,3 +209,26 @@
   #oak-lab .oak-status{position:relative;inset:auto;grid-row:3;grid-column:1;align-self:start;justify-self:end;max-width:calc(57vw - 72px);margin:16px 24px 0 0;}
   #oak-lab .oak-retry{position:relative;inset:auto;grid-row:3;grid-column:1;align-self:start;justify-self:end;margin:96px 24px 0 0;}
 }
+
+/* Give the speaking host his own visible space above the transcript on phones. */
+@media (max-width:760px) {
+  #oak-lab:is([data-zone=welcome],[data-zone=collection]) .oak-shell {
+    display:grid;
+    grid-template-rows:auto auto clamp(125px,23dvh,220px) minmax(135px,1fr) auto;
+    height:100%;
+    overflow-y:auto;
+  }
+  #oak-lab:is([data-zone=welcome],[data-zone=collection]) :is(.oak-header,.oak-zones,.oak-canvas,.oak-comic,.oak-tools) {
+    position:relative;
+    inset:auto;
+    width:auto;
+    min-width:0;
+    grid-column:1;
+  }
+  #oak-lab:is([data-zone=welcome],[data-zone=collection]) .oak-header {grid-row:1;padding:10px 14px 5px;}
+  #oak-lab:is([data-zone=welcome],[data-zone=collection]) .oak-zones {grid-row:2;margin:4px 14px;}
+  #oak-lab:is([data-zone=welcome],[data-zone=collection]) .oak-canvas {grid-row:3;overflow:hidden;}
+  #oak-lab:is([data-zone=welcome],[data-zone=collection]) .oak-comic {grid-row:4;margin:6px 12px 0;overflow:auto;display:block;}
+  #oak-lab:is([data-zone=welcome],[data-zone=collection]) .oak-tools {grid-row:5;margin:6px 12px;}
+  #oak-lab:is([data-zone=welcome],[data-zone=collection]) .oak-shade {display:none;}
+}

@@ -7,36 +7,32 @@ import {withinDeadline} from './loading.js';
 export const GARDEN_POKEBALL_URL = new URL('../assets/oak-lab/pokeballs-variety.glb', import.meta.url).href;
 export const GARDEN_POKEBALL_VARIANTS = Object.freeze(['ClassicBall','UltraBall','MasterBall','GreatBall','HeavyBall','HealBall','LoveBall','DiveBall','LureBall','CherishBall']);
 
+// Contact height and radius were measured from the final rotated model vertices.
+// Reserve these footprints before loading the optional meshes so routes stay clear.
 // Irregular riverbank pockets leave both bridge approaches and stunt runways open.
 // Original models rest at different angles; actual rotated vertices determine
 // contact height and clearance. Blue landmarks lead, pink companions follow.
 export const GARDEN_POKEBALL_PLACEMENTS = Object.freeze([
-  {"id":"river-dive","variant":"DiveBall","x":3,"z":-41,"height":4.2,"yaw":0.94,"pitch":0.38,"roll":-0.48,"kind":"monument"},
-  {"id":"west-master","variant":"MasterBall","x":-55,"z":-41,"height":4,"yaw":-0.16,"pitch":-0.22,"roll":0.31,"kind":"monument"},
-  {"id":"west-great","variant":"GreatBall","x":62,"z":-61,"height":3.6,"yaw":2.5,"pitch":0.74,"roll":0.26,"kind":"monument"},
-  {"id":"lab-lure","variant":"LureBall","x":20,"z":-41,"height":3.2,"yaw":-0.4,"pitch":-0.42,"roll":1.03,"kind":"monument"},
-  {"id":"north-heavy","variant":"HeavyBall","x":-64,"z":-61,"height":3.1,"yaw":1.62,"pitch":0.2,"roll":-0.62,"kind":"monument"},
-  {"id":"south-love","variant":"LoveBall","x":-50.5,"z":-41,"height":2.5,"yaw":2.66,"pitch":-0.3,"roll":0.48,"kind":"medium"},
-  {"id":"south-heal","variant":"HealBall","x":7,"z":-39,"height":2.3,"yaw":1.4,"pitch":0.6,"roll":-0.27,"kind":"medium"},
-  {"id":"lab-love","variant":"LoveBall","x":60,"z":-65,"height":2.1,"yaw":-0.1,"pitch":1.08,"roll":0.2,"kind":"medium"},
-  {"id":"river-heal","variant":"HealBall","x":17,"z":-37,"height":2.1,"yaw":0.87,"pitch":-0.51,"roll":-0.7,"kind":"medium"},
-  {"id":"arrival-ultra","variant":"UltraBall","x":-58,"z":-37,"height":1.7,"yaw":-0.19,"pitch":0.44,"roll":0.63,"kind":"small"},
-  {"id":"north-cherish","variant":"CherishBall","x":0,"z":-36.5,"height":1.35,"yaw":-2.77,"pitch":-0.24,"roll":1.22,"kind":"small"},
-  {"id":"arrival-classic","variant":"ClassicBall","x":-52,"z":-37,"height":0.95,"yaw":0.05,"pitch":0.8,"roll":-0.35,"kind":"small"},
+  {"id":"river-dive","radius":2.30063739977123,"centerY":2.1090757192807543,"top":4.193160313696179,"variant":"DiveBall","x":3,"z":-41,"height":4.2,"yaw":0.94,"pitch":0.38,"roll":-0.48,"kind":"monument"},
+  {"id":"west-master","radius":2.1222098436701198,"centerY":1.974204264541704,"top":3.9806964691769475,"variant":"MasterBall","x":-55,"z":-41,"height":4,"yaw":-0.16,"pitch":-0.22,"roll":0.31,"kind":"monument"},
+  {"id":"west-great","radius":1.9626278153140366,"centerY":1.7284873147842073,"top":3.5487384867560596,"variant":"GreatBall","x":62,"z":-61,"height":3.6,"yaw":2.5,"pitch":0.74,"roll":0.26,"kind":"monument"},
+  {"id":"lab-lure","radius":1.7188046960152228,"centerY":1.5415900339196984,"top":3.1440556422985684,"variant":"LureBall","x":20,"z":-41,"height":3.2,"yaw":-0.4,"pitch":-0.42,"roll":1.03,"kind":"monument"},
+  {"id":"north-heavy","radius":1.9154902312494075,"centerY":1.528561650969749,"top":3.3223592124220054,"variant":"HeavyBall","x":-64,"z":-61,"height":3.1,"yaw":1.62,"pitch":0.2,"roll":-0.62,"kind":"monument"},
+  {"id":"south-love","radius":1.3677609205502372,"centerY":1.2034088261433717,"top":2.494115580296403,"variant":"LoveBall","x":-50.5,"z":-41,"height":2.5,"yaw":2.66,"pitch":-0.3,"roll":0.48,"kind":"medium"},
+  {"id":"south-heal","radius":1.2776187014895966,"centerY":1.1457837982572838,"top":2.2859844859186103,"variant":"HealBall","x":7,"z":-39,"height":2.3,"yaw":1.4,"pitch":0.6,"roll":-0.27,"kind":"medium"},
+  {"id":"lab-love","radius":1.1744776475246523,"centerY":1.0514852911186183,"top":2.0613872384348664,"variant":"LoveBall","x":60,"z":-65,"height":2.1,"yaw":-0.1,"pitch":1.08,"roll":0.2,"kind":"medium"},
+  {"id":"river-heal","radius":1.1680947323413229,"centerY":1.0108718272216228,"top":2.094257124126051,"variant":"HealBall","x":17,"z":-37,"height":2.1,"yaw":0.87,"pitch":-0.51,"roll":-0.7,"kind":"medium"},
+  {"id":"arrival-ultra","radius":0.9494122185225742,"centerY":0.8055150319274642,"top":1.6651393833260613,"variant":"UltraBall","x":-58,"z":-37,"height":1.7,"yaw":-0.19,"pitch":0.44,"roll":0.63,"kind":"small"},
+  {"id":"north-cherish","radius":0.7703557451911514,"centerY":0.648484323219905,"top":1.327467664793708,"variant":"CherishBall","x":0,"z":-36.5,"height":1.35,"yaw":-2.77,"pitch":-0.24,"roll":1.22,"kind":"small"},
+  {"id":"arrival-classic","radius":0.5604785026091643,"centerY":0.43579700737418503,"top":0.9156405081988206,"variant":"ClassicBall","x":-52,"z":-37,"height":0.95,"yaw":0.05,"pitch":0.8,"roll":-0.35,"kind":"small"},
 ].map(Object.freeze));
 
-function placedBounds(surfaces,placement){
-  const rotation=new THREE.Quaternion().setFromEuler(new THREE.Euler(placement.pitch||0,placement.yaw,placement.roll??placement.lean??0,'YXZ'));
-  const point=new THREE.Vector3();let radius=0,minY=Infinity,maxY=-Infinity;
-  for(const surface of surfaces){const position=surface.geometry.attributes.position;
-    for(let i=0;i<position.count;i++){
-      point.fromBufferAttribute(position,i);point.y-=.5;point.applyQuaternion(rotation);
-      radius=Math.max(radius,Math.hypot(point.x,point.z));minY=Math.min(minY,point.y);maxY=Math.max(maxY,point.y);
-    }
-  }
-  const matrix=new THREE.Matrix4().compose(new THREE.Vector3(placement.x,-minY*placement.height-.025,placement.z),rotation,new THREE.Vector3().setScalar(placement.height));
+function placedBounds(placement){
+  const {x,z,centerY,height,pitch,yaw,roll}=placement;
+  const rotation=new THREE.Quaternion().setFromEuler(new THREE.Euler(pitch,yaw,roll,'YXZ'));
+  const matrix=new THREE.Matrix4().compose(new THREE.Vector3(x,centerY,z),rotation,new THREE.Vector3().setScalar(height));
   matrix.multiply(new THREE.Matrix4().makeTranslation(0,-.5,0));
-  return {...placement,pitch:placement.pitch||0,roll:placement.roll??placement.lean??0,lean:placement.roll??placement.lean??0,bottom:-.025,radius:radius*placement.height+.08,top:(maxY-minY)*placement.height-.025,matrix};
+  return {...placement,lean:roll,bottom:-.025,matrix};
 }
 
 // One small shared radial mesh grounds all displays without a shadow-map pass,
@@ -72,7 +68,7 @@ export function createGardenPokeballs(source, {naturePlacements=[]} = {}) {
         surfaces.push(mesh);
       });
       if (!surfaces.length) throw new Error('Invalid ball prototype geometry.');
-      const items = GARDEN_POKEBALL_PLACEMENTS.filter(p => p.variant === variant).map(p => placedBounds(surfaces,p));
+      const items = GARDEN_POKEBALL_PLACEMENTS.filter(p => p.variant === variant).map(placedBounds);
       const accepted = [];
       for (const p of items) {
         if (treeTransplantClearance(p.x, p.z, p.radius) &&

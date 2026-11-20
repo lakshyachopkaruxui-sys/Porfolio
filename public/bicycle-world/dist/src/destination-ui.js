@@ -1,3 +1,4 @@
+import {LISTENING_COLLECTION} from './listening-room-data.js';
 import {aboutJournalFallback} from './about-journal-fallback.js';
 import {createSkyCamera} from './sky-camera.js';
 import {personalRoomContent} from './personal-room-content.js';
@@ -5,8 +6,20 @@ const hobbies=personalRoomContent('memory');
 const cloud=personalRoomContent('cloud');
 const cloudFallback={title:cloud.title,eyebrow:'05 / THE VIEWFINDER',body:`<p class="place-intro">${cloud.intro}</p>${cloud.chapters.map(chapter=>`<section class="place-story"><h2>${chapter.title}</h2><p>${chapter.body}</p><p>${chapter.detail}</p></section>`).join('')}<p class="place-caption">${cloud.mediaNote}</p>`};
 
+function hobbyChapter(chapter) {
+  const recordings = chapter.id === 'singing' ? ['tiny-desk', 'spontaneous'].map(id => {
+    const item = LISTENING_COLLECTION[id];
+    return `<figure><video controls playsinline preload="none" poster="${item.poster}" src="${item.video}" aria-label="${item.title}"></video><figcaption>${item.title}</figcaption></figure>`;
+  }).join('') : '';
+  const photos = chapter.photoIds.map(id => {
+    const item = hobbies.media.find(photo => photo.id === id);
+    return `<figure><img loading="lazy" decoding="async" src="${item.src}" alt="${item.alt}" width="${item.width}" height="${item.height}"><figcaption>${item.caption}</figcaption></figure>`;
+  }).join('');
+  return `<section class="place-story"><h2>${chapter.title}</h2><p>${chapter.body}</p><p>${chapter.detail}</p><div class="hobby-reader-media">${recordings}${photos}</div></section>`;
+}
+
 const stories={
-  collection:{title:hobbies.title,eyebrow:'03 / HOBBIES',body:`<p class="place-intro">${hobbies.intro}</p>${hobbies.chapters.map(chapter=>`<section class="place-story"><h2>${chapter.title}</h2><p>${chapter.body}</p><p>${chapter.detail}</p></section>`).join('')}<p class="place-caption">${hobbies.mediaNote}</p>`},
+  collection:{title:hobbies.title,eyebrow:'Hobbies',body:`<p class="place-intro">${hobbies.intro}</p>${hobbies.chapters.map(hobbyChapter).join('')}`},
   cloud:{title:'I collect quiet moments.',eyebrow:'05 / THE VIEWFINDER',body:`
     <p class="place-intro">I love photographing clouds. Looking up gives me a quiet moment, even on a busy day.</p>
     <div class="sky-viewfinder"><div id="sky-scene"></div><div class="viewfinder-corner top-left"></div><div class="viewfinder-corner bottom-right"></div><span class="viewfinder-label">VIRTUAL VIEWFINDER</span></div>
@@ -60,7 +73,7 @@ export function createDestinationUI({onOpen,onClose,onContinue,onPortfolio,onVis
   // Store reading progress against content, so a postcard or viewport change cannot shift it.
   function progress(){const top=dialog.getBoundingClientRect().top;const anchors=[...article.querySelectorAll('[data-reading-anchor]')];const anchor=anchors.filter(el=>el.getBoundingClientRect().top-top<=120).at(-1);return anchor?{anchor:anchor.dataset.readingAnchor,offset:top+120-anchor.getBoundingClientRect().top}:dialog.scrollTop;}
   function restoreProgress(value){if(typeof value==='number'){dialog.scrollTop=value;return;}const anchor=[...article.querySelectorAll('[data-reading-anchor]')].find(el=>el.dataset.readingAnchor===value?.anchor);dialog.scrollTop=anchor?dialog.scrollTop+anchor.getBoundingClientRect().top-dialog.getBoundingClientRect().top-120+value.offset:0;}
-  function cleanup(){sky?.dispose();sky=null;sound?.dispose();sound=null;}
+  function cleanup(){article.querySelectorAll('video').forEach(video=>video.pause());sky?.dispose();sky=null;sound?.dispose();sound=null;}
   function close(){if(!dialog.open)return;if(current)scrolls[current]=progress();cleanup();dialog.close();current=null;history.replaceState(null,'',location.pathname);onClose();}
   function open(kind){
     if(!stories[kind])return false;
@@ -87,6 +100,12 @@ export function createDestinationUI({onOpen,onClose,onContinue,onPortfolio,onVis
     }
     restoreProgress(scrolls[kind]);return true;
   }
+  article.addEventListener('play', event => {
+    if (!(event.target instanceof HTMLVideoElement)) return;
+    for (const video of article.querySelectorAll('video')) {
+      if (video !== event.target) video.pause();
+    }
+  }, true);
   closeButton.addEventListener('click',close);dialog.querySelector('#place-back').addEventListener('click',onPortfolio);dialog.addEventListener('cancel',e=>{e.preventDefault();close();});
   document.addEventListener('visibilitychange',()=>{if(document.hidden)sound?.stop();});window.addEventListener('blur',()=>sound?.stop());
   return {open,close,get isOpen(){return dialog.open;},get scrolls(){return {...scrolls,...(current?{[current]:progress()}:{})};},restoreScrolls(saved){for(const key of Object.keys(scrolls)){const value=saved?.[key];if(Number.isFinite(value))scrolls[key]=Math.max(0,value);else if(typeof value?.anchor==='string'&&Number.isFinite(value.offset))scrolls[key]={anchor:value.anchor,offset:Math.max(0,value.offset)};}}};

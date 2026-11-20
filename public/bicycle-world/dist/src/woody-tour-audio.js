@@ -12,15 +12,14 @@ export function createWoodyTourAudio({AudioClass = globalThis.Audio, onPlaying =
     stopCurrent();
     if (disposed) return {stop() {}};
     const token = ++generation;
-    let audio, detached, stopped = false, sounding = false, buffering = false, startTimer = null, playbackTimer = null, started = false;
+    let audio, detached, stopped = false, sounding = false, buffering = false, startTimer = null, started = false;
     const listeners = [];
     const valid = () => !disposed && !stopped && generation === token;
     function stop() {
       if (stopped) return;
       stopped = true;
       if (startTimer !== null) clearTimer(startTimer);
-      if (playbackTimer !== null) clearTimer(playbackTimer);
-      startTimer = playbackTimer = null;
+      startTimer = null;
       listeners.splice(0).forEach(([type,handler]) => audio?.removeEventListener(type,handler));
       try { audio?.pause(); } catch {}
       if (sounding) { sounding = false; onPlaying(false); }
@@ -43,16 +42,12 @@ export function createWoodyTourAudio({AudioClass = globalThis.Audio, onPlaying =
         if (!started) {
           started = true;
           if(audio.dataset)audio.dataset.playingAt=String(globalThis.performance?.now?.()||0);
-          const duration = Number(clip.durationSeconds);
-          const deadline = Number.isFinite(duration) && duration > 0 ? duration * 1000 + 5000 : 45000;
-          playbackTimer = setTimer(() => finish(true), deadline);
         }
         if (!sounding) {sounding=true; onPlaying(true);} onLinePlaying();
       });
       // `paused` stays false during native buffering. Freeze speech gestures
       // until media really resumes, without restarting its clock or allowing
-      // short music bursts between buffered fragments. The watchdog still
-      // bounds the quiet period. `stalled` alone may retain playable data.
+      // short music bursts between buffered fragments.
       listen('waiting', () => { if (valid()) buffering = true; });
       listen('ended', () => finish(false)); listen('error', () => finish(true));
       // Native media pauses at natural completion before dispatching `ended`.

@@ -376,10 +376,15 @@ const verifiedAudio=Object.freeze({
     "sha256": "34d8ee1a7a075151b39de03a3de19261a8d060ce7c151cdf1f22507e0c014f8d"
   }
 });
+// Arrival and approach keep their own cue IDs and captions but share these recordings.
+const sharedRecordings = Object.freeze({
+  'arrive:about':'approach:about', 'arrive:projects':'approach:projects',
+  'arrive:work':'approach:work', 'arrive:cloud':'approach:cloud',
+});
 export const WOODY_TOUR_CLIPS = Object.freeze(Object.fromEntries(lines.map(([id, text, stopId, captionOnly = false]) => [id, Object.freeze({
   id,
   text,
-  src: !captionOnly&&verifiedAudio[id]?new URL('../assets/woody-tour/'+id.replaceAll(':','-')+'.mp3?v='+verifiedAudio[id].sha256.slice(0,12),import.meta.url).href:null,
+  src: !captionOnly&&verifiedAudio[id]?new URL('../assets/woody-tour/'+(sharedRecordings[id]??id).replaceAll(':','-')+'.mp3?v='+verifiedAudio[id].sha256.slice(0,12),import.meta.url).href:null,
   ...(verifiedAudio[id]?{durationSeconds:verifiedAudio[id].durationSeconds}:{}),
   ...(stopId ? {stopId} : {}),
   ...(captionOnly ? {captionOnly: true} : {}),

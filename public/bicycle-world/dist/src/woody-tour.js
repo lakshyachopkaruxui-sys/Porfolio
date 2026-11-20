@@ -5,14 +5,14 @@ export function createWoodyTour({clips = {}, play, onState = () => {}, now = () 
   const automaticStarts = [];
   let enabled = false, disposed = false, generation = 0, active = null, playback = null, quietContext = null;
   let lastLanding=-Infinity, feedbackInvited=Boolean(feedbackAlreadyInvited);
-  let lastClip = null, lastScope = null, lastAutomatic = -Infinity, choice = false, choiceOffered = false, worksOpened = false, error = null;
+  let lastClip = null, lastAutomatic = -Infinity, choice = false, choiceOffered = false, worksOpened = false, error = null;
   let context = {stopId: null, destinationId: null, roomId: null, stopped: false, riding: true, overlay: false, hidden: false, jumping: false,feedbackNear:false,explorationStarted:false}, publishedState = '', arrivedStop = null;
   const blocked = (key=null) => !context.riding || context.overlay || context.hidden || (context.jumping && key!=='ramp-airborne');
   const contextKey = () => JSON.stringify([context.stopId,context.destinationId,context.roomId]);
   const isQuiet = () => quietContext === contextKey();
   const matchesScope = scope => !scope || (!scope.stopId || scope.stopId === context.stopId) && (!scope.destinationId || scope.destinationId === context.destinationId) && (!scope.roomId || scope.roomId === context.roomId) && (!scope.feedbackNear || context.feedbackNear&&!context.roomId);
   const snapshot = () => ({enabled, status: active ? active.playing ? 'speaking' : 'starting' : error ? 'unavailable' : enabled ? 'ready' : 'off',
-    clip: active?.clip || lastClip, speaking: Boolean(active), playing: Boolean(active?.playing), choice, worksOpened, feedbackInvited, error, suspended: blocked(active?.key)});
+    clip: active?.clip || lastClip, speaking: Boolean(active), playing: Boolean(active?.playing), choice, worksOpened, feedbackInvited, error, suspended: !active && blocked()});
   function publish() { const state = snapshot(), signature = JSON.stringify(state); if (!disposed && signature !== publishedState) { publishedState = signature; onState(state); } }
   function cancel() {
     generation++;
@@ -22,8 +22,7 @@ export function createWoodyTour({clips = {}, play, onState = () => {}, now = () 
   }
   function dismissWorksChoice() {
     choice = false;
-    if (active?.key === 'works-skipped') cancel();
-    if (lastClip?.id === 'works-skipped') { lastClip = null; lastScope = null; error = null; }
+    if (!active && lastClip?.id === 'works-skipped') { lastClip = null; error = null; }
   }
   function finish(token, failure) {
     if (disposed || token !== generation || !active) return;
@@ -32,11 +31,11 @@ export function createWoodyTour({clips = {}, play, onState = () => {}, now = () 
     error = failure ? 'Voice unavailable. The caption is still available.' : null;
     publish();
   }
-  function speak(key, {manual = false, automatic = !manual, stopId = null, destinationId = null, roomId = null} = {}) {
-    if (disposed || !enabled) return false;
+  function speak(key, {manual = false, interrupt = false, automatic = !manual, stopId = null, destinationId = null, roomId = null} = {}) {
+    if (disposed || !enabled || (active && !interrupt)) return false;
     const clip = key === 'room:music' && clips[key] ? {...clips[key],captionOnly:true} : clips[key];
     if (!clip || typeof clip.text !== 'string' || !clip.text.trim()) return false;
-    if(key==='ramp-airborne'&&!context.jumping)return false;
+    if(!interrupt&&key==='ramp-airborne'&&!context.jumping)return false;
     if (key.startsWith('arrive:')) stopId ??= key.split(':')[1];
     // A room opened directly from the map does not move the bicycle. Return
     // speech belongs to its actual garden position, not the remote room's stop.
@@ -44,23 +43,20 @@ export function createWoodyTour({clips = {}, play, onState = () => {}, now = () 
     if (key.startsWith('approach:')) destinationId ??= key.split(':')[1];
     if (key === 'works-skipped') stopId ??= context.stopId;
     const scope = {stopId,destinationId,roomId:roomId || (key.startsWith('room:') ? key.split(':')[1] : null),feedbackNear:key==='feedback-nearby'};
-    if (!matchesScope(scope)) return false;
+    if (!interrupt && !matchesScope(scope)) return false;
     if (manual && !automatic) quietContext = null;
     if (manual && key !== 'works-skipped') dismissWorksChoice();
-    if (blocked(key)) {
-      if (manual) { cancel(); lastClip = {...clip,id:clip.id || key}; lastScope = scope; error = 'Voice paused here. The caption is still available.'; publish(); }
-      return false;
-    }
+    if (!interrupt && blocked(key)) return false;
     const currentTime = now();
     while (automaticStarts.length && currentTime - automaticStarts[0] >= 60000) automaticStarts.shift();
     // Automatic context never queues: at most two starts in any rolling minute,
     // in addition to per-line deduplication and the shorter breathing-space gap.
     if (automatic && (isQuiet() || active || seen.has(key) || currentTime - lastAutomatic < cooldownMs || automaticStarts.length >= 2)) return false;
-    if (stopId && context.stopId !== stopId) return false;
-    if (destinationId && context.destinationId !== destinationId) return false;
+    if (!interrupt && stopId && context.stopId !== stopId) return false;
+    if (!interrupt && destinationId && context.destinationId !== destinationId) return false;
     cancel(); error = null;
     const token = generation;
-    lastClip = {...clip, id: clip.id || key}; lastScope = scope; active = {clip: lastClip, key, ...scope, playing:false};
+    lastClip = {...clip, id: clip.id || key}; active = {clip: lastClip, key, ...scope, playing:false};
     // An explicit arrival/replay also satisfies that contextual line. It may be
     // replayed manually, but the frame loop must not repeat it automatically.
     seen.add(key);
@@ -99,12 +95,12 @@ export function createWoodyTour({clips = {}, play, onState = () => {}, now = () 
     }
     if (event === 'works-opened') { worksOpened = true; dismissWorksChoice(); publish(); return true; }
     if (event === 'stay') { dismissWorksChoice(); publish(); return true; }
-    if (event === 'visit-works') { choice = false; cancel(); publish(); return true; }
+    if (event === 'visit-works') { choice = false; publish(); return true; }
     if (event === 'room-enter') {
       const key = `room:${payload.stopId}`;
-      if(context.roomId !== payload.stopId){cancel();publish();return false;}
+      if(context.roomId !== payload.stopId || active)return false;
       if (seen.has(key) || blocked() || isQuiet()) return false;
-      cancel(); choice = false; arrivedStop = null; publish();
+      choice = false; arrivedStop = null; publish();
       const accepted = speak(key, {manual:true}); if (accepted) {seen.add(key); if (active) active.roomId = payload.stopId;} return accepted;
     }
     if (event === 'room-return') {
@@ -120,7 +116,8 @@ export function createWoodyTour({clips = {}, play, onState = () => {}, now = () 
       if(!enabled||!context.jumping||blocked('ramp-airborne')||isQuiet()||now()-lastLanding<3000)return false;
       const accepted=speak('ramp-airborne',{automatic:false});if(accepted)lastLanding=now();return accepted;
     }
-    if (event === 'manual') return speak(payload.clipId, {manual: true});
+    if (event === 'manual') return speak(payload.clipId, {manual: true,interrupt:true});
+    if (event === 'action') return isQuiet()?false:speak(payload.clipId,{automatic:false});
     if (!enabled || blocked()) return false;
     if(event==='ramp-landed'){
       // A real landing is timely feedback, not incidental route chatter.
@@ -139,7 +136,7 @@ export function createWoodyTour({clips = {}, play, onState = () => {}, now = () 
       if(completedApproaches.has(clips[arrivalKey]?.text)){
         seen.add(arrivalKey);return offerWorks();
       }
-      // Arrival is authoritative: supersede approach chatter and bypass its rate limit.
+      // Arrival can start as soon as the current line finishes.
       return speak(arrivalKey,{automatic:false,stopId});
     }
     const key = event === 'welcome' ? 'welcome' : event === 'ramp-landed' ? 'ramp-landed' : event === 'route-cancelled' ? 'route-cancelled'
@@ -158,13 +155,11 @@ export function createWoodyTour({clips = {}, play, onState = () => {}, now = () 
       if(active?.key.startsWith('approach:')&&context.stopped&&!context.roomId&&context.stopId===active.destinationId&&clips[`arrive:${context.stopId}`]?.text===active.clip.text){
         active.key=`arrive:${context.stopId}`;active.stopId=context.stopId;active.destinationId=null;
         lastClip={...clips[active.key],id:active.key};active.clip=lastClip;
-        lastScope={stopId:context.stopId,destinationId:null,roomId:null};seen.add(active.key);
+        seen.add(active.key);
       }
       if (oldContext !== contextKey()) {quietContext = null;dismissWorksChoice();}
       if (!context.stopped&&!context.roomId) dismissWorksChoice();
       if (next.worksOpened) { worksOpened = true; choice = false; }
-      if (blocked(active?.key) || active?.key==='ramp-airborne'&&!context.jumping || active?.key==='feedback-nearby'&&(!context.feedbackNear||context.roomId) || active?.stopId && active.stopId !== context.stopId || active?.destinationId && active.destinationId !== context.destinationId || active?.roomId && active.roomId !== context.roomId) cancel();
-      if (lastClip && !matchesScope(lastScope)) { lastClip = null; lastScope = null; error = null; }
       if (oldStop !== context.stopId || blocked()) { choice = false; arrivedStop = null; }
       offerWorks();
       publish();
@@ -178,7 +173,7 @@ export function createWoodyTour({clips = {}, play, onState = () => {}, now = () 
         speak(key, {manual: true, stopId: context.stopId});
       }
     },
-    replay() { return lastClip ? speak(Object.keys(clips).find(key => (clips[key].id || key) === lastClip.id), {manual: true}) : false; },
+    replay() { return lastClip ? speak(Object.keys(clips).find(key => (clips[key].id || key) === lastClip.id), {manual: true,interrupt:true}) : false; },
     stop({quiet = false} = {}) { if (disposed) return; if (quiet) quietContext = contextKey(); cancel(); publish(); },
     get snapshot() { return snapshot(); },
     dispose() { if (disposed) return; cancel(); disposed = true; },
