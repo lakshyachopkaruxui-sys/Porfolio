@@ -25,7 +25,16 @@ async function boot(){
     const module=await import('./mobile-entry.js');
     if(document.body.dataset.startupState==='failed')return;
     module.mountMobileEntry();window.__playStartup?.finish('mobile');
-  }else await import('./main.js');
+  }else{
+    let graphics;
+    try { graphics=document.createElement('canvas').getContext('webgl2'); } catch {}
+    if(!graphics){
+      window.__playStartup?.fail('3D graphics are unavailable in this browser. You can still explore every project and view the résumé.');
+      return;
+    }
+    graphics.getExtension('WEBGL_lose_context')?.loseContext();
+    await import('./main.js');
+  }
 }
 boot().catch(error=>{
   console.error('Portfolio module could not load',error);

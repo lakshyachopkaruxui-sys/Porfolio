@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T09:55:32.668Z",
+  "generatedAt": "2026-11-21T11:37:21.894Z",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 746,
-      "sha256": "fb8267aaea3d9db28bbfeb833f889288a07584e2317a125b397760a1c2f76ea1"
+      "sha256": "3b727e02075a43d6ac6ef54baa574fcf27cd8f56cc8bcb60f387bdd873f89f3e"
     },
     {
       "path": "_redirects",
@@ -3159,8 +3159,8 @@
     },
     {
       "path": "bicycle-world/dist/index.html",
-      "size": 50076,
-      "sha256": "57024c4d5d94553c89e01b4c86c6a07c024d45b733cef78dab4eb47d8af7ce40"
+      "size": 50226,
+      "sha256": "a6b74a3af3203a735876796e408b37aec3ac0a5bfb17ea1c6b6253b48f757005"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
@@ -3279,8 +3279,8 @@
     },
     {
       "path": "bicycle-world/dist/src/boot.js",
-      "size": 1805,
-      "sha256": "7f650421fb57214af995a468564c62bb42372a535bb13ceee5687e9e73c00868"
+      "size": 2160,
+      "sha256": "d5f664694029a9f9898c3d15ba2b91b4adced2a823d2f939e00b4d708aaad323"
     },
     {
       "path": "bicycle-world/dist/src/bridge-decks.js",
@@ -3599,8 +3599,8 @@
     },
     {
       "path": "bicycle-world/dist/src/main.js",
-      "size": 103709,
-      "sha256": "e82b08eb1ea5103fe612093525915286a3d2014d01ee6224ceeac25e1fb71353"
+      "size": 102141,
+      "sha256": "915c3f91bd9c82bd98527ef63629c1d0c3c6fb4f53863874362dde562237cc9c"
     },
     {
       "path": "bicycle-world/dist/src/map-guide.css",

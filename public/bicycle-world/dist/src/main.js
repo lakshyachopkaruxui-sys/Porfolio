@@ -64,7 +64,7 @@ import {mountPokemonControls} from './pokemon-ui.js';
 import {createPersonalRooms} from './personal-rooms.js';
 import {createOakLab} from './oak-lab.js';
 import {createWorksExperience} from './works-experience.js';
-import {runLoadingStages,withinDeadline} from './loading.js';
+import {runLoadingStages} from './loading.js';
 import {createGuardedFrameLoop} from './startup-lifecycle.js';
 
 const $=id=>document.getElementById(id);
@@ -995,7 +995,6 @@ function placeRider(){
   rider.group.rotation.set(Math.atan2(front-rear,half*2),state.heading,0,'YXZ');
 }
 async function initialize(){
-  let displayImages=[];
   try{
   if(document.body.dataset.startupState==='failed')return;
   const saved=store.get();
@@ -1077,26 +1076,9 @@ async function initialize(){
         cameraObstacles=createCameraObstacles(world,garden,[trailheadGuide.root]);setRidingView(saved?.ridingView,{persist:false});
         try{companions=createPokemonWorld({scene,obstacles:world.colliders,trees:garden.nature.placements,onLoadTiming:profileRequested?recordCompanionLoad:undefined});}
         catch(error){console.warn('Optional garden companions unavailable:',error);}
-        // Build the three costly procedural gaits while the real loading
-        // curtain is up. Duplicates reuse prepared templates; other species
-        // remain optional proximity loads. This is bounded preparation, not a
-        // hidden all-map download or an artificial minimum loading duration.
-        await companions?.prepareRiding({yieldControl:()=>new Promise(resolve=>setTimeout(resolve,0))});
-        startupController.signal.throwIfAborted();
         if(!positionIsClear(state,world.colliders,supportsDeck)){Object.assign(state,newState());focus.set(state.x-5,0,state.z+1);placeRider();}
-        displayImages=await world.studioDisplays.ready;
-        if(abandoned)throw new DOMException('World loading cancelled','AbortError');
         startupController.signal.throwIfAborted();
-        await withinDeadline(renderer.compileAsync(scene,camera),15000,{signal:startupController.signal});
-        // Prepare the optional sky material during real loading rather than
-        // paying its first shader compilation when the visitor changes view.
-        followSky.root.visible=true;
-        try{await withinDeadline(renderer.compileAsync(scene,followView.camera),15000,{signal:startupController.signal});}
-        finally{followSky.root.visible=ridingView==='follow';}
-        if(abandoned)throw new DOMException('World loading cancelled','AbortError');
-        await withinDeadline(renderer.compileAsync(woodyWelcome.scene,woodyWelcome.camera),15000,{signal:startupController.signal});
-        await withinDeadline(renderer.compileAsync(cloudVolume.scene,cloudVolume.camera),15000,{signal:startupController.signal});
-        if(abandoned)throw new DOMException('World loading cancelled','AbortError');
+        void world.studioDisplays.ready.catch(error=>console.warn('Optional displays unavailable:',error));
         if(renderer.getContext().isContextLost())throw new Error('The 3D context was lost during preparation');
         renderBackdrop();
       }}
@@ -1109,16 +1091,14 @@ async function initialize(){
     cancelAnimationFrame(loadingCloudFrame);startupComplete=true;ready=true;$('failure').hidden=true;if(!running)$('welcome').hidden=false;$('start').disabled=false;$('start').textContent='Let’s start';
     window.__playStartup?.finish('ready');
     $('loading-state').setAttribute('aria-busy','false');$('loading-state').dataset.ready='true';
-    const missingOptional=[];
-    if(!displayImages.every(Boolean))missingOptional.push('display images');
-    $('loading-status').textContent=missingOptional.length?`Ready to ride. Some ${missingOptional.join(' and ')} could not load; every case study is still available.`:'Ready to ride.';
+    $('loading-status').textContent='Ready to ride.';
     if(enteredGarden&&!running&&!inPortfolio)start({skipWelcome:true,resuming:true});
     syncRideUI();
     // A mode change during loading cancels a stale immersive deep link.
     if(location.hash===initialHash&&!inPortfolio){const personal=Object.keys(PERSONAL_ROUTES).find(kind=>PERSONAL_ROUTES[kind]===initialHash||(kind==='work'&&initialHash==='#memory-pavilion')||(kind==='music'&&['#music-corner','#making-of'].includes(initialHash)));if(personal)openLandmark(personal);else if(initialHash==='#works-room')openWorks();}
     mainLoop.start();
     greetAtEntry();
-  }catch(error){if(abandoned)return;failed=true;startupController.abort();companions?.dispose();console.error('World could not initialize',error);showWorldFailure('The 3D world could not finish loading. Retry, or read the projects directly.');}
+  }catch(error){if(abandoned)return;failed=true;startupController.abort();companions?.dispose();console.error('World could not initialize',error);showWorldFailure(error.message.includes('WebGL')?'The browser lost access to 3D graphics. You can still browse the projects or try the ride again.':'The ride couldn’t finish preparing. You can open the projects now or try the ride again.');}
 }
 function frame(now){
   if(abandoned)return;
