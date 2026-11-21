@@ -611,6 +611,11 @@ function replayGuideVoice(){
 }
 function renderGuidePanel(state){
   oakLab?.syncGuideVoice();
+  // The welcome card already contains the greeting in full.
+  if(!$('welcome').hidden){
+    tourUI?.render({...state,suspended:true});
+    return;
+  }
   if(tourUI)moveGuidePanel();
   if(welcomeVoice.speaking&&welcomeCurrentKind){
     tourUI?.render({...state,enabled:true,speaking:true,suspended:false,clip:WOODY_TOUR_CLIPS[welcomeCurrentKind],error:null});
