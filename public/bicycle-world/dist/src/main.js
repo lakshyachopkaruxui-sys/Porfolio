@@ -935,6 +935,7 @@ function applyRenderQuality(){
 }
 function resize(){if(!renderer)return;readingBackdropDrawn=false;const w=innerWidth,h=innerHeight;renderer.setSize(w,h);applyRenderQuality();if(aboutExperience?.isOpen){aboutExperience.resize();return;}if(oakLab?.isOpen){oakLab.resize();return;}if(worksExperience?.isOpen){worksExperience.resize();return;}if(personalRooms?.isOpen){personalRooms.resize();return;}cameraHeight=Math.max(24,16*h/w);updateProjection();if(ready)renderBackdrop();}
 function showWorldFailure(message){
+  $('play-loading-veil')?.remove();
   departureControlsPending=false;tour?.update({riding:false,overlay:true});
   mainLoop.stop();window.__playStartup?.finish('failed');
   for(const owner of [aboutExperience,oakLab,worksExperience,personalRooms]){
@@ -1054,6 +1055,13 @@ async function initialize(){
       // Yield a paint opportunity between real tasks, without an artificial delay.
       yieldControl:()=>new Promise(resolve=>setTimeout(resolve,0)),
     });
+    let veil;
+    if (!reduced && !document.hidden && typeof Element.prototype.animate === 'function') {
+      veil=document.createElement('div');veil.id='play-loading-veil';veil.setAttribute('aria-hidden','true');
+      document.body.append(veil);
+      await veil.animate([{opacity:0},{opacity:1}],{duration:280,easing:'ease-in-out',fill:'forwards'}).finished.catch(()=>{});
+      if(abandoned||failed){veil.remove();return;}
+    }
     cancelAnimationFrame(loadingCloudFrame);startupComplete=true;ready=true;$('failure').hidden=true;if(!running)$('welcome').hidden=false;$('start').disabled=false;$('start').textContent='Let’s start';
     window.__playStartup?.finish('ready');
     if(!enteredGarden){
@@ -1068,6 +1076,10 @@ async function initialize(){
     // A mode change during loading cancels a stale immersive deep link.
     if(location.hash===initialHash&&!inPortfolio){const personal=Object.keys(PERSONAL_ROUTES).find(kind=>PERSONAL_ROUTES[kind]===initialHash||(kind==='work'&&initialHash==='#memory-pavilion')||(kind==='music'&&['#music-corner','#making-of'].includes(initialHash)));if(personal)openLandmark(personal);else if(initialHash==='#works-room')openWorks();}
     mainLoop.start();
+    if(veil)requestAnimationFrame(()=>{
+      veil.animate([{opacity:1},{opacity:0}],{duration:450,easing:'ease-in-out',fill:'forwards'})
+        .finished.then(()=>veil.remove(),()=>veil.remove());
+    });
     greetAtEntry();
   }catch(error){if(abandoned)return;failed=true;startupController.abort();companions?.dispose();console.error('World could not initialize',error);showWorldFailure(error.message.includes('WebGL')?'The browser lost access to 3D graphics. You can still browse the projects or try the ride again.':'The ride couldn’t finish preparing. You can open the projects now or try the ride again.');}
 }

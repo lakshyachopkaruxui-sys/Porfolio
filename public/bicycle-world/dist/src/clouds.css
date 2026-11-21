@@ -62,3 +62,13 @@ body.cloud-handoff #world-controls,body.cloud-handoff #world-bottom,body.cloud-h
 }
 
 #welcome .welcome-copy:has(#loading-state[aria-busy="true"]) #read-direct { display: none; }
+
+/* The sky stays continuous while the loading canvas becomes the garden canvas. */
+#play-loading-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 9;
+  background: #dce9e5;
+  pointer-events: none;
+}
+@media (forced-colors: active) { #play-loading-veil { background: Canvas; } }

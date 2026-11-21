@@ -15,3 +15,10 @@ html.portfolio-app-open,
   border: 0;
   background: #f2f4f7;
 }
+
+#portfolio-handoff {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  opacity: 0;
+}

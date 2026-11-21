@@ -22,6 +22,63 @@
   let themeMeta = entranceThemeMeta;
   let frame;
   let lastRoute;
+  let handoff;
+  const pageGroup = route => route.startsWith('/bicycle-world/') ? 'play' : 'portfolio';
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const fadeEase = 'cubic-bezier(.4, 0, .2, 1)';
+
+  function clearHandoff() {
+    if (!handoff) return;
+    clearTimeout(handoff.timeout);
+    handoff.layer.remove();
+    handoff = undefined;
+  }
+
+  function settleHandoff(route) {
+    const current = handoff;
+    if (!current?.navigated || current.revealing || pageGroup(route) !== pageGroup(current.route)) return;
+    current.revealing = true;
+    clearTimeout(current.timeout);
+    current.layer.style.pointerEvents = 'none';
+    const reveal = current.layer.animate([{opacity: 1}, {opacity: 0}], {
+      duration: reduceMotion.matches ? 0 : 480, easing: fadeEase, fill: 'forwards',
+    });
+    reveal.finished.then(() => {
+      if (handoff === current) clearHandoff();
+    }, () => {});
+  }
+
+  async function switchApp(route, quiet) {
+    clearHandoff();
+    const current = frame && routeFrom(frame.contentWindow.location.href);
+    const moving = current && pageGroup(current) !== pageGroup(route);
+    if (!moving || quiet || reduceMotion.matches || typeof Element.prototype.animate !== 'function') {
+      record(route,null,'pushState');
+      showApp(route);
+      return;
+    }
+    const layer = document.createElement('div');
+    layer.id = 'portfolio-handoff';
+    layer.setAttribute('aria-hidden', 'true');
+    document.body.append(layer);
+    let color = '#dce9e5';
+    if (pageGroup(route) === 'portfolio') {
+      color = '#f2f4f7';
+      try { if (localStorage.getItem('lakshya-normal-theme') === 'slate') color = '#1b2129'; }
+      catch { /* Storage may be disabled. Use the same default as Portfolio. */ }
+    }
+    layer.style.backgroundColor = color;
+    const state = handoff = {layer, route, navigated: false, revealing: false};
+    await layer.animate([{opacity: 0}, {opacity: 1}], {
+      duration: 300, easing: fadeEase, fill: 'forwards',
+    }).finished.catch(() => {});
+    if (handoff !== state) return;
+    state.navigated = true;
+    frame.style.backgroundColor = color;
+    state.timeout = setTimeout(() => settleHandoff(route), 8000);
+    record(route,null,'pushState');
+    showApp(route);
+  }
 
   function applyThemeColor(color) {
     if (typeof color !== 'string' || !/^#[0-9a-f]{6}$/i.test(color)) return false;
@@ -61,6 +118,7 @@
   }
 
   function showEntrance() {
+    clearHandoff();
     void window.__portfolioNarrationContext?.suspend().catch(()=>{});
     frame?.remove();
     frame = undefined;
@@ -103,6 +161,7 @@
       }
       const current = routeFrom(view.location.href);
       if (current) {
+        settleHandoff(current);
         record(current,view.history.state);
         lastRoute = current;
         frame.title = view.document.title;
@@ -141,12 +200,15 @@
       showEntrance();
       return;
     }
-    if (!['lakshya:route','lakshya:navigate'].includes(event.data?.type)) return;
+    if (!['lakshya:route','lakshya:navigate','lakshya:surface-ready'].includes(event.data?.type)) return;
     const route = routeFrom(event.data.route);
     if (!route) return;
     if (event.data.type === 'lakshya:navigate') {
-      record(route,null,'pushState');
-      showApp(route);
+      void switchApp(route,event.data.quiet === true);
+      return;
+    }
+    if (event.data.type === 'lakshya:surface-ready') {
+      settleHandoff(route);
       return;
     }
     record(route,event.data.state,event.data.action === 'push' ? 'pushState' : 'replaceState');
@@ -158,6 +220,7 @@
   });
 
   addEventListener('popstate', () => {
+    clearHandoff();
     const route = routeFrom(history.state?.[stateKey]);
     if (!route) showEntrance();
     else showApp(route,history.state?.[childStateKey]);

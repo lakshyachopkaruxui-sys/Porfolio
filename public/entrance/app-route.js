@@ -31,7 +31,8 @@
   history.pushState = function (...args) { replace(...args); notify('push'); };
   history.replaceState = function (...args) { replace(...args); notify(); };
   window.portfolioShellNavigate = url => {
-    parent.postMessage({type:'lakshya:navigate',route:new URL(url,location.href).href},location.origin);
+    const quiet = document.documentElement.classList.contains('reduce-motion');
+    parent.postMessage({type:'lakshya:navigate',route:new URL(url,location.href).href,quiet},location.origin);
   };
   addEventListener('message',event => {
     if (event.origin !== location.origin || event.source !== parent || event.data?.type !== 'lakshya:restore') return;
@@ -72,5 +73,10 @@
     event.preventDefault();
     window.portfolioShellNavigate(next.href);
   });
+  addEventListener('DOMContentLoaded', () => {
+    requestAnimationFrame(() => {
+      parent.postMessage({type:'lakshya:surface-ready',route:route()},location.origin);
+    });
+  }, {once:true});
   notify();
 })();

@@ -9,7 +9,7 @@ import {mountPortfolioAssistant, mountPixelBreak} from './portfolio-extras.js?v=
 import {mountResumeProfile} from './homepage-resume.js';
 import {mountPortfolioMotion} from './portfolio-motion.js?v=20261104-personal-space';
 import {mountCaseMotion} from './case-motion.js?v=20261103b';
-import {getWelcomeIntro} from './welcome-intro.js?v=20261114-product-designer';
+import {getWelcomeIntro} from './welcome-intro.js?v=20261122-soft';
 import {mountPhotoCarousel} from './photo-carousel.js?v=20261104-carousel-fast';
 import {
   NORMAL_PROJECTS, NORMAL_PROJECT_CONTEXT, NORMAL_PROJECT_PROCESS,

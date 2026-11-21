@@ -97,6 +97,8 @@ function dropModeParticles(host, destination) {
   function paint(now) {
     if (!layer.isConnected) return;
     ctx.clearRect(0,0,width,height);
+    const tail = Math.max(0, Math.min(1, (2110 - (now - start)) / 610));
+    const fade = tail * tail * (3 - 2 * tail);
     for (const p of particles) {
       const age=Math.max(0,Math.min(2.1,(now-start)/1000-p.delay));
       if (!age) continue;
@@ -105,11 +107,11 @@ function dropModeParticles(host, destination) {
         advance(p,dt);
         p.age+=dt;
       }
-      const shimmer=balls ? 1 : .82+.18*Math.cos(p.phase+age*8);
+      const shimmer=balls ? .92 : .65+.09*Math.cos(p.phase+age*6);
       const size=p.size*(.32+1.08*(1-Math.exp(-age*5)));
       ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.angle);
       if (!balls) ctx.scale(.65+.35*Math.abs(Math.cos(p.phase+age*5)),1);
-      ctx.globalAlpha=Math.min(1,age*36)*shimmer;
+      ctx.globalAlpha=Math.min(1,age*10)*shimmer*fade;
       if (!balls || artwork.naturalWidth) ctx.drawImage(artwork,-size/2,-size/2,size,size);
       ctx.restore();
     }

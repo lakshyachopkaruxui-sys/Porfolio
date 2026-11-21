@@ -169,8 +169,9 @@ export function mountWelcomeIntro() {
       const plane = dialog.querySelector('.welcome-logo-plane');
       const slices = [...dialog.querySelectorAll('.welcome-slice')];
       animate(plane, [
-        {transform: 'scale(1.8)'}, {transform: 'scale(1)'},
+        {transform: 'scale(1.12)'}, {transform: 'scale(1)'},
       ], {duration: 1100, easing: EASE_MOVE});
+      animate(plane, [{opacity: 0}, {opacity: 1}], {duration: 540, easing: EASE_OUT});
       const offsets = ['translate(19%, -6%)', 'translate(-14%, 0)', 'translate(10%, 7%)'];
       slices.forEach((slice, index) => animate(slice, [
         {transform: offsets[index]}, {transform: 'translate(0, 0)'},
@@ -217,7 +218,7 @@ export function mountWelcomeIntro() {
           {opacity: 1, transform: 'translate(-50%, 0)'}, {opacity: 0, transform: 'translate(-50%, -8px)'},
         ], {duration: 250, easing: EASE_OUT});
         animate(dialog.querySelector('.welcome-backdrop'), [
-          {transform: 'translateY(0)'}, {transform: 'translateY(-102%)'},
+          {opacity: 1}, {opacity: 0},
         ], {duration: 1100, delay: 100, easing: EASE_MOVE});
       }, 1700);
       after(() => finish('completed'), 3000);
