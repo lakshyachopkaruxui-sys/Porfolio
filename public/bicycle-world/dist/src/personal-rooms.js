@@ -4,7 +4,6 @@ import {createHobbiesRoomScene} from './hobbies-room-architecture.js';
 import {hobbiesRoomView,hobbiesEntrancePose} from './hobbies-room-camera.js';
 import {personalRoomContent} from './personal-room-content.js';
 import {renderAboutStory} from './about-story-reader.js';
-import {renderHobbiesStory} from './hobbies-story-reader.js';
 import {createAboutRoomScene} from './about-room-architecture.js';
 import {aboutRoomView,aboutEntrancePose} from './about-room-camera.js';
 import {createCloudRoomScene} from './cloud-room-architecture.js';
@@ -124,7 +123,7 @@ export function createPersonalRooms({renderer,cloudVolume=null,onOpen=()=>{},onC
   let curtainOpen=0;
   let kind='about',selected=0,currentIndex=0,pan=0,currentPan=0,phase='closed',room=null,dead=false,dirty=true,transition=null,previousFocus=null,previousHost=null,previousSibling=null,previousStyle='',savedRenderer=null,lastSubFocus=null,texture=null,imageController=null,imageGeneration=0,renderedFrames=0,elapsed=0,hover=null,pressed=null,soundError='',photoLoading=false,postcard=null,captureGeneration=0,capturePending=false,mediaKind='photograph';
   let aboutEntranceProgress=1,queuedAboutSelection=null,interactionMoving=false,mediaIndex=0,mediaReturn=null;
-  let listeningRoom=null,garbaRoom=null,hobbySiblings=[],hobbyReaderReturn=null;
+  let listeningRoom=null,garbaRoom=null,hobbySiblings=[];
   let cloudGallery=null,cloudSiblings=[],photoEntryProgress=0,pendingPhotoEntry=false;
   function activeHobbyRoom(){return listeningRoom?.isOpen?listeningRoom:garbaRoom?.isOpen?garbaRoom:null;}
   const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2(),anchorProjection=new THREE.Vector3();
@@ -172,9 +171,9 @@ export function createPersonalRooms({renderer,cloudVolume=null,onOpen=()=>{},onC
     const content=contentFor(kind),chapter=content.chapters[selected];dialog.dataset.kind=kind;dialog.style.setProperty('--personal-paper',paper[kind]);q('[data-personal-eyebrow]').textContent=content.eyebrow;q('#personal-room-title').textContent=content.title;q('#personal-chapter-title').textContent=chapter.title;q('[data-personal-body]').textContent=chapter.body;q('[data-personal-number]').textContent=`${String(selected+1).padStart(2,'0')} / ${String(content.chapters.length).padStart(2,'0')}`;
     const nav=q('[data-personal-chapters]');nav.setAttribute('aria-label',kind==='cloud'?'Choose a photo collection':'Explore the stories');if(nav.dataset.kind!==kind){nav.replaceChildren();content.chapters.forEach((entry,index)=>{const button=node('button',entry.label,nav);button.type='button';button.dataset.personalChapter=String(index);});nav.dataset.kind=kind;}
     nav.querySelectorAll('button').forEach((button,index)=>button.setAttribute('aria-pressed',String(index===selected)));
-    const media=content.media.filter(item=>item.type==='image');q('[data-personal-media]').hidden=kind==='work'||media.length===0;q('[data-personal-media]').classList.toggle('primary',kind==='cloud');q('[data-personal-media]').textContent=kind==='cloud'?(selected===0?'Browse cloud photos':'Browse mobile photos'):media.length===1?'View photograph':'View photographs';q('[data-personal-story]').textContent=kind==='work'?`About ${chapter.label}`:'Read the story';q('[data-personal-story]').hidden=kind==='cloud';q('[data-personal-recording]').hidden=true;q('[data-personal-recording]').textContent='Enter the listening room';q('[data-personal-works]').hidden=kind!=='about';q('.personal-sound-actions').hidden=kind!=='music';q('.personal-sky-actions').hidden=kind!=='cloud';
+    const media=content.media.filter(item=>item.type==='image');q('[data-personal-media]').hidden=kind==='work'||media.length===0;q('[data-personal-media]').classList.toggle('primary',kind==='cloud');q('[data-personal-media]').textContent=kind==='cloud'?(selected===0?'Browse cloud photos':'Browse mobile photos'):media.length===1?'View photograph':'View photographs';q('[data-personal-story]').hidden=kind==='work'||kind==='cloud';q('[data-personal-recording]').hidden=true;q('[data-personal-recording]').textContent='Enter the listening room';q('[data-personal-works]').hidden=kind!=='about';q('.personal-sound-actions').hidden=kind!=='music';q('.personal-sky-actions').hidden=kind!=='cloud';
     q('[data-personal-scene-note]').textContent=kind==='cloud'?'Choose a collection, then browse its photos. Escape returns to the garden.':`A/D or Left/Right to explore · Enter to interact · Esc to return.${kind==='music'?' Sound sketch, not a recording of my voice.':''}`;
-    host.setAttribute('aria-label',kind==='cloud'?'The Viewfinder. Choose Clouds or Mobile photography, then Browse photos. Left and Right choose a collection. Escape returns to the garden.':`${content.title}. A and D or Left and Right choose a story. Enter interacts with the selected object. Escape returns.`);host.setAttribute('aria-keyshortcuts','A D ArrowLeft ArrowRight Home End Enter Escape');aboutAction.classList.toggle('primary',kind==='work');aboutAction.hidden=!isSpatial()||kind==='cloud';aboutPrompts.hidden=['work','cloud'].includes(kind)||!isSpatial()||!['viewing','focusing'].includes(phase);syncAboutActions();updateStatus();dirty=true;
+    host.setAttribute('aria-label',kind==='cloud'?'The Viewfinder. Choose Clouds or Mobile photography, then Browse photos. Left and Right choose a collection. Escape returns to the garden.':`${content.title}. A and D or Left and Right choose a story. Enter interacts with the selected object. Escape returns.`);host.setAttribute('aria-keyshortcuts','A D ArrowLeft ArrowRight Home End Enter Escape');aboutAction.hidden=!isSpatial()||kind==='cloud';aboutPrompts.hidden=['work','cloud'].includes(kind)||!isSpatial()||!['viewing','focusing'].includes(phase);syncAboutActions();updateStatus();dirty=true;
   }
   function syncAboutActions(){
     if(!isSpatial()||!room)return;
@@ -230,7 +229,6 @@ export function createPersonalRooms({renderer,cloudVolume=null,onOpen=()=>{},onC
     dialog.setAttribute('aria-labelledby','personal-room-title');
   }
   function releaseHobbyRoom(){
-    hobbyReaderReturn=null;
     listeningRoom?.close({immediate:true,notify:false});
     garbaRoom?.close({immediate:true,notify:false});
     restoreHobbyHost();
@@ -246,13 +244,11 @@ export function createPersonalRooms({renderer,cloudVolume=null,onOpen=()=>{},onC
       const options={renderer,container:shell,isReduced,
         onClose(){
           restoreHobbyHost();setPhase('viewing');caption.hidden=false;resize();dirty=true;
-          if(hobbyReaderReturn){const previous=hobbyReaderReturn;hobbyReaderReturn=null;reading.hidden=false;host.inert=true;header.inert=true;caption.inert=true;setPhase('reading');reading.scrollTop=previous.scroll;lastSubFocus=previous.roomFocus;}
         },
         onPortfolio(){close({immediate:true,notify:false});onPortfolio();}
       };
       const child=isGarba?(garbaRoom??=createGarbaRoom(options)):(listeningRoom??=createListeningRoom(options));
-      const returnLabel=hobbyReaderReturn?`Back to ${contentFor(kind).chapters[selected].label} story`:'Back to Hobbies';
-      child.open({returnFocus:returnFocus?.isConnected?returnFocus:aboutAction,returnLabel});
+      child.open({returnFocus:returnFocus?.isConnected?returnFocus:aboutAction,returnLabel:'Back to Hobbies'});
       const childId=isGarba?'garba-experience':'listening-experience';
       hobbySiblings=[...shell.children].filter(element=>element.id!==childId).map(element=>[element,element.inert]);
       for(const [element]of hobbySiblings)element.inert=true;
@@ -261,7 +257,7 @@ export function createPersonalRooms({renderer,cloudVolume=null,onOpen=()=>{},onC
       setPhase(destination);
       return true;
     }catch(error){
-      releaseHobbyRoom();settle();soundError=`The ${isGarba?'Garba courtyard':'listening room'} couldn’t open. You can still read the story.`;updateStatus();
+      releaseHobbyRoom();settle();soundError=`The ${isGarba?'Garba courtyard':'listening room'} couldn’t open. Try again from Hobbies.`;updateStatus();
       aboutAction.focus({preventScroll:true});console.warn('Hobby destination entry failed.',error);return false;
     }
   }
@@ -316,21 +312,17 @@ export function createPersonalRooms({renderer,cloudVolume=null,onOpen=()=>{},onC
   }
   function frameSky(direction){if(kind!=='cloud'||!['viewing','focusing'].includes(phase))return;pan=clamp(pan+direction*.45,-1,1);if(isReduced()){settle();return;}transition={kind:'focus',from:currentIndex,to:selected,fromPan:currentPan,toPan:pan,elapsed:0,duration:.65};setPhase('focusing');}
   function readStory(){
+    if(kind==='work')return;
     const content=contentFor(kind),chapter=content.chapters[selected],article=q('[data-personal-article]');
     article.replaceChildren();article.className='';
     if(kind==='about')renderAboutStory(article,content,selected);
-    else if(kind==='work')renderHobbiesStory(article,content,selected);
     else{node('p',content.eyebrow,article,'personal-eyebrow');const title=node('h1',chapter.title,article);title.id='personal-story-title';if(isSpatial()){node('p',chapter.body,article,'personal-deck');node('p',chapter.detail,article);}else{node('p',content.intro,article,'personal-deck');node('p',chapter.body,article);node('p',chapter.detail,article);}if(content.mediaNote)node('p',content.mediaNote,article,'personal-media-note');}
-    q('[data-personal-story-close]').textContent=kind==='work'?'Back to Hobbies':'Back to the room';
+    q('[data-personal-story-close]').textContent='Back to the room';
     showSubView('reading',reading,q('[data-personal-story-close]'));reading.scrollTop=0;
   }
   function readAboutChapter(index){
     const returnFocus=lastSubFocus;selectChapter(index);readStory();lastSubFocus=returnFocus;
     q(`[data-about-story="${selected}"]`)?.focus({preventScroll:true});
-  }
-  function readHobbyChapter(index){
-    const returnFocus=lastSubFocus;selectChapter(index);readStory();lastSubFocus=returnFocus;
-    q(`[data-hobby-story="${selected}"]`)?.focus({preventScroll:true});
   }
   function zoomPhoto(zoomed){mediaView.classList.toggle('is-zoomed',zoomed);q('[data-personal-zoom]').setAttribute('aria-pressed',String(zoomed));q('[data-personal-zoom]').textContent=(zoomed?'Fit ':'Zoom ')+mediaKind;mediaView.scrollTop=0;}
   function clearRecording(){
@@ -463,12 +455,6 @@ export function createPersonalRooms({renderer,cloudVolume=null,onOpen=()=>{},onC
   listen(q('[data-personal-chapters]'),'click',event=>{const button=event.target.closest?.('[data-personal-chapter]');if(button)selectChapter(Number(button.dataset.personalChapter));});
   listen(q('[data-personal-media-nav]'),'click',event=>{const button=event.target.closest?.('[data-personal-photo]');if(button)showMedia(Number(button.dataset.personalPhoto));});
   listen(reading,'click',event=>{
-    if(kind==='work'){
-      const photo=event.target.closest?.('[data-hobby-photo]');if(photo){showMedia(Number(photo.dataset.hobbyPhoto));return;}
-      const story=event.target.closest?.('[data-hobby-story]');if(story){readHobbyChapter(Number(story.dataset.hobbyStory));return;}
-      const enter=event.target.closest?.('[data-hobby-enter]');if(enter){const previous={scroll:reading.scrollTop,roomFocus:lastSubFocus};closeSubView(false);hobbyReaderReturn=previous;if(!enterHobbyRoom(enter.dataset.hobbyEnter))hobbyReaderReturn=null;}
-      return;
-    }
     if(kind!=='about')return;
     const photo=event.target.closest?.('[data-about-photo]');if(photo){showMedia(Number(photo.dataset.aboutPhoto));return;}
     const story=event.target.closest?.('[data-about-story]');if(story){readAboutChapter(Number(story.dataset.aboutStory));return;}
@@ -493,10 +479,6 @@ export function createPersonalRooms({renderer,cloudVolume=null,onOpen=()=>{},onC
     if(kind==='about'&&phase==='reading'&&(direction||boundary&&event.target.closest?.('.about-story-navigation'))){
       consumeNavigationKey(event);const count=contentFor(kind).chapters.length;
       readAboutChapter(boundary==='first'?0:boundary==='last'?count-1:clamp(selected+direction,0,count-1));return;
-    }
-    if(kind==='work'&&phase==='reading'&&(direction||boundary&&event.target.closest?.('.hobby-story-navigation'))){
-      consumeNavigationKey(event);const count=contentFor(kind).chapters.length;
-      readHobbyChapter(boundary==='first'?0:boundary==='last'?count-1:clamp(selected+direction,0,count-1));return;
     }
     if(phase==='places'){
       const vertical=!event.repeat?(event.key==='ArrowDown'?1:event.key==='ArrowUp'?-1:0):0,step=direction||vertical;

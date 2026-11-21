@@ -131,29 +131,6 @@
 #personal-experience[data-kind=work] .personal-reading{padding:20px max(32px,calc((100vw - 1160px)/2));}
 #personal-experience[data-kind=work] .personal-reading>header{top:-20px;border:0;gap:16px;flex-wrap:wrap;padding:14px 0;margin-bottom:26px;}
 #personal-experience[data-kind=work] .personal-reading>header>.personal-eyebrow{margin:0 auto 0 0;font-size:11px;}
-#personal-experience[data-kind=work] .hobby-story{--control-face-start:#fffdf8;--control-face-end:#fffdf8;max-width:none;margin:0;padding-bottom:40px;}
-#personal-experience[data-kind=work] .hobby-story-navigation{display:flex;gap:8px;margin-bottom:30px;flex-wrap:wrap;}
-#personal-experience[data-kind=work] .hobby-story-navigation button{padding:10px 18px;background:transparent;color:var(--personal-ink);box-shadow:none;}
-#personal-experience[data-kind=work] .hobby-story-navigation button[aria-pressed=true]{background:var(--personal-ink);color:#fff9eb;border-color:var(--personal-ink);}
-#personal-experience[data-kind=work] .hobby-story-hero{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:clamp(32px,5vw,72px);align-items:center;}
-#personal-experience[data-kind=work] .hobby-story-intro{grid-column:2;grid-row:1;}
-#personal-experience[data-kind=work] .hobby-story-hero>.hobby-story-photo{grid-column:1;grid-row:1;}
-#personal-experience[data-kind=work] .hobby-story-intro>.personal-eyebrow{font-size:11px;margin:0 0 18px;}
-#personal-experience[data-kind=work] .hobby-story h1{font-size:clamp(28px,3.1vw,42px);line-height:1.45;margin:0 0 24px;}
-#personal-experience[data-kind=work] .hobby-story .personal-deck{font-size:clamp(18px,1.65vw,21px);line-height:1.75;margin:0;max-width:44ch;}
-#personal-experience[data-kind=work] :is(.hobby-story-enter,.hobby-story-next button){padding:11px 18px;}
-#personal-experience[data-kind=work] .hobby-story-enter{margin-top:24px;}
-#personal-experience[data-kind=work] .hobby-story-photo{margin:0;min-width:0;}
-#personal-experience[data-kind=work] .hobby-photo-open{display:block;padding:0;width:100%;border:0;background:transparent;box-shadow:none;line-height:0;}
-#personal-experience[data-kind=work] .hobby-photo-open img{display:block;width:auto;height:auto;max-width:100%;max-height:520px;object-fit:contain;border-radius:12px;margin:auto;}
-#personal-experience[data-kind=work] .hobby-photo-open:hover{background:transparent;box-shadow:0 0 0 3px #7d957c;border-radius:12px;}
-#personal-experience[data-kind=work] .hobby-story-photo figcaption{font:400 14px/1.6 var(--font-body,'DM Sans',sans-serif);color:#536250;margin:12px 0 0;}
-#personal-experience[data-kind=work] .hobby-story-details{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px);margin:48px 0 0;}
-#personal-experience[data-kind=work] .hobby-story-details h2{font-size:20px;line-height:1.6;margin:0 0 16px;}
-#personal-experience[data-kind=work] .hobby-story-details p{font-size:18px;line-height:1.8;margin:0;max-width:52ch;}
-#personal-experience[data-kind=work] .hobby-story-moments{max-width:800px;margin:36px auto 0;}
-#personal-experience[data-kind=work] .hobby-story-next{display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin:36px 0 0;padding:24px 0;}
-#personal-experience[data-kind=work] .hobby-story-next p{flex:1 1 300px;margin:0;font-size:18px;}
 #personal-experience[data-kind=work] .personal-media>header{flex-wrap:wrap;border:0;gap:16px;}
 #personal-experience[data-kind=work] .personal-media h2{font-size:20px;margin-right:auto;}
 #personal-experience[data-kind=work] .personal-media img{background:transparent;border-radius:10px;}
@@ -163,9 +140,6 @@
 #personal-experience[data-kind=work] :is(.personal-reading,.personal-media,.personal-places)>header>.play-music-dock{position:static;inset:auto;display:flex;transform:none;margin:0;}
 @media(max-width:760px){
  #personal-experience[data-kind=work] .personal-reading{padding-inline:24px;}
- #personal-experience[data-kind=work] .hobby-story-hero,#personal-experience[data-kind=work] .hobby-story-details{grid-template-columns:1fr;gap:28px;}
- #personal-experience[data-kind=work] .hobby-story-intro{grid-column:1;grid-row:1;}
- #personal-experience[data-kind=work] .hobby-story-hero>.hobby-story-photo{grid-column:1;grid-row:2;}
 }
 
 /* Cloud photography has a dedicated, opaque room. Its WebGL parent rests. */
@@ -213,6 +187,7 @@ body.hybrid-world #personal-experience[data-kind=cloud] :is(.personal-header nav
 #personal-experience[data-kind=work] .personal-number { display: none; }
 #personal-experience[data-kind=work] #personal-chapter-title { margin: 0 0 12px; font-size: 25px; line-height: 1.35; }
 #personal-experience[data-kind=work] .personal-caption > [data-personal-body] { margin: 0; max-width: 38ch; font-size: 16px; line-height: 1.65; }
+#personal-experience[data-kind=work] .personal-caption { --control-face-start:#fffdf8; --control-face-end:#fffdf8; }
 #personal-experience[data-kind=work] .personal-chapters { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); align-self: stretch; justify-self: stretch; grid-column: auto; grid-row: auto; width: 100%; gap: 8px; margin: 20px 0 16px; }
 #personal-experience[data-kind=work] .personal-chapters button { width: 100%; min-height: 44px !important; padding: 10px 14px !important; font-size: 15px !important; }
 #personal-experience[data-kind=work] .personal-actions { display: flex; flex-direction: column; align-items: stretch; align-self: stretch; justify-self: stretch; grid-column: auto; grid-row: auto; width: 100%; gap: 8px; margin: 0; }
@@ -220,18 +195,8 @@ body.hybrid-world #personal-experience[data-kind=cloud] :is(.personal-header nav
 #personal-experience[data-kind=work] .personal-actions > [data-about-interact] { min-width: 0; }
 #personal-experience[data-kind=work] .personal-actions > button[hidden] { display: none; }
 #personal-experience[data-kind=work] .personal-scene-note { margin: 16px 0 0; max-width: 40ch; font-size: 13px; line-height: 1.6; }
-#personal-experience[data-kind=work] .hobby-story { text-align: left; }
-#personal-experience[data-kind=work] .hobby-story-hero { align-items: start; }
-#personal-experience[data-kind=work] .hobby-story-intro { grid-column: 1; grid-row: 1; }
-#personal-experience[data-kind=work] .hobby-story-hero > .hobby-story-photo { grid-column: 2; grid-row: 1; }
-#personal-experience[data-kind=work] .hobby-story .personal-deck { max-width: 42ch; }
-#personal-experience[data-kind=work] .hobby-story-details { display: block; max-width: 64ch; }
-#personal-experience[data-kind=work] .hobby-story-details section + section { margin-top: 32px; }
-#personal-experience[data-kind=work] .hobby-story-moments { max-width: 680px; margin-inline: 0; }
 @media (max-width: 899px) {
   #personal-experience[data-kind=work] .personal-caption { left: 20px; bottom: 20px; width: min(400px,calc(100% - 40px)); padding: 20px; }
-  #personal-experience[data-kind=work] .hobby-story-hero { grid-template-columns: minmax(0,1fr); }
-  #personal-experience[data-kind=work] .hobby-story-hero > .hobby-story-photo { grid-column: 1; grid-row: 2; }
 }
 @media (max-height: 650px) {
   #personal-experience[data-kind=work] .personal-caption { bottom: 12px; padding: 18px; max-height: calc(100dvh - 130px); }
