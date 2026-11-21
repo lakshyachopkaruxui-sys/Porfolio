@@ -58,8 +58,8 @@ body.hybrid-world :is(#ride-tools, #world-map, .oak-tools) .mode-selector.mode-s
   --mode-height: var(--compact-height, 44px);
 }
 
-.mode-selector[data-mode='portfolio']:not([data-visual-mode]),
-.mode-selector[data-visual-mode='portfolio'] {
+/* Keep the current page's palette while the thumb travels. */
+.mode-selector[data-mode='portfolio'] {
   --mode-face: transparent;
   --mode-edge: transparent;
   --mode-depth: none;
@@ -113,8 +113,7 @@ body.hybrid-world :is(#ride-tools, #world-map, .oak-tools) .mode-selector.mode-s
 }
 .mode-selector.mode-switch > a:not([aria-current]):hover {
   color: var(--mode-current) !important;
-  text-decoration: underline !important;
-  text-underline-offset: 3px;
+  text-decoration: none !important;
 }
 .mode-selector.mode-switch > a:focus-visible {
   outline: 2px solid var(--mode-focus) !important;
@@ -199,3 +198,43 @@ body.hybrid-world :is(#ride-tools, #world-map, .oak-tools) .mode-selector.mode-s
   }
   .mode-selector-plate { forced-color-adjust: none; }
 }
+
+/* The switch stays neutral; selection is communicated by the moving thumb. */
+.mode-selector.mode-switch { --mode-rail-column: 42px; }
+.mode-selector.mode-switch .mode-selector-plate { box-sizing: border-box; width: 36px; height: 20px; border-radius: 999px; }
+.mode-selector.mode-switch .mode-selector-plate::after { box-sizing: border-box; inset: 50% auto auto 2px; margin-top: -7px; width: 14px; height: 14px; border-radius: 50%; }
+.mode-selector[data-visual-mode='play'] .mode-selector-plate::after { transform: translateX(16px); }
+body .mode-selector.mode-switch > a,
+body .mode-selector.mode-switch > a:hover,
+body.hybrid-world .mode-selector.mode-switch > a:hover {
+ background: transparent !important; box-shadow: none !important;
+ color: var(--mode-label) !important; text-decoration: none !important;
+ transform: none !important;
+}
+body .mode-selector.mode-switch > a[aria-current='page'],
+body .mode-selector.mode-switch > a[aria-current='page']:hover { color: var(--mode-current) !important; }
+.mode-particle-layer { position: fixed; inset: 0; pointer-events: none; z-index: 2147483646; overflow: hidden; }
+.mode-particle { position: absolute; display: block; opacity: 0; animation: mode-particle-fall 650ms cubic-bezier(.3,0,.65,1) both; }
+.mode-particle svg { display: block; width: 100%; height: 100%; }
+@keyframes mode-particle-fall {
+ 0% { opacity: 0; transform: translate(-50%,-50%) scale(.25) rotate(0); }
+ 18% { opacity: 1; }
+ 72% { opacity: 1; }
+ 100% { opacity: 0; transform: translate(calc(-50% + var(--dx)),var(--dy)) scale(1.15) rotate(var(--spin)); }
+}
+@media (prefers-reduced-motion: reduce) { .mode-particle-layer { display: none; } }
+
+/* Popper impulse, a visible arc, then gravity; only transforms and opacity move. */
+.mode-particle { animation: mode-particle-burst 960ms linear both; }
+@keyframes mode-particle-burst {
+  0% { opacity: 0; transform: translate(-50%,-50%) scale(.35) rotate(0); }
+  12% { opacity: 1; transform: translate(calc(-50% + var(--dx)*.25),calc(var(--rise)*-.7)) scale(.8) rotate(calc(var(--spin)*.1)); }
+  28% { opacity: 1; transform: translate(calc(-50% + var(--dx)*.52),calc(var(--rise)*-1)) scale(1.05) rotate(calc(var(--spin)*.28)); }
+  48% { opacity: 1; transform: translate(calc(-50% + var(--dx)*.74),0px) scale(1.22) rotate(calc(var(--spin)*.48)); }
+  76% { opacity: 1; transform: translate(calc(-50% + var(--dx)*.92),calc(var(--dy)*.48)) scale(1.4) rotate(calc(var(--spin)*.76)); }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--dx)),var(--dy)) scale(1.55) rotate(var(--spin)); }
+}
+.mode-selector[data-mode-moving] .mode-selector-plate { animation: mode-switch-pop 360ms ease-out; }
+@keyframes mode-switch-pop { 0%,100% { scale:1; } 25% { scale:.88; } 60% { scale:1.14; } }
+@media (prefers-reduced-motion:reduce) { .mode-selector[data-mode-moving] .mode-selector-plate { animation:none; } }
+.reduce-motion .mode-selector[data-mode-moving] .mode-selector-plate { animation:none; }

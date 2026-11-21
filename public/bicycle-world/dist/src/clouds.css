@@ -4,39 +4,38 @@
 .cloud-veil{position:absolute;inset:0;background:#f3f7fa;opacity:0}
 body.cloud-handoff #scene{z-index:8;pointer-events:none}
 body.cloud-handoff #world-controls,body.cloud-handoff #world-bottom,body.cloud-handoff #woody-guide{visibility:hidden}
-/* This viewport also positions the WebGL miniature. Before the renderer is
-   available, the CSS silhouette carries the same key light and blue base. */
+/* CSS fallback until the shared entrance cloud renderer is ready. */
 .loading-clouds {
   position: relative;
-  width: min(100%, clamp(12rem, 23vw, 16rem));
-  aspect-ratio: 2 / 1;
-  margin-bottom: 6px;
+  width: 100%;
+  height: clamp(5.5rem, 16vw, 9rem);
   pointer-events: none;
 }
 .loading-clouds span {
-  position:absolute;
-  inset:48% 9% 16%;
-  border-radius:50% 52% 45% 45%;
-  background:radial-gradient(ellipse at 34% 15%, #fffef7 12%, #e9f1f5 51%, #b2c4d4 88%);
+  position: absolute;
+  width: 25%; height: 25%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 34% 15%, #fffef7 12%, #e9f1f5 51%, #b2c4d4 88%);
 }
 .loading-clouds span::before,.loading-clouds span::after {
-  content:""; position:absolute;
-  border-radius:50%;
-  background:radial-gradient(ellipse at 30% 19%, #fffef7 11%, #edf3f5 48%, #bccfdd 91%);
+  content: ""; position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 30% 19%, #fffef7 11%, #edf3f5 48%, #bccfdd 91%);
 }
-.loading-clouds span::before { width:44%; height:178%; left:23%; bottom:20%; }
-.loading-clouds span::after { width:34%; height:135%; right:12%; bottom:17%; }
-.loading-clouds span:nth-child(2) { inset:46% 57% 23% 8%; }
-.loading-clouds span:nth-child(2)::before { width:78%; height:105%; left:5%; bottom:4%; }
-.loading-clouds span:nth-child(2)::after,.loading-clouds span:nth-child(3) { display:none; }
-.loading-clouds[data-volume-ready="true"] span{visibility:hidden}
-@media(forced-colors:active){.loading-clouds{display:none}}
+.loading-clouds span::before { width: 52%; height: 150%; left: 20%; bottom: 8%; }
+.loading-clouds span::after { width: 36%; height: 109%; right: 9%; bottom: 3%; }
+.loading-clouds span:nth-child(1) { left: 6%; top: 41%; }
+.loading-clouds span:nth-child(2) { left: 35%; top: 25%; scale: .85; --drift-delay: -1.8s; }
+.loading-clouds span:nth-child(3) { right: 8%; top: 46%; scale: 1.1; --drift-delay: -3s; }
+.loading-clouds span:nth-child(4) { left: 43%; top: 68%; --drift-delay: -4.2s; }
+.loading-clouds[data-volume-ready="true"] span { visibility: hidden; }
+@media (forced-colors: active) { .loading-clouds { display: none; } }
 /* Recovery links stay usable at small desktop sizes and enlarged text. */
 #failure{position:fixed;inset:24px;margin:auto;width:min(550px,calc(100% - 48px));height:max-content;max-height:calc(100dvh - 48px);overflow:auto}
 #failure .failure-links{display:flex;flex-wrap:wrap;gap:4px 20px;margin-top:16px}
 #failure .failure-links a{padding-block:12px;margin:0}
 
-/* Real startup milestones only. Keep copy and progress stable as labels change. */
+/* Keep the waiting message centered beneath the clouds. */
 #welcome.woody-welcome #loading-state:not([data-ready="true"]) {
   width: min(100%, 24rem);
   box-sizing: border-box;
@@ -47,30 +46,19 @@ body.cloud-handoff #world-controls,body.cloud-handoff #world-bottom,body.cloud-h
 #welcome #loading-state .loading-clouds { margin: 0 auto 12px; }
 #welcome #loading-status {
   min-height: 2.8em;
-  display: grid;
-  align-items: center;
+  display: block;
   margin: 0 0 10px;
   color: #294638;
-  font-size: 1rem;
-  line-height: 1.4;
-}
-#welcome .loading-steps { gap: 8px; }
-#welcome .loading-steps li {
-  border-color: #a9beb1;
-  padding-top: 8px;
-  color: #415b50;
-  font-size: .8125rem;
-}
-#welcome .loading-steps li:is([data-state="working"],[data-state="complete"]) {
-  border-color: #315d4b;
-  color: #234438;
-  font-weight: 650;
+  font-family: var(--font-heading, "Mochiy Pop P One", sans-serif);
+  font-size: clamp(1.125rem, 2.2vw, 1.4rem);
+  line-height: 1.45;
+  text-wrap: balance;
 }
 @media (prefers-reduced-motion: no-preference) {
-  body:not([data-play-ui-motion="reduced"]) #welcome .loading-clouds:not([data-volume-ready="true"]) {
-    animation: preparing-cloud-drift 2.4s ease-in-out infinite alternate;
+  html:not(.reduce-motion) body:not([data-play-ui-motion="reduced"]) #welcome .loading-clouds:not([data-volume-ready="true"]) span {
+    animation: preparing-cloud-drift 5s ease-in-out var(--drift-delay, 0s) infinite alternate;
   }
-  @keyframes preparing-cloud-drift { to { transform: translate(4px,-2px); } }
+  @keyframes preparing-cloud-drift { to { transform: translate(6px, -4px); } }
 }
 
 #welcome .welcome-copy:has(#loading-state[aria-busy="true"]) #read-direct { display: none; }

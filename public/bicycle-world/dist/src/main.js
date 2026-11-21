@@ -970,7 +970,6 @@ async function initialize(){
   document.body.dataset.gardenEntry=enteredGarden?'resume':'preparing';
   if(enteredGarden){
     $('welcome').removeAttribute('aria-labelledby');$('welcome').setAttribute('aria-label','Returning to your ride');
-    $('loading-status').textContent='Returning to your ride…';
   }
   bicycleLightPreference=saved?.bicycleLight===true;
   pokemonSoundPreference=typeof saved?.pokemonSounds==='boolean'?saved.pokemonSounds:null;
@@ -1052,7 +1051,6 @@ async function initialize(){
       }}
     ],{
       signal:startupController.signal,onTimeout:()=>startupController.abort(),
-      onStage(id,status,label){if(abandoned)throw new DOMException('World loading cancelled','AbortError');const step=document.querySelector(`[data-load-stage="${id}"]`);step.dataset.state=status;if(status==='working'){step.setAttribute('aria-current','step');$('loading-status').textContent=label;}else step.removeAttribute('aria-current');},
       // Yield a paint opportunity between real tasks, without an artificial delay.
       yieldControl:()=>new Promise(resolve=>setTimeout(resolve,0)),
     });

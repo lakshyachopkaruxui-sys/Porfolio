@@ -1,4 +1,4 @@
-import { decorateModeSelectors, portfolioModeURLs } from './mode-selector.js?v=20261105';
+import { decorateModeSelectors, portfolioModeURLs } from './mode-selector.js?v=20261122-switch';
 
 decorateModeSelectors(document, { mode: 'portfolio', pageURL: location.href });
 
