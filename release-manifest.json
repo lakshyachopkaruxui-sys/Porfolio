@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-21T15:11:07.840Z",
+  "generatedAt": "2026-11-21T15:21:16.833Z",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 746,
-      "sha256": "315c3586a6882e4bb246c5a7aed63b07b0bf2cd79f71a61d240222bda1f959da"
+      "sha256": "5c5c41e52e76fb1b6067b43d78de69ed05fe8c23f6d4cb60a89e649c19b1cf1c"
     },
     {
       "path": "_redirects",
@@ -3125,7 +3125,7 @@
     {
       "path": "bicycle-world/dist/index.html",
       "size": 50174,
-      "sha256": "62ad4ee66b8d68417d6242e097234f8b96c8dc9ceb01b4ef6e53f2e17298ecf8"
+      "sha256": "89db58048026348da44ac8d2dbc973e92e0747e286aebd94f95ca9ce5ddbe2cb"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
@@ -3494,8 +3494,8 @@
     },
     {
       "path": "bicycle-world/dist/src/hobbies-story-reader.js",
-      "size": 3094,
-      "sha256": "b7aa6303244986370d68b67645059410841bcf026a345aceaa4869398bf162d6"
+      "size": 3000,
+      "sha256": "18ad2a8dd0956346f99dfc4c3e3340e0089a8483f26d955339c6847f39d84f8c"
     },
     {
       "path": "bicycle-world/dist/src/hobby-interactions.css",
@@ -3694,8 +3694,8 @@
     },
     {
       "path": "bicycle-world/dist/src/personal-rooms.css",
-      "size": 37799,
-      "sha256": "7a9f380eebb2dfe709b21183de0259cf4be21cdf73e33c25416d935ee8d2f43e"
+      "size": 37761,
+      "sha256": "c980d4f31452c1baf724220f43a757d20eaaad1018331510208a076008f33b3b"
     },
     {
       "path": "bicycle-world/dist/src/personal-rooms.js",

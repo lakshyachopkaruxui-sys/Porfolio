@@ -15,12 +15,15 @@ export function renderHobbiesStory(article,content,selected){
   content.chapters.forEach((item,index)=>{const button=node('button',item.label,navigation);button.type='button';button.dataset.hobbyStory=String(index);button.setAttribute('aria-pressed',String(selected===index));});
   const hero=node('div',undefined,article,'hobby-story-hero'),intro=node('div',undefined,hero,'hobby-story-intro');
   node('p',content.eyebrow,intro,'personal-eyebrow');node('h1',chapter.title,intro).id='personal-story-title';node('p',chapter.reader.lead,intro,'personal-deck');
-  const enter=node('button',selected===0?'Enter the listening room':'Enter the Garba courtyard',intro,'hobby-story-enter primary');enter.type='button';enter.dataset.hobbyEnter=selected===0?'listening':'garba';
+  const enter=node('button',selected===0?'Enter the listening room':'Enter the Garba courtyard',intro,'hobby-story-enter');enter.type='button';enter.dataset.hobbyEnter=selected===0?'listening':'garba';
   const index=photos.findIndex(item=>item.id===chapter.reader.photoId);if(index>=0)photograph(hero,photos[index],index,{lead:true});
   const details=node('div',undefined,article,'hobby-story-details');
   for(const section of chapter.reader.sections){const block=node('section',undefined,details);node('h2',section.title,block);node('p',section.body,block);}
   const remaining=chapter.photoIds.filter(id=>id!==chapter.reader.photoId);
   if(remaining.length){const gallery=node('div',undefined,article,'hobby-story-moments');for(const id of remaining){const index=photos.findIndex(item=>item.id===id);if(index>=0)photograph(gallery,photos[index],index);}}
-  const footer=node('footer',undefined,article,'hobby-story-next');node('p',selected===0?'There’s another kind of music and movement next door.':'Stay for a song before heading back.',footer);
-  const other=node('button',selected===0?'About Garba':'About Singing',footer);other.type='button';other.dataset.hobbyStory=String(selected===0?1:0);
+  if(selected===1){
+    const footer=node('footer',undefined,article,'hobby-story-next');
+    node('p','Stay for a song before heading back.',footer);
+    const other=node('button','About Singing',footer);other.type='button';other.dataset.hobbyStory='0';
+  }
 }
