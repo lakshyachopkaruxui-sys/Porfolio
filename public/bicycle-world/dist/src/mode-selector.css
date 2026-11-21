@@ -204,15 +204,14 @@ body.hybrid-world :is(#ride-tools, #world-map, .oak-tools) .mode-selector.mode-s
 .mode-selector.mode-switch .mode-selector-plate { box-sizing: border-box; width: 36px; height: 20px; border-radius: 999px; }
 .mode-selector.mode-switch .mode-selector-plate::after { box-sizing: border-box; inset: 50% auto auto 2px; margin-top: -7px; width: 14px; height: 14px; border-radius: 50%; }
 .mode-selector[data-visual-mode='play'] .mode-selector-plate::after { transform: translateX(16px); }
-body .mode-selector.mode-switch > a,
-body .mode-selector.mode-switch > a:hover,
-body.hybrid-world .mode-selector.mode-switch > a:hover {
+html:root body .mode-selector.mode-switch > a,
+html:root body .mode-selector.mode-switch > a:hover {
  background: transparent !important; box-shadow: none !important;
  color: var(--mode-label) !important; text-decoration: none !important;
  transform: none !important;
 }
-body .mode-selector.mode-switch > a[aria-current='page'],
-body .mode-selector.mode-switch > a[aria-current='page']:hover { color: var(--mode-current) !important; }
+html:root body .mode-selector.mode-switch > a[aria-current='page'],
+html:root body .mode-selector.mode-switch > a[aria-current='page']:hover { color: var(--mode-current) !important; }
 .mode-particle-layer { position: fixed; inset: 0; pointer-events: none; z-index: 2147483646; overflow: hidden; }
 .mode-particle { position: absolute; display: block; opacity: 0; animation: mode-particle-fall 650ms cubic-bezier(.3,0,.65,1) both; }
 .mode-particle svg { display: block; width: 100%; height: 100%; }

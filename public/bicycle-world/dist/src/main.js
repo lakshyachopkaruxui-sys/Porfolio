@@ -1,8 +1,9 @@
 import {createWelcomeAudioClass} from './welcome-context-audio.js';
 import {createCaptionClock} from './woody-caption.js';
 import {sampleSpeechOpening} from './woody-speech.js';
-import {createVisitorBoard,VISITOR_BOARD_LOCATION,visitorNarrationPresence} from './visitor-board.js';
+import {createVisitorBoard,VISITOR_BOARD_LOCATION} from './visitor-board.js';
 import {createVisitorBoardUI} from './visitor-board-ui.js';
+import {createRideReviewProgress} from './ride-review-progress.js';
 import {assistAcrossRamps,supportsDeck} from './river-hop/hop-sites.js';
 import {createFullGardenHop} from './river-hop/full-garden-hop.js';
 import {HOP} from './river-hop/trajectory.js';
@@ -109,7 +110,7 @@ let welcomePainted=false;
 let welcomeGreetingPlaying=false,entryGreetingNeedsGesture=false;
 let welcomeCurrentKind=null,departureControlsPending=false,onboarding=null,entryGuideLine='controls-yes',entryGreetingAttempted=false;
 let pendingWelcomeLine=null,entryGuideStopped=false;
-let tour=null,tourUI=null,tourAudio=null,tourDestination=null,tourRoom=null,pendingTourIntro=false,tourJumped=false,tourAirborne=false,tourExplored=false,tourFeedbackNear=false;
+let tour=null,tourUI=null,tourAudio=null,tourDestination=null,tourRoom=null,pendingTourIntro=false,tourJumped=false,tourAirborne=false,tourExplored=false;
 let tourFocusOrigin=null;
 let tourFocused=true;
 const welcomeFlow=createWelcomeFlow();
@@ -172,11 +173,11 @@ const rideAudioMotion={speed:0,pedaling:false,braking:false,moved:0,dt:0};
 let landmarkFramer,cameraHeight=24;
 let running=false,inPortfolio=false,ready=false,failed=false;
 let visitorBoard=null,visitorUI=null;
-let feedbackInvited=false;try{feedbackInvited=sessionStorage.getItem('visitor-feedback-invited')==='1';}catch{}
-function inviteFeedback(onLeave){if(feedbackInvited){onLeave?.();return;}feedbackInvited=true;tour?.emit('feedback-invited');try{sessionStorage.setItem('visitor-feedback-invited','1');}catch{}visitorUI?.invite({onLeave});}
-let viewfinderFeedbackInvited=false;try{viewfinderFeedbackInvited=sessionStorage.getItem('viewfinder-feedback-invited')==='1';}catch{}
-function inviteViewfinderFeedback(){if(viewfinderFeedbackInvited)return;viewfinderFeedbackInvited=true;feedbackInvited=true;tour?.emit('feedback-invited');try{sessionStorage.setItem('viewfinder-feedback-invited','1');sessionStorage.setItem('visitor-feedback-invited','1');}catch{}visitorUI?.invite();}
-function openVisitorBoard(){if(!visitorUI)return;feedbackInvited=true;tour?.emit('feedback-invited');try{sessionStorage.setItem('visitor-feedback-invited','1');}catch{}cancelRoute();state.speed=0;visitorUI.open({invite:true});}
+const reviewProgress=createRideReviewProgress(()=>sessionStorage);
+const feedbackInviteKey='visitor-feedback-after-hobbies';
+let feedbackInvited=false;try{feedbackInvited=sessionStorage.getItem(feedbackInviteKey)==='1';}catch{}
+function inviteFeedback(onLeave){if(feedbackInvited){onLeave?.();return;}feedbackInvited=true;tour?.emit('feedback-invited');try{sessionStorage.setItem(feedbackInviteKey,'1');}catch{}visitorUI?.invite({onLeave});}
+function openVisitorBoard(){if(!visitorUI)return;feedbackInvited=true;tour?.emit('feedback-invited');try{sessionStorage.setItem(feedbackInviteKey,'1');}catch{}cancelRoute();state.speed=0;visitorUI.open({invite:true});}
 let enteredGarden=false,pendingRideAudio=false;
 let riverHop=null,hopBoost=false,rampApproach=false;
 sceneHost.setAttribute('aria-label',sceneHost.getAttribute('aria-label')+' Ride onto River Hop to jump automatically. Riding resumes after landing. Q toggles boost.');
@@ -266,7 +267,7 @@ function setBicycleLight(value){
   syncBicycleLight();readingBackdropDrawn=false;save();
   notify(value?'Bicycle light on.':'Bicycle light off.');
 }
-function hasOverlay(){return Boolean(visitorUI?.isOpen||reader.open||help.open||placeUI?.isOpen||projectUI?.isOpen||mapUI?.isOpen||personalRooms?.isOpen||worksExperience?.isOpen||oakLab?.isOpen||aboutExperience?.isOpen);}
+function hasOverlay(){return Boolean(visitorUI?.invitationHost||visitorUI?.isOpen||reader.open||help.open||placeUI?.isOpen||projectUI?.isOpen||mapUI?.isOpen||personalRooms?.isOpen||worksExperience?.isOpen||oakLab?.isOpen||aboutExperience?.isOpen);}
 function ridingInputBlocked(){return failed||abandoned||document.hidden||cloudTransition.snapshot.active;}
 function syncRideUI(){
   playMusic.setActive(ready&&running&&!inPortfolio);
@@ -430,7 +431,8 @@ function showPortfolio(hash='',skipFeedback=false){
   tourJumped=false;
   tour?.update({riding:false,overlay:true});
   if(hash?.preventDefault){hash.preventDefault();hash='';}
-  if(running&&visitorUI&&!skipFeedback&&!feedbackInvited){cancelRoute();clearInput();state.speed=0;inviteFeedback(()=>showPortfolio(hash,true));return;}
+  observeReviewProgress();
+  if(running&&visitorUI&&reviewProgress.canInvite&&!skipFeedback&&!feedbackInvited){cancelRoute();clearInput();state.speed=0;inviteFeedback(()=>showPortfolio(hash,true));return;}
   visitorUI?.close();
   playMusic.suspend('normal-portfolio',true);
   // Capture the return URL before reader cleanup changes its hash or query.
@@ -568,7 +570,7 @@ tour=createWoodyTour({clips:WOODY_TOUR_CLIPS,feedbackAlreadyInvited:feedbackInvi
   replayTourLine.disabled=running?!snapshot.clip:!welcomeVoice.available(entryGuideLine);
   sceneHost.dataset.tourPlayback=snapshot.status;sceneHost.dataset.tourClip=snapshot.clip?.id||'';
   if(snapshot.feedbackInvited&&!feedbackInvited){
-    feedbackInvited=true;try{sessionStorage.setItem('visitor-feedback-invited','1');}catch{}
+    feedbackInvited=true;try{sessionStorage.setItem(feedbackInviteKey,'1');}catch{}
   }
 }});
 tourUI=mountWoodyTourUI({onEnable:value=>setTourEnabled(value),onReplay:replayGuideVoice,onStop:stopGuideVoice,
@@ -626,6 +628,13 @@ function moveGuidePanel(){
   const narrationHost=modal||document.body;
   if(tourUI.element.parentElement!==narrationHost)narrationHost.append(tourUI.element);
 }
+function activeTourRoom(){
+  const personal=personalRooms?.tourContext;
+  return visitorUI?.isOpen?'visitor':aboutExperience?.phase==='studio'?'about':['viewing','index'].includes(worksExperience?.phase)?'projects':personal?.ready?personal.kind:null;
+}
+function observeReviewProgress(room=activeTourRoom()){
+  if(running&&!inPortfolio)reviewProgress.visit(room??(oakLab?.isOpen?'music':null));
+}
 function syncTourContext(){
   if(!tour)return;
   if(pendingWelcomeLine&&!welcomeVoice.speaking&&!tour.snapshot.speaking&&!document.hidden){
@@ -633,21 +642,18 @@ function syncTourContext(){
     pendingWelcomeLine=null;
     welcomeVoice.play(next);
   }
-  const personal=personalRooms?.tourContext;
-  const roomId=visitorUI?.isOpen?'visitor':aboutExperience?.phase==='studio'?'about':['viewing','index'].includes(worksExperience?.phase)?'projects':personal?.ready?personal.kind:null;
+  const roomId=activeTourRoom();
+  observeReviewProgress(roomId);
   const overlay=hasOverlay()&&!roomId;
   if(roomId&&roomId!=='visitor'||state.distance>35)tourExplored=true;
-  tourFeedbackNear=visitorNarrationPresence(state,tourFeedbackNear,Boolean(ready&&running&&visitorBoard?.available&&!inPortfolio&&!overlay&&!roomId&&!riverHop?.active));
-  const feedbackNear=tourFeedbackNear;
-  const feedbackEntry=visitorNarrationPresence(state,false,feedbackNear);
   if(running&&onboarding?.snapshot.phase==='choice'&&(roomId||overlay||target||Math.abs(state.speed)>.3)){dismissWelcomeGuide();}
   tour.update({stopId:nearStop,destinationId:tourDestination,roomId,stopped:Math.abs(state.speed)<.3,
-    riding:Boolean(ready&&running&&!inPortfolio),overlay:overlay||welcomeVoice.speaking,hidden:document.hidden||!tourFocused,jumping:Boolean(riverHop?.active&&riverHop.pose?.air),feedbackNear,feedbackEntry,explorationStarted:tourExplored});
-  sceneHost.dataset.feedbackNear=String(feedbackNear);sceneHost.dataset.tourExplored=String(tourExplored);
+    riding:Boolean(ready&&running&&!inPortfolio),overlay:overlay||welcomeVoice.speaking,hidden:document.hidden||!tourFocused,jumping:Boolean(riverHop?.active&&riverHop.pose?.air),explorationStarted:tourExplored});
+  sceneHost.dataset.tourExplored=String(tourExplored);
   if(!tourUI.element.hidden)moveGuidePanel();
   if(roomId){tourRoom=roomId;
     if(roomId==='projects')tour.emit('works-opened');tour.emit('room-enter',{stopId:roomId});
-  }else if(!roomId&&tourRoom&&!hasOverlay()&&tourFocused&&!document.hidden&&!welcomeVoice.speaking){const previous=tourRoom,alreadyInvited=tour.snapshot.feedbackInvited;tourRoom=null;if(previous!=='visitor')tour.emit('room-return',{stopId:previous});if(previous==='cloud'&&!alreadyInvited)inviteViewfinderFeedback();
+  }else if(!roomId&&tourRoom&&!hasOverlay()&&tourFocused&&!document.hidden&&!welcomeVoice.speaking){const previous=tourRoom;tourRoom=null;if(previous!=='visitor'&&previous!=='cloud')tour.emit('room-return',{stopId:previous});
   }
   if(oakLab?.isOpen)pendingTourIntro=false;
   if(pendingTourIntro&&!overlay&&running&&!welcomeVoice.speaking&&tour.emit('enable-intro'))pendingTourIntro=false;
@@ -661,8 +667,6 @@ function syncTourContext(){
   const inAir=Boolean(riverHop?.active&&riverHop.pose?.air);
   if(inAir&&!tourAirborne){sceneHost.dataset.riverHopAirborneAt=String(performance.now());if(!overlay)tour.emit('ramp-airborne');}
   tourAirborne=inAir;
-  if(feedbackNear&&!roomId&&!overlay)tour.emit('feedback-nearby');
-  if(ready&&running&&visitorBoard?.available&&welcomeAudioPreference&&tourExplored&&!tour.snapshot.feedbackInvited&&visitorNarrationPresence(state,true,!overlay&&!roomId&&!riverHop?.active))tourAudio.prime(WOODY_TOUR_CLIPS['feedback-nearby']);
   if(ready&&running&&welcomeAudioPreference&&!riverHop?.active)tourAudio.prime(WOODY_TOUR_CLIPS['ramp-airborne']);
 }
 function decorateModeSwitches(){syncModeSwitches();}

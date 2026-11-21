@@ -6,3 +6,7 @@
 .vb-header{flex-wrap:wrap}.vb-header>div{flex:1 1 540px}.vb-header .play-music-dock{position:static;inset:auto;transform:none;box-shadow:none;flex:0 0 auto}.vb-header .play-music-dock button{position:static}
 
 /* Keep the spoken review invitation and its actions in one readable surface. */
+
+/* The exit prompt also opens above destination dialogs. */
+dialog.vb-invite { top: auto; right: auto; margin: 0; max-height: calc(100dvh - 140px); }
+dialog.vb-invite::backdrop { background: transparent; }

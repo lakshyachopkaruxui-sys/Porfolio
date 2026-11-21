@@ -543,11 +543,6 @@ body.hybrid-world :is(#ride-tools, #world-map, #help, #woody-guide) button:is(:a
     color: var(--nav-action-light) !important;
   }
   body.hybrid-world #ride-tools button:hover:not(:disabled) kbd { background: transparent !important; }
-  body.hybrid-world .mode-selector.mode-switch > a:hover {
-    background: var(--nav-action-dark) !important;
-    color: var(--nav-action-light) !important;
-    text-decoration: none !important;
-  }
   body.hybrid-world #works-experience .works-primary:hover {
     --nav-action-dark: var(--nav-action-dark-hover);
   }
