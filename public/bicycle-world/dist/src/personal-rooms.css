@@ -43,10 +43,6 @@
 #personal-experience .about-object-prompts button::before{content:'';position:absolute;left:50%;top:100%;width:1px;height:14px;background:#718b70;pointer-events:none}
 #personal-experience .personal-retry{position:absolute;top:140px;left:50%;transform:translateX(-50%);z-index:6}
 #personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-status{top:112px;background:#fff9ec;border:1px solid #d7d3be;color:#294638}
-#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud])[data-phase=entering] .personal-header>div,
-#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud])[data-phase=returning] .personal-header>div,
-#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud])[data-phase=entering] [data-personal-places],
-#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud])[data-phase=returning] [data-personal-places]{visibility:hidden}
 @media(min-width:1600px){#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-caption{bottom:34px;column-gap:90px}#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-caption>[data-personal-body]{font-size:17px}}
 @media(max-width:1100px){#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-caption{left:28px;right:28px;column-gap:28px;grid-template-columns:1.15fr 1fr}#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-header{padding:18px 24px}#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-chapters button{padding:9px 13px!important}#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-caption>[data-personal-body]{font-size:14px}#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-actions{gap:2px 16px}#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-actions>button{font-size:12px}}
 @media(max-height:650px){#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-caption{bottom:12px}#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) #personal-chapter-title{font-size:19px;margin-bottom:6px}#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-chapters{margin-bottom:8px}#personal-experience:is([data-kind=about],[data-kind=work],[data-kind=cloud]) .personal-caption>[data-personal-body]{font-size:13px;line-height:1.5}}
@@ -258,3 +254,8 @@ body.hybrid-world #personal-experience[data-kind=cloud] :is(.personal-header nav
 #personal-experience[data-kind=cloud] .personal-scene-note{margin:16px 0 0;font-size:13px;line-height:1.6;}
 @media(max-height:650px){#personal-experience[data-kind=cloud] .personal-caption{bottom:12px;max-height:calc(100dvh - 130px);padding:18px;}}
 @media(max-width:760px){#personal-experience[data-kind=cloud] .personal-caption{left:20px;bottom:20px;width:calc(100% - 40px);padding:20px;}}
+
+/* The shared renderer paints the cloud reveal behind the usable room header. */
+#personal-experience[data-cloud-arrival][data-phase="entering"] .personal-curtain {
+  display: none;
+}

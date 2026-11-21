@@ -16,6 +16,15 @@ export function mountWoodyTourUI({document: doc = globalThis.document, host = do
   const stay = doc.createElement('button'); stay.type = 'button'; stay.textContent = 'Stay here';
   const status = doc.createElement('span'); status.className = 'woody-tour-status';
   controls.append(label, toggle, replay, stop); choice.append(visit, stay); panel.append(controls, caption, status, choice); host.append(panel);
+  const root = doc.documentElement;
+  const dockObserver = typeof ResizeObserver === 'function' ? new ResizeObserver(() => {
+    root.style.setProperty('--woody-dock-height', panel.offsetHeight + 'px');
+  }) : null;
+  dockObserver?.observe(panel);
+  const galleryObserver = typeof ResizeObserver === 'function' ? new ResizeObserver(([entry]) => {
+    root.style.setProperty('--gallery-rail-height', entry.target.offsetHeight + 'px');
+  }) : null;
+  let galleryRail = null;
   let enabled = false, disposed = false, lastSignature = '';
   const events = [[toggle, () => onEnable(!enabled)], [replay, onReplay], [stop, onStop], [visit, onVisitWorks], [stay, onStay]];
   events.forEach(([element, handler]) => element.addEventListener('click', handler));
@@ -24,6 +33,12 @@ export function mountWoodyTourUI({document: doc = globalThis.document, host = do
     updateCaption: highlight.update,
     render(state) {
       if (disposed) return;
+      const rail = panel.closest('#works-experience')?.querySelector('.works-caption') || null;
+      if (galleryRail !== rail) {
+        galleryObserver?.disconnect();
+        galleryRail = rail;
+        if (rail) galleryObserver?.observe(rail);
+      }
       const signature = JSON.stringify(state); if (signature === lastSignature) return; lastSignature = signature;
       panel.setAttribute('data-clip',state.clip?.id||'');
       panel.hidden = !state.enabled || Boolean(state.suspended) || !(state.speaking || state.choice || state.error);
@@ -36,6 +51,6 @@ export function mountWoodyTourUI({document: doc = globalThis.document, host = do
       caption.hidden = !text; choice.hidden = !state.choice || !enabled;
       status.textContent = state.error || ''; status.hidden = !state.error;
     },
-    dispose() { if (disposed) return; disposed = true; events.forEach(([element, handler]) => element.removeEventListener('click', handler)); panel.remove(); },
+    dispose() { if (disposed) return; disposed = true; dockObserver?.disconnect(); galleryObserver?.disconnect(); root.style.removeProperty('--woody-dock-height'); events.forEach(([element, handler]) => element.removeEventListener('click', handler)); panel.remove(); },
   };
 }

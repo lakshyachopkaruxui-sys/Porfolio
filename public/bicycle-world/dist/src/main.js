@@ -1,5 +1,5 @@
 import {createWelcomeAudioClass} from './welcome-context-audio.js';
-import {createWordCaption,createCaptionClock} from './woody-caption.js';
+import {createCaptionClock} from './woody-caption.js';
 import {sampleSpeechOpening} from './woody-speech.js';
 import {createVisitorBoard,VISITOR_BOARD_LOCATION,visitorNarrationPresence} from './visitor-board.js';
 import {createVisitorBoardUI} from './visitor-board-ui.js';
@@ -104,12 +104,11 @@ const pokemonListener={x:0,y:0,z:0,heading:0,speed:0};
 const renderQuality=createRenderQuality();
 let renderSettings=renderQuality.settings(innerWidth,innerHeight,devicePixelRatio);
 let woodyWelcome,welcomeTime=0,guideRemaining=0,introRouteVisible=false,introRoutePoints=null,pendingWelcomeGuide=false;
-let lastWaveLabel='';
 let welcomeAudioPreference=null;
 let welcomePainted=false;
-let welcomeGreetingPlaying=false,gardenInvitePending=false,entryGreetingNeedsGesture=false;
+let welcomeGreetingPlaying=false,entryGreetingNeedsGesture=false;
 let welcomeCurrentKind=null,departureControlsPending=false,onboarding=null,entryGuideLine='controls-yes',entryGreetingAttempted=false;
-let pendingWelcomeLine=null;
+let pendingWelcomeLine=null,entryGuideStopped=false;
 let tour=null,tourUI=null,tourAudio=null,tourDestination=null,tourRoom=null,pendingTourIntro=false,tourJumped=false,tourAirborne=false,tourExplored=false,tourFeedbackNear=false;
 let tourFocusOrigin=null;
 let tourFocused=true;
@@ -118,12 +117,11 @@ const cloudTransition=createCloudTransition(),cloudCurtain=mountCloudCurtain($('
 let cloudVolume,loadingCloudFrame=0,lastLoadingCloudPaint=-Infinity;
 const FIRST_STOP='about';
 const PERSONAL_ROUTES=Object.freeze({about:'#meet-lakshya',work:'#hobbies',music:'#oak-lab',cloud:'#cloud-lookout'});
-const greetingCaption=createWordCaption(), questionCaption=createWordCaption(), helpCaption=createWordCaption(), guideCaption=createWordCaption();
 const syncCaptionClock=createCaptionClock(()=>{
   if(document.hidden)return Infinity;
   if(welcomeVoice.speaking){
     const speech=welcomeVoice.frame;
-    const next=Math.min(greetingCaption.update(speech),questionCaption.update(speech),helpCaption.update(speech),guideCaption.update(speech),tourUI?.updateCaption(speech)??Infinity);
+    const next=tourUI?.updateCaption(speech)??Infinity;
     return speech.playing?next:100;
   }
   const speech=tourAudio?.frame;
@@ -134,7 +132,7 @@ const syncCaptionClock=createCaptionClock(()=>{
 const welcomeVoice=createWelcomeRecordings({clips:WELCOME_AUDIO,AudioClass:createWelcomeAudioClass(),onState:syncWelcomeVoice,
   mountAudio(audio,kind){audio.hidden=true;audio.dataset.welcomeRecording=kind;document.body.append(audio);}});
 // The heading and deck carry the first two spoken sentences; do not repeat them.
-$('welcome-about').textContent=WELCOME_TRANSCRIPTS.welcome.split('world. ')[1];
+$('welcome-about').textContent=WELCOME_TRANSCRIPTS.welcome.split('world. ')[1] || '';
 $('welcome-controls-question').textContent=WELCOME_TRANSCRIPTS['controls-offer'];
 const startupController=new AbortController();
 let abandoned=false;
@@ -300,9 +298,10 @@ function syncRideUI(){
   const stopLabel='Stop';
   if($('stop-route').textContent!==stopLabel)$('stop-route').textContent=stopLabel;
 }
-function rideEntry(){return !ready?(!$('failure').hidden?$('failure-read'):$('read-direct')):running?sceneHost:$('start');}
+function rideEntry(){return !ready?(!$('failure').hidden?$('failure-read'):$('loading-status')):running?sceneHost:$('start');}
 function restoreRideUI(){clearInput();save();syncRideUI();if(hasOverlay()||inPortfolio)return;if(renderer)resize();if(running&&ready)sceneHost.focus({preventScroll:true});else if(lastFocus?.isConnected&&!lastFocus.closest('[hidden]')&&!lastFocus.closest('dialog')&&!lastFocus.disabled)lastFocus.focus({preventScroll:true});else rideEntry().focus({preventScroll:true});}
 function prepareOverlay(kind){
+  $('quick-tips').hidePopover?.();
   tourJumped=false;
   tour?.update({overlay:true});
   cancelWelcomeDeparture();dismissWelcomeGuide();
@@ -324,6 +323,7 @@ function setNearStop(kind){
   if(stop){$('interact').querySelector('.stop-caption').textContent=destinationName(kind,stop.title);$('interact-label').innerHTML=`${kind==='cloud'?'Explore my photography':stop.action} <kbd>Enter</kbd>`;$('route-hint').hidden=true;}
 }
 function syncWelcomeVoice({enabled,supported,speaking,error,playback='idle',kind}={}){
+  oakLab?.syncGuideVoice();
   const greetingPlaying=kind==='welcome'&&playback==='playing'&&!running;
   // Greeting pose samples the active recording clock in renderWelcome.
   welcomeGreetingPlaying=greetingPlaying;
@@ -340,27 +340,17 @@ function syncWelcomeVoice({enabled,supported,speaking,error,playback='idle',kind
   $('help-welcome-error').textContent=inEntryGuide&&error?'Voice unavailable. The instructions stay here to read.':'';
   playMusic.suspend('woody-welcome',playback==='playing');
   $('welcome-audio').hidden=!WELCOME_AUDIO.welcome?.src;
-  for(const id of ['welcome-voice','woody-guide-voice']){
-    const clip=id==='welcome-voice'?'welcome':'controls',supplied=Boolean(WELCOME_AUDIO[clip]?.src),available=supported&&supplied;
+  for(const id of ['woody-guide-voice']){
+    const clip='controls',supplied=Boolean(WELCOME_AUDIO[clip]?.src),available=supported&&supplied;
     const button=$(id);button.textContent=!supplied?'Voice pending':!supported?'Audio unavailable':enabled?'Tour voice on':'Tour voice off';button.setAttribute('aria-pressed',String(Boolean(enabled&&available)));button.disabled=!available;
     if(id==='woody-guide-voice')button.hidden=!supplied;
   }
   $('welcome-replay').hidden=!welcomeVoice.available('welcome');
   $('welcome-replay').disabled=!supported||!ready;
-  $('welcome-replay').textContent=speaking?'Stop voice':onboarding?.snapshot.phase==='choice'?'Hear question':'Hear welcome';
+  $('welcome-replay').textContent=speaking?'Mute Woody':onboarding?.snapshot.phase==='choice'?'Hear Woody’s question':'Hear Woody';
   $('welcome-replay').dataset.playback=playback;
-  $('welcome-caption').textContent=!WELCOME_AUDIO.welcome?.src?'Full Woody narration is awaiting a recording of this script.':!supported?'Audio is unavailable here. Everything is written on screen.':error?'Sound is on. Tap Woody or this scene to hear his welcome.':'Optional tour voice. Mute anytime; the full transcript is above.';
   $('woody-guide-replay').hidden=onboarding?.snapshot.phase==='choice'||!WELCOME_AUDIO.controls?.src;$('woody-guide-replay').disabled=!supported;$('woody-guide-replay').textContent=speaking?'Stop voice':'Hear controls';
-  const guideTranscript=speaking&&running&&WELCOME_TRANSCRIPTS[kind];
-  $('woody-guide-controls').hidden=Boolean(onboarding?.snapshot.answer||onboarding?.snapshot.phase==='choice'||guideTranscript&&kind==='controls');
-  $('woody-guide-audio-status').hidden=onboarding?.snapshot.phase==='choice'||(!error&&!guideTranscript)||!WELCOME_AUDIO.controls?.src;
-  $('woody-guide-audio-status').setAttribute('aria-live',error?'polite':'off');
-  $('woody-guide-audio-status').textContent=error?'Audio couldn’t play. Choose Hear controls to try again.':guideTranscript||'';
-  const clip=speaking?WOODY_TOUR_CLIPS[kind]:null;
-  greetingCaption.bind(!running&&kind==='welcome'?clip:null,[...document.querySelectorAll('#welcome-title > *, .welcome-deck-title'),$('welcome-about')]);
-  questionCaption.bind(kind==='controls-offer'?clip:null,[$('welcome-controls-question')]);
-  helpCaption.bind(inEntryGuide?clip:null,[$('help-welcome-caption')]);
-  guideCaption.bind(guideTranscript?clip:null,[$('woody-guide-audio-status')]);
+  $('woody-guide-controls').hidden=Boolean(onboarding?.snapshot.answer||onboarding?.snapshot.phase==='choice');
   syncCaptionClock();
   if(running&&onboarding?.snapshot.answer==='no'&&!speaking&&!$('woody-guide').hidden)dismissWelcomeGuide();
 }
@@ -386,28 +376,14 @@ function dismissWelcomeGuide(){
   if(ownedFocus&&running&&ready&&!inPortfolio&&!hasOverlay())sceneHost.focus({preventScroll:true});
 }
 function showWelcomeGuidance(){
-  if(welcomeFlow.consumeGuidance()){
-    if(gardenInvitePending){gardenInvitePending=false;onboarding?.requestGardenGuide();return;}
-    $('woody-guide').dataset.entryChoice=onboarding?.snapshot.answer||'';
-    if(onboarding?.snapshot.answer==='no'){
-      // This is only the short departure caption, not a controls lesson.
-      if(welcomeVoice.speaking){$('woody-guide-destination').textContent='';$('woody-guide-controls').hidden=true;$('woody-guide').hidden=false;guideRemaining=9;}
-      return;
-    }
-    const atIntroduction=nearbyStop(state,null)===FIRST_STOP;
-    const destination=atIntroduction?'Meet Lakshya here. His work comes next, then the things he loves.':'First stop: meet Lakshya. Follow the path, or open the garden guide beside arrival for riding controls.';
-    $('woody-guide-destination').textContent=destination;$('woody-guide').hidden=false;guideRemaining=9;
-    if(!atIntroduction){const route=planRoute(state,STOPS[FIRST_STOP].arrival,world.colliders,{preferPaths:true});if(route){introRoutePoints=[{x:state.x,z:state.z},...route];world.setRoute(introRoutePoints);introRouteVisible=true;}}
-    // Controls are chosen before departure or requested explicitly later.
-    // Never queue a second instruction recording behind the departure.
-  }
+  if(!welcomeFlow.consumeGuidance()||entryGuideStopped)return;
+  requestWelcomeLine('arrival-guide');
 }
 function completeWelcome(showGuidance=true){
   onboarding?.markRiding();
   running=true;inPortfolio=false;$('welcome').hidden=true;rideHintVisible=false;
   enteredGarden=true;save();
   $('game').hidden=false;
-  gardenInvitePending=showGuidance;
   pendingWelcomeGuide=showGuidance;
   if(cloudTransition.snapshot.active){
     // Render the prepared garden under an opaque cover before opening it.
@@ -623,7 +599,7 @@ function requestWelcomeLine(name){
   else welcomeVoice.play(name);
 }
 function stopGuideVoice(){
-  pendingWelcomeLine=null;
+  entryGuideStopped=true;pendingWelcomeLine=null;
   welcomeVoice.stop();
   tour?.stop({quiet:true});
 }
@@ -634,9 +610,16 @@ function replayGuideVoice(){
   else tour?.replay();
 }
 function renderGuidePanel(state){
-  if(running&&welcomeVoice.speaking&&welcomeCurrentKind){
+  oakLab?.syncGuideVoice();
+  if(tourUI)moveGuidePanel();
+  if(welcomeVoice.speaking&&welcomeCurrentKind){
     tourUI?.render({...state,enabled:true,speaking:true,suspended:false,clip:WOODY_TOUR_CLIPS[welcomeCurrentKind],error:null});
   }else tourUI?.render(state);
+}
+function moveGuidePanel(){
+  const modal=document.activeElement?.closest('dialog:modal')||[...document.querySelectorAll('dialog:modal')].at(-1);
+  const narrationHost=modal||document.body;
+  if(tourUI.element.parentElement!==narrationHost)narrationHost.append(tourUI.element);
 }
 function syncTourContext(){
   if(!tour)return;
@@ -656,11 +639,7 @@ function syncTourContext(){
   tour.update({stopId:nearStop,destinationId:tourDestination,roomId,stopped:Math.abs(state.speed)<.3,
     riding:Boolean(ready&&running&&!inPortfolio),overlay:overlay||welcomeVoice.speaking,hidden:document.hidden||!tourFocused,jumping:Boolean(riverHop?.active&&riverHop.pose?.air),feedbackNear,feedbackEntry,explorationStarted:tourExplored});
   sceneHost.dataset.feedbackNear=String(feedbackNear);sceneHost.dataset.tourExplored=String(tourExplored);
-  const host=roomId==='visitor'?$('visitor-board').querySelector('.vb-shell'):roomId?renderer?.domElement?.closest('dialog[open]'):null;
-  tourUI.element.dataset.room=roomId||'';
-  const narrationHost=host||visitorUI?.invitationHost||document.querySelector('dialog[open]:modal')||document.body;
-  if(tourUI?.element.parentElement!==narrationHost){if(roomId==='visitor')narrationHost.querySelector('.vb-columns').before(tourUI.element);else narrationHost.append(tourUI.element);}
-  $('works-experience')?.toggleAttribute('data-tour-room-guide',roomId==='projects'&&!tourUI.element.hidden);
+  if(!tourUI.element.hidden)moveGuidePanel();
   if(roomId){tourRoom=roomId;
     if(roomId==='projects')tour.emit('works-opened');tour.emit('room-enter',{stopId:roomId});
   }else if(!roomId&&tourRoom&&!hasOverlay()&&tourFocused&&!document.hidden&&!welcomeVoice.speaking){const previous=tourRoom,alreadyInvited=tour.snapshot.feedbackInvited;tourRoom=null;if(previous!=='visitor')tour.emit('room-return',{stopId:previous});if(previous==='cloud'&&!alreadyInvited)inviteViewfinderFeedback();
@@ -698,7 +677,6 @@ function renderEntryChoice(snapshot){
   $('welcome-controls-back').hidden=choosing;
   document.querySelector('#welcome .welcome-actions').hidden=choosing;
   $('start').hidden=choosing;
-  $('welcome-wave').hidden=choosing;
   if(snapshot.phase==='ready')$('start').textContent='Let’s ride';
 }
 onboarding=createWoodyOnboarding({onState:renderEntryChoice,
@@ -724,10 +702,6 @@ onboarding=createWoodyOnboarding({onState:renderEntryChoice,
       dismissWelcomeGuide();onboarding.markRiding();
       if(onboarding.snapshot.answer==='no'&&welcomeVoice.enabled){
         requestWelcomeLine('controls-no');
-        if(welcomeVoice.speaking){
-          $('woody-guide-destination').textContent='';$('woody-guide-controls').hidden=true;
-          $('woody-guide').hidden=false;guideRemaining=9;
-        }
       }
       syncRideUI();
     }else start();
@@ -742,16 +716,6 @@ $('welcome-controls-back').textContent='Keep exploring';
 $('welcome-controls-back').addEventListener('click',()=>{dismissWelcomeGuide();sceneHost.focus({preventScroll:true});});
 $('help-welcome-stop').addEventListener('click',stopGuideVoice);
 $('welcome-portfolio').addEventListener('click',showPortfolio);
-$('welcome-wave').addEventListener('click',()=>{
-  if(!ready||welcomeFlow.snapshot.phase!=='welcome')return;
-  entryGreetingAttempted=true;
-  if(!welcomeVoice.speaking)requestWelcomeLine('welcome');
-  $('welcome-dialogue').textContent='Your guide to Lakshya’s world.';
-});
-$('welcome').addEventListener('pointerdown',event=>{
-  if(!event.isTrusted||!entryGreetingNeedsGesture||running||enteredGarden||!ready||welcomeAudioPreference===false||event.target.closest('button,a,input,select'))return;
-  entryGreetingNeedsGesture=false;if(!welcomeVoice.speaking)requestWelcomeLine('welcome');
-},{capture:true,signal:startupController.signal});
 $('welcome').addEventListener('pointermove',event=>{
   if(!woodyWelcome||running||reduced)return;
   const x=event.clientX/Math.max(1,innerWidth)*2-1;
@@ -763,16 +727,15 @@ function toggleWelcomeVoice(){
   setTourEnabled(!welcomeVoice.enabled,{announce:false});
   if(welcomeVoice.enabled&&ready){tour.stop();welcomeVoice.play(running?'controls':onboarding.snapshot.phase==='choice'?'controls-offer':'welcome');}
 }
-$('welcome-voice').addEventListener('click',toggleWelcomeVoice);
 $('woody-guide-voice').addEventListener('click',toggleWelcomeVoice);
-$('welcome-replay').addEventListener('click',()=>{if(welcomeVoice.speaking)stopGuideVoice();else{setTourEnabled(true,{announce:false});tour.stop();welcomeVoice.play(onboarding.snapshot.phase==='choice'?'controls-offer':'welcome');}});
+$('welcome-replay').addEventListener('click',()=>{if(welcomeVoice.speaking)setTourEnabled(false,{announce:false});else{setTourEnabled(true,{announce:false});tour.stop();welcomeVoice.play(onboarding.snapshot.phase==='choice'?'controls-offer':'welcome');}});
 $('woody-guide-replay').addEventListener('click',()=>{if(welcomeVoice.speaking)stopGuideVoice();else{setTourEnabled(true,{announce:false});tour.stop();welcomeVoice.play('controls');}});
 $('woody-guide-dismiss').addEventListener('click',()=>{dismissWelcomeGuide();syncRideUI();sceneHost.focus({preventScroll:true});});
 syncWelcomeVoice({enabled:welcomeVoice.enabled,supported:welcomeVoice.supported,speaking:false});
 function stopRide(){clearInput();syncRideUI();syncTourContext();tour?.emit('action',{clipId:'route-cancelled'});notify('Stopped. Pedal or choose another place to continue.');sceneHost.focus({preventScroll:true});}
 $('stop-route').addEventListener('click',stopRide);
 $('open-map')?.addEventListener('click',showMap);$('help-map').addEventListener('click',showMap);$('ride-guide').addEventListener('click',showMap);
-$('ride-help').addEventListener('click',showHelp);
+$('quick-full-guide').addEventListener('click',()=>{ $('quick-tips').hidePopover(); showHelp(); });
 $('ride-camera').addEventListener('click',()=>{toggleRidingView();if(running&&!hasOverlay())sceneHost.focus({preventScroll:true});});
 $('ride-bell').addEventListener('click',()=>{bell();if(running&&!hasOverlay())sceneHost.focus({preventScroll:true});});
 $('ride-light').addEventListener('click',()=>{setBicycleLight(!bicycleLight?.enabled);if(running&&!hasOverlay())sceneHost.focus({preventScroll:true});});
@@ -911,8 +874,12 @@ function animateLoadingCloud(now){
   try{
   if(document.hidden||inPortfolio||now-lastLoadingCloudPaint<(reduced?250:1000/24))return;
   lastLoadingCloudPaint=now;
-  if(woodyWelcome&&!enteredGarden)renderWelcome();
-  else{const parent=$('welcome-portrait');if(renderer.domElement.parentElement!==parent)parent.append(renderer.domElement);renderer.setViewport(0,0,innerWidth,innerHeight);renderer.setScissorTest(false);renderer.setClearColor('#ffffff',0);renderer.clear();}
+  const parent=$('welcome-portrait');
+  if(renderer.domElement.parentElement!==parent)parent.append(renderer.domElement);
+  renderer.setViewport(0,0,innerWidth,innerHeight);
+  renderer.setScissorTest(false);
+  renderer.setClearColor('#ffffff',0);
+  renderer.clear();
   drawLoadingCloud(now);
   }catch(error){
     failed=true;startupController.abort();console.error('The loading view could not continue',error);
@@ -935,10 +902,6 @@ function renderWelcome(dt=0){
   const greetingMetrics=woodyWelcome.speechFrame,greetingTime=greetingMetrics.elapsed;
   $('welcome').dataset.gesturePhase=greetingMetrics.reduced?'rest':greetingTime<.12?'rest':greetingTime<.62?'raise':greetingTime<1.87?(greetingMetrics.sweep>=0?'sweep-left':'sweep-right'):greetingTime<2.05?'hold':greetingTime<2.6?'lower':'rest';
   $('welcome').dataset.greetingTime=greetingTime.toFixed(3);$('welcome').dataset.mouthOpen=greetingMetrics.mouthOpen.toFixed(3);$('welcome').dataset.blink=greetingMetrics.blink.toFixed(3);$('welcome').dataset.explain=greetingMetrics.explain.toFixed(3);
-  const waveButton=$('welcome-wave'),canWave=ready&&(reduced||woodyWelcome.canGreet);
-  if(waveButton.disabled!==!canWave)waveButton.disabled=!canWave;
-  const waveLabel=!ready?'Preparing Woody…':canWave?'Say hi & hear Woody':'Saying hello…';
-  if(lastWaveLabel!==waveLabel){waveButton.textContent=waveLabel;lastWaveLabel=waveLabel;}
   renderer.setViewport(rect.left,h-rect.bottom,rect.width,rect.height);renderer.setScissor(left,h-bottom,right-left,bottom-top);renderer.setScissorTest(true);
   const background=woodyWelcome.scene.background;
   woodyWelcome.scene.background=null;
@@ -978,7 +941,7 @@ function showWorldFailure(message){
   cancelWelcomeDeparture();dismissWelcomeGuide();
   
   readingBackdropDrawn=false;
-  ready=false;clearInput();syncRideUI();$('start').disabled=true;$('welcome-wave').disabled=true;
+  ready=false;clearInput();syncRideUI();$('start').disabled=true;
   $('route-hint').hidden=true;$('failure').querySelector('h1').textContent=startupComplete?'The world paused.':'The world couldn’t start.';
   $('loading-state').setAttribute('aria-busy','false');$('loading-status').textContent='The world needs another try.';
   document.querySelector('.loading-clouds')?.removeAttribute('data-volume-ready');
@@ -999,11 +962,11 @@ async function initialize(){
   if(document.body.dataset.startupState==='failed')return;
   const saved=store.get();
   enteredGarden=!welcomeLayoutReview&&hasEnteredGarden(saved,{mapVersion:MAP_VERSION,spawn:newState()});
-  document.body.dataset.gardenEntry=enteredGarden?'resume':'welcome';
+  document.body.dataset.gardenEntry=enteredGarden?'resume':'preparing';
   if(enteredGarden){
     $('welcome').removeAttribute('aria-labelledby');$('welcome').setAttribute('aria-label','Returning to your ride');
     $('loading-status').textContent='Returning to your ride…';
-  }else{$('welcome').removeAttribute('aria-label');$('welcome').setAttribute('aria-labelledby','welcome-title');}
+  }
   bicycleLightPreference=saved?.bicycleLight===true;
   pokemonSoundPreference=typeof saved?.pokemonSounds==='boolean'?saved.pokemonSounds:null;
   rideSoundPreference=typeof saved?.rideSounds==='boolean'?saved.rideSounds:null;
@@ -1047,7 +1010,7 @@ async function initialize(){
         woodyWelcome=createWoodyWelcome(THREE,characterAsset);rider.attachCharacter(characterAsset);
         scene.add(rider.group);contactMarker=createContactMarker(scene,'#29433e');
         landmarkFramer=createLandmarkFramer(world.landmarks.roots,cameraOffset,{localMinHeights:{projects:18}});
-        personalRooms=createPersonalRooms({renderer,isReduced:()=>reduced,onPortfolio:showPortfolio,onWorks:()=>rideFromRoom('projects'),onPlace:rideFromRoom,onOakLab:()=>rideFromRoom('music'),onSoundState:playing=>{playMusic.suspend('sound-sketch',playing);},
+        personalRooms=createPersonalRooms({renderer,cloudVolume,isReduced:()=>reduced,onPortfolio:showPortfolio,onWorks:()=>rideFromRoom('projects'),onPlace:rideFromRoom,onOakLab:()=>rideFromRoom('music'),onSoundState:playing=>{playMusic.suspend('sound-sketch',playing);},
           onOpen(kind){prepareOverlay('personal');history.replaceState(null,'',location.pathname+location.search+(PERSONAL_ROUTES[kind]||PERSONAL_ROUTES.work));},
           onClose(){updateProjection();readingBackdropDrawn=false;history.replaceState(null,'',location.pathname+location.search);restoreRideUI();}
         });
@@ -1055,7 +1018,7 @@ async function initialize(){
           onOpen(){prepareOverlay('works');history.replaceState(null,'',location.pathname+location.search+'#works-room');},
           onClose(){updateProjection();readingBackdropDrawn=false;history.replaceState(null,'',location.pathname+location.search);restoreRideUI();}
         });
-        oakLab=createOakLab({renderer,isReduced:()=>reduced,onPortfolio:showPortfolio,onPlace:rideFromRoom,
+        oakLab=createOakLab({renderer,guideSpeaking:()=>Boolean(welcomeVoice.speaking||tour?.snapshot.speaking),isReduced:()=>reduced,onPortfolio:showPortfolio,onPlace:rideFromRoom,
           onOpen(){prepareOverlay('oak');tourRoom='music';history.replaceState(null,'',location.pathname+location.search+'#oak-lab');},
           onClose(){updateProjection();readingBackdropDrawn=false;history.replaceState(null,'',location.pathname+location.search);restoreRideUI();}
         });
@@ -1090,6 +1053,11 @@ async function initialize(){
     });
     cancelAnimationFrame(loadingCloudFrame);startupComplete=true;ready=true;$('failure').hidden=true;if(!running)$('welcome').hidden=false;$('start').disabled=false;$('start').textContent='Let’s start';
     window.__playStartup?.finish('ready');
+    if(!enteredGarden){
+      document.body.dataset.gardenEntry='welcome';
+      $('welcome').removeAttribute('aria-label');
+      $('welcome').setAttribute('aria-labelledby','welcome-title');
+    }
     $('loading-state').setAttribute('aria-busy','false');$('loading-state').dataset.ready='true';
     $('loading-status').textContent='Ready to ride.';
     if(enteredGarden&&!running&&!inPortfolio)start({skipWelcome:true,resuming:true});

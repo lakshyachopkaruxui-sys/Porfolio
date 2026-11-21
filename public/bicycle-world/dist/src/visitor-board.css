@@ -6,4 +6,3 @@
 .vb-header{flex-wrap:wrap}.vb-header>div{flex:1 1 540px}.vb-header .play-music-dock{position:static;inset:auto;transform:none;box-shadow:none;flex:0 0 auto}.vb-header .play-music-dock button{position:static}
 
 /* Keep the spoken review invitation and its actions in one readable surface. */
-.vb-invite .woody-tour{position:static;max-width:none;margin:14px 0 0;padding:0;box-shadow:none;background:transparent}.vb-invite:has(.woody-tour:not([hidden]))>div:first-child>p{display:none}

@@ -28,7 +28,18 @@ export function createCloudVolume(){
     scene.add(mesh);return mesh;
   }
   const banks=Array.from({length:4},(_,i)=>makeBank(i,32));
-  const miniature=new THREE.InstancedMesh(geometry,material,3*lobes.length);
+  // One asymmetric, moulded cloud. Distant lobes use a cooler value so the
+  // silhouette reads as a solid object even before it turns toward the light.
+  const loadingLobes = [
+    [-.03,-.14, .04,1.53,.47,.64, .92],
+    [-1.05,.08, .01,.66,.49,.60, .92],
+    [-.63, .31,-.24,.62,.57,.65, .88],
+    [-.14, .47, .02,.75,.74,.76,1.00],
+    [ .63, .32,-.05,.66,.57,.65, .96],
+    [1.19, .04, .00,.51,.40,.52, .90],
+    [ .22,-.01, .28,.73,.45,.62, .96],
+  ];
+  const miniature=new THREE.InstancedMesh(geometry,material,loadingLobes.length);
   miniature.name='Loading cloud cluster';miniature.frustumCulled=false;scene.add(miniature);
   // An opaque backstop seals tiny crevices before changing the scene below.
   const veilGeometry=new THREE.PlaneGeometry(2,2),veilMaterial=new THREE.MeshBasicMaterial({color:'#eef3f8',transparent:true,depthWrite:false,toneMapped:false});
@@ -77,11 +88,9 @@ export function createCloudVolume(){
       bank.instanceMatrix.needsUpdate=true;bank.instanceColor.needsUpdate=true;bank.boundingSphere=null;
     });
   }
-  let miniIndex=0;
-  for(let c=0;c<3;c++)for(const [x,y,z,sx,sy,sz] of lobes){
-    const scale=c===1?.90:.61;
-    put(miniature,miniIndex++,(c-1)*1.16+x*scale,(c===1?-.12:.17)+y*scale,z*scale+(c===1?1:0),sx*scale,sy*scale,sz*scale,0,c===1?1:.94);
-  }
+  loadingLobes.forEach(([x,y,z,sx,sy,sz,tint], index) => {
+    put(miniature,index,x,y-.23,z,sx,sy,sz,0,tint);
+  });
   miniature.instanceMatrix.needsUpdate=true;miniature.instanceColor.needsUpdate=true;
   resize(1280,720);
 
@@ -128,7 +137,8 @@ export function createCloudVolume(){
     miniature.rotation.y=reduced?-.15:-.15+Math.sin(time*.65)*.17;
     miniature.position.y=reduced?0:Math.sin(time*.9)*.045;
     const aspect=rect.width/rect.height;
-    camera.left=-1.15*aspect;camera.right=1.15*aspect;camera.top=1.15;camera.bottom=-1.15;camera.updateProjectionMatrix();
+    const halfHeight=Math.max(1.10,1.94/aspect);
+    camera.left=-halfHeight*aspect;camera.right=halfHeight*aspect;camera.top=halfHeight;camera.bottom=-halfHeight;camera.updateProjectionMatrix();
     draw(renderer,rect);
   }
   function dispose(){

@@ -1,16 +1,8 @@
 .woody-tour{position:fixed;left:24px;bottom:104px;z-index:35;max-width:min(400px,calc(100vw - 48px));padding:12px 16px;border-radius:12px;background:#fffaf0;color:#243d32;box-shadow:0 4px 20px #193a2220;font:16px/1.5 'DM Sans',sans-serif}
 .woody-tour-controls,.woody-tour-choice{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.woody-tour-label{font-weight:650;margin-right:auto}.woody-tour button{min-height:44px;padding:8px 10px;border:1px solid #617367;border-radius:7px;background:transparent;color:inherit;font:inherit;cursor:pointer}.woody-tour button:focus-visible{outline:3px solid #285c42;outline-offset:3px}.woody-tour button:disabled{opacity:.5;cursor:default}.woody-tour-caption{margin:8px 0 0;max-width:44ch}.woody-tour-status{display:block;margin-top:6px}.woody-tour-choice{margin-top:10px}.woody-tour [hidden]{display:none!important}
 .woody-tour[hidden]{display:none!important}
-/* Room actions stay usable while the guide speaks. The scene carries personal
-   room captions; the catalogue reserves a footer instead of covering cards. */
-dialog .woody-tour[data-room]:not([data-room=""]){left:auto;right:24px;top:108px;bottom:auto}
-#works-experience .woody-tour[data-room="projects"]{left:24px;right:24px;top:auto;bottom:16px;max-width:none;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:16px}
-dialog .woody-tour[data-room="projects"] .woody-tour-caption{max-width:none;margin:0}
-dialog .woody-tour[data-room="projects"] .woody-tour-status{grid-column:1/-1}
-#works-experience[data-tour-room-guide] .works-index{bottom:124px}
 #works-experience[data-phase="index"] :is(.works-caption,.works-canvas){visibility:hidden;pointer-events:none}
 body.hybrid-world #woody-guide[data-entry-choice="no"]{bottom:104px}
-@media(max-width:900px){dialog .woody-tour[data-room]:not([data-room=""]){top:148px}#works-experience .woody-tour[data-room="projects"]{top:auto;display:block}dialog .woody-tour[data-room="projects"] .woody-tour-caption{margin-top:8px}#works-experience[data-tour-room-guide] .works-index{bottom:188px}}
 #welcome .welcome-actions[hidden]{display:none!important}
 #welcome-controls-choice{max-width:40ch;margin:20px 0;color:inherit;font:16px/1.5 'DM Sans',sans-serif}#welcome-controls-question{font-size:20px;line-height:1.45}.welcome-choice-actions{display:flex;gap:10px;flex-wrap:wrap}.welcome-choice-actions button{min-height:44px;padding:10px 14px;font:inherit;border-radius:8px}.welcome-choice-actions button:not(.primary):not(.text-button){background:#fffaf0;color:#243d32;border:1px solid #617367}#welcome-controls-choice[hidden],#help-welcome-intro[hidden]{display:none!important}#help-welcome-intro{max-width:64ch;margin:16px 0 24px;font:16px/1.5 'DM Sans',sans-serif}#help-welcome-intro button{min-height:44px}#help-welcome-error:empty{display:none}
 body.hybrid-world #woody-guide{left:24px;right:auto;transform:none;width:min(420px,calc(100vw - 48px));max-width:420px;bottom:24px}body.hybrid-world #woody-guide-controls:not([hidden]){display:block;margin:10px 0;font-size:16px;line-height:1.5}body.hybrid-world #woody-guide-audio-status{font-size:16px;line-height:1.5}
@@ -21,10 +13,118 @@ body.hybrid-world #woody-guide{left:24px;right:auto;transform:none;width:min(420
 
 body.hybrid-world #woody-guide:has(#welcome-controls-choice:not([hidden])){max-height:calc(100dvh - 120px);overflow:auto}#woody-guide #welcome-controls-choice{margin:12px 0 0}#woody-guide #welcome-controls-question{font-size:16px;line-height:1.5;margin:0 0 12px}
 
-#visitor-board .woody-tour[data-room="visitor"]{position:static;max-width:none;margin:16px 0 24px;padding:16px;box-shadow:none;background:#eef0e0}#visitor-board .woody-tour-caption{max-width:70ch}
 
 /* Keep the physical board action below its spoken invitation on narrow screens. */
-@media(max-width:767px){.woody-tour[data-clip="feedback-nearby"]{bottom:176px;max-height:calc(100dvh - 280px);overflow:auto}}
 
 .woody-spoken-word{color:#fff;background-color:#173d32;border-radius:.15em}
 @media(forced-colors:active){.woody-spoken-word{color:HighlightText;background:Highlight;forced-color-adjust:none;text-decoration:underline}}
+/* One viewport dock. Space is reserved below room content while it is open. */
+.woody-tour {
+  box-sizing:border-box;
+  left:var(--woody-gutter, 16px);
+  bottom:var(--woody-bottom);
+  width:min(400px, calc(100vw - 2 * var(--woody-gutter, 16px)));
+  max-width:none;
+  max-height:32dvh;
+  overflow:auto;
+  overscroll-behavior:contain;
+}
+html { --woody-bottom:max(16px, env(safe-area-inset-bottom)); }
+body.hybrid-touch-riding > .woody-tour {
+  bottom:calc(var(--touch-bottom-gap, 16px) + var(--touch-controls-height, 80px) + 12px);
+}
+/* Keep render surfaces at their native aspect ratio. Only foreground UI
+   shares space with the fixed narration panel. */
+dialog {
+  --caption-clearance:min(28rem, calc(100vw - 1rem));
+  --caption-top:calc(var(--woody-dock-height, 0px) + var(--woody-bottom) + 12px);
+}
+@media (min-width:901px) {
+  #oak-lab .oak-tools {
+    left:auto; right:20px; width:fit-content; max-width:calc(100% - var(--caption-clearance) - 20px);
+  }
+  #personal-experience[data-kind] .personal-caption,
+  #about-experience .about-introduction {
+    left:auto; right:16px; max-width:calc(100% - var(--caption-clearance) - 32px);
+  }
+}
+@media (max-width:900px) {
+  :is(#personal-experience,#about-experience,#oak-lab):has(> .woody-tour:not([hidden]))
+    :is(.personal-caption,.about-introduction,.oak-tools) {
+    bottom:var(--caption-top); max-height:calc(100dvh - var(--caption-top) - 5rem); overflow:auto;
+  }
+}
+dialog:has(> .woody-tour:not([hidden])) .about-story {
+  padding-bottom:var(--caption-top);
+}
+body.hybrid-world #woody-guide,
+body.hybrid-world:has(> .woody-tour:not([hidden])) #world-bottom {
+  left:auto;
+  right:16px;
+  transform:none;
+}
+body.hybrid-world #woody-guide { max-height:calc(100dvh - 145px); }
+body:has(> .woody-tour[data-clip="feedback-nearby"]:not([hidden])) .vb-invite > div:first-child > p,
+body:has(.woody-tour[data-clip="controls-offer"]:not([hidden])) #welcome-controls-question,
+#help:has(> .woody-tour[data-clip="controls-yes"]:not([hidden])) #help-welcome-caption { display:none; }
+@media (max-width:900px) {
+  body.hybrid-world:has(> .woody-tour:not([hidden])) #woody-guide,
+  body.hybrid-world:has(> .woody-tour:not([hidden])) #world-bottom {
+    bottom:calc(var(--woody-dock-height, 0px) + var(--woody-bottom) + 12px);
+    max-height:calc(100dvh - var(--woody-dock-height, 0px) - 150px);
+  }
+  body.hybrid-world.hybrid-touch-riding:has(> .woody-tour:not([hidden])) #world-bottom {
+    bottom:calc(var(--woody-dock-height, 0px) + var(--touch-bottom-gap, 16px) + var(--touch-controls-height, 80px) + 24px);
+  }
+}
+
+body:has(> .woody-tour:not([hidden])) .vb-invite {
+  left:auto;
+  right:16px;
+  transform:none;
+}
+
+body:has(> .woody-tour:not([hidden])) :is(#welcome-replay,#welcome-voice,#woody-guide-replay,#woody-guide-voice) { display:none; }
+@media(max-width:1100px){
+  body:has(> .woody-tour:not([hidden])) .vb-invite {
+    bottom:calc(var(--woody-dock-height, 0px) + var(--woody-bottom) + 12px);
+  }
+}
+@media(max-width:480px){
+  .woody-tour { max-height:36dvh; }
+  }
+
+
+#quick-tips {
+  position:fixed; inset: max(5rem, 14dvh) max(1rem, env(safe-area-inset-right)) auto auto;
+  margin:0; box-sizing:border-box; width:min(19rem, calc(100vw - 2rem));
+  max-height:min(34dvh,calc(100dvh - 8rem)); overflow:auto;
+  padding:1rem; border:1px solid #617367; border-radius:12px;
+  background:#fffaf0; color:#243d32; font:1rem/1.5 'DM Sans',sans-serif;
+}
+#quick-tips p { margin:0 0 .6rem; }
+#quick-full-guide { color:inherit; font:inherit; background:transparent; border:0; padding:0; text-decoration:underline; cursor:pointer; }
+
+/* A shared caption header keeps room-specific button sizing out of the dock. */
+body.hybrid-world .woody-tour {
+  width:min(26rem, calc(100vw - 2 * var(--woody-gutter, 16px)));
+  color:var(--control-ink); background:#fffaf0;
+}
+body.hybrid-world .woody-tour .woody-tour-controls { gap:4px 6px; }
+html:root body.hybrid-world .woody-tour .woody-tour-controls button {
+  min-width:0; width:auto; min-height:44px; margin:0; padding:6px 10px;
+  font:600 .875rem/1.25 var(--font-body,'DM Sans',sans-serif);
+}
+@media (max-width:360px) {
+  body.hybrid-world .woody-tour-label { flex-basis:100%; }
+}
+
+/* The gallery rail uses the live layout. Float narration above it. */
+#works-experience:has(.works-caption:not([hidden])) > .woody-tour {
+  bottom:calc(var(--gallery-rail-height, 5rem) + 10px);
+}
+@media(prefers-reduced-motion:no-preference) and (max-width:900px) {
+  :is(#personal-experience,#about-experience,#oak-lab) :is(.personal-caption,.about-introduction,.oak-tools) {
+    transition:bottom 200ms ease-out;
+  }
+}

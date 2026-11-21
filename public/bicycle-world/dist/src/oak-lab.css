@@ -95,7 +95,7 @@
 #oak-lab .oak-build-copy summary{cursor:pointer;min-height:44px;padding:10px 0;color:var(--oak-ink);font-weight:600;}
 #oak-lab .oak-build-copy details p{font-size:14px;line-height:1.7;margin:8px 0 0;}
 #oak-lab :is(select,summary):focus-visible{outline:3px solid #a45132;outline-offset:4px;}
-#oak-lab .oak-tools{bottom:12px;gap:8px;align-items:flex-end;padding:8px 10px;border:1px solid #a5b39b;border-radius:11px;background:#fff8e5f5;}
+#oak-lab .oak-tools{bottom:12px;gap:8px;align-items:flex-end;padding:8px 10px;border:0;border-radius:11px;background:#fff8e5f5;}
 #oak-lab .oak-tools>div.oak-narration-controls{flex:1;min-width:0;display:flex;flex-wrap:wrap;gap:5px 6px;justify-content:center;}
 #oak-lab [data-oak-narration-status]{flex-basis:100%;margin:0;font-size:12px;line-height:1.4;text-align:center;}
 #oak-lab .oak-tools :is(button,select){font:600 12px/1.4 'DM Sans',sans-serif;min-height:44px;padding:8px 10px;}
@@ -231,4 +231,26 @@
   #oak-lab:is([data-zone=welcome],[data-zone=collection]) .oak-comic {grid-row:4;margin:6px 12px 0;overflow:auto;display:block;}
   #oak-lab:is([data-zone=welcome],[data-zone=collection]) .oak-tools {grid-row:5;margin:6px 12px;}
   #oak-lab:is([data-zone=welcome],[data-zone=collection]) .oak-shade {display:none;}
+}
+
+#oak-lab .oak-shade { display:none }
+#oak-lab .oak-header > div:first-child { background:#fffaf0; border-radius:9px; padding:8px 14px }
+#oak-lab .oak-header { background:transparent }
+#oak-lab .oak-header::after { content:none }
+@media(min-width:761px){
+  #oak-lab :is(.oak-comic,.oak-making) {
+    bottom:auto; height:fit-content; align-self:start; max-height:calc(100% - 275px);
+    width:min(29rem,41vw); overflow:auto; padding:clamp(14px,1.3vw,22px);
+    background:#fffaf0; border:1px solid #98a99b; border-radius:12px; box-shadow:0 3px 14px #18342819;
+  }
+  #oak-lab .oak-tools { left:auto; right:20px; width:fit-content; max-width:calc(100% - 40px); gap:12px; flex-wrap:wrap; }
+}
+@media(max-width:760px){
+  #oak-lab:is([data-zone=welcome],[data-zone=collection]) .oak-comic { align-self:start; max-height:100%; }
+}
+
+@media(min-width:901px){
+  #oak-lab:has(> .woody-tour:not([hidden])) :is(.oak-comic,.oak-making) {
+    max-height:calc(100% - 185px - var(--caption-top)); overflow:auto;
+  }
 }

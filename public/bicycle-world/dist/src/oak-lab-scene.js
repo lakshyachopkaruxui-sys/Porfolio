@@ -251,14 +251,14 @@ export function createOakLabScene({onChange=()=>{},onAssetState=()=>{}}={}){
     const conversation=currentZone==='welcome'||(compact&&!making);
     const target=conversation?new THREE.Vector3(-2.5,compact?2.62:2.25,-2.35):making?new THREE.Vector3(4.4,1.68,.6):new THREE.Vector3(-2.5,1.75,-1.65);
     const direction=making?new THREE.Vector3(2.3,4.1,4.3).normalize():new THREE.Vector3(currentZone==='collection'?.18:.30,.20,1).normalize();
-    const span=conversation?(compact?Math.max(1.67,2.6/safeAspect):Math.max(4.2,5.7/safeAspect)):compact?(making?5.4:7.7):Math.max(making?4.6:6.6,(making?7.2:11.4)/safeAspect);
+    const span=conversation?(compact?Math.max(2.6,3.1/safeAspect):Math.max(5.4,6.3/safeAspect)):compact?(making?5.4:7.7):Math.max(making?4.6:6.6,(making?7.2:11.4)/safeAspect);
     const distance=span/(2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2)));
     // Keep the physical subject on the left, leaving the existing semantic
     // dialogue on the right. Narrow desktop windows pull back instead of crop.
     if(!compact)target.addScaledVector(new THREE.Vector3(direction.z,0,-direction.x).normalize(),span*safeAspect*(making?.18:.19));
     const position=target.clone().addScaledVector(direction,distance);
-    if(entry){camera.position.copy(position).addScaledVector(position.clone().sub(target).normalize(),2.4);camera.position.y+=.2;cameraTarget.copy(target);camera.lookAt(cameraTarget);}
-    if(animate){moving={from:camera.position.clone(),fromTarget:cameraTarget.clone(),position,target,elapsed:0,duration:entry?.9:.8};}
+    if(entry){camera.position.copy(position).addScaledVector(position.clone().sub(target).normalize(),.6);camera.position.y+=.2;cameraTarget.copy(target);camera.lookAt(cameraTarget);}
+    if(animate){moving={from:camera.position.clone(),fromTarget:cameraTarget.clone(),position,target,elapsed:0,duration:entry?.55:.5};}
     else{moving=null;camera.position.copy(position);cameraTarget.copy(target);camera.lookAt(cameraTarget);}
     onChange();
   }

@@ -24,11 +24,11 @@ function narrationPreferences(){
 }
 
 /** Owns one modal and its scene. The garden retains the renderer and loop. */
-export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=()=>{},onPlace=()=>{},isReduced}={}){
+export function createOakLab({renderer,guideSpeaking=()=>false,onOpen=()=>{},onClose=()=>{},onPortfolio=()=>{},onPlace=()=>{},isReduced}={}){
   if(!renderer?.domElement)throw new Error('Oak’s lab requires the existing renderer.');
   const dialog=document.createElement('dialog');dialog.id='oak-lab';dialog.setAttribute('aria-labelledby','oak-lab-title');
   dialog.innerHTML=`<div class="oak-shell"><div class="oak-canvas" aria-hidden="true"></div><div class="oak-shade" aria-hidden="true"></div>
-    <header class="oak-header"><div><p>CHILDHOOD MEMORIES. A WORLD OF HIS OWN.</p><h1 id="oak-lab-title">Professor Oak’s lab</h1></div><nav aria-label="Lab navigation"><button type="button" data-oak-places aria-expanded="false" aria-controls="oak-places">Other places</button><span class="mode-switch" data-oak-portfolio data-mode-switch>Portfolio / Play</span><button type="button" data-oak-close>Back to garden</button></nav></header>
+    <header class="oak-header"><div><p>CHILDHOOD MEMORIES. A WORLD OF HIS OWN.</p><h1 id="oak-lab-title">Professor Oak’s lab</h1></div><nav aria-label="Lab navigation"><span class="room-places-slot"><button type="button" data-oak-places aria-expanded="false" aria-controls="oak-places">Other places</button></span><span class="mode-switch" data-oak-portfolio data-mode-switch>Portfolio / Play</span><button type="button" data-oak-close>Back to garden</button></nav></header>
     <nav class="oak-zones" aria-label="Explore the lab"><button type="button" data-oak-zone="welcome"><span>01</span> Meet Oak</button><button type="button" data-oak-zone="collection"><span>02</span> His Pokemon collection</button><button type="button" data-oak-zone="making"><span>03</span> How he built this</button></nav>
     <section class="oak-comic" aria-labelledby="oak-speech-title"><p class="oak-speaker">PROFESSOR OAK <span data-oak-count></span></p><h2 id="oak-speech-title"></h2><p class="oak-speech" data-oak-speech aria-live="off"></p>
       <div class="oak-collection" hidden><div class="oak-previews" aria-label="A few captures from the collection"></div><button type="button" data-oak-collection>Explore the collection</button></div>
@@ -99,7 +99,16 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
     if(!narration.available)$('[data-oak-narration-status]').textContent='Read Oak’s words below.';
     else if(!narrationEnabled)$('[data-oak-narration-status]').textContent='Voice is off.';
   }
-  function stopNarration(){narrationPending=null;narration.stop();}
+  let pausedForGuide=false;
+  function syncGuideVoice(){
+    if(guideSpeaking()){
+      if(narration.speaking&&!narration.paused)pausedForGuide=narration.pause();
+    }else if(pausedForGuide){
+      pausedForGuide=false;
+      if(narrationEnabled&&!document.hidden&&!placesOpen&&!child?.isOpen)narration.resume();
+    }
+  }
+  function stopNarration(){pausedForGuide=false;narrationPending=null;narration.stop();}
   function queueNarration(delay=.45){
     stopNarration();
     // Visual sentence highlights must not repeatedly announce the whole line.
@@ -111,10 +120,11 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
   function replayLine(){
     stopNarration();if(!narrationEnabled)room?.react?.({reduced:reduced()||!ambientMotion});
     if(!narrationEnabled||document.hidden||!['viewing','entering'].includes(phase)||placesOpen||child?.isOpen)return false;
+    if(guideSpeaking()){queueNarration(0);return true;}
     return narration.read(currentSpeech);
   }
   function updateNarration(dt){
-    if(!narrationPending)return;
+    if(!narrationPending||guideSpeaking())return;
     narrationPending.remaining-=Math.max(0,Math.min(.1,Number(dt)||0));
     const sceneState=room?.stats;
     if(narrationPending.remaining>0||phase!=='viewing'||sceneState?.moving)return;
@@ -171,6 +181,11 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
     if(active?.closest?.('[hidden],[inert]')||previous!==selectedZone&&!active?.closest?.('[data-oak-zone]')){
       const target=selectedZone==='making'?$('.oak-build-copy'):selectedZone==='collection'?$('[data-oak-collection]'):$('[data-oak-next]');target.focus({preventScroll:true});
     }
+    if(animate&&!reduced()){
+      const copy=selectedZone==='making'?$('.oak-build-copy'):$('[data-oak-speech]');
+      copy.getAnimations().forEach(animation=>animation.cancel());
+      copy.animate([{opacity:.55},{opacity:1}],{duration:180,easing:'ease-out'});
+    }
     if(narrate)queueNarration(delay);
   }
   function advanceBuild(direction=1){if(selectedZone!=='making')return false;if(direction<0&&buildIndex===0)return selectZone('collection');if(direction>0&&buildIndex===OAK_MAKING_STEPS.length-1)return close();setBuildStep(buildIndex+direction);return true;}
@@ -204,7 +219,7 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
     renderer.setPixelRatio(Math.min(saved?.ratio||1,1.6));renderer.setSize(width,height,false);renderer.setViewport(0,0,width,height);renderer.setScissorTest(false);
     const compact=width<=760;room.frame(selectedZone,width/height,compact,{animate:animate===true&&!reduced(),entry});
     // Keep the subject beside the left reading panel without changing the room.
-    if(compact)room.camera.clearViewOffset();else room.camera.setViewOffset(width,height,-width*.38,0,width,height);
+    if(compact)room.camera.clearViewOffset();else room.camera.setViewOffset(width,height,-width*.32,0,width,height);
     dirty=true;
   }
   const stageObserver=new ResizeObserver(()=>{if(room&&!child?.isOpen)resize();});
@@ -250,7 +265,7 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
   listen(renderer.domElement,'pointerup',event=>{const down=press;press=null;if(!down||placesOpen||event.button!==0||!room||!['viewing','entering'].includes(phase)||Math.hypot(event.clientX-down.x,event.clientY-down.y)>7)return;const rect=renderer.domElement.getBoundingClientRect();pointer.set((event.clientX-rect.left)/rect.width*2-1,-(event.clientY-rect.top)/rect.height*2+1);raycaster.setFromCamera(pointer,room.camera);const place=selectedZone==='making'&&buildIndex===2?room.pickBuildStop?.(raycaster.ray):null;if(place){inspectBuildPlace(place);return;}const zone=room.pick(raycaster.ray);if(zone==='welcome')replayLine();else if(zone==='collection'){selectZone(zone);openCollection();}else if(zone==='making'&&(selectedZone!=='making'||buildIndex!==2))openModelMap();});
   listen(renderer.domElement,'pointercancel',()=>{press=null;});listen(window,'resize',resize);listen(document,'visibilitychange',()=>{if(document.hidden)stopNarration();else dirty=true;});listen(window,'pagehide',stopNarration);listen(query,'change',()=>{syncMotionControl();if(reduced()&&transition){const t=transition;transition=null;veil.style.opacity=t.kind==='entry'?'0':'1';if(t.kind==='exit')finishClose(t.notify);else setPhase('viewing');}dirty=true;});
   listen($('[data-oak-read]'),'click',()=>{narrationEnabled=!narrationEnabled;rememberNarration();stopNarration();syncNarrationControls();if(narrationEnabled)replayLine();});
-  listen($('[data-oak-pause]'),'click',()=>narration.togglePause());listen($('[data-oak-replay]'),'click',replayLine);
+  listen($('[data-oak-pause]'),'click',()=>{if(!guideSpeaking())narration.togglePause();});listen($('[data-oak-replay]'),'click',replayLine);
   listen($('[data-oak-motion]'),'click',()=>{ambientMotion=!ambientMotion;syncMotionControl();dirty=true;});
   listen(placeNav,'click',event=>{const button=event.target.closest?.('[data-oak-place]');if(button)inspectBuildPlace(button.dataset.oakPlace);});
   listen(stageNav,'click',event=>{const button=event.target.closest?.('[data-oak-build]');if(button)setBuildStep(Number(button.dataset.oakBuild));});
@@ -258,7 +273,7 @@ export function createOakLab({renderer,onOpen=()=>{},onClose=()=>{},onPortfolio=
   listen($('[data-oak-build-prev]'),'click',()=>advanceBuild(-1));listen($('[data-oak-build-next]'),'click',()=>advanceBuild());listen($('[data-oak-map]'),'click',()=>{if(selectedZone==='making'&&buildIndex===2)setBuildStep(2);});
   listen($('[data-oak-work]'),'click',()=>{if(selectedZone!=='making'||buildIndex!==OAK_MAKING_STEPS.length-1||!['viewing','entering'].includes(phase))return;close({immediate:true,notify:false});onPlace('projects');});
   const previewHost=$('.oak-previews');POKEMON_COLLECTION.slice(0,3).forEach(entry=>{const image=document.createElement('img');image.dataset.oakSource=entry.thumbnail;image.alt=entry.name;image.width=66;image.height=88;image.loading='lazy';previewHost.append(image);});$('[data-oak-collection]').textContent=`Browse ${POKEMON_COLLECTION.length} catches`;
-  return {open,close,update,resize,openCollection,selectZone,advance,
+  return {open,close,update,resize,syncGuideVoice,openCollection,selectZone,advance,
     dispose(){if(dead)return;close({immediate:true,notify:false});child?.dispose();child=null;stageObserver.disconnect();narration.dispose();listeners.splice(0).forEach(remove=>remove());dialog.remove();dead=true;},
     diagnostics(){return {phase,placesOpen,isOpen:phase!=='closed',dialogueIndex:index,zone:selectedZone,buildIndex,selectedMapPlace,ambientMotion,narrating:narration.speaking,narrationEnabled,narrationPaused:narration.paused,narrationPending:Boolean(narrationPending),narrationText:currentSpeech,renderedFrames,resources:room?.stats||null,collection:child?.isOpen?child.diagnostics():null,ownsRenderer:false};},
     get isOpen(){return phase!=='closed';},get phase(){return phase;}

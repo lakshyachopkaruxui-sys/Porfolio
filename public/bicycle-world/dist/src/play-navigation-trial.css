@@ -54,7 +54,7 @@ body.hybrid-world #ride-tools {
   margin-inline: auto;
   gap: 4px;
   padding: 6px;
-  border: 1px solid var(--nav-trial-edge);
+  border:0;
   border-radius: 12px;
   background: var(--nav-trial-face);
   box-shadow: 0 3px 14px #243b3b18;
@@ -184,7 +184,7 @@ body.hybrid-world :is(
   gap: 4px;
   max-width: 100%;
   padding: 4px;
-  border: 1px solid var(--nav-trial-edge);
+  border:0;
   border-radius: 10px;
   background: var(--nav-trial-face);
   box-shadow: 0 2px 12px #243b3b12;
@@ -633,4 +633,61 @@ body.hybrid-world #personal-experience :is(#listening-experience,#garba-experien
   color: inherit;
   font-size: .9375rem;
   line-height: 1.4;
+}
+
+/* Grow the leading action toward the empty side of the rail. The remaining
+   controls keep their trailing anchor while the room becomes interactive. */
+body.hybrid-world :is(#personal-experience .personal-header, #oak-lab .oak-header) nav {
+  --room-rail-gap: 4px;
+  gap: var(--room-rail-gap);
+  padding: 4px;
+  flex: 0 1 auto;
+  width: fit-content;
+  min-width: 0;
+  margin-inline-start: auto;
+}
+.room-places-slot {
+  display: inline-flex;
+  flex: 0 0 auto;
+  inline-size: max-content;
+  interpolate-size: allow-keywords;
+  overflow: clip;
+  overflow-clip-margin: 4px;
+}
+.room-places-slot > button { flex: none; }
+:is(#personal-experience, #oak-lab):is([data-phase="entering"], [data-phase="returning"]) .room-places-slot {
+  inline-size: 0;
+  visibility: hidden;
+  overflow: clip;
+  margin-inline-end: calc(-1 * var(--room-rail-gap));
+}
+@media (prefers-reduced-motion: no-preference) {
+  body:not([data-play-ui-motion="reduced"]) .room-places-slot {
+    transition: inline-size 180ms ease-out, margin-inline-end 180ms ease-out;
+  }
+  body:not([data-play-ui-motion="reduced"]) :is(#personal-experience,#oak-lab):not([data-phase="entering"],[data-phase="returning"]) .room-places-slot > button {
+    animation: room-action-arrive 180ms cubic-bezier(.2,.7,.2,1);
+  }
+  @keyframes room-action-arrive { from { opacity: 0; transform: translateX(6px); } }
+}
+body.hybrid-world :is(#personal-experience[data-kind] .personal-header,#oak-lab .oak-header) > div:first-child {
+  padding: 8px 14px;
+  border-radius: 9px;
+  background: #fffaf0;
+  color: #273f35;
+}
+body.hybrid-world :is(#personal-experience .personal-header,#oak-lab .oak-header) > div > p {
+  color: #476052;
+  font: 700 .6875rem/1.45 var(--font-body, sans-serif);
+  letter-spacing: .08em;
+  margin: 0 0 4px;
+}
+body.hybrid-world :is(#personal-room-title,#oak-lab-title) {
+  font-size: clamp(1.125rem, 2vw, 1.625rem);
+  line-height: 1.4;
+  margin: 0;
+}
+body.hybrid-world #personal-experience[data-kind="cloud"] .personal-chapters {
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  align-items: stretch;
 }

@@ -2,7 +2,7 @@
 const lines = [
   [
     "room:visitor",
-    "Welcome to the visitor board. How did the ride feel? What did you think of Lakshya’s work and the world he’s built around it? You can read shared reviews and see the visitors’ names here. Leave your own thoughts if you’d like—what stayed with you, and what could be better? Your feedback helps Lakshya improve this place.",
+    "Welcome to the visitor board. How did the ride feel? You can read shared reviews and see the visitors’ names here. Leave your own thoughts if you’d like—what stayed with you, and what could be better?",
     null,
     false
   ],
@@ -104,7 +104,7 @@ const lines = [
   ],
   [
     "arrive:music",
-    "Lakshya grew up imagining a world with Pokémon, and Toy Story stayed close to his heart, too. Here, his Pokémon GO collection sits alongside the story of turning those memories into a portfolio you can explore. Dr. Oak will take it from here.",
+    "Lakshya grew up imagining a world with Pokémon, and Toy Story stayed close to his heart, too. Dr. Oak will take it from here.",
     "music",
     false
   ],
@@ -134,7 +134,7 @@ const lines = [
   ],
   [
     "room:about",
-    "Lakshya loves starting conversations. Listening matters to him, too—it’s part of what drew him to design. His notebook brings together his background, the way he works and the things he makes time for. Choose a chapter that catches your eye.",
+    "Lakshya loves starting conversations. Listening matters to him, too—it’s part of what drew him to design. Choose a chapter that catches your eye.",
     "about",
     false
   ],
@@ -146,7 +146,7 @@ const lines = [
   ],
   [
     "room:work",
-    "Lakshya enjoys sharing a song, and Garba brings together his love of music, movement and people. Visit the Listening Room for his recordings, or the courtyard for his Garba photographs. Take your time; I’ll let him do the performing.",
+    "Visit the Listening Room for his recordings, or the courtyard for his Garba photographs. Take your time; I’ll let him do the performing.",
     "work",
     false
   ],
@@ -158,7 +158,7 @@ const lines = [
   ],
   [
     "room:cloud",
-    "These are Lakshya’s own photographs. Clouds give him a reason to pause and look up; his mobile photographs capture other things he notices along the way. Choose a collection and have a look through his lens.",
+    "Clouds give him a reason to pause and look up; his mobile photographs capture other things he notices along the way. Choose a collection and have a look through his lens.",
     "cloud",
     false
   ],
@@ -296,8 +296,8 @@ const verifiedAudio=Object.freeze({
     "sha256": "0b1fa0a262cee4067a33c236695273d0f3426e2a782161ec19450a07ff9081fc"
   },
   "arrive:music": {
-    "durationSeconds": 16.64,
-    "sha256": "2287c5814b4b8cd1e09aff291d66f707aa91d6c4bff3584b94fcf8343523ce8e"
+    "durationSeconds": 8.544,
+    "sha256": "f6134ae0fcb71db840946d88741225c67e871cc025bb7c70bd9f35dc35536a26"
   },
   "arrive:cloud": {
     "durationSeconds": 9.28,
@@ -312,20 +312,20 @@ const verifiedAudio=Object.freeze({
     "sha256": "bb1beed54dceec8459371ef12e8295a34135f08d0977da4dbba8eb3e51c1cabb"
   },
   "room:about": {
-    "durationSeconds": 14.24,
-    "sha256": "478150a6db191b27d8c99393df7572eaa040954ea25c44106eebc2b91a3b91ac"
+    "durationSeconds": 8.88,
+    "sha256": "5c56583c0313f2a466b298f2d6fc460fbdfb7de548b2a8450b14de7c66b60c31"
   },
   "room:projects": {
     "durationSeconds": 15.52,
     "sha256": "c84215abf9e1ec1b9211bb657fce92a408f5061cd64c53ea1d975dc9559f260d"
   },
   "room:work": {
-    "durationSeconds": 13.44,
-    "sha256": "18ee48da54d2f9cd62a9882aa806d9842b66213a2db85911a1388e960c4882c8"
+    "durationSeconds": 7.872,
+    "sha256": "d653fa80aa68543a37048109757b7b86dfb91085eb541f0cd38e0e910ce047ec"
   },
   "room:cloud": {
-    "durationSeconds": 12.0,
-    "sha256": "5a64a95424c6a556aa67dfecf6ffbe27252ae4d49ac079c95716110d23dc9796"
+    "durationSeconds": 10.032,
+    "sha256": "4c386d461d16c2d39064624b56c121c58aa4e8578de02080dbe0e77ad760d133"
   },
   "return:about": {
     "durationSeconds": 6.08,
@@ -368,8 +368,8 @@ const verifiedAudio=Object.freeze({
     "sha256": "6d110ce5a78cd3fa5648da2ce1bbce104a137d0310655cb7e44854306b9cbd29"
   },
   "room:visitor": {
-    "durationSeconds": 18.8,
-    "sha256": "3950852eca8c007c66f9f4532e4db9abe8956c5755aa11cdf5b6ddd9dc08a630"
+    "durationSeconds": 12.0,
+    "sha256": "987e847f8dc7a5f4a93e0ce2cfc0ae300c76ad3934c4f6029a6542c97afedec4"
   },
   "feedback-nearby": {
     "durationSeconds": 10.16,

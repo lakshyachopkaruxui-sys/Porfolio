@@ -976,54 +976,11 @@
     {
       "id": "arrive:music",
       "filename": "arrive-music.mp3",
-      "text": "Lakshya grew up imagining a world with Pokémon, and Toy Story stayed close to his heart, too. Here, his Pokémon GO collection sits alongside the story of turning those memories into a portfolio you can explore. Dr. Oak will take it from here.",
-      "sha256": "2287c5814b4b8cd1e09aff291d66f707aa91d6c4bff3584b94fcf8343523ce8e",
-      "bytes": 200780,
-      "durationSeconds": 16.64,
+      "text": "Lakshya grew up imagining a world with Pokémon, and Toy Story stayed close to his heart, too. Dr. Oak will take it from here.",
+      "sha256": "f6134ae0fcb71db840946d88741225c67e871cc025bb7c70bd9f35dc35536a26",
+      "bytes": 74516,
+      "durationSeconds": 8.544,
       "asr_best_wer": 0.0,
-      "asr_checks": [
-        {
-          "model": "base.en",
-          "text": "Lakshya grew up imagining a world with Pokemon and Toy Stories stayed close to his heart too. Here, his Pokemon GO collection sits alongside the story of turning those memories into a portfolio you can explore. Doctor Oak will take it from here. Thank you. Bye.",
-          "normalized_word_error_rate": 0.09302325581395349,
-          "raw_normalized_word_error_rate": 0.09302325581395349,
-          "name_slot_check": {
-            "allNonNameWordsExact": false,
-            "approvedNameSlotEquivalence": false,
-            "slots": []
-          },
-          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
-        },
-        {
-          "model": "tiny.en",
-          "text": "Lecture grew up imagining a world with Pokemon and Toy Story stayed close to his heart too. Here, his Pokemon GO collection sits alongside the story of turning those memories into a portfolio you can explore. Doctor Oak will take it from here.",
-          "normalized_word_error_rate": 0.0,
-          "raw_normalized_word_error_rate": 0.023255813953488372,
-          "name_slot_check": {
-            "allNonNameWordsExact": true,
-            "approvedNameSlotEquivalence": true,
-            "slots": [
-              {
-                "label": "name0",
-                "recognized": "lecture",
-                "expected": [
-                  "lakshya"
-                ],
-                "possessive": false,
-                "approvedLexicalEquivalence": true,
-                "exactRecordingListeningEvidence": {
-                  "heard": true,
-                  "sourceSHA256": "2287c5814b4b8cd1e09aff291d66f707aa91d6c4bff3584b94fcf8343523ce8e",
-                  "kind": "exact-context-excerpt",
-                  "scope": "This exact recording and name occurrence only."
-                },
-                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
-              }
-            ]
-          },
-          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
-        }
-      ],
       "integrated_lufs": -16.18,
       "true_peak_dbtp": -1.31,
       "seconds": 16.64,
@@ -1043,7 +1000,12 @@
       "raw_asr_best_wer": 0.023255813953488372,
       "listening_approval": "Every name occurrence has exact-source owner listening evidence; see per-slot scope. Context excerpts do not establish full-performance listening.",
       "direction": "An original friendly adult male cowboy tour guide speaking to one visitor beside a bicycle. Built-in Aiden, no actor imitation. Clear natural US English, warm grounded medium adult register, relaxed light country inflection. Smooth conversational phrasing with expressive rises and falls, meaningful emphasis and short natural phrase pauses. A welcoming friendly smile, not an announcer, sales pitch, robotic narrator or caricature. Do not whisper, shout, sing, laugh or add words. One clean dry voice, no effects, music or reverb. Speak only the supplied text. Warm reflective storytelling, natural affection, and a relaxed clear handoff. Pronounce Dr. as Doctor, say Doctor Oak clearly. Keep all supplied words and small connecting words, including and. No extra words. The Indian Hindi name in Devanagari लक्ष्य has standard pronunciation /lək.ʂjᵊ/, colloquial [lɐk.ʃjᵊ]. Keep the k-sh-y consonant cluster compact and connected, and end with only a very brief reduced uh/schwa release. It is not Lak-shee, not Luck-shaa, and not English shy or sh-eye. No long ah or ee. Do not explain the name or read instructions or IPA aloud. Speak the full supplied text with all connecting words; preserve meaningful sentence boundaries.",
-      "seed": 161208
+      "seed": 161208,
+      "sourceRecording": {
+        "text": "Lakshya grew up imagining a world with Pokémon, and Toy Story stayed close to his heart, too. Here, his Pokémon GO collection sits alongside the story of turning those memories into a portfolio you can explore. Dr. Oak will take it from here.",
+        "sha256": "2287c5814b4b8cd1e09aff291d66f707aa91d6c4bff3584b94fcf8343523ce8e",
+        "durationSeconds": 16.64
+      }
     },
     {
       "id": "arrive:cloud",
@@ -1239,70 +1201,10 @@
     {
       "id": "room:about",
       "filename": "room-about.mp3",
-      "text": "Lakshya loves starting conversations. Listening matters to him, too—it’s part of what drew him to design. His notebook brings together his background, the way he works and the things he makes time for. Choose a chapter that catches your eye.",
-      "sha256": "478150a6db191b27d8c99393df7572eaa040954ea25c44106eebc2b91a3b91ac",
-      "durationSeconds": 14.24,
-      "bytes": 171980,
-      "asr_checks": [
-        {
-          "model": "base.en",
-          "text": "Lakshya loves starting conversations. Listening matters to him too. It's part of what drew him to design. His notebook brings together his background, the way he works and the things he makes time for. Choose a chapter that catches your eye. . . .",
-          "normalized_word_error_rate": 0.0,
-          "raw_normalized_word_error_rate": 0.0,
-          "name_slot_check": {
-            "allNonNameWordsExact": true,
-            "approvedNameSlotEquivalence": true,
-            "slots": [
-              {
-                "label": "name0",
-                "recognized": "lakshya",
-                "expected": [
-                  "lakshya"
-                ],
-                "possessive": false,
-                "approvedLexicalEquivalence": true,
-                "exactRecordingListeningEvidence": {
-                  "heard": true,
-                  "sourceSHA256": "478150a6db191b27d8c99393df7572eaa040954ea25c44106eebc2b91a3b91ac",
-                  "kind": "exact-context-excerpt",
-                  "scope": "This exact recording and name occurrence only."
-                },
-                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
-              }
-            ]
-          },
-          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
-        },
-        {
-          "model": "tiny.en",
-          "text": "Luxe loves starting conversations. Listening matters to him too. It's part of what drew him to design. His notebook brings together his background the way he works and the things he makes time for. Choose a chapter that catches your eye.",
-          "normalized_word_error_rate": 0.0,
-          "raw_normalized_word_error_rate": 0.023809523809523808,
-          "name_slot_check": {
-            "allNonNameWordsExact": true,
-            "approvedNameSlotEquivalence": true,
-            "slots": [
-              {
-                "label": "name0",
-                "recognized": "luxe",
-                "expected": [
-                  "lakshya"
-                ],
-                "possessive": false,
-                "approvedLexicalEquivalence": true,
-                "exactRecordingListeningEvidence": {
-                  "heard": true,
-                  "sourceSHA256": "478150a6db191b27d8c99393df7572eaa040954ea25c44106eebc2b91a3b91ac",
-                  "kind": "exact-context-excerpt",
-                  "scope": "This exact recording and name occurrence only."
-                },
-                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
-              }
-            ]
-          },
-          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
-        }
-      ],
+      "text": "Lakshya loves starting conversations. Listening matters to him, too—it’s part of what drew him to design. Choose a chapter that catches your eye.",
+      "sha256": "5c56583c0313f2a466b298f2d6fc460fbdfb7de548b2a8450b14de7c66b60c31",
+      "durationSeconds": 8.88,
+      "bytes": 83492,
       "asr_best_wer": 0.0,
       "asr_initial_best_wer": 0.0,
       "asr_equivalences": [
@@ -1324,7 +1226,12 @@
       "raw_asr_best_wer": 0.0,
       "listening_approval": "Every name occurrence has exact-source owner listening evidence; see per-slot scope. Context excerpts do not establish full-performance listening.",
       "direction": "An original friendly adult male cowboy tour guide speaking to one visitor beside a bicycle. Built-in Aiden, no actor imitation. Clear natural US English, warm grounded medium adult register, relaxed light country inflection. Smooth conversational phrasing with expressive rises and falls, meaningful emphasis and short natural phrase pauses. A welcoming friendly smile, not an announcer, sales pitch, robotic narrator or caricature. Do not whisper, shout, sing, laugh or add words. One clean dry voice, no effects, music or reverb. Speak only the supplied text. Friendly personal anecdote, small reflective pause around listening. Full natural voice, slightly softer presence in the room, yield attention at the end. The Indian Hindi name in Devanagari लक्ष्य has standard pronunciation /lək.ʂjᵊ/, colloquial [lɐk.ʃjᵊ]. Keep the k-sh-y consonant cluster compact and connected, and end with only a very brief reduced uh/schwa release. It is not Lak-shee, not Luck-shaa, and not English shy or sh-eye. No long ah or ee. Do not explain the name or read instructions or IPA aloud. Speak the full supplied text with all connecting words; preserve meaningful sentence boundaries.",
-      "seed": 161210
+      "seed": 161210,
+      "sourceRecording": {
+        "text": "Lakshya loves starting conversations. Listening matters to him, too—it’s part of what drew him to design. His notebook brings together his background, the way he works and the things he makes time for. Choose a chapter that catches your eye.",
+        "sha256": "478150a6db191b27d8c99393df7572eaa040954ea25c44106eebc2b91a3b91ac",
+        "durationSeconds": 14.24
+      }
     },
     {
       "id": "room:projects",
@@ -1422,53 +1329,10 @@
     {
       "id": "room:work",
       "filename": "room-work.mp3",
-      "text": "Lakshya enjoys sharing a song, and Garba brings together his love of music, movement and people. Visit the Listening Room for his recordings, or the courtyard for his Garba photographs. Take your time; I’ll let him do the performing.",
-      "sha256": "18ee48da54d2f9cd62a9882aa806d9842b66213a2db85911a1388e960c4882c8",
-      "durationSeconds": 13.44,
-      "bytes": 162188,
-      "asr_checks": [
-        {
-          "model": "base.en",
-          "text": "Lakshya enjoys sharing a song and Garba brings together his love of music, movement and people. Visit the listening room for his recordings or the courtyard for his Garba photographs. Take your time. I'll let him do the performing.",
-          "normalized_word_error_rate": 0.0,
-          "raw_normalized_word_error_rate": 0.0,
-          "name_slot_check": {
-            "allNonNameWordsExact": true,
-            "approvedNameSlotEquivalence": true,
-            "slots": [
-              {
-                "label": "name0",
-                "recognized": "lakshya",
-                "expected": [
-                  "lakshya"
-                ],
-                "possessive": false,
-                "approvedLexicalEquivalence": true,
-                "exactRecordingListeningEvidence": {
-                  "heard": true,
-                  "sourceSHA256": "18ee48da54d2f9cd62a9882aa806d9842b66213a2db85911a1388e960c4882c8",
-                  "kind": "exact-context-excerpt",
-                  "scope": "This exact recording and name occurrence only."
-                },
-                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
-              }
-            ]
-          },
-          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
-        },
-        {
-          "model": "tiny.en",
-          "text": "Lakshya enjoys sharing a song and Garba brings together his love of music, movement and people. Visit the listening room for his recordings or the courtyard for his Garba photographs. Take your time. I'll let him do the performing. Thank you.",
-          "normalized_word_error_rate": 0.05,
-          "raw_normalized_word_error_rate": 0.05,
-          "name_slot_check": {
-            "allNonNameWordsExact": false,
-            "approvedNameSlotEquivalence": false,
-            "slots": []
-          },
-          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
-        }
-      ],
+      "text": "Visit the Listening Room for his recordings, or the courtyard for his Garba photographs. Take your time; I’ll let him do the performing.",
+      "sha256": "d653fa80aa68543a37048109757b7b86dfb91085eb541f0cd38e0e910ce047ec",
+      "durationSeconds": 7.872,
+      "bytes": 69476,
       "asr_best_wer": 0.0,
       "asr_initial_best_wer": 0.0,
       "asr_equivalences": [
@@ -1490,77 +1354,20 @@
       "raw_asr_best_wer": 0.0,
       "listening_approval": "Every name occurrence has exact-source owner listening evidence; see per-slot scope. Context excerpts do not establish full-performance listening.",
       "direction": "An original friendly adult male cowboy tour guide speaking to one visitor beside a bicycle. Built-in Aiden, no actor imitation. Clear natural US English, warm grounded medium adult register, relaxed light country inflection. Smooth conversational phrasing with expressive rises and falls, meaningful emphasis and short natural phrase pauses. A welcoming friendly smile, not an announcer, sales pitch, robotic narrator or caricature. Do not whisper, shout, sing, laugh or add words. One clean dry voice, no effects, music or reverb. Speak only the supplied text. Warm enthusiasm for music and people, easy contrast between the two options. Finish with a small friendly smile on let him do the performing, not a joke voice. The Indian Hindi name in Devanagari लक्ष्य has standard pronunciation /lək.ʂjᵊ/, colloquial [lɐk.ʃjᵊ]. Keep the k-sh-y consonant cluster compact and connected, and end with only a very brief reduced uh/schwa release. It is not Lak-shee, not Luck-shaa, and not English shy or sh-eye. No long ah or ee. Do not explain the name or read instructions or IPA aloud. Speak the full supplied text with all connecting words; preserve meaningful sentence boundaries.",
-      "seed": 161212
+      "seed": 161212,
+      "sourceRecording": {
+        "text": "Lakshya enjoys sharing a song, and Garba brings together his love of music, movement and people. Visit the Listening Room for his recordings, or the courtyard for his Garba photographs. Take your time; I’ll let him do the performing.",
+        "sha256": "18ee48da54d2f9cd62a9882aa806d9842b66213a2db85911a1388e960c4882c8",
+        "durationSeconds": 13.44
+      }
     },
     {
       "id": "room:cloud",
       "filename": "room-cloud.mp3",
-      "text": "These are Lakshya’s own photographs. Clouds give him a reason to pause and look up; his mobile photographs capture other things he notices along the way. Choose a collection and have a look through his lens.",
-      "sha256": "5a64a95424c6a556aa67dfecf6ffbe27252ae4d49ac079c95716110d23dc9796",
-      "durationSeconds": 12.0,
-      "bytes": 144908,
-      "asr_checks": [
-        {
-          "model": "base.en",
-          "text": "These are Lex's own photographs. Clouds give him a reason to pause and look up. His mobile photographs capture other things he notices along the way. Choose a collection and have a look through his lens.",
-          "normalized_word_error_rate": 0.0,
-          "raw_normalized_word_error_rate": 0.02702702702702703,
-          "name_slot_check": {
-            "allNonNameWordsExact": true,
-            "approvedNameSlotEquivalence": true,
-            "slots": [
-              {
-                "label": "name0",
-                "recognized": "lex s",
-                "expected": [
-                  "lakshya",
-                  "s"
-                ],
-                "possessive": true,
-                "approvedLexicalEquivalence": true,
-                "exactRecordingListeningEvidence": {
-                  "heard": true,
-                  "sourceSHA256": "5a64a95424c6a556aa67dfecf6ffbe27252ae4d49ac079c95716110d23dc9796",
-                  "kind": "exact-context-excerpt",
-                  "scope": "This exact recording and name occurrence only."
-                },
-                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
-              }
-            ]
-          },
-          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
-        },
-        {
-          "model": "tiny.en",
-          "text": "These are lecture's own photographs. Clouds give him a reason to pause and look up. His mobile photographs capture other things he notices along the way. Choose a collection and have a look through his lens.",
-          "normalized_word_error_rate": 0.0,
-          "raw_normalized_word_error_rate": 0.02702702702702703,
-          "name_slot_check": {
-            "allNonNameWordsExact": true,
-            "approvedNameSlotEquivalence": true,
-            "slots": [
-              {
-                "label": "name0",
-                "recognized": "lecture s",
-                "expected": [
-                  "lakshya",
-                  "s"
-                ],
-                "possessive": true,
-                "approvedLexicalEquivalence": true,
-                "exactRecordingListeningEvidence": {
-                  "heard": true,
-                  "sourceSHA256": "5a64a95424c6a556aa67dfecf6ffbe27252ae4d49ac079c95716110d23dc9796",
-                  "kind": "exact-context-excerpt",
-                  "scope": "This exact recording and name occurrence only."
-                },
-                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
-              }
-            ]
-          },
-          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
-        }
-      ],
+      "text": "Clouds give him a reason to pause and look up; his mobile photographs capture other things he notices along the way. Choose a collection and have a look through his lens.",
+      "sha256": "4c386d461d16c2d39064624b56c121c58aa4e8578de02080dbe0e77ad760d133",
+      "durationSeconds": 10.032,
+      "bytes": 89684,
       "asr_best_wer": 0.0,
       "asr_initial_best_wer": 0.02702702702702703,
       "asr_equivalences": [
@@ -1583,7 +1390,12 @@
       "raw_asr_best_wer": 0.02702702702702703,
       "listening_approval": "Every name occurrence has exact-source owner listening evidence; see per-slot scope. Context excerpts do not establish full-performance listening.",
       "direction": "An original friendly adult male cowboy tour guide speaking to one visitor beside a bicycle. Built-in Aiden, no actor imitation. Clear natural US English, warm grounded medium adult register, relaxed light country inflection. Smooth conversational phrasing with expressive rises and falls, meaningful emphasis and short natural phrase pauses. A welcoming friendly smile, not an announcer, sales pitch, robotic narrator or caricature. Do not whisper, shout, sing, laugh or add words. One clean dry voice, no effects, music or reverb. Speak only the supplied text. Quieter attentive full voice, a little wonder on look up, clean phrase pauses. Invite the visitor to look, then yield attention. The Indian Hindi name in Devanagari लक्ष्य has standard pronunciation /lək.ʂjᵊ/, colloquial [lɐk.ʃjᵊ]. Keep the k-sh-y consonant cluster compact and connected, and end with only a very brief reduced uh/schwa release. It is not Lak-shee, not Luck-shaa, and not English shy or sh-eye. No long ah or ee. Do not explain the name or read instructions or IPA aloud. Speak the full supplied text with all connecting words; preserve meaningful sentence boundaries.",
-      "seed": 161213
+      "seed": 161213,
+      "sourceRecording": {
+        "text": "These are Lakshya’s own photographs. Clouds give him a reason to pause and look up; his mobile photographs capture other things he notices along the way. Choose a collection and have a look through his lens.",
+        "sha256": "5a64a95424c6a556aa67dfecf6ffbe27252ae4d49ac079c95716110d23dc9796",
+        "durationSeconds": 12.0
+      }
     },
     {
       "id": "return:about",
@@ -1902,70 +1714,10 @@
     {
       "id": "room:visitor",
       "filename": "room-visitor.mp3",
-      "text": "Welcome to the visitor board. How did the ride feel? What did you think of Lakshya’s work and the world he’s built around it? You can read shared reviews and see the visitors’ names here. Leave your own thoughts if you’d like—what stayed with you, and what could be better? Your feedback helps Lakshya improve this place.",
-      "sha256": "3950852eca8c007c66f9f4532e4db9abe8956c5755aa11cdf5b6ddd9dc08a630",
-      "durationSeconds": 18.8,
-      "bytes": 226700,
-      "asr_checks": [
-        {
-          "model": "base.en",
-          "text": "Welcome to the visitor board. How did the ride feel? What did you think of Lux's work and the world he's built around it? You can read shared reviews and see the visitor's names here. Leave your own thoughts if you'd like. What stayed with you? And what could be better? Your feedback helps Luxion improve this place. .",
-          "normalized_word_error_rate": 0.0,
-          "raw_normalized_word_error_rate": 0.03278688524590164,
-          "name_slot_check": {
-            "allNonNameWordsExact": true,
-            "approvedNameSlotEquivalence": true,
-            "slots": [
-              {
-                "label": "name0",
-                "recognized": "lux s",
-                "expected": [
-                  "lakshya",
-                  "s"
-                ],
-                "possessive": true,
-                "approvedLexicalEquivalence": true,
-                "exactRecordingListeningEvidence": {
-                  "heard": true,
-                  "sourceSHA256": "3950852eca8c007c66f9f4532e4db9abe8956c5755aa11cdf5b6ddd9dc08a630",
-                  "kind": "exact-context-excerpt",
-                  "scope": "This exact recording and name occurrence only."
-                },
-                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
-              },
-              {
-                "label": "name1",
-                "recognized": "luxion",
-                "expected": [
-                  "lakshya"
-                ],
-                "possessive": false,
-                "approvedLexicalEquivalence": true,
-                "exactRecordingListeningEvidence": {
-                  "heard": true,
-                  "sourceSHA256": "3950852eca8c007c66f9f4532e4db9abe8956c5755aa11cdf5b6ddd9dc08a630",
-                  "kind": "exact-context-excerpt",
-                  "scope": "This exact recording and name occurrence only."
-                },
-                "approvalBasis": "Approved name-slot lexical equivalence; all non-name words checked separately. Raw recogniser spelling is preserved."
-              }
-            ]
-          },
-          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
-        },
-        {
-          "model": "tiny.en",
-          "text": "Welcome to the visitor board. How did the ride feel? What did you think of Lakshya's work in the world he's built around it? You can read shared reviews and see the visitor's names here. Leave your own thoughts if you'd like. What stayed with you? And what could be better? Your feedback helps Lakshya improve this place.",
-          "normalized_word_error_rate": 0.01639344262295082,
-          "raw_normalized_word_error_rate": 0.01639344262295082,
-          "name_slot_check": {
-            "allNonNameWordsExact": false,
-            "approvedNameSlotEquivalence": false,
-            "slots": []
-          },
-          "normalization_basis": "Documented text and orthographic normalization plus exact-owner-approved name-slot equivalence; raw recogniser text and raw error rates retained, not acoustic certification"
-        }
-      ],
+      "text": "Welcome to the visitor board. How did the ride feel? You can read shared reviews and see the visitors’ names here. Leave your own thoughts if you’d like—what stayed with you, and what could be better?",
+      "sha256": "987e847f8dc7a5f4a93e0ce2cfc0ae300c76ad3934c4f6029a6542c97afedec4",
+      "durationSeconds": 12.0,
+      "bytes": 104612,
       "asr_best_wer": 0.0,
       "asr_initial_best_wer": 0.01639344262295082,
       "asr_equivalences": [
@@ -1995,7 +1747,12 @@
       "raw_asr_best_wer": 0.01639344262295082,
       "listening_approval": "Every name occurrence has exact-source owner listening evidence; see per-slot scope. Context excerpts do not establish full-performance listening.",
       "direction": "An original friendly adult male cowboy tour guide speaking to one visitor beside a bicycle. Built-in Aiden, no actor imitation. Clear natural US English, warm grounded medium adult register, relaxed light country inflection. Smooth conversational phrasing with expressive rises and falls, meaningful emphasis and short natural phrase pauses. A welcoming friendly smile, not an announcer, sales pitch, robotic narrator or caricature. Do not whisper, shout, sing, laugh or add words. One clean dry voice, no effects, music or reverb. Speak only the supplied text. Warm welcoming companion. Express genuine curiosity with small rises and falls in each question. Keep the instructions relaxed and respectful, no nagging, no announcement voice. Clear exact-word recovery: Keep every supplied word, including small articles. Give each sentence a natural clear boundary and retain a little as two distinct words when present. In the phrase work and the world, articulate AND clearly with a small natural phrase boundary; never say in the world. Do not read this direction. The Indian Hindi name in Devanagari लक्ष्य has standard pronunciation /lək.ʂjᵊ/, colloquial [lɐk.ʃjᵊ]. Keep the k-sh-y consonant cluster compact and connected, and end with only a very brief reduced uh/schwa release. It is not Lak-shee, not Luck-shaa, and not English shy or sh-eye. No long ah or ee. Do not explain the name or read instructions or IPA aloud. Speak the full supplied text with all connecting words; preserve meaningful sentence boundaries.",
-      "seed": 161215
+      "seed": 161215,
+      "sourceRecording": {
+        "text": "Welcome to the visitor board. How did the ride feel? What did you think of Lakshya’s work and the world he’s built around it? You can read shared reviews and see the visitors’ names here. Leave your own thoughts if you’d like—what stayed with you, and what could be better? Your feedback helps Lakshya improve this place.",
+        "sha256": "3950852eca8c007c66f9f4532e4db9abe8956c5755aa11cdf5b6ddd9dc08a630",
+        "durationSeconds": 18.8
+      }
     },
     {
       "id": "feedback-nearby",
@@ -2075,7 +1832,8 @@
   ],
   "revision_note": "Approved personal narration, 16 November 2026: 20 replaced/new runtime recordings, including one nearby visitor-board invitation. Original built-in Aiden; local processing, ASR and waveform verification. Human listening approval is not inferred. Dr. Oak handoff updated16November2026 with coherent verified recording.",
   "baseline_script_sha256": "ea94fb3a99a26e051b0bea8488ed4e20142be67665ec09b64ebf4c3e0d86ca87",
-  "script_sha256": "8aa4775102a6d5fdaa4df5efa1455884959ea1e775e6b4620184f55ceecd19bf",
+  "script_sha256": "83ed93727cdc451d1532cc78768d598806c1fa3e51de76a030c872381b0fe4c2",
   "script_hash_scope": "All 38 runtime id/text pairs in runtime array order, sorted object keys, compact JSON separators and UTF-8. Historical baseline hash retained separately.",
-  "asr_normalization": "Initial recognizer metrics preserved. Final normalization expands ordinary contractions, including contextual has and wanna/want to, combines U X letter spelling, matches British/American favourites/favorites orthography and visitors’/visitor’s possessive spelling. No semantic/word substitutions; in/and remains a substantive failure."
+  "asr_normalization": "Initial recognizer metrics preserved. Final normalization expands ordinary contractions, including contextual has and wanna/want to, combines U X letter spelling, matches British/American favourites/favorites orthography and visitors’/visitor’s possessive spelling. No semantic/word substitutions; in/and remains a substantive failure.",
+  "excerpt_note": "Selected sections retain complete phrases from the recorded narration. Earlier listening and ASR notes refer to the original takes."
 }

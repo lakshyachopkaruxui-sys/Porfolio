@@ -1,4 +1,4 @@
-@import url("/control-sizing.css");
+@import url("./control-sizing.css");
 /* Play-only softly modelled controls. Normal portfolio does not load this file. */
 body.hybrid-world {
   --control-face-start: #fffdf5;
@@ -20,7 +20,7 @@ body.hybrid-world {
 html:root body.hybrid-world :is(
   #ride-tools, #world-map, #help, #reader, #project-reader, #woody-guide, #welcome, #failure, #mobile-play-notice,
   #about-experience, #works-experience, #personal-experience, #oak-lab,
-  #personal-experience #listening-experience, .play-music-dock
+  #personal-experience #listening-experience, .woody-tour, #quick-tips, .play-music-dock
 ) button:where(:not(:has(img)):not(.cloud-photo-card):not(.journal-photo-button):not(.hobby-photo-open)),
 html:root body.hybrid-world :is(#river-hop-action, #touch-controls button, #stop-route, #interact) {
   min-height: 44px;
@@ -56,7 +56,7 @@ html:root body.hybrid-world #ride-tools .mode-selector.mode-switch {
 html:root body.hybrid-world :is(
   #ride-tools, #world-map, #help, #reader, #project-reader, #welcome, #failure, #mobile-play-notice,
   #about-experience, #works-experience, #personal-experience, #oak-lab,
-  #personal-experience #listening-experience, .play-music-dock
+  #personal-experience #listening-experience, .woody-tour, #quick-tips, .play-music-dock
 ) button:is([aria-pressed='true'],[aria-selected='true'],[aria-current='page'],[aria-current='step'],.primary,.works-primary,.gr-primary,.pgr-primary,.cloud-gallery-primary,[data-map-ride],[data-oak-next],[data-oak-collection],[data-oak-build-next],.about-open-notebook,[data-journal-next]):where(:not(:has(img)):not(.cloud-photo-card):not(.journal-photo-button):not(.hobby-photo-open)),
 html:root body.hybrid-world #touch-controls button.pressed {
   background: linear-gradient(175deg, var(--control-primary-start), var(--control-primary-end)) !important;

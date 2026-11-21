@@ -4,17 +4,73 @@
 .cloud-veil{position:absolute;inset:0;background:#f3f7fa;opacity:0}
 body.cloud-handoff #scene{z-index:8;pointer-events:none}
 body.cloud-handoff #world-controls,body.cloud-handoff #world-bottom,body.cloud-handoff #woody-guide{visibility:hidden}
-.loading-clouds{position:relative;width:120px;height:48px;margin-bottom:6px;pointer-events:none}
-/* Immediate HTML fallback while the one WebGL context is being prepared. */
-.loading-clouds span{position:absolute;top:28px;left:16px;width:85px;height:23px;border-radius:50%;background:radial-gradient(ellipse at 30% 15%,#fff,#d2dfe9)}
-.loading-clouds span::before,.loading-clouds span::after{content:"";position:absolute;border-radius:50%;background:radial-gradient(circle at 32% 24%,#fff 12%,#edf2f7 50%,#c2d0df)}
-.loading-clouds span::before{width:44px;height:42px;left:13px;top:-25px}
-.loading-clouds span::after{width:35px;height:33px;right:4px;top:-15px}
-.loading-clouds span:nth-child(2){left:59px;top:29px;scale:.58;opacity:.8}
-.loading-clouds span:nth-child(3){display:none}
+/* This viewport also positions the WebGL miniature. Before the renderer is
+   available, the CSS silhouette carries the same key light and blue base. */
+.loading-clouds {
+  position: relative;
+  width: min(100%, clamp(12rem, 23vw, 16rem));
+  aspect-ratio: 2 / 1;
+  margin-bottom: 6px;
+  pointer-events: none;
+}
+.loading-clouds span {
+  position:absolute;
+  inset:48% 9% 16%;
+  border-radius:50% 52% 45% 45%;
+  background:radial-gradient(ellipse at 34% 15%, #fffef7 12%, #e9f1f5 51%, #b2c4d4 88%);
+}
+.loading-clouds span::before,.loading-clouds span::after {
+  content:""; position:absolute;
+  border-radius:50%;
+  background:radial-gradient(ellipse at 30% 19%, #fffef7 11%, #edf3f5 48%, #bccfdd 91%);
+}
+.loading-clouds span::before { width:44%; height:178%; left:23%; bottom:20%; }
+.loading-clouds span::after { width:34%; height:135%; right:12%; bottom:17%; }
+.loading-clouds span:nth-child(2) { inset:46% 57% 23% 8%; }
+.loading-clouds span:nth-child(2)::before { width:78%; height:105%; left:5%; bottom:4%; }
+.loading-clouds span:nth-child(2)::after,.loading-clouds span:nth-child(3) { display:none; }
 .loading-clouds[data-volume-ready="true"] span{visibility:hidden}
 @media(forced-colors:active){.loading-clouds{display:none}}
 /* Recovery links stay usable at small desktop sizes and enlarged text. */
 #failure{position:fixed;inset:24px;margin:auto;width:min(550px,calc(100% - 48px));height:max-content;max-height:calc(100dvh - 48px);overflow:auto}
 #failure .failure-links{display:flex;flex-wrap:wrap;gap:4px 20px;margin-top:16px}
 #failure .failure-links a{padding-block:12px;margin:0}
+
+/* Real startup milestones only. Keep copy and progress stable as labels change. */
+#welcome.woody-welcome #loading-state:not([data-ready="true"]) {
+  width: min(100%, 24rem);
+  box-sizing: border-box;
+  margin-inline: auto;
+  padding: 16px 8px;
+  text-align: center;
+}
+#welcome #loading-state .loading-clouds { margin: 0 auto 12px; }
+#welcome #loading-status {
+  min-height: 2.8em;
+  display: grid;
+  align-items: center;
+  margin: 0 0 10px;
+  color: #294638;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+#welcome .loading-steps { gap: 8px; }
+#welcome .loading-steps li {
+  border-color: #a9beb1;
+  padding-top: 8px;
+  color: #415b50;
+  font-size: .8125rem;
+}
+#welcome .loading-steps li:is([data-state="working"],[data-state="complete"]) {
+  border-color: #315d4b;
+  color: #234438;
+  font-weight: 650;
+}
+@media (prefers-reduced-motion: no-preference) {
+  body:not([data-play-ui-motion="reduced"]) #welcome .loading-clouds:not([data-volume-ready="true"]) {
+    animation: preparing-cloud-drift 2.4s ease-in-out infinite alternate;
+  }
+  @keyframes preparing-cloud-drift { to { transform: translate(4px,-2px); } }
+}
+
+#welcome .welcome-copy:has(#loading-state[aria-busy="true"]) #read-direct { display: none; }
