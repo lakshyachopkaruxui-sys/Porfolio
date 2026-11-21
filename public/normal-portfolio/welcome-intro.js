@@ -57,7 +57,6 @@ export function mountWelcomeIntro() {
     // Trusted SVG from this page is reused without a network request or font substitution.
     const mark = sourceLogo.outerHTML;
     dialog.innerHTML = `<div class="welcome-backdrop" aria-hidden="true"></div>
-      <div class="welcome-meta"><button class="welcome-skip" type="button" autofocus>Skip intro <span aria-hidden="true">↗</span></button></div>
       <div class="welcome-composition" aria-hidden="true">
         <div class="welcome-logo"><div class="welcome-logo-plane">
           <div class="welcome-slice welcome-slice-top">${mark}</div>
@@ -128,7 +127,6 @@ export function mountWelcomeIntro() {
       dialog.showModal();
       run.shown = true;
       doc.documentElement.dataset.welcomeState = 'composition';
-      listen(dialog.querySelector('.welcome-skip'), 'click', () => finish('user-skip'));
       listen(dialog, 'cancel', event => { event.preventDefault(); finish('user-skip'); });
       listen(doc, 'keydown', event => {
         if (event.ctrlKey || event.metaKey || event.altKey || ['Shift', 'Control', 'Meta', 'Alt'].includes(event.key)) return;
