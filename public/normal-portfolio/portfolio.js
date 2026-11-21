@@ -2,11 +2,11 @@ import {projectContribution} from './project-card-copy.js?v=20261115-evidence';
 // This proposal consumes the audited catalog without changing shared source.
 import {CASE_CONTEXT, normalProject} from './case-context.js?v=20261109-evidence-pass';
 import {PROJECT_PROCESS} from './process-data.js?v=20261109-evidence-pass';
-import {mountToolkit} from './toolkit.js?v=20261104-personal-space';
+import {mountToolkit} from './homepage-toolkit.js';
 import {CASE_STORIES} from './case-stories.js?v=20261109-evidence-pass';
 import {renderCaseStudy} from './case-reader.js?v=20261110-approved-covers';
 import {mountPortfolioAssistant, mountPixelBreak} from './portfolio-extras.js?v=20261113-assistant-retry';
-import {mountResumeProfile} from './resume-ui.js?v=20261114-product-designer';
+import {mountResumeProfile} from './homepage-resume.js';
 import {mountPortfolioMotion} from './portfolio-motion.js?v=20261104-personal-space';
 import {mountCaseMotion} from './case-motion.js?v=20261103b';
 import {getWelcomeIntro} from './welcome-intro.js?v=20261114-product-designer';
@@ -118,7 +118,7 @@ async function start() {
   const contexts = {...CASE_CONTEXT, ...NORMAL_PROJECT_CONTEXT};
   const processes = {...PROJECT_PROCESS, ...NORMAL_PROJECT_PROCESS};
   const stories = {...CASE_STORIES, ...NORMAL_PROJECT_STORIES};
-  const filterFromUrl = () => normalizeProjectFilter(new URL(location.href).searchParams.get('filter') || 'all');
+  const filterFromUrl = () => normalizeProjectFilter(new URL(location.href).searchParams.get('filter') || 'featured');
   let active = filterFromUrl();
   let returnFocus = null;
   let returnScroll = 0;
@@ -140,7 +140,7 @@ async function start() {
 
   function projectUrl(id) {
     const url = new URL(location.href);
-    if (active === 'all') url.searchParams.delete('filter');
+    if (active === 'featured') url.searchParams.delete('filter');
     else url.searchParams.set('filter', active);
     url.hash = `project-${id}`;
     return url.pathname + url.search + url.hash;
@@ -199,16 +199,12 @@ async function start() {
       }
       const copy = node('div', undefined, link, 'project-copy');
       const context = contexts[project.id];
-      node('p', context?.type || project.subtitle, copy, 'project-meta');
       const heading = node('div', undefined, copy, 'project-heading');
       node('h3', project.title, heading).id = `title-${project.id}`;
       node('p', project.summary, copy, 'project-summary');
-      if (project.id !== 'dhan-drishti') node('p', projectContribution(project.id, context?.role || project.role), copy, 'project-contribution');
+      node('p', 'My role: ' + projectContribution(project.id, context?.role || project.role), copy, 'project-contribution');
+      if (context?.timeline) node('p', context.timeline, copy, 'card-timeline');
       node('span', 'Read case study', copy, 'project-case-label');
-      if (['connectaid', 'giggles'].includes(project.id)) {
-        const evidence = node('a', project.id === 'giggles' ? 'Follow one complete turn' : 'See what testing changed', article, 'project-evidence-link');
-        evidence.href = `#evidence-${project.id}`;
-      }
       link.addEventListener('click', event => {
         if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
         event.preventDefault();
@@ -227,7 +223,7 @@ async function start() {
     count.textContent = `${projects.length} ${projects.length === 1 ? 'project' : 'projects'} · ${label}`;
     if (updateUrl) {
       const url = new URL(location.href);
-      if (active === 'all') url.searchParams.delete('filter');
+      if (active === 'featured') url.searchParams.delete('filter');
       else url.searchParams.set('filter', active);
       url.hash = 'work';
       history.replaceState(null, '', url.pathname + url.search + url.hash);
