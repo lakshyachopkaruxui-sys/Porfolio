@@ -1,3 +1,4 @@
+import {copyText} from './clipboard-copy.js?v=20261110-contact-copy';
 import {projectContribution} from './project-card-copy.js?v=20261115-evidence';
 // This proposal consumes the audited catalog without changing shared source.
 import {CASE_CONTEXT, normalProject} from './case-context.js?v=20261109-evidence-pass';
@@ -98,6 +99,9 @@ async function start() {
   let currentProject = null;
   let disposeStory = null;
   let readerRevision = 0;
+  const shareStatus = document.querySelector('#case-link-status');
+  const manualLink = document.querySelector('#manual-case-link');
+  const linkField = manualLink.querySelector('input');
   const readingProgress = new Map();
   let previews = [];
   const artPath = (artifact, id) => NORMAL_PROJECT_ARTIFACTS[id]
@@ -218,6 +222,9 @@ async function start() {
     currentProject = project.id;
     const artifact = PROJECT_ARTIFACTS[id];
     const revision = ++readerRevision;
+    manualLink.hidden = true;
+    linkField.value = '';
+    shareStatus.textContent = '';
     content.replaceChildren();
     const title = node('h2', project.title, content);
     title.id = 'case-title';
@@ -342,9 +349,20 @@ async function start() {
     },
   }));
   document.querySelector('#copy-case-link').addEventListener('click', async () => {
-    const status = document.querySelector('#case-link-status');
-    try { await navigator.clipboard.writeText(location.href); status.textContent = 'Project link copied.'; }
-    catch { status.textContent = 'Copy the project link from your address bar.'; }
+    const revision = readerRevision;
+    const url = location.href;
+    const isCurrent = () => reader.open && revision === readerRevision;
+    const result = await copyText(url, {isCurrent});
+    if (!isCurrent()) return;
+    manualLink.hidden = result.status === 'copied';
+    if (manualLink.hidden) {
+      shareStatus.textContent = 'Project link copied.';
+      return;
+    }
+    linkField.value = url;
+    shareStatus.textContent = 'Project link selected. Use your device’s Copy command.';
+    linkField.focus();
+    linkField.select();
   });
   closeButton.addEventListener('click', closeProject);
   reader.addEventListener('cancel', event => { event.preventDefault(); closeProject(); });
