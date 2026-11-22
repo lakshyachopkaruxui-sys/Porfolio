@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-22T03:24:10.867Z",
+  "generatedAt": "2026-11-22T03:46:10.706Z",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 746,
-      "sha256": "739ec3f588b1ebe439c35a4188d92396318f391cfea8fd2877f2f94ab670f9e1"
+      "sha256": "a6ebedc89a8a8253a1a49081a06d9e20f77ecd4a484c9546c72df83ea36d2333"
     },
     {
       "path": "_redirects",
@@ -3125,7 +3125,7 @@
     {
       "path": "bicycle-world/dist/index.html",
       "size": 47405,
-      "sha256": "0d6da5c7ad46f89739ba70402d04c83d58f5e19695510940fabe976aa5d9a876"
+      "sha256": "6c624688be35c9869540eeb03b18ce5a36c8a1304c42776b2ddd492ad6d456aa"
     },
     {
       "path": "bicycle-world/dist/play-bundle.css",
@@ -3564,8 +3564,8 @@
     },
     {
       "path": "bicycle-world/dist/src/main.js",
-      "size": 97699,
-      "sha256": "e50aff270092d5479a3ad5da3367bb6dd94b49a05ab24686ff3a981169e2bb1e"
+      "size": 98134,
+      "sha256": "b1e97aa9dd3ae450fe3df5badbc12458fde56b4dacd5d3765ba201e191db4d27"
     },
     {
       "path": "bicycle-world/dist/src/map-guide.css",
@@ -3864,8 +3864,8 @@
     },
     {
       "path": "bicycle-world/dist/src/render-quality.js",
-      "size": 2850,
-      "sha256": "a96bc9d535699295b2cc6d32cda2d5b6ffdde562282d291c26a0a6e19ed664e5"
+      "size": 2849,
+      "sha256": "45f76e44fde16e92e7a298b239d98eed97d55e7bcb7a6a2c2d755d70da4de0a5"
     },
     {
       "path": "bicycle-world/dist/src/replacement-character-poses.js",
@@ -3884,8 +3884,8 @@
     },
     {
       "path": "bicycle-world/dist/src/ride-profile.js",
-      "size": 1201,
-      "sha256": "b8ccdae9c3e34c4412feb3d09aeed5eb60e32fa2b2fb75b5d938a0e79018ad76"
+      "size": 1739,
+      "sha256": "b596bddbe8f0ef583c03b8139e9affff79e01708b3b4d104a423571d1ea217b9"
     },
     {
       "path": "bicycle-world/dist/src/ride-review-progress.js",
@@ -4379,8 +4379,8 @@
     },
     {
       "path": "entrance/simple-analytics.js",
-      "size": 3425,
-      "sha256": "be603f94ef68c1cdc2aa86e490bbd3f092cba0ae78eea1bc151809997f1834fe"
+      "size": 3468,
+      "sha256": "1b4dd084e784bebd6ec4989609806d79ab93a7d599494f3eae24cba64d2500f3"
     },
     {
       "path": "entrance/site-shell.css",
@@ -7094,8 +7094,8 @@
     },
     {
       "path": "normal-portfolio/homepage-release.css",
-      "size": 11494,
-      "sha256": "5cd6a1a6f5d92574fa98ff9e35df433455b2f35fd8a0604b4f681371df9cfed1"
+      "size": 11856,
+      "sha256": "9eb43b36745b39a56d3b0f222fdc26ce4ca9fe40b3ea7944fa3f96030f0cf72f"
     },
     {
       "path": "normal-portfolio/homepage-resume.js",
@@ -7114,8 +7114,8 @@
     },
     {
       "path": "normal-portfolio/index.html",
-      "size": 39950,
-      "sha256": "8dc1c38859ea0bd045a911b827482c84dbdd9388ae10211ba217eeab2bce2d48"
+      "size": 40305,
+      "sha256": "8c34efa0415fec4a73d38670a53aa9ec5a1f5ecf0ce313daec7cc160a087afa1"
     },
     {
       "path": "normal-portfolio/jan-concept-data.js",
@@ -7209,8 +7209,8 @@
     },
     {
       "path": "normal-portfolio/portfolio-bundle.css",
-      "size": 229070,
-      "sha256": "ac15047ca9cd1b328bfda3ed49f965ad58900dbfe83ff53c00e5712f94f70582"
+      "size": 229432,
+      "sha256": "47d986b2986cf0cff3a76379e79190b188afeeb90b885f8c6280770e12ee7dfd"
     },
     {
       "path": "normal-portfolio/portfolio-extras.css",
@@ -7229,8 +7229,8 @@
     },
     {
       "path": "normal-portfolio/portfolio-motion.js",
-      "size": 14247,
-      "sha256": "7f6a91dd8ec30e5edf35f02b8066f342afa18e4dc95b2ad61cc9a98ac89a7b80"
+      "size": 14624,
+      "sha256": "a6d103ad3b0f72caddcdb8381cc1363285f8d1d6105af6b5eeca8691e4c3d25d"
     },
     {
       "path": "normal-portfolio/portfolio.js",

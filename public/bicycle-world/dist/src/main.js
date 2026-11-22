@@ -139,13 +139,14 @@ const startupController=new AbortController();
 let abandoned=false;
 // Optional local QA only. Normal portfolio visits never fetch the profiler.
 let rideProfile;
-const profileRequested=['localhost','127.0.0.1','[::1]'].includes(location.hostname)&&new URLSearchParams(location.search).get('rideProfile')==='1';
+const showRideMeter=new URLSearchParams(location.search).get('rideProfile')==='1';
+const profileRequested=['localhost','127.0.0.1','[::1]'].includes(location.hostname)&&showRideMeter;
 const companionLoadTimings=[];
 function recordCompanionLoad(event){
   if(companionLoadTimings.length>=160)companionLoadTimings.shift();
   companionLoadTimings.push(event);sceneHost.dataset.companionLoading=JSON.stringify(companionLoadTimings);
 }
-if(profileRequested){
+if(showRideMeter){
   import('./ride-profile.js').then(({createRideProfile})=>{if(!abandoned)rideProfile=createRideProfile();}).catch(error=>console.warn('Ride profiling is unavailable:',error));
 }
 let previousBicycleError=null;
@@ -269,6 +270,7 @@ function setBicycleLight(value){
 }
 function hasOverlay(){return Boolean(visitorUI?.invitationHost||visitorUI?.isOpen||reader.open||help.open||placeUI?.isOpen||projectUI?.isOpen||mapUI?.isOpen||personalRooms?.isOpen||worksExperience?.isOpen||oakLab?.isOpen||aboutExperience?.isOpen);}
 function ridingInputBlocked(){return failed||abandoned||document.hidden||cloudTransition.snapshot.active;}
+function setHidden(element,hidden){if(element.hidden!==hidden)element.hidden=hidden;}
 function syncRideUI(){
   playMusic.setActive(ready&&running&&!inPortfolio);
   const ui=hybridUIState({ready,inPortfolio,running,modalOpen:hasOverlay(),previewOpen:false,hasRoute:Boolean(target),speed:state.speed,nearStop,hintVisible:rideHintVisible,stopFocused:document.activeElement===$('stop-route'),coarse,inputBlocked:ridingInputBlocked()});
@@ -276,24 +278,26 @@ function syncRideUI(){
   document.body.classList.toggle('hybrid-intro',ui.intro&&$('failure').hidden);
   document.body.classList.toggle('hybrid-reading',ui.reading);
   if(!ui.controls||riverHop?.active||cloudTransition.snapshot.active)rideObjectives?.hide();
-  $('world-controls').hidden=!ui.controls;$('world-bottom').hidden=!ui.controls;
-  $('ride-guide').hidden=!ui.controls;$('ride-help').hidden=!ui.controls;$('back').hidden=!ui.controls;
+  setHidden($('world-controls'),!ui.controls);
+  setHidden($('world-bottom'),!ui.controls||!$('woody-guide').hidden);
+  setHidden($('ride-guide'),!ui.controls);setHidden($('ride-help'),!ui.controls);setHidden($('back'),!ui.controls);
   // Compute visibility once. Hiding and revealing this button on every frame
   // removes native focus and can cancel Enter, Space or a pointer activation.
   const guidePrompt=!nearStop&&nearTrailhead()&&ui.controls;
-  $('interact').hidden=!(ui.interact||guidePrompt);$('route-hint').hidden=!ui.hint;
+  setHidden($('interact'),!(ui.interact||guidePrompt));setHidden($('route-hint'),!ui.hint);
   if(guidePrompt&&$('interact').querySelector('.stop-caption').textContent!=='Garden guide'){
     $('interact').querySelector('.stop-caption').textContent='Garden guide';
     $('interact-label').innerHTML='Open the riding guide <kbd>Enter</kbd>';
   }
-  $('ride-status').hidden=!ui.status;$('stop-route').hidden=!ui.status;
+  setHidden($('ride-status'),!ui.status);setHidden($('stop-route'),!ui.status);
   const touchControls=$('touch-controls');
   if(!ui.touchControls&&!touchControls.hidden)touchControlInput?.clear();
-  touchControls.hidden=!ui.touchControls;touchControls.inert=!ui.touchControls;
+  setHidden(touchControls,!ui.touchControls);if(touchControls.inert!==!ui.touchControls)touchControls.inert=!ui.touchControls;
   document.body.classList.toggle('hybrid-touch-riding',ui.touchControls);
-  sceneHost.tabIndex=ready&&running&&!failed?0:-1;
-  sceneHost.inert=!ready||failed||cloudTransition.snapshot.active;
-  if(!$('woody-guide').hidden)$('world-bottom').hidden=true;
+  const tabIndex=ready&&running&&!failed?0:-1;
+  if(sceneHost.tabIndex!==tabIndex)sceneHost.tabIndex=tabIndex;
+  const inert=!ready||failed||cloudTransition.snapshot.active;
+  if(sceneHost.inert!==inert)sceneHost.inert=inert;
   const status=ui.kind==='riding'?(Math.abs(state.speed)<=.05?'Stopped · Ready to explore':coarse?'Riding freely':'Riding freely · Space to brake'):null;
   if(status&&$('ride-status-label').textContent!==status)$('ride-status-label').textContent=status;
   const stopLabel='Stop';
@@ -864,8 +868,10 @@ function selectGround(e){
 sceneHost.addEventListener('pointerdown',e=>{if(e.button!==0||!e.isPrimary)return;sceneHost.focus({preventScroll:true});pointerDown={x:e.clientX,y:e.clientY,id:e.pointerId};});
 sceneHost.addEventListener('pointerup',e=>{if(!pointerDown||e.pointerId!==pointerDown.id)return;const travel=Math.hypot(e.clientX-pointerDown.x,e.clientY-pointerDown.y);pointerDown=null;if(travel<=8)selectGround(e);});
 sceneHost.addEventListener('pointercancel',()=>pointerDown=null);
+let nextHoverCheck=0;
+const HOVER_INTERVAL_MS=80;
 sceneHost.addEventListener('pointermove',e=>{if(e.pointerType==='mouse')hoverPointer={x:e.clientX,y:e.clientY};});
-sceneHost.addEventListener('pointerleave',()=>{hoverPointer=null;sceneHost.style.cursor='';sceneHost.removeAttribute('title');});
+sceneHost.addEventListener('pointerleave',()=>{hoverPointer=null;nextHoverCheck=0;sceneHost.style.cursor='';sceneHost.removeAttribute('title');});
 
 function updateProjection(){const aspect=innerWidth/innerHeight;if(camera.isPerspectiveCamera)camera.aspect=aspect;else{camera.left=-cameraHeight*aspect/2;camera.right=cameraHeight*aspect/2;camera.top=cameraHeight/2;camera.bottom=-cameraHeight/2;}camera.updateProjectionMatrix();}
 let portraitWidth=0,portraitHeight=0;
@@ -1176,8 +1182,9 @@ function frame(now){
     if(running&&!riverHop?.active&&!cloudTransition.snapshot.active)rideObjectives?.update(state,camera,innerHeight,time,dt,reduced);
     else rideObjectives?.hide();
     world.wayfinding.update(camera,{follow:ridingView==='follow'});
-    gardenLighting.update(0,{paused:true,reduced,focus});
-    if(hoverPointer&&running){
+    // Pointer activation still performs an immediate, independent hit test.
+    if(hoverPointer&&running&&now>=nextHoverCheck){
+      nextHoverCheck=now+HOVER_INTERVAL_MS;
       const rect=renderer.domElement.getBoundingClientRect();
       if(rect.width&&rect.height){
         pointer.set((hoverPointer.x-rect.left)/rect.width*2-1,-(hoverPointer.y-rect.top)/rect.height*2+1);raycaster.setFromCamera(pointer,camera);

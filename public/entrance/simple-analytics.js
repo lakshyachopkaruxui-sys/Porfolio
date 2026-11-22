@@ -40,7 +40,7 @@
     if (link.hasAttribute('download') && url.origin === location.origin &&
         /\/Lakshya-Chopkar-(?:Product|UX)-Designer-Resume\.pdf$/i.test(url.pathname)) {
       send('resume_download', 'resume');
-    } else if (url.protocol === 'mailto:') send('contact_click', 'email');
+    } else if (url.protocol === 'mailto:' || link.hasAttribute('data-project-email')) send('contact_click', 'email');
     else if (url.protocol === 'tel:') send('contact_click', 'phone');
     else if (/(^|\.)linkedin\.com$/i.test(url.hostname) && /^\/in\/lakshyachopkar\/?$/i.test(url.pathname)) send('contact_click', 'linkedin');
     else if (/(^|\.)behance\.net$/i.test(url.hostname) && /^\/lakshyachopkaruiux\/?$/i.test(url.pathname)) send('contact_click', 'behance');

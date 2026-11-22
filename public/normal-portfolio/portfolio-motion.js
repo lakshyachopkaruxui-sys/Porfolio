@@ -14,6 +14,7 @@ export function mountPortfolioMotion() {
   const effects = new Map();
   const listeners = [];
   const pending = new Set();
+  const intersecting = new Set();
   const seen = new WeakSet();
   let observer;
   let destroyed = false;
@@ -153,6 +154,7 @@ export function mountPortfolioMotion() {
     if (started) {
       seen.add(element);
       pending.delete(element);
+      intersecting.delete(element);
       observer?.unobserve(element);
     }
     return started;
@@ -164,13 +166,13 @@ export function mountPortfolioMotion() {
   function sweep() {
     sweepFrame = 0;
     let index = 0;
-    for (const element of pending) {
-      if (!element.isConnected) { pending.delete(element); observer?.unobserve(element); continue; }
+    for (const element of observer ? intersecting : pending) {
+      if (!element.isConnected) { pending.delete(element); intersecting.delete(element); observer?.unobserve(element); continue; }
       if (eligible(element)) reveal(element, Math.min(index++ * 60, 180));
     }
   }
   function scheduleSweep() {
-    if (!destroyed && !sweepFrame) sweepFrame = win.requestAnimationFrame(sweep);
+    if (!destroyed && !sweepFrame && (observer ? intersecting.size : pending.size)) sweepFrame = win.requestAnimationFrame(sweep);
   }
   function observe(scope = doc) {
     if (destroyed) return;
@@ -187,6 +189,8 @@ export function mountPortfolioMotion() {
     observer = new win.IntersectionObserver(entries => {
       let index = 0;
       for (const entry of entries) {
+        if (entry.isIntersecting && pending.has(entry.target)) intersecting.add(entry.target);
+        else intersecting.delete(entry.target);
         // isIntersecting is also true for a single visible pixel.
         if (!entry.isIntersecting || entry.intersectionRatio < .18 || !pending.has(entry.target)) continue;
         if (eligible(entry.target)) reveal(entry.target, Math.min(index++ * 60, 180));
@@ -200,6 +204,7 @@ export function mountPortfolioMotion() {
       const rect = visibleRect(card);
       if (rect) before.set(card.dataset.project, rect);
       pending.delete(card);
+      intersecting.delete(card);
       observer?.unobserve(card);
     }
     stopEffects(element => !element.isConnected || grid.contains(element));
@@ -292,6 +297,7 @@ export function mountPortfolioMotion() {
     if (sweepFrame) win.cancelAnimationFrame(sweepFrame);
     observer?.disconnect();
     pending.clear();
+    intersecting.clear();
     for (const remove of listeners) remove();
   }
   return {intro, observe, captureProjects, refreshProjects, replay, cancel, destroy};

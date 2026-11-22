@@ -250,3 +250,7 @@ html[data-normal-theme="slate"] :is(#top .hero-primary, .portfolio-primary-actio
 #explore-play .play-invitation-copy { justify-content: flex-end; }
 
 #resources .resource-practice .resources-actions { margin-top: 12px; }
+
+.project-email-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+#contact .project-email-actions a { display: inline-flex; align-items: center; min-height: 44px; box-sizing: border-box; }
+#contact .project-email-actions .email-app-link { background: transparent; color: var(--ink); text-decoration: underline; padding-inline: 0; }

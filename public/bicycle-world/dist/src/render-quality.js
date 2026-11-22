@@ -5,8 +5,8 @@ const LEVELS=Object.freeze([
   Object.freeze({level:'balanced',maxPixelRatio:1.25,pixelBudget:2_200_000,shadowSize:1024,ambientMotion:false}),
   Object.freeze({level:'light',maxPixelRatio:1,pixelBudget:1_500_000,shadowSize:1024,ambientMotion:false}),
 ]);
-const WARMUP_MS=2500,WINDOW_MS=3000,MIN_SAMPLES=30;
-const SLOW_FRAME_MS=30,MIN_MEAN_MS=32,SLOW_SHARE=.75,MAX_SAMPLE_MS=500;
+const WARMUP_MS=1500,WINDOW_MS=2000,MIN_SAMPLES=30;
+const SLOW_FRAME_MS=24,MIN_MEAN_MS=24,SLOW_SHARE=.5,MAX_SAMPLE_MS=500;
 
 /** Small, downward-only automatic quality policy for active rendering.
  * `sample` consumes raw RAF intervals, never the clamped simulation timestep.
