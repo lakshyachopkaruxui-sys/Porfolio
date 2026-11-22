@@ -17,8 +17,21 @@ export const PORTFOLIO_CSS_SOURCES = Object.freeze([
 ]);
 
 const ORIGIN = 'https://portfolio.invalid';
-const INDEX_ROUTE = '/normal-portfolio/index.html';
-const BUNDLE_ROUTE = '/normal-portfolio/portfolio-bundle.css';
+const PLAY_CSS_SOURCES = Object.freeze([
+  'src/style.css', 'src/destinations.css', 'src/foundation.css',
+  'src/exploration.css', 'src/hobby-interactions.css', 'src/riding.css',
+  'src/diegetic.css', 'src/hybrid-ui.css', 'src/welcome-fonts.css',
+  'src/welcome.css', 'src/clouds.css', 'src/mobile-entry.css',
+  'src/play-typography.css', 'src/garden-polish.css', 'src/collection-experience.css',
+  'src/works-experience.css', 'src/personal-rooms.css', 'src/cloud-photo-gallery.css',
+  'src/listening-room.css', 'src/garba-room.css', 'src/pokemon-room.css',
+  'src/oak-lab.css', 'src/about-experience.css', 'src/about-journal-reader.css',
+  'src/play-music.css', 'src/identity.css', 'src/play-controls.css',
+  'src/map-guide.css', 'src/riding-options.css', 'src/mode-selector.css',
+  'src/play-navigation-trial.css', 'src/play-overlay-motion.css', 'src/river-hop.css',
+  'src/play-interface-controls.css', 'src/visitor-board.css', 'src/award-play-craft.css',
+  'src/woody-tour.css',
+]);
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const attributes = tag => Object.fromEntries([...tag.matchAll(/([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/g)].map(m => [m[1].toLowerCase(), m[2] ?? m[3]]));
 
@@ -50,14 +63,14 @@ function valueOf(raw) {
   return value;
 }
 
-function rebaseURL(raw, sourceRoute) {
+function rebaseURL(raw, sourceRoute, bundleRoute) {
   const value = valueOf(raw);
   if (!value || /^(?:[a-z][a-z\d+.-]*:|\/|#)/i.test(value)) return raw;
   // A general CSS escape decoder is intentionally outside this small bundler.
   // Fail rather than silently changing the destination of an escaped URL.
   if (value.includes('\\')) throw new Error(`Unsupported escaped CSS URL in ${sourceRoute}`);
   const resolved = new URL(value, ORIGIN + sourceRoute);
-  const relative = path.posix.relative(path.posix.dirname(BUNDLE_ROUTE), resolved.pathname);
+  const relative = path.posix.relative(path.posix.dirname(bundleRoute), resolved.pathname);
   const url = relative + resolved.search + resolved.hash;
   return JSON.stringify(url.startsWith('.') ? url : './' + url);
 }
@@ -68,16 +81,26 @@ function rebaseURL(raw, sourceRoute) {
  * Conditional imports are rejected rather than changing layer/media semantics.
  */
 export async function bundlePortfolioCSS({siteRoot, html, write = true} = {}) {
+  return bundleStylesheets({siteRoot, html, write, directory: 'normal-portfolio', name: 'portfolio-bundle.css', sourceFiles: PORTFOLIO_CSS_SOURCES});
+}
+
+export function bundlePlayCSS({siteRoot, html, write = true}) {
+  return bundleStylesheets({siteRoot, html, write, directory: 'bicycle-world/dist', name: 'play-bundle.css', sourceFiles: PLAY_CSS_SOURCES});
+}
+
+async function bundleStylesheets({siteRoot, html, write, directory, name, sourceFiles}) {
+  const indexRoute = '/' + directory + '/index.html';
+  const bundleRoute = '/' + directory + '/' + name;
   if (!siteRoot) throw new Error('siteRoot is required.');
   const root = path.resolve(siteRoot);
   const publicRoot = path.join(root, 'public');
-  const indexFile = path.join(publicRoot, 'normal-portfolio', 'index.html');
+  const indexFile = path.join(publicRoot, directory, 'index.html');
   html ??= await fs.readFile(indexFile, 'utf8');
   const links = [...html.matchAll(/<link\b[^>]*>/gi)].map(match => ({match, attrs: attributes(match[0])}))
     .filter(({attrs}) => attrs.rel?.toLowerCase().split(/\s+/).includes('stylesheet'));
-  const routes = links.map(({attrs}) => new URL(attrs.href || '', ORIGIN + INDEX_ROUTE));
-  const alreadyBundled = routes.length === 1 && routes[0].origin === ORIGIN && routes[0].pathname === BUNDLE_ROUTE;
-  const expected = PORTFOLIO_CSS_SOURCES.map(file => '/normal-portfolio/' + file);
+  const routes = links.map(({attrs}) => new URL(attrs.href || '', ORIGIN + indexRoute));
+  const alreadyBundled = routes.length === 1 && routes[0].origin === ORIGIN && routes[0].pathname === bundleRoute;
+  const expected = sourceFiles.map(file => '/' + directory + '/' + file);
   if (!alreadyBundled && (routes.length !== expected.length || routes.some((url, i) => url.origin !== ORIGIN || url.pathname !== expected[i]))) {
     throw new Error('Stylesheet links differ from the approved source order; update the explicit source manifest deliberately.');
   }
@@ -149,7 +172,7 @@ export async function bundlePortfolioCSS({siteRoot, html, write = true} = {}) {
       if (/^@namespace\b/i.test(css.slice(i))) throw new Error(`CSS namespaces need explicit bundling support in ${route}`);
       if (/^url\s*\(/i.test(css.slice(i)) && (i === 0 || !/[\w-]/.test(css[i - 1]))) {
         const opening = css.indexOf('(', i), end = urlEnd(css, opening + 1);
-        output += css.slice(i, opening + 1) + rebaseURL(css.slice(opening + 1, end), route) + ')';
+        output += css.slice(i, opening + 1) + rebaseURL(css.slice(opening + 1, end), route, bundleRoute) + ')';
         i = end + 1; prefixOnly = false; continue;
       }
       output += css[i];
@@ -161,9 +184,10 @@ export async function bundlePortfolioCSS({siteRoot, html, write = true} = {}) {
 
   const chunks = [];
   for (const route of expected) chunks.push(await compile(route));
-  const css = '/* Generated from the approved Normal stylesheet order. Edit source files, then rebuild. */\n' + chunks.join('\n');
+  const mode = directory === 'normal-portfolio' ? 'Normal' : 'Play';
+  const css = `/* Generated from the approved ${mode} stylesheet order. Edit source files, then rebuild. */\n` + chunks.join('\n');
   const sha256 = hash(css);
-  const href = './portfolio-bundle.css?v=' + sha256.slice(0, 16);
+  const href = './' + name + '?v=' + sha256.slice(0, 16);
   const replacement = `<link rel="stylesheet" href="${href}">`;
   let updatedHTML = html;
   // Replace in reverse so original match offsets remain valid. Scripts and all
@@ -172,14 +196,14 @@ export async function bundlePortfolioCSS({siteRoot, html, write = true} = {}) {
     const match = links[i].match;
     updatedHTML = updatedHTML.slice(0, match.index) + (i === 0 ? replacement : '') + updatedHTML.slice(match.index + match[0].length);
   }
-  const relativePath = BUNDLE_ROUTE.slice(1);
+  const relativePath = bundleRoute.slice(1);
   if (write) await fs.writeFile(path.join(publicRoot, relativePath), css);
   return {
     html: updatedHTML,
     css,
     bundle: {path: relativePath, href, bytes: Buffer.byteLength(css), sha256},
-    sourceLinks: [...PORTFOLIO_CSS_SOURCES],
+    sourceLinks: [...sourceFiles],
     sources,
-    directStylesheetRequests: {before: PORTFOLIO_CSS_SOURCES.length, after: 1},
+    directStylesheetRequests: {before: sourceFiles.length, after: 1},
   };
 }

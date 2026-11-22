@@ -1,4 +1,3 @@
-@import url("./control-sizing.css");
 /* Play-only softly modelled controls. Normal portfolio does not load this file. */
 body.hybrid-world {
   --control-face-start: #fffdf5;

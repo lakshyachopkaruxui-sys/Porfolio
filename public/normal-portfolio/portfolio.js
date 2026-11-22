@@ -1,10 +1,7 @@
 import {projectContribution} from './project-card-copy.js?v=20261115-evidence';
 // This proposal consumes the audited catalog without changing shared source.
 import {CASE_CONTEXT, normalProject} from './case-context.js?v=20261109-evidence-pass';
-import {PROJECT_PROCESS} from './process-data.js?v=20261109-evidence-pass';
 import {mountToolkit} from './homepage-toolkit.js';
-import {CASE_STORIES} from './case-stories.js?v=20261109-evidence-pass';
-import {renderCaseStudy} from './case-reader.js?v=20261110-approved-covers';
 import {mountPortfolioAssistant, mountPixelBreak} from './portfolio-extras.js?v=20261113-assistant-retry';
 import {mountResumeProfile} from './homepage-resume.js';
 import {mountPortfolioMotion} from './portfolio-motion.js?v=20261104-personal-space';
@@ -12,10 +9,10 @@ import {mountCaseMotion} from './case-motion.js?v=20261103b';
 import {getWelcomeIntro} from './welcome-intro.js?v=20261122-soft';
 import {mountPhotoCarousel} from './photo-carousel.js?v=20261104-carousel-fast';
 import {
-  NORMAL_PROJECTS, NORMAL_PROJECT_CONTEXT, NORMAL_PROJECT_PROCESS,
-  NORMAL_PROJECT_STORIES, NORMAL_PROJECT_ARTIFACTS, NORMAL_PROJECT_CATEGORIES,
+  NORMAL_PROJECTS, NORMAL_PROJECT_CONTEXT, READER_URLS,
+  NORMAL_PROJECT_ARTIFACTS, NORMAL_PROJECT_CATEGORIES,
   PROJECT_COVERS,
-} from './normal-projects.js?v=20261112-ar-vr';
+} from './project-catalogue.js';
 import {mountGigglesCover} from './cover-artwork.js?v=20261108-care-mockups';
 import {mountProjectPreview} from './project-preview.js?v=20261110-space';
 
@@ -62,28 +59,6 @@ welcome.onFinish(({shown, reason}) => {
 const caseMotion = optionalFeature(() => mountCaseMotion(reader), {cancel() {}, capture() {}, enter() {}});
 const PROJECT_ORDER = ['connectaid', 'giggles', 'pixel-mania', 'syringe', 'workplace-mode', 'jan-aushadhi', 'tear', 'dhan-drishti'];
 const FEATURED_PROJECTS = new Set(['connectaid', 'giggles', 'pixel-mania', 'tear']);
-const CARD_SUMMARIES = {
-  tear: 'Pinch a seam. Pull reality apart. A dream journey through wonder, fear and uncertain relief.',
-  connectaid: 'One place to book care, order medicines and keep health records.',
-  giggles: 'A learning game for autistic children that connects physical play with questions and feedback on a phone.',
-  'pixel-mania': 'An open-ended drawing board built from one five-colour interaction.',
-  syringe: 'A syringe redesign focused on grip, thumb support and scale readability.',
-  'workplace-mode': 'An in-car interface concept shaped by how private and commercial drivers use screens.',
-};
-const CARD_CATEGORIES = {
-  tear: 'Immersive interaction · Storytelling',
-  connectaid: 'Healthcare · App design', giggles: 'Learning · Physical–digital play',
-  'pixel-mania': 'Interaction · Visual system', syringe: 'Ergonomics · Physical product',
-  'workplace-mode': 'UX research · Interface concept',
-};
-const CARD_DETAILS = {
-  tear: ['My part: concept, gesture, emotional journey and art direction.', 'Working prototype · Informal feedback-led iteration'],
-  connectaid: ['My part: core design system and remote testing coordination.', '6 participants · 6 team refinements'],
-  giggles: ['My part: electronics, game logic and the working prototype.', 'Best Project · Meraki'],
-  'pixel-mania': ['My part: visual system, interface and interaction prototyping.', 'Tried by visitors at the college exhibition'],
-  syringe: ['My part: concept development and shared research/3D printing. Maya modelling by my teammate.', '3D-printed prototype'],
-  'workplace-mode': ['My part: research, synthesis and the interaction concept.', '34 surveys · 13 interviews'],
-};
 const RELATED_PROJECTS = {
   'dhan-drishti': ['workplace-mode', 'jan-aushadhi'],
   tear: ['pixel-mania', 'giggles'],
@@ -116,14 +91,13 @@ async function start() {
   const PROJECTS = [...sharedProjects, ...NORMAL_PROJECTS];
   const PROJECT_ARTIFACTS = {...sharedArtifacts, ...NORMAL_PROJECT_ARTIFACTS};
   const contexts = {...CASE_CONTEXT, ...NORMAL_PROJECT_CONTEXT};
-  const processes = {...PROJECT_PROCESS, ...NORMAL_PROJECT_PROCESS};
-  const stories = {...CASE_STORIES, ...NORMAL_PROJECT_STORIES};
   const filterFromUrl = () => normalizeProjectFilter(new URL(location.href).searchParams.get('filter') || 'featured');
   let active = filterFromUrl();
   let returnFocus = null;
   let returnScroll = 0;
   let currentProject = null;
   let disposeStory = null;
+  let readerRevision = 0;
   const readingProgress = new Map();
   let previews = [];
   const artPath = (artifact, id) => NORMAL_PROJECT_ARTIFACTS[id]
@@ -202,7 +176,7 @@ async function start() {
       const heading = node('div', undefined, copy, 'project-heading');
       node('h3', project.title, heading).id = `title-${project.id}`;
       node('p', project.summary, copy, 'project-summary');
-      node('p', 'My role: ' + projectContribution(project.id, context?.role || project.role), copy, 'project-contribution');
+      node('p', projectContribution(project.id, context?.role || project.role), copy, 'project-contribution');
       if (context?.timeline) node('p', context.timeline, copy, 'card-timeline');
       node('span', 'Read case study', copy, 'project-case-label');
       link.addEventListener('click', event => {
@@ -240,19 +214,49 @@ async function start() {
     caseMotion.cancel();
     const project = normalProject(sourceProject);
     if (reader.open && currentProject) readingProgress.set(currentProject, reader.scrollTop);
-    disposeStory?.();
+    disposeStory?.(); disposeStory = null;
     currentProject = project.id;
     const artifact = PROJECT_ARTIFACTS[id];
+    const revision = ++readerRevision;
+    content.replaceChildren();
+    const title = node('h2', project.title, content);
+    title.id = 'case-title';
+    const loading = node('p', 'Opening case study…', content);
+    loading.setAttribute('role', 'status');
+    document.querySelector('#reader-project-label').textContent = project.title;
+    if (!reader.open) {
+      try { reader.showModal(); }
+      catch { location.assign(summaryURL); return true; }
+    }
+    caseTitles.show(project.title);
+    void fillReader({id, project, artifact, imageOrigin, summaryURL, revision});
+    return true;
+  }
+
+  async function fillReader({id, project, artifact, imageOrigin, summaryURL, revision}) {
+    const isCurrent = () => reader.open && readerRevision === revision;
     let rendered = false;
-    try { disposeStory = renderCaseStudy({
-      reader, content, project, context: contexts[id], process: processes[id],
-      story: stories[id], artifact, artifactUrl: artPath(artifact, id),
-      related: (RELATED_PROJECTS[id] || []).map(relatedId => {
-        const related = PROJECTS.find(item => item.id === relatedId);
-        return related ? {...related, cover: PROJECT_COVERS[relatedId], href: projectUrl(relatedId)} : null;
-      }).filter(Boolean),
-      onRelated(nextId) { readingProgress.delete(nextId); history.replaceState(history.state, '', projectUrl(nextId)); openProject(nextId); },
-    }); rendered = true; } catch (error) {
+    try {
+      const [{renderCaseStudy}, {story, process}] = await Promise.all([
+        import('./case-reader.js?v=20261110-approved-covers'),
+        fetch(new URL(READER_URLS[id], import.meta.url)).then(response => {
+          if (!response.ok) throw new Error('Case study data unavailable: ' + response.status);
+          return response.json();
+        }),
+      ]);
+      if (!isCurrent()) return;
+      disposeStory = renderCaseStudy({
+        reader, content, project, context: contexts[id], process,
+        story, artifact, artifactUrl: artPath(artifact, id),
+        related: (RELATED_PROJECTS[id] || []).map(relatedId => {
+          const related = PROJECTS.find(item => item.id === relatedId);
+          return related ? {...related, cover: PROJECT_COVERS[relatedId], href: projectUrl(relatedId)} : null;
+        }).filter(Boolean),
+        onRelated(nextId) { readingProgress.delete(nextId); history.replaceState(history.state, '', projectUrl(nextId)); openProject(nextId); },
+      });
+      rendered = true;
+    } catch (error) {
+      if (!isCurrent()) return;
       console.error('This case study could not render.', error);
       disposeStory = null;
       content.replaceChildren();
@@ -260,20 +264,14 @@ async function start() {
       node('p', 'This case study could not open. You can read its project summary instead.', content);
       node('a', 'Read project summary', content).href = summaryURL;
     }
-    document.querySelector('#reader-project-label').textContent = project.title;
-    if (!reader.open) {
-      try { reader.showModal(); }
-      catch { disposeStory?.(); disposeStory = null; location.assign(summaryURL); return true; }
-    }
-    caseTitles.show(project.title);
     reader.scrollTop = readingProgress.get(id) || 0;
     content.querySelector('#case-title')?.focus({preventScroll: true});
     caseMotion.enter(imageOrigin);
     if (rendered) { try { document.dispatchEvent(new CustomEvent('portfolio:project-open', {detail:{id:project.id}})); } catch { /* Analytics is optional. */ } }
-    return true;
   }
 
   function restorePage() {
+    readerRevision++;
     caseTitles.restore();
     if (!reader.open) return;
     caseMotion.cancel();

@@ -1,5 +1,6 @@
+import {buildReaderData} from './build-reader-data.mjs';
 import {prerenderPortfolio} from './prerender-portfolio.mjs';
-import {bundlePortfolioCSS} from './bundle-portfolio-css.mjs';
+import {bundlePortfolioCSS, bundlePlayCSS} from './bundle-portfolio-css.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -59,6 +60,7 @@ export async function configureSite({siteRoot,env = process.env} = {}) {
   if (!siteRoot) throw Error('A publishing repository is required.');
   const config = resolveConfiguration(JSON.parse(await fs.readFile(path.join(siteRoot,'config.json'),'utf8')),env);
   const publicRoot = path.join(siteRoot,'public');
+  await buildReaderData(publicRoot);
   const files = await listFiles(publicRoot);
   const sitemap = [];
   const hashes = new Set();
@@ -69,6 +71,9 @@ export async function configureSite({siteRoot,env = process.env} = {}) {
     if (file === 'normal-portfolio/index.html') {
       html = await prerenderPortfolio({html, publicRoot});
       ({html} = await bundlePortfolioCSS({siteRoot, html}));
+    }
+    if (file === 'bicycle-world/dist/index.html') {
+      ({html} = await bundlePlayCSS({siteRoot, html}));
     }
     html = await versionPlayAssets({html, publicRoot, htmlPath:file});
     // Some existing generated attribution pages use a valid implicit HTML head.
