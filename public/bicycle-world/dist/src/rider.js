@@ -163,6 +163,15 @@ export function createRider(THREE) {
   tube(point(-0.015, 0.017, 0.013), point(0, 0.017, -0.012), 0.0035, m.sidewall, routeCue);
   tube(point(0, 0.017, -0.012), point(0.015, 0.017, 0.013), 0.0035, m.sidewall, routeCue);
   routeCue.visible = false;
+  // Amber double chevrons on the cycle computer distinguish boost from the route arrow.
+  const boostCue = new THREE.Group();
+  boostCue.name = 'Cycle computer boost indicator';
+  cycleComputer.add(boostCue);
+  const amber = material('#ffcd69', {emissive: '#ffab38', emissiveIntensity: 1.1});
+  for (const z of [-0.023, 0.012]) {
+    tube(point(-0.024, 0.02, z + 0.018), point(0, 0.02, z - 0.008), 0.006, amber, boostCue);
+    tube(point(0, 0.02, z - 0.008), point(0.024, 0.02, z + 0.018), 0.006, amber, boostCue);
+  }
   const frontLamp = sphere([0, 0.05, -0.13], [0.035, 0.035, 0.035], m.shoes, steeringRig);
   frontLamp.name = 'Bicycle headlight';
 
@@ -320,8 +329,9 @@ export function createRider(THREE) {
   };
   const plantedContact=new THREE.Vector3();
   const gripRotation=new THREE.Quaternion();
-  function update({ mouthOpen = 0, speed = 0, steering = 0, wheelSteering, movingIntent = false, turnIntent = 0, groundHeight = () => 0, time = 0, dt = 1 / 60, pedaling = true, reduced = false, feedback = {}, navigationActive = false, poseModifier } = {}) {
-    routeCue.visible = Boolean(navigationActive);
+  function update({ mouthOpen = 0, speed = 0, steering = 0, wheelSteering, movingIntent = false, turnIntent = 0, groundHeight = () => 0, time = 0, dt = 1 / 60, pedaling = true, reduced = false, feedback = {}, navigationActive = false, boostActive = false, poseModifier } = {}) {
+    routeCue.visible = Boolean(navigationActive) && !boostActive;
+    boostCue.visible = Boolean(boostActive);
     // Match the world's bounded frame delta so wheel travel remains consistent
     // on a slower frame, while still limiting resumed-tab animation jumps.
     const delta = Math.min(Math.max(dt, 0), 0.12);

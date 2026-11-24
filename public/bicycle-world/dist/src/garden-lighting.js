@@ -1,10 +1,8 @@
 import * as THREE from 'three';
 import {GARDEN_PALETTE} from './garden-palette.js';
 
-const MANUAL_SECONDS=4,CYCLE_SECONDS=270,MAX_STEP=.1;
-// A minute of settled daylight before a 54-second sunset. Night and dawn keep
-// their existing lengths; only the initial day and sunset gain a little time.
-const DAY_END=60,NIGHT_START=114,NIGHT_END=174,DAWN_END=246;
+const MANUAL_SECONDS=4,CYCLE_SECONDS=75,MAX_STEP=.1;
+const DAY_END=12,NIGHT_START=30,NIGHT_END=54,DAWN_END=CYCLE_SECONDS;
 const clamp=value=>Math.max(0,Math.min(1,value));
 const smooth=value=>{const t=clamp(value);return t*t*(3-2*t);};
 const blendColour=(target,first,last,mix)=>mix===0?target.copy(first):mix===1?target.copy(last):target.lerpColors(first,last,mix);
