@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T08:09:55.321Z",
+  "generatedAt": "2026-11-24T08:12:45.310Z",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -3135,7 +3135,7 @@
     {
       "path": "bicycle-world/dist/exhibition.html",
       "size": 21493,
-      "sha256": "82c46f30a3d9cf9c6971f5bba76670238430f262142b13e340960a22a980c2d6"
+      "sha256": "de8120666b42eba98880ea950ab0899d28c0e5a3f589c2b0f83411ebde56c4c4"
     },
     {
       "path": "bicycle-world/dist/exhibition.js",
@@ -3144,8 +3144,8 @@
     },
     {
       "path": "bicycle-world/dist/index.html",
-      "size": 47798,
-      "sha256": "7e4d07c5b19f06b4c8856135eacf032eadadbc044d128f8bb12b70acf18f8f2a"
+      "size": 47867,
+      "sha256": "4360fe64e1f85c2f83d769d5dbf3d648866fa33cfe75dc7ab5c5e625c95a6239"
     },
     {
       "path": "bicycle-world/dist/photo-renderer.js",
