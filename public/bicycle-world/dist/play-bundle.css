@@ -2698,6 +2698,10 @@ html:root body.hybrid-world #garba-experience .gr-header .mode-selector.mode-swi
 
 :is(#personal-experience,#oak-lab) #pokemon-experience .pgr-collection-controls{bottom:54px}
 
+/* A short laptop viewport must keep exits and page controls reachable. */
+:is(#personal-experience,#oak-lab) #pokemon-experience :is(.pgr-index,.pgr-viewer){overflow-y:auto;overscroll-behavior:contain}
+:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-grid{min-height:min(130px,28vh)}
+
 /* Source: bicycle-world/dist/src/oak-lab.css */
 /* Oak's lab: one guided action, a visible journey and an inspectable build table. */
 #oak-lab{--oak-ink:#273f35;--oak-paper:#fff8e5;--oak-green:#426956;--oak-mint:#d8e7cf;position:fixed;inset:0;width:100%;height:100dvh;max-width:none;max-height:none;padding:0;margin:0;border:0;background:#d9e5d8;color:var(--oak-ink);font-family:'DM Sans',sans-serif;overflow:hidden;}
@@ -5004,6 +5008,23 @@ body.hybrid-world #personal-experience[data-kind="cloud"] .personal-chapters {
   grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
   align-items: stretch;
 }
+
+body.hybrid-world button[data-room-map] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45em;
+  min-height: 44px;
+  padding: .5em .9em;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  background: #f8faf4;
+  color: #244641;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+body.hybrid-world button[data-room-map] kbd {font: inherit; font-size: .85em;}
 
 /* Source: bicycle-world/dist/src/play-overlay-motion.css */
 /* Prompt Motion's reviewed transfer is state continuity, not a film or loop:

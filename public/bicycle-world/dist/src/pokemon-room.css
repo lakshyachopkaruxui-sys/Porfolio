@@ -125,3 +125,7 @@
 }
 
 :is(#personal-experience,#oak-lab) #pokemon-experience .pgr-collection-controls{bottom:54px}
+
+/* A short laptop viewport must keep exits and page controls reachable. */
+:is(#personal-experience,#oak-lab) #pokemon-experience :is(.pgr-index,.pgr-viewer){overflow-y:auto;overscroll-behavior:contain}
+:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-grid{min-height:min(130px,28vh)}

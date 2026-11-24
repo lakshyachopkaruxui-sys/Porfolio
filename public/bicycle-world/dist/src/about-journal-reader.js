@@ -1,3 +1,4 @@
+import {roomMapButton} from './room-map-navigation.js';
 import {journalAtoms,balanceJournalPages} from './about-journal-pagination.js';
 let readerSerial=0;
 
@@ -8,14 +9,14 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
   const id=`about-journal-${++readerSerial}`,root=doc.createElement('section');
   root.className='about-journal-reader';root.hidden=true;root.tabIndex=-1;
   root.setAttribute('role','region');root.setAttribute('aria-label',content?.title||'Lakshya’s notebook');
-  root.innerHTML=`<nav class="journal-chapters" aria-label="Notebook sections" data-journal-tabs><label class="journal-section-jump" for="${id}-section">Section<select id="${id}-section" data-journal-jump aria-controls="${id}-spread"></select></label><button type="button" data-journal-close>Back to studio</button></nav>
+  root.innerHTML=`<nav class="journal-chapters" aria-label="Notebook sections" data-journal-tabs><label class="journal-section-jump" for="${id}-section">Section<select id="${id}-section" data-journal-jump aria-controls="${id}-spread"></select></label>${roomMapButton}<button type="button" data-journal-close>Back to studio</button></nav>
     <div class="journal-book-stage" data-journal-stage><div class="journal-book" data-journal-book role="region" id="${id}-spread">
       <article class="journal-page journal-page-left" data-journal-left tabindex="0"></article>
       <article class="journal-page journal-page-right" data-journal-right tabindex="0"></article>
     </div><div class="journal-binding" aria-hidden="true"></div></div>
     <footer class="journal-footer"><nav class="journal-page-navigation" aria-label="Turn notebook pages"><button type="button" data-journal-prev><span aria-hidden="true">← </span>Previous pages</button><div class="journal-page-position"><p id="${id}-section-title" data-journal-section></p><p data-journal-count aria-live="polite"></p><p class="journal-key-hint">A / D or ← / → turn pages · Esc returns to studio</p></div><button type="button" data-journal-next>Next pages<span aria-hidden="true"> →</span></button></nav></footer>
     <section id="about-journal-photo" class="journal-photo-viewer" data-journal-viewer aria-labelledby="${id}-photo-title" tabindex="-1" hidden>
-      <header><div><p>FROM MY NOTEBOOK</p><h2 id="${id}-photo-title" data-journal-photo-title></h2></div><button type="button" data-journal-photo-close>Back to the notebook</button></header>
+      <header><div><p>FROM MY NOTEBOOK</p><h2 id="${id}-photo-title" data-journal-photo-title></h2></div>${roomMapButton}<button type="button" data-journal-photo-close>Back to the notebook</button></header>
       <figure><img decoding="async" data-journal-full-photo alt=""><figcaption data-journal-photo-caption></figcaption></figure>
       <p class="journal-photo-status" data-journal-photo-status role="status" aria-live="polite"></p><button type="button" class="journal-photo-retry" data-journal-photo-retry hidden>Retry photograph</button>
       <footer><button type="button" data-journal-photo-prev>Previous photo</button><p data-journal-photo-count aria-live="polite"></p><button type="button" data-journal-photo-next>Next photo</button></footer>

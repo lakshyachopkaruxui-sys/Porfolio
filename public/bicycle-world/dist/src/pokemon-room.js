@@ -1,3 +1,4 @@
+import {roomMapButton} from './room-map-navigation.js';
 import {decorateModeSelectors} from './mode-selector.js';
 import * as THREE from 'three';
 import {RoundedBoxGeometry} from 'three/addons/geometries/RoundedBoxGeometry.js';
@@ -10,7 +11,7 @@ import {getHorizontalNavigation,getBoundaryNavigation,isKeyboardShortcutBlocked,
 
 /** An imagined setting for a real memory. The parent owns the renderer/loop;
  * this room owns its scenery and one optional, independently loaded companion. */
-export function createPokemonRoom({renderer,container,isReduced,onClose=()=>{},onPortfolio=()=>{},loadAsset=loadPokemonAsset,poseFactory=createPikachuGait,collection=POKEMON_COLLECTION,onGardenMap,returnLabel="Back to Hobbies"}={}){
+export function createPokemonRoom({renderer,container,isReduced,onClose=()=>{},onPortfolio=()=>{},loadAsset=loadPokemonAsset,poseFactory=createPikachuGait,collection=POKEMON_COLLECTION,onGardenMap,onNextSection,returnLabel="Back to Hobbies"}={}){
   if(!renderer?.domElement||!container)throw new Error('Pokemon room requires the existing renderer and a container.');
   const v=(x,y,z)=>new THREE.Vector3(x,y,z),stories=POKEMON_STORIES;
   const poses={
@@ -44,13 +45,13 @@ export function createPokemonRoom({renderer,container,isReduced,onClose=()=>{},o
   function mount(){
     experience=document.createElement('section');experience.id='pokemon-experience';experience.setAttribute('aria-label','Pokémon GO exhibition');
     experience.innerHTML=`<div id="pokemon-scene" tabindex="0" role="region" aria-label="Pokemon exhibition. A and D or Left and Right browse captures. Enter selects the current capture or opens it. Escape goes back."></div><div class="pgr-shade" aria-hidden="true"></div>
-      <header class="pgr-header"><button id="pokemon-back-hobbies" class="pgr-quiet" type="button"></button><div class="pgr-heading"><p>Pokemon GO</p><h1>Oak’s collection gallery</h1></div><div class="pgr-header-actions"><button type="button" data-play-music class="pgr-quiet pgr-music" aria-pressed="false">Music off</button><span id="pokemon-portfolio" class="mode-switch" data-mode-switch>Portfolio / Play</span></div></header>
+      <header class="pgr-header"><button id="pokemon-back-hobbies" class="pgr-quiet" type="button"></button><div class="pgr-heading"><p>Pokemon GO</p><h1>Oak’s collection gallery</h1></div><div class="pgr-header-actions">${roomMapButton}<button type="button" data-play-music class="pgr-quiet pgr-music" aria-pressed="false">Music off</button><span id="pokemon-portfolio" class="mode-switch" data-mode-switch>Portfolio / Play</span></div></header>
       <section class="pgr-story" aria-labelledby="pokemon-title"><p id="pokemon-chapter" class="pgr-eyebrow"></p><h2 id="pokemon-title"></h2><p id="pokemon-body"></p><div id="pokemon-catch-context" hidden><p id="pokemon-catch-position" class="pgr-eyebrow"></p><h3 id="pokemon-catch-name"></h3><p id="pokemon-catch-meta"></p><button id="pokemon-view-catch" class="pgr-primary" type="button">Open full capture</button><p id="pokemon-catch-error" hidden>Preview unavailable. The full capture is still available.</p><button id="pokemon-image-retry" class="pgr-reset" type="button" hidden>Retry preview</button></div><div class="pgr-actions"><button id="pokemon-action" class="pgr-primary" type="button">Step outside</button><button id="pokemon-reset" class="pgr-reset" type="button" hidden>Reset walk</button></div><p id="pokemon-asset-note" class="pgr-asset-note" hidden></p><button id="pokemon-retry" class="pgr-quiet" type="button" hidden>Retry Pikachu</button></section>
       <section id="pokemon-collection-controls" class="pgr-collection-controls" aria-label="Explore the catches" hidden><button id="pokemon-garden-map" class="pgr-quiet" type="button" hidden>Explore the garden map</button><button id="pokemon-browse" class="pgr-quiet" type="button">Browse catches</button><div class="pgr-display-controls"><button id="pokemon-display-prev" class="pgr-quiet" type="button">Previous 6</button><span id="pokemon-display-count"></span><button id="pokemon-display-next" class="pgr-quiet" type="button">Next 6</button></div><button id="pokemon-collection-overview" class="pgr-quiet" type="button" hidden>See the whole display</button></section>
 
       <footer class="pgr-footer"><span id="pokemon-position">A childhood wish</span><span id="pokemon-key-hint">A / D or Left / Right to explore · Esc to return</span></footer>
-      <section id="pokemon-index" class="pgr-index" aria-labelledby="pokemon-index-title" hidden><header><div><p class="pgr-eyebrow">Lakshya’s Pokemon GO collection</p><h2 id="pokemon-index-title">My catches</h2></div><div class="pgr-index-actions"><button id="pokemon-index-exhibition" class="pgr-quiet" type="button">Explore exhibition</button><button id="pokemon-index-close" class="pgr-quiet" type="button">Back to exhibition</button></div></header><p class="pgr-index-instruction">Choose a capture to open the complete screenshot. The exhibition offers an optional walk with Pikachu.</p><div class="pgr-index-toolbar"><label for="pokemon-search">Find a Pokemon</label><input id="pokemon-search" type="search" placeholder="Search by name" autocomplete="off"><p id="pokemon-index-count" aria-live="polite"></p></div><div id="pokemon-index-grid" class="pgr-index-grid"></div><footer><button id="pokemon-index-prev" class="pgr-quiet" type="button">Previous page</button><span id="pokemon-index-page"></span><button id="pokemon-index-next" class="pgr-quiet" type="button">Next page</button></footer></section>
-      <section id="pokemon-viewer" class="pgr-viewer" aria-labelledby="pokemon-viewer-title" hidden><header><div><p class="pgr-eyebrow">From my Pokemon GO collection</p><h2 id="pokemon-viewer-title"></h2><p id="pokemon-viewer-meta"></p></div><button id="pokemon-viewer-close" class="pgr-quiet" type="button">Back to exhibition</button></header><figure><img id="pokemon-full-catch" alt=""><figcaption id="pokemon-viewer-caption"></figcaption><p id="pokemon-viewer-error" hidden>This capture couldn’t load.</p><button id="pokemon-viewer-retry" class="pgr-quiet" type="button" hidden>Retry capture</button></figure><nav aria-label="Browse full captures"><button id="pokemon-catch-prev" class="pgr-quiet" type="button">Previous capture</button><span id="pokemon-viewer-count"></span><button id="pokemon-catch-next" class="pgr-quiet" type="button">Next capture</button></nav></section>
+      <section id="pokemon-index" class="pgr-index" aria-labelledby="pokemon-index-title" hidden><header><div><p class="pgr-eyebrow">Lakshya’s Pokemon GO collection</p><h2 id="pokemon-index-title">My catches</h2></div><div class="pgr-index-actions">${roomMapButton}${onNextSection?'<button type="button" class="pgr-quiet" data-pgr-continue>Next lab section</button>':''}<button id="pokemon-index-exhibition" class="pgr-quiet" type="button">Explore exhibition</button><button id="pokemon-index-close" class="pgr-quiet" type="button">Back to exhibition</button></div></header><p class="pgr-index-instruction">Use ← / → to browse captures, Enter to open and Esc to go back. Use ↓ in Search to reach the results.</p><div class="pgr-index-toolbar"><label for="pokemon-search">Find a Pokemon</label><input id="pokemon-search" type="search" placeholder="Search by name" autocomplete="off"><p id="pokemon-index-count" aria-live="polite"></p></div><div id="pokemon-index-grid" class="pgr-index-grid"></div><footer><button id="pokemon-index-prev" class="pgr-quiet" type="button">Previous page</button><span id="pokemon-index-page"></span><button id="pokemon-index-next" class="pgr-quiet" type="button">Next page</button></footer></section>
+      <section id="pokemon-viewer" class="pgr-viewer" aria-labelledby="pokemon-viewer-title" hidden><header><div><p class="pgr-eyebrow">From my Pokemon GO collection</p><h2 id="pokemon-viewer-title"></h2><p id="pokemon-viewer-meta"></p></div><div class="pgr-index-actions">${roomMapButton}${onNextSection?'<button type="button" class="pgr-quiet" data-pgr-continue>Next lab section</button>':''}<button id="pokemon-viewer-close" class="pgr-quiet" type="button">Back to exhibition</button></div></header><figure><img id="pokemon-full-catch" alt=""><figcaption id="pokemon-viewer-caption"></figcaption><p id="pokemon-viewer-error" hidden>This capture couldn’t load.</p><button id="pokemon-viewer-retry" class="pgr-quiet" type="button" hidden>Retry capture</button></figure><nav aria-label="Browse full captures"><button id="pokemon-catch-prev" class="pgr-quiet" type="button">Previous capture</button><span id="pokemon-viewer-count"></span><button id="pokemon-catch-next" class="pgr-quiet" type="button">Next capture</button></nav></section>
       <div id="pokemon-hint" class="pgr-hint" hidden></div><p id="pokemon-status" class="pgr-sr" aria-live="polite"></p><div id="pokemon-veil" class="pgr-veil" aria-hidden="true"></div>`;
     container.appendChild(experience);$('#pokemon-back-hobbies').textContent=returnLabel;host=$('#pokemon-scene');veil=$('#pokemon-veil');status=$('#pokemon-status');
     $('#pokemon-garden-map').hidden=!onGardenMap;
@@ -176,7 +177,12 @@ export function createPokemonRoom({renderer,container,isReduced,onClose=()=>{},o
     $('#pokemon-search').value=indexQuery;$('#pokemon-index-close').textContent=indexReturnsToParent?returnLabel:'Back to exhibition';
     renderIndex();confineTo($('#pokemon-index'));
     const card=focusId?Array.from($('#pokemon-index-grid').querySelectorAll('[data-pgr-catch]')).find(button=>button.dataset.pgrCatch===focusId):null;
-    (card||$('#pokemon-search')).focus({preventScroll:true});status.textContent='Choose a capture to open its complete screenshot, or search by name.';
+    (card||$('#pokemon-index-grid button')||$('#pokemon-search')).focus({preventScroll:true});status.textContent='Choose a capture to open its complete screenshot, or search by name.';
+  }
+  function setIndexPage(page){
+    indexPage=page;
+    renderIndex();
+    $('#pokemon-index-grid').scrollTop=0;
   }
   function filteredCollection(){const value=indexQuery.trim().toLocaleLowerCase();return collection.map((entry,index)=>({entry,index})).filter(({entry})=>!value||catchLabel(entry).toLocaleLowerCase().includes(value));}
   function renderIndex(){
@@ -265,7 +271,10 @@ export function createPokemonRoom({renderer,container,isReduced,onClose=()=>{},o
     listen($('#pokemon-back-hobbies'),'click',()=>close());listen($('#pokemon-portfolio'),'click',()=>onPortfolio());listen($('#pokemon-action'),'click',action);listen($('#pokemon-reset'),'click',resetWalk);listen($('#pokemon-retry'),'click',requestCompanion);
     listen($('#pokemon-garden-map'),'click',()=>{if(!onGardenMap)return;close({immediate:true,notify:false});onGardenMap();});
     listen($('#pokemon-browse'),'click',openIndex);listen($('#pokemon-view-catch'),'click',openViewer);listen($('#pokemon-collection-overview'),'click',()=>collectionOverview());listen($('#pokemon-display-prev'),'click',()=>displayPage(-1));listen($('#pokemon-display-next'),'click',()=>displayPage(1));listen($('#pokemon-image-retry'),'click',()=>{const exhibit=exhibitFor(activeIndex);if(exhibit)requestImage(exhibit);});
-    listen($('#pokemon-index-close'),'click',()=>indexReturnsToParent?close():closeIndex());listen($('#pokemon-index-exhibition'),'click',()=>{indexReturnsToParent=false;closeIndex();});listen($('#pokemon-search'),'input',event=>{indexQuery=event.target.value||'';indexPage=0;renderIndex();});listen($('#pokemon-index-prev'),'click',()=>{indexPage--;renderIndex();});listen($('#pokemon-index-next'),'click',()=>{indexPage++;renderIndex();});listen($('#pokemon-index-grid'),'click',event=>{const button=event.target.closest?.('[data-pgr-catch]');if(button)openIndexCapture(Number(button.dataset.catchIndex));});
+    for(const button of experience.querySelectorAll('[data-pgr-continue]')){
+      listen(button,'click',()=>{close({immediate:true,notify:false});onNextSection();});
+    }
+    listen($('#pokemon-index-close'),'click',()=>indexReturnsToParent?close():closeIndex());listen($('#pokemon-index-exhibition'),'click',()=>{indexReturnsToParent=false;closeIndex();});listen($('#pokemon-search'),'input',event=>{indexQuery=event.target.value||'';indexPage=0;renderIndex();});listen($('#pokemon-index-prev'),'click',()=>{setIndexPage(indexPage-1);});listen($('#pokemon-index-next'),'click',()=>{setIndexPage(indexPage+1);});listen($('#pokemon-index-grid'),'click',event=>{const button=event.target.closest?.('[data-pgr-catch]');if(button)openIndexCapture(Number(button.dataset.catchIndex));});
     listen($('#pokemon-viewer-close'),'click',closeViewer);listen($('#pokemon-catch-prev'),'click',()=>viewerStep(-1));listen($('#pokemon-catch-next'),'click',()=>viewerStep(1));listen($('#pokemon-viewer-retry'),'click',loadFullCapture);
     listen(renderer.domElement,'pointermove',pointerMove);listen(renderer.domElement,'pointerleave',()=>{pointerDown=null;setHover(null);});listen(renderer.domElement,'pointercancel',()=>{pointerDown=null;});listen(renderer.domElement,'pointerdown',event=>{pointerDown=event.button===0?{x:event.clientX,y:event.clientY}:null;});listen(renderer.domElement,'pointerup',event=>{const press=pointerDown;pointerDown=null;if(event.button!==0||!press||Math.hypot(event.clientX-press.x,event.clientY-press.y)>6)return;if(closing||viewerOpen||indexOpen)return;const id=pick(event);if(id?.startsWith('catch:')){const index=Number(id.slice(6));if(galleryFocused&&activeIndex===index&&!transition&&!walkActive)openViewer();else selectCatch(index);}else if(id==='pikachu')startWalk();});
     listen(document,'keydown',event=>{
@@ -273,7 +282,20 @@ export function createPokemonRoom({renderer,container,isReduced,onClose=()=>{},o
       if(event.isComposing||event.ctrlKey||event.metaKey||event.altKey||(event.shiftKey&&event.key!=='Tab'))return;
       if(event.key==='Escape'){event.preventDefault();event.stopPropagation();if(!event.repeat)cancel({fromKeyboard:true});return;}
       if((viewerOpen||indexOpen)&&event.key==='Tab'){const layer=viewerOpen?$('#pokemon-viewer'):$('#pokemon-index'),controls=[...layer.querySelectorAll('button,input')].filter(item=>!item.disabled&&!item.closest('[hidden],[inert]'));if(!controls.length)return;const first=controls[0],last=controls.at(-1),current=document.activeElement;if(event.shiftKey&&current===first||!event.shiftKey&&current===last||!controls.includes(current)){event.preventDefault();(event.shiftKey?last:first).focus({preventScroll:true});}return;}
+      if(indexOpen && event.target===$('#pokemon-search') && event.key==='ArrowDown'){
+        const first=$('#pokemon-index-grid button');
+        if(first){consumeNavigationKey(event);first.focus();}
+        return;
+      }
       if(closing||isKeyboardShortcutBlocked(event)||event.target?.closest?.('#pokemon-experience')!==experience)return;
+      if(indexOpen && (event.key==='PageDown'||event.key==='PageUp')){
+        consumeNavigationKey(event);
+        if(!event.repeat){
+          setIndexPage(indexPage+(event.key==='PageDown'?1:-1));
+          ($('#pokemon-index-grid button')||$('#pokemon-search')).focus();
+        }
+        return;
+      }
       const direction=getHorizontalNavigation(event),boundary=getBoundaryNavigation(event);
       if(direction||boundary){
         consumeNavigationKey(event);

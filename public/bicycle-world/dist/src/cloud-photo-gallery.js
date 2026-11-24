@@ -1,3 +1,4 @@
+import {roomMapButton} from './room-map-navigation.js';
 import {PHOTO_SUBJECTS,photographySubjects,photographySelection} from './photography-browse.js';
 
 /** A bounded photo catalogue and fitted detail. The parent owns the scene and return. */
@@ -9,7 +10,7 @@ export function createCloudPhotoGallery({host,photos=[],collections=[],onClose=(
     .map(roll=>({...roll,photos:valid(roll.photos||[])})).filter(roll=>roll.photos.length);
   const root=doc.createElement('section');root.className='cloud-photo-gallery';root.hidden=true;root.tabIndex=-1;
   root.setAttribute('role','region');root.setAttribute('aria-label','Lakshya’s photographs');
-  root.innerHTML=`<header class="cloud-gallery-header"><div><p class="cloud-gallery-eyebrow">THE VIEWFINDER <span data-cloud-total></span></p><h2 data-cloud-title></h2><p class="cloud-gallery-intro" data-cloud-intro></p><p class="cloud-gallery-position" data-cloud-count aria-live="polite"></p></div><div class="cloud-gallery-header-actions"><button type="button" data-cloud-back hidden>Back to photos</button><button type="button" data-cloud-close>Back to the Viewfinder</button></div></header>
+  root.innerHTML=`<header class="cloud-gallery-header"><div><p class="cloud-gallery-eyebrow">THE VIEWFINDER <span data-cloud-total></span></p><h2 data-cloud-title></h2><p class="cloud-gallery-intro" data-cloud-intro></p><p class="cloud-gallery-position" data-cloud-count aria-live="polite"></p></div><div class="cloud-gallery-header-actions"><button type="button" data-cloud-back hidden>Back to photos</button>${roomMapButton}<button type="button" data-cloud-close>Back to the Viewfinder</button></div></header>
     <nav class="cloud-gallery-rolls" aria-label="Choose a photography collection"></nav><nav class="cloud-gallery-subjects" aria-label="Filter photographs by subject"></nav>
     <section class="cloud-gallery-index" aria-label="Choose a photograph"></section>
     <figure class="cloud-gallery-stage" data-cloud-stage hidden><figcaption class="cloud-gallery-load" role="status" aria-live="polite"><span data-cloud-status></span><button type="button" data-cloud-retry hidden>Retry photograph</button></figcaption></figure>

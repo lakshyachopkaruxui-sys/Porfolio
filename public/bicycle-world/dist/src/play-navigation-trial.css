@@ -686,3 +686,20 @@ body.hybrid-world #personal-experience[data-kind="cloud"] .personal-chapters {
   grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
   align-items: stretch;
 }
+
+body.hybrid-world button[data-room-map] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45em;
+  min-height: 44px;
+  padding: .5em .9em;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  background: #f8faf4;
+  color: #244641;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+body.hybrid-world button[data-room-map] kbd {font: inherit; font-size: .85em;}

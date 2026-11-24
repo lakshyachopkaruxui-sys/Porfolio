@@ -1,3 +1,4 @@
+import {roomMapButton} from './room-map-navigation.js';
 import {decorateModeSelectors} from './mode-selector.js';
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
@@ -51,12 +52,14 @@ export function createListeningRoom({renderer,container,isReduced,onClose=()=>{}
     host=$('#listening-scene');status=$('#status');player=$('#recording-player');playerSurface=$('#player-surface');
     veil=document.createElement('div');veil.className='listening-veil';veil.setAttribute('aria-hidden','true');experience.appendChild(veil);
     $('#leave-room').hidden=true;
-    const photoViewer=document.createElement('section');photoViewer.id='listening-photo-viewer';photoViewer.hidden=true;photoViewer.setAttribute('aria-labelledby','listening-photo-title');photoViewer.innerHTML='<header><h2 id="listening-photo-title"></h2><button type="button" id="listening-photo-close" class="quiet-button">Back to recordings</button></header><div class="singing-photo-layout"><figure><img id="listening-full-photo" alt=""><figcaption id="listening-photo-caption"></figcaption></figure><aside><p class="eyebrow">A moment from the stage</p><p id="listening-photo-description"></p><nav aria-label="Performance photographs"><button type="button" id="listening-photo-prev" class="quiet-button">Previous photograph</button><span id="listening-photo-count" role="status" aria-live="polite"></span><button type="button" id="listening-photo-next" class="quiet-button">Next photograph</button></nav><p id="listening-photo-error" role="status" hidden></p></aside></div>';experience.append(photoViewer);
+    const photoViewer=document.createElement('section');photoViewer.id='listening-photo-viewer';photoViewer.hidden=true;photoViewer.setAttribute('aria-labelledby','listening-photo-title');photoViewer.innerHTML='<header><h2 id="listening-photo-title"></h2>'+roomMapButton+'<button type="button" id="listening-photo-close" class="quiet-button">Back to recordings</button></header><div class="singing-photo-layout"><figure><img id="listening-full-photo" alt=""><figcaption id="listening-photo-caption"></figcaption></figure><aside><p class="eyebrow">A moment from the stage</p><p id="listening-photo-description"></p><nav aria-label="Performance photographs"><button type="button" id="listening-photo-prev" class="quiet-button">Previous photograph</button><span id="listening-photo-count" role="status" aria-live="polite"></span><button type="button" id="listening-photo-next" class="quiet-button">Next photograph</button></nav><p id="listening-photo-error" role="status" hidden></p></aside></div>';experience.append(photoViewer);
     const header=experience.querySelector('.masthead');
     const title=header.querySelector('.study-label');
     title.textContent='Listening room';title.className='hobby-room-name';
     const nav=document.createElement('nav');nav.setAttribute('aria-label','Room navigation');
-    nav.append($('#listening-back-hobbies'),$('#listening-portfolio'));header.replaceChildren(title,nav);
+    nav.append($('#listening-back-hobbies'),$('#listening-portfolio'));
+    nav.insertAdjacentHTML('afterbegin',roomMapButton);
+    header.replaceChildren(title,nav);
     experience.setAttribute('aria-description','A and D or Left and Right browse the collection. Home and End choose the first or last item. Escape returns one level. Video controls keep their normal keys.');
     experience.querySelector('.room-instruction').textContent='Choose a video or photograph below. Left / Right changes selection; Escape goes back.';
     const links=$('#fallback').querySelectorAll('a');

@@ -11,6 +11,7 @@ import {planRampApproach} from './river-hop/approach-route.js';
 import {createAboutExperience} from './about-experience.js';
 import {destinationName} from './destination-names.js';
 import {decorateModeSelectors} from './mode-selector.js';
+import {bindRoomMapNavigation} from './room-map-navigation.js';
 import {isKeyboardShortcutBlocked,consumeNavigationKey} from './keyboard-navigation.js';
 import {mountPlayOverlayMotion} from './play-overlay-motion.js';
 import * as THREE from 'three';
@@ -532,6 +533,7 @@ placeUI=createDestinationUI({
   onContinue(){if(!running&&ready)start({skipWelcome:true});},onPortfolio:showPortfolio,onVisit:visitPlace,onRead:openLandmark,onProject:openWorks,isReduced:()=>reduced,enableRichCloud:false
 });
 projectUI=createProjectUI({onOpen(){prepareOverlay('projects');queueMicrotask(()=>{if(projectUI?.isOpen)tour?.emit('works-opened');});},onClose:restoreRideUI,onPortfolio:showPortfolio,onContinue(){if(!running&&ready)start({skipWelcome:true});}});
+bindRoomMapNavigation(document,()=>mapUI.open(state));
 mapUI=createMapUI({onOpen(){prepareOverlay('map');},onClose:restoreRideUI,onRide:visitPlace,onRead:openLandmark,onPortfolio:showPortfolio,onHelp:showHelp,getView:()=>ridingView,onReset:restartJourney});
 // One optional guide, separate from music and from Oak's existing voice owner.
 const tourPreference=document.createElement('label');tourPreference.className='check';
