@@ -26,23 +26,20 @@
 :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-veil{position:absolute;inset:0;z-index:20;pointer-events:none;background:#eee4cd;opacity:1}
 :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-hint{position:absolute;z-index:8;pointer-events:none;background:var(--pgr-paper);border-radius:8px;padding:8px 12px;font-size:14px}
 
-/* Reserve the map and return slots even when the tools or the title change. */
+/* Keep the heading separate from the single exhibition toolbar. */
 :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-head{
-  position:relative;inset:auto;z-index:5;flex:none;display:grid;align-items:start;
-  grid-template-columns:minmax(max-content,1fr) auto 112px 136px var(--pgr-map);
-  grid-template-areas:"title extras music back map";gap:6px;
+  position:relative;inset:auto;z-index:5;flex:none;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:6px;
   width:100%;max-width:none;margin:0;padding:var(--pgr-top) var(--pgr-top) 8px;
 }
 :is(#oak-lab,#personal-experience) #pokemon-experience .walk-header{grid-area:1/1;background:var(--pgr-paper);pointer-events:none}
 :is(#oak-lab,#personal-experience) #pokemon-experience .walk-header :is(.walk-heading,button,.pgr-tools){pointer-events:auto}
 :is(#oak-lab,#personal-experience) #pokemon-experience .walk-heading{grid-area:title;place-self:start;display:flex;align-items:center;min-width:0;max-width:100%;min-height:44px;width:fit-content;background:var(--pgr-paper);padding:4px 12px;border-radius:4px}
 :is(#oak-lab,#personal-experience) #pokemon-experience .walk-heading :is(h1,h2){margin:0;color:var(--pgr-ink);font:400 clamp(16px,1.6vw,23px)/1.32 var(--font-heading,'Mochiy Pop P One',sans-serif);overflow-wrap:break-word}
-:is(#oak-lab,#personal-experience) #pokemon-experience :is(.pgr-head nav,.pgr-tools){display:contents}
+:is(#oak-lab,#personal-experience) #pokemon-experience :is(.pgr-tools,.pgr-extras){display:contents}
 :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-extras{grid-area:extras;display:flex;align-items:center;flex-wrap:wrap;justify-content:flex-end;gap:5px;min-width:0;align-self:start}
 :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-extras:empty{display:none}
 :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-tools>[data-play-music]{grid-area:music;justify-self:end;min-width:96px;height:44px}
 :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-back{grid-area:back;width:100%;height:44px;padding:3px 7px}
-:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-head [data-room-map]{grid-area:map;position:fixed;top:var(--pgr-top);right:var(--pgr-top);left:auto;bottom:auto;width:var(--pgr-map);height:44px;padding:3px 6px}
 :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-tools #pokemon-browse{--control-face-start:#f1f5e9;--control-face-end:#dae7d7}
 
 #pokemon-experience .walk-dock { grid-area:3/1; position:relative; z-index:6; }
@@ -65,13 +62,11 @@
 :is(#oak-lab,#personal-experience) #pokemon-experience #pokemon-full-catch{display:block;min-height:0;width:100%;height:100%;object-fit:contain}
 :is(#oak-lab,#personal-experience) #pokemon-experience #pokemon-viewer-error{margin:0;font-size:14px}
 @media(max-width:1100px){
-  :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-head{grid-template-columns:minmax(0,1fr) 112px 136px var(--pgr-map);grid-template-areas:"title music back map" "extras extras extras extras"}
   :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-extras{justify-content:flex-start}
   :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-index-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
 @media(max-width:760px){
   :is(#oak-lab,#personal-experience) #pokemon-experience{--pgr-side:16px;--pgr-top:var(--play-map-inset,8px);--pgr-floor:max(10px,env(safe-area-inset-bottom));--pgr-direction:clamp(77px,26vw,130px)}
-  :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-head{grid-template-columns:minmax(0,1fr) var(--pgr-map);grid-template-areas:"title map" "music back" "extras extras";grid-template-rows:minmax(76px,max-content) auto;gap:4px 6px}
   :is(#oak-lab,#personal-experience) #pokemon-experience .walk-heading{padding:5px 8px}
   :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-extras{gap:4px;max-height:96px;overflow-y:auto;overscroll-behavior:contain}
   :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-tools>[data-play-music]{justify-self:start}
@@ -107,13 +102,7 @@
 @media(max-width:760px) {
   :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-extras {align-items:flex-start;}
 }
-@media(min-width:1101px) {
-  :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-head::before {
-    content:""; grid-column:2/-1; grid-row:1; position:absolute; inset:-4px;
-    align-self:start; height:52px; box-sizing:border-box; z-index:-1;
-    border-radius:10px; background:var(--pgr-paper); pointer-events:none;
-  }
-}
+
 @media(max-width:360px) {
   :is(#oak-lab,#personal-experience) #pokemon-experience .walk-heading {padding-inline:4px;}
   :is(#oak-lab,#personal-experience) #pokemon-experience .walk-heading :is(h1,h2) {font-size:15.5px;}

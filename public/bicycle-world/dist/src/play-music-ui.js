@@ -95,14 +95,9 @@ export function mountPlayMusic({notify = () => {}} = {}) {
       : boundary.matches('.works-reading,.works-index,.works-inspect,.works-places,.oak-places') || ['about','work'].includes(dialog?.dataset.kind) && boundary.matches('.personal-reading,.personal-media,.personal-places') || boundary.id === 'listening-photo-viewer' || boundary.id === 'garba-viewer' ? boundary.querySelector('header')
       : boundary.id === 'oak-lab' ? boundary.querySelector('.oak-header nav') || boundary.querySelector('.oak-tools')
       : ['help','world-map','place-reader','project-reader'].includes(boundary.id) ? boundary.querySelector('.reader-top') : null;
-    const parent = headerNavigation || boundary;
+    const actionBar = headerNavigation?.querySelector(':scope > .room-action-bar');
+    const parent = actionBar || headerNavigation || boundary;
     // A modal dialog makes outside controls inert. Keep this control inside it.
-    // Keep the version switch last in both visual and keyboard order.
-    // Room headers are separate from nested viewer sound controls.
-    for (const switcher of document.querySelectorAll('[data-mode-switch]')) {
-      const host = switcher.parentElement;
-      if (host?.matches('#ride-tools,.about-header nav,.works-header nav,.personal-header nav,.oak-header nav,.reader-top') && [...host.children].at(-1) !== switcher) host.append(switcher);
-    }
     const modeSwitch = [...parent.children].find(child => child.matches('[data-mode-switch]')) || (parent.id === 'ride-tools' ? parent.querySelector('#back') : null);
     if (modeSwitch) {
       const children = [...parent.children];

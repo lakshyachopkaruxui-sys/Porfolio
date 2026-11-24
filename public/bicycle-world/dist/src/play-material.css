@@ -51,6 +51,7 @@
     [aria-current=page], [aria-current=step], [aria-current=true], .pressed
   ) {
     --action-face: var(--play-green-face);
+    --action-hover: linear-gradient(175deg, #537c68, #345c49);
     --action-ink: var(--play-green-ink);
     --action-depth: var(--play-green-depth);
   }
@@ -70,7 +71,7 @@
     .oak-tools, .works-caption, .gallery-strip, .reader-top, .cloud-gallery-tools,
     .mobile-mode-bar, nav[aria-label="Portfolio navigation"]
   ) { background: var(--play-rail) !important; }
-  body.hybrid-world #pokemon-experience .pgr-head::before { background: var(--play-rail) !important; }
+
 
   :where(body.hybrid-world, #mobile-play-notice, body.portfolio-static) :is(a, button, [role="button"]):focus-visible {
     outline: 3px solid #214d3c !important;
@@ -79,11 +80,22 @@
   @media (max-width: 760px) {
     body.hybrid-world .gallery-actions button { padding-inline: 8px !important; }
   }
+  :where(body.hybrid-world, #mobile-play-notice, body.portfolio-static) :is(
+    button, [role="button"], a.primary, a.text-button, a.plain-reading, .failure-links a,
+    .mobile-play-footer a, .mobile-work-link, nav[aria-label="Portfolio navigation"] a, [data-mode-link]
+  ):is(:hover, :focus-visible),
+  :where(body.hybrid-world, #mobile-play-notice, body.portfolio-static) :is(button, .mobile-work-link):hover * {
+    text-decoration: none !important;
+  }
   @media (hover: hover) {
-    :where(body.hybrid-world, #mobile-play-notice, body.portfolio-static) :is(button, a.primary, a.text-button, .mobile-play-footer a):hover:not(:disabled) {
-      text-decoration: underline !important;
-      text-underline-offset: .18em;
+    :where(body.hybrid-world, #mobile-play-notice, body.portfolio-static) :is(
+      button:not(:has(img)):not(.cloud-photo-card,.journal-photo-button,.hobby-photo-open),
+      [role="button"], a.primary, a.text-button, a.plain-reading, .failure-links a,
+      .mobile-play-footer a, nav[aria-label="Portfolio navigation"] a
+    ):hover:not(:disabled), #mobile-play-notice .mobile-work-link:hover .mobile-work-action {
+      background: var(--action-hover, linear-gradient(175deg, #f8f1dc, #e5d9b9)) !important;
     }
+    [data-mode-switch] a:hover {color: #396747 !important;}
   }
   @media (forced-colors: active) {
     :where(body.hybrid-world, #mobile-play-notice, body.portfolio-static) :is(button, a.primary, a.text-button, .mobile-work-action, .mobile-play-footer a) {

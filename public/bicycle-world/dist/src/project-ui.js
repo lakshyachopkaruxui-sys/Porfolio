@@ -10,7 +10,7 @@ const PROGRESS_VERSION='garden-overviews-3';
 export function createProjectUI({onOpen,onClose,onPortfolio,onContinue}) {
   const dialog=document.createElement('dialog');
   dialog.id='project-reader';dialog.className='place-reader';dialog.setAttribute('aria-labelledby','project-title');
-  dialog.innerHTML=`<div class="reader-top"><span class="mode-switch" data-mode-switch id="projects-portfolio">Portfolio / Play</span>${roomMapButton}<button data-room-return class="close-button" id="projects-close">Back to garden</button></div>
+  dialog.innerHTML=`<div class="reader-top"><span class="mode-switch" data-mode-switch id="projects-portfolio">Portfolio / Play</span><button data-room-return class="close-button" id="projects-close">Back to garden</button>${roomMapButton}</div>
     <article><div class="project-chooser"><label for="project-select">Project</label><select id="project-select"></select><p>Choose a project summary, or open its full case study in Portfolio.</p><button type="button" class="text-button project-process-link" id="portfolio-process">Portfolio making story</button></div><div id="project-content"></div><footer class="case-footer"><nav class="project-step-navigation" aria-label="Browse project summaries"><button type="button" id="previous-project">Previous project</button><p id="project-position" role="status" aria-live="polite"></p><button type="button" id="next-project">Next project</button></nav><button type="button" id="projects-continue">Back to garden</button></footer></article>`;
   document.body.append(dialog);
   const content=dialog.querySelector('#project-content'),select=dialog.querySelector('select');

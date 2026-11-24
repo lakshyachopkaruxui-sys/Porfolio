@@ -1,89 +1,54 @@
-/* The same landmark stays in the same corner in each room and reader. */
-body.hybrid-world {
-  --play-map-inset: 16px;
-  --play-map-width: 128px;
-}
-@media (max-width:760px) {
-  body.hybrid-world { --play-map-inset: 8px; }
-}
-html:root body.hybrid-world :is(#personal-experience,#about-experience,#oak-lab,#works-experience,#project-reader,#place-reader)
-button[data-room-map] {
-  position: fixed !important;
-  inset: max(var(--play-map-inset),env(safe-area-inset-top)) max(var(--play-map-inset),env(safe-area-inset-right)) auto auto !important;
-  z-index: 12;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: .45rem;
+/* Each room owns its header. The return and map controls participate in the
+   same row and wrapping behaviour as its music and mode controls. */
+body.hybrid-world :is(nav, .reader-top, .cloud-gallery-header-actions, .room-action-bar):has(> [data-room-map]) {
   box-sizing: border-box;
-  width: var(--play-map-width) !important;
-  min-width: 0;
-  max-width: none;
-  height: 44px !important;
-  min-height: 44px !important;
-  margin: 0 !important;
-  padding: 0 8px !important;
+  display: flex !important;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  max-width: 100%;
+  padding: 4px;
+  background: var(--play-rail, white);
+  color: var(--play-warm-ink);
+  border-radius: 10px;
+}
+body.hybrid-world .room-action-bar { margin-inline-start: auto; }
+body.hybrid-world :is(#personal-experience,#about-experience,#oak-lab,#works-experience,#project-reader,#place-reader)
+:is([data-room-map],[data-room-return],.pgr-back) {
+  position: static !important;
+  inset: auto !important;
   transform: none !important;
-  border-radius: 9px !important;
-  font: 600 14px/1.2 'DM Sans',sans-serif !important;
+  width: auto !important;
+  height: auto !important;
+  min-height: 44px;
+  flex: 0 0 auto;
+  margin: 0 !important;
   white-space: nowrap;
-  pointer-events:auto;
+  pointer-events: auto;
 }
-html:root body.hybrid-world button[data-room-map][hidden],
-html:root body.hybrid-world [inert] button[data-room-map] { visibility:hidden;pointer-events:none; }
-
-/* Leave a clear tap target outside the heading and the local navigation. */
-html:root body.hybrid-world :is(#personal-experience,#about-experience,#oak-lab,#works-experience,#project-reader,#place-reader)
-:is(header,.reader-top):has([data-room-map]):not(#pokemon-experience *) {
-  box-sizing:border-box;
-  padding-inline-end:calc(var(--play-map-width) + max(var(--play-map-inset),env(safe-area-inset-right)) + 12px);
-  min-block-size:calc(44px + 2 * var(--play-map-inset));
+body.hybrid-world [data-room-map] kbd {margin-inline-start:.25em;}
+body.hybrid-world :is([data-room-map],[data-room-return])[hidden] { display: none !important; }
+body.hybrid-world :is(#personal-experience,#about-experience,#oak-lab,#works-experience,#project-reader,#place-reader)
+:is(header,.reader-top,.journal-chapters) .play-music-dock {
+  position: static !important; inset: auto !important; transform: none !important; margin: 0;
 }
-
-/* Animate reader content while the navigation stays in its final position. */
+body.hybrid-world #about-experience .journal-chapters:has([data-room-map]) {
+  display:flex !important; flex-wrap:wrap; align-items:center; gap:4px; padding:4px;
+}
+body.hybrid-world .journal-section-jump { margin-inline-end:auto; }
+body.hybrid-world :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-head nav {
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-end;
+  flex:0 1 auto; min-width:0; max-width:100%; margin-inline-start:auto;
+  gap:4px; padding:4px; border-radius:10px; background:var(--play-rail,white);pointer-events:auto;
+}
+body.hybrid-world :is(#oak-lab,#personal-experience) #pokemon-experience :is(.pgr-tools,.pgr-extras) {display:contents;}
+body.hybrid-world :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-head {box-sizing:border-box;}
+body.hybrid-world :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-head nav button {white-space:nowrap;}
+@media (max-width:760px) {
+  body.hybrid-world :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-head nav {justify-content:flex-start;}
+}
 body.hybrid-world dialog.place-reader[open] {animation:none;}
 @media (prefers-reduced-motion:no-preference) {
   body.hybrid-world:not([data-play-ui-motion="reduced"]) dialog.place-reader[open]>article {animation:reader-in .25s ease-out;}
-}
-@media (max-width:760px) {
-  body.hybrid-world :is(#project-reader,#place-reader)>.reader-top {
-    flex-wrap:wrap;
-    justify-content:flex-start;
-    gap:4px;
-  }
-}
-
-body.hybrid-world {
-  --room-return-width:136px;
-  --room-return-top:max(var(--play-map-inset),env(safe-area-inset-top));
-  --room-return-right:calc(max(var(--play-map-inset),env(safe-area-inset-right)) + var(--play-map-width) + 6px);
-  --room-utilities-space:calc(var(--room-return-right) + var(--room-return-width) + 10px);
-}
-html:root body.hybrid-world :is(#personal-experience,#about-experience,#oak-lab,#works-experience,#project-reader,#place-reader)
-button[data-room-return] {
-  box-sizing:border-box;
-  position:fixed !important;
-  inset:var(--room-return-top) var(--room-return-right) auto auto !important;
-  z-index:11;
-  width:var(--room-return-width) !important;
-  height:44px !important;min-height:44px !important;
-  margin:0 !important;padding:3px 6px !important;transform:none !important;
-  font:600 14px/1.2 'DM Sans',sans-serif !important;white-space:normal;
-  pointer-events:auto;
-}
-html:root body.hybrid-world :is(#personal-experience,#about-experience,#oak-lab,#works-experience,#project-reader,#place-reader)
-:is(header,.reader-top,.journal-chapters):has([data-room-return]):has([data-room-map]) {
-  box-sizing:border-box;
-  padding-inline-end:var(--room-utilities-space) !important;
-}
-@media (max-width:760px) {
-  body.hybrid-world {
-    --room-return-width:var(--play-map-width);
-    --room-return-right:max(var(--play-map-inset),env(safe-area-inset-right));
-    --room-return-top:calc(max(var(--play-map-inset),env(safe-area-inset-top)) + 80px);
-  }
-  html:root body.hybrid-world :is(#personal-experience,#about-experience,#oak-lab,#works-experience,#project-reader,#place-reader)
-  :is(header,.reader-top,.journal-chapters):has([data-room-return]):has([data-room-map]) {
-    min-block-size:calc(var(--room-return-top) + 48px);
-  }
 }

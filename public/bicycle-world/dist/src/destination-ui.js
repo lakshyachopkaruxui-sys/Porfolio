@@ -65,7 +65,7 @@ function soundEngine(onStatus){
 
 export function createDestinationUI({onOpen,onClose,onContinue,onPortfolio,onVisit,onRead=onVisit,onProject,isReduced,enableRichCloud=true}){
   const dialog=document.createElement('dialog');dialog.id='place-reader';dialog.className='place-reader';dialog.setAttribute('aria-labelledby','place-title');
-  dialog.innerHTML='<div class="reader-top"><span class="mode-switch" data-mode-switch id="place-back">Portfolio / Play</span>'+roomMapButton+'<button data-room-return id="place-close" class="close-button">Return to ride <span aria-hidden="true">×</span></button></div><article id="place-article"></article>';
+  dialog.innerHTML='<div class="reader-top"><span class="mode-switch" data-mode-switch id="place-back">Portfolio / Play</span><button data-room-return id="place-close" class="close-button">Return to ride <span aria-hidden="true">×</span></button>'+roomMapButton+'</div><article id="place-article"></article>';
   document.body.append(dialog);
   const article=dialog.querySelector('article'),closeButton=dialog.querySelector('#place-close');
   let current=null,sky=null,sound=null,postcard=null,postcardCaption='',musicStory='singing';
