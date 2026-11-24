@@ -4,7 +4,7 @@ import {POKEMON} from './pokemon-habitats.js';
 export function mountPokemonControls(help,audio,onUnavailable,onPreference){
   const section=document.createElement('section');section.setAttribute('aria-label','Pokemon companions');
   section.innerHTML=`<label class="motion-option"><input type="checkbox" id="pokemon-sounds" aria-describedby="pokemon-sound-note"> Nearby Pokemon voices</label>
-    <p class="ride-sound-note" id="pokemon-sound-note">Short calls as you ride past. Four anime calls; their dub is unverified. Articuno and Vaporeon use game cries. Snorlax stays quiet.</p>
+    <p class="ride-sound-note" id="pokemon-sound-note">Hear nearby Pokémon call again as you ride around them.</p>
     <details class="help-destinations"><summary>About the Pokemon companions <span aria-hidden="true">+</span></summary>
     <p>Pokemon was part of Lakshya’s childhood. Pokemon GO brought that wish to explore a world with Pokemon a little closer.</p>
     <ul>${POKEMON.map(p=>`<li>${p.name} — ${p.habitat}.</li>`).join('')}</ul>

@@ -3,7 +3,7 @@ export const AUDIO_MIX = Object.freeze({
   music: .12,
   musicCeiling: .20,
   musicLevel: .60,
-  pokemon: .60,
+  pokemon: .86,
   deck: .028,
   contact: .050,
   bell: .30,

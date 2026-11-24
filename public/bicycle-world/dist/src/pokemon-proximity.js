@@ -1,8 +1,8 @@
-const SUPPORTED = new Set(['pikachu', 'bulbasaur', 'charmander', 'charizard', 'vaporeon', 'articuno']);
+const SUPPORTED = new Set(['pikachu', 'bulbasaur', 'charmander', 'charizard', 'vaporeon', 'articuno', 'snorlax']);
 const FLYING = new Set(['fly', 'flying', 'flight']);
 const clamp = (value, minimum, maximum) => Math.max(minimum, Math.min(maximum, value));
 
-/** One nearby greeting per encounter, evaluated at most ten times each second. */
+/** Repeated calls while riding nearby, evaluated at most ten times each second. */
 export function createPokemonProximity({play}) {
   const encounters = new Map();
   let lastUpdate = -Infinity, lastAttempt = -Infinity, pending = false, generation = 0, wasActive = true;
@@ -30,28 +30,28 @@ export function createPokemonProximity({play}) {
     for (const source of sources ?? []) {
       if (!source?.ready || !SUPPORTED.has(source.id) || !source.key || !Number.isFinite(source.x) || !Number.isFinite(source.z)) continue;
       let encounter = encounters.get(source.key);
-      if (!encounter) { encounter = {inside: false, fired: false, lastAttempt: -Infinity}; encounters.set(source.key, encounter); }
+      if (!encounter) { encounter = {inside: false, lastAttempt: -Infinity}; encounters.set(source.key, encounter); }
       const flying = FLYING.has(source.kind), enter = flying ? 30 : 12, exit = flying ? 40 : 17;
       const dx = source.x - player.x, dz = source.z - player.z;
       const dy = flying ? (Number.isFinite(source.y) ? source.y : 0) - headY : 0;
       const distance = Math.hypot(dx, dy, dz);
-      if (distance > exit) { encounter.inside = false; encounter.fired = false; }
+      if (distance > exit) { encounter.inside = false; encounter.lastAttempt = -Infinity; }
       else if (distance <= enter) encounter.inside = true;
-      if (!moving || !encounter.inside || encounter.fired || distance > enter || time - encounter.lastAttempt < 24) continue;
+      if (!moving || !encounter.inside || distance > enter || time - encounter.lastAttempt < 12) continue;
       if (distance < closestDistance) { closest = {source, encounter, dx, dz}; closestDistance = distance; closestExit = exit; }
     }
     if (!closest || pending || time - lastAttempt < 8) return false;
 
     const {source, encounter, dx, dz} = closest;
     // Reserve the encounter before any asynchronous fetch so failures cannot spam retries.
-    encounter.fired = true; encounter.lastAttempt = time; lastAttempt = time;
+    encounter.lastAttempt = time; lastAttempt = time;
     pending = true;
     const request = generation, heading = Number.isFinite(player.heading) ? player.heading : 0;
     const horizontalDistance = Math.hypot(dx, dz);
     const pan = horizontalDistance > .001 ? clamp((dx * Math.cos(heading) - dz * Math.sin(heading)) / horizontalDistance, -1, 1) : 0;
-    const gain = clamp(1 - .75 * (closestDistance / closestExit) ** 2, .25, 1);
+    const gain = clamp(1 - .40 * (closestDistance / closestExit) ** 2, .25, 1);
     try {
-      Promise.resolve(play(source.id, {gain, pan})).catch(() => false).finally(() => { if (request === generation) pending = false; });
+      Promise.resolve(play(source.id, {gain, pan: pan * .65})).catch(() => false).finally(() => { if (request === generation) pending = false; });
     } catch { pending = false; }
     return true;
   }

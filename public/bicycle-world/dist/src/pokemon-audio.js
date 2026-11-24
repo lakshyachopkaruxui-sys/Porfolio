@@ -1,18 +1,18 @@
 import {AUDIO_MIX} from './audio-mix.js';
 
+// Per-recording trims keep the seven calls clear at comparable listening levels.
 const FILES = {
-  pikachu: ['pokemon-voices/pikachu-anime-candidate.mp3', 'anime-candidate'],
-  bulbasaur: ['pokemon-voices/bulbasaur-anime-candidate.mp3', 'anime-candidate'],
-  charmander: ['pokemon-voices/charmander-anime-candidate.mp3', 'anime-candidate'],
-  charizard: ['pokemon-voices/charizard-anime-candidate.mp3', 'anime-candidate'],
-  // The untouched game recordings are 14–17 dB hotter than the short anime
-  // candidates. Source-specific trims balance them without rewriting assets.
-  vaporeon: ['pokemon-audio/vaporeon.ogg', 'game-cry', .15],
-  articuno: ['pokemon-audio/articuno.ogg', 'game-cry', .19],
+  pikachu: ['pokemon-voices/pikachu-selected.mp3', 'review-selection', 1.65],
+  bulbasaur: ['pokemon-voices/bulbasaur-selected.mp3', 'review-selection', .78],
+  charmander: ['pokemon-voices/charmander-anime-candidate.mp3', 'anime-candidate', 2.1],
+  charizard: ['pokemon-voices/charizard-selected.mp3', 'review-selection', .66],
+  vaporeon: ['pokemon-audio/vaporeon.ogg', 'game-cry', .41],
+  articuno: ['pokemon-audio/articuno.ogg', 'game-cry', .5],
+  snorlax: ['pokemon-voices/snorlax-selected.mp3', 'review-selection', .89],
 };
 const bounded = (value, minimum, maximum, fallback) => Number.isFinite(value) ? Math.max(minimum, Math.min(maximum, value)) : fallback;
 
-/** Short source-labelled calls; the four anime candidates have no verified dub. */
+/** Nearby calls load on demand and share one playback channel. */
 export function createPokemonAudio({
   contextFactory = () => new (globalThis.AudioContext || globalThis.webkitAudioContext)(),
   fetcher = globalThis.fetch,
