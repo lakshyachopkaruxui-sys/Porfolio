@@ -5337,6 +5337,9 @@ html.touch-input body.hybrid-world.river-hop-near #world-bottom {
     border-radius: var(--play-bar-radius) !important;
     background: var(--play-rail) !important;
   }
+  body.hybrid-world #world-bottom :is(#ride-status, #notice) {
+    border: 0 !important;
+  }
   @media (forced-colors: active) {
     :where(body.hybrid-world, #mobile-play-notice, body.portfolio-static) :is(button, a.primary, a.text-button, .mobile-work-action, .mobile-play-footer a) {
       outline: 1px solid ButtonText;
