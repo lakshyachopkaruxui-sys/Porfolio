@@ -1,3 +1,4 @@
+@import url("./play-material.css");
 /* Play-only softly modelled controls. Normal portfolio does not load this file. */
 body.hybrid-world {
   --control-face-start: #fffdf5;
@@ -131,26 +132,7 @@ html:root body.hybrid-world #works-experience .works-header [data-mode-switch] {
   flex-basis: var(--mode-width, 184px);
 }
 
-/* The toolbar, guide and lower controls share a single porcelain surface.
-   A shallow press and a focus outline carry feedback through every state. */
-@layer play-navigation {
-  body.hybrid-world :is(#ride-tools,#help,#world-map,#woody-guide,#world-bottom,#touch-controls) button:not(:has(img)),
-  body.hybrid-world :is(#stop-route,#river-hop-action) {
-    background:linear-gradient(175deg,#fffdf5,#e6eddd) !important;
-    color:#243e34 !important;border:0 !important;
-    box-shadow:inset 0 1px 0 #ffffff70,0 2px 5px #18342824 !important;
-    filter:none !important;
-  }
-  body.hybrid-world :is(#ride-tools,#help,#world-map,#woody-guide,#world-bottom,#touch-controls) button :is(span,small,strong,kbd),
-  body.hybrid-world #world-bottom .stop-caption {color:inherit !important;}
-  body.hybrid-world :is(#ride-tools,#help,#world-map,#woody-guide,#world-bottom) kbd {
-    color:#334b40 !important;background:transparent !important;border:0 !important;
-    box-shadow:none !important;opacity:1 !important;padding-inline:.2em;
-  }
-  body.hybrid-world :is(#ride-tools,#help,#world-map,#woody-guide,#world-bottom,#touch-controls) button:is([aria-pressed=true],[aria-selected=true],[aria-current=step]) {
-    text-decoration:underline;text-underline-offset:.22em;
-  }
-  @media (forced-colors:active) {
-    body.hybrid-world :is(#ride-tools,#help,#world-map,#woody-guide,#world-bottom,#touch-controls) button:not(:has(img)) {background:ButtonFace !important;color:ButtonText !important;border:1px solid ButtonText !important;}
-  }
+body.hybrid-world :is(#ride-tools,#help,#world-map,#woody-guide,#world-bottom) kbd {
+  color:inherit !important; background:transparent !important; border:0 !important;
+  box-shadow:none !important; opacity:1 !important; padding-inline:.2em;
 }

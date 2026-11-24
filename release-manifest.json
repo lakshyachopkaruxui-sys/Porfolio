@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T05:55:10.242Z",
+  "generatedAt": "2026-11-24T06:26:25.426Z",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 800,
-      "sha256": "01edb6364545cfb4df9674b471adf7877ef16c4b794c52b8f7bc142d4612e613"
+      "sha256": "2be83f370f16215da9bf9219ecb8a60e86da1e46ec526142563c6e22bd65de09"
     },
     {
       "path": "_redirects",
@@ -3135,7 +3135,7 @@
     {
       "path": "bicycle-world/dist/exhibition.html",
       "size": 21493,
-      "sha256": "f1d4c07b805294be026145f6d2036f35c629bbe1fda0e3326ce1fb66e4c1cf95"
+      "sha256": "f1d93d7ab8127b511161423d420e38623c1d583f3a83364e71656e8e7a3eadc6"
     },
     {
       "path": "bicycle-world/dist/exhibition.js",
@@ -3145,7 +3145,7 @@
     {
       "path": "bicycle-world/dist/index.html",
       "size": 47798,
-      "sha256": "907e31859b500070ef4d6c2e6a5f14988170d7d5f233739b5c2355fe3b708148"
+      "sha256": "f55fd42364e9558588fc9da1ca87cb1ad5cd0460e75a40936182e79b9d98811d"
     },
     {
       "path": "bicycle-world/dist/photo-renderer.js",
@@ -3154,8 +3154,8 @@
     },
     {
       "path": "bicycle-world/dist/play-bundle.css",
-      "size": 389977,
-      "sha256": "b701acf31c40ea82a990843bbf3f93f24dc60aef1abf6edd816c8090ad0c7c3a"
+      "size": 393097,
+      "sha256": "a4b916fc52fb5424c29d0320518902c7551793c9bd7b910fc976b02abfdc71c1"
     },
     {
       "path": "bicycle-world/dist/pokemon-credits.html",
@@ -3164,13 +3164,13 @@
     },
     {
       "path": "bicycle-world/dist/projects.html",
-      "size": 31277,
-      "sha256": "4fe0f931e5944cb8a045caca94dd47a56d8e02c914544bc6922f2e78f6255670"
+      "size": 31349,
+      "sha256": "b6da096b8c5a2c1c9eea534aec778be7eaf624d3ce97104a3fdb9ee91e8892ec"
     },
     {
       "path": "bicycle-world/dist/sections.html",
       "size": 21434,
-      "sha256": "eba58dde82bd6107b4a41cd7fd674a5c295b4566be309e1a325ca636fec5e06f"
+      "sha256": "df287f7184d55fb03d34e2fa581cab0622dbed41696784e0e04665fc1f196ef2"
     },
     {
       "path": "bicycle-world/dist/sections.js",
@@ -3359,13 +3359,13 @@
     },
     {
       "path": "bicycle-world/dist/src/cloud-volume.js",
-      "size": 8387,
-      "sha256": "2bd649de38e176a535bb3e0fcc2e69be360020af3ab6cfd17b0ebe3b68b5e2a4"
+      "size": 6699,
+      "sha256": "f7eb36945b681f2a3ca681583ac486a2581e647d16840937f8a689158676db7a"
     },
     {
       "path": "bicycle-world/dist/src/clouds.css",
-      "size": 3376,
-      "sha256": "d2b91a16fde486f7073c9aeaf6d733ef22b4e528e3a2c48fcb6ab928721e51b4"
+      "size": 3420,
+      "sha256": "cecc4b1b56bea8a6f06fc314e1886dafda6f0ad7e9f1f207bbec5396122f79c2"
     },
     {
       "path": "bicycle-world/dist/src/collection-experience.css",
@@ -3599,8 +3599,8 @@
     },
     {
       "path": "bicycle-world/dist/src/main.js",
-      "size": 98255,
-      "sha256": "24bf2e344f49da20a4943ebe798d1d096aa202053f0b311d31ff513df75c246b"
+      "size": 96682,
+      "sha256": "9e1bb4fb92796516f9a2d36955abf69544d98b7a7007d333b731217866fa68b1"
     },
     {
       "path": "bicycle-world/dist/src/map-guide.css",
@@ -3764,8 +3764,13 @@
     },
     {
       "path": "bicycle-world/dist/src/play-interface-controls.css",
-      "size": 7973,
-      "sha256": "ed31f35ee36c025dd6a414771529886dbb5d7437a0d0126d24d94285e16e7d54"
+      "size": 6706,
+      "sha256": "ed7fd3fa80f9cf5f79542f6ed00edf2ce5f5ff6e57eed4f88bdca2ee34cc91be"
+    },
+    {
+      "path": "bicycle-world/dist/src/play-material.css",
+      "size": 4323,
+      "sha256": "2faa4b88a95c26e21284ffb797d48d4fc1d458bd3632ab725976b8713d1167a7"
     },
     {
       "path": "bicycle-world/dist/src/play-music-ui.js",
@@ -4229,8 +4234,8 @@
     },
     {
       "path": "bicycle-world/dist/story.html",
-      "size": 5842,
-      "sha256": "96e3baf58c9566ac9ca9415f24aadf250a0b998042bf951d381538874d52ab27"
+      "size": 5914,
+      "sha256": "be07c657a3712a57037b9e98b09cd78c26fbf3c7cfd36a5f500e1e52ac7a8288"
     },
     {
       "path": "bicycle-world/dist/vendor/THREE-LICENSE.txt",

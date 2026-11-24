@@ -4,10 +4,10 @@
 .cloud-veil{position:absolute;inset:0;background:#f3f7fa;opacity:0}
 body.cloud-handoff #scene{z-index:8;pointer-events:none}
 body.cloud-handoff #world-controls,body.cloud-handoff #world-bottom,body.cloud-handoff #woody-guide{visibility:hidden}
-/* CSS fallback until the shared entrance cloud renderer is ready. */
+/* One painted cloud bank, available before the 3D modules load. */
 .loading-clouds {
   position: relative;
-  width: 100%;
+  width: min(100%, 20rem);
   height: clamp(5.5rem, 16vw, 9rem);
   pointer-events: none;
 }
@@ -25,10 +25,10 @@ body.cloud-handoff #world-controls,body.cloud-handoff #world-bottom,body.cloud-h
 .loading-clouds span::before { width: 52%; height: 150%; left: 20%; bottom: 8%; }
 .loading-clouds span::after { width: 36%; height: 109%; right: 9%; bottom: 3%; }
 .loading-clouds span:nth-child(1) { left: 6%; top: 41%; }
-.loading-clouds span:nth-child(2) { left: 35%; top: 25%; scale: .85; --drift-delay: -1.8s; }
-.loading-clouds span:nth-child(3) { right: 8%; top: 46%; scale: 1.1; --drift-delay: -3s; }
-.loading-clouds span:nth-child(4) { left: 43%; top: 68%; --drift-delay: -4.2s; }
-.loading-clouds[data-volume-ready="true"] span { visibility: hidden; }
+.loading-clouds span:nth-child(2) { left: 35%; top: 25%; scale: .85; }
+.loading-clouds span:nth-child(3) { right: 8%; top: 46%; scale: 1.1; }
+.loading-clouds span:nth-child(4) { left: 43%; top: 68%; }
+body:is([data-garden-entry="preparing"],[data-garden-entry="resume"]) #welcome-portrait { visibility: hidden; }
 @media (forced-colors: active) { .loading-clouds { display: none; } }
 /* Recovery links stay usable at small desktop sizes and enlarged text. */
 #failure{position:fixed;inset:24px;margin:auto;width:min(550px,calc(100% - 48px));height:max-content;max-height:calc(100dvh - 48px);overflow:auto}
@@ -55,15 +55,19 @@ body.cloud-handoff #world-controls,body.cloud-handoff #world-bottom,body.cloud-h
   text-wrap: balance;
 }
 @media (prefers-reduced-motion: no-preference) {
-  html:not(.reduce-motion) body:not([data-play-ui-motion="reduced"]) #welcome .loading-clouds:not([data-volume-ready="true"]) span {
-    animation: preparing-cloud-drift 5s ease-in-out var(--drift-delay, 0s) infinite alternate;
+  html:not(.reduce-motion) body:not([data-play-ui-motion="reduced"]) #welcome #loading-state[aria-busy="true"] .loading-clouds {
+    animation: preparing-cloud-drift 3.6s ease-in-out infinite alternate;
+    will-change: transform;
   }
-  @keyframes preparing-cloud-drift { to { transform: translate(6px, -4px); } }
+  @keyframes preparing-cloud-drift {
+    from { transform: translate3d(-8px, 2px, 0); }
+    to   { transform: translate3d(8px, -3px, 0); }
+  }
 }
 
 #welcome .welcome-copy:has(#loading-state[aria-busy="true"]) #read-direct { display: none; }
 
-/* The sky stays continuous while the loading canvas becomes the garden canvas. */
+/* The sky stays continuous while the loader gives way to the garden. */
 #play-loading-veil {
   position: fixed;
   inset: 0;

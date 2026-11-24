@@ -1433,10 +1433,10 @@ body[data-garden-entry="welcome"][data-welcome-layout="panorama"][data-welcome-c
 .cloud-veil{position:absolute;inset:0;background:#f3f7fa;opacity:0}
 body.cloud-handoff #scene{z-index:8;pointer-events:none}
 body.cloud-handoff #world-controls,body.cloud-handoff #world-bottom,body.cloud-handoff #woody-guide{visibility:hidden}
-/* CSS fallback until the shared entrance cloud renderer is ready. */
+/* One painted cloud bank, available before the 3D modules load. */
 .loading-clouds {
   position: relative;
-  width: 100%;
+  width: min(100%, 20rem);
   height: clamp(5.5rem, 16vw, 9rem);
   pointer-events: none;
 }
@@ -1454,10 +1454,10 @@ body.cloud-handoff #world-controls,body.cloud-handoff #world-bottom,body.cloud-h
 .loading-clouds span::before { width: 52%; height: 150%; left: 20%; bottom: 8%; }
 .loading-clouds span::after { width: 36%; height: 109%; right: 9%; bottom: 3%; }
 .loading-clouds span:nth-child(1) { left: 6%; top: 41%; }
-.loading-clouds span:nth-child(2) { left: 35%; top: 25%; scale: .85; --drift-delay: -1.8s; }
-.loading-clouds span:nth-child(3) { right: 8%; top: 46%; scale: 1.1; --drift-delay: -3s; }
-.loading-clouds span:nth-child(4) { left: 43%; top: 68%; --drift-delay: -4.2s; }
-.loading-clouds[data-volume-ready="true"] span { visibility: hidden; }
+.loading-clouds span:nth-child(2) { left: 35%; top: 25%; scale: .85; }
+.loading-clouds span:nth-child(3) { right: 8%; top: 46%; scale: 1.1; }
+.loading-clouds span:nth-child(4) { left: 43%; top: 68%; }
+body:is([data-garden-entry="preparing"],[data-garden-entry="resume"]) #welcome-portrait { visibility: hidden; }
 @media (forced-colors: active) { .loading-clouds { display: none; } }
 /* Recovery links stay usable at small desktop sizes and enlarged text. */
 #failure{position:fixed;inset:24px;margin:auto;width:min(550px,calc(100% - 48px));height:max-content;max-height:calc(100dvh - 48px);overflow:auto}
@@ -1484,15 +1484,19 @@ body.cloud-handoff #world-controls,body.cloud-handoff #world-bottom,body.cloud-h
   text-wrap: balance;
 }
 @media (prefers-reduced-motion: no-preference) {
-  html:not(.reduce-motion) body:not([data-play-ui-motion="reduced"]) #welcome .loading-clouds:not([data-volume-ready="true"]) span {
-    animation: preparing-cloud-drift 5s ease-in-out var(--drift-delay, 0s) infinite alternate;
+  html:not(.reduce-motion) body:not([data-play-ui-motion="reduced"]) #welcome #loading-state[aria-busy="true"] .loading-clouds {
+    animation: preparing-cloud-drift 3.6s ease-in-out infinite alternate;
+    will-change: transform;
   }
-  @keyframes preparing-cloud-drift { to { transform: translate(6px, -4px); } }
+  @keyframes preparing-cloud-drift {
+    from { transform: translate3d(-8px, 2px, 0); }
+    to   { transform: translate3d(8px, -3px, 0); }
+  }
 }
 
 #welcome .welcome-copy:has(#loading-state[aria-busy="true"]) #read-direct { display: none; }
 
-/* The sky stays continuous while the loading canvas becomes the garden canvas. */
+/* The sky stays continuous while the loader gives way to the garden. */
 #play-loading-veil {
   position: fixed;
   inset: 0;
@@ -5178,6 +5182,101 @@ html.touch-input body.hybrid-world.river-hop-near #world-bottom {
 }
 
 /* Source: bicycle-world/dist/src/play-interface-controls.css */
+/* Source: bicycle-world/dist/src/play-material.css */
+/* Play's shared controls, including the catalogue used without WebGL. The layer
+   keeps older room themes from recolouring actions on hover or selection. */
+@layer play-material {
+  :root {
+    --play-rail: #fff;
+    --play-warm-face: linear-gradient(175deg, #fffdf5, #eee9d7);
+    --play-green-face: linear-gradient(175deg, #426958, #284b3d);
+    --play-warm-ink: #243e34;
+    --play-green-ink: #fffdf5;
+    --play-warm-depth: inset 0 1px 0 #ffffff70, 0 2px 5px #18342824;
+    --play-green-depth: inset 0 1px 0 #ffffff22, 0 2px 5px #18342830;
+  }
+
+  :where(body.hybrid-world, #mobile-play-notice, body.portfolio-static) :is(button, [role="button"]) {
+    border: 0 !important;
+  }
+
+  :where(body.hybrid-world, #mobile-play-notice, body.portfolio-static) :is(
+    button:not(:has(img)):not(.cloud-photo-card,.journal-photo-button,.hobby-photo-open),
+    [role="button"], a.primary, a.text-button, a.plain-reading, .failure-links a,
+    .mobile-work-action, .mobile-play-footer a, nav[aria-label="Portfolio navigation"] a
+  ) {
+    background: var(--action-face, var(--play-warm-face)) !important;
+    color: var(--action-ink, var(--play-warm-ink)) !important;
+    box-shadow: var(--action-depth, var(--play-warm-depth)) !important;
+    border: 0 !important;
+    border-radius: 9px !important;
+    min-height: 44px !important;
+    box-sizing: border-box;
+    filter: none !important;
+  }
+
+  :where(body.hybrid-world) :is(.welcome-actions, .welcome-choice-actions, .case-footer, .vb-invite-actions) button,
+  body.portfolio-static a.primary { min-height: 48px !important; }
+
+  :where(body.hybrid-world) :is(#ride-tools, .gallery-actions, .works-actions, .works-header nav,
+    .about-header nav, .personal-header nav, .oak-header nav, .pgr-tools) button:not(:has(img)) {
+    padding: 7px 12px !important;
+    font-size: 14px !important;
+    line-height: 1.3 !important;
+  }
+  :where(body.hybrid-world) :is(#ride-tools, #world-map, #help, #world-bottom, #woody-guide) button :is(kbd, span, small, strong) {
+    color: inherit !important;
+  }
+
+  :is(button, a, [role="button"], .mobile-work-action):is(
+    .primary, .works-primary, .gr-primary, .pgr-primary, .cloud-gallery-primary,
+    .about-open-notebook, .vb-submit, .mobile-work-action, #pokemon-view-catch,
+    [data-map-ride], [data-vb-invite-write], [data-oak-next], [data-oak-collection],
+    [data-oak-build-next], [data-journal-next], [aria-pressed=true], [aria-selected=true],
+    [aria-current=page], [aria-current=step], [aria-current=true], .pressed
+  ) {
+    --action-face: var(--play-green-face);
+    --action-ink: var(--play-green-ink);
+    --action-depth: var(--play-green-depth);
+  }
+
+  :where(body.hybrid-world, #mobile-play-notice, body.portfolio-static) :is(
+    a.primary, a.text-button, a.plain-reading, .failure-links a, .mobile-work-action,
+    .mobile-play-footer a, nav[aria-label="Portfolio navigation"] a
+  ) {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px !important;
+    text-decoration: none !important;
+  }
+
+  :where(body.hybrid-world, #mobile-play-notice, body.portfolio-static) :is(
+    #ride-tools, .works-header nav, .personal-header nav, .about-header nav, .oak-header nav,
+    .oak-tools, .works-caption, .gallery-strip, .reader-top, .cloud-gallery-tools,
+    .mobile-mode-bar, nav[aria-label="Portfolio navigation"]
+  ) { background: var(--play-rail) !important; }
+  body.hybrid-world #pokemon-experience .pgr-head::before { background: var(--play-rail) !important; }
+
+  :where(body.hybrid-world, #mobile-play-notice, body.portfolio-static) :is(a, button, [role="button"]):focus-visible {
+    outline: 3px solid #214d3c !important;
+    outline-offset: 3px !important;
+  }
+  @media (max-width: 760px) {
+    body.hybrid-world .gallery-actions button { padding-inline: 8px !important; }
+  }
+  @media (hover: hover) {
+    :where(body.hybrid-world, #mobile-play-notice, body.portfolio-static) :is(button, a.primary, a.text-button, .mobile-play-footer a):hover:not(:disabled) {
+      text-decoration: underline !important;
+      text-underline-offset: .18em;
+    }
+  }
+  @media (forced-colors: active) {
+    :where(body.hybrid-world, #mobile-play-notice, body.portfolio-static) :is(button, a.primary, a.text-button, .mobile-work-action, .mobile-play-footer a) {
+      outline: 1px solid ButtonText;
+    }
+  }
+}
+
 /* Play-only softly modelled controls. Normal portfolio does not load this file. */
 body.hybrid-world {
   --control-face-start: #fffdf5;
@@ -5311,28 +5410,9 @@ html:root body.hybrid-world #works-experience .works-header [data-mode-switch] {
   flex-basis: var(--mode-width, 184px);
 }
 
-/* The toolbar, guide and lower controls share a single porcelain surface.
-   A shallow press and a focus outline carry feedback through every state. */
-@layer play-navigation {
-  body.hybrid-world :is(#ride-tools,#help,#world-map,#woody-guide,#world-bottom,#touch-controls) button:not(:has(img)),
-  body.hybrid-world :is(#stop-route,#river-hop-action) {
-    background:linear-gradient(175deg,#fffdf5,#e6eddd) !important;
-    color:#243e34 !important;border:0 !important;
-    box-shadow:inset 0 1px 0 #ffffff70,0 2px 5px #18342824 !important;
-    filter:none !important;
-  }
-  body.hybrid-world :is(#ride-tools,#help,#world-map,#woody-guide,#world-bottom,#touch-controls) button :is(span,small,strong,kbd),
-  body.hybrid-world #world-bottom .stop-caption {color:inherit !important;}
-  body.hybrid-world :is(#ride-tools,#help,#world-map,#woody-guide,#world-bottom) kbd {
-    color:#334b40 !important;background:transparent !important;border:0 !important;
-    box-shadow:none !important;opacity:1 !important;padding-inline:.2em;
-  }
-  body.hybrid-world :is(#ride-tools,#help,#world-map,#woody-guide,#world-bottom,#touch-controls) button:is([aria-pressed=true],[aria-selected=true],[aria-current=step]) {
-    text-decoration:underline;text-underline-offset:.22em;
-  }
-  @media (forced-colors:active) {
-    body.hybrid-world :is(#ride-tools,#help,#world-map,#woody-guide,#world-bottom,#touch-controls) button:not(:has(img)) {background:ButtonFace !important;color:ButtonText !important;border:1px solid ButtonText !important;}
-  }
+body.hybrid-world :is(#ride-tools,#help,#world-map,#woody-guide,#world-bottom) kbd {
+  color:inherit !important; background:transparent !important; border:0 !important;
+  box-shadow:none !important; opacity:1 !important; padding-inline:.2em;
 }
 
 /* Source: bicycle-world/dist/src/visitor-board.css */

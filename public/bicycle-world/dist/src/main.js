@@ -116,7 +116,7 @@ let tourFocusOrigin=null;
 let tourFocused=true;
 const welcomeFlow=createWelcomeFlow();
 const cloudTransition=createCloudTransition(),cloudCurtain=mountCloudCurtain($('welcome-handoff'));
-let cloudVolume,loadingCloudFrame=0,lastLoadingCloudPaint=-Infinity;
+let cloudVolume;
 const FIRST_STOP='about';
 const PERSONAL_ROUTES=Object.freeze({about:'#meet-lakshya',work:'#hobbies',music:'#oak-lab',cloud:'#cloud-lookout'});
 const syncCaptionClock=createCaptionClock(()=>{
@@ -188,7 +188,7 @@ const mainLoop=createGuardedFrameLoop({step:frame,onError(error){
   showWorldFailure('The 3D view stopped unexpectedly. Retry the world, or keep reading the projects.');
 }});
 window.addEventListener('play-startup-cancel',()=>{
-  failed=true;startupController.abort();mainLoop.stop();cancelAnimationFrame(loadingCloudFrame);
+  failed=true;startupController.abort();mainLoop.stop();
 });
 const playMusic=mountPlayMusic({notify});
 let target=null,guidedRide=null,nearStop=null,lastTime=0,time=0,noticeTimer,saveTime=0,blockedTime=0;
@@ -838,7 +838,7 @@ window.addEventListener('pagehide',event=>{
   const deferredGuide=running&&pendingWelcomeGuide;
   departureControlsPending=false;pendingWelcomeLine=null;welcomeVoice.stop();tour?.stop();tour?.update({hidden:true});clearInput();clearWelcomeHandoff();
   if(event.persisted){pendingWelcomeGuide=deferredGuide;return;}
-  abandoned=true;tour?.dispose();tourAudio?.dispose();tourUI?.dispose();visitorBoard?.dispose();visitorUI?.dispose();riverHop?.dispose();overlayMotion.dispose();touchControlInput?.dispose();mainLoop.stop();bicycleLight?.dispose();rider?.bell?.dispose();aboutExperience?.dispose();oakLab?.dispose();worksExperience?.dispose();personalRooms?.dispose();rideObjectives?.dispose();trailheadGuide?.dispose();gardenLighting?.dispose();followSky?.dispose();world?.wayfinding.dispose();cancelAnimationFrame(loadingCloudFrame);cloudVolume?.dispose();cloudCurtain.dispose();rideProfile?.dispose();startupController.abort();pokemonControls.dispose();pokemonAudio.dispose();rideSoundControl.dispose();gardenBell.dispose();rideAudio.dispose();companions?.dispose();welcomeVoice.dispose();garden?.dispose();world?.studioDisplays.dispose();world?.landmarks.dispose();woodyWelcome?.dispose();disposeCharacterAsset(characterAsset);characterAsset=null;
+  abandoned=true;tour?.dispose();tourAudio?.dispose();tourUI?.dispose();visitorBoard?.dispose();visitorUI?.dispose();riverHop?.dispose();overlayMotion.dispose();touchControlInput?.dispose();mainLoop.stop();bicycleLight?.dispose();rider?.bell?.dispose();aboutExperience?.dispose();oakLab?.dispose();worksExperience?.dispose();personalRooms?.dispose();rideObjectives?.dispose();trailheadGuide?.dispose();gardenLighting?.dispose();followSky?.dispose();world?.wayfinding.dispose();cloudVolume?.dispose();cloudCurtain.dispose();rideProfile?.dispose();startupController.abort();pokemonControls.dispose();pokemonAudio.dispose();rideSoundControl.dispose();gardenBell.dispose();rideAudio.dispose();companions?.dispose();welcomeVoice.dispose();garden?.dispose();world?.studioDisplays.dispose();world?.landmarks.dispose();woodyWelcome?.dispose();disposeCharacterAsset(characterAsset);characterAsset=null;
   renderer?.dispose();renderer?.domElement.remove();
 });
 touchControlInput=createTouchRidingInput({buttons:$('touch-controls').querySelectorAll('[data-key]'),keys,physicalKeys,releaseTarget:window,onStart:cancelRoute,isActive:()=>coarse&&ready&&running&&!inPortfolio&&!hasOverlay()&&!ridingInputBlocked()});
@@ -878,31 +878,6 @@ sceneHost.addEventListener('pointerleave',()=>{hoverPointer=null;nextHoverCheck=
 function updateProjection(){const aspect=innerWidth/innerHeight;if(camera.isPerspectiveCamera)camera.aspect=aspect;else{camera.left=-cameraHeight*aspect/2;camera.right=cameraHeight*aspect/2;camera.top=cameraHeight/2;camera.bottom=-cameraHeight/2;}camera.updateProjectionMatrix();}
 let portraitWidth=0,portraitHeight=0;
 function renderCloudEntry(){cloudVolume?.render(renderer,cloudTransition.snapshot,innerWidth,innerHeight);}
-function drawLoadingCloud(now=0){
-  if(!cloudVolume||ready||failed||abandoned||inPortfolio||document.hidden)return;
-  const host=document.querySelector('.loading-clouds'),rect=host.getBoundingClientRect();
-  if(rect.width<1||rect.height<1)return;
-  cloudVolume.renderLoading(renderer,{x:rect.left,y:innerHeight-rect.bottom,width:rect.width,height:rect.height},now/1000,{reduced});
-  host.dataset.volumeReady='true';
-}
-function animateLoadingCloud(now){
-  if(abandoned||ready||failed)return;
-  loadingCloudFrame=requestAnimationFrame(animateLoadingCloud);
-  try{
-  if(document.hidden||inPortfolio||now-lastLoadingCloudPaint<(reduced?250:1000/24))return;
-  lastLoadingCloudPaint=now;
-  const parent=$('welcome-portrait');
-  if(renderer.domElement.parentElement!==parent)parent.append(renderer.domElement);
-  renderer.setViewport(0,0,innerWidth,innerHeight);
-  renderer.setScissorTest(false);
-  renderer.setClearColor('#ffffff',0);
-  renderer.clear();
-  drawLoadingCloud(now);
-  }catch(error){
-    failed=true;startupController.abort();console.error('The loading view could not continue',error);
-    showWorldFailure('The 3D view could not prepare. Retry, or read the projects directly.');
-  }
-}
 function renderWelcome(dt=0){
   if(!renderer||!woodyWelcome)return;
   const rect=$('welcome-portrait').getBoundingClientRect(),w=innerWidth,h=innerHeight;
@@ -955,14 +930,12 @@ function showWorldFailure(message){
     catch(error){console.warn('A destination could not finish closing after the 3D view stopped.',error);}
   }
   if([...Object.values(PERSONAL_ROUTES),'#works-room'].includes(location.hash))history.replaceState(null,'',location.pathname+location.search);
-  cancelAnimationFrame(loadingCloudFrame);
   cancelWelcomeDeparture();dismissWelcomeGuide();
   
   readingBackdropDrawn=false;
   ready=false;clearInput();syncRideUI();$('start').disabled=true;
   $('route-hint').hidden=true;$('failure').querySelector('h1').textContent=startupComplete?'The world paused.':'The world couldn’t start.';
   $('loading-state').setAttribute('aria-busy','false');$('loading-status').textContent='The world needs another try.';
-  document.querySelector('.loading-clouds')?.removeAttribute('data-volume-ready');
   $('failure-message').textContent=message;$('failure').hidden=false;$('welcome').hidden=true;
   syncRideUI();
   
@@ -999,7 +972,7 @@ async function initialize(){
         renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'high-performance'});renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;sceneHost.append(renderer.domElement);
         renderer.setPixelRatio(renderSettings.pixelRatio);renderer.setSize(innerWidth,innerHeight);
         renderer.setClearColor('#ffffff',1);renderer.clear();
-        cloudVolume=createCloudVolume();loadingCloudFrame=requestAnimationFrame(animateLoadingCloud);
+        cloudVolume=createCloudVolume();
         renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();if(!startupComplete){failed=true;startupController.abort();}showWorldFailure('The 3D view was interrupted. Retry the world, or keep reading the projects.');});
         renderer.domElement.addEventListener('webglcontextrestored',()=>{
           if(!startupComplete||failed)return;
@@ -1074,7 +1047,7 @@ async function initialize(){
       await veil.animate([{opacity:0},{opacity:1}],{duration:280,easing:'ease-in-out',fill:'forwards'}).finished.catch(()=>{});
       if(abandoned||failed){veil.remove();return;}
     }
-    cancelAnimationFrame(loadingCloudFrame);startupComplete=true;ready=true;$('failure').hidden=true;if(!running)$('welcome').hidden=false;$('start').disabled=false;$('start').textContent='Let’s start';
+    startupComplete=true;ready=true;$('failure').hidden=true;if(!running)$('welcome').hidden=false;$('start').disabled=false;$('start').textContent='Let’s start';
     window.__playStartup?.finish('ready');
     if(!enteredGarden){
       document.body.dataset.gardenEntry='welcome';

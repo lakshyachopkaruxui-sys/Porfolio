@@ -28,15 +28,6 @@ export function createCloudVolume(){
     scene.add(mesh);return mesh;
   }
   const banks=Array.from({length:4},(_,i)=>makeBank(i,32));
-  const loadingClouds = [
-    [-.66,.08,.81,.4],
-    [-.07,.34,.69,2.2],
-    [.61,.04,.88,4.1],
-    [.08,-.43,.78,5.4],
-  ];
-  const loadingBank=new THREE.InstancedMesh(geometry,material,loadingClouds.length*lobes.length);
-  loadingBank.name='Floating entrance clouds';loadingBank.frustumCulled=false;
-  scene.add(loadingBank);
   // An opaque backstop seals tiny crevices before changing the scene below.
   const veilGeometry=new THREE.PlaneGeometry(2,2),veilMaterial=new THREE.MeshBasicMaterial({color:'#eef3f8',transparent:true,depthWrite:false,toneMapped:false});
   const veil=new THREE.Mesh(veilGeometry,veilMaterial);veil.name='Cloud opacity backstop';veil.position.z=-4;veil.renderOrder=-1;scene.add(veil);
@@ -84,11 +75,11 @@ export function createCloudVolume(){
       bank.instanceMatrix.needsUpdate=true;bank.instanceColor.needsUpdate=true;bank.boundingSphere=null;
     });
   }
-  resize(1280,720);
+
 
   function update(snapshot,w=width,h=height){
     if(disposed)return;
-    resize(w,h);loadingBank.visible=false;
+    resize(w,h);
     veil.visible=Boolean(snapshot.active);veil.scale.set(halfWidth,halfHeight,1);
     veilMaterial.opacity=snapshot.phase==='revealing'?1-ease(snapshot.revealProgress/.18):ease((snapshot.coverProgress-.55)/.45);
     camera.left=-halfWidth;camera.right=halfWidth;camera.top=halfHeight;camera.bottom=-halfHeight;camera.updateProjectionMatrix();
@@ -106,14 +97,13 @@ export function createCloudVolume(){
     scene.updateMatrixWorld(true);
   }
 
-  function draw(renderer,rect){
+  function draw(renderer){
     if(disposed)return;
     const autoClear=renderer.autoClear,scissorTest=renderer.getScissorTest();
     renderer.getViewport(viewport);renderer.getScissor(scissor);
     try{
       renderer.autoClear=false;
-      if(rect){renderer.setViewport(rect.x,rect.y,rect.width,rect.height);renderer.setScissor(rect.x,rect.y,rect.width,rect.height);renderer.setScissorTest(true);}
-      else{renderer.setViewport(0,0,width,height);renderer.setScissorTest(false);}
+      renderer.setViewport(0,0,width,height);renderer.setScissorTest(false);
       renderer.clearDepth();renderer.render(scene,camera);
     }finally{
       renderer.autoClear=autoClear;renderer.setViewport(viewport);renderer.setScissor(scissor);renderer.setScissorTest(scissorTest);
@@ -123,31 +113,11 @@ export function createCloudVolume(){
     if(disposed||!snapshot.active)return;
     update(snapshot,w,h);draw(renderer);
   }
-  function renderLoading(renderer,rect,time=0,{reduced=false}={}){
-    if(disposed||rect.width<1||rect.height<1)return;
-    banks.forEach(bank=>bank.visible=false);veil.visible=false;loadingBank.visible=true;
-    const aspect=rect.width/rect.height;
-    const halfHeight=Math.max(2,4.4/aspect),halfWidth=halfHeight*aspect;
-    camera.left=-halfWidth;camera.right=halfWidth;camera.top=halfHeight;camera.bottom=-halfHeight;camera.updateProjectionMatrix();
-    let index=0;
-    for(const [x,y,size,phase] of loadingClouds){
-      const driftX=reduced?0:Math.sin(time*.53+phase)*.23;
-      const driftY=reduced?0:Math.sin(time*.71+phase)*.14;
-      const angle=reduced?0:Math.sin(time*.39+phase)*.065;
-      const cos=Math.cos(angle),sin=Math.sin(angle);
-      for(const [lx,ly,lz,sx,sy,sz] of lobes){
-        put(loadingBank,index++,x*halfWidth+driftX+(lx*cos-ly*sin)*size,
-          y*halfHeight+driftY+(lx*sin+ly*cos)*size,lz*size,sx*size,sy*size,sz*size,angle);
-      }
-    }
-    loadingBank.instanceMatrix.needsUpdate=true;loadingBank.instanceColor.needsUpdate=true;
-    draw(renderer,rect);
-  }
   function dispose(){
     if(disposed)return;disposed=true;
-    for(const mesh of [...banks,loadingBank])mesh.dispose();
+    for(const mesh of banks)mesh.dispose();
     geometry.dispose();material.dispose();veilGeometry.dispose();veilMaterial.dispose();scene.clear();
   }
-  return {scene,camera,banks,loadingBank,geometry,material,veil,update,render,renderLoading,dispose,
+  return {scene,camera,banks,geometry,material,veil,update,render,dispose,
     get metrics(){const instances=banks.reduce((n,bank)=>n+bank.count,0);return {clouds:instances/lobes.length,instances,triangles:instances*geometry.attributes.position.count/3+2,draws:5,textures:0};}};
 }

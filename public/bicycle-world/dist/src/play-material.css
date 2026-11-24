@@ -1,0 +1,93 @@
+/* Play's shared controls, including the catalogue used without WebGL. The layer
+   keeps older room themes from recolouring actions on hover or selection. */
+@layer play-material {
+  :root {
+    --play-rail: #fff;
+    --play-warm-face: linear-gradient(175deg, #fffdf5, #eee9d7);
+    --play-green-face: linear-gradient(175deg, #426958, #284b3d);
+    --play-warm-ink: #243e34;
+    --play-green-ink: #fffdf5;
+    --play-warm-depth: inset 0 1px 0 #ffffff70, 0 2px 5px #18342824;
+    --play-green-depth: inset 0 1px 0 #ffffff22, 0 2px 5px #18342830;
+  }
+
+  :where(body.hybrid-world, #mobile-play-notice, body.portfolio-static) :is(button, [role="button"]) {
+    border: 0 !important;
+  }
+
+  :where(body.hybrid-world, #mobile-play-notice, body.portfolio-static) :is(
+    button:not(:has(img)):not(.cloud-photo-card,.journal-photo-button,.hobby-photo-open),
+    [role="button"], a.primary, a.text-button, a.plain-reading, .failure-links a,
+    .mobile-work-action, .mobile-play-footer a, nav[aria-label="Portfolio navigation"] a
+  ) {
+    background: var(--action-face, var(--play-warm-face)) !important;
+    color: var(--action-ink, var(--play-warm-ink)) !important;
+    box-shadow: var(--action-depth, var(--play-warm-depth)) !important;
+    border: 0 !important;
+    border-radius: 9px !important;
+    min-height: 44px !important;
+    box-sizing: border-box;
+    filter: none !important;
+  }
+
+  :where(body.hybrid-world) :is(.welcome-actions, .welcome-choice-actions, .case-footer, .vb-invite-actions) button,
+  body.portfolio-static a.primary { min-height: 48px !important; }
+
+  :where(body.hybrid-world) :is(#ride-tools, .gallery-actions, .works-actions, .works-header nav,
+    .about-header nav, .personal-header nav, .oak-header nav, .pgr-tools) button:not(:has(img)) {
+    padding: 7px 12px !important;
+    font-size: 14px !important;
+    line-height: 1.3 !important;
+  }
+  :where(body.hybrid-world) :is(#ride-tools, #world-map, #help, #world-bottom, #woody-guide) button :is(kbd, span, small, strong) {
+    color: inherit !important;
+  }
+
+  :is(button, a, [role="button"], .mobile-work-action):is(
+    .primary, .works-primary, .gr-primary, .pgr-primary, .cloud-gallery-primary,
+    .about-open-notebook, .vb-submit, .mobile-work-action, #pokemon-view-catch,
+    [data-map-ride], [data-vb-invite-write], [data-oak-next], [data-oak-collection],
+    [data-oak-build-next], [data-journal-next], [aria-pressed=true], [aria-selected=true],
+    [aria-current=page], [aria-current=step], [aria-current=true], .pressed
+  ) {
+    --action-face: var(--play-green-face);
+    --action-ink: var(--play-green-ink);
+    --action-depth: var(--play-green-depth);
+  }
+
+  :where(body.hybrid-world, #mobile-play-notice, body.portfolio-static) :is(
+    a.primary, a.text-button, a.plain-reading, .failure-links a, .mobile-work-action,
+    .mobile-play-footer a, nav[aria-label="Portfolio navigation"] a
+  ) {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px !important;
+    text-decoration: none !important;
+  }
+
+  :where(body.hybrid-world, #mobile-play-notice, body.portfolio-static) :is(
+    #ride-tools, .works-header nav, .personal-header nav, .about-header nav, .oak-header nav,
+    .oak-tools, .works-caption, .gallery-strip, .reader-top, .cloud-gallery-tools,
+    .mobile-mode-bar, nav[aria-label="Portfolio navigation"]
+  ) { background: var(--play-rail) !important; }
+  body.hybrid-world #pokemon-experience .pgr-head::before { background: var(--play-rail) !important; }
+
+  :where(body.hybrid-world, #mobile-play-notice, body.portfolio-static) :is(a, button, [role="button"]):focus-visible {
+    outline: 3px solid #214d3c !important;
+    outline-offset: 3px !important;
+  }
+  @media (max-width: 760px) {
+    body.hybrid-world .gallery-actions button { padding-inline: 8px !important; }
+  }
+  @media (hover: hover) {
+    :where(body.hybrid-world, #mobile-play-notice, body.portfolio-static) :is(button, a.primary, a.text-button, .mobile-play-footer a):hover:not(:disabled) {
+      text-decoration: underline !important;
+      text-underline-offset: .18em;
+    }
+  }
+  @media (forced-colors: active) {
+    :where(body.hybrid-world, #mobile-play-notice, body.portfolio-static) :is(button, a.primary, a.text-button, .mobile-work-action, .mobile-play-footer a) {
+      outline: 1px solid ButtonText;
+    }
+  }
+}
