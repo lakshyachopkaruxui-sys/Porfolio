@@ -181,6 +181,7 @@ let feedbackInvited=false;try{feedbackInvited=sessionStorage.getItem(feedbackInv
 function inviteFeedback(onLeave){if(feedbackInvited){onLeave?.();return;}feedbackInvited=true;tour?.emit('feedback-invited');try{sessionStorage.setItem(feedbackInviteKey,'1');}catch{}visitorUI?.invite({onLeave});}
 function openVisitorBoard(){if(!visitorUI)return;feedbackInvited=true;tour?.emit('feedback-invited');try{sessionStorage.setItem(feedbackInviteKey,'1');}catch{}cancelRoute();state.speed=0;visitorUI.open({invite:true});}
 let enteredGarden=false,pendingRideAudio=false;
+const RIDE_TIP_SECONDS=12;
 let rideTipSeconds=0;
 let daylightChoice=null;
 let riverHop=null,hopBoost=false,rampApproach=false;
@@ -222,7 +223,7 @@ function notify(text){$('notice').textContent=text;$('notice').classList.add('vi
 function save(){if(!riverHop?.active)store.set();}
 function restartJourney(){
   if(!ready||!rider){notify('The garden is still preparing. Restart is available once the ride is ready.');return;}
-  clearInput();dismissWelcomeGuide();rideTipSeconds=10;
+  clearInput();dismissWelcomeGuide();rideTipSeconds=RIDE_TIP_SECONDS;
   Object.assign(state,newState());pokemonProximity.reset();
   rideFeedback.reset(state);contactMarker?.reset();
   focus.set(state.x-Math.sin(state.heading),0,state.z-Math.cos(state.heading));
@@ -393,7 +394,7 @@ function showWelcomeGuidance(){
   requestWelcomeLine('arrival-guide');
 }
 function completeWelcome(showGuidance=true){
-  rideTipSeconds=10;
+  rideTipSeconds=RIDE_TIP_SECONDS;
   onboarding?.markRiding();
   running=true;inPortfolio=false;$('welcome').hidden=true;rideHintVisible=false;
   enteredGarden=true;save();
