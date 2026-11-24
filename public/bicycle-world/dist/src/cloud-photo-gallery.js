@@ -10,11 +10,12 @@ export function createCloudPhotoGallery({host,photos=[],collections=[],onClose=(
     .map(roll=>({...roll,photos:valid(roll.photos||[])})).filter(roll=>roll.photos.length);
   const root=doc.createElement('section');root.className='cloud-photo-gallery';root.hidden=true;root.tabIndex=-1;
   root.setAttribute('role','region');root.setAttribute('aria-label','Lakshya’s photographs');
-  root.innerHTML=`<header class="cloud-gallery-header"><div><p class="cloud-gallery-eyebrow">THE VIEWFINDER <span data-cloud-total></span></p><h2 data-cloud-title></h2><p class="cloud-gallery-intro" data-cloud-intro></p><p class="cloud-gallery-position" data-cloud-count aria-live="polite"></p></div><div class="cloud-gallery-header-actions"><button type="button" data-cloud-back hidden>Back to photos</button>${roomMapButton}<button type="button" data-cloud-close>Back to the Viewfinder</button></div></header>
+  root.innerHTML=`<header class="cloud-gallery-header"><div><p class="cloud-gallery-eyebrow">THE VIEWFINDER <span data-cloud-total></span></p><h2 data-cloud-title></h2><p class="cloud-gallery-intro" data-cloud-intro></p><p class="cloud-gallery-position" data-cloud-count aria-live="polite"></p></div><div class="cloud-gallery-header-actions"><div class="cloud-gallery-tools"></div><button data-room-return type="button" data-cloud-back hidden>Back to photos</button>${roomMapButton}<button data-room-return type="button" data-cloud-close>Back to the Viewfinder</button></div></header>
+    <details class="cloud-gallery-help"><summary>How to browse</summary><p data-cloud-hint></p></details>
     <nav class="cloud-gallery-rolls" aria-label="Choose a photography collection"></nav><nav class="cloud-gallery-subjects" aria-label="Filter photographs by subject"></nav>
     <section class="cloud-gallery-index" aria-label="Choose a photograph"></section>
     <figure class="cloud-gallery-stage" data-cloud-stage hidden><figcaption class="cloud-gallery-load" role="status" aria-live="polite"><span data-cloud-status></span><button type="button" data-cloud-retry hidden>Retry photograph</button></figcaption></figure>
-    <footer class="cloud-gallery-footer"><nav class="cloud-gallery-pages" aria-label="Move through the film reel"><button type="button" data-cloud-sheet-prev>Previous frame</button><p data-cloud-sheet-count role="status"></p><button type="button" data-cloud-sheet-next>Next frame</button></nav><nav class="cloud-gallery-actions" aria-label="Browse complete photographs" hidden><button type="button" data-cloud-prev>Previous photo</button><p>Complete photograph · fitted to screen</p><button type="button" data-cloud-next>Next photo</button></nav><div class="cloud-gallery-bottom"><p data-cloud-hint>Choose a photograph to open it.</p><div class="cloud-gallery-tools"></div></div></footer>`;
+    <footer class="cloud-gallery-footer gallery-strip"><div class="gallery-label"><span data-cloud-sheet-count role="status"></span><span data-cloud-caption></span></div><nav class="cloud-gallery-pages gallery-actions" aria-label="Move through the film reel"><button type="button" data-cloud-sheet-prev>Previous frame</button><button type="button" data-cloud-sheet-next>Next frame</button></nav><nav class="cloud-gallery-actions gallery-actions" aria-label="Browse complete photographs" hidden><button type="button" data-cloud-prev>Previous photo</button><button type="button" data-cloud-next>Next photo</button></nav></footer>`;
   host.append(root);
   const q=selector=>root.querySelector(selector),indexView=q('.cloud-gallery-index'),stage=q('[data-cloud-stage]');
   const rollNav=q('.cloud-gallery-rolls'),subjectNav=q('.cloud-gallery-subjects');
@@ -96,14 +97,18 @@ export function createCloudPhotoGallery({host,photos=[],collections=[],onClose=(
     if(!opened||dead)return;generation++;const roll=rolls[rollIndex],full=mode==='full';releaseAll(full);
     root.dataset.mode=mode;root.dataset.roll=roll.id;root.dataset.subject=subject;root.dataset.reduced=String(Boolean(isReduced()));
     q('[data-cloud-total]').textContent=`${subject==='all'?roll.photos.length:items.length+' of '+roll.photos.length} photographs`;
-    q('[data-cloud-title]').textContent=full?(items[selected]?.caption||'Photograph'):roll.title;
+    q('[data-cloud-title]').textContent=roll.title;
+    const caption=q('[data-cloud-caption]');
+    caption.textContent=full?(items[selected]?.caption||''):'';
+    caption.hidden=!caption.textContent;
     q('[data-cloud-intro]').textContent=roll.intro;q('[data-cloud-intro]').hidden=full;
     q('[data-cloud-count]').textContent=full?`Photo ${selected+1} of ${items.length} · ${subject==='all'?roll.label:PHOTO_SUBJECTS[subject]}`:'';
     q('[data-cloud-count]').hidden=!full;q('[data-cloud-close]').hidden=full;q('[data-cloud-back]').hidden=!full;
     rollNav.hidden=full||rolls.length<2;for(const button of rollNav.querySelectorAll('button'))button.setAttribute('aria-pressed',String(Number(button.dataset.cloudRoll)===rollIndex));
     renderSubjects();indexView.hidden=full;q('[data-cloud-stage]').hidden=!full;
     q('.cloud-gallery-pages').hidden=full;q('.cloud-gallery-actions').hidden=!full;
-    q('[data-cloud-hint]').textContent=full?'A / D or Left / Right: browse · Esc: back to photos':'Swipe or use ← → to move the reel. Select the centre photo to open it.';
+    q('[data-cloud-hint]').textContent=full?'Use Left or Right to browse and Escape to return to photos.':'Swipe or use Left and Right to move the reel. Select the centre photo to open it.';
+    if(full)q('[data-cloud-sheet-count]').textContent='Photo '+(selected+1)+' of '+items.length;
     q('[data-cloud-status]').textContent='';q('[data-cloud-retry]').hidden=true;root.dataset.loading='false';
     q('[data-cloud-prev]').disabled=selected===0;q('[data-cloud-next]').disabled=selected===items.length-1;
     if(full){q('[data-cloud-status]').textContent='Loading photograph…';root.dataset.loading='true';showDetail(items[selected]);return;}
@@ -130,6 +135,7 @@ export function createCloudPhotoGallery({host,photos=[],collections=[],onClose=(
       card.setAttribute('aria-label',(slot===0?'Open':'Centre')+' photograph '+(index+1)+': '+photo.caption);
     }
     for(const card of frames.values()){releaseImage(card.firstElementChild);card.remove();}
+    q('[data-cloud-caption]').textContent=items[selected]?.caption||'';q('[data-cloud-caption]').hidden=false;
     q('[data-cloud-sheet-count]').textContent='Frame '+(selected+1)+' of '+count;
     q('[data-cloud-sheet-prev]').disabled=q('[data-cloud-sheet-next]').disabled=count<2;
   }

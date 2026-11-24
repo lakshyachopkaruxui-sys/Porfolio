@@ -1,5 +1,5 @@
 import {roomMapButton} from './room-map-navigation.js';
-import {journalAtoms,balanceJournalPages} from './about-journal-pagination.js';
+import {journalAtoms,balanceJournalPages,JournalPageSizeError} from './about-journal-pagination.js';
 let readerSerial=0;
 
 /** A semantic notebook inside the About owner's dialog. It owns no 3D resources. */
@@ -9,24 +9,24 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
   const id=`about-journal-${++readerSerial}`,root=doc.createElement('section');
   root.className='about-journal-reader';root.hidden=true;root.tabIndex=-1;
   root.setAttribute('role','region');root.setAttribute('aria-label',content?.title||'Lakshya’s notebook');
-  root.innerHTML=`<nav class="journal-chapters" aria-label="Notebook sections" data-journal-tabs><label class="journal-section-jump" for="${id}-section">Section<select id="${id}-section" data-journal-jump aria-controls="${id}-spread"></select></label>${roomMapButton}<button type="button" data-journal-close>Back to studio</button></nav>
+  root.innerHTML=`<nav class="journal-chapters" aria-label="Notebook sections" data-journal-tabs><label class="journal-section-jump" for="${id}-section">Section<select id="${id}-section" data-journal-jump aria-controls="${id}-spread"></select></label>${roomMapButton}<button data-room-return type="button" data-journal-close>Back to studio</button></nav>
     <div class="journal-book-stage" data-journal-stage><div class="journal-book" data-journal-book role="region" id="${id}-spread">
       <article class="journal-page journal-page-left" data-journal-left tabindex="0"></article>
       <article class="journal-page journal-page-right" data-journal-right tabindex="0"></article>
     </div><div class="journal-binding" aria-hidden="true"></div></div>
     <footer class="journal-footer"><nav class="journal-page-navigation" aria-label="Turn notebook pages"><button type="button" data-journal-prev><span aria-hidden="true">← </span>Previous pages</button><div class="journal-page-position"><p id="${id}-section-title" data-journal-section></p><p data-journal-count aria-live="polite"></p><p class="journal-key-hint">A / D or ← / → turn pages · Esc returns to studio</p></div><button type="button" data-journal-next>Next pages<span aria-hidden="true"> →</span></button></nav></footer>
     <section id="about-journal-photo" class="journal-photo-viewer" data-journal-viewer aria-labelledby="${id}-photo-title" tabindex="-1" hidden>
-      <header><div><p>FROM MY NOTEBOOK</p><h2 id="${id}-photo-title" data-journal-photo-title></h2></div>${roomMapButton}<button type="button" data-journal-photo-close>Back to the notebook</button></header>
-      <figure><img decoding="async" data-journal-full-photo alt=""><figcaption data-journal-photo-caption></figcaption></figure>
+      <header><div><p>FROM MY NOTEBOOK</p><h2 id="${id}-photo-title" data-journal-photo-title></h2></div>${roomMapButton}<button data-room-return type="button" data-journal-photo-close>Back to the notebook</button></header>
+      <figure aria-describedby="journal-photo-caption"><img decoding="async" data-journal-full-photo alt=""></figure>
       <p class="journal-photo-status" data-journal-photo-status role="status" aria-live="polite"></p><button type="button" class="journal-photo-retry" data-journal-photo-retry hidden>Retry photograph</button>
-      <footer><button type="button" data-journal-photo-prev>Previous photo</button><p data-journal-photo-count aria-live="polite"></p><button type="button" data-journal-photo-next>Next photo</button></footer>
+      <footer class="gallery-strip"><div class="gallery-label"><p data-journal-photo-count aria-live="polite"></p><span id="journal-photo-caption" data-journal-photo-caption></span></div><nav class="gallery-actions" aria-label="Notebook photographs"><button type="button" data-journal-photo-prev>Previous photo</button><button type="button" data-journal-photo-next>Next photo</button></nav></footer>
     </section>`;
   host.append(root);
   const q=selector=>root.querySelector(selector),book=q('[data-journal-book]'),stage=q('[data-journal-stage]'),jump=q('[data-journal-jump]');
   const pages=[q('[data-journal-left]'),q('[data-journal-right]')],viewer=q('[data-journal-viewer]'),fullImage=q('[data-journal-full-photo]');
   const listeners=[],imageListeners=new Map(),motions=[];
   let opened=false,dead=false,selected=0,turnGeneration=0,turnLeaf=null,heldPage=null;
-  let selectedSpread=0,layoutPages=[],measuring=false,layoutKey='',resizeFrame=null;
+  let selectedSpread=0,pagesPerSpread=2,layoutPages=[],measuring=false,layoutKey='',resizeFrame=null;
   const layoutCache=new Map(),measurePage=doc.createElement('article');
   measurePage.className='journal-page journal-page-left journal-measure-page';measurePage.inert=true;measurePage.setAttribute('aria-hidden','true');root.append(measurePage);
   let photoOpened=false,photoIndex=0,photoGeneration=0,photoFocus=null,inertSiblings=[];
@@ -111,12 +111,17 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
   }
   function chapterLayout(){
     const chapter=chapters[selected],atoms=journalAtoms(chapter,selected,chapters.length);
+    const authoredPages=()=>chapter.pages.map((_,index)=>atoms.filter(atom=>atom.logicalPage===index));
+    root.dataset.scrollPages=String(pagesPerSpread===1);
+    if(pagesPerSpread===1){layoutKey='single';return authoredPages();}
     const width=Math.min(pages[0].clientWidth||0,pages[1].clientWidth||0),height=Math.min(pages[0].clientHeight||0,pages[1].clientHeight||0);
     // A non-layout host (for example a semantic DOM fixture) retains authored
     // page boundaries. The browser always measures the actual visible paper.
-    if(!width||!height){layoutKey='semantic';return chapter.pages.map((_,index)=>atoms.filter(atom=>atom.logicalPage===index));}
+    if(!width||!height){layoutKey='semantic';return authoredPages();}
     const key=`${selected}:${width}:${height}`;layoutKey=key;
-    if(layoutCache.has(key))return layoutCache.get(key);
+    if(layoutCache.has(key)){
+      const cached=layoutCache.get(key);root.dataset.scrollPages=String(cached.scroll);return cached.pages;
+    }
     measurePage.style.width=width+'px';measurePage.style.height=height+'px';measurePage.style.setProperty('--journal-photo-height',Math.max(100,Math.min(126,height*.24))+'px');measuring=true;
     try{
       const measure=candidate=>{
@@ -124,21 +129,31 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
         return contentHeight(measurePage);
       };
       const result=chapter.pairLogicalPages?chapter.pages.flatMap((_,index)=>balanceJournalPages(atoms.filter(atom=>atom.logicalPage===index),measure,height)):balanceJournalPages(atoms,measure,height);
-      layoutCache.set(key,result);return result;
+      layoutCache.set(key,{pages:result,scroll:false});return result;
+    }catch(error){
+      if(!(error instanceof JournalPageSizeError))throw error;
+      // Unusually short paper can leave an unsplittable photo or heading. Keep
+      // its entire original page accessible with a scrollable reading area.
+      const result=authoredPages();root.dataset.scrollPages='true';
+      layoutCache.set(key,{pages:result,scroll:true});return result;
     }finally{measuring=false;measurePage.replaceChildren();}
   }
   function render({reflow=false}={}){
-    const anchor=reflow?layoutPages[selectedSpread*2]?.[0]?.key:null;
+    const anchor=reflow?layoutPages[selectedSpread*pagesPerSpread]?.[0]?.key:null;
+    // The narrow layout uses one scrollable authored page and a fixed page bar.
+    pagesPerSpread=doc.defaultView?.getComputedStyle?.(book)?.getPropertyValue?.('--journal-pages-per-spread')?.trim()==='1'?1:2;
     releasePages();const chapter=chapters[selected];layoutPages=chapterLayout();
-    if(anchor){const at=layoutPages.findIndex(page=>page.some(atom=>atom.key===anchor));if(at>=0)selectedSpread=Math.floor(at/2);}
-    selectedSpread=Math.max(0,Math.min(Math.ceil(layoutPages.length/2)-1,selectedSpread));
+    if(anchor){const at=layoutPages.findIndex(page=>page.some(atom=>atom.key===anchor));if(at>=0)selectedSpread=Math.floor(at/pagesPerSpread);}
+    selectedSpread=Math.max(0,Math.min(Math.ceil(layoutPages.length/pagesPerSpread)-1,selectedSpread));
     for(const [index,page]of pages.entries()){
-      const number=selectedSpread*2+index,data=layoutPages[number];page.replaceChildren();page.scrollTop=0;page.style.setProperty('--journal-photo-height',Math.max(100,Math.min(126,(page.clientHeight||500)*.24))+'px');
-      page.setAttribute('aria-label',data?`${index===0?'Left':'Right'} page: ${chapter.label}, page ${number+1}`:`${index===0?'Left':'Right'} page: ${chapters[selected+1]?'Next chapter':'Return to the garden'}`);
+      page.replaceChildren();page.scrollTop=0;
+      if(index>=pagesPerSpread)continue;
+      const number=selectedSpread*pagesPerSpread+index,data=layoutPages[number];page.style.setProperty('--journal-photo-height',Math.max(100,Math.min(126,(page.clientHeight||500)*.24))+'px');
+      page.setAttribute('aria-label',data?`${pagesPerSpread===1?'Notebook':index===0?'Left':'Right'} page: ${chapter.label}, page ${number+1}`:`${pagesPerSpread===1?'Notebook':index===0?'Left':'Right'} page: ${chapters[selected+1]?'Next chapter':'Return to the garden'}`);
       if(data){
         for(const atom of data)renderAtom(atom,page);
         const photos=page.querySelectorAll('.journal-photo-button img');
-        if(photos.length&&page.clientHeight){const base=Math.max(100,Math.min(126,page.clientHeight*.24)),spare=Math.max(0,page.clientHeight-contentHeight(page)-8);page.style.setProperty('--journal-photo-height',Math.min(page.clientHeight*.66,320,base+spare/photos.length)+'px');}
+        if(root.dataset.scrollPages!=='true'&&photos.length&&page.clientHeight){const base=Math.max(100,Math.min(126,page.clientHeight*.24)),spare=Math.max(0,page.clientHeight-contentHeight(page)-8);page.style.setProperty('--journal-photo-height',Math.min(page.clientHeight*.66,320,base+spare/photos.length)+'px');}
         node('p',`${number+1} / ${layoutPages.length}`,page,'journal-folio');
       }
       else{
@@ -149,16 +164,16 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     }
     jump.value=String(selected);q('[data-journal-section]').textContent=chapter.label;
     book.setAttribute('aria-labelledby',`${id}-section-title`);
-    const firstPage=selectedSpread*2+1,lastPage=Math.min(layoutPages.length,firstPage+1);
+    const firstPage=selectedSpread*pagesPerSpread+1,lastPage=Math.min(layoutPages.length,firstPage+pagesPerSpread-1);
     q('[data-journal-count]').textContent=`${firstPage===lastPage?'Page '+firstPage:'Pages '+firstPage+'–'+lastPage} of ${layoutPages.length}`;
-    const atStart=selectedSpread===0,atEnd=selectedSpread===Math.ceil(layoutPages.length/2)-1;
-    const previous=q('[data-journal-prev]'),next=q('[data-journal-next]');
+    const atStart=selectedSpread===0,atEnd=selectedSpread===Math.ceil(layoutPages.length/pagesPerSpread)-1;
+    const previous=q('[data-journal-prev]'),next=q('[data-journal-next]'),pageUnit=pagesPerSpread===1?'page':'pages';
     previous.disabled=selected===0&&atStart;next.disabled=selected===chapters.length-1&&atEnd;
-    previous.textContent=atStart&&selected>0?'← Previous section':'← Previous pages';
-    next.textContent=atEnd&&selected<chapters.length-1?'Next section →':'Next pages →';
-    previous.setAttribute('aria-label',atStart&&selected>0?`Previous section: ${chapters[selected-1].label}`:'Previous pages');
-    next.setAttribute('aria-label',atEnd&&selected<chapters.length-1?`Next section: ${chapters[selected+1].label}`:'Next pages');
-    root.dataset.chapter=chapter.id;root.dataset.spread=String(selectedSpread);root.dataset.spreads=String(Math.ceil(layoutPages.length/2));root.dataset.reduced=String(reduced());
+    previous.textContent=atStart&&selected>0?'← Previous section':'← Previous '+pageUnit;
+    next.textContent=atEnd&&selected<chapters.length-1?'Next section →':'Next '+pageUnit+' →';
+    previous.setAttribute('aria-label',atStart&&selected>0?`Previous section: ${chapters[selected-1].label}`:'Previous '+pageUnit);
+    next.setAttribute('aria-label',atEnd&&selected<chapters.length-1?`Next section: ${chapters[selected+1].label}`:'Next '+pageUnit);
+    root.dataset.chapter=chapter.id;root.dataset.spread=String(selectedSpread);root.dataset.spreads=String(Math.ceil(layoutPages.length/pagesPerSpread));root.dataset.reduced=String(reduced());
   }
   function clearTurn(){
     turnGeneration++;for(const motion of motions.splice(0)){motion.onfinish=null;motion.oncancel=null;motion.cancel();}
@@ -201,7 +216,7 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     const next=Math.max(0,Math.min(chapters.length-1,Math.round(Number(value)||0)));if(next===selected&&selectedSpread===0&&!atEnd){if(reduced())clearTurn();return false;}
     closePhoto({restoreFocus:false});clearTurn();
     const origin=doc.activeElement,fromJump=origin===jump,fromPage=pages.some(page=>page===origin||page.contains?.(origin));
-    const before=!reduced()&&typeof stage.animate==='function'?pages.map(decorativeCopy):null;
+    const before=pagesPerSpread===2&&!reduced()&&typeof stage.animate==='function'?pages.map(decorativeCopy):null;
     const direction=next>selected?1:-1;selected=next;selectedSpread=atEnd?Number.MAX_SAFE_INTEGER:0;render();beginTurn(before,direction);
     if(fromJump)focus(jump);
     else if(fromPage||origin?.disabled||!origin?.isConnected)focus(pages[0]);
@@ -209,11 +224,11 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
   }
   function turnPage(direction){
     if(!opened||dead)return false;
-    const next=selectedSpread+direction,last=Math.ceil(layoutPages.length/2)-1;
+    const next=selectedSpread+direction,last=Math.ceil(layoutPages.length/pagesPerSpread)-1;
     if(next<0)return selected>0?setChapter(selected-1,{atEnd:true}):false;
     if(next>last)return selected<chapters.length-1?setChapter(selected+1):false;
     closePhoto({restoreFocus:false});clearTurn();
-    const before=!reduced()&&typeof stage.animate==='function'?pages.map(decorativeCopy):null;
+    const before=pagesPerSpread===2&&!reduced()&&typeof stage.animate==='function'?pages.map(decorativeCopy):null;
     const origin=doc.activeElement,fromPage=pages.some(page=>page===origin||page.contains?.(origin));selectedSpread=next;render();beginTurn(before,direction);
     if(fromPage||origin?.disabled||!origin?.isConnected)focus(pages[0]);return true;
   }

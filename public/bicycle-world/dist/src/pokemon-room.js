@@ -1,3 +1,4 @@
+import {createRoomBackdrop} from './pokemon-room-backdrop.js';
 import {roomMapButton} from './room-map-navigation.js';
 import {decorateModeSelectors} from './mode-selector.js';
 import * as THREE from 'three';
@@ -11,7 +12,7 @@ import {getHorizontalNavigation,getBoundaryNavigation,isKeyboardShortcutBlocked,
 
 /** An imagined setting for a real memory. The parent owns the renderer/loop;
  * this room owns its scenery and one optional, independently loaded companion. */
-export function createPokemonRoom({renderer,container,isReduced,onClose=()=>{},onPortfolio=()=>{},loadAsset=loadPokemonAsset,poseFactory=createPikachuGait,collection=POKEMON_COLLECTION,onGardenMap,onNextSection,returnLabel="Back to Hobbies"}={}){
+export function createPokemonRoom({renderer,container,isReduced,onClose=()=>{},onPortfolio=()=>{},loadAsset=loadPokemonAsset,poseFactory=createPikachuGait,collection=POKEMON_COLLECTION,onNextSection,returnLabel="Back to Hobbies"}={}){
   if(!renderer?.domElement||!container)throw new Error('Pokemon room requires the existing renderer and a container.');
   const v=(x,y,z)=>new THREE.Vector3(x,y,z),stories=POKEMON_STORIES;
   const poses={
@@ -33,6 +34,7 @@ export function createPokemonRoom({renderer,container,isReduced,onClose=()=>{},o
   let model=null,gait=null,companion=null,assetController=null,assetStatus='idle',assetError='',requestSerial=0;
   let walkActive=false,walkProgress=0,walkElapsed=0,walkDistance=0,settling=0,trailLight=null,screenGlow=null,screenLight=null,modelRing=null;
   let activeIndex=0,displayStart=-1,galleryFocused=false,projectionShift=0,imageGeneration=0,indexOpen=false,viewerOpen=false,indexPage=0,indexQuery='',layerFocus=null,layerSiblings=[],viewerSerial=0,viewerOrigin='exhibition',viewerReturnId=null,indexReturnsToParent=false;
+  let backdrop=null,headerHeight=0;
   const assetURL=path=>new URL('../'+path.replace(/^\.\//,''),import.meta.url).href;
   const $=selector=>experience?.querySelector(selector);
   const listen=(el,type,fn,options)=>{el.addEventListener(type,fn,options);listeners.push(()=>el.removeEventListener(type,fn,options));};
@@ -44,17 +46,51 @@ export function createPokemonRoom({renderer,container,isReduced,onClose=()=>{},o
 
   function mount(){
     experience=document.createElement('section');experience.id='pokemon-experience';experience.setAttribute('aria-label','Pokémon GO exhibition');
-    experience.innerHTML=`<div id="pokemon-scene" tabindex="0" role="region" aria-label="Pokemon exhibition. A and D or Left and Right browse captures. Enter selects the current capture or opens it. Escape goes back."></div><div class="pgr-shade" aria-hidden="true"></div>
-      <header class="pgr-header"><button id="pokemon-back-hobbies" class="pgr-quiet" type="button"></button><div class="pgr-heading"><p>Pokemon GO</p><h1>Oak’s collection gallery</h1></div><div class="pgr-header-actions">${roomMapButton}<button type="button" data-play-music class="pgr-quiet pgr-music" aria-pressed="false">Music off</button><span id="pokemon-portfolio" class="mode-switch" data-mode-switch>Portfolio / Play</span></div></header>
-      <section class="pgr-story" aria-labelledby="pokemon-title"><p id="pokemon-chapter" class="pgr-eyebrow"></p><h2 id="pokemon-title"></h2><p id="pokemon-body"></p><div id="pokemon-catch-context" hidden><p id="pokemon-catch-position" class="pgr-eyebrow"></p><h3 id="pokemon-catch-name"></h3><p id="pokemon-catch-meta"></p><button id="pokemon-view-catch" class="pgr-primary" type="button">Open full capture</button><p id="pokemon-catch-error" hidden>Preview unavailable. The full capture is still available.</p><button id="pokemon-image-retry" class="pgr-reset" type="button" hidden>Retry preview</button></div><div class="pgr-actions"><button id="pokemon-action" class="pgr-primary" type="button">Step outside</button><button id="pokemon-reset" class="pgr-reset" type="button" hidden>Reset walk</button></div><p id="pokemon-asset-note" class="pgr-asset-note" hidden></p><button id="pokemon-retry" class="pgr-quiet" type="button" hidden>Retry Pikachu</button></section>
-      <section id="pokemon-collection-controls" class="pgr-collection-controls" aria-label="Explore the catches" hidden><button id="pokemon-garden-map" class="pgr-quiet" type="button" hidden>Explore the garden map</button><button id="pokemon-browse" class="pgr-quiet" type="button">Browse catches</button><div class="pgr-display-controls"><button id="pokemon-display-prev" class="pgr-quiet" type="button">Previous 6</button><span id="pokemon-display-count"></span><button id="pokemon-display-next" class="pgr-quiet" type="button">Next 6</button></div><button id="pokemon-collection-overview" class="pgr-quiet" type="button" hidden>See the whole display</button></section>
-
-      <footer class="pgr-footer"><span id="pokemon-position">A childhood wish</span><span id="pokemon-key-hint">A / D or Left / Right to explore · Esc to return</span></footer>
-      <section id="pokemon-index" class="pgr-index" aria-labelledby="pokemon-index-title" hidden><header><div><p class="pgr-eyebrow">Lakshya’s Pokemon GO collection</p><h2 id="pokemon-index-title">My catches</h2></div><div class="pgr-index-actions">${roomMapButton}${onNextSection?'<button type="button" class="pgr-quiet" data-pgr-continue>Next lab section</button>':''}<button id="pokemon-index-exhibition" class="pgr-quiet" type="button">Explore exhibition</button><button id="pokemon-index-close" class="pgr-quiet" type="button">Back to exhibition</button></div></header><p class="pgr-index-instruction">Use ← / → to browse captures, Enter to open and Esc to go back. Use ↓ in Search to reach the results.</p><div class="pgr-index-toolbar"><label for="pokemon-search">Find a Pokemon</label><input id="pokemon-search" type="search" placeholder="Search by name" autocomplete="off"><p id="pokemon-index-count" aria-live="polite"></p></div><div id="pokemon-index-grid" class="pgr-index-grid"></div><footer><button id="pokemon-index-prev" class="pgr-quiet" type="button">Previous page</button><span id="pokemon-index-page"></span><button id="pokemon-index-next" class="pgr-quiet" type="button">Next page</button></footer></section>
-      <section id="pokemon-viewer" class="pgr-viewer" aria-labelledby="pokemon-viewer-title" hidden><header><div><p class="pgr-eyebrow">From my Pokemon GO collection</p><h2 id="pokemon-viewer-title"></h2><p id="pokemon-viewer-meta"></p></div><div class="pgr-index-actions">${roomMapButton}${onNextSection?'<button type="button" class="pgr-quiet" data-pgr-continue>Next lab section</button>':''}<button id="pokemon-viewer-close" class="pgr-quiet" type="button">Back to exhibition</button></div></header><figure><img id="pokemon-full-catch" alt=""><figcaption id="pokemon-viewer-caption"></figcaption><p id="pokemon-viewer-error" hidden>This capture couldn’t load.</p><button id="pokemon-viewer-retry" class="pgr-quiet" type="button" hidden>Retry capture</button></figure><nav aria-label="Browse full captures"><button id="pokemon-catch-prev" class="pgr-quiet" type="button">Previous capture</button><span id="pokemon-viewer-count"></span><button id="pokemon-catch-next" class="pgr-quiet" type="button">Next capture</button></nav></section>
+    const nextSection=onNextSection?'<button type="button" data-pgr-continue>Next lab section</button>':'';
+    function exhibitionHeader({title,titleId,backId,walk=false}){
+      const heading=walk?'h1':'h2';
+      const tools=walk?`<button id="pokemon-overview" type="button">Top view</button><button id="pokemon-browse" type="button">Collection grid</button>${nextSection}<span id="pokemon-portfolio" class="mode-switch" data-mode-switch></span>`:titleId==='pokemon-index-title'?`<button id="pokemon-switch-layout" type="button">Top view</button>${nextSection}`:nextSection;
+      return `<header class="pgr-head ${walk?'walk-header':''}">
+        <div class="walk-heading"><${heading} id="${titleId}">${title}</${heading}></div>
+        <nav class="${walk?'walk-utility':'pgr-index-actions'}" aria-label="Exhibition navigation">
+          <div class="pgr-tools"><div class="pgr-extras">${tools}</div><button type="button" data-play-music aria-pressed="false">Music off</button></div>
+          <button id="${backId}" class="pgr-back" type="button">${walk?'':'Back to walk'}</button>${roomMapButton}
+        </nav></header>`;
+    }
+    experience.innerHTML=`<div id="pokemon-scene" tabindex="0" role="region" aria-label="Pokémon exhibition. Left and Right or A and D browse captures. Enter opens the full picture. O opens the gallery top view. Escape goes back."></div><div class="pgr-shade" aria-hidden="true"></div>
+      ${exhibitionHeader({title:'Walk with Pikachu',titleId:'pokemon-walk-title',backId:'pokemon-back-hobbies',walk:true})}
+      <div class="pgr-start-tip" role="status" hidden>
+        <span class="pgr-key-tip"><span><kbd>←</kbd> Previous</span><span><kbd>→</kbd> Next</span><span><kbd>O</kbd> Top view</span></span>
+        <span class="pgr-touch-tip">Tap Previous or Next to browse. Tap Top view to see the exhibition from above.</span>
+      </div>
+      <footer class="walk-dock pgr-dock gallery-strip">
+        <div class="pgr-caption"><span id="pokemon-catch-position"></span><h2 id="pokemon-catch-name"></h2><span id="pokemon-catch-meta"></span></div>
+        <nav class="pgr-steps gallery-actions" aria-label="Browse Pokémon">
+          <button id="pokemon-walk-prev" type="button" aria-label="Previous Pokémon">Previous</button>
+          <button id="pokemon-view-catch" type="button">View full picture</button>
+          <button id="pokemon-walk-next" type="button" aria-label="Next Pokémon">Next</button>
+        </nav>
+      </footer>
+      <div class="walk-alerts"><p id="pokemon-asset-note" hidden></p><button id="pokemon-retry" type="button" hidden>Retry Pikachu</button><button id="pokemon-image-retry" type="button" hidden>Retry exhibit image</button></div>
+      <section id="pokemon-index" class="pgr-index" aria-labelledby="pokemon-index-title" hidden>
+        ${exhibitionHeader({title:'My catches',titleId:'pokemon-index-title',backId:'pokemon-index-close'})}
+        <div class="pgr-index-toolbar"><label for="pokemon-search">Find a Pokémon</label><input id="pokemon-search" type="search" placeholder="Search by name" autocomplete="off"></div>
+        <div id="pokemon-index-grid" class="pgr-index-grid"></div>
+        <footer class="pgr-dock gallery-strip">
+          <div class="pgr-caption"><span id="pokemon-index-page"></span><span id="pokemon-index-count" aria-live="polite"></span></div>
+          <nav class="pgr-steps gallery-actions" aria-label="Collection pages"><button id="pokemon-index-prev" type="button">Previous page</button><button id="pokemon-index-next" type="button">Next page</button></nav>
+        </footer>
+      </section>
+      <section id="pokemon-viewer" class="pgr-viewer" aria-labelledby="pokemon-picture-title" hidden>
+        ${exhibitionHeader({title:'Full picture',titleId:'pokemon-picture-title',backId:'pokemon-viewer-close'})}
+        <figure aria-describedby="pokemon-viewer-caption"><div class="pgr-picture"><img id="pokemon-full-catch" alt=""><p id="pokemon-viewer-error" hidden>This capture couldn’t load.</p><button id="pokemon-viewer-retry" class="pgr-quiet" type="button" hidden>Retry capture</button></div>
+        </figure>
+        <footer class="pgr-dock gallery-strip"><div id="pokemon-viewer-caption" class="pgr-caption"><span id="pokemon-viewer-count"></span><strong id="pokemon-viewer-title"></strong><span id="pokemon-viewer-meta"></span></div>
+          <nav class="pgr-steps gallery-actions" aria-label="Browse full captures"><button id="pokemon-catch-prev" type="button" aria-label="Previous capture">Previous</button><button id="pokemon-catch-next" type="button" aria-label="Next capture">Next</button></nav></footer>
+      </section>
       <div id="pokemon-hint" class="pgr-hint" hidden></div><p id="pokemon-status" class="pgr-sr" aria-live="polite"></p><div id="pokemon-veil" class="pgr-veil" aria-hidden="true"></div>`;
     container.appendChild(experience);$('#pokemon-back-hobbies').textContent=returnLabel;host=$('#pokemon-scene');veil=$('#pokemon-veil');status=$('#pokemon-status');
-    $('#pokemon-garden-map').hidden=!onGardenMap;
+
   }
   function snapshotRenderer(){
     const canvas=renderer.domElement;
@@ -142,18 +178,26 @@ export function createPokemonRoom({renderer,container,isReduced,onClose=()=>{},o
   function catchPose(index){
     const slot=exhibitFor(index)||exhibits[index%6],p=slot.group.position,yaw=slot.group.rotation.y;
     const normal=v(Math.sin(yaw),0,Math.cos(yaw)),centre=v(p.x,2,p.z+.1);
-    return {position:v(p.x,4.7,p.z+.1).addScaledVector(normal,8.8),target:centre,fov:48,shift:.16};
+    return {position:v(p.x,4.7,p.z+.1).addScaledVector(normal,8.8),target:centre,fov:48,shift:0};
   }
   function companionPlace(index){const slot=exhibitFor(index)||exhibits[index%6],p=slot.group.position,yaw=slot.group.rotation.y;return v(p.x-Math.cos(yaw)*2.2+Math.sin(yaw)*.35,.15,p.z+Math.sin(yaw)*2.2+Math.cos(yaw)*.35);}
-  function applyProjection(shift=0){projectionShift=shift;if(Math.abs(shift)<.0001)camera.clearViewOffset();else camera.setViewOffset(width,height,-width*shift,0,width,height);camera.updateProjectionMatrix();}
+  function applyProjection(shift=0){
+    projectionShift=shift;
+    // Extend the camera above its original frame. The scene behind the title and
+    // controls is rendered from the same camera as the artwork below them.
+    const contentHeight=Math.max(1,height-headerHeight);
+    const frameHeight=galleryFocused?contentHeight:Math.min(contentHeight,width*508/916);
+    const frameTop=headerHeight+(contentHeight-frameHeight)/2;
+    camera.setViewOffset(width,frameHeight,-width*shift,-frameTop,width,height);
+  }
   function setCompanionAtExhibit(){if(!companion||!collection.length)return;companion.position.copy(companionPlace(activeIndex));const slot=exhibitFor(activeIndex)||exhibits[activeIndex%6];companion.rotation.y=slot.group.rotation.y+.35;companion.updateMatrixWorld(true);gait?.update({time:clock/1000,dt:0,speed:0,distance:walkDistance,reduced:true});trailLight.position.copy(companion.position);trailLight.position.y=.18;dirtyFrame();}
   function selectCatch(index,{guided=true,focus=true}={}){
     if(!opened||closing||!collection.length)return false;
     index=THREE.MathUtils.clamp(Number(index)||0,0,collection.length-1);const previousStory=selected;releaseLayer();stopWalk();setHover(null);selected='outdoors';lastSelected='outdoors';activeIndex=index;galleryFocused=true;setDisplay(Math.floor(index/6)*6);updateContent();
-    const pose=catchPose(index);let duration=previousStory==='outdoors'?1350:2100;
+    const pose=catchPose(index);let duration=previousStory==='outdoors'?650:1200;
     if(guided&&companion&&assetStatus==='ready'){
       const start=companion.position.clone(),end=companionPlace(index),middle=start.clone().lerp(end,.5);middle.z+=Math.min(2,start.distanceTo(end)*.18);middle.y=.15;
-      walkCurve=new THREE.CatmullRomCurve3([start,middle,end]);walkLength=walkCurve.getLength();walkDuration=Math.max(1.1,Math.min(4.2,walkLength/2.7));duration=Math.max(duration,walkDuration*1000);walkDuration=duration/1000;walkProgress=0;walkElapsed=0;walkDistance=0;settling=0;walkActive=true;gait.reset?.();placeCompanion(0,0,true);
+      walkCurve=new THREE.CatmullRomCurve3([start,middle,end]);walkLength=walkCurve.getLength();walkDuration=Math.max(.65,Math.min(1.4,walkLength/5));duration=Math.max(duration,walkDuration*1000);walkDuration=duration/1000;walkProgress=0;walkElapsed=0;walkDistance=0;settling=0;walkActive=true;gait.reset?.();placeCompanion(0,0,true);
       if(reduced()){walkProgress=1;walkDistance=walkLength;walkActive=false;setCompanionAtExhibit();}
     }else setCompanionAtExhibit();
     updateContent();
@@ -162,10 +206,23 @@ export function createPokemonRoom({renderer,container,isReduced,onClose=()=>{},o
     if(transition&&walkActive&&!transition.path)transition.guide={start:walkCurve.getPointAt(0),end:walkCurve.getPointAt(1)};
     return true;
   }
-  function collectionOverview({focus=true}={}){
-    if(!opened||closing)return;releaseLayer();stopWalk();galleryFocused=false;setDisplay(Math.floor(activeIndex/6)*6);selected='outdoors';lastSelected='outdoors';updateContent();moveTo(poses.outdoors,1400,()=>{if(focus)$('#pokemon-browse').focus({preventScroll:true});},{throughDoor:camera.position.z>0});
+  function roomFromAbove(start=activeIndex){
+    if(!opened||closing||!collection.length)return;
+    indexReturnsToParent=false;
+    releaseLayer();stopWalk();galleryFocused=false;
+    activeIndex=THREE.MathUtils.clamp(start,0,collection.length-1);
+    setDisplay(Math.floor(activeIndex/6)*6);updateContent();
+    moveTo(poses.outdoors,650,dirtyFrame);
+    host.focus({preventScroll:true});
   }
-  function displayPage(direction){if(!opened||closing||!collection.length)return;activeIndex=THREE.MathUtils.clamp(displayStart+direction*6,0,Math.floor((collection.length-1)/6)*6);galleryFocused=false;setDisplay(activeIndex);collectionOverview({focus:false});}
+  function stepCatch(direction){
+    if(!galleryFocused){roomFromAbove(displayStart+direction*6);return;}
+    const next=activeIndex+direction;
+    if(next<0||next>=collection.length)return;
+    const origin=document.activeElement;
+    selectCatch(next,{guided:true,focus:false});
+    if(origin?.disabled)$('#pokemon-view-catch').focus({preventScroll:true});
+  }
   function releaseLayer(){
     if(!experience)return;viewerSerial++;const full=$('#pokemon-full-catch');full.onload=null;full.onerror=null;full.removeAttribute('src');$('#pokemon-viewer').hidden=true;$('#pokemon-index').hidden=true;$('#pokemon-index-grid').querySelectorAll('img').forEach(img=>img.removeAttribute('src'));$('#pokemon-index-grid').replaceChildren();indexOpen=false;viewerOpen=false;layerSiblings.forEach(([element,inert])=>{element.inert=inert;});layerSiblings=[];
   }
@@ -173,9 +230,13 @@ export function createPokemonRoom({renderer,container,isReduced,onClose=()=>{},o
   function openIndex({focusId=null}={}){
     if(!opened||closing)return;stopWalk();
     if(transition){const t=transition;transition=null;camera.position.copy(t.pose.position);target.copy(t.pose.target);camera.fov=t.pose.fov;applyProjection(t.pose.shift||0);camera.lookAt(target);if(t.throughDoor)applyDoor(1);experience.classList.remove('pgr-moving');if(galleryFocused)setCompanionAtExhibit();}
-    layerFocus=focusId?$('#pokemon-browse'):document.activeElement;releaseLayer();indexOpen=true;
-    $('#pokemon-search').value=indexQuery;$('#pokemon-index-close').textContent=indexReturnsToParent?returnLabel:'Back to exhibition';
-    renderIndex();confineTo($('#pokemon-index'));
+    if(!focusId && collection[activeIndex]){
+      indexQuery='';indexPage=Math.floor(activeIndex/12);focusId=collection[activeIndex].id;
+    }
+    layerFocus=$('#pokemon-browse');releaseLayer();indexOpen=true;
+    const section=$('#pokemon-index');
+    $('#pokemon-search').value=indexQuery;$('#pokemon-index-close').textContent=indexReturnsToParent?returnLabel:galleryFocused?'Back to walk':'Back to room';
+    renderIndex();confineTo(section);
     const card=focusId?Array.from($('#pokemon-index-grid').querySelectorAll('[data-pgr-catch]')).find(button=>button.dataset.pgrCatch===focusId):null;
     (card||$('#pokemon-index-grid button')||$('#pokemon-search')).focus({preventScroll:true});status.textContent='Choose a capture to open its complete screenshot, or search by name.';
   }
@@ -188,10 +249,10 @@ export function createPokemonRoom({renderer,container,isReduced,onClose=()=>{},o
   function renderIndex(){
     const focused=document.activeElement,filtered=filteredCollection(),pages=Math.max(1,Math.ceil(filtered.length/12));indexPage=THREE.MathUtils.clamp(indexPage,0,pages-1);const grid=$('#pokemon-index-grid');grid.querySelectorAll('img').forEach(image=>image.removeAttribute('src'));grid.replaceChildren();
     for(const {entry,index}of filtered.slice(indexPage*12,indexPage*12+12)){
-      const button=document.createElement('button');button.type='button';button.dataset.pgrCatch=entry.id;button.dataset.catchIndex=String(index);button.setAttribute('aria-label',`Open capture: ${catchLabel(entry)}${catchMeta(entry)?`, ${catchMeta(entry)}`:''}`);const image=document.createElement('img');image.alt='';image.loading='lazy';image.decoding='async';image.width=entry.width;image.height=entry.height;image.src=assetURL(entry.thumbnail);const title=document.createElement('strong');title.textContent=catchLabel(entry);const meta=document.createElement('span');meta.textContent=catchMeta(entry);button.append(image,title,meta);grid.appendChild(button);
+      const button=document.createElement('button');button.type='button';button.dataset.pgrCatch=entry.id;button.dataset.catchIndex=String(index);button.title=catchLabel(entry);button.setAttribute('aria-label',`Open capture: ${catchLabel(entry)}${catchMeta(entry)?`, ${catchMeta(entry)}`:''}`);const image=document.createElement('img');image.alt='';image.loading='lazy';image.decoding='async';image.width=entry.width;image.height=entry.height;image.src=assetURL(entry.thumbnail);const title=document.createElement('strong');title.textContent=catchLabel(entry);const meta=document.createElement('span');meta.textContent=catchMeta(entry);button.append(image,title,meta);grid.appendChild(button);
     }
-    if(!filtered.length){const empty=document.createElement('p');empty.textContent='No matching Pokemon. Try another name.';grid.appendChild(empty);}
-    $('#pokemon-index-count').textContent=`${filtered.length} ${filtered.length===1?'capture':'captures'}`;$('#pokemon-index-page').textContent=`Page ${indexPage+1} of ${pages}`;$('#pokemon-index-prev').disabled=indexPage===0;$('#pokemon-index-next').disabled=indexPage===pages-1;
+    if(!filtered.length){const empty=document.createElement('p');empty.textContent=collection.length?'No matching Pokémon. Try another name.':'There are no captures in this collection.';grid.appendChild(empty);}
+    $('#pokemon-index-count').textContent=`${filtered.length} ${filtered.length===1?'capture':'captures'}`;$('#pokemon-index-page').textContent=filtered.length?`Page ${indexPage+1} of ${pages}`:'';$('#pokemon-index-prev').disabled=indexPage===0;$('#pokemon-index-next').disabled=indexPage===pages-1;
     if(focused?.disabled&&(focused.id==='pokemon-index-prev'||focused.id==='pokemon-index-next'))(grid.querySelector('button')||$('#pokemon-index-close')).focus({preventScroll:true});
   }
   function navigateIndex(direction,boundary){
@@ -203,14 +264,14 @@ export function createPokemonRoom({renderer,container,isReduced,onClose=()=>{},o
   }
   function closeIndex(){if(!indexOpen)return;const focus=layerFocus;releaseLayer();layerFocus=null;updateContent();(focus?.isConnected?focus:$('#pokemon-browse')).focus({preventScroll:true});dirtyFrame();}
   function loadFullCapture(){
-    const entry=collection[activeIndex];if(!entry)return;const image=$('#pokemon-full-catch'),serial=++viewerSerial;image.onload=null;image.onerror=null;image.removeAttribute('src');image.alt=`${catchLabel(entry)} from Lakshya’s Pokemon GO collection${catchMeta(entry)?`, ${catchMeta(entry)}`:''}.`;image.width=entry.width;image.height=entry.height;$('#pokemon-viewer-title').textContent=catchLabel(entry);$('#pokemon-viewer-meta').textContent=catchMeta(entry);$('#pokemon-viewer-caption').textContent='A complete screenshot from my Pokemon GO collection, fitted to the screen.';$('#pokemon-viewer-count').textContent=`${activeIndex+1} of ${collection.length}`;$('#pokemon-catch-prev').disabled=activeIndex===0;$('#pokemon-catch-next').disabled=activeIndex===collection.length-1;$('#pokemon-viewer-error').hidden=true;$('#pokemon-viewer-retry').hidden=true;
+    const entry=collection[activeIndex];if(!entry)return;const image=$('#pokemon-full-catch'),serial=++viewerSerial;image.onload=null;image.onerror=null;image.removeAttribute('src');image.alt=`${catchLabel(entry)} from Lakshya’s Pokemon GO collection${catchMeta(entry)?`, ${catchMeta(entry)}`:''}.`;image.width=entry.width;image.height=entry.height;$('#pokemon-viewer-title').textContent=catchLabel(entry);$('#pokemon-viewer-meta').textContent=catchMeta(entry);$('#pokemon-viewer-count').textContent=`Capture ${activeIndex+1} of ${collection.length}`;$('#pokemon-catch-prev').disabled=activeIndex===0;$('#pokemon-catch-next').disabled=activeIndex===collection.length-1;$('#pokemon-viewer-error').hidden=true;$('#pokemon-viewer-retry').hidden=true;
     image.onload=()=>{if(!opened||!viewerOpen||serial!==viewerSerial)return;image.onload=null;image.onerror=null;status.textContent=`${catchLabel(entry)} capture loaded.`;};image.onerror=()=>{if(!opened||!viewerOpen||serial!==viewerSerial)return;$('#pokemon-viewer-error').hidden=false;$('#pokemon-viewer-retry').hidden=false;status.textContent='The capture could not load. Retry or select another.';};image.src=assetURL(entry.image);
   }
   function openViewer({fromIndex=false,returnId=null}={}){
     if(!opened||closing||!galleryFocused||!collection.length)return;stopWalk();transition=null;experience.classList.remove('pgr-moving');
     const pose=catchPose(activeIndex);camera.position.copy(pose.position);target.copy(pose.target);camera.fov=pose.fov;applyProjection(pose.shift||0);camera.lookAt(target);setCompanionAtExhibit();
     viewerOrigin=fromIndex?'index':'exhibition';viewerReturnId=returnId;layerFocus=$('#pokemon-view-catch');releaseLayer();viewerOpen=true;
-    $('#pokemon-viewer-close').textContent=fromIndex?'Back to collection':'Back to exhibition';
+    $('#pokemon-viewer-close').textContent=fromIndex?'Back to collection':'Back to walk';
     loadFullCapture();confineTo($('#pokemon-viewer'));$('#pokemon-viewer-close').focus({preventScroll:true});
   }
   function openIndexCapture(index){
@@ -219,22 +280,49 @@ export function createPokemonRoom({renderer,container,isReduced,onClose=()=>{},o
     setDisplay(Math.floor(activeIndex/6)*6);updateContent();
     openViewer({fromIndex:true,returnId:collection[activeIndex].id});
   }
-  function viewerStep(direction){if(!viewerOpen)return;activeIndex=THREE.MathUtils.clamp(activeIndex+direction,0,collection.length-1);setDisplay(Math.floor(activeIndex/6)*6);const pose=catchPose(activeIndex);camera.position.copy(pose.position);target.copy(pose.target);camera.fov=pose.fov;applyProjection(pose.shift||0);camera.lookAt(target);setCompanionAtExhibit();updateContent();loadFullCapture();if(document.activeElement?.disabled)$('#pokemon-viewer-close').focus({preventScroll:true});}
+  function viewerStep(direction){if(!viewerOpen)return;const origin=document.activeElement;activeIndex=THREE.MathUtils.clamp(activeIndex+direction,0,collection.length-1);setDisplay(Math.floor(activeIndex/6)*6);const pose=catchPose(activeIndex);camera.position.copy(pose.position);target.copy(pose.target);camera.fov=pose.fov;applyProjection(pose.shift||0);camera.lookAt(target);setCompanionAtExhibit();updateContent();loadFullCapture();if(origin?.disabled)$('#pokemon-viewer-close').focus({preventScroll:true});}
   function closeViewer(){
     if(!viewerOpen)return;const origin=viewerOrigin,returnId=viewerReturnId;
     releaseLayer();layerFocus=null;viewerOrigin='exhibition';viewerReturnId=null;updateContent();
-    if(origin==='index')openIndex({focusId:returnId});else $('#pokemon-view-catch').focus({preventScroll:true});
+    if(origin==='index'){
+      const filtered=filteredCollection(),position=filtered.findIndex(({index})=>index===activeIndex);
+      if(position<0)indexQuery='';
+      indexPage=Math.floor((position<0?activeIndex:position)/12);
+      openIndex({focusId:collection[activeIndex]?.id||returnId});
+    }else $('#pokemon-view-catch').focus({preventScroll:true});
     dirtyFrame();
   }
   function applyDoor(value){doorProgress=THREE.MathUtils.clamp(value,0,1);for(const {pivot,side}of doors)pivot.rotation.y=side*1.61*doorProgress;renderer.shadowMap.needsUpdate=true;}
   function updateContent(){
     if(!experience)return;
-    const story=stories.find(item=>item.id===selected);$('#pokemon-chapter').textContent=story.label;$('#pokemon-title').textContent=story.title;$('#pokemon-body').textContent=story.body;$('#pokemon-position').textContent=selected==='childhood'?'A childhood wish':selected==='outdoors'?'Out under the sky':'The idea became a place';experience.dataset.story=selected;
-    $('#pokemon-key-hint').textContent=selected==='outdoors'?'A / D: captures · Enter on scene: open · Esc: back':'A / D: story · Enter on scene: continue · Esc: back';
-    const action=$('#pokemon-action');action.textContent=galleryFocused?'Walk to the next catch':'Walk with Pikachu';action.disabled=selected==='outdoors'&&(assetStatus!=='ready'||walkActive||!collection.length);$('#pokemon-reset').hidden=true;$('#pokemon-reset').disabled=walkProgress===0||walkActive;
-    const note=$('#pokemon-asset-note');note.hidden=selected!=='outdoors'||assetStatus==='ready';note.textContent=assetStatus==='error'?'Pikachu couldn’t load. You can still explore the whole story.':assetStatus==='loading'?'Pikachu is on the way. The story is ready to explore.':'';$('#pokemon-retry').hidden=selected!=='outdoors'||assetStatus!=='error';
-    const outdoors=selected==='outdoors',entry=collection[activeIndex];experience.dataset.catchFocus=String(outdoors&&galleryFocused);$('#pokemon-collection-controls').hidden=!outdoors;$('#pokemon-catch-context').hidden=!outdoors||!galleryFocused||!entry;$('#pokemon-collection-overview').hidden=!galleryFocused;$('#pokemon-browse').textContent=`Browse all ${collection.length} captures`;$('#pokemon-display-count').textContent=collection.length?`${Math.max(0,displayStart)+1}–${Math.min(collection.length,Math.max(0,displayStart)+6)} of ${collection.length}`:'No captures yet';$('#pokemon-display-prev').disabled=displayStart<=0;$('#pokemon-display-next').disabled=displayStart+6>=collection.length;
-    if(entry){$('#pokemon-catch-position').textContent=`Capture ${activeIndex+1} of ${collection.length}`;$('#pokemon-catch-name').textContent=catchLabel(entry);$('#pokemon-catch-meta').textContent=catchMeta(entry);const failed=exhibitFor(activeIndex)?.status==='error';$('#pokemon-catch-error').hidden=!failed;$('#pokemon-image-retry').hidden=!failed;}
+    const entry=collection[activeIndex];
+    experience.dataset.catchFocus=String(galleryFocused&&Boolean(entry));
+    experience.dataset.story=selected;
+    const wide=!galleryFocused&&Boolean(entry);
+    $('#pokemon-walk-title').textContent=wide?'Exhibition from above':'Walk with Pikachu';
+    $('#pokemon-overview').setAttribute('aria-pressed',String(wide));
+    $('#pokemon-overview').disabled=!entry;
+    backdrop?.show(wide?displayStart:null);
+    const previous=$('#pokemon-walk-prev'),next=$('#pokemon-walk-next');
+    previous.setAttribute('aria-label',wide?'Previous display':'Previous Pokémon');
+    next.setAttribute('aria-label',wide?'Next display':'Next Pokémon');
+    $('#pokemon-view-catch').textContent=wide?'Walk with Pikachu':'View full picture';
+    $('#pokemon-walk-prev').disabled=wide?displayStart<=0:activeIndex===0;
+    $('#pokemon-walk-next').disabled=wide?displayStart+6>=collection.length:activeIndex+1>=collection.length;
+    $('#pokemon-view-catch').disabled=!entry;
+    $('#pokemon-catch-position').textContent=entry?`Capture ${activeIndex+1} of ${collection.length}`:'Empty collection';
+    $('#pokemon-catch-name').textContent=entry?catchLabel(entry):'';
+    $('#pokemon-catch-meta').textContent=entry?catchMeta(entry):'';
+    if(wide){
+      $('#pokemon-catch-position').textContent=`Captures ${displayStart+1}–${Math.min(collection.length,displayStart+6)} of ${collection.length}`;
+      $('#pokemon-catch-name').textContent='Choose a frame';
+      $('#pokemon-catch-meta').textContent='';
+    }
+    $('#pokemon-image-retry').hidden=exhibitFor(activeIndex)?.status!=='error';
+    $('#pokemon-asset-note').hidden=assetStatus!=='error';
+    $('#pokemon-asset-note').textContent='Pikachu could not load. You can still browse the exhibits.';
+    $('#pokemon-retry').hidden=assetStatus!=='error';
+    const outdoors=selected==='outdoors';
     for(const exhibit of exhibits)exhibit.glow.visible=outdoors&&galleryFocused&&exhibit.index===activeIndex;
   }
   function moveTo(pose,duration,onComplete,{throughDoor=false,entry=false,exit=false,closeDoor=false}={}){
@@ -256,38 +344,47 @@ export function createPokemonRoom({renderer,container,isReduced,onClose=()=>{},o
   function placeCompanion(progress,dt=0,quiet=false){
     if(!companion||!gait)return;walkCurve.getPointAt(progress,walkPoint);walkCurve.getTangentAt(progress,walkTangent);companion.position.copy(walkPoint);companion.rotation.y=Math.atan2(walkTangent.x,walkTangent.z);companion.updateMatrixWorld(true);const speed=walkActive&&!quiet?walkLength/walkDuration:0;gait.update({time:clock/1000,dt,speed,distance:walkDistance,reduced:quiet,lighter:false});trailLight.position.copy(walkPoint);trailLight.position.y=.18;
   }
-  function startWalk(){
-    if(!opened||closing||selected!=='outdoors'||assetStatus!=='ready'||walkActive)return false;
-    return selectCatch(galleryFocused?(activeIndex+1)%collection.length:activeIndex,{guided:true});
-  }
   function stopWalk(){if(!walkActive&&settling===0)return;walkActive=false;settling=0;placeCompanion(walkProgress,0,true);dirtyFrame();}
-  function resetWalk(){if(!opened||closing||walkActive)return;walkProgress=0;walkElapsed=0;walkDistance=0;settling=0;gait?.reset?.();placeCompanion(0,0,true);updateContent();status.textContent='Pikachu is back at the start of the walk.';dirtyFrame();}
-  function action(){startWalk();}
-  function setHover(id){if(hover===id)return;hover=id;renderer.domElement.style.cursor=id?'pointer':'default';const hint=$('#pokemon-hint');if(!hint)return;hint.hidden=!id;if(id)hint.textContent=id.startsWith('catch:')?catchLabel(collection[Number(id.slice(6))]):id==='pikachu'?'Walk with Pikachu':stories.find(story=>story.id===id)?.label||'';}
+  function setHover(id){if(hover===id)return;hover=id;renderer.domElement.style.cursor=id?'pointer':'default';const hint=$('#pokemon-hint');if(!hint)return;hint.hidden=!id;if(id)hint.textContent=id.startsWith('catch:')?catchLabel(collection[Number(id.slice(6))]):id==='pikachu'?'Next Pokémon':stories.find(story=>story.id===id)?.label||'';}
   function pick(event){const rect=renderer.domElement.getBoundingClientRect();pointer.set((event.clientX-rect.left)/rect.width*2-1,-(event.clientY-rect.top)/rect.height*2+1);raycaster.setFromCamera(pointer,camera);const visible=object=>{for(let item=object;item;item=item.parent)if(!item.visible)return false;return true;},objectHit=raycaster.intersectObjects([...new Set([...picks,...occluders])].filter(visible),false)[0],companionHit=companion?raycaster.intersectObject(companion,true)[0]:null;if(companionHit&&(!objectHit||companionHit.distance<objectHit.distance))return 'pikachu';const object=objectHit?.object;if(Number.isInteger(object?.userData.catchSlot)){const exhibit=exhibits[object.userData.catchSlot];return collection[exhibit.index]?`catch:${exhibit.index}`:null;}return object?.userData.story||null;}
-  function pointerMove(event){if(transition||closing||walkActive||viewerOpen||indexOpen){setHover(null);return;}setHover(pick(event));if(hover){const rect=experience.getBoundingClientRect();Object.assign($('#pokemon-hint').style,{left:`${Math.max(15,Math.min(width-220,event.clientX-rect.left+15))}px`,top:`${Math.max(100,Math.min(height-130,event.clientY-rect.top-42))}px`});}}
+  function pointerMove(event){if(transition||closing||walkActive||viewerOpen||indexOpen){setHover(null);return;}setHover(pick(event));if(hover){const rect=experience.getBoundingClientRect();Object.assign($('#pokemon-hint').style,{left:`${Math.max(15,Math.min(rect.width-220,event.clientX-rect.left+15))}px`,top:`${Math.max(100,Math.min(rect.height-130,event.clientY-rect.top-42))}px`});}}
   function bindUI(){
+    if(renderer.domElement.tagName!=='CANVAS'){
+      backdrop=createRoomBackdrop(host,collection,index=>selectCatch(index,{guided:false}));
+    }
+    // Changes to the header or caption can resize the artwork without a window resize.
+    const sceneSize=new ResizeObserver(()=>{if(opened&&host)resize();});
+    sceneSize.observe(host);sceneSize.observe(experience.querySelector('.walk-header'));listeners.push(()=>sceneSize.disconnect());
     decorateModeSelectors(experience,{mode:'play',pageURL:location.href,navigationHandled:true});
-    listen($('#pokemon-back-hobbies'),'click',()=>close());listen($('#pokemon-portfolio'),'click',()=>onPortfolio());listen($('#pokemon-action'),'click',action);listen($('#pokemon-reset'),'click',resetWalk);listen($('#pokemon-retry'),'click',requestCompanion);
-    listen($('#pokemon-garden-map'),'click',()=>{if(!onGardenMap)return;close({immediate:true,notify:false});onGardenMap();});
-    listen($('#pokemon-browse'),'click',openIndex);listen($('#pokemon-view-catch'),'click',openViewer);listen($('#pokemon-collection-overview'),'click',()=>collectionOverview());listen($('#pokemon-display-prev'),'click',()=>displayPage(-1));listen($('#pokemon-display-next'),'click',()=>displayPage(1));listen($('#pokemon-image-retry'),'click',()=>{const exhibit=exhibitFor(activeIndex);if(exhibit)requestImage(exhibit);});
+    listen($('#pokemon-back-hobbies'),'click',()=>close());listen($('#pokemon-portfolio'),'click',event=>{if(event.target.closest?.('[data-mode-link]')?.dataset.modeLink==='portfolio')onPortfolio();});listen($('#pokemon-walk-prev'),'click',()=>stepCatch(-1));listen($('#pokemon-walk-next'),'click',()=>stepCatch(1));listen($('#pokemon-retry'),'click',requestCompanion);
+    const toggleOverview=()=>galleryFocused||indexOpen?roomFromAbove():selectCatch(activeIndex,{guided:false});
+    listen($('#pokemon-overview'),'click',toggleOverview);
+    listen($('#pokemon-switch-layout'),'click',()=>roomFromAbove());
+    listen($('#pokemon-browse'),'click',()=>openIndex());
+    listen($('#pokemon-view-catch'),'click',()=>galleryFocused?openViewer():selectCatch(activeIndex));
+    listen($('#pokemon-image-retry'),'click',()=>{const exhibit=exhibitFor(activeIndex);if(exhibit)requestImage(exhibit);});
     for(const button of experience.querySelectorAll('[data-pgr-continue]')){
       listen(button,'click',()=>{close({immediate:true,notify:false});onNextSection();});
     }
-    listen($('#pokemon-index-close'),'click',()=>indexReturnsToParent?close():closeIndex());listen($('#pokemon-index-exhibition'),'click',()=>{indexReturnsToParent=false;closeIndex();});listen($('#pokemon-search'),'input',event=>{indexQuery=event.target.value||'';indexPage=0;renderIndex();});listen($('#pokemon-index-prev'),'click',()=>{setIndexPage(indexPage-1);});listen($('#pokemon-index-next'),'click',()=>{setIndexPage(indexPage+1);});listen($('#pokemon-index-grid'),'click',event=>{const button=event.target.closest?.('[data-pgr-catch]');if(button)openIndexCapture(Number(button.dataset.catchIndex));});
+    listen($('#pokemon-index-close'),'click',()=>indexReturnsToParent?close():closeIndex());listen($('#pokemon-search'),'input',event=>{indexQuery=event.target.value||'';indexPage=0;renderIndex();});listen($('#pokemon-index-prev'),'click',()=>{setIndexPage(indexPage-1);});listen($('#pokemon-index-next'),'click',()=>{setIndexPage(indexPage+1);});listen($('#pokemon-index-grid'),'click',event=>{const button=event.target.closest?.('[data-pgr-catch]');if(button)openIndexCapture(Number(button.dataset.catchIndex));});
     listen($('#pokemon-viewer-close'),'click',closeViewer);listen($('#pokemon-catch-prev'),'click',()=>viewerStep(-1));listen($('#pokemon-catch-next'),'click',()=>viewerStep(1));listen($('#pokemon-viewer-retry'),'click',loadFullCapture);
-    listen(renderer.domElement,'pointermove',pointerMove);listen(renderer.domElement,'pointerleave',()=>{pointerDown=null;setHover(null);});listen(renderer.domElement,'pointercancel',()=>{pointerDown=null;});listen(renderer.domElement,'pointerdown',event=>{pointerDown=event.button===0?{x:event.clientX,y:event.clientY}:null;});listen(renderer.domElement,'pointerup',event=>{const press=pointerDown;pointerDown=null;if(event.button!==0||!press||Math.hypot(event.clientX-press.x,event.clientY-press.y)>6)return;if(closing||viewerOpen||indexOpen)return;const id=pick(event);if(id?.startsWith('catch:')){const index=Number(id.slice(6));if(galleryFocused&&activeIndex===index&&!transition&&!walkActive)openViewer();else selectCatch(index);}else if(id==='pikachu')startWalk();});
+    listen(renderer.domElement,'pointermove',pointerMove);listen(renderer.domElement,'pointerleave',()=>{pointerDown=null;setHover(null);});listen(renderer.domElement,'pointercancel',()=>{pointerDown=null;});listen(renderer.domElement,'pointerdown',event=>{pointerDown=event.button===0?{x:event.clientX,y:event.clientY}:null;});listen(renderer.domElement,'pointerup',event=>{const press=pointerDown;pointerDown=null;if(event.button!==0||!press||Math.hypot(event.clientX-press.x,event.clientY-press.y)>6)return;if(closing||viewerOpen||indexOpen)return;const id=pick(event);if(id?.startsWith('catch:')){const index=Number(id.slice(6));if(galleryFocused&&activeIndex===index&&!transition&&!walkActive)openViewer();else selectCatch(index);}else if(id==='pikachu')stepCatch(1);});
     listen(document,'keydown',event=>{
       if(!opened||event.defaultPrevented)return;
       if(event.isComposing||event.ctrlKey||event.metaKey||event.altKey||(event.shiftKey&&event.key!=='Tab'))return;
       if(event.key==='Escape'){event.preventDefault();event.stopPropagation();if(!event.repeat)cancel({fromKeyboard:true});return;}
-      if((viewerOpen||indexOpen)&&event.key==='Tab'){const layer=viewerOpen?$('#pokemon-viewer'):$('#pokemon-index'),controls=[...layer.querySelectorAll('button,input')].filter(item=>!item.disabled&&!item.closest('[hidden],[inert]'));if(!controls.length)return;const first=controls[0],last=controls.at(-1),current=document.activeElement;if(event.shiftKey&&current===first||!event.shiftKey&&current===last||!controls.includes(current)){event.preventDefault();(event.shiftKey?last:first).focus({preventScroll:true});}return;}
+      if((viewerOpen||indexOpen)&&event.key==='Tab'){const layer=viewerOpen?$('#pokemon-viewer'):$('#pokemon-index'),controls=[...layer.querySelectorAll('button,input,a[href]')].filter(item=>!item.disabled&&!item.closest('[hidden],[inert]'));if(!controls.length)return;const first=controls[0],last=controls.at(-1),current=document.activeElement;if(event.shiftKey&&current===first||!event.shiftKey&&current===last||!controls.includes(current)){event.preventDefault();(event.shiftKey?last:first).focus({preventScroll:true});}return;}
       if(indexOpen && event.target===$('#pokemon-search') && event.key==='ArrowDown'){
         const first=$('#pokemon-index-grid button');
         if(first){consumeNavigationKey(event);first.focus();}
         return;
       }
       if(closing||isKeyboardShortcutBlocked(event)||event.target?.closest?.('#pokemon-experience')!==experience)return;
+      if(event.key.toLowerCase()==='o'&&!viewerOpen&&!event.repeat){
+        consumeNavigationKey(event);
+        toggleOverview();
+        return;
+      }
       if(indexOpen && (event.key==='PageDown'||event.key==='PageUp')){
         consumeNavigationKey(event);
         if(!event.repeat){
@@ -301,21 +398,37 @@ export function createPokemonRoom({renderer,container,isReduced,onClose=()=>{},o
         consumeNavigationKey(event);
         if(viewerOpen){viewerStep(boundary==='first'?-activeIndex:boundary==='last'?collection.length-1-activeIndex:direction);return;}
         if(indexOpen){navigateIndex(direction,boundary);return;}
-        selectCatch(boundary==='first'?0:boundary==='last'?collection.length-1:galleryFocused?activeIndex+direction:activeIndex,{guided:false,focus:false});return;
+        if(boundary)selectCatch(boundary==='first'?0:collection.length-1,{guided:false,focus:false});else stepCatch(direction);return;
       }
-      if((event.key==='Enter'||event.key===' ')&&event.target===host){consumeNavigationKey(event);if(event.repeat)return;if(selected==='outdoors'){if(galleryFocused)openViewer();else selectCatch(activeIndex,{guided:false,focus:false});}else action();}
+      if((event.key==='Enter'||event.key===' ')&&event.target===host){consumeNavigationKey(event);if(event.repeat)return;if(galleryFocused)openViewer();else selectCatch(activeIndex);}
     });
     listen(document,'visibilitychange',()=>{if(!document.hidden)dirtyFrame();});listen(window,'pagehide',()=>{if(!opened)return;stopWalk();if(transition){const t=transition;camera.position.copy(t.pose.position);target.copy(t.pose.target);camera.fov=t.pose.fov;applyProjection(t.pose.shift||0);camera.lookAt(target);if(t.throughDoor)applyDoor(1);else if(t.closeDoor)applyDoor(0);transition=null;experience.classList.remove('pgr-moving');t.onComplete?.();}if(opened){if(galleryFocused)setCompanionAtExhibit();updateContent();dirtyFrame();}});listen(query,'change',()=>{if(reduced()){if(transition)transition.started=clock-transition.duration;if(walkActive){walkProgress=1;walkDistance=walkLength;walkActive=false;settling=0;placeCompanion(1,0,true);updateContent();}dirtyFrame();}});
   }
-  function cancel({fromKeyboard=false}={}){if(!opened)return false;const now=performance.now();if(!fromKeyboard&&now-lastEscape<180)return true;lastEscape=now;if(closing)return true;if(viewerOpen)closeViewer();else if(indexOpen){if(indexReturnsToParent)close();else closeIndex();}else if(walkActive){stopWalk();transition=null;experience.classList.remove('pgr-moving');updateContent();$('#pokemon-action').focus({preventScroll:true});status.textContent='Walk stopped. View the capture, choose another or use the return button.';}else if(galleryFocused)collectionOverview();else close();return true;}
-  function resize(){if(!opened||!camera)return;const rect=experience.getBoundingClientRect();width=Math.max(1,rect.width||container.clientWidth||window.innerWidth);height=Math.max(1,rect.height||container.clientHeight||window.innerHeight);renderer.setPixelRatio(Math.min(saved?.pixelRatio||1,1.6));renderer.setSize(width,height,false);renderer.setViewport(0,0,width,height);renderer.setScissorTest(false);camera.aspect=width/height;applyProjection(projectionShift);dirtyFrame();}
-  function open({returnFocus,initialCollection=false,initialIndex=false}={}){
+  function cancel({fromKeyboard=false}={}){if(!opened)return false;const now=performance.now();if(!fromKeyboard&&now-lastEscape<180)return true;lastEscape=now;if(closing)return true;if(viewerOpen)closeViewer();else if(indexOpen){if(indexReturnsToParent)close();else closeIndex();}else if(!galleryFocused&&collection.length)selectCatch(activeIndex,{guided:false});else close();return true;}
+  function resize(){if(!opened||!camera)return;const rect=host.getBoundingClientRect();
+    headerHeight=Math.round(experience.querySelector('.walk-header').getBoundingClientRect().height);
+    experience.style.setProperty('--pgr-header-height',headerHeight+'px');
+    backdrop?.resize(headerHeight);
+    width=Math.max(1,rect.width);height=Math.max(1,rect.height);renderer.setPixelRatio(Math.min(saved?.pixelRatio||1,1.6));renderer.setSize(width,height,false);renderer.setViewport(0,0,width,height);renderer.setScissorTest(false);camera.aspect=width/height;applyProjection(projectionShift);dirtyFrame();}
+  function open({returnFocus,initialIndex=false}={}){
     if(dead)throw new Error('Pokemon room has been disposed.');if(opened)return false;opened=true;closing=false;generation++;clock=0;renderedFrames=0;openingElapsed=0;walkActive=false;walkProgress=0;walkElapsed=0;walkDistance=0;settling=0;walkCurve=new THREE.CatmullRomCurve3([v(1,.15,-10),v(1.1,.15,-10.1)]);walkLength=walkCurve.getLength();walkDuration=7.5;doorProgress=0;selected='outdoors';transition=null;assetStatus='idle';assetError='';lastEscape=-Infinity;projectionShift=0;galleryFocused=false;displayStart=-1;indexOpen=viewerOpen=false;viewerOrigin='exhibition';viewerReturnId=null;indexReturnsToParent=Boolean(initialIndex);layerSiblings=[];pointerDown=null;activeIndex=Math.min(activeIndex,Math.max(0,collection.length-1));target.copy(poses.threshold.target);externalFocus=returnFocus||document.activeElement;
-    try{mount();borrowRenderer();buildScene();bindUI();resize();updateContent();requestCompanion();const token=generation;document.fonts?.ready?.then(()=>{if(!opened||token!==generation)return;labels.forEach(({texture,draw})=>{draw();texture.needsUpdate=true;});dirtyFrame();});veil.style.opacity=reduced()?'0':'1';host.focus({preventScroll:true});camera.position.copy(poses.outdoors.position);target.copy(poses.outdoors.target);camera.lookAt(target);collectionOverview({focus:false});if(initialIndex)openIndex();return true;}catch(error){finishClose(false);throw error;}
+    try{mount();borrowRenderer();buildScene();bindUI();resize();updateContent();requestCompanion();const token=generation;document.fonts?.ready?.then(()=>{if(!opened||token!==generation)return;labels.forEach(({texture,draw})=>{draw();texture.needsUpdate=true;});dirtyFrame();});veil.style.opacity=reduced()?'0':'1';host.focus({preventScroll:true});camera.position.copy(poses.outdoors.position);target.copy(poses.outdoors.target);camera.lookAt(target);if(collection.length){
+      selectCatch(activeIndex,{guided:false,focus:false});
+      const pose=catchPose(activeIndex);transition=null;experience.classList.remove('pgr-moving');
+      camera.position.copy(pose.position);target.copy(pose.target);camera.fov=pose.fov;applyProjection(pose.shift);camera.lookAt(target);
+    }
+    if(initialIndex)openIndex();
+    else {
+      const tip=experience.querySelector('.pgr-start-tip');
+      tip.hidden=false;
+      const tipTimer=setTimeout(()=>{tip.hidden=true;},5000);
+      listeners.push(()=>clearTimeout(tipTimer));
+    }
+    return true;}catch(error){finishClose(false);throw error;}
   }
   function close({immediate=false,notify=true}={}){if(!opened)return false;if(closing&&!immediate)return false;closing=true;releaseLayer();stopWalk();setHover(null);experience.dataset.phase='returning';finishClose(notify);return true;}
   function finishClose(notify){
-    if(!opened)return;generation++;clearImageRequests();releaseLayer();assetController?.abort();assetController=null;requestSerial++;opened=false;closing=false;walkActive=false;transition=null;dirty=false;listeners.splice(0).forEach(remove=>remove());releaseCompanion();resources.instanced.forEach(value=>value.dispose());resources.light.forEach(light=>light.shadow?.dispose());resources.geometry.forEach(value=>value.dispose());resources.material.forEach(value=>value.dispose());resources.texture.forEach(value=>value.dispose());Object.values(resources).forEach(set=>set.clear());geometryCache.clear();doors.length=0;picks.length=0;occluders.length=0;labels.length=0;exhibits.length=0;Object.keys(palette).forEach(key=>delete palette[key]);scene?.clear();restoreRenderer();experience?.remove();experience=host=veil=status=scene=camera=trailLight=screenGlow=screenLight=modelRing=null;assetStatus='idle';const focus=externalFocus;externalFocus=null;if(notify){try{onClose();}finally{if(focus?.isConnected&&!focus.disabled)focus.focus({preventScroll:true});}}
+    if(!opened)return;generation++;clearImageRequests();backdrop?.remove();backdrop=null;releaseLayer();assetController?.abort();assetController=null;requestSerial++;opened=false;closing=false;walkActive=false;transition=null;dirty=false;listeners.splice(0).forEach(remove=>remove());releaseCompanion();resources.instanced.forEach(value=>value.dispose());resources.light.forEach(light=>light.shadow?.dispose());resources.geometry.forEach(value=>value.dispose());resources.material.forEach(value=>value.dispose());resources.texture.forEach(value=>value.dispose());Object.values(resources).forEach(set=>set.clear());geometryCache.clear();doors.length=0;picks.length=0;occluders.length=0;labels.length=0;exhibits.length=0;Object.keys(palette).forEach(key=>delete palette[key]);scene?.clear();restoreRenderer();experience?.remove();experience=host=veil=status=scene=camera=trailLight=screenGlow=screenLight=modelRing=null;assetStatus='idle';const focus=externalFocus;externalFocus=null;if(notify){try{onClose();}finally{if(focus?.isConnected&&!focus.disabled)focus.focus({preventScroll:true});}}
   }
   function update(dtSeconds=0){
     if(!opened||!scene||document.hidden||viewerOpen||indexOpen)return false;const dt=Math.min(.1,Math.max(0,Number(dtSeconds)||0));clock+=dt*1000;

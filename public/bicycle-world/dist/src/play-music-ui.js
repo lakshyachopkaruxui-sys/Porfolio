@@ -78,11 +78,14 @@ export function mountPlayMusic({notify = () => {}} = {}) {
     const dialogs = [...document.querySelectorAll('dialog[open]')];
     const dialog = dialogs.at(-1);
     const activeLayer = dialog?.querySelector('#about-journal-photo:not([hidden]),.about-places:not([hidden]),.cloud-photo-gallery:not([hidden]),#listening-photo-viewer:not([hidden]),#pokemon-viewer:not([hidden]),#pokemon-index:not([hidden]),#garba-viewer:not([hidden]),.personal-media:not([hidden]),.personal-reading:not([hidden]),.personal-places:not([hidden]),.works-reading:not([hidden]),.works-index:not([hidden]),.works-inspect:not([hidden]),.works-places:not([hidden]),.oak-places:not([hidden])');
-    const childRoom = dialog?.querySelector('#listening-experience,#garba-experience');
-    const boundary = activeLayer || childRoom || dialog || document.body;
+    const childRoom = (dialog || document).querySelector('#pokemon-experience,#listening-experience,#garba-experience');
+    const exhibitionLayer = childRoom?.id === 'pokemon-experience'
+      ? childRoom.querySelector('#pokemon-viewer:not([hidden]),#pokemon-index:not([hidden])') : null;
+    const boundary = activeLayer || exhibitionLayer || childRoom || dialog || document.body;
     // Personal-room actions occupy the bottom edge. Keep optional music in
     // the existing header's flow instead of covering those actions with a dock.
     const headerNavigation = boundary === document.body ? document.querySelector('#ride-tools')
+      : boundary.matches('#pokemon-experience,#pokemon-viewer,#pokemon-index') ? boundary.querySelector('.pgr-tools')
       : boundary.id === 'visitor-board' ? boundary.querySelector('.vb-header')
       : boundary.id === 'works-experience' ? boundary.querySelector('.works-header nav')
       : boundary.id === 'garba-experience' ? boundary.querySelector('.gr-header nav')
@@ -91,7 +94,7 @@ export function mountPlayMusic({notify = () => {}} = {}) {
       ? boundary.querySelector('.personal-header nav')
       : boundary.matches('.works-reading,.works-index,.works-inspect,.works-places,.oak-places') || ['about','work'].includes(dialog?.dataset.kind) && boundary.matches('.personal-reading,.personal-media,.personal-places') || boundary.id === 'listening-photo-viewer' || boundary.id === 'garba-viewer' ? boundary.querySelector('header')
       : boundary.id === 'oak-lab' ? boundary.querySelector('.oak-header nav') || boundary.querySelector('.oak-tools')
-      : boundary.id === 'help' || boundary.id === 'world-map' ? boundary.querySelector('.reader-top') : null;
+      : ['help','world-map','place-reader','project-reader'].includes(boundary.id) ? boundary.querySelector('.reader-top') : null;
     const parent = headerNavigation || boundary;
     // A modal dialog makes outside controls inert. Keep this control inside it.
     // Keep the version switch last in both visual and keyboard order.

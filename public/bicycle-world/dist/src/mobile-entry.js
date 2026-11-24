@@ -53,6 +53,7 @@ export function mountMobileEntry() {
     <ul class="mobile-work-grid" aria-label="Projects">${cards}</ul>
     <footer class="mobile-play-footer">
       <p>The 3D garden is best explored on a computer or laptop.</p>
+      <a href="./sections.html">Browse garden sections</a>
       <a id="mobile-view-portfolio" data-normal-portfolio href="/normal-portfolio/">View portfolio</a>
     </footer>`;
   document.body.append(notice);

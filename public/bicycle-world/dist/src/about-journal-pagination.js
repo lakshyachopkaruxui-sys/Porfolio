@@ -1,3 +1,5 @@
+export class JournalPageSizeError extends Error {}
+
 /** Convert the sourced chapter into small, ordered units without rewriting it. */
 export function journalAtoms(chapter,index=0,total=1){
   const atoms=[{type:'chapter',title:chapter.openingTitle||chapter.title,body:chapter.lead,label:chapter.label,index,total,logicalPage:0,key:'chapter',keepWithNext:true}];
@@ -65,7 +67,7 @@ export function balanceJournalPages(atoms,measure,capacity,{splitSentences=false
     const result=solve(0,pairs);if(result)return result.pages;
   }
   if(!splitSentences)return balanceJournalPages(atoms,measure,capacity,{splitSentences:true});
-  throw new Error('The notebook needs more room for a complete, readable spread.');
+  throw new JournalPageSizeError('The notebook needs more room for a complete, readable spread.');
 }
 
 /** Fit actual pages. Overflow becomes another page, never smaller type or clipping. */
@@ -97,7 +99,7 @@ export function paginateJournal(atoms,fits){
     if(atom.title&&atom.body&&fits([{...atom,body:undefined}])){
       page.push({...atom,body:undefined});flush();queue.unshift({...atom,type:'text',title:undefined,date:undefined,continued:true});continue;
     }
-    throw new Error(`The notebook page is too small for ${atom.type}.`);
+    throw new JournalPageSizeError(`The notebook page is too small for ${atom.type}.`);
   }
   flush();return pages.length?pages:[[]];
 }

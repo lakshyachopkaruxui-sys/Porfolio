@@ -2570,137 +2570,181 @@ html:root body.hybrid-world #garba-experience .gr-header .mode-selector.mode-swi
 #personal-experience #garba-experience .gr-print{width:clamp(32px,4vw,48px);aspect-ratio:3/4;object-fit:cover;flex:none;border-radius:3px;}
 
 /* Source: bicycle-world/dist/src/pokemon-room.css */
-/* This room borrows the existing Play canvas and typography. */
-:is(#personal-experience,#oak-lab) #pokemon-experience{--pgr-ink:#284537;--pgr-paper:#eef5f4;position:absolute;inset:0;z-index:30;isolation:isolate;overflow:hidden;background:#c3e6ef;color:var(--pgr-ink);font-family:'DM Sans',sans-serif}
-:is(#personal-experience,#oak-lab) #pokemon-experience *{box-sizing:border-box}
-:is(#personal-experience,#oak-lab) #pokemon-experience [hidden]{display:none!important}
-:is(#personal-experience,#oak-lab) #pokemon-scene{position:absolute;inset:0}
-:is(#personal-experience,#oak-lab) #pokemon-scene:focus-visible{outline:3px solid #235fbe;outline-offset:-5px}
-:is(#personal-experience,#oak-lab) #pokemon-scene canvas{display:block;position:absolute;inset:0;width:100%;height:100%}
-:is(#personal-experience,#oak-lab) #pokemon-experience button{position:static;inset:auto;transform:none;box-shadow:none;font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.45;min-height:44px;border-radius:9px;cursor:pointer;touch-action:manipulation}
-:is(#personal-experience,#oak-lab) #pokemon-experience button:focus-visible{outline:3px solid #a5702b;outline-offset:4px}
-:is(#personal-experience,#oak-lab) #pokemon-experience button:disabled{opacity:.5;cursor:default}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-header{position:absolute;z-index:5;inset:0 0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding:25px 36px;pointer-events:none}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-header>*{pointer-events:auto}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-heading{text-align:center;padding:12px 22px;color:#2e4737;background:#f3ead8f2;border:1px solid #dbcaa9;border-radius:12px;box-shadow:0 4px 20px #213a2410}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-heading p{font-size:11px;line-height:1.5;letter-spacing:.13em;text-transform:uppercase;font-weight:700;margin:0 0 8px}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-heading h1{font-family:'Mochiy Pop P One',sans-serif;font-weight:400;letter-spacing:-.03em;line-height:1.5;font-size:clamp(18px,1.8vw,27px);margin:0}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-quiet{border:1px solid #bdd5d1;background:#eef5f4f5;color:var(--pgr-ink);padding:10px 16px;white-space:nowrap;font-weight:600}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-quiet:hover{background:#fff4de;border-color:#a4916e}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,#f2e6ca24,transparent 24%,transparent 66%,#1e39201c)}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-story{position:absolute;z-index:4;left:36px;bottom:142px;width:310px;max-width:30vw;padding:23px 25px;background:#f3ead8f2;border:1px solid #dbcaa9;border-radius:13px;box-shadow:0 7px 30px #213a2420;backdrop-filter:blur(8px)}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-eyebrow{font-size:10px;line-height:1.5;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#677455;margin:0 0 12px}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-story h2{font-family:'Mochiy Pop P One',sans-serif;font-weight:400;font-size:22px;line-height:1.5;letter-spacing:-.025em;margin:0 0 15px;text-wrap:balance}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-story>p:not(.pgr-eyebrow){font-size:14px;line-height:1.65;margin:0 0 22px;color:#55614b}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;min-height:48px}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-primary{display:inline-flex;align-items:center;justify-content:center;background:#34583d;color:#fff3dc;border:1px solid #34583d;padding:11px 17px;font-weight:700;box-shadow:0 3px 0 #203c28;min-height:48px}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-primary:hover{background:#26452f;border-color:#26452f}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-primary:active{transform:translateY(2px);box-shadow:0 1px 0 #203c28}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-reset{padding:8px 0;background:transparent;border:0;color:#405a40;text-decoration:underline;text-underline-offset:4px}
-:is(#personal-experience,#oak-lab) #pokemon-experience[data-story=outdoors] .pgr-actions{display:grid;grid-template-columns:1fr;gap:5px;min-height:97px;justify-items:start}
-:is(#personal-experience,#oak-lab) #pokemon-experience[data-story=outdoors] .pgr-primary{min-width:180px}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-story .pgr-asset-note{font-size:12px;line-height:1.5;margin:13px 0 0}
-:is(#personal-experience,#oak-lab) #pokemon-experience #pokemon-retry{margin-top:12px;font-size:13px}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-chapters{position:absolute;z-index:5;left:36px;right:36px;bottom:53px;max-width:860px;display:grid;grid-template-columns:repeat(3,1fr);margin:auto;padding:8px;gap:6px;background:#f2e9d7f2;border:1px solid #d7c6a4;border-radius:13px;box-shadow:0 6px 30px #213a2420;backdrop-filter:blur(8px)}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-chapters button{display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 18px;background:transparent;border:1px solid transparent;min-height:54px;color:#3e5841;font-weight:600}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-chapters button:hover{background:#e5e2cb;border-color:#c4cbad}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-chapters button[aria-pressed=true]{background:#d9e0c5;border-color:#93a682;color:#254333}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-number{font-size:11px;font-weight:400;color:#74836a}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-footer{position:absolute;bottom:15px;left:36px;right:36px;z-index:4;display:flex;justify-content:space-between;gap:16px;font-size:11px;line-height:1.4;pointer-events:none;color:#2d4837}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-footer span{background:#e8dfcae6;padding:4px 8px;border-radius:4px}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-hint{position:absolute;z-index:8;pointer-events:none;background:#f3ead8;color:#284537;padding:10px 14px;border-radius:8px;box-shadow:0 3px 14px #233c2433;font-size:13px}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-veil{position:absolute;inset:0;z-index:20;pointer-events:none;background:#eee4cd;opacity:1}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;padding:0;margin:-1px;border:0}
-:is(#personal-experience,#oak-lab) #pokemon-experience[data-story=outdoors] .pgr-heading{color:#284536}
-:is(#personal-experience,#oak-lab) #pokemon-experience.pgr-moving .pgr-story{opacity:.7;pointer-events:none}
-@media(min-width:1800px){:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-header{padding:32px 5vw}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-story{left:5vw;bottom:170px;width:350px;padding:29px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-story h2{font-size:25px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-story>p:not(.pgr-eyebrow){font-size:16px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-chapters{bottom:68px;max-width:960px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-footer{left:5vw;right:5vw;bottom:24px}}
-@media(max-width:1100px){:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-header{padding:20px 24px;gap:15px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-heading h1{font-size:18px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-heading p{font-size:10px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-story{left:24px;width:270px;max-width:29vw;padding:20px;bottom:139px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-story h2{font-size:19px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-story>p:not(.pgr-eyebrow){font-size:14px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-chapters{left:24px;right:24px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-chapters button{padding:10px 12px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-footer{left:24px;right:24px}}
-@media(max-height:760px){:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-header{padding-top:17px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-story{bottom:129px;padding:19px 22px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-story h2{font-size:20px;margin-bottom:12px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-story>p:not(.pgr-eyebrow){margin-bottom:17px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-chapters{bottom:44px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-footer{bottom:9px}}
-@media(max-width:760px){:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-header{padding:15px;gap:10px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-heading h1{font-size:14px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-quiet{font-size:11px;padding:9px 11px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-story{left:15px;right:15px;max-width:340px;width:auto;bottom:140px;padding:16px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-chapters{left:15px;right:15px;gap:2px;padding:5px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-chapters button{font-size:11px;padding:8px 5px;gap:5px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-number{display:none}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-footer{left:15px;right:15px;font-size:9px}}
-
-/* Personal collection: a bounded spatial display, complete direct index and
-   faithful full-image inspection are three views of the same selection. */
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-header-actions{display:flex;gap:9px;align-items:flex-start}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-music{font-size:12px}
-:is(#personal-experience,#oak-lab) #pokemon-experience:not([data-story=childhood]) .pgr-heading{padding:10px 16px}
-:is(#personal-experience,#oak-lab) #pokemon-experience:not([data-story=childhood]) .pgr-heading p{display:none}
-:is(#personal-experience,#oak-lab) #pokemon-experience:not([data-story=childhood]) .pgr-heading h1{font-size:18px}
-:is(#personal-experience,#oak-lab) #pokemon-experience[data-story=outdoors][data-catch-focus=false] .pgr-story{top:126px;bottom:auto;width:280px;max-width:28vw;padding:19px 21px}
-:is(#personal-experience,#oak-lab) #pokemon-experience[data-story=outdoors][data-catch-focus=false] .pgr-story h2{font-size:19px}
-:is(#personal-experience,#oak-lab) #pokemon-experience[data-story=outdoors][data-catch-focus=false] .pgr-story>p:not(.pgr-eyebrow){font-size:14px;line-height:1.55}
-:is(#personal-experience,#oak-lab) #pokemon-experience[data-story=outdoors] .pgr-actions{display:flex;min-height:48px;gap:10px;margin-top:15px}
-:is(#personal-experience,#oak-lab) #pokemon-experience[data-story=outdoors] .pgr-actions .pgr-primary{min-width:0;width:100%}
-:is(#personal-experience,#oak-lab) #pokemon-experience[data-catch-focus=true] #pokemon-title,:is(#personal-experience,#oak-lab) #pokemon-experience[data-catch-focus=true] #pokemon-body{display:none}
-:is(#personal-experience,#oak-lab) #pokemon-experience #pokemon-catch-context h3{font-family:'Mochiy Pop P One',sans-serif;font-size:24px;font-weight:400;line-height:1.5;letter-spacing:-.025em;margin:0 0 10px;overflow-wrap:anywhere}
-:is(#personal-experience,#oak-lab) #pokemon-experience #pokemon-catch-context>p:not(.pgr-eyebrow){font-size:14px;line-height:1.5;margin:0 0 19px;color:#5b674f}
-:is(#personal-experience,#oak-lab) #pokemon-experience #pokemon-view-catch{width:100%}
-:is(#personal-experience,#oak-lab) #pokemon-experience #pokemon-catch-error{margin-top:14px!important;font-size:12px!important}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-collection-controls{position:absolute;top:145px;right:36px;z-index:5;width:174px;display:flex;flex-direction:column;gap:12px;align-items:stretch}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-collection-controls button{font-size:13px;white-space:normal;padding:10px 12px;background:#eef5f4f5;border-color:#d0bea0}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-display-controls{display:grid;grid-template-columns:1fr;gap:7px;padding:10px;border:1px solid #d4c4a6;border-radius:11px;background:#f1e7d2ed}
-:is(#personal-experience,#oak-lab) #pokemon-experience #pokemon-display-count{font-size:12px;line-height:1.5;text-align:center;color:#596b50}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index,:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-viewer{position:absolute;inset:0;z-index:40;display:flex;flex-direction:column;overflow:hidden;background:#e4eeef;padding:28px 40px;color:#244641}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index>header,:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-viewer>header{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-shrink:0;max-width:1450px;width:100%;margin:0 auto}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index h2,:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-viewer h2{font-family:'Mochiy Pop P One',sans-serif;font-weight:400;font-size:26px;line-height:1.5;letter-spacing:-.025em;margin:0}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index .pgr-eyebrow,:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-viewer .pgr-eyebrow{margin-bottom:6px}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-toolbar{display:flex;align-items:center;gap:18px;margin:24px auto 20px;max-width:1450px;width:100%;flex-shrink:0}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-toolbar label{font-size:14px;font-weight:600}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-toolbar input{font-family:'DM Sans',sans-serif;font-size:16px;min-height:46px;padding:11px 14px;border:1px solid #bcb99d;border-radius:9px;background:#fff9ec;color:#244641;width:280px}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-toolbar input:focus-visible{outline:3px solid #a5702b;outline-offset:3px}
-:is(#personal-experience,#oak-lab) #pokemon-experience #pokemon-index-count{margin:0 0 0 auto;font-size:14px}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-grid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));align-content:start;gap:16px;overflow:auto;max-width:1450px;width:100%;margin:0 auto;padding:3px 5px 8px;scrollbar-gutter:stable}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-grid button{display:flex;flex-direction:column;align-items:center;text-align:center;background:#f7fbfa;border:1px solid #bdd5d1;border-radius:12px;padding:11px;gap:8px;color:#244641;min-width:0}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-grid button:hover{border-color:#8fa27a;background:#d9ece7}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-grid img{display:block;width:100%;height:clamp(108px,20vh,220px);object-fit:contain}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-grid strong{font-size:14px;line-height:1.4;overflow-wrap:anywhere}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-grid span{font-size:12px;line-height:1.4;color:#68765a}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index>footer,:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-viewer>nav{display:flex;align-items:center;justify-content:center;gap:24px;padding-top:20px;flex-shrink:0;font-size:14px}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-viewer>header p:last-child:not(.pgr-eyebrow){margin:5px 0 0;font-size:14px;color:#657258}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-viewer figure{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;margin:14px 0 0}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-viewer img{display:block;width:auto;height:auto;max-height:calc(100% - 35px);max-width:100%;object-fit:contain;border-radius:2px;box-shadow:0 5px 25px #26432918}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-viewer figcaption{font-size:13px;line-height:1.5;text-align:center;color:#657258;margin:0}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-viewer #pokemon-viewer-error{font-size:14px;margin:0}
-:is(#personal-experience,#oak-lab) #pokemon-experience[data-catch-focus=true] .pgr-story{bottom:145px}
-:is(#personal-experience,#oak-lab) #pokemon-experience.pgr-moving .pgr-story{opacity:.86;pointer-events:auto}
-@media(max-width:1100px){:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-header-actions{gap:6px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-header-actions .pgr-quiet{padding:10px 12px;font-size:12px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-heading{padding:10px 13px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-collection-controls{right:24px;top:139px;width:158px}:is(#personal-experience,#oak-lab) #pokemon-experience #pokemon-catch-context h3{font-size:21px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index,:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-viewer{padding:23px 26px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-grid{gap:11px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-grid button{padding:8px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-grid strong{font-size:13px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-grid img{height:19vh}}
-@media(min-width:1800px){:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-collection-controls{right:5vw;top:162px;width:190px}:is(#personal-experience,#oak-lab) #pokemon-experience[data-catch-focus=true] .pgr-story{bottom:170px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index,:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-viewer{padding:36px 5vw}}
-@media(max-height:760px){:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index,:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-viewer{padding-top:19px;padding-bottom:16px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-toolbar{margin-top:16px;margin-bottom:15px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-viewer figure{margin-top:9px}:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index>footer,:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-viewer>nav{padding-top:14px}}
-
-/* Browsing pages, opening a capture and walking the exhibition are distinct actions. */
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-actions{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-instruction{flex:none;max-width:1450px;width:100%;margin:18px auto 0;font-size:16px;line-height:1.6;color:#405a40}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-grid button{align-items:flex-start;text-align:left}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-grid img{align-self:center}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-grid button:hover,:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-grid button:focus-visible{border-color:#426956}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-display-controls{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:7px;padding:8px}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-collection-controls{top:auto;bottom:145px;width:340px;max-width:36vw}
-:is(#personal-experience,#oak-lab) #pokemon-experience #pokemon-display-count{font-size:12px;max-width:90px}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index>footer,:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-viewer>nav{justify-content:space-between;max-width:1450px;width:100%;margin:0 auto;gap:14px}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-viewer figcaption{font-size:14px;line-height:1.5;max-width:65ch}
-@media(max-width:900px){
-  :is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
-  :is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index>header,:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-viewer>header{gap:12px;flex-wrap:wrap}
-  :is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-actions{justify-content:flex-start}
-  :is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-instruction{font-size:15px;margin-top:14px}
+/* Exhibition views use the Works Room's title, content, caption and action order. */
+:is(#oak-lab,#personal-experience) #pokemon-experience {
+  --pgr-ink: #273f35;
+  --pgr-muted: #455e50;
+  --pgr-paper: #f6f3ea;
+  --pgr-edge: #c8cec4;
+  --pgr-side: clamp(18px,4vw,72px);
+  --pgr-floor: max(12px,env(safe-area-inset-bottom));
+  --pgr-top: var(--play-map-inset,16px);
+  --pgr-map: var(--play-map-width,128px);
+  --pgr-direction: clamp(78px,18vw,150px);
+  position:absolute;inset:0;z-index:30;isolation:isolate;overflow:hidden;
+  display:grid;grid-template-rows:auto minmax(0,1fr) auto;grid-template-columns:minmax(0,1fr);
+  background:transparent;color:var(--pgr-ink);font-family:var(--font-body,'DM Sans',sans-serif)
 }
-@media(max-width:600px){
-  :is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index,:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-viewer{padding:18px}
-  :is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index h2,:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-viewer h2{font-size:21px}
-  :is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-toolbar{flex-wrap:wrap;gap:8px;margin-top:14px;margin-bottom:12px}
-  :is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-toolbar input{width:100%}
-  :is(#personal-experience,#oak-lab) #pokemon-experience #pokemon-index-count{margin:0;width:100%}
-  :is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
-  :is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-grid img{height:118px}
-  :is(#personal-experience,#oak-lab) #pokemon-experience .pgr-collection-controls{max-width:none;width:calc(100% - 36px);right:18px;bottom:145px}
-  :is(#personal-experience,#oak-lab) #pokemon-experience .pgr-collection-controls button{font-size:12px;min-height:44px}
-  :is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index>footer,:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-viewer>nav{font-size:12px;gap:6px}
+:is(#oak-lab,#personal-experience) #pokemon-experience *,:is(#oak-lab,#personal-experience) #pokemon-experience *::before,:is(#oak-lab,#personal-experience) #pokemon-experience *::after{box-sizing:border-box}
+:is(#oak-lab,#personal-experience) #pokemon-experience [hidden]{display:none!important}
+:is(#oak-lab,#personal-experience) #pokemon-experience button{position:static;inset:auto;min-height:44px;padding:7px 12px;border:1px solid var(--pgr-edge);border-radius:9px;background:var(--pgr-paper);color:var(--pgr-ink);font:600 14px/1.3 var(--font-body,'DM Sans',sans-serif);cursor:pointer;touch-action:manipulation}
+:is(#oak-lab,#personal-experience) #pokemon-experience button:disabled{opacity:.5;cursor:default}
+:is(#oak-lab,#personal-experience) #pokemon-experience :is(button,input):focus-visible{outline:3px solid #235a43;outline-offset:2px}
+:is(#oak-lab,#personal-experience) #pokemon-experience #pokemon-scene{position:relative;min-height:0;grid-area:1/1/3/2;overflow:hidden}
+:is(#oak-lab,#personal-experience) #pokemon-experience #pokemon-scene:focus-visible{outline:3px solid #235a43;outline-offset:-4px}
+:is(#oak-lab,#personal-experience) #pokemon-experience #pokemon-scene canvas{display:block;position:absolute;inset:0;width:100%;height:100%}
+:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,#f2e6ca22,transparent 25%,transparent 76%,#1e392015)}
+:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-veil{position:absolute;inset:0;z-index:20;pointer-events:none;background:#eee4cd;opacity:1}
+:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-hint{position:absolute;z-index:8;pointer-events:none;background:var(--pgr-paper);border-radius:8px;padding:8px 12px;font-size:14px}
+
+/* Reserve the map and return slots even when the tools or the title change. */
+:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-head{
+  position:relative;inset:auto;z-index:5;flex:none;display:grid;align-items:start;
+  grid-template-columns:minmax(max-content,1fr) auto 112px 136px var(--pgr-map);
+  grid-template-areas:"title extras music back map";gap:6px;
+  width:100%;max-width:none;margin:0;padding:var(--pgr-top) var(--pgr-top) 8px;
+}
+:is(#oak-lab,#personal-experience) #pokemon-experience .walk-header{grid-area:1/1;background:var(--pgr-paper);pointer-events:none}
+:is(#oak-lab,#personal-experience) #pokemon-experience .walk-header :is(.walk-heading,button,.pgr-tools){pointer-events:auto}
+:is(#oak-lab,#personal-experience) #pokemon-experience .walk-heading{grid-area:title;place-self:start;display:flex;align-items:center;min-width:0;max-width:100%;min-height:44px;width:fit-content;background:var(--pgr-paper);padding:4px 12px;border-radius:4px}
+:is(#oak-lab,#personal-experience) #pokemon-experience .walk-heading :is(h1,h2){margin:0;color:var(--pgr-ink);font:400 clamp(16px,1.6vw,23px)/1.32 var(--font-heading,'Mochiy Pop P One',sans-serif);overflow-wrap:break-word}
+:is(#oak-lab,#personal-experience) #pokemon-experience :is(.pgr-head nav,.pgr-tools){display:contents}
+:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-extras{grid-area:extras;display:flex;align-items:center;flex-wrap:wrap;justify-content:flex-end;gap:5px;min-width:0;align-self:start}
+:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-extras:empty{display:none}
+:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-tools>[data-play-music]{grid-area:music;justify-self:end;min-width:96px;height:44px}
+:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-back{grid-area:back;width:100%;height:44px;padding:3px 7px}
+:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-head [data-room-map]{grid-area:map;position:fixed;top:var(--pgr-top);right:var(--pgr-top);left:auto;bottom:auto;width:var(--pgr-map);height:44px;padding:3px 6px}
+:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-tools #pokemon-browse{--control-face-start:#f1f5e9;--control-face-end:#dae7d7}
+
+#pokemon-experience .walk-dock { grid-area:3/1; position:relative; z-index:6; }
+#pokemon-experience .pgr-caption { display:flex; align-items:baseline; gap:5px 14px; flex-wrap:wrap; }
+#pokemon-experience .pgr-caption :is(h2,strong) { margin:0; font:600 15px/1.4 var(--font-body,sans-serif); }
+#pokemon-experience #pokemon-view-catch { --control-face-start:#416955; --control-face-end:#2a4d3d; --control-ink:#fff; }
+:is(#oak-lab,#personal-experience) #pokemon-experience .walk-alerts{position:absolute;z-index:7;right:var(--pgr-side);top:35%;width:min(245px,80%);pointer-events:none}
+:is(#oak-lab,#personal-experience) #pokemon-experience .walk-alerts>*{pointer-events:auto;background:var(--pgr-paper);padding:8px 12px;border-radius:6px}
+:is(#oak-lab,#personal-experience) #pokemon-experience :is(.pgr-index,.pgr-viewer){position:absolute;inset:0;z-index:40;display:flex;flex-direction:column;overflow:hidden;background:#e4eeef;color:var(--pgr-ink)}
+:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-index-toolbar{flex:none;display:flex;align-items:center;gap:12px;width:100%;padding:8px var(--pgr-side) 12px;margin:0}
+:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-index-toolbar label{flex:none;font-size:14px;font-weight:600}
+:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-index-toolbar input{min-width:0;width:min(100%,280px);height:44px;font:400 16px/1.3 var(--font-body,'DM Sans',sans-serif);padding:8px 12px;border:1px solid #849680;border-radius:9px;background:#fffdf6;color:var(--pgr-ink)}
+:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-index-grid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));align-content:start;gap:14px;overflow:auto;overscroll-behavior:contain;width:100%;margin:0;padding:4px var(--pgr-side) 12px;scroll-padding:6px}
+:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-index-grid button{height:100%;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:10px;text-align:start;background:#f7fbfa;border:1px solid var(--pgr-edge)}
+:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-index-grid img{align-self:center;width:100%;height:clamp(100px,16vh,175px);object-fit:contain}
+:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-index-grid strong,:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-index-grid span{font:600 14px/1.4 var(--font-body,'DM Sans',sans-serif);overflow-wrap:anywhere}
+:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-index-grid span{font-weight:400;color:var(--pgr-muted)}
+:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-viewer figure{flex:1;min-height:0;display:flex;flex-direction:column;margin:0}
+:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-picture{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:8px var(--pgr-side) 10px}
+:is(#oak-lab,#personal-experience) #pokemon-experience #pokemon-full-catch{display:block;min-height:0;width:100%;height:100%;object-fit:contain}
+:is(#oak-lab,#personal-experience) #pokemon-experience #pokemon-viewer-error{margin:0;font-size:14px}
+@media(max-width:1100px){
+  :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-head{grid-template-columns:minmax(0,1fr) 112px 136px var(--pgr-map);grid-template-areas:"title music back map" "extras extras extras extras"}
+  :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-extras{justify-content:flex-start}
+  :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-index-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media(max-width:760px){
+  :is(#oak-lab,#personal-experience) #pokemon-experience{--pgr-side:16px;--pgr-top:var(--play-map-inset,8px);--pgr-floor:max(10px,env(safe-area-inset-bottom));--pgr-direction:clamp(77px,26vw,130px)}
+  :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-head{grid-template-columns:minmax(0,1fr) var(--pgr-map);grid-template-areas:"title map" "music back" "extras extras";grid-template-rows:minmax(76px,max-content) auto;gap:4px 6px}
+  :is(#oak-lab,#personal-experience) #pokemon-experience .walk-heading{padding:5px 8px}
+  :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-extras{gap:4px;max-height:96px;overflow-y:auto;overscroll-behavior:contain}
+  :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-tools>[data-play-music]{justify-self:start}
+  :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-tools button{padding:5px 8px}
+  :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-index-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-index-toolbar{gap:6px}
+}
+@media(max-width:480px){
+  :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-index-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-height:520px){
+  :is(#oak-lab,#personal-experience) #pokemon-experience{--pgr-floor:max(4px,env(safe-area-inset-bottom))}
+  :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-extras{max-height:48px;overflow-y:auto}
 }
 
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-collection-controls{bottom:54px}
+:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-index-grid>p{grid-column:1/-1;margin:12px 0;font-size:16px;line-height:1.5}
 
-/* A short laptop viewport must keep exits and page controls reachable. */
-:is(#personal-experience,#oak-lab) #pokemon-experience :is(.pgr-index,.pgr-viewer){overflow-y:auto;overscroll-behavior:contain}
-:is(#personal-experience,#oak-lab) #pokemon-experience .pgr-index-grid{min-height:min(130px,28vh)}
+@media(max-width:760px){
+  :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-tools .mode-selector.mode-switch{--mode-width:154px;--mode-height:44px;--mode-type:14px;--mode-rail-column:26px}
+}
+
+/* Keep the artwork visible between the title placard and the utility group. */
+:is(#oak-lab,#personal-experience) #pokemon-experience .walk-header {background:transparent;}
+#personal-experience .cloud-photo-gallery .cloud-gallery-help {
+  border:0; padding:0; margin:0; background:transparent;
+}
+#personal-experience .cloud-photo-gallery .cloud-gallery-help summary {
+  display:list-item; list-style:revert; padding:2px 0; margin:0; height:auto;
+  font:600 13px/1.4 var(--font-body,sans-serif); color:inherit;
+}
+#personal-experience .cloud-photo-gallery .cloud-gallery-help summary::after {content:none;}
+:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-head [data-play-music] {white-space:nowrap;}
+@media(max-width:760px) {
+  :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-extras {align-items:flex-start;}
+}
+@media(min-width:1101px) {
+  :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-head::before {
+    content:""; grid-column:2/-1; grid-row:1; position:absolute; inset:-4px;
+    align-self:start; height:52px; box-sizing:border-box; z-index:-1;
+    border-radius:10px; background:var(--pgr-paper); pointer-events:none;
+  }
+}
+@media(max-width:360px) {
+  :is(#oak-lab,#personal-experience) #pokemon-experience .walk-heading {padding-inline:4px;}
+  :is(#oak-lab,#personal-experience) #pokemon-experience .walk-heading :is(h1,h2) {font-size:15.5px;}
+}
+
+/* Placed over the scene so its arrival and dismissal never move the artwork. */
+#pokemon-experience .pgr-start-tip {
+  grid-area:2/1; place-self:start center; z-index:4; pointer-events:none;
+  max-width:calc(100% - 24px); margin-top:12px; padding:8px 13px;
+  border:1px solid #577460; border-radius:8px;
+  color:#fffdf3; background:#233e32; box-shadow:0 2px 8px #15281d2e;
+  font:500 14px/1.45 var(--font-body,sans-serif); text-align:center;
+  animation:pgr-start-tip 5s both;
+}
+#pokemon-experience .pgr-key-tip {display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:4px 14px;}
+#pokemon-experience .pgr-key-tip>span {display:inline-flex; align-items:center; gap:5px;}
+#pokemon-experience .pgr-key-tip kbd {
+  display:inline-grid; place-items:center; min-width:22px; height:22px;
+  border-radius:4px; background:#f6f3ea; color:#213c30; box-shadow:0 2px 0 #8f9e90;
+  font:700 14px/1 var(--font-body,sans-serif);
+}
+#pokemon-experience .pgr-touch-tip {display:none;}
+@media(hover:none) and (pointer:coarse) {
+  #pokemon-experience .pgr-key-tip {display:none;}
+  #pokemon-experience .pgr-touch-tip {display:inline;}
+}
+@keyframes pgr-start-tip {
+  0% {opacity:0; transform:translateY(-4px);}
+  5%,90% {opacity:1; transform:translateY(0);}
+  100% {opacity:0; transform:translateY(0);}
+}
+@media(prefers-reduced-motion:reduce) {#pokemon-experience .pgr-start-tip {animation:none;}}
+.reduce-motion #pokemon-experience .pgr-start-tip {animation:none;}
+
+#pokemon-experience .pgr-room-backdrop {
+  position:absolute;inset:0;z-index:2;overflow:hidden;background:#c2d6ca;
+}
+#pokemon-experience .pgr-room-board {
+  position:absolute;top:50%;left:50%;width:916px;height:508px;overflow:hidden;
+  transform:translate(-50%,-50%) scale(var(--room-scale,1));
+  background:center / 100% 100% no-repeat url("./assets/pokemon-room-overhead.png");
+}
+#pokemon-experience .pgr-mount {
+  position:absolute;left:0;top:0;width:100px;height:100px;transform-origin:0 0;
+}
+#pokemon-experience .pgr-frame-art, #pokemon-experience .pgr-frame-hit {
+  position:absolute;inset:0;
+}
+#pokemon-experience .pgr-frame-hit {opacity:0;}
+#pokemon-experience .pgr-frame-hit button {width:100%;height:100%;}
+#pokemon-experience .pgr-frame-art img {display:block;width:100%;height:100%;object-fit:fill;}
+#pokemon-experience .pgr-mount[data-empty=true] {background:#e9ece2;}
+#pokemon-experience .pgr-mount:has(button:is(:hover,:focus-visible):enabled) {outline:3px solid #ffe27b;outline-offset:-3px;}
+#pokemon-experience .pgr-room-surround {
+  position:absolute;inset:0;width:100%;height:100%;pointer-events:none;
+}
+#pokemon-experience .pgr-room-board {
+  top:calc(50% + var(--pgr-header-height,0px)/2);
+}
 
 /* Source: bicycle-world/dist/src/oak-lab.css */
 /* Oak's lab: one guided action, a visible journey and an inspectable build table. */
@@ -5630,5 +5674,421 @@ html:root body.hybrid-world .woody-tour .woody-tour-controls button {
 @media(prefers-reduced-motion:no-preference) and (max-width:900px) {
   :is(#personal-experience,#about-experience,#oak-lab) :is(.personal-caption,.about-introduction,.oak-tools) {
     transition:bottom 200ms ease-out;
+  }
+}
+
+/* Source: bicycle-world/dist/src/play-room-layout.css */
+/* Shared margins follow the Projects artwork strip. Individual rooms retain their
+   own materials and their own imagery. */
+body.hybrid-world {
+  --room-content-edge: clamp(18px, 4vw, 72px);
+  --room-panel-gap: 12px;
+}
+@media (max-width:760px) {
+  body.hybrid-world { --room-content-edge: 16px; }
+}
+
+/* Scene labels. Keep long interactive transcripts scrollable independently. */
+body.hybrid-world #about-experience .about-introduction {
+  inset: auto auto max(16px,env(safe-area-inset-bottom)) var(--room-content-edge);
+  transform: none;
+  width: min(400px,calc(100% - 2 * var(--room-content-edge)));
+  max-height: min(50%,29rem);
+  overflow: auto;
+  box-sizing: border-box;
+  background: var(--works-paper,#f6f3ea);
+  text-align: start;
+}
+body.hybrid-world #personal-experience[data-kind] .personal-caption {
+  left: var(--room-content-edge);
+  text-align: left;
+}
+body.hybrid-world #personal-experience #garba-experience :is(.gr-rail,.gr-context),
+body.hybrid-world #personal-experience #listening-experience :is(.threshold-copy,.item-context,.collection) {
+  left: var(--room-content-edge);
+  text-align: start;
+}
+body.hybrid-world #personal-experience #listening-experience .threshold-copy {
+  top: auto;
+  bottom: max(64px,env(safe-area-inset-bottom));
+  transform: none;
+  max-height: 48%;
+  overflow: auto;
+}
+@media (min-width:901px), (min-width:761px) and (orientation:landscape) {
+  body.hybrid-world #oak-lab :is(.oak-comic,.oak-making) {
+    top: auto;
+    right: auto;
+    left: var(--room-content-edge);
+    bottom: var(--room-panel-gap);
+    max-height: calc(100% - 184px);
+    text-align: start;
+  }
+}
+@media (min-width:761px) and (max-width:1100px) {
+  body.hybrid-world #oak-lab :is(.oak-comic,.oak-making) {bottom:100px;max-height:calc(100% - 260px);}
+}
+@media (max-width:760px) {
+  body.hybrid-world #personal-experience[data-kind] .personal-caption {
+    width: calc(100% - 2 * var(--room-content-edge));
+  }
+}
+
+/* Read a caption where the picture ends, including photographs inside articles.
+   Loading/error messages retain their independent live regions. */
+body.hybrid-world :is(#works-experience,#about-experience,#personal-experience,#project-reader,#place-reader)
+  :is(figure figcaption:not(.cloud-gallery-load),.works-reading .works-meta) {
+  text-align: start;
+  align-self: stretch;
+  margin-inline: 0;
+}
+body.hybrid-world #personal-experience .cloud-full-caption {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: start;
+  color: var(--cloud-ink);
+}
+body.hybrid-world #personal-experience .cloud-gallery-index-card span { text-align:start; }
+body.hybrid-world #personal-experience .cloud-photo-gallery,
+body.hybrid-world #about-experience .journal-photo-viewer {padding-inline:var(--room-content-edge);}
+body.hybrid-world #about-experience .journal-photo-viewer figcaption {
+  width:100%;max-width:none;font-size:14px;margin:0;text-align:start;
+}
+body.hybrid-world #about-experience .journal-photo-viewer footer {
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;
+}
+body.hybrid-world #about-experience .journal-photo-viewer footer button:first-child{justify-self:start;}
+body.hybrid-world #about-experience .journal-photo-viewer footer button:last-child{justify-self:end;}
+
+/* The same artwork / caption / paging hierarchy for the performance photo rooms. */
+body.hybrid-world #personal-experience :is(#garba-viewer,#listening-photo-viewer):not([hidden]) {
+  display:flex;
+  flex-direction:column;
+  box-sizing:border-box;
+  padding:var(--room-panel-gap) var(--room-content-edge) max(12px,env(safe-area-inset-bottom));
+  gap:var(--room-panel-gap);
+  overflow:auto;
+}
+body.hybrid-world #personal-experience :is(#garba-viewer,#listening-photo-viewer)>header {
+  position:relative;
+  top:auto;
+  flex:none;
+  padding-block:0;
+  margin:0;
+  align-items:center;
+}
+body.hybrid-world #personal-experience :is(#garba-viewer,#listening-photo-viewer) :is(.gr-viewer-layout,.singing-photo-layout) {
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  flex:1 0 auto;
+  min-height:0;
+  gap:8px;
+  margin:0;
+}
+body.hybrid-world #personal-experience :is(#garba-viewer,#listening-photo-viewer) figure {
+  display:flex;
+  flex:1 0 auto;
+  flex-direction:column;
+  gap:8px;
+  margin:0;
+  min-width:0;
+}
+body.hybrid-world #personal-experience :is(#garba-viewer,#listening-photo-viewer) figure img {
+  display:block;
+  flex:1 0 0;
+  object-fit:contain;
+  height:0;
+  min-height:110px;
+  width:100%;
+  max-height:none;
+  margin:auto;
+}
+body.hybrid-world #personal-experience :is(#garba-viewer,#listening-photo-viewer) figure figcaption {
+  flex:none;
+  align-self:stretch;
+  max-width:70ch;
+  margin:0;
+  text-align:start;
+  font-size:14px;
+  line-height:1.45;
+}
+body.hybrid-world #personal-experience :is(#garba-viewer,#listening-photo-viewer) aside {max-width:72ch;}
+body.hybrid-world #personal-experience :is(#garba-viewer,#listening-photo-viewer) aside p {margin:0;}
+body.hybrid-world #personal-experience :is(#garba-viewer,#listening-photo-viewer) aside p:not(.eyebrow,.gr-eyebrow) {
+  font-size:1rem;line-height:1.5;margin:0;
+}
+body.hybrid-world #personal-experience :is(#garba-viewer,#listening-photo-viewer)>nav {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+  align-items:center;
+  flex:none;
+  gap:8px;
+  width:100%;
+}
+body.hybrid-world #personal-experience :is(#garba-viewer,#listening-photo-viewer)>nav button {font-size:14px;white-space:normal;min-height:44px;}
+body.hybrid-world #personal-experience :is(#garba-viewer,#listening-photo-viewer)>nav button:first-child {justify-self:start;}
+body.hybrid-world #personal-experience :is(#garba-viewer,#listening-photo-viewer)>nav button:last-child {justify-self:end;}
+body.hybrid-world #personal-experience :is(#garba-viewer,#listening-photo-viewer)>nav span {
+  font:500 14px/1.4 var(--font-body,sans-serif);font-variant-numeric:tabular-nums;
+}
+@media (max-width:480px) {
+  body.hybrid-world #personal-experience .cloud-gallery-header-actions {flex-wrap:wrap;max-width:100%;}
+  body.hybrid-world #personal-experience .cloud-photo-gallery {overflow-y:auto;}
+  body.hybrid-world #personal-experience .cloud-gallery-index,
+  body.hybrid-world #personal-experience .cloud-gallery-stage {min-height:110px;}
+}
+
+
+/* The optional narrator already reports its actual height on its host dialog.
+   Leave that space below the caption whenever both occupy the left edge. */
+body.hybrid-world :is(#personal-experience,#about-experience):has(> .woody-tour:not([hidden]))
+  :is(.personal-caption,.about-introduction) {
+  bottom:var(--caption-top);
+  max-height:calc(100% - var(--caption-top) - 9rem);
+}
+@media (min-width:901px) {
+  body.hybrid-world #oak-lab:has(> .woody-tour:not([hidden])) :is(.oak-comic,.oak-making) {
+    bottom:var(--caption-top);
+    max-height:calc(100% - var(--caption-top) - 180px);
+  }
+}
+
+/* The recorder's original header has a room-specific three-ID rule. Reserve the
+   shared map's fixed corner here as well, before the local Back action wraps. */
+body.hybrid-world #personal-experience #listening-experience #listening-photo-viewer > header {
+  position: relative;
+  top: auto;
+  box-sizing: border-box;
+  padding-block: 0;
+  padding-inline-end: calc(var(--play-map-width) + var(--play-map-inset) + 12px);
+  min-height: calc(44px + 2 * var(--play-map-inset));
+}
+
+body.hybrid-world #about-experience .about-journal-reader[data-scroll-pages="true"] .journal-book .journal-page {
+  overflow:auto;
+}
+body.hybrid-world #about-experience .about-journal-reader[data-scroll-pages="true"] .journal-book .journal-folio {
+  position:static;
+  margin-top:16px!important;
+}
+
+/* A two-page book no longer has readable paper on a narrow or short display. */
+@media (max-width:760px), (max-height:480px) {
+  body.hybrid-world #about-experience[data-phase="reading"] .about-header {display:none;}
+  body.hybrid-world #about-experience .about-journal-reader {
+    display:grid;
+    grid-template-rows:auto minmax(0,1fr) auto;
+    gap:8px;
+    padding:max(8px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));
+    background:#eee8d5;
+  }
+  body.hybrid-world #about-experience :is(.journal-chapters,.journal-book-stage,.journal-footer) {
+    position:relative;
+    inset:auto;
+    width:auto;
+    height:auto;
+    min-width:0;
+    min-height:0;
+  }
+  body.hybrid-world #about-experience .journal-chapters {
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    gap:4px 8px;
+    padding:0;
+  }
+  body.hybrid-world #about-experience .journal-chapters [data-journal-close] {grid-area:1/1;justify-self:start;}
+  body.hybrid-world #about-experience .journal-section-jump {grid-area:2/1/3/-1;}
+  body.hybrid-world #about-experience .journal-book {
+    --journal-pages-per-spread:1;
+    grid-template-columns:minmax(0,1fr);
+    grid-template-rows:minmax(0,1fr);
+    border-width:3px;
+  }
+  body.hybrid-world #about-experience :is(.journal-book .journal-page-right,.journal-binding) {display:none;}
+  body.hybrid-world #about-experience .journal-book .journal-page-left {
+    overflow:auto;
+    padding:16px 18px;
+    background:#fff8e6;
+  }
+  body.hybrid-world #about-experience .journal-book .journal-folio {position:static;margin-top:16px!important;}
+  body.hybrid-world #about-experience .journal-page-navigation {gap:4px;}
+  body.hybrid-world #about-experience #about-journal-photo > header {
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    align-items:start;
+    gap:6px;
+    padding:0;
+  }
+  body.hybrid-world #about-experience #about-journal-photo > header > div:first-child {
+    grid-column:1/-1;
+    min-height:44px;
+    padding-inline-end:calc(var(--play-map-width) + 8px);
+  }
+  body.hybrid-world #about-experience #about-journal-photo > header [data-journal-photo-close] {
+    grid-row:2;
+    justify-self:start;
+  }
+  body.hybrid-world #about-experience #about-journal-photo > header .play-music-dock {
+    grid-area:2/2;
+    position:static;
+    margin:0;
+  }
+}
+
+/* The Works Room's artwork strip: caption at the leading edge, a compact
+   action group at the trailing edge. Both share a single 44px control row. */
+body.hybrid-world {
+  --gallery-strip-y:14px;
+  --gallery-strip-bottom:max(14px, env(safe-area-inset-bottom));
+}
+body.hybrid-world :is(#oak-lab, #personal-experience, #about-experience)
+  :is(#pokemon-experience, #garba-viewer, #listening-photo-viewer, #about-journal-photo, .cloud-photo-gallery) .gallery-strip {
+  display:flex; align-items:center; justify-content:space-between; flex:none;
+  box-sizing:border-box; width:100%; max-width:none; gap:8px 20px; margin:0;
+  padding:var(--gallery-strip-y) var(--room-content-edge) var(--gallery-strip-bottom);
+  border:0; border-top:1px solid #c8cec4; border-radius:0;
+  background:#f6f3ea; color:#273f35; text-align:start;
+  font:400 14px/1.45 var(--font-body,'DM Sans',sans-serif);
+}
+body.hybrid-world :is(#personal-experience,#about-experience)
+  :is(#garba-viewer,#listening-photo-viewer,#about-journal-photo,.cloud-photo-gallery):not([hidden]) {
+  padding-bottom:0; padding-inline:var(--room-content-edge);
+}
+body.hybrid-world :is(#personal-experience,#about-experience)
+  :is(#garba-viewer,#listening-photo-viewer,#about-journal-photo,.cloud-photo-gallery) .gallery-strip {
+  width:calc(100% + 2 * var(--room-content-edge));
+  margin-inline:calc(-1 * var(--room-content-edge));
+  margin-top:auto;
+}
+body.hybrid-world .gallery-strip .gallery-label { display:flex; align-items:baseline; flex-wrap:wrap; gap:2px 20px; min-width:0; }
+body.hybrid-world :is(#pokemon-experience,#garba-viewer,#listening-photo-viewer,#about-journal-photo,.cloud-photo-gallery) .gallery-strip :is(.gallery-label,.pgr-caption)>:first-child {
+  font:600 13px/1.45 var(--font-body,sans-serif); letter-spacing:.04em; font-variant-numeric:tabular-nums; color:#42594d; margin:0;
+}
+body.hybrid-world :is(#oak-lab,#personal-experience,#about-experience)
+  :is(#pokemon-experience,#garba-viewer,#listening-photo-viewer,#about-journal-photo,.cloud-photo-gallery) .gallery-strip .gallery-actions:not([hidden]) {
+  display:flex; flex:0 0 auto; justify-content:flex-end; align-items:center; gap:8px;
+  padding:0; margin:0 0 0 auto; width:auto; border:0;
+}
+body.hybrid-world :is(#oak-lab,#personal-experience,#about-experience)
+  :is(#pokemon-experience,#garba-viewer,#listening-photo-viewer,#about-journal-photo,.cloud-photo-gallery) .gallery-actions button {
+  position:static; width:auto; min-width:0; min-height:44px; margin:0;
+  padding:6px 12px; font:600 14px/1.3 var(--font-body,'DM Sans',sans-serif);
+  border-radius:8px; white-space:normal;
+}
+body.hybrid-world #personal-experience .cloud-gallery-header-actions .cloud-gallery-tools>.play-music-dock {position:static;inset:auto;transform:none;margin:0;}
+@media(max-width:760px) {
+  body.hybrid-world {--gallery-strip-y:10px;--gallery-strip-bottom:max(12px,env(safe-area-inset-bottom));}
+  body.hybrid-world :is(#oak-lab,#personal-experience,#about-experience)
+    :is(#pokemon-experience,#garba-viewer,#listening-photo-viewer,#about-journal-photo,.cloud-photo-gallery) .gallery-strip {
+    flex-direction:column; align-items:stretch; gap:6px;
+  }
+  body.hybrid-world :is(#oak-lab,#personal-experience,#about-experience)
+    :is(#pokemon-experience,#garba-viewer,#listening-photo-viewer,#about-journal-photo,.cloud-photo-gallery) .gallery-strip .gallery-actions:not([hidden]) {
+    justify-content:center; margin:0; flex-wrap:wrap;
+  }
+  body.hybrid-world #oak-lab #pokemon-experience .gallery-strip .gallery-actions button,
+  body.hybrid-world #personal-experience #pokemon-experience .gallery-strip .gallery-actions button {padding-inline:8px;}
+}
+@media(max-height:520px) and (min-width:761px) {
+  body.hybrid-world {--gallery-strip-y:6px;--gallery-strip-bottom:max(6px,env(safe-area-inset-bottom));}
+}
+body.hybrid-world #personal-experience #listening-experience #listening-photo-viewer:not([hidden]) {
+  padding-inline:var(--room-content-edge);
+  padding-bottom:0;
+}
+.cloud-gallery-help {margin:4px 0;font:400 14px/1.4 var(--font-body,sans-serif);}
+.cloud-gallery-help summary {width:fit-content;cursor:pointer;}
+.cloud-gallery-help p {margin:4px 0;}
+
+/* Source: bicycle-world/dist/src/room-map-layout.css */
+/* The same landmark stays in the same corner in each room and reader. */
+body.hybrid-world {
+  --play-map-inset: 16px;
+  --play-map-width: 128px;
+}
+@media (max-width:760px) {
+  body.hybrid-world { --play-map-inset: 8px; }
+}
+html:root body.hybrid-world :is(#personal-experience,#about-experience,#oak-lab,#works-experience,#project-reader,#place-reader)
+button[data-room-map] {
+  position: fixed !important;
+  inset: max(var(--play-map-inset),env(safe-area-inset-top)) max(var(--play-map-inset),env(safe-area-inset-right)) auto auto !important;
+  z-index: 12;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  box-sizing: border-box;
+  width: var(--play-map-width) !important;
+  min-width: 0;
+  max-width: none;
+  height: 44px !important;
+  min-height: 44px !important;
+  margin: 0 !important;
+  padding: 0 8px !important;
+  transform: none !important;
+  border-radius: 9px !important;
+  font: 600 14px/1.2 'DM Sans',sans-serif !important;
+  white-space: nowrap;
+  pointer-events:auto;
+}
+html:root body.hybrid-world button[data-room-map][hidden],
+html:root body.hybrid-world [inert] button[data-room-map] { visibility:hidden;pointer-events:none; }
+
+/* Leave a clear tap target outside the heading and the local navigation. */
+html:root body.hybrid-world :is(#personal-experience,#about-experience,#oak-lab,#works-experience,#project-reader,#place-reader)
+:is(header,.reader-top):has([data-room-map]):not(#pokemon-experience *) {
+  box-sizing:border-box;
+  padding-inline-end:calc(var(--play-map-width) + max(var(--play-map-inset),env(safe-area-inset-right)) + 12px);
+  min-block-size:calc(44px + 2 * var(--play-map-inset));
+}
+
+/* Animate reader content while the navigation stays in its final position. */
+body.hybrid-world dialog.place-reader[open] {animation:none;}
+@media (prefers-reduced-motion:no-preference) {
+  body.hybrid-world:not([data-play-ui-motion="reduced"]) dialog.place-reader[open]>article {animation:reader-in .25s ease-out;}
+}
+@media (max-width:760px) {
+  body.hybrid-world :is(#project-reader,#place-reader)>.reader-top {
+    flex-wrap:wrap;
+    justify-content:flex-start;
+    gap:4px;
+  }
+}
+
+body.hybrid-world {
+  --room-return-width:136px;
+  --room-return-top:max(var(--play-map-inset),env(safe-area-inset-top));
+  --room-return-right:calc(max(var(--play-map-inset),env(safe-area-inset-right)) + var(--play-map-width) + 6px);
+  --room-utilities-space:calc(var(--room-return-right) + var(--room-return-width) + 10px);
+}
+html:root body.hybrid-world :is(#personal-experience,#about-experience,#oak-lab,#works-experience,#project-reader,#place-reader)
+button[data-room-return] {
+  box-sizing:border-box;
+  position:fixed !important;
+  inset:var(--room-return-top) var(--room-return-right) auto auto !important;
+  z-index:11;
+  width:var(--room-return-width) !important;
+  height:44px !important;min-height:44px !important;
+  margin:0 !important;padding:3px 6px !important;transform:none !important;
+  font:600 14px/1.2 'DM Sans',sans-serif !important;white-space:normal;
+  pointer-events:auto;
+}
+html:root body.hybrid-world :is(#personal-experience,#about-experience,#oak-lab,#works-experience,#project-reader,#place-reader)
+:is(header,.reader-top,.journal-chapters):has([data-room-return]):has([data-room-map]) {
+  box-sizing:border-box;
+  padding-inline-end:var(--room-utilities-space) !important;
+}
+@media (max-width:760px) {
+  body.hybrid-world {
+    --room-return-width:var(--play-map-width);
+    --room-return-right:max(var(--play-map-inset),env(safe-area-inset-right));
+    --room-return-top:calc(max(var(--play-map-inset),env(safe-area-inset-top)) + 80px);
+  }
+  html:root body.hybrid-world :is(#personal-experience,#about-experience,#oak-lab,#works-experience,#project-reader,#place-reader)
+  :is(header,.reader-top,.journal-chapters):has([data-room-return]):has([data-room-map]) {
+    min-block-size:calc(var(--room-return-top) + 48px);
   }
 }

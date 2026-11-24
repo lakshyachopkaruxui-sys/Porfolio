@@ -30,7 +30,7 @@ const PLAY_CSS_SOURCES = Object.freeze([
   'src/map-guide.css', 'src/riding-options.css', 'src/mode-selector.css',
   'src/play-navigation-trial.css', 'src/play-overlay-motion.css', 'src/river-hop.css',
   'src/play-interface-controls.css', 'src/visitor-board.css', 'src/award-play-craft.css',
-  'src/woody-tour.css',
+  'src/woody-tour.css', 'src/play-room-layout.css', 'src/room-map-layout.css',
 ]);
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const attributes = tag => Object.fromEntries([...tag.matchAll(/([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/g)].map(m => [m[1].toLowerCase(), m[2] ?? m[3]]));
