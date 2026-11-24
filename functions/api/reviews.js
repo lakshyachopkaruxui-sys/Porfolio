@@ -39,11 +39,11 @@ export async function onRequest({request,env}) {
  if(!env.VISIT_DB)return reply(503,{error:'Visitor notes are temporarily unavailable. Please try again.'});
  try {
   const db=env.VISIT_DB.withSession?env.VISIT_DB.withSession('first-primary'):env.VISIT_DB;
-  await db.prepare(schema).run();
   if(request.method==='GET') {const rows=await db.prepare(`SELECT ${fields} FROM visitor_reviews ORDER BY created_ms DESC,id DESC LIMIT 12`).all();return reply(200,{reviews:rows.results.map(present)});}
   if(!/^application\/json(?:;|$)/i.test(request.headers.get('Content-Type')||''))return reply(415,{error:'Please send the review form as JSON.'});
   let value;try{value=validate(await limitedJSON(request));}catch(error){return reply(error.message==='large'?413:400,{error:'Please check the review fields and try again.'});}
   if(!value)return reply(400,{error:'Add your name, 1–5 stars, 10–600 characters of feedback and public-display consent. LinkedIn is optional.'});
+  await db.prepare(schema).run();
   const now=Date.now(),day=Math.floor(now/86400000);
   // A daily one-way network digest limits abuse without storing raw addresses.
   const sender=await digest(day+'|'+(request.headers.get('CF-Connecting-IP')||'unknown'));
@@ -58,5 +58,10 @@ export async function onRequest({request,env}) {
   ]);
   const row=results[1]?.results?.[0];if(!row)return reply(429,{error:'Please wait before leaving another review.'});
   return reply(201,{review:present(row)});
- } catch {return reply(503,{error:'Visitor notes are temporarily unavailable. Your writing is still here; please try again.'});}
+ } catch(error) {
+  if(request.method==='GET' && /no such table:\s*(?:main\.)?visitor_reviews\b/i.test(String(error))) {
+   return reply(200,{reviews:[]});
+  }
+  return reply(503,{error:'Visitor notes are temporarily unavailable. Your writing is still here; please try again.'});
+ }
 }
