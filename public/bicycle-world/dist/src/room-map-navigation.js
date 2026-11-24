@@ -1,6 +1,6 @@
 import {consumeNavigationKey, isKeyboardShortcutBlocked} from './keyboard-navigation.js';
 
-export const roomMapButton = '<button type="button" data-room-map aria-keyshortcuts="M">Garden map <kbd>M</kbd></button>';
+export const roomMapButton = '<button type="button" data-room-map aria-keyshortcuts="M">Garden map <span class="room-map-key">M</span></button>';
 
 const rooms = '#oak-lab,#personal-experience,#works-experience,#about-experience,#project-reader,#place-reader,#reader';
 

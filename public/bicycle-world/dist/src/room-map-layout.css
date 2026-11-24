@@ -27,7 +27,7 @@ body.hybrid-world :is(#personal-experience,#about-experience,#oak-lab,#works-exp
   white-space: nowrap;
   pointer-events: auto;
 }
-body.hybrid-world [data-room-map] kbd {margin-inline-start:.25em;}
+
 body.hybrid-world :is([data-room-map],[data-room-return])[hidden] { display: none !important; }
 body.hybrid-world :is(#personal-experience,#about-experience,#oak-lab,#works-experience,#project-reader,#place-reader)
 :is(header,.reader-top,.journal-chapters) .play-music-dock {

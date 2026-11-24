@@ -40,7 +40,6 @@
 :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-extras:empty{display:none}
 :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-tools>[data-play-music]{grid-area:music;justify-self:end;min-width:96px;height:44px}
 :is(#oak-lab,#personal-experience) #pokemon-experience .pgr-back{grid-area:back;width:100%;height:44px;padding:3px 7px}
-:is(#oak-lab,#personal-experience) #pokemon-experience .pgr-tools #pokemon-browse{--control-face-start:#f1f5e9;--control-face-end:#dae7d7}
 
 #pokemon-experience .walk-dock { grid-area:3/1; position:relative; z-index:6; }
 #pokemon-experience .pgr-caption { display:flex; align-items:baseline; gap:5px 14px; flex-wrap:wrap; }
