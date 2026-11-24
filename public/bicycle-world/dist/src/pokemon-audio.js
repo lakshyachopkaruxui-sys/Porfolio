@@ -2,8 +2,8 @@ import {AUDIO_MIX} from './audio-mix.js';
 
 // Per-recording trims keep the seven calls clear at comparable listening levels.
 const FILES = {
-  pikachu: ['pokemon-voices/pikachu-selected.mp3', 'review-selection', 1.65],
-  bulbasaur: ['pokemon-voices/bulbasaur-selected.mp3', 'review-selection', .78],
+  pikachu: ['pokemon-voices/pikachu-anime-candidate.mp3', 'anime-candidate', 2.1],
+  bulbasaur: ['pokemon-voices/bulbasaur-anime-candidate.mp3', 'anime-candidate', 2.1],
   charmander: ['pokemon-voices/charmander-anime-candidate.mp3', 'anime-candidate', 2.1],
   charizard: ['pokemon-voices/charizard-selected.mp3', 'review-selection', .66],
   vaporeon: ['pokemon-audio/vaporeon.ogg', 'game-cry', .41],
