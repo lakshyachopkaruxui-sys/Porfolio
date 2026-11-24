@@ -1,71 +1,50 @@
-import {mountPlayMusic} from '/bicycle-world/dist/src/play-music-ui.js';
 import {WebGLRenderer} from 'three';
-import {createPokemonRoom} from './src/pokemon-room.js';
+import {mountPlayMusic} from './src/play-music-ui.js';
+import {createOakLab} from './src/oak-lab.js';
 import {POKEMON_COLLECTION} from './src/pokemon-collection-data.js';
-import {isKeyboardShortcutBlocked} from './src/keyboard-navigation.js';
+import {bindRoomMapNavigation} from './src/room-map-navigation.js';
 import {createPhotoRenderer} from './photo-renderer.js';
 
 const music = mountPlayMusic();
-const lobby = document.querySelector('#lobby');
-const enter = document.querySelector('#enter');
-let renderer, room, photoMode = false, previousTime = null, frame;
+let renderer, lab, photoMode = false, previousTime = null, frame;
 try {
   renderer = new WebGLRenderer({antialias: true, powerPreference: 'default'});
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
 } catch {
   photoMode = true;
-  renderer = createPhotoRenderer(() => POKEMON_COLLECTION[room.diagnostics().activeIndex]);
+  renderer = createPhotoRenderer(() => POKEMON_COLLECTION[lab.diagnostics().collection?.activeIndex]);
+  const surface = renderer.domElement;
+  surface.onpointerdown = surface.onpointerup = event => event.stopImmediatePropagation();
+  surface.onclick = () => document.querySelector('#pokemon-view-catch')?.click();
 }
 document.querySelector('#parking').append(renderer.domElement);
-room = createPokemonRoom({
+
+lab = createOakLab({
   renderer,
-  container: document.querySelector('#exhibition'),
+  renderLabScene: !photoMode,
   isReduced: () => photoMode || matchMedia('(prefers-reduced-motion: reduce)').matches,
-  returnLabel: 'Exit exhibition',
   onPortfolio: () => location.assign('/normal-portfolio/'),
+  onPlace: place => location.assign('./sections.html#' + place),
   onClose() {
     music.setActive(false);
     cancelAnimationFrame(frame);
-    previousTime = null;
-    lobby.hidden = false;
-    enter.focus();
+    location.assign('./');
   }
 });
+bindRoomMapNavigation(document, () => location.assign('./sections.html'));
+lab.open({exhibitionFirst: true});
+music.setActive(true);
+
 function draw(time) {
-  if (!room.isOpen || document.hidden) return;
-  room.update(previousTime === null ? 0 : (time - previousTime) / 1000);
+  if (!lab.isOpen || document.hidden) return;
+  lab.update(previousTime === null ? 0 : (time - previousTime) / 1000);
   previousTime = time;
   frame = requestAnimationFrame(draw);
 }
-function openExhibition() {
-  if (room.isOpen) return;
-  room.open({returnFocus: enter});
-  lobby.hidden = true;
-  music.setActive(true);
-  if (photoMode) {
-    // In photo mode the image has one action, opening the complete capture.
-    const host = renderer.domElement;
-    host.onpointerdown = e => e.stopImmediatePropagation();
-    host.onpointerup = e => e.stopImmediatePropagation();
-    host.onclick = () => document.querySelector('#pokemon-view-catch')?.click();
-  }
-  frame = requestAnimationFrame(draw);
-}
-window.addEventListener('resize', () => room.resize());
+window.addEventListener('resize', () => lab.resize());
 document.addEventListener('visibilitychange', () => {
   cancelAnimationFrame(frame);
   previousTime = null;
-  if (room.isOpen && !document.hidden) frame = requestAnimationFrame(draw);
+  if (lab.isOpen && !document.hidden) frame = requestAnimationFrame(draw);
 });
-function openGardenMap() { location.assign('/bicycle-world/dist/sections.html'); }
-document.querySelector('#exhibition').addEventListener('click', event => {
-  if (event.target.closest('[data-room-map]')) openGardenMap();
-});
-document.addEventListener('keydown', event => {
-  if (room.isOpen && event.key.toLowerCase() === 'm' && !event.repeat && !isKeyboardShortcutBlocked(event)) {
-    event.preventDefault();
-    openGardenMap();
-  }
-});
-enter.addEventListener('click', openExhibition);
-openExhibition();
+frame = requestAnimationFrame(draw);

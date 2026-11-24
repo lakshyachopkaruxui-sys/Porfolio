@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T08:12:45.310Z",
+  "generatedAt": "2026-11-24T08:24:53.271Z",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -10,7 +10,7 @@
     {
       "path": "_headers",
       "size": 800,
-      "sha256": "0c198cc1a46b0b8d1b1f16940350345dc8ddd7377c390a6716346bec86e1e3b8"
+      "sha256": "d74bed8328b76d7bf187d4ff7481f31deaae624ed921e685f355164058fa2fe1"
     },
     {
       "path": "_redirects",
@@ -3129,23 +3129,23 @@
     },
     {
       "path": "bicycle-world/dist/exhibition.css",
-      "size": 1234,
-      "sha256": "4c8643c0cd18f54fc5690b434952b190303b225c86911a23d32224feb33ce766"
+      "size": 597,
+      "sha256": "09bb0284abbf8b8898af4cdb1a82aa706b909b2d009e66775eb479642d638c49"
     },
     {
       "path": "bicycle-world/dist/exhibition.html",
-      "size": 21493,
-      "sha256": "de8120666b42eba98880ea950ab0899d28c0e5a3f589c2b0f83411ebde56c4c4"
+      "size": 21317,
+      "sha256": "2b8418c300d6b37fb26a4489838f417102b759241c6e4c116d30b8614148f844"
     },
     {
       "path": "bicycle-world/dist/exhibition.js",
-      "size": 2805,
-      "sha256": "fd38c7b81dd3f6290c17d572add72197c333bf9f0b924d5b4d41118ab0ba6481"
+      "size": 2003,
+      "sha256": "5885d590625560957fa8740c3331d57807e25a58a200bfb68468039eb2a57dde"
     },
     {
       "path": "bicycle-world/dist/index.html",
       "size": 47867,
-      "sha256": "4360fe64e1f85c2f83d769d5dbf3d648866fa33cfe75dc7ab5c5e625c95a6239"
+      "sha256": "5faa9a5f62c4397cee986690f1eacb6d18063cc7ce43e3e64959d9b467b5ae05"
     },
     {
       "path": "bicycle-world/dist/photo-renderer.js",
@@ -3170,7 +3170,7 @@
     {
       "path": "bicycle-world/dist/sections.html",
       "size": 21434,
-      "sha256": "e3041fd0f0a18aa6d58b3d1326554c892408546e3fc77961a8190b35cac79dba"
+      "sha256": "c07798d13bd0ab6a259b31f58048bec71e68b0a2ebbbffd7fee0dcd6a54e1926"
     },
     {
       "path": "bicycle-world/dist/sections.js",
@@ -3684,8 +3684,8 @@
     },
     {
       "path": "bicycle-world/dist/src/oak-lab.js",
-      "size": 36549,
-      "sha256": "af63a1dbe39c0314183a2f1cb853e24509d3bb261cdcab725c1e1d0e1dfb819d"
+      "size": 36957,
+      "sha256": "bb581708261b9388234c6cf11f76a18c59ea7f7a5c43108eff4786638258c782"
     },
     {
       "path": "bicycle-world/dist/src/oak-narration.js",

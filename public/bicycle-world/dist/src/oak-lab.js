@@ -25,7 +25,7 @@ function narrationPreferences(){
 }
 
 /** Owns one modal and its scene. The garden retains the renderer and loop. */
-export function createOakLab({renderer,guideSpeaking=()=>false,onOpen=()=>{},onClose=()=>{},onPortfolio=()=>{},onPlace=()=>{},isReduced}={}){
+export function createOakLab({renderer,renderLabScene=true,guideSpeaking=()=>false,onOpen=()=>{},onClose=()=>{},onPortfolio=()=>{},onPlace=()=>{},isReduced}={}){
   if(!renderer?.domElement)throw new Error('Oak’s lab requires the existing renderer.');
   const dialog=document.createElement('dialog');dialog.id='oak-lab';dialog.setAttribute('aria-labelledby','oak-lab-title');
   dialog.innerHTML=`<div class="oak-shell"><div class="oak-canvas" aria-hidden="true"></div><div class="oak-shade" aria-hidden="true"></div>
@@ -208,14 +208,14 @@ export function createOakLab({renderer,guideSpeaking=()=>false,onOpen=()=>{},onC
     $('.oak-build-copy').focus({preventScroll:true});
   }
   function startMaking(){buildIndex=0;return selectZone('making');}
-  function restoreChild(){childSiblings.forEach(([element,inert])=>{element.inert=inert;});childSiblings=[];shell.classList.remove('oak-has-collection');dialog.setAttribute('aria-labelledby','oak-lab-title');dialog.removeAttribute('aria-label');if(phase!=='closed'&&phase!=='returning'){setPhase('viewing');if(collectionVisited)index=OAK_DIALOGUE.findIndex(entry=>entry.id==='collection-connection');content({animate:false});resize();dirty=true;}}
-  function openCollection(){
-    if(!['viewing','entering'].includes(phase)||child?.isOpen)return false;stopNarration();transition=null;veil.style.opacity='0';lastCollectionFocus=document.activeElement;
+  function restoreChild(){childSiblings.forEach(([element,inert])=>{element.inert=inert;});childSiblings=[];shell.classList.remove('oak-has-collection');dialog.setAttribute('aria-labelledby','oak-lab-title');dialog.removeAttribute('aria-label');if(phase!=='closed'&&phase!=='returning'){setPhase('viewing');prepareLabScene();if(collectionVisited)index=OAK_DIALOGUE.findIndex(entry=>entry.id==='collection-connection');content({animate:false});resize();dirty=true;}}
+  function openCollection(returnFocus){
+    if(!['viewing','entering'].includes(phase)||child?.isOpen)return false;stopNarration();transition=null;veil.style.opacity='0';lastCollectionFocus=returnFocus instanceof HTMLElement?returnFocus:document.activeElement;
     try{child??=createPokemonRoom({renderer,container:shell,isReduced,returnLabel:'Back to Oak’s lab',onClose:restoreChild,onNextSection(){restoreChild();startMaking();},onPortfolio(){close({immediate:true,notify:false});onPortfolio();}});child.open({returnFocus:lastCollectionFocus,initialIndex:false});childSiblings=[...shell.children].filter(element=>element.id!=='pokemon-experience').map(element=>[element,element.inert]);childSiblings.forEach(([element])=>{element.inert=true;});shell.classList.add('oak-has-collection');dialog.removeAttribute('aria-labelledby');dialog.setAttribute('aria-label','Lakshya’s Pokemon GO collection');collectionVisited=true;dialog.dataset.collectionVisited='true';setPhase('collection');return true;}
     catch{restoreChild();$('.oak-status').textContent='The collection could not open. Please try again.';return false;}
   }
   function resize(animate=false,entry=false){
-    if(!room||phase==='closed')return;if(child?.isOpen){child.resize();return;}
+    if(child?.isOpen){child.resize();return;}if(!room||phase==='closed')return;
     const rect=host.getBoundingClientRect(),width=Math.max(1,rect.width||window.innerWidth),height=Math.max(1,rect.height||window.innerHeight);
     renderer.setPixelRatio(Math.min(saved?.ratio||1,1.6));renderer.setSize(width,height,false);renderer.setViewport(0,0,width,height);renderer.setScissorTest(false);
     const compact=width<=760;room.frame(selectedZone,width/height,compact,{animate:animate===true&&!reduced(),entry});
@@ -231,10 +231,30 @@ export function createOakLab({renderer,guideSpeaking=()=>false,onOpen=()=>{},onC
     if(state===motionControlState)return;motionControlState=state;
     const control=$('[data-oak-motion]');control.disabled=still;control.textContent=still?'Displays still':ambientMotion?'Pause displays':'Resume displays';control.setAttribute('aria-pressed',String(ambientMotion&&!still));
   }
-  function open({returnFocus}={}){
-    if(dead)throw new Error('Oak’s lab has been disposed.');if(phase!=='closed')return false;focus=returnFocus||document.activeElement;index=0;buildIndex=0;collectionVisited=false;renderedFrames=0;setPhase('entering');dirty=true;
+  function prepareLabScene(){
+    if(room||!renderLabScene)return;
+    borrow();
+    room=createOakLabScene({onChange(){dirty=true;},onAssetState(state){
+      $('.oak-status').textContent=state==='loading'?'Oak is arriving…':state==='error'?'Oak’s model could not load. His dialogue and the collection are still available.':'';
+      $('[data-oak-retry]').hidden=state!=='error';
+    }});
+    room.setPreviews(POKEMON_COLLECTION);
+    room.loadOak();
+  }
+  function open({returnFocus,exhibitionFirst=false}={}){
+    if(dead)throw new Error('Oak’s lab has been disposed.');
+    if(phase!=='closed')return false;
+    focus=returnFocus||document.activeElement;index=0;buildIndex=0;collectionVisited=false;renderedFrames=0;setPhase('entering');dirty=true;
     syncMotionControl();
-    try{onOpen();dialog.showModal();borrow();room=createOakLabScene({onChange(){dirty=true;},onAssetState(state){$('.oak-status').textContent=state==='loading'?'Oak is arriving…':state==='error'?'Oak’s model could not load. His dialogue and the collection are still available.':'';$('[data-oak-retry]').hidden=state!=='error';}});room.setPreviews(POKEMON_COLLECTION);content({animate:false,delay:1.05});resize(true,true);room.loadOak();veil.style.opacity=reduced()?'0':'1';transition=reduced()?null:{kind:'entry',elapsed:0,duration:.32};if(!transition)setPhase('viewing');$('[data-oak-next]').focus({preventScroll:true});return true;}catch(error){finishClose(false);throw error;}
+    try{
+      onOpen();dialog.showModal();
+      if(exhibitionFirst && openCollection($('[data-oak-collection]')))return true;
+      prepareLabScene();
+      content({animate:false,delay:1.05});resize(true,true);
+      veil.style.opacity=reduced()?'0':'1';transition=reduced()?null:{kind:'entry',elapsed:0,duration:.32};
+      if(!transition)setPhase('viewing');
+      $('[data-oak-next]').focus({preventScroll:true});return true;
+    }catch(error){finishClose(false);throw error;}
   }
   function finishClose(notify){if(phase==='closed')return;setPhase('returning');hidePlaces({restoreFocus:false});stopNarration();child?.close({immediate:true,notify:false});restoreChild();room?.dispose();room=null;transition=null;setPhase('closed');dirty=false;restore();dialog.close();const previous=focus;focus=null;if(notify){try{onClose();}finally{if(previous?.isConnected&&!previous.disabled)previous.focus({preventScroll:true});}}}
   function close({immediate=false,notify=true}={}){if(phase==='closed')return false;stopNarration();hidePlaces({restoreFocus:false});if(phase==='returning'&&!immediate)return false;setPhase('returning');if(child?.isOpen){child.close({immediate:true,notify:false});restoreChild();}if(immediate||reduced()){finishClose(notify);return true;}room?.beginExit();transition={kind:'exit',elapsed:0,duration:.45,notify};dirty=true;return true;}
