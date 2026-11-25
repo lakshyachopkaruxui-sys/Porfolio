@@ -6016,13 +6016,31 @@ body.hybrid-world #personal-experience #listening-experience #listening-photo-vi
   min-height: calc(44px + 2 * var(--play-map-inset));
 }
 
-body.hybrid-world #about-experience .about-journal-reader[data-scroll-pages="true"] .journal-book .journal-page {
-  overflow:auto;
+/* Page numbers stay on the paper even when a small screen needs to scroll. */
+body.hybrid-world #about-experience .journal-page {
+  display:grid;
+  grid-template-rows:minmax(0,1fr) auto;
+  gap:8px;
+  overflow:hidden;
+  padding-bottom:12px;
 }
-body.hybrid-world #about-experience .about-journal-reader[data-scroll-pages="true"] .journal-book .journal-folio {
+.journal-page-body {min-height:0;overflow:auto;scrollbar-width:thin;overscroll-behavior:contain;}
+body.hybrid-world #about-experience .journal-folio {
   position:static;
-  margin-top:16px!important;
+  margin:0!important;
+  text-align:start;
+  font:500 13px/1.2 Georgia,serif;
+  font-variant-numeric:lining-nums tabular-nums;
+  color:#61583e;
 }
+body.hybrid-world #about-experience .journal-page-right .journal-folio {text-align:end;}
+body.hybrid-world #about-experience .journal-page-position [data-journal-section] {
+  margin:0;
+  font:600 clamp(18px,2vw,27px)/1.12 Georgia,serif;
+  color:var(--journal-ink);
+  text-wrap:balance;
+}
+.journal-announcement {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
 
 /* A two-page book no longer has readable paper on a narrow or short display. */
 @media (max-width:760px), (max-height:480px) {
@@ -6058,11 +6076,11 @@ body.hybrid-world #about-experience .about-journal-reader[data-scroll-pages="tru
   }
   body.hybrid-world #about-experience :is(.journal-book .journal-page-right,.journal-binding) {display:none;}
   body.hybrid-world #about-experience .journal-book .journal-page-left {
-    overflow:auto;
-    padding:16px 18px;
+    overflow:hidden;
+    padding:16px 18px 10px;
     background:#fff8e6;
   }
-  body.hybrid-world #about-experience .journal-book .journal-folio {position:static;margin-top:16px!important;}
+  body.hybrid-world #about-experience .journal-book .journal-folio {text-align:center;}
   body.hybrid-world #about-experience .journal-page-navigation {gap:4px;}
   body.hybrid-world #about-experience #about-journal-photo > header {
     display:grid;

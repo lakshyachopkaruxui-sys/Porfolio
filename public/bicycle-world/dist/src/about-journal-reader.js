@@ -1,5 +1,5 @@
 import {roomMapButton} from './room-map-navigation.js';
-import {journalAtoms,balanceJournalPages,JournalPageSizeError} from './about-journal-pagination.js';
+import {notebookEdition} from './about-journal-pagination.js';
 let readerSerial=0;
 
 /** A semantic notebook inside the About owner's dialog. It owns no 3D resources. */
@@ -14,7 +14,7 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
       <article class="journal-page journal-page-left" data-journal-left tabindex="0"></article>
       <article class="journal-page journal-page-right" data-journal-right tabindex="0"></article>
     </div><div class="journal-binding" aria-hidden="true"></div></div>
-    <footer class="journal-footer"><nav class="journal-page-navigation" aria-label="Turn notebook pages"><button type="button" data-journal-prev><span aria-hidden="true">← </span>Previous pages</button><div class="journal-page-position"><p id="${id}-section-title" data-journal-section></p><p data-journal-count aria-live="polite"></p><p class="journal-key-hint">A / D or ← / → turn pages · Esc returns to studio</p></div><button type="button" data-journal-next>Next pages<span aria-hidden="true"> →</span></button></nav></footer>
+    <footer class="journal-footer"><nav class="journal-page-navigation" aria-label="Turn notebook pages"><button type="button" aria-keyshortcuts="ArrowLeft A" data-journal-prev><span aria-hidden="true">← </span>Previous pages</button><div class="journal-page-position"><p id="${id}-section-title" data-journal-section></p><p data-journal-count class="journal-announcement" role="status" aria-atomic="true"></p></div><button type="button" aria-keyshortcuts="ArrowRight D" data-journal-next>Next pages<span aria-hidden="true"> →</span></button></nav></footer>
     <section id="about-journal-photo" class="journal-photo-viewer" data-journal-viewer aria-labelledby="${id}-photo-title" tabindex="-1" hidden>
       <header><div><p>FROM MY NOTEBOOK</p><h2 id="${id}-photo-title" data-journal-photo-title></h2></div><nav class="room-action-bar" aria-label="Room navigation"><button data-room-return type="button" data-journal-photo-close>Back to the notebook</button>${roomMapButton}</nav></header>
       <figure aria-describedby="journal-photo-caption"><img decoding="async" data-journal-full-photo alt=""></figure>
@@ -26,9 +26,8 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
   const pages=[q('[data-journal-left]'),q('[data-journal-right]')],viewer=q('[data-journal-viewer]'),fullImage=q('[data-journal-full-photo]');
   const listeners=[],imageListeners=new Map(),motions=[];
   let opened=false,dead=false,selected=0,turnGeneration=0,turnLeaf=null,heldPage=null;
-  let selectedSpread=0,pagesPerSpread=2,layoutPages=[],measuring=false,layoutKey='',resizeFrame=null;
-  const layoutCache=new Map(),measurePage=doc.createElement('article');
-  measurePage.className='journal-page journal-page-left journal-measure-page';measurePage.inert=true;measurePage.setAttribute('aria-hidden','true');root.append(measurePage);
+  let selectedSpread=0,pagesPerSpread=2,layoutPages=[],resizeFrame=null;
+  const edition=notebookEdition(chapters);
   let photoOpened=false,photoIndex=0,photoGeneration=0,photoFocus=null,inertSiblings=[];
   const listen=(element,type,handler,options)=>{element.addEventListener(type,handler,options);listeners.push(()=>element.removeEventListener(type,handler,options));};
   const focus=element=>element?.focus({preventScroll:true});
@@ -59,7 +58,7 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     const button=node('button',undefined,figure,'journal-photo-button');button.type='button';button.dataset.journalPhoto=photo.id;
     button.setAttribute('aria-label',`Open photograph: ${block.caption||photo.caption}`);
     const image=node('img',undefined,button);image.decoding='async';image.loading='lazy';image.width=photo.width;image.height=photo.height;
-    if(!measuring)loadPagePhoto(image,photo,figure);
+    loadPagePhoto(image,photo,figure);
     node('figcaption',block.caption||photo.caption,figure);node('span','Open photograph',button,'journal-photo-affordance');
     node('p','This photograph could not load. Open it to try again.',figure,'journal-photo-error');
   }
@@ -93,8 +92,8 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
   }
   function renderAtom(atom,parent){
     if(atom.type==='chapter'){
-      node('p',`${String(atom.index+1).padStart(2,'0')} / ${String(atom.total).padStart(2,'0')} · ${atom.label}`,parent,'journal-kicker');
-      if(atom.title){const title=node('h2',atom.title,parent,'journal-chapter-title');if(!measuring)title.id=`${id}-chapter-title`;}
+      node('p',`Chapter ${atom.index+1}`,parent,'journal-kicker');
+      if(atom.title){const title=node('h2',atom.title,parent,'journal-chapter-title');title.id=`${id}-chapter-title`;}
       if(atom.body)node('p',atom.body,parent,'journal-lead');return;
     }
     if(atom.type==='heading'){node('h3',atom.title,parent,'journal-page-title');return;}
@@ -103,58 +102,35 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     if(atom.type==='project-link'){const button=node('button',`Explore ${atom.projectLabel||'this project'} in Work`,parent,'journal-inline-link');button.type='button';button.dataset.journalNavigate='projects';button.dataset.journalProject=atom.projectId;return;}
     renderBlock(atom,parent);
   }
-  function contentHeight(page){
-    const children=[...page.children].filter(child=>!child.classList.contains('journal-folio'));
-    const last=children.at(-1);if(!last)return 0;
-    const style=(doc.defaultView||window).getComputedStyle(page);
-    return last.getBoundingClientRect().bottom-page.getBoundingClientRect().top+(parseFloat(style.paddingBottom)||0)+Math.max(0,parseFloat((doc.defaultView||window).getComputedStyle(last).marginBottom)||0);
-  }
-  function chapterLayout(){
-    const chapter=chapters[selected],atoms=journalAtoms(chapter,selected,chapters.length);
-    const authoredPages=()=>chapter.pages.map((_,index)=>atoms.filter(atom=>atom.logicalPage===index));
-    root.dataset.scrollPages=String(pagesPerSpread===1);
-    if(pagesPerSpread===1){layoutKey='single';return authoredPages();}
-    const width=Math.min(pages[0].clientWidth||0,pages[1].clientWidth||0),height=Math.min(pages[0].clientHeight||0,pages[1].clientHeight||0);
-    // A non-layout host (for example a semantic DOM fixture) retains authored
-    // page boundaries. The browser always measures the actual visible paper.
-    if(!width||!height){layoutKey='semantic';return authoredPages();}
-    const key=`${selected}:${width}:${height}`;layoutKey=key;
-    if(layoutCache.has(key)){
-      const cached=layoutCache.get(key);root.dataset.scrollPages=String(cached.scroll);return cached.pages;
-    }
-    measurePage.style.width=width+'px';measurePage.style.height=height+'px';measurePage.style.setProperty('--journal-photo-height',Math.max(100,Math.min(126,height*.24))+'px');measuring=true;
-    try{
-      const measure=candidate=>{
-        measurePage.replaceChildren();for(const atom of candidate)renderAtom(atom,measurePage);
-        return contentHeight(measurePage);
-      };
-      const result=chapter.pairLogicalPages?chapter.pages.flatMap((_,index)=>balanceJournalPages(atoms.filter(atom=>atom.logicalPage===index),measure,height)):balanceJournalPages(atoms,measure,height);
-      layoutCache.set(key,{pages:result,scroll:false});return result;
-    }catch(error){
-      if(!(error instanceof JournalPageSizeError))throw error;
-      // Unusually short paper can leave an unsplittable photo or heading. Keep
-      // its entire original page accessible with a scrollable reading area.
-      const result=authoredPages();root.dataset.scrollPages='true';
-      layoutCache.set(key,{pages:result,scroll:true});return result;
-    }finally{measuring=false;measurePage.replaceChildren();}
-  }
   function render({reflow=false}={}){
     const anchor=reflow?layoutPages[selectedSpread*pagesPerSpread]?.[0]?.key:null;
     // The narrow layout uses one scrollable authored page and a fixed page bar.
     pagesPerSpread=doc.defaultView?.getComputedStyle?.(book)?.getPropertyValue?.('--journal-pages-per-spread')?.trim()==='1'?1:2;
-    releasePages();const chapter=chapters[selected];layoutPages=chapterLayout();
+    releasePages();const chapter=chapters[selected];const section=edition.sections[selected];layoutPages=section.pages;
     if(anchor){const at=layoutPages.findIndex(page=>page.some(atom=>atom.key===anchor));if(at>=0)selectedSpread=Math.floor(at/pagesPerSpread);}
     selectedSpread=Math.max(0,Math.min(Math.ceil(layoutPages.length/pagesPerSpread)-1,selectedSpread));
     for(const [index,page]of pages.entries()){
       page.replaceChildren();page.scrollTop=0;
       if(index>=pagesPerSpread)continue;
       const number=selectedSpread*pagesPerSpread+index,data=layoutPages[number];page.style.setProperty('--journal-photo-height',Math.max(100,Math.min(126,(page.clientHeight||500)*.24))+'px');
-      page.setAttribute('aria-label',data?`${pagesPerSpread===1?'Notebook':index===0?'Left':'Right'} page: ${chapter.label}, page ${number+1}`:`${pagesPerSpread===1?'Notebook':index===0?'Left':'Right'} page: ${chapters[selected+1]?'Next chapter':'Return to the garden'}`);
+      page.setAttribute('aria-label',data?`${pagesPerSpread===1?'Notebook':index===0?'Left':'Right'} page: ${chapter.label}, page ${section.firstPage+number} of ${edition.total}`:`${pagesPerSpread===1?'Notebook':index===0?'Left':'Right'} page: ${chapters[selected+1]?'Next chapter':'Return to the garden'}`);
       if(data){
-        for(const atom of data)renderAtom(atom,page);
-        const photos=page.querySelectorAll('.journal-photo-button img');
-        if(root.dataset.scrollPages!=='true'&&photos.length&&page.clientHeight){const base=Math.max(100,Math.min(126,page.clientHeight*.24)),spare=Math.max(0,page.clientHeight-contentHeight(page)-8);page.style.setProperty('--journal-photo-height',Math.min(page.clientHeight*.66,320,base+spare/photos.length)+'px');}
-        node('p',`${number+1} / ${layoutPages.length}`,page,'journal-folio');
+        const body=node('div',undefined,page,'journal-page-body');
+        for(const atom of data)renderAtom(atom,body);
+        const folio=node('p',`${section.firstPage+number} of ${edition.total}`,page,'journal-folio');
+        folio.setAttribute('aria-hidden','true');
+        const photoCount=body.querySelectorAll('.journal-photo-button img').length;
+        if(photoCount && body.clientHeight){
+          const last=body.lastElementChild;
+          const free=body.getBoundingClientRect().bottom-last.getBoundingClientRect().bottom-12;
+          const base=parseFloat(page.style.getPropertyValue('--journal-photo-height'));
+          page.style.setProperty('--journal-photo-height',Math.min(320,base+Math.max(0,free)/photoCount)+'px');
+        }
+        if(body.scrollHeight>body.clientHeight+1){
+          body.tabIndex=0;
+          body.setAttribute('role','region');
+          body.setAttribute('aria-label',`Read page ${section.firstPage+number}`);
+        }
       }
       else{
         const next=chapters[selected+1];node('p',next?'NEXT CHAPTER':'BACK OUTSIDE',page,'journal-kicker');node('h3',next?.label||'The garden is waiting.',page);
@@ -164,8 +140,8 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     }
     jump.value=String(selected);q('[data-journal-section]').textContent=chapter.label;
     book.setAttribute('aria-labelledby',`${id}-section-title`);
-    const firstPage=selectedSpread*pagesPerSpread+1,lastPage=Math.min(layoutPages.length,firstPage+pagesPerSpread-1);
-    q('[data-journal-count]').textContent=`${firstPage===lastPage?'Page '+firstPage:'Pages '+firstPage+'–'+lastPage} of ${layoutPages.length}`;
+    const firstPage=section.firstPage+selectedSpread*pagesPerSpread,lastPage=Math.min(section.firstPage+layoutPages.length-1,firstPage+pagesPerSpread-1);
+    q('[data-journal-count]').textContent=`${chapter.label}. ${firstPage===lastPage?'Page '+firstPage:'Pages '+firstPage+'–'+lastPage} of ${edition.total}`;
     const atStart=selectedSpread===0,atEnd=selectedSpread===Math.ceil(layoutPages.length/pagesPerSpread)-1;
     const previous=q('[data-journal-prev]'),next=q('[data-journal-next]'),pageUnit=pagesPerSpread===1?'page':'pages';
     previous.disabled=selected===0&&atStart;next.disabled=selected===chapters.length-1&&atEnd;
@@ -182,7 +158,7 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
   function decorativeCopy(source){
     if(typeof source.cloneNode!=='function')return null;
     const clone=source.cloneNode(true);clone.setAttribute('aria-hidden','true');clone.inert=true;clone.tabIndex=-1;clone.removeAttribute('id');
-    clone.dataset.journalScroll=String(source.scrollTop||0);
+    clone.dataset.journalScroll=String(source.querySelector('.journal-page-body')?.scrollTop||0);
     for(const element of clone.querySelectorAll('[id]'))element.removeAttribute('id');
     for(const button of clone.querySelectorAll('button')){button.disabled=true;button.tabIndex=-1;}
     // Reuse an already requested image as a decorative cached background. A
@@ -204,7 +180,7 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     turnLeaf=node('div',undefined,stage,`journal-turn-leaf ${forward?'journal-turn-forward':'journal-turn-back'}`);turnLeaf.setAttribute('aria-hidden','true');turnLeaf.inert=true;
     const front=node('div',undefined,turnLeaf,'journal-leaf-face journal-leaf-front'),rear=node('div',undefined,turnLeaf,'journal-leaf-face journal-leaf-back');front.append(face);rear.append(back);
     heldPage.classList.add('journal-held-page',forward?'journal-held-left':'journal-held-right');heldPage.setAttribute('aria-hidden','true');heldPage.inert=true;stage.append(heldPage);
-    for(const page of [face,back,heldPage])page.scrollTop=Number(page.dataset.journalScroll)||0;
+    for(const page of [face,back,heldPage]){const body=page.querySelector('.journal-page-body');if(body)body.scrollTop=Number(page.dataset.journalScroll)||0;}
     const sign=forward?-1:1,options={duration:460,easing:'cubic-bezier(.2,.65,.25,1)',fill:'both'};
     const turning=turnLeaf.animate([{transform:'rotateY(0deg)'},{transform:`rotateY(${sign*180}deg)`}],options);
     const holding=heldPage.animate([{opacity:1,offset:0},{opacity:1,offset:.46},{opacity:0,offset:.54},{opacity:0,offset:1}],{...options,easing:'linear'});
@@ -234,7 +210,7 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
   }
   function resize(){
     if(!opened||dead)return;const origin=doc.activeElement,focusedPage=pages.findIndex(page=>page===origin||page.contains?.(origin));
-    clearTurn();layoutCache.clear();render({reflow:true});if(focusedPage>=0)focus(pages[focusedPage]);
+    clearTurn();render({reflow:true});if(focusedPage>=0)focus(pages[focusedPage]);
   }
   function scheduleResize(){
     if(!opened||dead||resizeFrame!==null)return;
@@ -301,8 +277,8 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     open({chapter=0}={}){if(dead||opened||!chapters.length)return false;const next=Math.max(0,Math.min(chapters.length-1,Math.round(Number(chapter)||0)));if(next!==selected)selectedSpread=0;selected=next;opened=true;root.hidden=false;render();focus(pages[0]);return true;},
     close,cancel,setChapter,
     resize,turnPage,
-    dispose(){if(dead)return;close({notify:false});clearTurn();resizeObserver?.disconnect();const win=doc.defaultView||globalThis.window;if(resizeFrame!==null)win?.cancelAnimationFrame?.(resizeFrame);resizeFrame=null;layoutCache.clear();releaseImage(fullImage);listeners.splice(0).forEach(remove=>remove());root.remove();dead=true;},
+    dispose(){if(dead)return;close({notify:false});clearTurn();resizeObserver?.disconnect();const win=doc.defaultView||globalThis.window;if(resizeFrame!==null)win?.cancelAnimationFrame?.(resizeFrame);resizeFrame=null;releaseImage(fullImage);listeners.splice(0).forEach(remove=>remove());root.remove();dead=true;},
     get isOpen(){return opened;},get selectedChapter(){return selected;},get photoOpen(){return photoOpened;},
-    diagnostics(){return {isOpen:opened,selectedChapter:selected,selectedSpread,pageCount:layoutPages.length,measured:layoutKey!=='semantic',photoOpen:photoOpened,photoIndex,turning:Boolean(turnLeaf),turnLeaves:turnLeaf?1:0,pageImageSources:pages.reduce((sum,page)=>sum+[...page.querySelectorAll('img')].filter(image=>image.getAttribute('src')).length,0),viewerImageSources:fullImage.getAttribute('src')?1:0,activeAnimations:motions.length,totalPhotos:photos.length};}
+    diagnostics(){return {isOpen:opened,selectedChapter:selected,selectedSpread,pageCount:edition.total,chapterPageCount:layoutPages.length,measured:Boolean(pages[0].clientHeight),photoOpen:photoOpened,photoIndex,turning:Boolean(turnLeaf),turnLeaves:turnLeaf?1:0,pageImageSources:pages.reduce((sum,page)=>sum+[...page.querySelectorAll('img')].filter(image=>image.getAttribute('src')).length,0),viewerImageSources:fullImage.getAttribute('src')?1:0,activeAnimations:motions.length,totalPhotos:photos.length};}
   };
 }
