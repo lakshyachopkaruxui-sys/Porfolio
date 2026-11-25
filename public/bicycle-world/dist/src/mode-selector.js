@@ -46,10 +46,10 @@ function dropModeParticles(host, destination) {
     // Bake the honey-colored bloom once. Every particle shares this small bitmap.
     const bloom = brush.createRadialGradient(0, 0, 0, 0, 0, 55);
     bloom.addColorStop(0, 'rgba(255,255,231,1)');
-    bloom.addColorStop(.14, 'rgba(255,240,165,.95)');
-    bloom.addColorStop(.32, 'rgba(255,207,98,.72)');
-    bloom.addColorStop(.58, 'rgba(255,181,61,.28)');
-    bloom.addColorStop(.82, 'rgba(255,177,54,.08)');
+    bloom.addColorStop(.14, 'rgba(255,240,165,.45)');
+    bloom.addColorStop(.32, 'rgba(255,207,98,.18)');
+    bloom.addColorStop(.58, 'rgba(255,181,61,.055)');
+    bloom.addColorStop(.82, 'rgba(255,177,54,.012)');
     bloom.addColorStop(1, 'rgba(255,177,54,0)');
     brush.fillStyle = bloom;
     brush.fillRect(-56, -56, 112, 112);
@@ -62,15 +62,15 @@ function dropModeParticles(host, destination) {
     brush.fillStyle = core;
     brush.beginPath();
     brush.moveTo(0, -40);
-    brush.bezierCurveTo(3, -15, 8, -5, 36, 0);
-    brush.bezierCurveTo(9, 4, 4, 12, 0, 40);
-    brush.bezierCurveTo(-4, 14, -8, 5, -36, 0);
-    brush.bezierCurveTo(-9, -4, -4, -13, 0, -40);
+    brush.bezierCurveTo(2, -10, 6, -3, 43, 0);
+    brush.bezierCurveTo(7, 3, 2, 11, 0, 40);
+    brush.bezierCurveTo(-2, 12, -6, 3, -43, 0);
+    brush.bezierCurveTo(-7, -3, -2, -11, 0, -40);
     brush.closePath();
     brush.fill();
   }
   const particles = Array.from({length: count}, (_, i) => {
-    const size = balls ? 12 + Math.random()*23 : 24 + 39*Math.pow(Math.random(), 1.45);
+    const size = balls ? 12 + Math.random()*23 : 17 + 23*Math.pow(Math.random(), 1.45);
     const radius = size*.7;
     const phase = Math.random()*Math.PI*2;
     const gravity = height*(balls ? 3.8 : 3.3)*(1 + Math.random()*.2);
