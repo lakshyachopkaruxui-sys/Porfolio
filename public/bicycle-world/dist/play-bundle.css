@@ -6019,24 +6019,25 @@ body.hybrid-world #personal-experience #listening-experience #listening-photo-vi
 /* Page numbers stay on the paper even when a small screen needs to scroll. */
 body.hybrid-world #about-experience .journal-page {
   display:grid;
-  grid-template-rows:minmax(0,1fr) auto;
+  grid-template-rows:minmax(0,1fr) 16px;
   gap:8px;
   overflow:hidden;
   padding-bottom:12px;
 }
 .journal-page-body {min-height:0;overflow:auto;scrollbar-width:thin;overscroll-behavior:contain;}
 body.hybrid-world #about-experience .journal-folio {
-  position:static;
+  position:absolute;
+  inset-inline:0;
+  bottom:12px;
   margin:0!important;
-  text-align:start;
-  font:500 13px/1.2 Georgia,serif;
+  text-align:center;
+  font:500 13px/1.2 var(--font-body);
   font-variant-numeric:lining-nums tabular-nums;
   color:#61583e;
 }
-body.hybrid-world #about-experience .journal-page-right .journal-folio {text-align:end;}
 body.hybrid-world #about-experience .journal-page-position [data-journal-section] {
   margin:0;
-  font:600 clamp(18px,2vw,27px)/1.12 Georgia,serif;
+  font:400 clamp(18px,1.8vw,25px)/1.35 var(--font-heading);
   color:var(--journal-ink);
   text-wrap:balance;
 }
@@ -6080,7 +6081,6 @@ body.hybrid-world #about-experience .journal-page-position [data-journal-section
     padding:16px 18px 10px;
     background:#fff8e6;
   }
-  body.hybrid-world #about-experience .journal-book .journal-folio {text-align:center;}
   body.hybrid-world #about-experience .journal-page-navigation {gap:4px;}
   body.hybrid-world #about-experience #about-journal-photo > header {
     display:grid;
