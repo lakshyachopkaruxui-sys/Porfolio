@@ -9,12 +9,12 @@ export function journalAtoms(chapter,index=0,total=1){
     for(const block of page.blocks||[]){
       if(block.type==='timeline')for(const entry of block.entries)add({type:'entry',...entry},pageIndex);
       else if(block.type==='toolkit')for(const group of block.groups){
-        add({type:'text',title:group.title,body:group.body,keepWithNext:Boolean(group.tools?.length)},pageIndex);
+        add({type:'text',title:group.title,body:group.body,startPage:true,keepWithNext:Boolean(group.tools?.length)},pageIndex);
         if(group.tools?.length)add({type:'tools',tools:[...group.tools],groupLabel:group.title},pageIndex);
       }
       else if(block.type==='decision'){
         if(block.title)add({type:'heading',title:block.title,keepWithNext:true},pageIndex);
-        for(const [field,title]of [['friction','What happened'],['decision','The decision'],['next','What comes next']])if(block[field])add({type:'text',title,body:block[field]},pageIndex);
+        for(const [field,title]of [['friction','What happened'],['decision','The decision'],['next','What comes next']])if(block[field])add({type:'text',title,body:block[field],startPage:chapter.pairLogicalPages&&field==='decision'},pageIndex);
         if(block.projectId)add({type:'project-link',projectId:block.projectId,projectLabel:block.projectLabel},pageIndex);
       }
       else if(block.type==='links')for(const item of block.items)add({type:'links',items:[item]},pageIndex);
@@ -22,6 +22,28 @@ export function journalAtoms(chapter,index=0,total=1){
     }
   });
   return atoms;
+}
+
+/** Each method keeps its tools, and each project gets a facing pair.
+ * The same leaves are used in the open spread and single-page layouts. */
+export function notebookEdition(chapters){
+  let total=0;
+  const sections=chapters.map((chapter,index)=>{
+    const pages=[];
+    let logicalPage=-1;
+    for(const atom of journalAtoms(chapter,index,chapters.length)){
+      const current=pages.at(-1);
+      if(atom.logicalPage!==logicalPage || (atom.startPage && current.some(item=>!['chapter','heading'].includes(item.type)))){
+        pages.push([]);
+        logicalPage=atom.logicalPage;
+      }
+      pages.at(-1).push(atom);
+    }
+    const firstPage=total+1;
+    total+=pages.length;
+    return {firstPage,pages};
+  });
+  return {sections,total};
 }
 
 /** Compose complete facing pairs, minimizing empty paper and lopsided spreads. */

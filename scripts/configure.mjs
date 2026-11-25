@@ -110,7 +110,7 @@ export async function configureSite({siteRoot,env = process.env} = {}) {
       '<!-- portfolio-publishing:start -->',
       ...(file !== '404.html' && !config.preview ? ['<script defer src="/entrance/visit-session.js"></script>'] : []),
       ...(file !== '404.html' && !config.preview ? ['<script defer src="/entrance/simple-analytics.js?v=20261114"></script>'] : []),
-      ...(file !== '404.html' && file !== 'index.html' ? ['<script src="/entrance/app-route.js"></script>'] : []),
+      ...(file !== '404.html' && file !== 'index.html' && file !== 'bicycle-world/dist/notebook/index.html' ? ['<script src="/entrance/app-route.js"></script>'] : []),
       `<link rel="canonical" href="${escapeHTML(canonical)}">`,
       `<meta property="og:url" content="${escapeHTML(canonical)}">`,
       '<meta property="og:type" content="website">',
