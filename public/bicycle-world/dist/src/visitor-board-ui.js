@@ -12,8 +12,52 @@ export function createVisitorBoardUI({onOpen=()=>{},onClose=()=>{},onChange=()=>
   const text=(tag,value,parent,className)=>{const element=document.createElement(tag);if(className)element.className=className;element.textContent=value;parent.append(element);return element;};
   function linkedIn(value){if(typeof value!=='string'||!value.trim())return '';try{const u=new URL(value.trim());if(u.protocol==='https:'&&/^(www\.)?linkedin\.com$/i.test(u.hostname)&&/^\/in\/[a-zA-Z0-9_-]+\/?$/.test(u.pathname)&&!u.username&&!u.password&&!u.port&&!u.search&&!u.hash)return 'https://www.linkedin.com'+u.pathname.replace(/\/$/,'');}catch{}return null;}
   function render(reviews){list.replaceChildren();if(!reviews.length){text('p','No reviews yet. Be the first to leave a thought for the next visitor.',list,'vb-empty');return;}for(const review of reviews){const card=document.createElement('article');card.className='vb-note';list.append(card);const top=document.createElement('div');top.className='vb-note-meta';card.append(top);text('h3',review.name,top);const rating=text('span',`${review.stars} / 5`,top,'vb-note-rating');rating.setAttribute('aria-label',`${review.stars} out of 5 stars`);text('p',review.feedback,card,'vb-note-body');const bottom=document.createElement('div');bottom.className='vb-note-bottom';card.append(bottom);const date=new Date(review.createdAt);if(Number.isFinite(date.getTime())){const time=text('time',new Intl.DateTimeFormat(undefined,{dateStyle:'medium'}).format(date),bottom);time.dateTime=date.toISOString();}const url=linkedIn(review.linkedin);if(url){const a=text('a','LinkedIn profile',bottom);a.href=url;a.target='_blank';a.rel='noopener noreferrer';}}}
+  function addRemovalControls(reviews) {
+    Array.from(list.children).forEach((card,index)=>{
+      const review=reviews[index];
+      if(!review?.id)return;
+      const panel=document.createElement('details');
+      card.append(panel);
+      text('summary','Remove review (owner)',panel);
+      const removal=document.createElement('form');
+      panel.append(removal);
+      const label=text('label','Owner password ',removal);
+      const input=document.createElement('input');
+      input.type='password';
+      input.required=true;
+      input.maxLength=43;
+      input.autocomplete='off';
+      label.append(input);
+      const button=text('button','Delete this review',removal);
+      button.type='submit';
+      const status=text('p','',removal);
+      status.setAttribute('role','status');
+      removal.addEventListener('submit',async event=>{
+        event.preventDefault();
+        if(button.disabled)return;
+        const password=input.value.trim();
+        input.value='';
+        button.disabled=true;
+        try{
+          const response=await fetch('/api/reviews?id='+encodeURIComponent(review.id),{
+            method:'DELETE',credentials:'same-origin',headers:{Authorization:'Bearer '+password}
+          });
+          const result=await response.json();
+          if(!response.ok||result.deleted!==true)throw Error(result.error||'Could not confirm deletion.');
+          if(dead)return;
+          card.remove();
+          const refreshButton=q('[data-vb-refresh]');
+          refreshButton.focus();
+          void refresh().then(()=>{if(!dead)refreshButton.focus();});
+        }catch(error){
+          status.textContent=error.message||'Could not remove this review.';
+          input.focus();
+        }finally{button.disabled=false;}
+      });
+    });
+  }
   async function refresh(){if(dead)return [];const generation=++loadGeneration;loadAbort?.abort();loadAbort=new AbortController();loadStatus.textContent='Loading visitor notes...';q('[data-vb-refresh]').disabled=true;
-    try{const response=await fetch('/api/reviews',{signal:loadAbort.signal,cache:'no-store',credentials:'same-origin'});if(!response.ok)throw Error('load');const data=await response.json();if(!Array.isArray(data.reviews))throw Error('shape');const reviews=visitorReviews(data.reviews);if(dead||generation!==loadGeneration)return [];loaded=true;render(reviews);loadStatus.textContent=reviews.length?`${reviews.length} recent ${reviews.length===1?'note':'notes'}. Newest first.`:'No visitor notes yet.';onChange(reviews);return reviews;}
+    try{const response=await fetch('/api/reviews',{signal:loadAbort.signal,cache:'no-store',credentials:'same-origin'});if(!response.ok)throw Error('load');const data=await response.json();if(!Array.isArray(data.reviews))throw Error('shape');const reviews=visitorReviews(data.reviews);if(dead||generation!==loadGeneration)return [];loaded=true;render(reviews);if(data.removalEnabled===true)addRemovalControls(reviews);loadStatus.textContent=reviews.length?`${reviews.length} recent ${reviews.length===1?'note':'notes'}. Newest first.`:'No visitor notes yet.';onChange(reviews);return reviews;}
     catch(error){if(!dead&&generation===loadGeneration&&error.name!=='AbortError'){loadStatus.textContent='Notes could not load. You can try Refresh again.';if(!loaded)list.replaceChildren();}return [];}
     finally{if(!dead&&generation===loadGeneration)q('[data-vb-refresh]').disabled=false;}}
   function close(){if(!dialog.open)return;dialog.close();}

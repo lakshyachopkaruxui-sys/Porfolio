@@ -6,6 +6,7 @@ export function visitorReviews(items) {
     if (!row || typeof row.name !== 'string' || typeof row.feedback !== 'string' ||
         !Number.isInteger(row.stars) || row.stars < 1 || row.stars > 5) continue;
     reviews.push({
+      id:typeof row.id === 'string' && /^[1-9]\d*$/.test(row.id) ? row.id : '',
       name:row.name.slice(0,60), feedback:row.feedback.slice(0,600), stars:row.stars,
       linkedin:typeof row.linkedin === 'string' ? row.linkedin.slice(0,512) : '',
       createdAt:typeof row.createdAt === 'string' || typeof row.createdAt === 'number' ? row.createdAt : ''

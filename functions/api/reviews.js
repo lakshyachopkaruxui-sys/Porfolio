@@ -1,3 +1,5 @@
+import {timingSafeEqual} from 'node:crypto';
+
 const origin = 'https://lakshyachopkar.com';
 const fields = 'id,name,stars,feedback,linkedin,created_ms';
 const schema = `CREATE TABLE IF NOT EXISTS visitor_reviews (
@@ -33,13 +35,28 @@ async function limitedJSON(request) {
  return JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes));
 }
 export async function onRequest({request,env}) {
- if(!['GET','POST'].includes(request.method))return reply(405,{error:'Use GET or POST.'});
+ if(!['GET','POST','DELETE'].includes(request.method))return reply(405,{error:'Use GET, POST or DELETE.'});
  if(new URL(request.url).origin!==origin||request.headers.get('Sec-Fetch-Site')==='cross-site')return reply(403,{error:'Please use the portfolio visitor board.'});
- if(request.method==='POST'&&request.headers.get('Origin')!==origin)return reply(403,{error:'Please use the portfolio visitor board.'});
+ if(request.method!=='GET'&&request.headers.get('Origin')!==origin)return reply(403,{error:'Please use the portfolio visitor board.'});
  if(!env.VISIT_DB)return reply(503,{error:'Visitor notes are temporarily unavailable. Please try again.'});
  try {
   const db=env.VISIT_DB.withSession?env.VISIT_DB.withSession('first-primary'):env.VISIT_DB;
-  if(request.method==='GET') {const rows=await db.prepare(`SELECT ${fields} FROM visitor_reviews ORDER BY created_ms DESC,id DESC LIMIT 12`).all();return reply(200,{reviews:rows.results.map(present)});}
+  const removalEnabled = typeof env.REVIEW_ADMIN_PASSWORD==='string' && /^[A-Za-z0-9_-]{43}$/.test(env.REVIEW_ADMIN_PASSWORD);
+  if(request.method==='DELETE') {
+   const password=env.REVIEW_ADMIN_PASSWORD;
+   if(!removalEnabled)return reply(503,{error:'Review removal is unavailable.'});
+   const supplied=request.headers.get('Authorization')||'';
+   const expected='Bearer '+password;
+   if(supplied.length!==expected.length||!/^[\x20-\x7e]+$/.test(supplied)||
+      !timingSafeEqual(new TextEncoder().encode(supplied),new TextEncoder().encode(expected))) {
+    return reply(403,{error:'Incorrect owner password.'});
+   }
+   const id=new URL(request.url).searchParams.get('id');
+   if(!/^[1-9]\d{0,15}$/.test(id||'')||!Number.isSafeInteger(Number(id)))return reply(400,{error:'Invalid review ID.'});
+   const result=await db.prepare('DELETE FROM visitor_reviews WHERE id = ?').bind(Number(id)).run();
+   return result.meta?.changes===1?reply(200,{deleted:true}):reply(404,{error:'That review is already gone.'});
+  }
+  if(request.method==='GET') {const rows=await db.prepare(`SELECT ${fields} FROM visitor_reviews ORDER BY created_ms DESC,id DESC LIMIT 12`).all();return reply(200,{reviews:rows.results.map(present),removalEnabled});}
   if(!/^application\/json(?:;|$)/i.test(request.headers.get('Content-Type')||''))return reply(415,{error:'Please send the review form as JSON.'});
   let value;try{value=validate(await limitedJSON(request));}catch(error){return reply(error.message==='large'?413:400,{error:'Please check the review fields and try again.'});}
   if(!value)return reply(400,{error:'Add your name, 1–5 stars, 10–600 characters of feedback and public-display consent. LinkedIn is optional.'});
