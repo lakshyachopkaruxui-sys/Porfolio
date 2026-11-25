@@ -16,15 +16,15 @@ export function visitorReviews(items) {
 }
 
 export async function readReviewReceipt(response) {
-  if (response.status === 204) return {};
   const body = await response.json().catch(() => null);
   const message = typeof body?.error === 'string' ? body.error : '';
   if (!response.ok) {
     if (response.status === 429) throw Error('Please wait a moment before posting another note.');
     throw Error(message || 'Your note could not be posted. Your writing is still here.');
   }
-  if (!body || typeof body !== 'object' || Array.isArray(body) ||
-      !Object.keys(body).length || body.ok === false || body.error) {
+  const id = body?.review?.id;
+  const saved = typeof id === 'string' && /^[1-9]\d*$/.test(id);
+  if (!saved || body.ok === false || body.error) {
     throw Error('The board could not confirm your note. Your writing is still here.');
   }
   return body;
