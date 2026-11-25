@@ -5,6 +5,7 @@ import {bindRoomMapNavigation} from '../src/room-map-navigation.js';
 
 const gardenMap = '../sections.html';
 bindRoomMapNavigation(document, () => location.assign(gardenMap));
+document.querySelector('.about-shell').dataset.paper = new URLSearchParams(location.search).get('paper') === 'toys' ? 'toys' : 'plain';
 const reader = createAboutJournalReader({
   host: document.querySelector('.about-shell'),
   content: ABOUT_JOURNAL,

@@ -9,12 +9,12 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
   const id=`about-journal-${++readerSerial}`,root=doc.createElement('section');
   root.className='about-journal-reader';root.hidden=true;root.tabIndex=-1;
   root.setAttribute('role','region');root.setAttribute('aria-label',content?.title||'Lakshya’s notebook');
-  root.innerHTML=`<nav class="journal-chapters" aria-label="Notebook sections" data-journal-tabs><label class="journal-section-jump" for="${id}-section">Section<select id="${id}-section" data-journal-jump aria-controls="${id}-spread"></select></label><button data-room-return type="button" data-journal-close>Back to studio</button>${roomMapButton}</nav>
+  root.innerHTML=`<h2 class="journal-section-title" id="${id}-section-title" data-journal-section></h2>
     <div class="journal-book-stage" data-journal-stage><div class="journal-book" data-journal-book role="region" id="${id}-spread">
       <article class="journal-page journal-page-left" data-journal-left tabindex="0"></article>
       <article class="journal-page journal-page-right" data-journal-right tabindex="0"></article>
     </div><div class="journal-binding" aria-hidden="true"></div></div>
-    <footer class="journal-footer"><nav class="journal-page-navigation" aria-label="Turn notebook pages"><button type="button" aria-keyshortcuts="ArrowLeft A" data-journal-prev><span aria-hidden="true">← </span>Previous pages</button><div class="journal-page-position"><p id="${id}-section-title" data-journal-section></p><p data-journal-count class="journal-announcement" role="status" aria-atomic="true"></p></div><button type="button" aria-keyshortcuts="ArrowRight D" data-journal-next>Next pages<span aria-hidden="true"> →</span></button></nav></footer>
+    <footer class="journal-footer"><nav class="journal-page-navigation" aria-label="Turn notebook pages"><button type="button" aria-keyshortcuts="ArrowLeft A" data-journal-prev><span aria-hidden="true">← </span>Previous pages</button><button class="journal-return" type="button" data-journal-close>Back to studio</button><p data-journal-count class="journal-announcement" role="status" aria-atomic="true"></p><button type="button" aria-keyshortcuts="ArrowRight D" data-journal-next>Next pages<span aria-hidden="true"> →</span></button></nav></footer>
     <section id="about-journal-photo" class="journal-photo-viewer" data-journal-viewer aria-labelledby="${id}-photo-title" tabindex="-1" hidden>
       <header><div><p>FROM MY NOTEBOOK</p><h2 id="${id}-photo-title" data-journal-photo-title></h2></div><nav class="room-action-bar" aria-label="Room navigation"><button data-room-return type="button" data-journal-photo-close>Back to the notebook</button>${roomMapButton}</nav></header>
       <figure aria-describedby="journal-photo-caption"><img decoding="async" data-journal-full-photo alt=""></figure>
@@ -22,7 +22,7 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
       <footer class="gallery-strip"><div class="gallery-label"><p data-journal-photo-count aria-live="polite"></p><span id="journal-photo-caption" data-journal-photo-caption></span></div><nav class="gallery-actions" aria-label="Notebook photographs"><button type="button" data-journal-photo-prev>Previous photo</button><button type="button" data-journal-photo-next>Next photo</button></nav></footer>
     </section>`;
   host.append(root);
-  const q=selector=>root.querySelector(selector),book=q('[data-journal-book]'),stage=q('[data-journal-stage]'),jump=q('[data-journal-jump]');
+  const q=selector=>root.querySelector(selector),book=q('[data-journal-book]'),stage=q('[data-journal-stage]');
   const pages=[q('[data-journal-left]'),q('[data-journal-right]')],viewer=q('[data-journal-viewer]'),fullImage=q('[data-journal-full-photo]');
   const listeners=[],imageListeners=new Map(),motions=[];
   let opened=false,dead=false,selected=0,turnGeneration=0,turnLeaf=null,heldPage=null;
@@ -35,10 +35,6 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
   const reduced=()=>Boolean(isReduced()||motionQuery?.matches);
   const resolve=photo=>new URL('../'+photo.src.replace(/^\.\//,''),import.meta.url).href;
   const node=(tag,text,parent,className)=>{const element=doc.createElement(tag);if(className)element.className=className;if(text!==undefined)element.textContent=text;parent?.append(element);return element;};
-
-  chapters.forEach((chapter,index)=>{
-    const option=node('option',chapter.label,jump);option.value=String(index);
-  });
 
   function releaseImage(image){
     imageListeners.get(image)?.();imageListeners.delete(image);image.removeAttribute('src');image.removeAttribute('srcset');image.dataset.loaded='false';
@@ -115,6 +111,7 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
       const number=selectedSpread*pagesPerSpread+index,data=layoutPages[number];page.style.setProperty('--journal-photo-height',Math.max(100,Math.min(126,(page.clientHeight||500)*.24))+'px');
       page.setAttribute('aria-label',data?`${pagesPerSpread===1?'Notebook':index===0?'Left':'Right'} page: ${chapter.label}, page ${section.firstPage+number} of ${edition.total}`:`${pagesPerSpread===1?'Notebook':index===0?'Left':'Right'} page: ${chapters[selected+1]?'Next chapter':'Return to the garden'}`);
       if(data){
+        page.dataset.paperMark=String((section.firstPage+number-1)%4);
         const body=node('div',undefined,page,'journal-page-body');
         for(const atom of data)renderAtom(atom,body);
         const folio=node('p',`${section.firstPage+number} of ${edition.total}`,page,'journal-folio');
@@ -138,7 +135,7 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
         if(next)button.dataset.journalChapter=String(selected+1);else button.dataset.journalNavigate='garden';
       }
     }
-    jump.value=String(selected);q('[data-journal-section]').textContent=chapter.label;
+    q('[data-journal-section]').textContent=chapter.label;
     book.setAttribute('aria-labelledby',`${id}-section-title`);
     const firstPage=section.firstPage+selectedSpread*pagesPerSpread,lastPage=Math.min(section.firstPage+layoutPages.length-1,firstPage+pagesPerSpread-1);
     q('[data-journal-count]').textContent=`${chapter.label}. ${firstPage===lastPage?'Page '+firstPage:'Pages '+firstPage+'–'+lastPage} of ${edition.total}`;
@@ -173,7 +170,15 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     return clone;
   }
   function beginTurn(before,direction){
-    if(!before||reduced()||typeof stage.animate!=='function')return;
+    if(reduced()||typeof stage.animate!=='function')return;
+    if(pagesPerSpread===1){
+      const sheet=pages[0],motion=sheet.animate([
+        {transform:`perspective(1000px) rotateY(${direction*7}deg) translateX(${direction*10}px)`},
+        {transform:'none'}
+      ],{duration:240,easing:'ease-out'});
+      motions.push(motion);motion.onfinish=clearTurn;return;
+    }
+    if(!before)return;
     const token=turnGeneration,forward=direction>0,turnIndex=forward?1:0,heldIndex=1-turnIndex;
     const face=before[turnIndex],back=decorativeCopy(pages[heldIndex]);heldPage=before[heldIndex];
     if(!face||!back||!heldPage){heldPage?.remove();heldPage=null;return;}
@@ -182,7 +187,11 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     heldPage.classList.add('journal-held-page',forward?'journal-held-left':'journal-held-right');heldPage.setAttribute('aria-hidden','true');heldPage.inert=true;stage.append(heldPage);
     for(const page of [face,back,heldPage]){const body=page.querySelector('.journal-page-body');if(body)body.scrollTop=Number(page.dataset.journalScroll)||0;}
     const sign=forward?-1:1,options={duration:460,easing:'cubic-bezier(.2,.65,.25,1)',fill:'both'};
-    const turning=turnLeaf.animate([{transform:'rotateY(0deg)'},{transform:`rotateY(${sign*180}deg)`}],options);
+    const turning=turnLeaf.animate([
+      {transform:'rotateY(0deg)'},
+      {transform:`rotateY(${sign*78}deg) rotateZ(${sign*.7}deg)`,offset:.48},
+      {transform:`rotateY(${sign*180}deg)`}
+    ],options);
     const holding=heldPage.animate([{opacity:1,offset:0},{opacity:1,offset:.46},{opacity:0,offset:.54},{opacity:0,offset:1}],{...options,easing:'linear'});
     motions.push(turning,holding);root.dataset.turning='true';
     turning.onfinish=()=>{if(token!==turnGeneration||!opened||dead)return;clearTurn();};
@@ -191,11 +200,10 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     if(!opened||dead||!chapters.length)return false;
     const next=Math.max(0,Math.min(chapters.length-1,Math.round(Number(value)||0)));if(next===selected&&selectedSpread===0&&!atEnd){if(reduced())clearTurn();return false;}
     closePhoto({restoreFocus:false});clearTurn();
-    const origin=doc.activeElement,fromJump=origin===jump,fromPage=pages.some(page=>page===origin||page.contains?.(origin));
+    const origin=doc.activeElement,fromPage=pages.some(page=>page===origin||page.contains?.(origin));
     const before=pagesPerSpread===2&&!reduced()&&typeof stage.animate==='function'?pages.map(decorativeCopy):null;
     const direction=next>selected?1:-1;selected=next;selectedSpread=atEnd?Number.MAX_SAFE_INTEGER:0;render();beginTurn(before,direction);
-    if(fromJump)focus(jump);
-    else if(fromPage||origin?.disabled||!origin?.isConnected)focus(pages[0]);
+    if(fromPage||origin?.disabled||!origin?.isConnected)focus(pages[0]);
     return true;
   }
   function turnPage(direction){
@@ -260,7 +268,35 @@ export function createAboutJournalReader({host,content,photos=[],onClose=()=>{},
     const chapter=event.target.closest?.('[data-journal-chapter]');if(chapter){setChapter(Number(chapter.dataset.journalChapter));return;}
     const destination=event.target.closest?.('[data-journal-navigate]');if(destination&&!photoOpened)onNavigate(destination.dataset.journalProject?'project:'+destination.dataset.journalProject:destination.dataset.journalNavigate);
   });
-  listen(jump,'change',()=>setChapter(Number(jump.value)));
+  // A trackpad fling counts as one turn. Text that overflows a leaf scrolls first.
+  let lastWheel=-Infinity, wheelDistance=0, gestureUsed=false;
+  listen(book,'wheel',event=>{
+    if(!opened||photoOpened||event.ctrlKey||event.metaKey)return;
+    if(event.timeStamp-lastWheel>180){wheelDistance=0;gestureUsed=false;}
+    lastWheel=event.timeStamp;
+    const sideways=Math.abs(event.deltaX)>Math.abs(event.deltaY);
+    const delta=sideways?event.deltaX:event.deltaY;
+    const body=event.target.closest?.('.journal-page-body');
+    if(!sideways && body && (delta>0?body.scrollTop+body.clientHeight<body.scrollHeight-1:body.scrollTop>1)){
+      gestureUsed=true;return;
+    }
+    if(event.cancelable)event.preventDefault();
+    if(gestureUsed)return;
+    wheelDistance+=delta*(event.deltaMode===1?16:event.deltaMode===2?book.clientHeight:1);
+    if(Math.abs(wheelDistance)>=44){gestureUsed=true;turnPage(Math.sign(wheelDistance));}
+  },{passive:false});
+  let touchStart=null;
+  listen(book,'touchstart',event=>{
+    const touch=event.touches[0];
+    touchStart=event.touches.length===1 && !event.target.closest?.('button,a') ? [touch.clientX,touch.clientY] : null;
+  },{passive:true});
+  listen(book,'touchcancel',()=>{touchStart=null;});
+  listen(book,'touchend',event=>{
+    if(!touchStart)return;
+    const touch=event.changedTouches[0],dx=touch.clientX-touchStart[0],dy=touch.clientY-touchStart[1];
+    touchStart=null;
+    if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)*1.6)turnPage(dx<0?1:-1);
+  },{passive:true});
   listen(q('[data-journal-prev]'),'click',()=>turnPage(-1));listen(q('[data-journal-next]'),'click',()=>turnPage(1));listen(q('[data-journal-close]'),'click',()=>close());
   listen(q('[data-journal-photo-close]'),'click',()=>closePhoto());listen(q('[data-journal-photo-prev]'),'click',()=>selectPhoto(photoIndex-1));listen(q('[data-journal-photo-next]'),'click',()=>selectPhoto(photoIndex+1));listen(q('[data-journal-photo-retry]'),'click',renderPhoto);
   listen(root,'keydown',event=>{
