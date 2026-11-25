@@ -1,0 +1,1 @@
+document.addEventListener('play', event => { for (const player of document.querySelectorAll('audio')) if (player !== event.target) player.pause(); }, true);
