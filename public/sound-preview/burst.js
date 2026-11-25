@@ -1,4 +1,4 @@
-export function burst(host, destination, cue) {
+export function burst(host, destination, score, image) {
   const doc = host.ownerDocument;
   const view = doc.defaultView;
   const rail = host.querySelector('.mode-selector-plate').getBoundingClientRect();
@@ -26,8 +26,7 @@ export function burst(host, destination, cue) {
   // Paint one reusable sprite for the whole shower.
   let artwork;
   if (balls) {
-    artwork = new view.Image();
-    artwork.src = '/entrance/49cdd3462d2e1fe2.webp';
+    artwork = image;
   } else {
     artwork = doc.createElement('canvas');
     artwork.width = artwork.height = 112;
@@ -64,7 +63,10 @@ export function burst(host, destination, cue) {
   const particles = Array.from({length: count}, (_, i) => {
     const size = balls ? 12 + Math.random()*23 : 17 + 23*Math.pow(Math.random(), 1.45);
     const radius = size*.7;
-    const phase = Math.random()*Math.PI*2;
+    const delay=Math.random()*(balls ? .09 : .19);
+    const accent=.24+(i%3)*.155;
+    const phase=balls || i%4 ? Math.random()*Math.PI*2 : -(accent-delay)*7;
+    const rate=balls || i%4 ? 5+1.2*Math.sin(phase) : 7;
     const gravity = height*(balls ? 3.8 : 3.3)*(1 + Math.random()*.2);
     const vy = height*(Math.random()*.72 - .43);
     const airTime = (Math.sqrt(vy*vy + 2*gravity*Math.max(1,height-radius-y)) - vy)/gravity;
@@ -72,9 +74,9 @@ export function burst(host, destination, cue) {
     const lane = radius + (width-2*radius)*(i+Math.random())/count;
     const target = i%7 === 0 ? (x>width/2 ? 2*(width-radius)-lane : 2*radius-lane) : lane;
     const vx = (target-x)/airTime;
-    return {x,y,vx,vy,gravity,radius,size,phase,angle:phase,
+    return {x,y,vx,vy,gravity,radius,size,phase,rate,angle:phase,
       spin:(Math.random()-.5)*(balls ? 10 : 1.1), restitution:(balls ? .28 : .16)+Math.random()*.13,
-      delay:Math.random()*(balls ? .09 : .19), age:0, grounded:false};
+      delay, age:0, grounded:false};
   });
   // Small, time-based steps keep gravity, wall contact and rolling independent of display refresh.
   function advance(p, dt) {
@@ -85,7 +87,7 @@ export function burst(host, destination, cue) {
         p.y=p.radius; p.vy *= -.55;
       }
       if (p.y >= height-p.radius && p.vy>0) {
-        if (balls && launched && !landed) { landed=true; cue('land'); }
+        
         p.y=height-p.radius;
         p.vy *= -p.restitution;
         p.vx *= balls ? .77 : .52;
@@ -104,9 +106,21 @@ export function burst(host, destination, cue) {
     }
     p.angle += p.spin*dt;
   }
-  let launched=false, landed=false, flashed=false;
-  const start=view.performance.now();
-  function paint(now) {
+  // Run the same fixed-step collision solver ahead for prominent balls.
+  const impacts=[];
+  if(balls) for(const original of particles.filter(p=>p.size>25)){
+    const p={...original};
+    while(p.age<1.6 && impacts.length<particles.length*2){
+      const previous=p.vy; advance(p,1/90);p.age+=1/90;
+      if(previous>0 && p.vy<0 && p.y>=height-p.radius-.1){
+        impacts.push({time:p.age+p.delay,strength:Math.min(1,previous/height),x:p.x/width}); 
+        if(p.age>1.25)break;
+      }
+    }
+  }
+  const elapsed=score(balls,impacts);
+  function paint() {
+    const now=elapsed()*1000; const start=0;
     if (!layer.isConnected) return;
     ctx.clearRect(0,0,width,height);
     const tail = Math.max(0, Math.min(1, (2110 - (now - start)) / 610));
@@ -119,13 +133,11 @@ export function burst(host, destination, cue) {
         advance(p,dt);
         p.age+=dt;
       }
-      const flash = balls ? 1 : (.5 + .5*Math.cos(p.phase + age*(5 + 1.2*Math.sin(p.phase)))) ** 2;
+      const flash = balls ? 1 : (.5 + .5*Math.cos(p.phase + age*p.rate)) ** 2;
       const shimmer = balls ? .92 : .58 + .42*flash;
       const size=p.size*(.32+1.08*(1-Math.exp(-age*5)));
       ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.angle);
       if (!balls) { const pulse = .87 + .22*flash; ctx.scale(pulse, pulse); }
-      if (!launched) { launched=true; cue('launch'); }
-      if (!balls && !flashed && age>.18 && flash>.94) { flashed=true; cue('flash'); }
       ctx.globalAlpha=Math.min(1,age*10)*shimmer*fade;
       if (!balls || artwork.naturalWidth) ctx.drawImage(artwork,-size/2,-size/2,size,size);
       ctx.restore();
