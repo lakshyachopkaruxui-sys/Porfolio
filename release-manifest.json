@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-25T05:27:01.251Z",
+  "generatedAt": "2026-11-25T05:32:41.950Z",
   "publicOrigin": "https://lakshyachopkar.com",
   "files": [
     {
@@ -3166,6 +3166,16 @@
       "path": "bicycle-world/dist/index.html",
       "size": 47867,
       "sha256": "290319a316d66e0efd8335bdc4cca730e0772f13c66479b8c07bdea250971480"
+    },
+    {
+      "path": "bicycle-world/dist/notebook-review/index.html",
+      "size": 1746,
+      "sha256": "ca13a6c79ac1c5c2e73c5e78a0576091d6ee09264b4cf3a32e6e2939000d2aa3"
+    },
+    {
+      "path": "bicycle-world/dist/notebook-review/reader.js",
+      "size": 881,
+      "sha256": "3e13e223991c7f60730be96fe9c257faa84702a283a5e70ad4302f253bffb4a8"
     },
     {
       "path": "bicycle-world/dist/photo-renderer.js",
