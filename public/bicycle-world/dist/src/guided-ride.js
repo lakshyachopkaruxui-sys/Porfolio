@@ -4,11 +4,11 @@ import {pointOnRoad,planRoute} from './navigation.js';
 
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 const angleDifference=(a,b)=>Math.atan2(Math.sin(a-b),Math.cos(a-b));
-const MIN_GUIDED_RADIUS=2.2,MAX_GUIDED_YAW=.9,TURNAROUND_SPEED=2;
+const MIN_GUIDED_RADIUS=2.2,MAX_GUIDED_YAW=1.2,TURNAROUND_SPEED=2.4;
 // A traced route needs a useful rolling pace through its joins. Its tracking
 // budget is separate from the deliberately slower parking/turnaround budget.
-const CRUISING_CORNER_YAW=1.2,CURVATURE_SPEED_FALLOFF=2.3;
-const ROAD_CORNER_YAW=1,ROAD_CURVATURE_SPEED_FALLOFF=2.6;
+const CRUISING_CORNER_YAW=1.45,CURVATURE_SPEED_FALLOFF=2.3;
+const ROAD_CORNER_YAW=1.25,ROAD_CURVATURE_SPEED_FALLOFF=2.6;
 function boundedTurn(angle,speed,yawLimit=MAX_GUIDED_YAW){
   const maxAngle=Math.min(Math.atan(BICYCLE_WHEELBASE/MIN_GUIDED_RADIUS),Math.atan(BICYCLE_WHEELBASE*yawLimit/Math.max(.1,Math.abs(speed))));
   return clamp(angle,-maxAngle,maxAngle)/steeringAngle(1,speed);
@@ -134,7 +134,7 @@ export function createGuidedRide(start,waypoints,colliders=STRUCTURE_COLLIDERS,{
       return {forward:step.gear>0,reverse:step.gear<0,turn:boundedTurn(step.side,state.speed),turnIntent:step.side,speedLimit:1.2,arrived:false};
     }
     if(gear===null){
-      gear=Math.abs(angle)>Math.PI*.57?-1:1;
+      gear=Math.abs(angle)>Math.PI*.76?-1:1;
       if(gear>0&&Math.abs(angle)>Math.PI/3&&Math.abs(state.speed)<.03){
         const trial={...state,contact:{...state.contact}},initialDistance=state.distance;
         for(let frame=0;frame<120&&trial.distance-initialDistance<2;frame++){
@@ -149,7 +149,7 @@ export function createGuidedRide(start,waypoints,colliders=STRUCTURE_COLLIDERS,{
     // first when a click requests the opposite direction of travel.
     if(!maneuver&&state.speed*gear<-.025)return {brake:true,turn:state.steering,arrived:false};
     turnCheck-=dt;
-    if(gear<0&&!maneuver&&remaining>6&&turnCheck<=0){
+    if(gear<0&&!maneuver&&remaining>14&&turnCheck<=0){
       turnCheck=.3;
       const candidates=[];
       // Validate the complete low-speed arc before leaving a narrow spur.
@@ -193,8 +193,8 @@ export function createGuidedRide(start,waypoints,colliders=STRUCTURE_COLLIDERS,{
     const curvatureFalloff=gear>0?(preferPaths?ROAD_CURVATURE_SPEED_FALLOFF:CURVATURE_SPEED_FALLOFF):4;
     // Shift extends clear forward stretches. Corner and arrival limits retain
     // their ordinary budgets, so boosting never skips a careful manoeuvre.
-    const cruise=boost&&gear>0?BOOST_SPEED:MAX_SPEED;
-    const speedLimit=Math.min(gear<0?1.8:cruise,Math.max(.65,Math.sqrt(Math.max(0,remaining-.65)*6)),Math.max(1.2,cornerYaw/Math.max(.01,Math.abs(curvature))),Math.max(1.2,cruise/(1+Math.abs(curvature)*curvatureFalloff)));
+    const cruise=boost&&gear>0?BOOST_SPEED:MAX_SPEED*1.2;
+    const speedLimit=Math.min(gear<0?2.7:cruise,Math.max(.65,Math.sqrt(Math.max(0,remaining-.65)*6)),Math.max(1.2,cornerYaw/Math.max(.01,Math.abs(curvature))),Math.max(1.2,cruise/(1+Math.abs(curvature)*curvatureFalloff)));
     // The rider can look toward the next bend before the wheel begins following
     // it. This cue does not alter speed, steering or the route itself.
     const ahead=sample(progress+lookahead+Math.max(1.2,Math.abs(state.speed)*.4));
@@ -202,7 +202,7 @@ export function createGuidedRide(start,waypoints,colliders=STRUCTURE_COLLIDERS,{
     const tangent=tangentLength>.05?Math.atan2(target.x-ahead.x,target.z-ahead.z):wanted;
     const upcoming=clamp(angleDifference(tangent,state.heading)*1.8,-1,1);
     const turnIntent=gear>0&&Math.abs(upcoming)>.16?upcoming:turn;
-    return {forward:gear>0,reverse:gear<0,boost:boost&&gear>0,turn,turnIntent,speedLimit,brake:false,arrived:false};
+    return {guided:true,forward:gear>0,reverse:gear<0,boost:boost&&gear>0,turn,turnIntent,speedLimit,brake:false,arrived:false};
   }
   return {update,points:points.slice(1),get remaining(){return Math.max(0,total-progress);},get done(){return done;},get blocked(){return blocked;}};
 }

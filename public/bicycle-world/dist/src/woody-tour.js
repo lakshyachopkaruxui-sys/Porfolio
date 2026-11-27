@@ -114,7 +114,7 @@ export function createWoodyTour({clips = {}, play, onState = () => {}, now = () 
     }
     if(event==='ramp-airborne'){
       if(!enabled||!context.jumping||blocked('ramp-airborne')||isQuiet()||now()-lastLanding<3000)return false;
-      const accepted=speak('ramp-airborne',{automatic:false});if(accepted)lastLanding=now();return accepted;
+      const accepted=speak('ramp-airborne',{automatic:false,interrupt:true});if(accepted)lastLanding=now();return accepted;
     }
     if (event === 'manual') return speak(payload.clipId, {manual: true,interrupt:true});
     if (event === 'action') return isQuiet()?false:speak(payload.clipId,{automatic:false});

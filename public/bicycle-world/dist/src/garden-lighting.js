@@ -1,10 +1,8 @@
 import * as THREE from 'three';
 import {GARDEN_PALETTE} from './garden-palette.js';
 
-const MANUAL_SECONDS=4,CYCLE_SECONDS=270,MAX_STEP=.1;
-// A minute of settled daylight before a 54-second sunset. Night and dawn keep
-// their existing lengths; only the initial day and sunset gain a little time.
-const DAY_END=60,NIGHT_START=114,NIGHT_END=174,DAWN_END=246;
+const MANUAL_SECONDS=4,MAX_STEP=.1;
+import {RIVER} from './layout.js';
 const clamp=value=>Math.max(0,Math.min(1,value));
 const smooth=value=>{const t=clamp(value);return t*t*(3-2*t);};
 const blendColour=(target,first,last,mix)=>mix===0?target.copy(first):mix===1?target.copy(last):target.lerpColors(first,last,mix);
@@ -18,22 +16,7 @@ const DUSK=palette('#777e89','#e7bda6','#89936e','#f5ba91',1.2,1.9);
 const NIGHT=palette('#273f57','#a8c0ec','#637d68','#9eafe7',.82,.85);
 const FOLLOW_SKY=[new THREE.Color('#b8d9ee'),new THREE.Color('#c5aec0'),new THREE.Color('#203b5b')];
 
-function cycleNight(seconds){
-  const phase=seconds%CYCLE_SECONDS;
-  if(phase<=DAY_END||phase>=DAWN_END)return 0;
-  if(phase<NIGHT_START)return smooth((phase-DAY_END)/(NIGHT_START-DAY_END));
-  if(phase<=NIGHT_END)return 1;
-  return 1-smooth((phase-NIGHT_END)/(DAWN_END-NIGHT_END));
-}
 
-// Enabling automatic time must not jump from a half-finished manual blend.
-function phaseForProgress(progress){
-  if(progress<=0)return 0;
-  if(progress>=1)return (NIGHT_START+NIGHT_END)/2;
-  let low=0,high=1;
-  for(let i=0;i<32;i++){const middle=(low+high)/2;if(smooth(middle)<progress)low=middle;else high=middle;}
-  return DAY_END+(low+high)/2*(NIGHT_START-DAY_END);
-}
 
 /** Small opaque lenses sit on the lamp faces declared by each exterior builder.
  * Keeping placement with the architecture prevents floating or buried lights
@@ -93,7 +76,7 @@ export function createGardenLighting({scene,sun,hemisphere,world}={}){
   };
   const background=scene.background?.isColor?scene.background:new THREE.Color();scene.background=background;
   const lenses=createEntranceLenses(scene,world);
-  let progress=0,target=0,automatic=false,cycleTime=0,from=0,elapsed=0,duration=0,disposed=false,lastApplied=-1;
+  let progress=0,target=0,automatic=false,from=0,elapsed=0,duration=0,disposed=false,lastApplied=-1;
   let focusX=0,focusZ=0,perspective=false,lastPerspective=false;
 
   const lightOffset = new THREE.Vector3(), axisX = new THREE.Vector3(), axisY = new THREE.Vector3();
@@ -143,16 +126,20 @@ export function createGardenLighting({scene,sun,hemisphere,world}={}){
     if(disposed)return;
     const next=Boolean(value);if(next===automatic)return;
     automatic=next;duration=0;
-    if(automatic)cycleTime=phaseForProgress(progress);
+    if(automatic)target=progress>=.5?1:0;
     else target=progress>=.5?1:0;
   }
-  function update(dt,{paused=false,reduced=false,focus}={}){
+  function update(dt,{paused=false,reduced=false,focus,riderZ}={}){
     if(disposed)return;
     if(Number.isFinite(focus?.x)&&Number.isFinite(focus?.z)){focusX=focus.x;focusZ=focus.z;}
     const step=Number.isFinite(dt)?Math.max(0,Math.min(MAX_STEP,dt)):0;
-    if(automatic){
-      if(!paused&&!reduced){cycleTime=(cycleTime+step)%CYCLE_SECONDS;progress=cycleNight(cycleTime);}
-    }else if(duration>0){
+    if(automatic && !paused && Number.isFinite(riderZ)){
+      const bankTarget=riderZ<RIVER.minZ-0.5?1:riderZ>RIVER.maxZ+0.5?0:target;
+      if(bankTarget!==target || (duration===0 && progress!==bankTarget)){
+        target=bankTarget;from=progress;elapsed=0;duration=MANUAL_SECONDS*Math.abs(target-from);
+      }
+    }
+    if(duration>0 && (!automatic || !paused)){
       if(reduced){progress=target;duration=0;}
       else{elapsed=Math.min(duration,elapsed+step);progress=elapsed>=duration?target:THREE.MathUtils.lerp(from,target,smooth(elapsed/duration));if(elapsed>=duration)duration=0;}
     }

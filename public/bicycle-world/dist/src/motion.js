@@ -75,7 +75,7 @@ export function stepMotion(state,input,dt,colliders=[],onAdvance,surface){
   const forward=Boolean(input.forward)&&!input.reverse&&!input.brake;
   const reverse=Boolean(input.reverse)&&!input.forward&&!input.brake;
   const boosting=Boolean(input.boost)&&forward;
-  const forwardLimit=boosting?BOOST_SPEED:MAX_SPEED;
+  const forwardLimit=boosting?BOOST_SPEED:input.guided?MAX_SPEED*1.2:MAX_SPEED;
   const acceleration=forward?(boosting?8.2:6.6):reverse?-3.8:0;
   // Faster travel still needs a short, deliberate stop near a reader or bridge.
   // Reverse keeps its existing limit so backing away remains easy to judge.
@@ -85,7 +85,7 @@ export function stepMotion(state,input,dt,colliders=[],onAdvance,surface){
     const oldX=state.x,oldZ=state.z,oldHeading=state.heading;
     const speedLimit=Number.isFinite(input.speedLimit)?clamp(input.speedLimit,0,forwardLimit):forwardLimit;
     if(Math.abs(state.speed)>speedLimit){state.speed=Math.sign(state.speed)*Math.max(speedLimit,Math.abs(state.speed)-(input.brake?0:8)*step);}
-    else state.speed=clamp(state.speed+acceleration*step,-Math.min(1.8,speedLimit),speedLimit);
+    else state.speed=clamp(state.speed+acceleration*step,-Math.min(input.guided?2.7:1.8,speedLimit),speedLimit);
     state.speed=Math.sign(state.speed)*Math.max(0,Math.abs(state.speed)-braking*step);
     state.steering=damp(state.steering,steering,11,step);
     // The rear/front axle relationship creates the turn. At rest only the
