@@ -40,6 +40,7 @@ import {hybridUIState,createTouchRidingInput} from './hybrid-ui-state.js';
 import {createDestinationUI} from './destination-ui.js';
 import {STOPS,MAP_VERSION,RIDER_HALF_WHEELBASE,positionIsClear,nearbyStop} from './layout.js';
 import {planRoute} from './navigation.js';
+import {findRecoveryPoint} from './ride-recovery.js';
 import {createMapUI} from './map-ui.js';
 import {createLandmarkFramer} from './camera-framing.js';
 import {createProjectUI} from './project-ui.js';
@@ -198,6 +199,8 @@ let placeUI,mapUI,projectUI,personalRooms,worksExperience,oakLab,aboutExperience
 // World coordinates for the rider's planted shoe; reuse the same terrain as wheels.
 const riderGroundHeight=(x,z)=>Math.max(elevation(z,x),riverHop?.rampHeight(x,z)??0);
 let rideHintVisible=false;
+let entryTipRemaining=12000,entryTipLastFrame=null;
+let recoveryHop=null;
 let readingBackdropDrawn=false;
 const coarsePreference=matchMedia('(pointer: coarse)');
 let coarse=coarsePreference.matches;
@@ -211,13 +214,13 @@ const guideCameraUp=new THREE.Vector3().crossVectors(cameraOffset.clone().normal
 const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2(),groundPlane=new THREE.Plane(new THREE.Vector3(0,1,0),0),hit=new THREE.Vector3();
 // Leaving during preparation must not replace the last ride with startup defaults.
 // Preferences and accessible reader progress can still be saved before 3D is ready.
-const store={get(){try{return JSON.parse(localStorage.getItem('lakshya-bicycle-v1')||'null');}catch{return null;}},set(){if(welcomeLayoutReview)return;try{const previous=this.get();const checkpoint=!ready&&previous?{mapVersion:previous.mapVersion,x:previous.x,z:previous.z,heading:previous.heading,ridingView:previous.ridingView,gardenNight:previous.gardenNight,automaticDaylight:previous.automaticDaylight}:{};localStorage.setItem('lakshya-bicycle-v1',JSON.stringify({enteredGarden:enteredGarden||previous?.enteredGarden===true,mapVersion:MAP_VERSION,x:state.x,z:state.z,heading:state.heading,ridingView,bicycleLight:bicycleLightPreference,gardenNight:gardenLighting?.night??false,riverDaylight:gardenLighting?.automatic??previous?.riverDaylight??true,automaticDaylight:gardenLighting?.automatic??false,pokemonSounds:pokemonSoundPreference,rideSounds:rideSoundPreference,tourVoice:welcomeAudioPreference,readerScroll:reader.open?reader.scrollTop:readerScroll,reducedOverride,lighterGraphics:renderQuality.lighter,placeScrolls:placeUI?.scrolls,projectProgress:projectUI?.progress,...checkpoint}));}catch{}}};
+const store={get(){try{return JSON.parse(localStorage.getItem('lakshya-bicycle-v1')||'null');}catch{return null;}},set(){if(welcomeLayoutReview)return;try{const previous=this.get();const checkpoint=!ready&&previous?{mapVersion:previous.mapVersion,x:previous.x,z:previous.z,heading:previous.heading,ridingView:previous.ridingView,gardenNight:previous.gardenNight,automaticDaylight:previous.automaticDaylight}:{};localStorage.setItem('lakshya-bicycle-v1',JSON.stringify({enteredGarden:enteredGarden||previous?.enteredGarden===true,mapVersion:MAP_VERSION,x:state.x,z:state.z,heading:state.heading,ridingView,bicycleLight:bicycleLightPreference,gardenNight:gardenLighting?.targetNight??previous?.gardenNight??false,riverDaylight:gardenLighting?.automatic??previous?.riverDaylight??true,automaticDaylight:gardenLighting?.automatic??false,pokemonSounds:pokemonSoundPreference,rideSounds:rideSoundPreference,tourVoice:welcomeAudioPreference,readerScroll:reader.open?reader.scrollTop:readerScroll,reducedOverride,lighterGraphics:renderQuality.lighter,placeScrolls:placeUI?.scrolls,projectProgress:projectUI?.progress,...checkpoint}));}catch{}}};
 motionPreference.addEventListener('change',e=>{if(reducedOverride===null)reduced=e.matches;if(reduced)setRidingView('overview');document.documentElement.classList.toggle('reduce-motion',reduced);});
 
 function cancelRoute(){tourDestination=null;rampApproach=false;target=null;guidedRide=null;pendingArrival=null;blockedTime=0;$('ride-status').hidden=true;if(world){world.ring.visible=false;world.setRoute(introRouteVisible?introRoutePoints:null);}}
-function clearInput({stop=true}={}){riverHop?.cancel();hopBoost=false;physicalKeys.clear();touchControlInput?.clear();keys.clear();cancelRoute();pointerDown=null;if(stop){state.speed=0;state.steering=0;}rideFeedback.reset(state);rideFeel={};contactMarker?.reset();rideAudio.stop();gardenBell.stop();pokemonAudio.stop();document.querySelectorAll('[data-key]').forEach(b=>b.classList.remove('pressed'));}
+function clearInput({stop=true}={}){if(recoveryHop){Object.assign(state,recoveryHop.end);recoveryHop=null;}riverHop?.cancel();hopBoost=false;physicalKeys.clear();touchControlInput?.clear();keys.clear();cancelRoute();pointerDown=null;if(stop){state.speed=0;state.steering=0;}rideFeedback.reset(state);rideFeel={};contactMarker?.reset();rideAudio.stop();gardenBell.stop();pokemonAudio.stop();document.querySelectorAll('[data-key]').forEach(b=>b.classList.remove('pressed'));}
 function notify(text){$('notice').textContent=text;$('notice').classList.add('visible');clearTimeout(noticeTimer);noticeTimer=setTimeout(()=>$('notice').classList.remove('visible'),3200);}
-function save(){if(!riverHop?.active)store.set();}
+function save(){if(!riverHop?.active&&!recoveryHop)store.set();}
 function restartJourney(){
   if(!ready||!rider){notify('The garden is still preparing. Restart is available once the ride is ready.');return;}
   clearInput();dismissWelcomeGuide();
@@ -324,7 +327,7 @@ function prepareOverlay(kind){
 }
 function setNearStop(kind){
   if(nearStop===kind)return;
-  nearStop=kind;syncRideUI();
+  nearStop=kind;gardenLighting?.enterSection(kind);syncRideUI();
   const stop=STOPS[kind];
   if(stop){$('interact').querySelector('.stop-caption').textContent=destinationName(kind,stop.title);$('interact-label').innerHTML=`${kind==='cloud'?'Explore my photography':stop.action} <kbd>Enter</kbd>`;$('route-hint').hidden=true;}
 }
@@ -464,6 +467,7 @@ function bell(){
   notify(pal?.kind==='sleep'?'Snorlax keeps snoozing.':pal?pal.name+' noticed your bell.':'A little hello.');
 }
 function openWorks(projectId){
+  gardenLighting?.enterSection('projects');
   if(worksExperience&&ready&&!inPortfolio){
     if(!running)start({skipWelcome:true});
     try{worksExperience.open(projectId);}
@@ -476,6 +480,7 @@ function openWorks(projectId){
   if(worksExperience?.isOpen||projectUI?.isOpen)tour?.emit('works-opened');
 }
 function openLandmark(kind){
+  gardenLighting?.enterSection(kind);
   tour?.emit('room-enter',{stopId:kind});
   if(kind==='about'){
     if(aboutExperience&&ready&&!inPortfolio){
@@ -503,7 +508,7 @@ function openLandmark(kind){
 function interact(){if(visitorBoard?.near){openVisitorBoard();return;}if(nearStop)openLandmark(nearStop);else if(nearTrailhead())showHelp();}
 function beginRoute(destination,preferPaths=false,onArrival=null){
   tourJumped=false;
-  if(riverHop?.active){notify("Let the jump finish before choosing a destination.");return false;}
+  if(recoveryHop||riverHop?.active){notify("Let the jump finish before choosing a destination.");return false;}
   dismissWelcomeGuide();
   const route=planRoute(state,destination,world.colliders,{preferPaths});
   if(!route){notify('Choose clear ground. The river is crossed at either bridge.');syncTourContext();tour?.emit('action',{clipId:'route-unavailable'});return false;}
@@ -666,7 +671,10 @@ function syncTourContext(){
   if(!roomId&&!overlay&&nearStop&&!target)tour.emit('arrive',{stopId:nearStop});
   if(tourDestination){const arrival=STOPS[tourDestination]?.arrival;
     const distance=arrival?Math.hypot(state.x-arrival.x,state.z-arrival.z):Infinity;
-    if(distance<=18&&distance>5)tour.emit('approach',{stopId:tourDestination});
+    if(distance<=18&&distance>5){
+      if(tourDestination==='cloud')gardenLighting?.enterSection('cloud');
+      tour.emit('approach',{stopId:tourDestination});
+    }
   }
   // Landing is a moment, never a queued speech waiting behind a room or guide.
   if(tourJumped&&!riverHop?.active)tourJumped=false;
@@ -723,6 +731,7 @@ onboarding=createWoodyOnboarding({onState:renderEntryChoice,
   }
 });
 renderEntryChoice(onboarding.snapshot);
+document.addEventListener('visibilitychange',()=>{entryTipLastFrame=null;});
 function requestEntryRide(){if(ready&&!running){if(welcomeAudioPreference!==false)setTourEnabled(true,{announce:false});start();}}
 $('start').addEventListener('click',requestEntryRide);$('back').addEventListener('click',showPortfolio);$('reader-back').addEventListener('click',showPortfolio);
 $('welcome-controls-yes').addEventListener('click',()=>onboarding.choose('yes'));
@@ -747,6 +756,32 @@ $('welcome-replay').addEventListener('click',()=>{if(welcomeVoice.speaking)setTo
 $('woody-guide-replay').addEventListener('click',()=>{if(welcomeVoice.speaking)stopGuideVoice();else{setTourEnabled(true,{announce:false});tour.stop();welcomeVoice.play('controls');}});
 $('woody-guide-dismiss').addEventListener('click',()=>{dismissWelcomeGuide();syncRideUI();sceneHost.focus({preventScroll:true});});
 syncWelcomeVoice({enabled:welcomeVoice.enabled,supported:welcomeVoice.supported,speaking:false});
+function recoverBike(){
+  if(!running||hasOverlay()||ridingInputBlocked()||riverHop?.active||recoveryHop)return;
+  const end=findRecoveryPoint(state,world.colliders);
+  if(!end){notify('No clear landing nearby. Open the garden map to restart the ride.');return;}
+  clearInput();
+  recoveryHop={x:state.x,z:state.z,heading:state.heading,end,elapsed:0,lift:0};
+  sceneHost.focus({preventScroll:true});
+}
+function advanceRecovery(dt){
+  const hop=recoveryHop;
+  hop.elapsed+=dt;
+  const t=reduced?1:Math.min(1,hop.elapsed/.55);
+  const blend=t*t*(3-2*t);
+  state.x=hop.x+(hop.end.x-hop.x)*blend;
+  state.z=hop.z+(hop.end.z-hop.z)*blend;
+  const angle=hop.end.heading-hop.heading;
+  state.heading=hop.heading+Math.atan2(Math.sin(angle),Math.cos(angle))*blend;
+  hop.lift=2.4*4*t*(1-t);
+  if(t===1){
+    Object.assign(state,hop.end);
+    recoveryHop=null;state.contact={blocked:false,kind:null,impactSpeed:0};
+    rideFeedback.reset(state);setNearStop(nearbyStop(state,null));save();
+    notify('Back on track. Ready to ride.');
+  }
+}
+$('recover-bike').addEventListener('click',()=>{$('quick-tips').hidePopover?.();recoverBike();});
 function stopRide(){clearInput();syncRideUI();syncTourContext();tour?.emit('action',{clipId:'route-cancelled'});notify('Stopped. Pedal or choose another place to continue.');sceneHost.focus({preventScroll:true});}
 $('stop-route').addEventListener('click',stopRide);
 $('open-map')?.addEventListener('click',showMap);$('help-map').addEventListener('click',showMap);$('ride-guide').addEventListener('click',showMap);
@@ -784,6 +819,7 @@ document.addEventListener('keydown',e=>{
   if(key==='escape'&&!e.repeat){consumeNavigationKey(e);stopRide();return;}
   // Keep native button/keyboard activation. Riding input belongs to the canvas.
   if(document.activeElement!==sceneHost&&!document.activeElement?.closest('#touch-controls')&&e.key!=='Escape')return;
+  if(key==='u'&&!e.repeat){e.preventDefault();recoverBike();return;}
   if(key==='q'&&!e.repeat){e.preventDefault();hopBoost=!hopBoost;notify(hopBoost?'Boost on. Tap Q to switch it off.':'Normal riding speed.');return;}
   if(key==='p'&&!e.repeat){e.preventDefault();showPortfolio();return;}
   // Shift changes pace without cancelling a click-to-ride route. Its keyup and
@@ -945,7 +981,7 @@ function placeRider(){
   const half=RIDER_HALF_WHEELBASE;
   const front=riderGroundHeight(state.x-Math.sin(state.heading)*half,state.z-Math.cos(state.heading)*half);
   const rear=riderGroundHeight(state.x+Math.sin(state.heading)*half,state.z+Math.cos(state.heading)*half);
-  rider.group.position.set(state.x,(front+rear)/2,state.z);
+  rider.group.position.set(state.x,(front+rear)/2+(recoveryHop?.lift||0),state.z);
   rider.group.rotation.set(Math.atan2(front-rear,half*2),state.heading,0,'YXZ');
 }
 async function initialize(){
@@ -1074,7 +1110,7 @@ function frame(now){
   // Reads the preceding completed frame's counters, aligned with its RAF interval.
   rideProfile?.sample({now,frameMs,renderer,settings:renderSettings,riding:running&&ready&&!cloudTransition.snapshot.active&&!document.hidden&&!inPortfolio&&!hasOverlay(),player:state,companions});
   if(renderQuality.sample({frameMs,active:running&&ready&&!cloudTransition.snapshot.active&&!document.hidden&&!inPortfolio&&!hasOverlay()}))applyRenderQuality();
-  if(document.hidden||inPortfolio||!ready)return;
+  if(document.hidden||inPortfolio||!ready){entryTipLastFrame=null;return;}
   const wasCloudActive=cloudTransition.snapshot.active;
   if(wasCloudActive){
     if(reduced)cloudTransition.cancel();else cloudTransition.advance(dt);
@@ -1084,13 +1120,17 @@ function frame(now){
     }
   }
   syncRideUI();
+  const showEntryTip=running && !hasOverlay() && !cloudTransition.snapshot.active && entryTipRemaining>0;
+  setHidden($('ride-start-tip'),!showEntryTip);
+  if(showEntryTip && entryTipLastFrame!==null)entryTipRemaining=Math.max(0,entryTipRemaining-(now-entryTipLastFrame));
+  entryTipLastFrame=showEntryTip?now:null;
   syncTourContext();
   if(aboutExperience?.isOpen){aboutExperience.update(dt);return;}
   if(oakLab?.isOpen){oakLab.update(dt);return;}
   if(worksExperience?.isOpen){worksExperience.update(dt);return;}
   if(personalRooms?.isOpen){personalRooms.update(dt);return;}
   visitorBoard?.update(state,running&&!inPortfolio&&!hasOverlay()&&!riverHop?.active,gardenLighting?.night);
-  gardenLighting?.update(dt,{paused:hasOverlay()||!running,reduced,focus,riderZ:state.z});
+  gardenLighting?.update(dt,{paused:hasOverlay()||!running,reduced,focus});
   if(gardenLighting){$('night-garden').checked=gardenLighting.night;$('automatic-daylight').checked=gardenLighting.automatic;sceneHost.dataset.daylight=gardenLighting.progress.toFixed(2);}
   if(!running&&!hasOverlay()){
     if(reduced&&welcomeFlow.snapshot.phase==='departing'){welcomeFlow.skip();clearWelcomeHandoff();}
@@ -1110,11 +1150,12 @@ function frame(now){
   readingBackdropDrawn=false;
   if(!paused){time+=dt;
     let pedaling=false,movingIntent=false,turnIntent=0;
-    if(riverHop?.active){riverHop.step(dt,reduced);pedaling=riverHop.active&&!riverHop.pose?.air;movingIntent=riverHop.active;}
+    if(recoveryHop){advanceRecovery(dt);}
+    else if(riverHop?.active){riverHop.step(dt,reduced);pedaling=riverHop.active&&!riverHop.pose?.air;movingIntent=riverHop.active;}
     else if(running){let input=cloudTransition.snapshot.active?{brake:true,turn:0}:{forward:keys.has('w')||keys.has('arrowup'),reverse:keys.has('s')||keys.has('arrowdown'),brake:keys.has(' '),boost:keys.has('shift')||hopBoost,turn:(keys.has('a')||keys.has('arrowleft')?1:0)-(keys.has('d')||keys.has('arrowright')?1:0)};
       if(guidedRide){
         input=guidedRide.update(state,dt,{boost:keys.has('shift')||hopBoost});
-        if(input.blocked){cancelRoute();input={brake:true};notify('There isn’t room for this turn. Reverse a little, or choose clearer ground.');}
+        if(input.blocked){cancelRoute();input={brake:true};notify('There isn’t room for this turn. Press U to hop back onto the track.');}
         else if(input.arrived){const callback=pendingArrival;cancelRoute();input={brake:true};callback?.();if(hasOverlay())return;}
       }
       if(!guidedRide)input=assistAcrossRamps(state,input);
@@ -1132,7 +1173,7 @@ function frame(now){
       rideFeel=rideFeedback.update({state,input,dt,reduced});if(rideFeel.notice)notify(rideFeel.notice);
       rideAudioMotion.speed=state.speed;rideAudioMotion.pedaling=pedaling;rideAudioMotion.braking=Boolean(input.brake);rideAudioMotion.moved=Math.max(0,state.distance-previousDistance);rideAudioMotion.dt=dt;
       rideAudio.update(rideFeel,rideAudioMotion);contactMarker.update(state,rideFeel,input,dt,reduced);
-      if(target&&(input.forward||input.reverse)&&state.contact?.blocked&&state.distance-previousDistance<.001){blockedTime+=dt;if(blockedTime>1.2){cancelRoute();state.speed=0;notify('The route is blocked. Reverse away, or choose another point.');}}else blockedTime=0;
+      if(target&&(input.forward||input.reverse)&&state.contact?.blocked&&state.distance-previousDistance<.001){blockedTime+=dt;if(blockedTime>1.2){cancelRoute();state.speed=0;notify('The route is blocked. Press U to hop back onto the track.');}}else blockedTime=0;
       if(state.distance>7)rideHintVisible=false;
       setNearStop(nearbyStop(state,nearStop));
     }

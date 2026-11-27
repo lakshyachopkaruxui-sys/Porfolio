@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import {GARDEN_PALETTE} from './garden-palette.js';
 
 const MANUAL_SECONDS=4,MAX_STEP=.1;
-import {RIVER} from './layout.js';
+
 const clamp=value=>Math.max(0,Math.min(1,value));
 const smooth=value=>{const t=clamp(value);return t*t*(3-2*t);};
 const blendColour=(target,first,last,mix)=>mix===0?target.copy(first):mix===1?target.copy(last):target.lerpColors(first,last,mix);
@@ -129,16 +129,16 @@ export function createGardenLighting({scene,sun,hemisphere,world}={}){
     if(automatic)target=progress>=.5?1:0;
     else target=progress>=.5?1:0;
   }
-  function update(dt,{paused=false,reduced=false,focus,riderZ}={}){
+  function enterSection(id){
+    if(!automatic || (id!=='projects' && id!=='cloud'))return;
+    const next=id==='projects'?1:0;
+    if(next===target && (duration>0 || progress===next))return;
+    target=next;from=progress;elapsed=0;duration=MANUAL_SECONDS*Math.abs(target-from);
+  }
+  function update(dt,{paused=false,reduced=false,focus}={}){
     if(disposed)return;
     if(Number.isFinite(focus?.x)&&Number.isFinite(focus?.z)){focusX=focus.x;focusZ=focus.z;}
     const step=Number.isFinite(dt)?Math.max(0,Math.min(MAX_STEP,dt)):0;
-    if(automatic && !paused && Number.isFinite(riderZ)){
-      const bankTarget=riderZ<RIVER.minZ-0.5?1:riderZ>RIVER.maxZ+0.5?0:target;
-      if(bankTarget!==target || (duration===0 && progress!==bankTarget)){
-        target=bankTarget;from=progress;elapsed=0;duration=MANUAL_SECONDS*Math.abs(target-from);
-      }
-    }
     if(duration>0 && (!automatic || !paused)){
       if(reduced){progress=target;duration=0;}
       else{elapsed=Math.min(duration,elapsed+step);progress=elapsed>=duration?target:THREE.MathUtils.lerp(from,target,smooth(elapsed/duration));if(elapsed>=duration)duration=0;}
@@ -154,5 +154,5 @@ export function createGardenLighting({scene,sun,hemisphere,world}={}){
     hemisphere.color.copy(original.sky);hemisphere.groundColor.copy(original.ground);hemisphere.intensity=original.hemisphereIntensity;
   }
   apply();
-  return {update,setNight,setAutomatic,setPerspective,get night(){return automatic?progress>=.5:target===1;},get automatic(){return automatic;},get progress(){return progress;},dispose};
+  return {update,enterSection,setNight,setAutomatic,setPerspective,get night(){return automatic?progress>=.5:target===1;},get targetNight(){return target===1;},get automatic(){return automatic;},get progress(){return progress;},dispose};
 }
